@@ -1,0 +1,58 @@
+{
+    "id": "666fe4efda8643029b6710f3",
+    "activityBlocked": false,
+    "avatarUrl": "https://trello-members.s3.amazonaws.com/666fe4efda8643029b6710f3/bffe3f3c9854fe3c4a4789267f815ea4",
+    "bio": "",
+    "bioData": null,
+    "confirmed": true,
+    "fullName": "jeneea45",
+    "idMemberReferrer": null,
+    "idPremOrgsAdmin": [],
+    "initials": "J",
+    "memberType": "normal",
+    "nonPublic": {},
+    "nonPublicAvailable": true,
+    "products": [],
+    "url": "https://trello.com/jeneea45",
+    "username": "jeneea45",
+    "status": "disconnected",
+    "avatarSource": "none",
+    "credentialsRemovedCount": 0,
+    "dateLastImpression": "2024-06-21T10:48:45.164Z",
+    "dateLastActive": "2024-06-21T10:45:24.839Z",
+    "domainClaimed": null,
+    "email": "jeneea45@gmail.com",
+    "idBoards": [
+        "666fe5e7ef4fd6a958727e1d",
+        "64f721f169b14894fac36cdf"
+    ],
+    "idOrganizations": [
+        "666fe5e6696fdcc2e7bf2de0"
+    ],
+    "messagesDismissed": [
+        {
+            "name": "feedback-card-home-page-internal",
+            "count": 1,
+            "lastDismissed": "2024-06-21T09:24:08.886Z",
+            "_id": "667546b8f5b9e18d2e286d5f"
+        },
+        {
+            "name": "feedback-card-home-page-internal",
+            "count": 1,
+            "lastDismissed": "2024-06-21T09:24:08.888Z",
+            "_id": "667546b821dc5c2dad5db6a8"
+        }
+    ],
+    "oneTimeMessagesDismissed": [],
+    "prefs": {
+        "sendSummaries": true,
+        "minutesBetweenSummaries": 60,
+        "minutesBeforeDeadlineToNotify": 60,
+        "locale": "en-US",
+        "privacy": {
+            "fullName": "public",
+            "avatar": "public"
+        }
+    },
+    "uploadedAvatarUrl": null
+}
