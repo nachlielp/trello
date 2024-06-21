@@ -1,11 +1,15 @@
 {
-  "name": "vite-react-proj",
+  "name": "trello",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "format": "npx prettier --write.",
     "dev": "vite",
+    "save": "git add . && git commit -e && git push",
     "build": "vite build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist -a assets",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
