@@ -1,6 +1,6 @@
 import { Link, NavLink } from 'react-router-dom'
 import { useNavigate } from 'react-router'
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { login, logout, signup } from '../store/user.actions'
 import { LoginSignup } from './LoginSignup.jsx'
@@ -14,7 +14,7 @@ export function AppHeader() {
             const user = await login(credentials)
             showSuccessMsg(`Welcome: ${user.fullname}`)
             navigate('/')
-        } catch(err) {
+        } catch (err) {
             showErrorMsg('Cannot login')
         }
     }
@@ -23,7 +23,7 @@ export function AppHeader() {
             const user = await signup(credentials)
             showSuccessMsg(`Welcome new user: ${user.fullname}`)
             navigate('/')
-        } catch(err) {
+        } catch (err) {
             showErrorMsg('Cannot signup')
         }
     }
@@ -32,7 +32,7 @@ export function AppHeader() {
             await logout()
             navigate('/')
             showSuccessMsg(`Bye now`)
-        } catch(err) {
+        } catch (err) {
             showErrorMsg('Cannot logout')
         }
     }
