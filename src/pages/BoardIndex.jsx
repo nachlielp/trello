@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 import { useSelector } from 'react-redux'
-import { loadBoards, addBoard, updateBoard, removeBoard, addBoardMsg } from '../store/board.actions'
+import { loadBoards, addBoard, updateBoard, removeBoard, addBoardMsg } from '../store/trello.actions'
 
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 import { userService } from '../services/user.service'
@@ -19,7 +19,7 @@ export function BoardIndex() {
     async function onRemoveBoard(boardId) {
         try {
             await removeBoard(boardId)
-            showSuccessMsg('Board removed')            
+            showSuccessMsg('Board removed')
         } catch (err) {
             showErrorMsg('Cannot remove board')
         }
@@ -33,12 +33,12 @@ export function BoardIndex() {
             showSuccessMsg(`Board added (id: ${savedBoard._id})`)
         } catch (err) {
             showErrorMsg('Cannot add board')
-        }        
+        }
     }
 
     async function onUpdateBoard(board) {
         const title = prompt('New title?', board.title)
-        if (!title) return 
+        if (!title) return
 
         const boardToSave = { ...board, title }
         try {
@@ -46,7 +46,7 @@ export function BoardIndex() {
             showSuccessMsg(`Board updated, new title: ${savedBoard.title}`)
         } catch (err) {
             showErrorMsg('Cannot update board')
-        }        
+        }
     }
 
 
@@ -68,11 +68,11 @@ export function BoardIndex() {
                         <li className="board-preview" key={board._id}>
                             <Link to={`${board._id}`}>
                                 <h4>{board.title}</h4>
-                           </Link>
+                            </Link>
                             <h1>⛐</h1>
                             <p>Owner: <span>{board.owner && board.owner.fullname}</span></p>
                             <hr />
- 
+
                             {shouldShowActionBtns(board) && <div>
                                 <button onClick={() => { onRemoveBoard(board._id) }}>x</button>
                                 <button onClick={() => { onUpdateBoard(board) }}>Edit</button>
