@@ -1,6 +1,39 @@
 import { boardService } from '../services/board.service.local'
-import { store } from '../store/store'
-import { ADD_BOARD, REMOVE_BOARD, SET_BOARDS, SET_BOARD, UPDATE_BOARD, ADD_BOARD_MSG, UPDATE_TASK } from './board.reducer'
+import { store } from './store'
+import { ADD_BOARD, REMOVE_BOARD, SET_BOARDS, SET_BOARD, UPDATE_BOARD, ADD_BOARD_MSG, UPDATE_TASK, ADD_WORKSPACE, REMOVE_WORKSPACE, SET_WORKSPACE, ADD_ITEM, REMOVE_ITEM, UPDATE_ITEM } from './trello.reducer'
+
+export async function loadWorkspaces() {
+    try {
+        const workspaces = await workspaceService.query()
+        console.log('Workspaces from DB:', workspaces)
+        store.dispatch(getCmdSetWorkspaces(workspaces))
+    } catch (err) {
+        console.log('Cannot load workspaces', err)
+        throw err
+    }
+}
+
+export async function addWorkspace(workspace) {
+    try {
+        const savedWorkspace = await workspaceService.save(workspace)
+        console.log('Added Workspace', savedWorkspace)
+        store.dispatch(getCmdAddWorkspace(savedWorkspace))
+        return savedWorkspace
+    } catch (err) {
+        console.log('Cannot add workspace', err)
+        throw err
+    }
+}
+
+export async function removeWorkspace(workspaceId) {
+    try {
+        await workspaceService.remove(workspaceId)
+        store.dispatch(getCmdRemoveWorkspace(workspaceId))
+    } catch (err) {
+        console.log('Cannot remove workspace', err)
+        throw err
+    }
+}
 
 export async function loadBoards() {
     try {
@@ -78,6 +111,41 @@ export async function updateTask(boardId, groupId, task, activityTitle) {
         return savedTask
     } catch (err) {
         console.log('Cannot update task', err)
+        throw err
+    }
+}
+
+
+export async function addItem(boardId, item) {
+    try {
+        const savedItem = await boardService.addItem(boardId, item)
+        console.log('Added item', savedItem)
+        store.dispatch(getCmdAddItem(savedItem))
+        return savedItem
+    } catch (err) {
+        console.log('Cannot add item', err)
+        throw err
+    }
+}
+
+export async function removeItem(boardId, itemId) {
+    try {
+        await boardService.removeItem(boardId, itemId)
+        store.dispatch(getCmdRemoveItem(itemId))
+    } catch (err) {
+        console.log('Cannot remove item', err)
+        throw err
+    }
+}
+
+export async function updateItem(boardId, item) {
+    try {
+        const savedItem = await boardService.updateItem(boardId, item)
+        console.log('Updated item', savedItem)
+        store.dispatch(getCmdUpdateItem(savedItem))
+        return savedItem
+    } catch (err) {
+        console.log('Cannot update item', err)
         throw err
     }
 }
