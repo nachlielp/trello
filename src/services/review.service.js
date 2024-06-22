@@ -1,4 +1,4 @@
-import { httpService } from './http.service'
+// import { httpService } from './http.service'
 import { storageService } from './async-storage.service'
 import { userService } from './user.service'
 
@@ -10,7 +10,7 @@ export const reviewService = {
 }
 
 function query(filterBy) {
-  var queryStr = (!filterBy) ? '' : `?name=${filterBy.name}&sort=anaAref`
+  // var queryStr = (!filterBy) ? '' : `?name=${filterBy.name}&sort=anaAref`
   // return httpService.get(`review${queryStr}`)
   return storageService.query('review')
 }
