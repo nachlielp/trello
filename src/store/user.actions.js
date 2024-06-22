@@ -1,10 +1,10 @@
 
-import { userService } from '../services/user.service'
-import { socketService } from '../services/socket.service'
-import { store } from '../store/store'
+import { userService } from '../services/user.service.js'
+import { socketService } from '../services/socket.service.js'
+import { store } from '../store/store.js'
 
 import { showErrorMsg } from '../services/event-bus.service'
-import { LOADING_DONE, LOADING_START } from './system.reducer'
+import { LOADING_DONE, LOADING_START } from './system.reducer.js'
 import { REMOVE_USER, SET_USER, SET_USERS, SET_WATCHED_USER } from './user.reducer'
 
 export async function loadUsers() {
