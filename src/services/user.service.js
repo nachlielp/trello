@@ -1,7 +1,8 @@
 import { storageService } from './async-storage.service'
 import { httpService } from './http.service'
-
+import { USERS_KEY } from './util.service'
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
+
 
 export const userService = {
     login,
@@ -20,25 +21,24 @@ window.userService = userService
 
 
 function getUsers() {
-    return storageService.query('user')
+    return storageService.query(USERS_KEY)
     // return httpService.get(`user`)
 }
 
-
-
 async function getById(userId) {
-    const user = await storageService.get('user', userId)
+    const user = await storageService.get(USERS_KEY, userId)
     // const user = await httpService.get(`user/${userId}`)
+   
     return user
 }
 
 function remove(userId) {
-    return storageService.remove('user', userId)
+    return storageService.remove(USERS_KEY, userId)
     // return httpService.delete(`user/${userId}`)
 }
 
 async function update({ _id, score }) {
-    const user = await storageService.get('user', _id)
+    const user = await storageService.get(USERS_KEY, _id)
     user.score = score
     await storageService.put('user', user)
 
@@ -50,7 +50,7 @@ async function update({ _id, score }) {
 }
 
 async function login(userCred) {
-    const users = await storageService.query('user')
+    const users = await storageService.query(USERS_KEY)
     const user = users.find(user => user.username === userCred.username)
     // const user = await httpService.post('auth/login', userCred)
     if (user) return saveLocalUser(user)
@@ -59,7 +59,7 @@ async function login(userCred) {
 async function signup(userCred) {
     if (!userCred.imgUrl) userCred.imgUrl = 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
     userCred.score = 10000
-    const user = await storageService.post('user', userCred)
+    const user = await storageService.post(USERS_KEY, userCred)
     // const user = await httpService.post('auth/signup', userCred)
     return saveLocalUser(user)
 }
