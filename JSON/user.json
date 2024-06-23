@@ -1,60 +1,182 @@
 [
-    {
-        "id": "666fe4efda8643029b6710f3",
-        "activityBlocked": false,
-        "avatarUrl": "https://trello-members.s3.amazonaws.com/666fe4efda8643029b6710f3/bffe3f3c9854fe3c4a4789267f815ea4",
-        "bio": "",
-        "bioData": null,
-        "confirmed": true,
-        "fullName": "jeneea45",
-        "idMemberReferrer": null,
-        "idPremOrgsAdmin": [],
-        "initials": "J",
-        "memberType": "normal",
-        "nonPublic": {},
-        "nonPublicAvailable": true,
-        "products": [],
-        "url": "https://trello.com/jeneea45",
-        "username": "jeneea45",
-        "status": "disconnected",
-        "avatarSource": "none",
-        "credentialsRemovedCount": 0,
-        "dateLastImpression": "2024-06-21T10:48:45.164Z",
-        "dateLastActive": "2024-06-21T10:45:24.839Z",
-        "domainClaimed": null,
-        "email": "jeneea45@gmail.com",
-        "idBoards": [
-            "666fe5e7ef4fd6a958727e1d",
-            "64f721f169b14894fac36cdf"
-        ],
-        "idOrganizations": [
-            "666fe5e6696fdcc2e7bf2de0"
-        ],
-        "messagesDismissed": [
-            {
-                "name": "feedback-card-home-page-internal",
-                "count": 1,
-                "lastDismissed": "2024-06-21T09:24:08.886Z",
-                "_id": "667546b8f5b9e18d2e286d5f"
-            },
-            {
-                "name": "feedback-card-home-page-internal",
-                "count": 1,
-                "lastDismissed": "2024-06-21T09:24:08.888Z",
-                "_id": "667546b821dc5c2dad5db6a8"
-            }
-        ],
-        "oneTimeMessagesDismissed": [],
-        "prefs": {
-            "sendSummaries": true,
-            "minutesBetweenSummaries": 60,
-            "minutesBeforeDeadlineToNotify": 60,
-            "locale": "en-US",
-            "privacy": {
-                "fullName": "public",
-                "avatar": "public"
-            }
-        },
-        "uploadedAvatarUrl": null
-    }
+  {
+    "id": "666fe4efda8643029b6710f3",
+    "aaId": "712020:8c977b6a-1f0a-4d1f-b674-f57f9b60cb55",
+    "activityBlocked": false,
+    "avatarHash": "ce60a8e37efe9eb56e9dda26392070d0",
+    "avatarUrl": "https://trello-members.s3.amazonaws.com/666fe4efda8643029b6710f3/ce60a8e37efe9eb56e9dda26392070d0",
+    "bio": "",
+    "bioData": null,
+    "confirmed": true,
+    "fullName": "Eugene",
+    "idEnterprise": null,
+    "idEnterprisesDeactivated": [],
+    "idMemberReferrer": null,
+    "idPremOrgsAdmin": [],
+    "initials": "E",
+    "memberType": "normal",
+    "nonPublic": {},
+    "nonPublicAvailable": true,
+    "products": [],
+    "url": "https://trello.com/jeneea45",
+    "username": "jeneea45",
+    "status": "disconnected",
+    "aaBlockSyncUntil": null,
+    "aaEmail": null,
+    "aaEnrolledDate": null,
+    "avatarSource": "none",
+    "credentialsRemovedCount": 0,
+    "dateLastImpression": "2024-06-23T14:37:01.036Z",
+    "dateLastActive": "2024-06-23T14:37:00.990Z",
+    "domainClaimed": null,
+    "email": "jeneea45@gmail.com",
+    "gravatarHash": "36f124e0fe5ac442f83c92081da9b2b9",
+    "idBoards": [
+      "64f721f169b14894fac36cdf",
+      "66756a34def1a6d3b8cd179d"
+    ],
+    "idOrganizations": ["666fe5e6696fdcc2e7bf2de0"],
+    "idEnterprisesAdmin": [],
+    "limits": {
+      "boards": {
+        "totalPerMember": {
+          "status": "ok",
+          "disableAt": 4500,
+          "warnAt": 3600
+        }
+      },
+      "orgs": {
+        "totalPerMember": {
+          "status": "ok",
+          "disableAt": 850,
+          "warnAt": 680
+        }
+      }
+    },
+    "loginTypes": ["atlassian"],
+    "marketingOptIn": {
+      "optedIn": true,
+      "date": "2024-06-17T07:25:36.927Z"
+    },
+    "messagesDismissed": [
+      {
+        "name": "feedback-card-home-page-internal",
+        "count": 1,
+        "lastDismissed": "2024-06-21T09:24:08.886Z",
+        "_id": "667546b8f5b9e18d2e286d5f"
+      },
+      {
+        "name": "feedback-card-home-page-internal",
+        "count": 1,
+        "lastDismissed": "2024-06-21T09:24:08.888Z",
+        "_id": "667546b821dc5c2dad5db6a8"
+      }
+    ],
+    "nodeId": "ari:cloud:trello::user/666fe4efda8643029b6710f3",
+    "oneTimeMessagesDismissed": [],
+    "sessionType": null,
+    "prefs": {
+      "sendSummaries": true,
+      "minutesBetweenSummaries": 60,
+      "minutesBeforeDeadlineToNotify": 60,
+      "colorBlind": false,
+      "locale": "en-US",
+      "privacy": {
+        "fullName": "public",
+        "avatar": "public"
+      }
+    },
+    "trophies": [],
+    "uploadedAvatarHash": null,
+    "uploadedAvatarUrl": null,
+    "premiumFeatures": [],
+    "isAaMastered": true,
+    "ixUpdate": "98"
+  },
+  {
+    "id": "64f721dfe7ac348348a02895",
+    "aaId": "712020:dcb56849-1766-4882-b931-b77c422aa49b",
+    "activityBlocked": false,
+    "avatarHash": "8231923b9aa633966a8c86c27501031d",
+    "avatarUrl": "https://trello-members.s3.amazonaws.com/64f721dfe7ac348348a02895/8231923b9aa633966a8c86c27501031d",
+    "bio": "",
+    "bioData": null,
+    "confirmed": true,
+    "fullName": "nachliel pokroy",
+    "idEnterprise": null,
+    "idEnterprisesDeactivated": [],
+    "idMemberReferrer": null,
+    "idPremOrgsAdmin": [],
+    "initials": "NP",
+    "memberType": "normal",
+    "nonPublic": {},
+    "nonPublicAvailable": true,
+    "products": [],
+    "url": "https://trello.com/nachlielpokroy",
+    "username": "nachlielpokroy",
+    "status": "disconnected",
+    "aaBlockSyncUntil": null,
+    "aaEmail": null,
+    "aaEnrolledDate": null,
+    "avatarSource": "none",
+    "credentialsRemovedCount": 0,
+    "dateLastImpression": "2024-06-23T14:41:37.288Z",
+    "dateLastActive": "2024-06-22T08:10:15.105Z",
+    "domainClaimed": null,
+    "email": "nachpok@gmail.com",
+    "gravatarHash": "cfa0dc3bae6a4e1098b65f1e1d07c340",
+    "idBoards": [
+      "64f721f169b14894fac36cdf",
+      "66756a34def1a6d3b8cd179d"
+    ],
+    "idOrganizations": ["64f721e4f2e4a8cb0eec149f"],
+    "idEnterprisesAdmin": [],
+    "limits": {
+      "boards": {
+        "totalPerMember": {
+          "status": "ok",
+          "disableAt": 4500,
+          "warnAt": 3600
+        }
+      },
+      "orgs": {
+        "totalPerMember": {
+          "status": "ok",
+          "disableAt": 850,
+          "warnAt": 680
+        }
+      }
+    },
+    "loginTypes": ["atlassian"],
+    "marketingOptIn": {
+      "optedIn": true,
+      "date": "2023-09-05T12:41:05.349Z"
+    },
+    "messagesDismissed": [],
+    "nodeId": "ari:cloud:trello::user/64f721dfe7ac348348a02895",
+    "oneTimeMessagesDismissed": [
+      "sent-possible-new-signup-event",
+      "close-menu-of-first-board",
+      "ack-new-feature-trello-e2b-ai-253370757600000",
+      "team-template-picker-64f721e4f2e4a8cb0eec149f"
+    ],
+    "sessionType": null,
+    "prefs": {
+      "sendSummaries": true,
+      "minutesBetweenSummaries": 60,
+      "minutesBeforeDeadlineToNotify": 60,
+      "colorBlind": false,
+      "locale": "en-US",
+      "privacy": {
+        "fullName": "public",
+        "avatar": "public"
+      }
+    },
+    "trophies": [],
+    "uploadedAvatarHash": null,
+    "uploadedAvatarUrl": null,
+    "premiumFeatures": [],
+    "isAaMastered": true,
+    "ixUpdate": "65"
+  }
 ]
