@@ -2,13 +2,13 @@
 import { storageService } from './async-storage.service'
 import { utilService } from './util.service'
 import { userService } from './user.service'
-
-const STORAGE_KEY = 'board'
-
+import { BOARDS_KEY, LISTS_KEY, CARDS_KEY } from './util.service'
 
 export const boardService = {
     query,
-    getById,
+    getBoardById,
+    getListById,
+    getCardById,
     save,
     remove,
     getEmptyBoard,
@@ -19,9 +19,14 @@ export const boardService = {
 }
 window.boardSer = boardService
 
+// getBoardById("66756a34def1a6d3b8cd179d").then(res=>console.log(res))
+// getListById("66756a34def1a6d3b8cd179d").then(res=>console.log(res.lists))
+// getCardById("66756a34def1a6d3b8cd179d").then(res=>console.log(res.cards))
+
+
 
 async function query(filterBy = { title: '' }) {
-    var boards = await storageService.query(STORAGE_KEY)
+    var boards = await storageService.query(BOARD_KEY)
     if (filterBy.title) {
         const regex = new RegExp(filterBy.title, 'i')
         boards = boards.filter(board => regex.test(board.title))
@@ -31,13 +36,22 @@ async function query(filterBy = { title: '' }) {
     return boards
 }
 
-function getById(boardId) {
-    return storageService.get(STORAGE_KEY, boardId)
+function getBoardById(boardId) {
+    return storageService.get(BOARDS_KEY, boardId)
 }
+function getListById(listId){
+    return storageService.getByBoardId(LISTS_KEY,listId)
+}
+function getCardById(cardId){
+    return storageService.getByBoardId(CARDS_KEY,cardId)
+}
+
+
+
 
 async function remove(boardId) {
     // throw new Error('Nope')
-    await storageService.remove(STORAGE_KEY, boardId)
+    await storageService.remove(BOARD_KEY, boardId)
 }
 
 async function save(board) {
@@ -47,11 +61,11 @@ async function save(board) {
             _id: board._id,
             title: board.title
         }
-        savedBoard = await storageService.put(STORAGE_KEY, boardToUpdate)
+        savedBoard = await storageService.put(BOARD_KEY, boardToUpdate)
     } else {
         // Later, owner is set by the backend
         board.owner = userService.getLoggedinUser()
-        savedBoard = await storageService.post(STORAGE_KEY, board)
+        savedBoard = await storageService.post(BOARD_KEY, board)
     }
     return savedBoard
 }
@@ -68,7 +82,7 @@ async function addBoardMsg(boardId, txt) {
         txt
     }
     board.msgs.push(msg)
-    await storageService.put(STORAGE_KEY, board)
+    await storageService.put(BOARD_KEY, board)
 
     return msg
 }
@@ -82,7 +96,7 @@ async function updateTask(boardId, groupId, task, activityTitle) {
 
     const activity = _createActivity(activityTitle, _toMiniTask(task), _toMiniGroup(group))
     board.activities.push(activity)
-    await storageService.put(STORAGE_KEY, board)
+    await storageService.put(BOARD_KEY, board)
 
     return [task, activity]
 }
