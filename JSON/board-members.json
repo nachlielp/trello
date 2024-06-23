@@ -1,12 +1,17 @@
 [
     {
-        "id": "666fe4efda8643029b6710f3",
-        "fullName": "jeneea45",
-        "username": "jeneea45"
-    },
-    {
-        "id": "64f721dfe7ac348348a02895",
-        "fullName": "nachliel pokroy",
-        "username": "nachlielpokroy"
+        "boardId": "64f721f169b14894fac36cdf",
+        "members": [
+            {
+                "id": "666fe4efda8643029b6710f3",
+                "fullName": "jeneea45",
+                "username": "jeneea45"
+            },
+            {
+                "id": "64f721dfe7ac348348a02895",
+                "fullName": "nachliel pokroy",
+                "username": "nachlielpokroy"
+            }
+        ]
     }
 ]
