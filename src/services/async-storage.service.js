@@ -4,6 +4,7 @@ export const storageService = {
     post,
     put,
     remove,
+    getByBoardId
 }
 
 function query(entityType, delay = 500) {
@@ -14,6 +15,13 @@ function query(entityType, delay = 500) {
 function get(entityType, entityId) {
     return query(entityType).then(entities => {
         const entity = entities.find(entity => entity.id === entityId)
+        if (!entity) throw new Error(`Get failed, cannot find entity with id: ${entityId} in: ${entityType}`)
+        return entity
+    })
+}
+function getByBoardId(entityType, entityId) {
+    return query(entityType).then(entities => {
+        const entity = entities.find(entity => entity.boardId === entityId)
         if (!entity) throw new Error(`Get failed, cannot find entity with id: ${entityId} in: ${entityType}`)
         return entity
     })
