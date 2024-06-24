@@ -19,7 +19,6 @@ const initialState = {
 }
 
 export function trelloReducer(state = initialState, action) {
-    console.log('action: ', action)
     var newState = state
     switch (action.type) {
         case SET_LISTS:
