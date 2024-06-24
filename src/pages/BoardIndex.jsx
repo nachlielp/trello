@@ -49,7 +49,7 @@ export function BoardIndex() {
             <>
                 {board && <BoardHeader board={board} />}
                 <main className="board-lists">
-                    {cards.length > 0 && lists && lists.map(list =>
+                    {lists && lists.map(list =>
                         <BoardList key={list.id} list={list} cards={cards.filter(card => card.idList === list.id)} />
                     )}
                 </main>

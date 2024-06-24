@@ -49,6 +49,7 @@ async function fetchBoardFromTrello() {
     const boardData = await data.json()
     return boardData;
 }
+
 export async function loadWorkspaces() {
     try {
         const workspaces = await workspaceService.query()
