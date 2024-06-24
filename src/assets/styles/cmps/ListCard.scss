@@ -64,3 +64,9 @@
 .list-card-content.image-cover .list-card-content-title {
     align-self: flex-end;
 }
+
+.list-card-content-labels {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+}

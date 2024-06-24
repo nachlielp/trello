@@ -5,7 +5,8 @@ export const utilService = {
     debounce,
     randomPastTime,
     saveToStorage,
-    loadFromStorage
+    loadFromStorage,
+    getColorHashByName
 }
 
 function makeId(length = 6) {
@@ -62,3 +63,30 @@ function loadFromStorage(key) {
     return (data) ? JSON.parse(data) : undefined
 }
 
+
+function getColorHashByName(name) {
+    switch (name) {
+        case 'yellow':
+            return '#f5cd47';
+        case 'green':
+            return '#4cce97';
+        case 'purple':
+            return '#9f8fef';
+        case 'orange':
+            return '#fea362';
+        case 'red':
+            return '#f87169'
+        case 'blue':
+            return '#569dff'
+        case 'sky':
+            return '#6cc3e0'
+        case 'lime':
+            return '#94c748'
+        case 'pink':
+            return '#e774bb'
+        case 'black':
+            return '#8590a2'
+        default:
+            return '#fff'
+    }
+}
