@@ -20,7 +20,7 @@ export function ListCard({ card }) {
         <Card className={`list-card custom-card ${getCardCoverClass(card)}`} style={{ ...cardStyle, ...cardBackgroundImage }}>
             {cardHeader}
             <section className={`list-card-content ${isImageCover ? 'image-cover' : ''}`}>
-                {card.name}
+                <span className="list-card-content-title">{card.name}</span>
             </section>
         </Card>
     )

@@ -19,7 +19,8 @@
     justify-content: flex-end;
 }
 
-.card-bg-cover .ant-card-body .list-card-content {
+.card-bg-cover .ant-card-body .list-card-content,
+.card-img-cover .ant-card-body .list-card-content {
     font-weight: 600;
     font-size: 16px;
 }
@@ -30,7 +31,6 @@
 
 .list-card-header {
     border-radius: 7px 7px 0 0 !important;
-    // background-color: #21272b;
     min-height: 36px;
 }
 
@@ -47,12 +47,20 @@
 }
 
 .list-card-content.image-cover {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
     position: absolute;
     bottom: 0;
     width: 100%;
     background: rgba(255, 255, 255, 0.8);
-    /* White background with some transparency */
+    height: 60px;
+    background: linear-gradient(to top, white, transparent);
     padding: 10px;
     box-sizing: border-box;
     border-radius: 0 0 7px 7px;
+}
+
+.list-card-content.image-cover .list-card-content-title {
+    align-self: flex-end;
 }
