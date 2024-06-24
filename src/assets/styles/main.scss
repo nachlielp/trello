@@ -2,22 +2,22 @@
 @import "setup/variables";
 @import "setup/functions";
 @import "setup/mixins";
-@import "setup/typography";
+// @import "setup/typography";
 
 // Basics
-@import "basics/helpers";
-@import "basics/layout";
-@import "basics/base";
+// @import "basics/helpers";
+// @import "basics/layout";
+// @import "basics/base";
 // @import "basics/links";
-@import "basics/forms";
+// @import "basics/forms";
 
 
 // Views
 @import "views/AboutUs";
 // @import "views/HomePage";
-@import "views/CarIndex";
-@import "views/ReviewIndex";
-@import "views/UserDetails";
+// @import "views/CarIndex";
+// @import "views/ReviewIndex";
+// @import "views/UserDetails";
 @import "views/BoardIndex";
 @import "views/BoardDetails";
 @import "views/TaskDetails";
@@ -26,3 +26,7 @@
 @import "cmps/AppHeader";
 @import "cmps/AppFooter";
 @import "cmps/UserMsg";
+@import "cmps/BoardIndex";
+@import "cmps/BoardHeader";
+@import "cmps/BoardList";
+@import "cmps/ListCard";
