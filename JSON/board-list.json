@@ -8,7 +8,6 @@
                 "name": "Backlog-Server",
                 "closed": false,
                 "color": null,
-                "idBoard": "64f721f169b14894fac36cdf",
                 "pos": 40960,
                 "subscribed": false,
                 "softLimit": null
@@ -18,7 +17,6 @@
                 "name": "Backlog-Client",
                 "closed": false,
                 "color": null,
-                "idBoard": "64f721f169b14894fac36cdf",
                 "pos": 45056,
                 "subscribed": false,
                 "softLimit": null
@@ -28,7 +26,6 @@
                 "name": "In Develpment",
                 "closed": false,
                 "color": null,
-                "idBoard": "64f721f169b14894fac36cdf",
                 "pos": 47104,
                 "subscribed": false,
                 "softLimit": null
@@ -38,7 +35,6 @@
                 "name": "Done",
                 "closed": false,
                 "color": null,
-                "idBoard": "64f721f169b14894fac36cdf",
                 "pos": 49152,
                 "subscribed": false,
                 "softLimit": null
@@ -48,7 +44,6 @@
                 "name": "QA",
                 "closed": false,
                 "color": null,
-                "idBoard": "64f721f169b14894fac36cdf",
                 "pos": 114688,
                 "subscribed": false,
                 "softLimit": null
@@ -58,8 +53,65 @@
                 "name": "Ready For Production",
                 "closed": false,
                 "color": null,
-                "idBoard": "64f721f169b14894fac36cdf",
                 "pos": 180224,
+                "subscribed": false,
+                "softLimit": null
+            }
+        ]
+    }, {
+        "boardId": "66756a34def1a6d3b8cd179d",
+        "lists": [
+            {
+                "id": "66756b3a4a97ac163d32e9e2",
+                "name": "js",
+                "closed": false,
+                "color": null,
+                "pos": 16384,
+                "subscribed": false,
+                "softLimit": null
+            },
+            {
+                "id": "66756e74ebad01c3a662aea7",
+                "name": "Redux",
+                "closed": false,
+                "color": null,
+                "pos": 32768,
+                "subscribed": false,
+                "softLimit": null
+            },
+            {
+                "id": "66756b31250742f334ce4cf0",
+                "name": "Web Pages",
+                "closed": false,
+                "color": null,
+                "pos": 65536,
+                "subscribed": false,
+                "softLimit": null
+            },
+            {
+                "id": "66756c51bcee71bff3ee6112",
+                "name": "Web Component",
+                "closed": false,
+                "color": null,
+                "pos": 81920,
+                "subscribed": false,
+                "softLimit": null
+            },
+            {
+                "id": "66768a1111fe07b4eb03d197",
+                "name": "In progress",
+                "closed": false,
+                "color": null,
+                "pos": 147456,
+                "subscribed": false,
+                "softLimit": null
+            },
+            {
+                "id": "66768a17ed3cb11714f89fa4",
+                "name": "Complete",
+                "closed": false,
+                "color": null,
+                "pos": 212992,
                 "subscribed": false,
                 "softLimit": null
             }
