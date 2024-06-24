@@ -13,38 +13,38 @@ export async function loadWorkspaces() {
     }
 }
 
-export async function addWorkspace(workspace) {
-    try {
-        const savedWorkspace = await workspaceService.save(workspace)
-        console.log('Added Workspace', savedWorkspace)
-        store.dispatch(getCmdAddWorkspace(savedWorkspace))
-        return savedWorkspace
-    } catch (err) {
-        console.log('Cannot add workspace', err)
-        throw err
-    }
-}
+// export async function addWorkspace(workspace) {
+//     try {
+//         const savedWorkspace = await workspaceService.save(workspace)
+//         console.log('Added Workspace', savedWorkspace)
+//         store.dispatch(getCmdAddWorkspace(savedWorkspace))
+//         return savedWorkspace
+//     } catch (err) {
+//         console.log('Cannot add workspace', err)
+//         throw err
+//     }
+// }
 
-export async function removeWorkspace(workspaceId) {
-    try {
-        await workspaceService.remove(workspaceId)
-        store.dispatch(getCmdRemoveWorkspace(workspaceId))
-    } catch (err) {
-        console.log('Cannot remove workspace', err)
-        throw err
-    }
-}
+// export async function removeWorkspace(workspaceId) {
+//     try {
+//         await workspaceService.remove(workspaceId)
+//         store.dispatch(getCmdRemoveWorkspace(workspaceId))
+//     } catch (err) {
+//         console.log('Cannot remove workspace', err)
+//         throw err
+//     }
+// }
 
-export async function loadBoards() {
-    try {
-        const boards = await boardService.query()
-        console.log('Boards from DB:', boards)
-        store.dispatch(getCmdSetBoards(boards))
-    } catch (err) {
-        console.log('Cannot load boards', err)
-        throw err
-    }
-}
+// export async function loadBoards() {
+//     try {
+//         const boards = await boardService.query()
+//         console.log('Boards from DB:', boards)
+//         store.dispatch(getCmdSetBoards(boards))
+//     } catch (err) {
+//         console.log('Cannot load boards', err)
+//         throw err
+//     }
+// }
 
 export async function loadBoard(boardId) {
     try {

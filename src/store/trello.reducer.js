@@ -4,6 +4,7 @@ export const SET_WORKSPACE = 'SET_WORKSPACE'
 
 export const SET_BOARDS = 'SET_BOARDS'
 export const SET_BOARD = 'SET_BOARD'
+export const GET_BOARD_LIST = 'GET_BOARD_LIST'
 export const REMOVE_BOARD = 'REMOVE_BOARD'
 export const ADD_BOARD = 'ADD_BOARD'
 export const UPDATE_BOARD = 'UPDATE_BOARD'
@@ -14,11 +15,17 @@ export const ADD_ITEM = 'ADD_ITEM'
 export const REMOVE_ITEM = 'REMOVE_ITEM'
 export const UPDATE_ITEM = 'UPDATE_ITEM'
 
+import boardInfo from '../../JSON/board-info.json'; // Adjust the path as necessary
+import boardList from '../../JSON/board-list.json';
+import boardMembers from '../../JSON/board-members.json';
+import listCards from '../../JSON/list-cards.json';
 
 
 const initialState = {
-    board: null,
-    boards: [],
+    boards: boardInfo,
+    lists: boardList,
+    members: boardMembers,
+    cards: listCards
 }
 
 export function boardReducer(state = initialState, action) {
@@ -41,6 +48,9 @@ export function boardReducer(state = initialState, action) {
         case SET_BOARD:
             newState = { ...state, board: action.board }
             break
+        case GET_BOARD_LIST:
+            newState = { ...state, lists: action.lists }
+            break
         case REMOVE_BOARD:
             boards = state.boards.filter(board => board._id !== action.boardId)
             newState = { ...state, boards }
@@ -55,6 +65,7 @@ export function boardReducer(state = initialState, action) {
         case ADD_BOARD_MSG:
             newState = { ...state, board: { ...state.board, msgs: [...state.board.msgs || [], action.msg] } }
             break
+
         case UPDATE_TASK:
             const board = { ...state.board }
             board.groups = state.board.groups.map(g => {
