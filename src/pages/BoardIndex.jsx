@@ -8,8 +8,6 @@ import { boardService } from '../services/board.service.local'
 import { BoardHeader } from '../cmps/BoardHeader'
 import { BoardList } from '../cmps/BoardList'
 
-const DEFAULT_BOARD_ID = "64f721f169b14894fac36cdf";
-
 
 
 export function BoardIndex() {
