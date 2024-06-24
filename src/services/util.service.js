@@ -104,16 +104,18 @@ function getColorHashByName(name) {
     }
 }
 function _createStartInfo() {
-  if (!localStorage.getItem(USERS_KEY)) {
-    localStorage.setItem(USERS_KEY, JSON.stringify(usersJson));
-  }
-  if (!localStorage.getItem(BOARDS_KEY)) {
-    localStorage.setItem(BOARDS_KEY, JSON.stringify(boardsJson));
-  }
-  if (!localStorage.getItem(LISTS_KEY)) {
-    localStorage.setItem(LISTS_KEY, JSON.stringify(listsJson));
-  }
-  if (!localStorage.getItem(CARDS_KEY)) {
-    localStorage.setItem(CARDS_KEY, JSON.stringify(cardsJson));
-  }
+    if (!localStorage.getItem(USERS_KEY)) {
+        localStorage.setItem(USERS_KEY, JSON.stringify(usersJson));
+    }
+    if (!localStorage.getItem(BOARDS_KEY)) {
+        localStorage.setItem(BOARDS_KEY, JSON.stringify(boardsJson));
+    }
+    if (!localStorage.getItem(LISTS_KEY)) {
+        localStorage.setItem(LISTS_KEY, JSON.stringify(listsJson));
+    }
+    if (!localStorage.getItem(CARDS_KEY)) {
+        localStorage.setItem(CARDS_KEY, JSON.stringify(cardsJson));
+    }
 }
+
+
