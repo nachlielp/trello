@@ -1,19 +1,9 @@
-export const ADD_WORKSPACE = 'ADD_WORKSPACE'
-export const REMOVE_WORKSPACE = 'REMOVE_WORKSPACE'
-export const SET_WORKSPACE = 'SET_WORKSPACE'
 
-export const SET_BOARDS = 'SET_BOARDS'
+
+export const SET_LISTS = 'SET_LISTS'
+export const SET_MEMBERS = 'SET_MEMBERS'
 export const SET_BOARD = 'SET_BOARD'
-export const GET_BOARD_LIST = 'GET_BOARD_LIST'
-export const REMOVE_BOARD = 'REMOVE_BOARD'
-export const ADD_BOARD = 'ADD_BOARD'
-export const UPDATE_BOARD = 'UPDATE_BOARD'
-export const ADD_BOARD_MSG = 'ADD_BOARD_MSG'
-export const UPDATE_TASK = 'UPDATE_TASK'
-
-export const ADD_ITEM = 'ADD_ITEM'
-export const REMOVE_ITEM = 'REMOVE_ITEM'
-export const UPDATE_ITEM = 'UPDATE_ITEM'
+export const SET_CARDS = 'SET_CARDS'
 
 import boardInfo from '../../JSON/board-info.json'; // Adjust the path as necessary
 import boardList from '../../JSON/board-list.json';
@@ -22,73 +12,32 @@ import listCards from '../../JSON/list-cards.json';
 
 
 const initialState = {
-    boards: boardInfo,
-    lists: boardList,
-    members: boardMembers,
-    cards: listCards
+    cards: [],
+    lists: [],
+    members: [],
+    board: []
 }
 
-export function boardReducer(state = initialState, action) {
+export function trelloReducer(state = initialState, action) {
+    console.log('action: ', action)
     var newState = state
-    var boards
     switch (action.type) {
-        case ADD_WORKSPACE:
-            newState = { ...state, workspaces: [...state.workspaces, action.workspace] }
+        case SET_LISTS:
+            newState = { ...state, lists: action.lists }
             break
-        case REMOVE_WORKSPACE:
-            newState = { ...state, workspaces: state.workspaces.filter(workspace => workspace._id !== action.workspaceId) }
+        case SET_CARDS:
+            newState = { ...state, cards: action.cards }
             break
-        case SET_WORKSPACE:
-            newState = { ...state, workspace: action.workspace }
-            break
-
-        case SET_BOARDS:
-            newState = { ...state, boards: action.boards }
+        case SET_MEMBERS:
+            newState = { ...state, members: action.members }
             break
         case SET_BOARD:
             newState = { ...state, board: action.board }
             break
-        case GET_BOARD_LIST:
-            newState = { ...state, lists: action.lists }
-            break
-        case REMOVE_BOARD:
-            boards = state.boards.filter(board => board._id !== action.boardId)
-            newState = { ...state, boards }
-            break
-        case ADD_BOARD:
-            newState = { ...state, boards: [...state.boards, action.board] }
-            break
-        case UPDATE_BOARD:
-            boards = state.boards.map(board => (board._id === action.board._id) ? action.board : board)
-            newState = { ...state, boards }
-            break
-        case ADD_BOARD_MSG:
-            newState = { ...state, board: { ...state.board, msgs: [...state.board.msgs || [], action.msg] } }
-            break
-
-        case UPDATE_TASK:
-            const board = { ...state.board }
-            board.groups = state.board.groups.map(g => {
-                if (g.id !== action.groupId) return g
-                const group = { ...g }
-                group.tasks = group.tasks.map(t => (t.id !== action.task.id) ? t : action.task)
-                return group
-            })
-            board.activities = [...board.activities, action.activity]
-            newState = { ...state, board }
-            break
-
-        case ADD_ITEM:
-            newState = { ...state, board: { ...state.board, items: [...state.board.items, action.item] } }
-            break
-        case REMOVE_ITEM:
-            newState = { ...state, board: { ...state.board, items: state.board.items.filter(item => item.id !== action.itemId) } }
-            break
-        case UPDATE_ITEM:
-            newState = { ...state, board: { ...state.board, items: state.board.items.map(item => (item.id !== action.item.id) ? action.item : item) } }
-            break
         default:
+            return state
     }
+    console.log('newState: ', newState)
     return newState
 }
 
