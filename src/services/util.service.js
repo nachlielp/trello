@@ -1,3 +1,9 @@
+import usersJson from "../../JSON/user.json";
+import boardsJson from "../../JSON/board-info.json";
+import listsJson from "../../JSON/board-list.json";
+import cardsJson from "../../JSON/list-cards.json";
+
+
 export const utilService = {
     makeId,
     makeLorem,
@@ -8,6 +14,12 @@ export const utilService = {
     loadFromStorage,
     getColorHashByName
 }
+export const USERS_KEY = "users";
+export const BOARDS_KEY = "boards";
+export const LISTS_KEY = "lists";
+export const CARDS_KEY = "cards";
+
+_createStartInfo();
 
 function makeId(length = 6) {
     var txt = ''
