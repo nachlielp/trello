@@ -12,7 +12,8 @@ export const utilService = {
     randomPastTime,
     saveToStorage,
     loadFromStorage,
-    getColorHashByName
+    getColorHashByName,
+    capitalizeInitials
 }
 export const USERS_KEY = "users";
 export const BOARDS_KEY = "boards";
@@ -118,4 +119,6 @@ function _createStartInfo() {
     }
 }
 
-
+function capitalizeInitials(string) {
+    return string.split(' ').map(word => word.charAt(0)).join('').toUpperCase();
+}

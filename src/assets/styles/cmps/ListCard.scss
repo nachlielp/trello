@@ -80,3 +80,16 @@
     gap: 4px;
     flex-wrap: wrap;
 }
+
+.list-card-content-members {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: flex-end;
+}
+
+.list-card-content-members.card-bg-cover,
+.list-card-content-members.card-img-cover {
+    display: none;
+}

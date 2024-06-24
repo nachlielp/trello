@@ -36,7 +36,6 @@ export function trelloReducer(state = initialState, action) {
         default:
             return state
     }
-    console.log('newState: ', newState)
     return newState
 }
 

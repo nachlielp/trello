@@ -2,8 +2,14 @@ import { Card } from "antd"
 import { utilService } from "../services/util.service"
 import { Label } from "./Label"
 import { EditOutlined } from "@ant-design/icons"
+import { useSelector } from "react-redux"
+import { Avatar } from "antd"
 
 export function ListCard({ card }) {
+
+    const members = useSelector(state => state.boardModule.members)
+    const cardMembers = members.filter(member => card.idMembers.includes(member.id)) || []
+    const cardMembersAvatars = cardMembers.map(member => <Avatar key={member.id} src={member.avatarHash} style={{ backgroundColor: '#f56a00', height: '24px', width: '24px' }}> {utilService.capitalizeInitials(member.fullName)}</Avatar>)
     const cardHeader = (
         card.cover.color && card.cover.size == 'normal' ?
             <div className="list-card-header" style={{ backgroundColor: utilService.getColorHashByName(card.cover.color) }}>
@@ -30,14 +36,14 @@ export function ListCard({ card }) {
                     {card.labels.map(label => <Label key={label.id} label={label} isExpanded={true} />)}
                 </article>
                 <span className="list-card-content-title">{card.name}</span>
+                <div className={`list-card-content-members ${getCardCoverClass(card)}`}>
+                    {cardMembersAvatars}
+                </div>
             </section>
         </Card>
     )
 }
 
-const EditIcon = () => {
-    return <span className="card-edit-icon"><EditOutlined /></span>
-}
 function getCardCoverClass(card) {
     if (!card.cover.color && !card.cover.idUploadedBackground) {
         return '';
