@@ -122,4 +122,3 @@ function _createStartInfo() {
     localStorage.setItem(CARDS_KEY, JSON.stringify(cardsJson));
   }
 }
-//
