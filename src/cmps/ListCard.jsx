@@ -1,19 +1,25 @@
-import { Card } from "antd"
+import { Card, Image } from "antd"
 
 export function ListCard({ card }) {
     const cardHeader = (
         card.cover.color && card.cover.size == 'normal' ?
             <div className="list-card-header" style={{ backgroundColor: getColorHashByName(card.cover.color) }}>&nbsp;</div>
-            :
-            <></>
+            : card.cover.idUploadedBackground && card.cover.size == 'normal' ?
+                <Image src={card.cover.scaled[2].url} alt="card cover" className="list-card-header-img" height={256} width={260} />
+                :
+                <></>
     )
 
     const cardStyle = card.cover.color && card.cover.size == 'full' ? { backgroundColor: getColorHashByName(card.cover.color) } : {}
 
+    const cardBackgroundImage = card.cover.idUploadedBackground && card.cover.size == 'full' ? { backgroundImage: `url(${card.cover.scaled[2].url})`, backgroundSize: 'cover' } : {};
+
+    const isImageCover = card.cover.idUploadedBackground && card.cover.size === 'full';
+
     return (
-        <Card className={`list-card custom-card ${getCardCoverType(card)}`} style={cardStyle}>
+        <Card className={`list-card custom-card ${getCardCoverClass(card)}`} style={{ ...cardStyle, ...cardBackgroundImage }}>
             {cardHeader}
-            <section className="list-card-content">
+            <section className={`list-card-content ${isImageCover ? 'image-cover' : ''}`}>
                 {card.name}
             </section>
         </Card>
@@ -21,7 +27,7 @@ export function ListCard({ card }) {
 }
 
 
-function getCardCoverType(card) {
+function getCardCoverClass(card) {
     if (!card.cover.color && !card.cover.idUploadedBackground) {
         return '';
     }
@@ -31,7 +37,7 @@ function getCardCoverType(card) {
     if (card.cover.color && card.cover.size === 'full') {
         return 'card-bg-cover';
     }
-    if (card.cover.idUploadedBackground) {
+    if (card.cover.idUploadedBackground && card.cover.size === 'full') {
         return 'card-img-cover';
     }
     return '';

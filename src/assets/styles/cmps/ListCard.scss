@@ -34,6 +34,25 @@
     min-height: 36px;
 }
 
+.list-card-header-img {
+    border-radius: 7px 7px 0 0 !important;
+}
+
+.card-img-cover {
+    min-height: 256px;
+}
+
 .list-card-content {
     padding: 6px;
+}
+
+.list-card-content.image-cover {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    /* White background with some transparency */
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 0 0 7px 7px;
 }
