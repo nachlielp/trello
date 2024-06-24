@@ -34,6 +34,13 @@
     min-height: 36px;
 }
 
+.list-card-header.img-cover {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 160px;
+}
+
 .list-card-header-img {
     border-radius: 7px 7px 0 0 !important;
     object-fit: cover;

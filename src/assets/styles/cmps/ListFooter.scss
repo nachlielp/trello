@@ -1,0 +1,27 @@
+.list-footer {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.list-footer .add-card-btn {
+    width: 100px;
+    border: none;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.list-footer .add-card-btn:hover {
+    background-color: var(--color-primary-dark);
+}
+
+.list-footer .use-template-btn {
+    width: 20px;
+    height: 20px;
+    border: none;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}

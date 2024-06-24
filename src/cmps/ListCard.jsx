@@ -1,13 +1,17 @@
-import { Card, Image } from "antd"
+import { Card } from "antd"
 import { utilService } from "../services/util.service"
 import { Label } from "./Label"
+import { EditOutlined } from "@ant-design/icons"
 
 export function ListCard({ card }) {
     const cardHeader = (
         card.cover.color && card.cover.size == 'normal' ?
-            <div className="list-card-header" style={{ backgroundColor: utilService.getColorHashByName(card.cover.color) }}>&nbsp;</div>
+            <div className="list-card-header" style={{ backgroundColor: utilService.getColorHashByName(card.cover.color) }}>
+                &nbsp;
+            </div>
             : card.cover.idUploadedBackground && card.cover.size == 'normal' ?
-                <Image src={card.cover.scaled[2].url} alt="card cover" className="list-card-header-img" preview={false} />
+                <div className="list-card-header img-cover" style={{ backgroundImage: `url(${card.cover.scaled[2].url})` }}>
+                </div>
                 :
                 <></>
     )
@@ -31,7 +35,9 @@ export function ListCard({ card }) {
     )
 }
 
-
+const EditIcon = () => {
+    return <span className="card-edit-icon"><EditOutlined /></span>
+}
 function getCardCoverClass(card) {
     if (!card.cover.color && !card.cover.idUploadedBackground) {
         return '';
