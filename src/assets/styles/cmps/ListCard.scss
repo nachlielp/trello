@@ -36,10 +36,12 @@
 
 .list-card-header-img {
     border-radius: 7px 7px 0 0 !important;
+    object-fit: cover;
 }
 
 .card-img-cover {
-    min-height: 256px;
+    min-height: 160px;
+    width: 256px;
 }
 
 .list-card-content {
@@ -63,6 +65,7 @@
 
 .list-card-content.image-cover .list-card-content-title {
     align-self: flex-end;
+    object-fit: cover;
 }
 
 .list-card-content-labels {

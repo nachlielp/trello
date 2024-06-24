@@ -1,13 +1,13 @@
 import { Card, Image } from "antd"
 import { utilService } from "../services/util.service"
-import Label from "./Label"
+import { Label } from "./Label"
 
 export function ListCard({ card }) {
     const cardHeader = (
         card.cover.color && card.cover.size == 'normal' ?
             <div className="list-card-header" style={{ backgroundColor: utilService.getColorHashByName(card.cover.color) }}>&nbsp;</div>
             : card.cover.idUploadedBackground && card.cover.size == 'normal' ?
-                <Image src={card.cover.scaled[2].url} alt="card cover" className="list-card-header-img" height={256} width={260} preview={false} />
+                <Image src={card.cover.scaled[2].url} alt="card cover" className="list-card-header-img" width={256} preview={false} />
                 :
                 <></>
     )
@@ -23,7 +23,7 @@ export function ListCard({ card }) {
             {cardHeader}
             <section className={`list-card-content ${isImageCover ? 'image-cover' : ''}`}>
                 <article className="list-card-content-labels">
-                    {card.labels.map(label => <Label key={label.id} label={label} isExpanded={false} />)}
+                    {card.labels.map(label => <Label key={label.id} label={label} isExpanded={true} />)}
                 </article>
                 <span className="list-card-content-title">{card.name}</span>
             </section>
