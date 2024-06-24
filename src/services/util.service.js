@@ -59,9 +59,10 @@ function saveToStorage(key, value) {
 }
 
 function loadFromStorage(key) {
-    const data = localStorage.getItem(key)
-    return (data) ? JSON.parse(data) : undefined
+    const data = localStorage.getItem(key);
+    return (data) ? JSON.parse(data) : undefined;
 }
+
 
 
 function getColorHashByName(name) {
@@ -90,3 +91,19 @@ function getColorHashByName(name) {
             return '#fff'
     }
 }
+function _createStartInfo() {
+    if (!localStorage.getItem(USERS_KEY)) {
+        localStorage.setItem(USERS_KEY, JSON.stringify(usersJson));
+    }
+    if (!localStorage.getItem(BOARDS_KEY)) {
+        localStorage.setItem(BOARDS_KEY, JSON.stringify(boardsJson));
+    }
+    if (!localStorage.getItem(LISTS_KEY)) {
+        localStorage.setItem(LISTS_KEY, JSON.stringify(listsJson));
+    }
+    if (!localStorage.getItem(CARDS_KEY)) {
+        localStorage.setItem(CARDS_KEY, JSON.stringify(cardsJson));
+    }
+}
+
+
