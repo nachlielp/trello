@@ -8,12 +8,20 @@
     }
 }
 
-// .list-card:hover {
-//     border: 2px solid blue;
-// }
-
 .list-card.custom-card .ant-card {
     margin: 10px 0 0 0 !important;
+}
+
+.card-bg-cover .ant-card-body {
+    min-height: 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.card-bg-cover .ant-card-body .list-card-content {
+    font-weight: 600;
+    font-size: 16px;
 }
 
 .list-card.custom-card .ant-card-body {
