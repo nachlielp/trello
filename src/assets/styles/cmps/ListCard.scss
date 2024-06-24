@@ -1,0 +1,31 @@
+.list-card {
+    margin-top: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+
+    &:hover {
+        outline: 2px solid blue;
+    }
+}
+
+// .list-card:hover {
+//     border: 2px solid blue;
+// }
+
+.list-card.custom-card .ant-card {
+    margin: 10px 0 0 0 !important;
+}
+
+.list-card.custom-card .ant-card-body {
+    padding: 0 !important;
+}
+
+.list-card-header {
+    border-radius: 5px 5px 0 0 !important;
+    // background-color: #21272b;
+    min-height: 36px;
+}
+
+.list-card-content {
+    padding: 6px;
+}
