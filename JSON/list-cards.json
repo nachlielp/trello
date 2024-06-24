@@ -44,6 +44,108 @@
                 "url": "https://trello.com/c/R3NAaD8A/6-back-log",
                 "cover": {
                     "idAttachment": null,
+                    "color": "yellow",
+                    "idUploadedBackground": null,
+                    "size": "full",
+                    "brightness": "light",
+                    "idPlugin": null
+                },
+                "isTemplate": false,
+                "cardRole": null
+            },
+            {
+                "id": "66754df7468a0b72581f2de9",
+                "checkItemStates": [],
+                "closed": false,
+                "dueComplete": false,
+                "dateLastActivity": "2024-06-22T11:21:43.178Z",
+                "desc": "[project-plan.js](https://trello.com/1/cards/66754df7468a0b72581f2de9/attachments/66754e0faeb4c24c7994c292/download/project-plan.js \"‌\")\n[project-members.js](https://trello.com/1/cards/66754df7468a0b72581f2de9/attachments/66754e12d267e69fbed5c05f/download/project-members.js \"‌\")\n[project.js](https://trello.com/1/cards/66754df7468a0b72581f2de9/attachments/66754e9696844f09df931eb3/download/project.js \"‌\")",
+                "descData": {
+                    "emoji": {}
+                },
+                "due": null,
+                "dueReminder": null,
+                "email": null,
+                "idBoard": "64f721f169b14894fac36cdf",
+                "idChecklists": [],
+                "idList": "64f721f169b14894fac36ce6",
+                "idMembers": [],
+                "idMembersVoted": [],
+                "idShort": 7,
+                "idAttachmentCover": null,
+                "labels": [
+                    {
+                        "id": "64f721f1415ea65cb1e8890c",
+                        "idBoard": "64f721f169b14894fac36cdf",
+                        "name": "",
+                        "color": "blue",
+                        "uses": 1
+                    }
+                ],
+                "idLabels": [
+                    "64f721f1415ea65cb1e8890c"
+                ],
+                "manualCoverAttachment": false,
+                "name": "in-progress",
+                "pos": 98305,
+                "shortLink": "R3NAaD8B",
+                "shortUrl": "https://trello.com/c/R3NAaD8B",
+                "start": null,
+                "subscribed": true,
+                "url": "https://trello.com/c/R3NAaD8B/7-in-progress",
+                "cover": {
+                    "idAttachment": null,
+                    "color": "lime",
+                    "idUploadedBackground": null,
+                    "size": "normal",
+                    "brightness": "light",
+                    "idPlugin": null
+                },
+                "isTemplate": false,
+                "cardRole": null
+            },
+            {
+                "id": "66754df7468a0b72581f2dea",
+                "checkItemStates": [],
+                "closed": false,
+                "dueComplete": false,
+                "dateLastActivity": "2024-06-23T11:21:43.178Z",
+                "desc": "[final-review.js](https://trello.com/1/cards/66754df7468a0b72581f2dea/attachments/66754e0faeb4c24c7994c293/download/final-review.js \"‌\")\n[review-members.js](https://trello.com/1/cards/66754df7468a0b72581f2dea/attachments/66754e12d267e69fbed5c06f/download/review-members.js \"‌\")\n[review.js](https://trello.com/1/cards/66754df7468a0b72581f2dea/attachments/66754e9696844f09df931eb4/download/review.js \"‌\")",
+                "descData": {
+                    "emoji": {}
+                },
+                "due": null,
+                "dueReminder": null,
+                "email": null,
+                "idBoard": "64f721f169b14894fac36cdf",
+                "idChecklists": [],
+                "idList": "64f721f169b14894fac36ce6",
+                "idMembers": [],
+                "idMembersVoted": [],
+                "idShort": 8,
+                "idAttachmentCover": null,
+                "labels": [
+                    {
+                        "id": "64f721f1415ea65cb1e8890d",
+                        "idBoard": "64f721f169b14894fac36cdf",
+                        "name": "",
+                        "color": "red",
+                        "uses": 1
+                    }
+                ],
+                "idLabels": [
+                    "64f721f1415ea65cb1e8890d"
+                ],
+                "manualCoverAttachment": false,
+                "name": "final-review",
+                "pos": 98306,
+                "shortLink": "R3NAaD8C",
+                "shortUrl": "https://trello.com/c/R3NAaD8C",
+                "start": null,
+                "subscribed": true,
+                "url": "https://trello.com/c/R3NAaD8C/8-final-review",
+                "cover": {
+                    "idAttachment": null,
                     "color": null,
                     "idUploadedBackground": null,
                     "size": "normal",
