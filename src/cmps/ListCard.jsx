@@ -6,13 +6,16 @@ import { useSelector } from "react-redux"
 import { Avatar } from "antd"
 import descriptionIcon from '../assets/svgs/description.svg'
 import fileIcon from '../assets/svgs/file.svg'
+import { UserAvatar } from "./UserAvatar"
 
 //TODO rename to ListCardPreview
 export function ListCard({ card }) {
 
     const members = useSelector(state => state.boardModule.members)
 
-    const cardMembersAvatars = getCardMemerAvatars(members, card.idMembers)
+    const cardMembers = members.filter(member => card.idMembers.includes(member.id)) || []
+    console.log('cardMembers', cardMembers)
+    const cardMembersAvatars = cardMembers.map(member => <UserAvatar key={member.id} member={member} />)
 
     const cardIcons = getCardIcons(card)
 
@@ -90,7 +93,7 @@ function getCardIcons(card) {
     const cardIcons = []
     if (card.badges.description) {
         cardIcons.push(
-            <Tooltip placement="bottom" title="This card has a description">
+            <Tooltip placement="bottom" title="This card has a description" key="description">
                 <span className="card-icon-wrapper">
                     <img src={descriptionIcon} alt="description" className="card-icon" />
                 </span>
@@ -99,7 +102,7 @@ function getCardIcons(card) {
     }
     if (card.badges.attachments > 0) {
         cardIcons.push(
-            <Tooltip placement="bottom" title="Attachments">
+            <Tooltip placement="bottom" title="Attachments" key="attachments">
                 <span className="card-icon-wrapper">
                     <img src={fileIcon} alt="file" className="card-icon" />
                     <span className="card-icon-count">{card.badges.attachments}</span>
