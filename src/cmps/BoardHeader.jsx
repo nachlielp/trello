@@ -72,7 +72,6 @@ export function BoardHeader({ board }) {
           Filters
         </button>
         <div className="members">
-        {console.log(members)}
           {members?.slice(0,3).map(member=><LetteredAvatar name={member.fullName} key={member.id} size="30px" className="members-avatar"/>)}
         </div>
         <button>

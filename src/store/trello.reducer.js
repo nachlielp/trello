@@ -16,7 +16,7 @@ const initialState = {
     cards: [],
     lists: [],
     members: [],
-    board: [],
+    board: {},
     isExpanded: true
 }
 
