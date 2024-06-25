@@ -34,12 +34,21 @@
     min-height: 36px;
 }
 
+.list-card-header.img-cover {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 160px;
+}
+
 .list-card-header-img {
     border-radius: 7px 7px 0 0 !important;
+    object-fit: cover;
 }
 
 .card-img-cover {
-    min-height: 256px;
+    min-height: 160px;
+    width: 100%;
 }
 
 .list-card-content {
@@ -63,6 +72,7 @@
 
 .list-card-content.image-cover .list-card-content-title {
     align-self: flex-end;
+    object-fit: cover;
 }
 
 .list-card-content-labels {
@@ -70,3 +80,49 @@
     gap: 4px;
     flex-wrap: wrap;
 }
+
+.list-card-content-icons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.list-card-content-icons.card-bg-cover,
+.list-card-content-icons.card-img-cover {
+    display: none;
+}
+
+.list-card-content-icons .aside-right {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    margin-top: 10px;
+}
+
+.list-card-content-icons .aside-left {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+}
+
+.card-icon-wrapper {
+    display: flex;
+    align-items: center; // Align items vertically
+}
+
+.card-icon {
+    // margin-top: 10px;
+    height: 16px;
+    width: 16px;
+}
+
+.card-icon-count {
+    // margin-top: 10px;
+    font-size: 12px;
+    margin-left: 4px; // Adjust spacing as needed
+}
+
+// .card-icon-wrapper .card-icon-count {
+//     font-size: 12px;
+//     padding-bottom: 20px;
+// }

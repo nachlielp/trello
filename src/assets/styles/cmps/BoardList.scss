@@ -1,5 +1,5 @@
 .board-list {
-    width: 300px;
+    max-width: 256px;
     height: 100%;
     background-color: #f0f2f4;
     margin-top: 10px;
@@ -17,7 +17,6 @@
 }
 
 .board-list-header .list-more-btn {
-    background-color: "#f0f2f4";
     border: none;
     border-radius: 10px;
     width: 32px;
@@ -27,16 +26,11 @@
     justify-content: center;
     padding: 0;
     box-shadow: none;
-}
-
-.board-list-header .list-more-btn {
-    .ant-btn-primary {
-        background-color: "#f0f2f4";
-    }
+    background-color: #f0f2f4;
 }
 
 .board-list-header .list-more-btn:hover {
-    background-color: #c0c4c8; // Slightly darker gray on hover
+    background-color: #d0d4dc !important;
 }
 
 .board-list-header .list-more-btn .anticon {
