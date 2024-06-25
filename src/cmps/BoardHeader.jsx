@@ -27,7 +27,7 @@ export function BoardHeader() {
   useEffect(() => {
     fetchUserId();
     login()
-  }, [user]);
+  }, []);
 
   async function fetchUserId() {
     const data = await fetch(
