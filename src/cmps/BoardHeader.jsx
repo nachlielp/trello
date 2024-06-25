@@ -1,16 +1,24 @@
 import { useEffect, useState } from "react";
-import { batch } from "react-redux";
+import { useSelector } from "react-redux";
 import visibilityIcon from "/img/headerImgs/visibilityIcon.svg";
 import boardIcon from "/img/headerImgs/boardIcon.svg";
-import { DownOutlined, StarOutlined, StarFilled, UserAddOutlined, EllipsisOutlined } from "@ant-design/icons";
+import {
+  DownOutlined,
+  StarOutlined,
+  StarFilled,
+  UserAddOutlined,
+  EllipsisOutlined,
+} from "@ant-design/icons";
 import { IoFilterSharp } from "react-icons/io5";
 import { LetteredAvatar } from "./LetteredAvatar";
+import { login } from "../store/user.actions";
 
-export function BoardHeader({ board }) {
+export function BoardHeader() {
   const [isStarredBoard, setIsStarredBoard] = useState(false);
   const [hover, setHover] = useState(false);
-  const [members, setMembers] = useState([]);
-
+  const members = useSelector((state) => state.boardModule.members);
+  const board = useSelector((state) => state.boardModule.board);
+  const user = useSelector((state) => state.userModule.user);
   const starFilled = isStarredBoard ? <StarFilled /> : <StarOutlined />;
   const starEmpty = isStarredBoard ? <StarOutlined /> : <StarFilled />;
 
@@ -18,7 +26,8 @@ export function BoardHeader({ board }) {
   const token = import.meta.env.VITE_TRELLO_TOKEN;
   useEffect(() => {
     fetchUserId();
-  }, []);
+    login()
+  }, [user]);
 
   async function fetchUserId() {
     const data = await fetch(
@@ -34,16 +43,8 @@ export function BoardHeader({ board }) {
     );
     const boardData = await data.json();
     setIsStarredBoard(boardData.some((obj) => obj.idBoard === board.id));
-    fetchMembersFromTrello()
   }
-  async function fetchMembersFromTrello() {
-    const data = await fetch(
-      `https://api.trello.com/1/boards/nfwLJTa2/members?key=${apiKey}&token=${token}`
-    );
-    const membersData = await data.json();
-    setMembers(membersData)
-    
-  }
+
   return (
     <div className="board-header">
       <div className="left-info">
@@ -72,14 +73,21 @@ export function BoardHeader({ board }) {
           Filters
         </button>
         <div className="members">
-          {members?.slice(0,3).map(member=><LetteredAvatar name={member.fullName} key={member.id} size="30px" className="members-avatar"/>)}
+          {members?.slice(0, 3).map((member) => (
+            <LetteredAvatar
+              name={member.fullName}
+              key={member.id}
+              size="30px"
+              className="members-avatar"
+            />
+          ))}
         </div>
         <button>
-        <UserAddOutlined />
-        Share
+          <UserAddOutlined />
+          Share
         </button>
         <button>
-        <EllipsisOutlined />
+          <EllipsisOutlined />
         </button>
       </div>
     </div>

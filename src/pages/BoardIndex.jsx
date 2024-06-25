@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service";
-import { userService } from "../services/user.service";
-import { boardService } from "../services/board.service.local";
 import { BoardHeader } from "../cmps/BoardHeader";
 import { BoardList } from "../cmps/BoardList";
 import { loadTrelloData } from "../store/trello.actions";
@@ -21,12 +17,11 @@ export function BoardIndex() {
     <section className="board-index">
       <div
         className="bg"
-   
         style={{
-            backgroundImage: `url(${board.prefs?.backgroundImage})`,
-          }}
+          backgroundImage: `url(${board.prefs?.backgroundImage})`,
+        }}
       >
-        {board && <BoardHeader board={board} />}
+        {board && <BoardHeader />}
         <main className="board-lists">
           {lists.map((list) => (
             <BoardList
