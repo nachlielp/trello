@@ -13,7 +13,8 @@ export const utilService = {
     saveToStorage,
     loadFromStorage,
     getColorHashByName,
-    capitalizeInitials
+    capitalizeInitials,
+    stringToColor
 }
 export const USERS_KEY = "users";
 export const BOARDS_KEY = "boards";
@@ -121,4 +122,17 @@ function _createStartInfo() {
 
 function capitalizeInitials(string) {
     return string.split(' ').map(word => word.charAt(0)).join('').toUpperCase();
+}
+
+export function stringToColor(str) {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+        hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    let color = '#';
+    for (let i = 0; i < 3; i++) {
+        const value = (hash >> (i * 8)) & 0xFF;
+        color += ('00' + value.toString(16)).substr(-2);
+    }
+    return color;
 }

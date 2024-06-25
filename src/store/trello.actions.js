@@ -1,6 +1,6 @@
 import { boardService } from '../services/board.service.local'
 import { store } from './store'
-import { SET_LISTS, SET_CARDS, SET_MEMBERS, SET_BOARD } from './trello.reducer'
+import { SET_LISTS, SET_CARDS, SET_MEMBERS, SET_BOARD, SET_IS_EXPANDED } from './trello.reducer'
 
 const apiKey = import.meta.env.VITE_TRELLO_API_KEY;
 const token = import.meta.env.VITE_TRELLO_TOKEN;
@@ -48,6 +48,10 @@ async function fetchBoardFromTrello() {
     const data = await fetch(`https://api.trello.com/1/boards/dL2ehGo7?key=${apiKey}&token=${token}`)
     const boardData = await data.json()
     return boardData;
+}
+
+export function toggleIsExpanded() {
+    store.dispatch({ type: SET_IS_EXPANDED, isExpanded: !store.getState().boardModule.isExpanded })
 }
 
 export async function loadWorkspaces() {

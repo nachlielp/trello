@@ -4,12 +4,17 @@ import { Label } from "./Label"
 import { EditOutlined } from "@ant-design/icons"
 import { useSelector } from "react-redux"
 import { Avatar } from "antd"
+import descriptionIcon from '../assets/svgs/description.svg'
+import fileIcon from '../assets/svgs/file.svg'
+import eyeIcon from '../assets/svgs/eye.svg'
 
 export function ListCard({ card }) {
 
     const members = useSelector(state => state.boardModule.members)
     const cardMembers = members.filter(member => card.idMembers.includes(member.id)) || []
-    const cardMembersAvatars = cardMembers.map(member => <Avatar key={member.id} src={member.avatarHash} style={{ backgroundColor: '#f56a00', height: '24px', width: '24px' }}> {utilService.capitalizeInitials(member.fullName)}</Avatar>)
+    const cardMembersAvatars = cardMembers.map(member => <Avatar key={member.id} src={member.avatarHash} style={{ backgroundColor: utilService.stringToColor(member.id), height: '24px', width: '24px' }}> {utilService.capitalizeInitials(member.fullName)}</Avatar>)
+
+    const cardIcons = getCardIcons(card)
     const cardHeader = (
         card.cover.color && card.cover.size == 'normal' ?
             <div className="list-card-header" style={{ backgroundColor: utilService.getColorHashByName(card.cover.color) }}>
@@ -36,8 +41,13 @@ export function ListCard({ card }) {
                     {card.labels.map(label => <Label key={label.id} label={label} isExpanded={true} />)}
                 </article>
                 <span className="list-card-content-title">{card.name}</span>
-                <div className={`list-card-content-members ${getCardCoverClass(card)}`}>
-                    {cardMembersAvatars}
+                <div className={`list-card-content-icons ${getCardCoverClass(card)}`}>
+                    <aside className="aside-left">
+                        {cardIcons}
+                    </aside>
+                    <aside className="aside-right">
+                        {cardMembersAvatars}
+                    </aside>
                 </div>
             </section>
         </Card>
@@ -58,4 +68,22 @@ function getCardCoverClass(card) {
         return 'card-img-cover';
     }
     return '';
+}
+
+function getCardIcons(card) {
+    const cardIcons = []
+    if (card.badges.description) {
+        cardIcons.push(<span className="card-icon-wrapper">
+            <img src={descriptionIcon} alt="description" className="card-icon" />
+        </span>)
+    }
+    if (card.badges.attachments > 0) {
+        cardIcons.push(
+            <span className="card-icon-wrapper">
+                <img src={fileIcon} alt="file" className="card-icon" />
+                <span className="card-icon-count">{card.badges.attachments}</span>
+            </span>
+        )
+    }
+    return cardIcons
 }
