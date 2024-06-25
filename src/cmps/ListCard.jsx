@@ -7,6 +7,7 @@ import { Avatar } from "antd"
 import descriptionIcon from '../assets/svgs/description.svg'
 import fileIcon from '../assets/svgs/file.svg'
 
+//TODO rename to ListCardPreview
 export function ListCard({ card }) {
 
     const members = useSelector(state => state.boardModule.members)
@@ -17,6 +18,7 @@ export function ListCard({ card }) {
 
     const cardHeader = getCardHeader(card)
 
+    //TODO destruct card
     const cardStyle = card.cover.color && card.cover.size == 'full' ? { backgroundColor: utilService.getColorHashByName(card.cover.color) } : {}
 
     const cardBackgroundImage = card.cover.idUploadedBackground && card.cover.size == 'full' ? { backgroundImage: `url(${card.cover.scaled[2].url})`, backgroundSize: 'cover' } : {};
@@ -55,6 +57,7 @@ function getCardHeader(card) {
     )
 }
 
+//TODO move to component
 function getCardMemerAvatars(members, cardMemberIds) {
     const cardMembers = members.filter(member => cardMemberIds.includes(member.id)) || []
     return cardMembers.map(member =>
