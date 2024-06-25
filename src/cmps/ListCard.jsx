@@ -1,4 +1,4 @@
-import { Card } from "antd"
+import { Card, Tooltip } from "antd"
 import { utilService } from "../services/util.service"
 import { Label } from "./Label"
 import { EditOutlined } from "@ant-design/icons"
@@ -6,26 +6,16 @@ import { useSelector } from "react-redux"
 import { Avatar } from "antd"
 import descriptionIcon from '../assets/svgs/description.svg'
 import fileIcon from '../assets/svgs/file.svg'
-import eyeIcon from '../assets/svgs/eye.svg'
 
 export function ListCard({ card }) {
 
     const members = useSelector(state => state.boardModule.members)
-    const cardMembers = members.filter(member => card.idMembers.includes(member.id)) || []
-    const cardMembersAvatars = cardMembers.map(member => <Avatar key={member.id} src={member.avatarHash} style={{ backgroundColor: utilService.stringToColor(member.id), height: '24px', width: '24px' }}> {utilService.capitalizeInitials(member.fullName)}</Avatar>)
+
+    const cardMembersAvatars = getCardMemerAvatars(members, card.idMembers)
 
     const cardIcons = getCardIcons(card)
-    const cardHeader = (
-        card.cover.color && card.cover.size == 'normal' ?
-            <div className="list-card-header" style={{ backgroundColor: utilService.getColorHashByName(card.cover.color) }}>
-                &nbsp;
-            </div>
-            : card.cover.idUploadedBackground && card.cover.size == 'normal' ?
-                <div className="list-card-header img-cover" style={{ backgroundImage: `url(${card.cover.scaled[2].url})` }}>
-                </div>
-                :
-                <></>
-    )
+
+    const cardHeader = getCardHeader(card)
 
     const cardStyle = card.cover.color && card.cover.size == 'full' ? { backgroundColor: utilService.getColorHashByName(card.cover.color) } : {}
 
@@ -54,6 +44,29 @@ export function ListCard({ card }) {
     )
 }
 
+function getCardHeader(card) {
+    return (
+        card.cover.color && card.cover.size == 'normal' ?
+            <div className="list-card-header" style={{ backgroundColor: utilService.getColorHashByName(card.cover.color) }}>&nbsp;</div>
+            : card.cover.idUploadedBackground && card.cover.size == 'normal' ?
+                <div className="list-card-header img-cover" style={{ backgroundImage: `url(${card.cover.scaled[2].url})` }}></div>
+                :
+                <></>
+    )
+}
+
+function getCardMemerAvatars(members, cardMemberIds) {
+    const cardMembers = members.filter(member => cardMemberIds.includes(member.id)) || []
+    return cardMembers.map(member =>
+        <Tooltip placement="bottom" title={member.fullName}>
+            <Avatar
+                key={member.id} src={member.avatarHash}
+                style={{ backgroundColor: utilService.stringToColor(member.id), height: '24px', width: '24px' }}>
+                {utilService.capitalizeInitials(member.fullName)}
+            </Avatar>
+        </Tooltip>)
+}
+
 function getCardCoverClass(card) {
     if (!card.cover.color && !card.cover.idUploadedBackground) {
         return '';
@@ -73,16 +86,22 @@ function getCardCoverClass(card) {
 function getCardIcons(card) {
     const cardIcons = []
     if (card.badges.description) {
-        cardIcons.push(<span className="card-icon-wrapper">
-            <img src={descriptionIcon} alt="description" className="card-icon" />
-        </span>)
+        cardIcons.push(
+            <Tooltip placement="bottom" title="This card has a description">
+                <span className="card-icon-wrapper">
+                    <img src={descriptionIcon} alt="description" className="card-icon" />
+                </span>
+            </Tooltip>
+        )
     }
     if (card.badges.attachments > 0) {
         cardIcons.push(
-            <span className="card-icon-wrapper">
-                <img src={fileIcon} alt="file" className="card-icon" />
-                <span className="card-icon-count">{card.badges.attachments}</span>
-            </span>
+            <Tooltip placement="bottom" title="Attachments">
+                <span className="card-icon-wrapper">
+                    <img src={fileIcon} alt="file" className="card-icon" />
+                    <span className="card-icon-count">{card.badges.attachments}</span>
+                </span>
+            </Tooltip>
         )
     }
     return cardIcons
