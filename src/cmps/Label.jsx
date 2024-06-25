@@ -5,7 +5,7 @@ import { toggleIsExpanded } from "../store/trello.actions";
 export function Label({ label }) {
     const isExpanded = useSelector(state => state.boardModule.isExpanded)
     function onClick() {
-        // utilService.saveToStorage('labelState', { showText: !isExpanded })
+        //  utilService.saveToStorage('labelState', { showText: !isExpanded })
         toggleIsExpanded()
     }
     return (
