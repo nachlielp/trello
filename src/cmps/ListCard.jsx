@@ -1,4 +1,4 @@
-import { Card } from "antd"
+import { Card, Tooltip } from "antd"
 import { utilService } from "../services/util.service"
 import { Label } from "./Label"
 import { EditOutlined } from "@ant-design/icons"
@@ -6,7 +6,6 @@ import { useSelector } from "react-redux"
 import { Avatar } from "antd"
 import descriptionIcon from '../assets/svgs/description.svg'
 import fileIcon from '../assets/svgs/file.svg'
-import eyeIcon from '../assets/svgs/eye.svg'
 
 export function ListCard({ card }) {
 
@@ -73,16 +72,22 @@ function getCardCoverClass(card) {
 function getCardIcons(card) {
     const cardIcons = []
     if (card.badges.description) {
-        cardIcons.push(<span className="card-icon-wrapper">
-            <img src={descriptionIcon} alt="description" className="card-icon" />
-        </span>)
+        cardIcons.push(
+            <Tooltip placement="bottom" title="This card has a description">
+                <span className="card-icon-wrapper">
+                    <img src={descriptionIcon} alt="description" className="card-icon" />
+                </span>
+            </Tooltip>
+        )
     }
     if (card.badges.attachments > 0) {
         cardIcons.push(
-            <span className="card-icon-wrapper">
-                <img src={fileIcon} alt="file" className="card-icon" />
-                <span className="card-icon-count">{card.badges.attachments}</span>
-            </span>
+            <Tooltip placement="bottom" title="Attachments">
+                <span className="card-icon-wrapper">
+                    <img src={fileIcon} alt="file" className="card-icon" />
+                    <span className="card-icon-count">{card.badges.attachments}</span>
+                </span>
+            </Tooltip>
         )
     }
     return cardIcons
