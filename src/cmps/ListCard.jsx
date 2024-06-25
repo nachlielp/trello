@@ -10,21 +10,12 @@ import fileIcon from '../assets/svgs/file.svg'
 export function ListCard({ card }) {
 
     const members = useSelector(state => state.boardModule.members)
-    const cardMembers = members.filter(member => card.idMembers.includes(member.id)) || []
-    const cardMembersAvatars = cardMembers.map(member => <Avatar key={member.id} src={member.avatarHash} style={{ backgroundColor: utilService.stringToColor(member.id), height: '24px', width: '24px' }}> {utilService.capitalizeInitials(member.fullName)}</Avatar>)
+
+    const cardMembersAvatars = getCardMemerAvatars(members, card.idMembers)
 
     const cardIcons = getCardIcons(card)
-    const cardHeader = (
-        card.cover.color && card.cover.size == 'normal' ?
-            <div className="list-card-header" style={{ backgroundColor: utilService.getColorHashByName(card.cover.color) }}>
-                &nbsp;
-            </div>
-            : card.cover.idUploadedBackground && card.cover.size == 'normal' ?
-                <div className="list-card-header img-cover" style={{ backgroundImage: `url(${card.cover.scaled[2].url})` }}>
-                </div>
-                :
-                <></>
-    )
+
+    const cardHeader = getCardHeader(card)
 
     const cardStyle = card.cover.color && card.cover.size == 'full' ? { backgroundColor: utilService.getColorHashByName(card.cover.color) } : {}
 
@@ -51,6 +42,29 @@ export function ListCard({ card }) {
             </section>
         </Card>
     )
+}
+
+function getCardHeader(card) {
+    return (
+        card.cover.color && card.cover.size == 'normal' ?
+            <div className="list-card-header" style={{ backgroundColor: utilService.getColorHashByName(card.cover.color) }}>&nbsp;</div>
+            : card.cover.idUploadedBackground && card.cover.size == 'normal' ?
+                <div className="list-card-header img-cover" style={{ backgroundImage: `url(${card.cover.scaled[2].url})` }}></div>
+                :
+                <></>
+    )
+}
+
+function getCardMemerAvatars(members, cardMemberIds) {
+    const cardMembers = members.filter(member => cardMemberIds.includes(member.id)) || []
+    return cardMembers.map(member =>
+        <Tooltip placement="bottom" title={member.fullName}>
+            <Avatar
+                key={member.id} src={member.avatarHash}
+                style={{ backgroundColor: utilService.stringToColor(member.id), height: '24px', width: '24px' }}>
+                {utilService.capitalizeInitials(member.fullName)}
+            </Avatar>
+        </Tooltip>)
 }
 
 function getCardCoverClass(card) {
