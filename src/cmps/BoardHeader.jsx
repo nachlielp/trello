@@ -18,7 +18,6 @@ export function BoardHeader() {
   const [hover, setHover] = useState(false);
   const members = useSelector((state) => state.boardModule.members);
   const board = useSelector((state) => state.boardModule.board);
-  const user = useSelector((state) => state.userModule.user);
   const starFilled = isStarredBoard ? <StarFilled /> : <StarOutlined />;
   const starEmpty = isStarredBoard ? <StarOutlined /> : <StarFilled />;
 
@@ -26,8 +25,7 @@ export function BoardHeader() {
   const token = import.meta.env.VITE_TRELLO_TOKEN;
   useEffect(() => {
     fetchUserId();
-    login()
-  }, []);
+  }, [board]);
 
   async function fetchUserId() {
     const data = await fetch(
@@ -38,11 +36,15 @@ export function BoardHeader() {
   }
 
   async function fetchStarredBoards(id) {
-    const data = await fetch(
-      `https://trello.com/1/member/${id}/boardStars?key=${apiKey}&token=${token}`
-    );
-    const boardData = await data.json();
-    setIsStarredBoard(boardData.some((obj) => obj.idBoard === board.id));
+    try {
+      const data = await fetch(
+        `https://trello.com/1/member/${id}/boardStars?key=${apiKey}&token=${token}`
+      );
+      const boardData = await data.json();
+      setIsStarredBoard(boardData.some((obj) => obj.idBoard === board.id));
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
@@ -55,8 +57,8 @@ export function BoardHeader() {
           onMouseOver={() => setHover(true)}
           onMouseOut={() => setHover(false)}
         >
-          {hover && starEmpty}
-          {!hover && starFilled}
+          {(hover && (isStarredBoard ? <StarOutlined /> : <StarFilled />)) ||
+            (isStarredBoard ? <StarFilled /> : <StarOutlined />)}
         </button>
         <button className="visibility-icon">
           <img src={visibilityIcon} />
