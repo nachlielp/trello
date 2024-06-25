@@ -52,7 +52,7 @@
 }
 
 .list-card-content {
-    padding: 6px;
+    padding: 8px 12px 4px 12px;
 }
 
 .list-card-content.image-cover {
@@ -76,6 +76,7 @@
 }
 
 .list-card-content-labels {
+
     display: flex;
     gap: 4px;
     flex-wrap: wrap;
@@ -105,6 +106,12 @@
     gap: 6px;
 }
 
+.list-card-content-icons .aside-left .card-preview-icons {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+}
+
 .card-icon-wrapper {
     display: flex;
     align-items: center; // Align items vertically
@@ -121,8 +128,3 @@
     font-size: 12px;
     margin-left: 4px; // Adjust spacing as needed
 }
-
-// .card-icon-wrapper .card-icon-count {
-//     font-size: 12px;
-//     padding-bottom: 20px;
-// }

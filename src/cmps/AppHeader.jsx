@@ -40,8 +40,6 @@ export function AppHeader() {
     return (
         <header className="app-header">
             <nav>
-
-
                 {user &&
                     <span className="user-info">
                         <Link to={`user/${user._id}`}>

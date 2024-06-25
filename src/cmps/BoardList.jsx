@@ -1,5 +1,5 @@
 import { Card, Button } from "antd"
-import { ListCard } from "./ListCard"
+import { ListCardPreview } from "./ListCardPreview"
 import { EllipsisOutlined } from "@ant-design/icons"
 import { ListFooter } from "./ListFooter"
 
@@ -10,7 +10,7 @@ export function BoardList({ list, cards }) {
                 <p className="list-title">{list.name}</p>
                 <Button className="list-more-btn" size="small"><EllipsisOutlined /></Button>
             </header>
-            {cards.map(card => <ListCard key={card.id} card={card} />)}
+            {cards.map(card => <ListCardPreview key={card.id} card={card} />)}
             <ListFooter />
         </Card>
     )
