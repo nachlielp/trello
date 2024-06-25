@@ -8,20 +8,34 @@
 }
 
 .list-footer .add-card-btn {
-    width: 100px;
+    width: 100%;
     border: none;
-    background-color: var(--color-primary);
-    color: var(--color-white);
+    border-radius: 4px;
+    padding: 8px;
+    display: flex;
+    /* Ensure flexbox is used */
+    align-items: center;
+    justify-content: start;
+    background-color: #f0f2f4;
+    // color: var(--color-white);
 }
 
 .list-footer .add-card-btn:hover {
-    background-color: var(--color-primary-dark);
+    background-color: #d0d4dc;
 }
 
 .list-footer .use-template-btn {
-    width: 20px;
-    height: 20px;
+    border-radius: 4px;
+    padding: 8px;
     border: none;
-    background-color: var(--color-primary);
-    color: var(--color-white);
+    background-color: #f0f2f4;
+}
+
+.list-footer .use-template-btn:hover {
+    background-color: #d0d4dc;
+}
+
+.template-card {
+    width: 16px;
+    height: 16px;
 }
