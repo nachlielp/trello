@@ -1,4 +1,3 @@
-
 [
   {
     "id": "64f721f169b14894fac36cdf",
@@ -145,10 +144,13 @@
     "desc": "",
     "descData": null,
     "closed": false,
+    "idOrganization": "64f721e4f2e4a8cb0eec149f",
+    "idEnterprise": null,
     "pinned": false,
     "url": "https://trello.com/b/dL2ehGo7/demo-trello",
     "shortUrl": "https://trello.com/b/dL2ehGo7",
     "prefs": {
+      "permissionLevel": "org",
       "hideVotes": false,
       "voting": "disabled",
       "comments": "members",
@@ -186,72 +188,69 @@
           "enabled": false
         }
       ],
-      "background": "66758e1e062c5a4f575eb0a7",
+      "background": "6679b7c7680c8316fed72bc3",
       "backgroundColor": null,
-      "backgroundImage": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/original/ba9e772d3a46aba6a091ba64218ca832/photo-1718648872191-99bcfd08bde3",
+      "backgroundImage": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/original/5911ac858623cecadd25fda240ee58f0/photo-1718486182950-88d67ee8d734",
       "backgroundTile": false,
       "backgroundBrightness": "dark",
-      "sharedSourceUrl": "https://images.unsplash.com/photo-1718648872191-99bcfd08bde3?ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNzE4OTgwMTEzfA&ixlib=rb-4.0.3&w=2560&h=2048&q=90",
+      "sharedSourceUrl": "https://images.unsplash.com/photo-1718486182950-88d67ee8d734?ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDh8MzE3MDk5fHx8fHwyfHwxNzE5MjUyNjQ5fA&ixlib=rb-4.0.3&w=2560&h=2048&q=90",
       "backgroundImageScaled": [
         {
-          "width": 140,
-          "height": 92,
-          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/140x92/bb0834e38a41a64428e9adca92c4c8fb/photo-1718648872191-99bcfd08bde3.webp"
+          "width": 67,
+          "height": 100,
+          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/67x100/9e581e77febe9ed676e8984a73da4ff4/photo-1718486182950-88d67ee8d734.webp"
         },
         {
-          "width": 256,
-          "height": 168,
-          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/256x168/bb0834e38a41a64428e9adca92c4c8fb/photo-1718648872191-99bcfd08bde3.webp"
+          "width": 128,
+          "height": 192,
+          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/128x192/9e581e77febe9ed676e8984a73da4ff4/photo-1718486182950-88d67ee8d734.webp"
         },
         {
-          "width": 480,
-          "height": 316,
-          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/480x316/bb0834e38a41a64428e9adca92c4c8fb/photo-1718648872191-99bcfd08bde3.webp"
+          "width": 320,
+          "height": 480,
+          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/320x480/9e581e77febe9ed676e8984a73da4ff4/photo-1718486182950-88d67ee8d734.webp"
         },
         {
-          "width": 960,
-          "height": 632,
-          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/960x632/bb0834e38a41a64428e9adca92c4c8fb/photo-1718648872191-99bcfd08bde3.webp"
+          "width": 640,
+          "height": 960,
+          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/640x960/9e581e77febe9ed676e8984a73da4ff4/photo-1718486182950-88d67ee8d734.webp"
         },
         {
-          "width": 1024,
-          "height": 674,
-          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1024x674/bb0834e38a41a64428e9adca92c4c8fb/photo-1718648872191-99bcfd08bde3.webp"
+          "width": 683,
+          "height": 1024,
+          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/683x1024/9e581e77febe9ed676e8984a73da4ff4/photo-1718486182950-88d67ee8d734.webp"
+        },
+        {
+          "width": 853,
+          "height": 1280,
+          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/853x1280/9e581e77febe9ed676e8984a73da4ff4/photo-1718486182950-88d67ee8d734.webp"
+        },
+        {
+          "width": 1066,
+          "height": 1600,
+          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1066x1600/9e581e77febe9ed676e8984a73da4ff4/photo-1718486182950-88d67ee8d734.webp"
         },
         {
           "width": 1280,
-          "height": 842,
-          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1280x842/bb0834e38a41a64428e9adca92c4c8fb/photo-1718648872191-99bcfd08bde3.webp"
+          "height": 1920,
+          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1280x1920/9e581e77febe9ed676e8984a73da4ff4/photo-1718486182950-88d67ee8d734.webp"
         },
         {
-          "width": 1920,
-          "height": 1263,
-          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1920x1263/bb0834e38a41a64428e9adca92c4c8fb/photo-1718648872191-99bcfd08bde3.webp"
-        },
-        {
-          "width": 2048,
-          "height": 1347,
-          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2048x1347/bb0834e38a41a64428e9adca92c4c8fb/photo-1718648872191-99bcfd08bde3.webp"
-        },
-        {
-          "width": 2432,
-          "height": 1600,
-          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2432x1600/bb0834e38a41a64428e9adca92c4c8fb/photo-1718648872191-99bcfd08bde3.webp"
-        },
-        {
-          "width": 2560,
-          "height": 1684,
-          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2560x1684/bb0834e38a41a64428e9adca92c4c8fb/photo-1718648872191-99bcfd08bde3.webp"
+          "width": 1365,
+          "height": 2048,
+          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1365x2048/9e581e77febe9ed676e8984a73da4ff4/photo-1718486182950-88d67ee8d734.webp"
         }
       ],
-      "backgroundBottomColor": "#191714",
-      "backgroundTopColor": "#191d27",
+      "backgroundBottomColor": "#152104",
+      "backgroundTopColor": "#2f8be6",
       "canBePublic": true,
+      "canBeEnterprise": true,
+      "canBeOrg": true,
       "canBePrivate": true,
       "canInvite": true
     },
     "labelNames": {
-      "green": "",
+      "green": ";fdkds;kf;skdf;sdkf;sdkf;s",
       "yellow": "",
       "orange": "",
       "red": "Urgent",

@@ -2,7 +2,7 @@ import usersJson from "../../JSON/user.json";
 import boardsJson from "../../JSON/board-info.json";
 import listsJson from "../../JSON/board-list.json";
 import cardsJson from "../../JSON/list-cards.json";
-
+import membersJson from "../../JSON/board-members.json";
 
 export const utilService = {
     makeId,
@@ -21,6 +21,7 @@ export const USERS_KEY = "users";
 export const BOARDS_KEY = "boards";
 export const LISTS_KEY = "lists";
 export const CARDS_KEY = "cards";
+export const MEMBERS_KEY = "members";
 
 _createStartInfo();
 
@@ -119,20 +120,23 @@ function _createStartInfo() {
     if (!localStorage.getItem(CARDS_KEY)) {
         localStorage.setItem(CARDS_KEY, JSON.stringify(cardsJson));
     }
+    if (!localStorage.getItem(MEMBERS_KEY)) {
+        localStorage.setItem(MEMBERS_KEY, JSON.stringify(membersJson));
+    }
 }
 function getRandomColor(name) {
     let hash = 0;
     let i;
     for (i = 0; i < name.length; i += 1) {
-      hash = name.charCodeAt(i) + ((hash << 5) - hash);
+        hash = name.charCodeAt(i) + ((hash << 5) - hash);
     }
     let color = '#';
     for (i = 0; i < 3; i += 1) {
-      const value = (hash >> (i * 8)) & 0xff;
-      color += `00${value.toString(16)}`.slice(-2);
+        const value = (hash >> (i * 8)) & 0xff;
+        color += `00${value.toString(16)}`.slice(-2);
     }
     return color;
-  }
+}
 
 function capitalizeInitials(string) {
     return string.split(' ').map(word => word.charAt(0)).join('').toUpperCase();

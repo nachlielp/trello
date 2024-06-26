@@ -1,0 +1,45 @@
+.add-card-in-list-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 6px;
+    width: 100%;
+}
+
+.add-card-in-list-footer .footer-input {
+    width: 100%;
+    border-color: transparent;
+
+}
+
+.add-card-in-list-footer .footer-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 6px;
+}
+
+.add-card-in-list-footer .add-card-btn {
+    padding: 6px 12px;
+    border: none;
+    background-color: #0b65e4;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 4px;
+}
+
+
+
+.add-card-in-list-footer .add-card-btn:hover {
+    background-color: #0055cc;
+}
+
+.add-card-in-list-footer .footer-actions .close-add-card-btn {
+    border: none;
+    border-radius: 4px;
+    background-color: transparent;
+}
+
+.add-card-in-list-footer .footer-actions .close-add-card-btn:hover {
+    background-color: #d0d4dc;
+}

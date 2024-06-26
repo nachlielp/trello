@@ -1,14 +1,13 @@
-
 [
     {
-        "boardId": "64f721f169b14894fac36cdf",
+        "id": "64f721f169b14894fac36cdf",
         "lists": [
             {
                 "id": "64f721f169b14894fac36ce6",
                 "name": "Backlog-Server",
                 "closed": false,
                 "color": null,
-                "pos": 40960,
+                "pos": 1,
                 "subscribed": false,
                 "softLimit": null
             },
@@ -17,7 +16,7 @@
                 "name": "Backlog-Client",
                 "closed": false,
                 "color": null,
-                "pos": 45056,
+                "pos": 2,
                 "subscribed": false,
                 "softLimit": null
             },
@@ -26,7 +25,7 @@
                 "name": "In Develpment",
                 "closed": false,
                 "color": null,
-                "pos": 47104,
+                "pos": 3,
                 "subscribed": false,
                 "softLimit": null
             },
@@ -35,7 +34,7 @@
                 "name": "Done",
                 "closed": false,
                 "color": null,
-                "pos": 49152,
+                "pos": 4,
                 "subscribed": false,
                 "softLimit": null
             },
@@ -44,7 +43,7 @@
                 "name": "QA",
                 "closed": false,
                 "color": null,
-                "pos": 114688,
+                "pos": 5,
                 "subscribed": false,
                 "softLimit": null
             },
@@ -53,20 +52,21 @@
                 "name": "Ready For Production",
                 "closed": false,
                 "color": null,
-                "pos": 180224,
+                "pos": 6,
                 "subscribed": false,
                 "softLimit": null
             }
         ]
-    }, {
-        "boardId": "66756a34def1a6d3b8cd179d",
+    },
+    {
+        "id": "66756a34def1a6d3b8cd179d",
         "lists": [
             {
                 "id": "66756b3a4a97ac163d32e9e2",
                 "name": "js",
                 "closed": false,
                 "color": null,
-                "pos": 16384,
+                "pos": 1,
                 "subscribed": false,
                 "softLimit": null
             },
@@ -75,7 +75,7 @@
                 "name": "Redux",
                 "closed": false,
                 "color": null,
-                "pos": 32768,
+                "pos": 2,
                 "subscribed": false,
                 "softLimit": null
             },
@@ -84,7 +84,7 @@
                 "name": "Web Pages",
                 "closed": false,
                 "color": null,
-                "pos": 65536,
+                "pos": 3,
                 "subscribed": false,
                 "softLimit": null
             },
@@ -93,25 +93,7 @@
                 "name": "Web Component",
                 "closed": false,
                 "color": null,
-                "pos": 81920,
-                "subscribed": false,
-                "softLimit": null
-            },
-            {
-                "id": "66768a1111fe07b4eb03d197",
-                "name": "In progress",
-                "closed": false,
-                "color": null,
-                "pos": 147456,
-                "subscribed": false,
-                "softLimit": null
-            },
-            {
-                "id": "66768a17ed3cb11714f89fa4",
-                "name": "Complete",
-                "closed": false,
-                "color": null,
-                "pos": 212992,
+                "pos": 4,
                 "subscribed": false,
                 "softLimit": null
             }

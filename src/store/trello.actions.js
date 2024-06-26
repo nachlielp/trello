@@ -1,12 +1,15 @@
 import { boardService } from '../services/board.service.local'
+import { listService } from '../services/list.service.local'
+import { cardService } from '../services/cards.service.local'
+import { memberService } from '../services/members.service.local'
 import { store } from './store'
-import { SET_LISTS, SET_CARDS, SET_MEMBERS, SET_BOARD, SET_IS_EXPANDED } from './trello.reducer'
+import { SET_LISTS, SET_CARDS, SET_MEMBERS, SET_BOARD, SET_IS_EXPANDED, ADD_CARD, ADD_LIST } from './trello.reducer'
 
 const apiKey = import.meta.env.VITE_TRELLO_API_KEY;
 const token = import.meta.env.VITE_TRELLO_TOKEN;
 
 
-export async function loadTrelloData() {
+export async function loadTrelloDataFromSource() {
     try {
         const listsData = await fetchListsFromTrello('dL2ehGo7');
         store.dispatch({ type: SET_LISTS, lists: listsData })
@@ -26,6 +29,22 @@ export async function loadTrelloData() {
         console.log('Error fetching listsData: ', err)
     }
 }
+export async function loadTestBoardFromStorage() {
+    const demoBoardId = '66756a34def1a6d3b8cd179d'
+
+    const boardData = await boardService.getById(demoBoardId)
+    store.dispatch({ type: SET_BOARD, board: boardData })
+
+    const listData = await listService.getById(demoBoardId)
+    store.dispatch({ type: SET_LISTS, lists: listData.lists })
+
+    const cardData = await cardService.getById(demoBoardId)
+    store.dispatch({ type: SET_CARDS, cards: cardData.cards })
+
+    const memberData = await memberService.getById(demoBoardId)
+    store.dispatch({ type: SET_MEMBERS, members: memberData.members })
+}
+
 async function fetchCardsFromTrello(listId) {
     const data = await fetch(`https://api.trello.com/1/lists/${listId}/cards?key=${apiKey}&token=${token}`)
     const cardsData = await data.json()
@@ -54,196 +73,93 @@ export function toggleIsExpanded() {
     store.dispatch({ type: SET_IS_EXPANDED, isExpanded: !store.getState().boardModule.isExpanded })
 }
 
-export async function loadWorkspaces() {
+export async function addCard(card) {
     try {
-        const workspaces = await workspaceService.query()
-        console.log('Workspaces from DB:', workspaces)
-        store.dispatch(getCmdSetWorkspaces(workspaces))
-    } catch (err) {
-        console.log('Cannot load workspaces', err)
-        throw err
-    }
-}
-
-export async function addWorkspace(workspace) {
-    try {
-        const savedWorkspace = await workspaceService.save(workspace)
-        console.log('Added Workspace', savedWorkspace)
-        store.dispatch(getCmdAddWorkspace(savedWorkspace))
-        return savedWorkspace
-    } catch (err) {
-        console.log('Cannot add workspace', err)
-        throw err
-    }
-}
-
-export async function removeWorkspace(workspaceId) {
-    try {
-        await workspaceService.remove(workspaceId)
-        store.dispatch(getCmdRemoveWorkspace(workspaceId))
-    } catch (err) {
-        console.log('Cannot remove workspace', err)
-        throw err
-    }
-}
-
-export async function loadBoards() {
-    try {
-        const boards = await boardService.query()
-        console.log('Boards from DB:', boards)
-        store.dispatch(getCmdSetBoards(boards))
-    } catch (err) {
-        console.log('Cannot load boards', err)
-        throw err
-    }
-}
-
-export async function loadBoard(boardId) {
-    try {
-        const board = await boardService.getById(boardId)
-        console.log('Board from DB:', board)
-        store.dispatch(getCmdSetBoard(board))
-    } catch (err) {
-        console.log('Cannot load board', err)
-        throw err
-    }
-}
-
-export async function removeBoard(boardId) {
-    try {
-        await boardService.remove(boardId)
-        store.dispatch(getCmdRemoveBoard(boardId))
-    } catch (err) {
-        console.log('Cannot remove board', err)
-        throw err
-    }
-}
-
-export async function addBoard(board) {
-    try {
-        // const savedBoard = await boardService.save(board)
-        // console.log('Added Board', savedBoard)
-        store.dispatch(getCmdAddBoard(board))
-        return savedBoard
-    } catch (err) {
-        console.log('Cannot add board', err)
-        throw err
-    }
-}
-
-export async function updateBoard(board) {
-    try {
-        const savedBoard = await boardService.save(board)
-        console.log('Updated Board:', savedBoard)
-        store.dispatch(getCmdUpdateBoard(savedBoard))
-        return savedBoard
-    } catch (err) {
-        console.log('Cannot save board', err)
-        throw err
-    }
-}
-
-export async function addBoardMsg(boardId, txt) {
-    try {
-        const msg = await boardService.addBoardMsg(boardId, txt)
-        console.log('Added Board message', msg)
-        store.dispatch(getCmdAddBoardMsg(msg))
-        return msg
-    } catch (err) {
-        console.log('Cannot add board msg', err)
-        throw err
-    }
-}
-
-export async function updateTask(boardId, groupId, task, activityTitle) {
-    try {
-        const [savedTask, activity] = await boardService.updateTask(boardId, groupId, task, activityTitle)
-        console.log('Updated task', savedTask)
-        store.dispatch(getCmdUpdateTask(groupId, task, activity))
-        return savedTask
-    } catch (err) {
-        console.log('Cannot update task', err)
-        throw err
-    }
-}
-
-
-export async function addCard(boardId, card) {
-    try {
-        const savedCard = await boardService.addCard(boardId, card)
-        console.log('Added card', savedCard)
-        store.dispatch(getCmdAddCard(savedCard))
-        return savedCard
+        const savedCard = await boardService.addCard(card)
+        console.log('saved card', savedCard)
+        store.dispatch({ type: ADD_CARD, card: savedCard })
+        // return savedCard
     } catch (err) {
         console.log('Cannot add card', err)
         throw err
     }
 }
 
-export async function addCards(boardId, cards) {
+export async function addList(list) {
     try {
-        store.dispatch(getCmdAddCards(cards))
+        const savedList = await boardService.addList(list)
+        console.log('saved list', savedList)
+        store.dispatch({ type: ADD_LIST, list: savedList })
     } catch (err) {
-        console.log('Cannot add cards', err)
-        throw err
-    }
-}
-export async function removeCard(boardId, cardId) {
-    try {
-        await boardService.removeCard(boardId, cardId)
-        store.dispatch(getCmdRemoveCard(cardId))
-    } catch (err) {
-        console.log('Cannot remove card', err)
+        console.log('Cannot add list', err)
         throw err
     }
 }
 
-export async function updateCard(boardId, card) {
-    try {
-        const savedCard = await boardService.updateCard(boardId, card)
-        console.log('Updated card', savedCard)
-        store.dispatch(getCmdUpdateCard(savedCard))
-        return savedCard
-    } catch (err) {
-        console.log('Cannot update card', err)
-        throw err
-    }
-}
+// export async function addCards(boardId, cards) {
+//     try {
+//         store.dispatch(getCmdAddCards(cards))
+//     } catch (err) {
+//         console.log('Cannot add cards', err)
+//         throw err
+//     }
+// }
+// export async function removeCard(boardId, cardId) {
+//     try {
+//         await boardService.removeCard(boardId, cardId)
+//         store.dispatch(getCmdRemoveCard(cardId))
+//     } catch (err) {
+//         console.log('Cannot remove card', err)
+//         throw err
+//     }
+// }
 
-export function addLists(lists) {
-    try {
-        store.dispatch({ type: SET_LISTS, lists })
-    } catch (err) {
-        console.log('Cannot add lists', err)
-        throw err
-    }
-}
-export function removeLists(lists) {
-    try {
-        store.dispatch(getCmdRemoveLists(lists))
-    } catch (err) {
-        console.log('Cannot remove lists', err)
-        throw err
-    }
-}
+// export async function updateCard(boardId, card) {
+//     try {
+//         const savedCard = await boardService.updateCard(boardId, card)
+//         console.log('Updated card', savedCard)
+//         store.dispatch(getCmdUpdateCard(savedCard))
+//         return savedCard
+//     } catch (err) {
+//         console.log('Cannot update card', err)
+//         throw err
+//     }
+// }
 
-export function updateList(list) {
-    try {
-        store.dispatch(getCmdUpdateList(list))
-    } catch (err) {
-        console.log('Cannot update list', err)
-        throw err
-    }
-}
+// export function addLists(lists) {
+//     try {
+//         store.dispatch({ type: SET_LISTS, lists })
+//     } catch (err) {
+//         console.log('Cannot add lists', err)
+//         throw err
+//     }
+// }
+// export function removeLists(lists) {
+//     try {
+//         store.dispatch(getCmdRemoveLists(lists))
+//     } catch (err) {
+//         console.log('Cannot remove lists', err)
+//         throw err
+//     }
+// }
 
-export function addMembers(members) {
-    try {
-        store.dispatch(getCmdAddMembers(members))
-    } catch (err) {
-        console.log('Cannot add members', err)
-        throw err
-    }
-}
+// export function updateList(list) {
+//     try {
+//         store.dispatch(getCmdUpdateList(list))
+//     } catch (err) {
+//         console.log('Cannot update list', err)
+//         throw err
+//     }
+// }
+
+// export function addMembers(members) {
+//     try {
+//         store.dispatch(getCmdAddMembers(members))
+//     } catch (err) {
+//         console.log('Cannot add members', err)
+//         throw err
+//     }
+// }
 
 // Command Creators:
 function getCmdRemoveBoard(boardId) {
