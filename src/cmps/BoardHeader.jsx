@@ -12,6 +12,7 @@ import {
 import { IoFilterSharp } from "react-icons/io5";
 import { LetteredAvatar } from "./LetteredAvatar";
 import { login } from "../store/user.actions";
+import { UserAvatar } from "./UserAvatar";
 
 export function BoardHeader() {
   const [isStarredBoard, setIsStarredBoard] = useState(false);
@@ -30,7 +31,9 @@ export function BoardHeader() {
 
   async function fetchUserId() {
     const data = await fetch(
-      `https://api.trello.com/1/members/me?key=${import.meta.env.VITE_TRELLO_API_KEY}&token=${token}`
+      `https://api.trello.com/1/members/me?key=${
+        import.meta.env.VITE_TRELLO_API_KEY
+      }&token=${token}`
     );
     const boardData = await data.json();
     fetchStarredBoards(boardData.id);
@@ -47,7 +50,7 @@ export function BoardHeader() {
       console.log(err);
     }
   }
-
+  console.log(members);
   return (
     <div className="board-header">
       <div className="left-info">
@@ -77,10 +80,9 @@ export function BoardHeader() {
         </button>
         <div className="members">
           {members?.slice(0, 3).map((member) => (
-            <LetteredAvatar
-              name={member.fullName}
+            <UserAvatar
+              member={member}
               key={member.id}
-              size="30px"
               className="members-avatar"
             />
           ))}
