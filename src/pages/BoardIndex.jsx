@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { BoardHeader } from "../cmps/BoardHeader";
 import { BoardList } from "../cmps/BoardList";
@@ -7,6 +7,7 @@ import {
   loadTestBoardFromStorage,
   addCard,
   addList,
+  archiveList,
 } from "../store/trello.actions";
 import { AddListBtn } from "../cmps/AddListBtn";
 
@@ -20,6 +21,10 @@ export function BoardIndex() {
     loadTestBoardFromStorage();
   }, []);
 
+  // const sortedLists = useMemo(() => {
+  //   return lists.filter(l => !l.closed).sort((a, b) => a.pos - b.pos);
+  // }, [lists]);
+
   async function onAddCard(e) {
     try {
       const card = {
@@ -28,7 +33,6 @@ export function BoardIndex() {
         pos: e.pos,
         idBoard: board.id,
       };
-      console.log("onAddCard", card);
       await addCard(card);
     } catch (error) {
       console.log("onAddCard", error);
@@ -41,8 +45,16 @@ export function BoardIndex() {
       idBoard: board.id,
       name: name,
     };
-    await addList(list);
+    const res = await addList(list);
+    console.log("onAddList", res);
   }
+
+  async function onArchiveList(boardId, listId) {
+    const res = await archiveList(boardId, listId);
+    console.log("onArchiveList", res);
+  }
+
+  const sortedLists = lists.filter(l => !l.closed).sort((a, b) => a.pos - b.pos);
 
   return (
     <section className="board-index">
@@ -54,12 +66,13 @@ export function BoardIndex() {
       >
         {board && <BoardHeader />}
         <main className="board-lists">
-          {lists.map((list) => (
+          {sortedLists.map((list) => (
             <BoardList
               key={list.id}
               list={list}
               cards={cards.filter((card) => card.idList === list.id)}
               addCard={onAddCard}
+              archiveList={() => onArchiveList(board.id, list.id)}
             />
           ))}
           <AddListBtn addList={onAddList} />

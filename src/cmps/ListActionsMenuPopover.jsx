@@ -2,13 +2,19 @@ import { Popover, Button } from "antd"
 import { useState } from "react"
 import { EllipsisOutlined } from "@ant-design/icons"
 
-export function ListActionsMenuPopover({ openAddCard }) {
+export function ListActionsMenuPopover({ openAddCard, archiveList }) {
     const [openListMenu, setOpenListMenu] = useState(false)
 
     function onClickAddCard() {
         openAddCard()
         setOpenListMenu(false)
     }
+
+    function onArchiveList() {
+        archiveList()
+        setOpenListMenu(false)
+    }
+
     return (
         <Popover
             className="list-actions-menu-popover"
@@ -26,7 +32,7 @@ export function ListActionsMenuPopover({ openAddCard }) {
                     <p className="menu-action">Move all cards in the list</p>
                     <p className="menu-action">Sort by...</p>
                     <p className="menu-action">Watch</p>
-                    <p className="menu-action">Archive this list</p>
+                    <p className="menu-action" onClick={onArchiveList}>Archive this list</p>
                     <p className="menu-action last-action">Archive all cards in the list</p>
                 </section>
             }
