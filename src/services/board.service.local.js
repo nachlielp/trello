@@ -7,29 +7,30 @@ const STORAGE_KEY = 'boards'
 
 
 export const boardService = {
-    query,
+    // query,
     getById,
     save,
     remove,
-    getEmptyBoard,
-    getDemoBoard,
-    addBoardMsg,
-    updateTask,
-    getTaskEditCmps
+    addCard,
+    // getEmptyBoard,
+    // getDemoBoard,
+    // addBoardMsg,
+    // updateTask,
+    // getTaskEditCmps
 }
 window.boardSer = boardService
 
 
-async function query(filterBy = { title: '' }) {
-    var boards = await storageService.query(STORAGE_KEY)
-    if (filterBy.title) {
-        const regex = new RegExp(filterBy.title, 'i')
-        boards = boards.filter(board => regex.test(board.title))
-    }
-    // Return just preview info about the boards
-    boards = boards.map(({ _id, title, owner }) => ({ _id, title, owner }))
-    return boards
-}
+// async function query(filterBy = { title: '' }) {
+//     var boards = await storageService.query(STORAGE_KEY)
+//     if (filterBy.title) {
+//         const regex = new RegExp(filterBy.title, 'i')
+//         boards = boards.filter(board => regex.test(board.title))
+//     }
+//     // Return just preview info about the boards
+//     boards = boards.map(({ _id, title, owner }) => ({ _id, title, owner }))
+//     return boards
+// }
 
 function getById(boardId) {
     return storageService.get(STORAGE_KEY, boardId)
@@ -56,79 +57,84 @@ async function save(board) {
     return savedBoard
 }
 
-async function addBoardMsg(boardId, txt) {
-
-    // Later, this is all done by the backend
-    const board = await getById(boardId)
-    if (!board.msgs) board.msgs = []
-
-    const msg = {
-        id: utilService.makeId(),
-        by: userService.getLoggedinUser(),
-        txt
-    }
-    board.msgs.push(msg)
-    await storageService.put(STORAGE_KEY, board)
-
-    return msg
+async function addCard(card) {
+    const newCard = createNewCard(card)
+    return storageService.postSubEntity('cards', newCard)
 }
 
-async function updateTask(boardId, groupId, task, activityTitle) {
-    // Later, this is all done by the backend
-    const board = await getById(boardId)
-    const group = board.groups.find(g => g.id === groupId)
-    const idx = group.tasks.findIndex(t => t.id === task.id)
-    group.tasks[idx] = task
+// async function addBoardMsg(boardId, txt) {
 
-    const activity = _createActivity(activityTitle, _toMiniTask(task), _toMiniGroup(group))
-    board.activities.push(activity)
-    await storageService.put(STORAGE_KEY, board)
+//     // Later, this is all done by the backend
+//     const board = await getById(boardId)
+//     if (!board.msgs) board.msgs = []
 
-    return [task, activity]
-}
+//     const msg = {
+//         id: utilService.makeId(),
+//         by: userService.getLoggedinUser(),
+//         txt
+//     }
+//     board.msgs.push(msg)
+//     await storageService.put(STORAGE_KEY, board)
 
-function getTaskEditCmps(task, board) {
-    const cmps = [
-        {
-            type: 'StatusPicker',
-            info: {
-                label: 'Status:',
-                propName: 'status',
-                selectedStatus: task.status,
-                statuses: _getStatuses()
-            }
-        },
-        {
-            type: 'DatePicker',
-            info: {
-                label: 'Due date:',
-                propName: 'dueDate',
-                selectedDate: task.dueDate,
-            }
-        },
-        {
-            type: 'MemberPicker',
-            info: {
-                label: 'Members: ',
-                propName: 'memberIds',
-                selectedMemberIds: task.memberIds || [],
-                members: board.members
-            }
-        }
-    ]
-    return cmps
-}
+//     return msg
+// }
 
-function getEmptyBoard() {
-    return {
-        title: 'Board -' + (Date.now() % 1000),
-        activities: []
-    }
-}
+// async function updateTask(boardId, groupId, task, activityTitle) {
+//     // Later, this is all done by the backend
+//     const board = await getById(boardId)
+//     const group = board.groups.find(g => g.id === groupId)
+//     const idx = group.tasks.findIndex(t => t.id === task.id)
+//     group.tasks[idx] = task
 
-function getDemoBoard() {
-    return structuredClone(board)
-}
+//     const activity = _createActivity(activityTitle, _toMiniTask(task), _toMiniGroup(group))
+//     board.activities.push(activity)
+//     await storageService.put(STORAGE_KEY, board)
+
+//     return [task, activity]
+// }
+
+// function getTaskEditCmps(task, board) {
+//     const cmps = [
+//         {
+//             type: 'StatusPicker',
+//             info: {
+//                 label: 'Status:',
+//                 propName: 'status',
+//                 selectedStatus: task.status,
+//                 statuses: _getStatuses()
+//             }
+//         },
+//         {
+//             type: 'DatePicker',
+//             info: {
+//                 label: 'Due date:',
+//                 propName: 'dueDate',
+//                 selectedDate: task.dueDate,
+//             }
+//         },
+//         {
+//             type: 'MemberPicker',
+//             info: {
+//                 label: 'Members: ',
+//                 propName: 'memberIds',
+//                 selectedMemberIds: task.memberIds || [],
+//                 members: board.members
+//             }
+//         }
+//     ]
+//     return cmps
+// }
+
+// function getEmptyBoard() {
+//     return {
+//         title: 'Board -' + (Date.now() % 1000),
+//         activities: []
+//     }
+// }
+
+// function getDemoBoard() {
+//     return structuredClone(board)
+// }
 
 function _createActivity(title, task, group = null) {
     return {
@@ -156,3 +162,74 @@ function _toMiniTask(task) {
 
 // TEST DATA
 // storageService.post(STORAGE_KEY, board).then(savedBoard => console.log('Added board', savedBoard))
+
+function createNewCard(card) {
+    console.log('createNewCard.card', card)
+    return {
+        badges: {
+            attachmentsByType: {
+                trello: {
+                    board: 0,
+                    card: 0
+                }
+            },
+            externalSource: null,
+            location: false,
+            votes: 0,
+            viewingMemberVoted: false,
+            subscribed: false,
+            attachments: 0,
+            fogbugz: "",
+            checkItems: 0,
+            checkItemsChecked: 0,
+            checkItemsEarliestDue: null,
+            comments: 0,
+            description: false,
+            due: null,
+            dueComplete: false,
+            lastUpdatedByAi: false,
+            start: null
+        },
+        checkItemStates: [],
+        closed: false,
+        dueComplete: false,
+        dateLastActivity: new Date().toISOString(),
+        desc: "",
+        descData: {
+            emoji: {}
+        },
+        due: null,
+        dueReminder: null,
+        email: null,
+        idBoard: card.idBoard,
+        idChecklists: [],
+        idList: card.idList,
+        idMembers: [],
+        idMembersVoted: [],
+        idShort: '',// generateShortId(), // Function to generate a short ID
+        idAttachmentCover: null,
+        labels: [],
+        idLabels: [],
+        manualCoverAttachment: true,
+        name: card.name,
+        pos: 327680, // Default position, can be adjusted
+        shortLink: '', // generateShortLink(), // Function to generate a short link
+        shortUrl: '', // `https://trello.com/c/${generateShortLink()}`,
+        start: null,
+        subscribed: false,
+        url: '', // `https://trello.com/c/${generateShortLink()}`,
+        cover: {
+            idAttachment: null,
+            color: null,
+            idUploadedBackground: null,
+            size: '',
+            brightness: '',
+            scaled: [],
+            edgeColor: '',
+            sharedSourceUrl: null,
+            idPlugin: null
+        },
+        isTemplate: false,
+        cardRole: null
+    };
+}

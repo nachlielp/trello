@@ -5,6 +5,8 @@ export const SET_MEMBERS = 'SET_MEMBERS'
 export const SET_BOARD = 'SET_BOARD'
 export const SET_CARDS = 'SET_CARDS'
 
+export const ADD_CARD = 'ADD_CARD'
+
 export const SET_IS_EXPANDED = 'SET_IS_EXPANDED'
 import boardInfo from '../../JSON/board-info.json'; // Adjust the path as necessary
 import boardList from '../../JSON/board-list.json';
@@ -38,6 +40,11 @@ export function trelloReducer(state = initialState, action) {
         case SET_IS_EXPANDED:
             newState = { ...state, isExpanded: action.isExpanded }
             break
+
+        case ADD_CARD:
+            newState = { ...state, cards: [...state.cards, action.card] }
+            break
+
         default:
             return state
     }

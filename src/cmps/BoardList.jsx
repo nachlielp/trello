@@ -3,7 +3,8 @@ import { ListCardPreview } from "./ListCardPreview"
 import { EllipsisOutlined } from "@ant-design/icons"
 import { ListFooter } from "./ListFooter"
 
-export function BoardList({ list, cards }) {
+export function BoardList({ list, cards, addCard }) {
+
     return (
         <Card className="board-list custom-card">
             <header className="board-list-header">
@@ -11,7 +12,7 @@ export function BoardList({ list, cards }) {
                 <Button className="list-more-btn" size="small"><EllipsisOutlined /></Button>
             </header>
             {cards.map(card => <ListCardPreview key={card.id} card={card} />)}
-            <ListFooter />
+            <ListFooter idList={list.id} addCard={addCard} />
         </Card>
     )
 }
