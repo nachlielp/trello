@@ -1,9 +1,9 @@
 import { PlusOutlined } from "@ant-design/icons"
 import { useState } from "react"
 import templateCard from "../assets/svgs/template-card.svg"
-import { AddCardInListFooter } from "./AddCardInListFooter"
+import { AddCardInList } from "./AddCardInList"
 
-export function ListFooter({ idList, addCard }) {
+export function ListFooter({ idList, addCard, lastCardPos }) {
     const [isAddCardOpen, setIsAddCardOpen] = useState(false)
     function closeAddCard() {
         setIsAddCardOpen(false)
@@ -19,7 +19,7 @@ export function ListFooter({ idList, addCard }) {
                     <img src={templateCard} alt="template card" className="template-card" />
                 </button>
             </>}
-            {isAddCardOpen && <AddCardInListFooter idList={idList} closeAddCard={closeAddCard} addCard={addCard} />}
+            {isAddCardOpen && <AddCardInList idList={idList} closeAddCard={closeAddCard} addCard={addCard} lastCardPos={lastCardPos} />}
         </div>
     )
 }

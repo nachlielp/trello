@@ -232,7 +232,7 @@ function createNewCard(card) {
         idLabels: [],
         manualCoverAttachment: true,
         name: card.name,
-        pos: 327680, // Default position, can be adjusted
+        pos: card.pos, // Default position, can be adjusted
         shortLink: '', // generateShortLink(), // Function to generate a short link
         shortUrl: '', // `https://trello.com/c/${generateShortLink()}`,
         start: null,

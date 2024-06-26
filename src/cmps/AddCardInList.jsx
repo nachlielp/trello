@@ -3,11 +3,26 @@ const { TextArea } = Input;
 import { CloseOutlined } from "@ant-design/icons";
 import { useState } from "react";
 
-export function AddCardInListFooter({ idList, closeAddCard, addCard }) {
+export function AddCardInList({ idList, closeAddCard, addCard, firstCardPos, lastCardPos }) {
     const [cardName, setCardName] = useState('');
 
     async function onAddCard() {
-        await addCard({ idList, name: cardName })
+
+        const newCard = {
+            idList,
+            name: cardName,
+        }
+        if (firstCardPos) {
+            console.log('firstCardPos', firstCardPos);
+            newCard.pos = firstCardPos - 1234
+            console.log('newCardPos', newCard.pos);
+        }
+        if (lastCardPos) {
+            console.log('lastCardPos', lastCardPos);
+            newCard.pos = lastCardPos + 1234
+            console.log('newCardPos', newCard.pos);
+        }
+        await addCard(newCard)
         closeAddCard()
     }
     return (

@@ -20,8 +20,10 @@ export function BoardIndex() {
       const card = {
         idList: e.idList,
         name: e.name,
+        pos: e.pos,
         idBoard: board.id
       }
+      console.log('onAddCard', card);
       await addCard(card)
     } catch (error) {
       console.log('onAddCard', error);
