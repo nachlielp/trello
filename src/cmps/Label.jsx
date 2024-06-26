@@ -10,7 +10,7 @@ export function Label({ label }) {
         toggleIsExpanded()
     }
     return (
-        <Tooltip placement="bottom" title={`Color: ${label.color}, title: ${label.name ? `"${label.name}"` : "none"}`}>
+        <Tooltip placement="bottom" title={`Color: ${label.color}, title: ${label.name ? `"${label.name}"` : "none"}`} arrow={false}>
             <button
                 className={`card-label ${isExpanded ? 'expanded' : 'minimized'}`}
                 style={{ backgroundColor: utilService.getColorHashByName(label.color) }}
