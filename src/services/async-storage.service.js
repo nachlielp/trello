@@ -35,7 +35,7 @@ function postSubEntity(entityType, newEntity) {
     return query(entityType).then(entities => {
         const board = entities.find(entity => entity.id === newEntity.idBoard);
         if (!board) throw new Error(`Board with id: ${idBoard} not found`);
-        board.cards.push(newEntity);
+        board[entityType].push(newEntity);
         _save(entityType, entities);
         return newEntity;
     });

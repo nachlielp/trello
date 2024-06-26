@@ -4,18 +4,75 @@
     justify-content: start;
     width: 246px;
     height: 40px;
-    border-radius: 5px;
-    border: 1px solid #e0e0e0;
-    background-color: none;
-    opacity: 0.5;
+    border-radius: 8px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.3);
     cursor: pointer;
     margin-top: 10px;
+    margin: 8px 6px;
 
 }
 
 .add-list-btn-text {
     color: #fff;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 22px;
+    opacity: 1;
+}
+
+.add-list-in-board-card .ant-card-body {
+    padding: 0;
+}
+
+.add-list-in-board-card {
+    width: 248px;
+    height: 86px;
+    padding: 0;
+    border-radius: 8px;
+    border: none;
+    background-color: #f0f2f4;
+    margin: 8px 6px;
+}
+
+.add-list-input {
+    margin: 8px;
+    width: 232px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid #d9d9d9;
+}
+
+
+.add-list-in-board-card .footer-actions {
+    display: flex;
+    justify-content: flex-start;
+    gap: 6px;
+    margin-left: 8px;
+}
+
+.add-list-in-board-card .footer-actions .add-card-btn {
+    padding: 6px 12px;
+    border: none;
+    background-color: #0b65e4;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 4px;
+}
+
+
+
+.add-list-in-board-card .footer-actions .add-card-btn:hover {
+    background-color: #0055cc;
+}
+
+.add-card-in-list-footer .footer-actions .close-add-card-btn {
+    border: none;
+    border-radius: 4px;
+    background-color: transparent;
+}
+
+.add-card-in-list-footer .footer-actions .close-add-card-btn:hover {
+    background-color: #d0d4dc;
 }

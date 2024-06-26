@@ -12,6 +12,7 @@ export const boardService = {
     save,
     remove,
     addCard,
+    addList,
     // getEmptyBoard,
     // getDemoBoard,
     // addBoardMsg,
@@ -61,7 +62,25 @@ async function addCard(card) {
     const newCard = createNewCard(card)
     return storageService.postSubEntity('cards', newCard)
 }
+async function addList(list) {
+    const newList = createNewList(list)
+    console.log("addList: ", newList)
+    return storageService.postSubEntity('lists', newList)
+}
 
+//TODO: add pos
+function createNewList(list) {
+    return {
+        id: "",
+        idBoard: list.idBoard,
+        name: list.name,
+        closed: false,
+        color: null,
+        pos: 9999,
+        subscribed: false,
+        softLimit: null
+    }
+}
 // async function addBoardMsg(boardId, txt) {
 
 //     // Later, this is all done by the backend

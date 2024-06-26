@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { BoardHeader } from "../cmps/BoardHeader";
 import { BoardList } from "../cmps/BoardList";
-import { loadTrelloDataFromSource, loadTestBoardFromStorage, addCard } from "../store/trello.actions";
+import { loadTrelloDataFromSource, loadTestBoardFromStorage, addCard, addList } from "../store/trello.actions";
 import { AddListBtn } from "../cmps/AddListBtn";
 
 export function BoardIndex() {
@@ -28,8 +28,13 @@ export function BoardIndex() {
     }
   }
 
-  async function onAddList(e) {
-    console.log('onAddList', e);
+  async function onAddList(name) {
+    console.log('onAddList', name);
+    const list = {
+      idBoard: board.id,
+      name: name,
+    }
+    await addList(list)
   }
   return (
     <section className="board-index">
