@@ -23,13 +23,14 @@ export function BoardHeader() {
 
   const apiKey = import.meta.env.VITE_TRELLO_API_KEY;
   const token = import.meta.env.VITE_TRELLO_TOKEN;
+
   useEffect(() => {
     fetchUserId();
   }, [board]);
 
   async function fetchUserId() {
     const data = await fetch(
-      `https://api.trello.com/1/members/me?key=${apiKey}&token=${token}`
+      `https://api.trello.com/1/members/me?key=${import.meta.env.VITE_TRELLO_API_KEY}&token=${token}`
     );
     const boardData = await data.json();
     fetchStarredBoards(boardData.id);

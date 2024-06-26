@@ -61,7 +61,7 @@ function getCardHeader(card) {
 function getCardMemerAvatars(members, cardMemberIds) {
     const cardMembers = members.filter(member => cardMemberIds.includes(member.id)) || []
     return cardMembers.map(member =>
-        <Tooltip placement="bottom" title={member.fullName}>
+        <Tooltip placement="bottom" title={member.fullName} key={member.id}>
             <Avatar
                 key={member.id} src={member.avatarHash}
                 style={{ backgroundColor: utilService.stringToColor(member.id), height: '24px', width: '24px' }}>
@@ -90,7 +90,7 @@ function getCardIcons(card) {
     const cardIcons = []
     if (card.badges.description) {
         cardIcons.push(
-            <Tooltip placement="bottom" title="This card has a description">
+            <Tooltip placement="bottom" title="This card has a description" key="description">
                 <span className="card-icon-wrapper">
                     <img src={descriptionIcon} alt="description" className="card-icon" />
                 </span>
@@ -99,7 +99,7 @@ function getCardIcons(card) {
     }
     if (card.badges.attachments > 0) {
         cardIcons.push(
-            <Tooltip placement="bottom" title="Attachments">
+            <Tooltip placement="bottom" title="Attachments" key="attachments">
                 <span className="card-icon-wrapper">
                     <img src={fileIcon} alt="file" className="card-icon" />
                     <span className="card-icon-count">{card.badges.attachments}</span>
