@@ -1,0 +1,21 @@
+.add-list-btn {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    width: 246px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+    background-color: none;
+    opacity: 0.5;
+    cursor: pointer;
+    margin-top: 10px;
+
+}
+
+.add-list-btn-text {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 22px;
+}

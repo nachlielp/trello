@@ -96,24 +96,6 @@
                 "pos": 81920,
                 "subscribed": false,
                 "softLimit": null
-            },
-            {
-                "id": "66768a1111fe07b4eb03d197",
-                "name": "In progress",
-                "closed": false,
-                "color": null,
-                "pos": 147456,
-                "subscribed": false,
-                "softLimit": null
-            },
-            {
-                "id": "66768a17ed3cb11714f89fa4",
-                "name": "Complete",
-                "closed": false,
-                "color": null,
-                "pos": 212992,
-                "subscribed": false,
-                "softLimit": null
             }
         ]
     }
