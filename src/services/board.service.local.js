@@ -63,8 +63,9 @@ async function addCard(card) {
     return storageService.postSubEntity('cards', newCard)
 }
 async function addList(list) {
+    const listArray = await storageService.get('lists', list.idBoard)
+    list.pos = listArray.length + 1;
     const newList = createNewList(list)
-    console.log("addList: ", newList)
     return storageService.postSubEntity('lists', newList)
 }
 
@@ -76,9 +77,9 @@ function createNewList(list) {
         name: list.name,
         closed: false,
         color: null,
-        pos: 9999,
         subscribed: false,
-        softLimit: null
+        softLimit: null,
+        pos: list.pos
     }
 }
 // async function addBoardMsg(boardId, txt) {

@@ -7,7 +7,7 @@
                 "name": "Backlog-Server",
                 "closed": false,
                 "color": null,
-                "pos": 40960,
+                "pos": 1,
                 "subscribed": false,
                 "softLimit": null
             },
@@ -16,7 +16,7 @@
                 "name": "Backlog-Client",
                 "closed": false,
                 "color": null,
-                "pos": 45056,
+                "pos": 2,
                 "subscribed": false,
                 "softLimit": null
             },
@@ -25,7 +25,7 @@
                 "name": "In Develpment",
                 "closed": false,
                 "color": null,
-                "pos": 47104,
+                "pos": 3,
                 "subscribed": false,
                 "softLimit": null
             },
@@ -34,7 +34,7 @@
                 "name": "Done",
                 "closed": false,
                 "color": null,
-                "pos": 49152,
+                "pos": 4,
                 "subscribed": false,
                 "softLimit": null
             },
@@ -43,7 +43,7 @@
                 "name": "QA",
                 "closed": false,
                 "color": null,
-                "pos": 114688,
+                "pos": 5,
                 "subscribed": false,
                 "softLimit": null
             },
@@ -52,7 +52,7 @@
                 "name": "Ready For Production",
                 "closed": false,
                 "color": null,
-                "pos": 180224,
+                "pos": 6,
                 "subscribed": false,
                 "softLimit": null
             }
@@ -66,7 +66,7 @@
                 "name": "js",
                 "closed": false,
                 "color": null,
-                "pos": 16384,
+                "pos": 1,
                 "subscribed": false,
                 "softLimit": null
             },
@@ -75,7 +75,7 @@
                 "name": "Redux",
                 "closed": false,
                 "color": null,
-                "pos": 32768,
+                "pos": 2,
                 "subscribed": false,
                 "softLimit": null
             },
@@ -84,7 +84,7 @@
                 "name": "Web Pages",
                 "closed": false,
                 "color": null,
-                "pos": 65536,
+                "pos": 3,
                 "subscribed": false,
                 "softLimit": null
             },
@@ -93,7 +93,7 @@
                 "name": "Web Component",
                 "closed": false,
                 "color": null,
-                "pos": 81920,
+                "pos": 4,
                 "subscribed": false,
                 "softLimit": null
             }

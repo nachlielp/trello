@@ -36,6 +36,7 @@ export function BoardIndex() {
     }
     await addList(list)
   }
+
   return (
     <section className="board-index">
       <div
