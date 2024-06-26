@@ -16,6 +16,7 @@ export function ListActionsMenuPopover({ openAddCard }) {
             placement="bottomLeft"
             open={openListMenu}
             onOpenChange={setOpenListMenu}
+            arrow={false}
             content={
                 <section className="list-actions-menu-content">
                     <header className="menu-header">List actions</header>
