@@ -6,7 +6,7 @@ export function CardPreviewIcons({ card }) {
     const cardIcons = []
     if (card.badges.description) {
         cardIcons.push(
-            <Tooltip placement="bottom" title="This card has a description" key="description">
+            <Tooltip placement="bottom" title="This card has a description" key="description" arrow={false}>
                 <span className="card-icon-wrapper">
                     <img src={descriptionIcon} alt="description" className="card-icon" />
                 </span>
@@ -15,7 +15,7 @@ export function CardPreviewIcons({ card }) {
     }
     if (card.badges.attachments > 0) {
         cardIcons.push(
-            <Tooltip placement="bottom" title="Attachments" key="attachments">
+            <Tooltip placement="bottom" title="Attachments" key="attachments" arrow={false}>
                 <span className="card-icon-wrapper">
                     <img src={fileIcon} alt="file" className="card-icon" />
                     <span className="card-icon-count">{card.badges.attachments}</span>
