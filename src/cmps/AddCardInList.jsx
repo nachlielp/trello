@@ -12,15 +12,12 @@ export function AddCardInList({ idList, closeAddCard, addCard, firstCardPos, las
             idList,
             name: cardName,
         }
+
         if (firstCardPos) {
-            console.log('firstCardPos', firstCardPos);
-            newCard.pos = firstCardPos - 1234
-            console.log('newCardPos', newCard.pos);
+            newCard.pos = firstCardPos - 123
         }
         if (lastCardPos) {
-            console.log('lastCardPos', lastCardPos);
-            newCard.pos = lastCardPos + 1234
-            console.log('newCardPos', newCard.pos);
+            newCard.pos = lastCardPos + 123
         }
         await addCard(newCard)
         closeAddCard()

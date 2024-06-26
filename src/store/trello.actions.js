@@ -74,7 +74,6 @@ export function toggleIsExpanded() {
 }
 
 export async function addCard(card) {
-    console.log('action.addCard.card: ', card)
     try {
         const savedCard = await boardService.addCard(card)
         console.log('saved card', savedCard)

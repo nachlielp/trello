@@ -13,12 +13,10 @@ export function BoardList({ list, cards, addCard }) {
     }
 
     const sortedCards = cards.sort((a, b) => a.pos - b.pos)
-    // console.log('sortedCards', sortedCards);
+
     const firstCardPos = sortedCards.length > 0 ? sortedCards[0].pos : 0
     const lastCardPos = sortedCards.length > 0 ? sortedCards[sortedCards.length - 1].pos : 0
-    // console.log("list: ", list.name)
-    // console.log('firstCardPos', firstCardPos);
-    // console.log('lastCardPos', lastCardPos);
+
     return (
         <Card className="board-list custom-card">
             <header className="board-list-header">
