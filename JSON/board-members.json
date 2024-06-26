@@ -1,7 +1,6 @@
-
 [
     {
-        "boardId": "64f721f169b14894fac36cdf",
+        "id": "64f721f169b14894fac36cdf",
         "members": [
             {
                 "id": "666fe4efda8643029b6710f3",
@@ -14,8 +13,9 @@
                 "username": "nachlielpokroy"
             }
         ]
-    },{
-        "boardId": "66756a34def1a6d3b8cd179d",
+    },
+    {
+        "id": "66756a34def1a6d3b8cd179d",
         "members": [
             {
                 "id": "666fe4efda8643029b6710f3",

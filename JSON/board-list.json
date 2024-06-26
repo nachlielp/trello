@@ -1,7 +1,6 @@
-
 [
     {
-        "boardId": "64f721f169b14894fac36cdf",
+        "id": "64f721f169b14894fac36cdf",
         "lists": [
             {
                 "id": "64f721f169b14894fac36ce6",
@@ -58,8 +57,9 @@
                 "softLimit": null
             }
         ]
-    }, {
-        "boardId": "66756a34def1a6d3b8cd179d",
+    },
+    {
+        "id": "66756a34def1a6d3b8cd179d",
         "lists": [
             {
                 "id": "66756b3a4a97ac163d32e9e2",

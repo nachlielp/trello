@@ -6,7 +6,7 @@ import { userService } from "../services/user.service";
 import { boardService } from "../services/board.service.local";
 import { BoardHeader } from "../cmps/BoardHeader";
 import { BoardList } from "../cmps/BoardList";
-import { loadTrelloData } from "../store/trello.actions";
+import { loadTrelloDataFromSource, loadTestBoardFromStorage } from "../store/trello.actions";
 export function BoardIndex() {
   const lists = useSelector((state) => state.boardModule.lists);
   const cards = useSelector((state) => state.boardModule.cards);
@@ -15,16 +15,17 @@ export function BoardIndex() {
   const [newStyle, setNewStyle] = useState({});
 
   useEffect(() => {
-    loadTrelloData();
+    // loadTrelloDataFromSource();
+    loadTestBoardFromStorage()
   }, []);
   return (
     <section className="board-index">
       <div
         className="bg"
-   
+
         style={{
-            backgroundImage: `url(${board.prefs?.backgroundImage})`,
-          }}
+          backgroundImage: `url(${board.prefs?.backgroundImage})`,
+        }}
       >
         {board && <BoardHeader board={board} />}
         <main className="board-lists">

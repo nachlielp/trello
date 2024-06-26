@@ -1,4 +1,7 @@
 import { boardService } from '../services/board.service.local'
+import { listService } from '../services/list.service.local'
+import { cardService } from '../services/cards.service.local'
+import { memberService } from '../services/members.service.local'
 import { store } from './store'
 import { SET_LISTS, SET_CARDS, SET_MEMBERS, SET_BOARD, SET_IS_EXPANDED } from './trello.reducer'
 
@@ -6,7 +9,7 @@ const apiKey = import.meta.env.VITE_TRELLO_API_KEY;
 const token = import.meta.env.VITE_TRELLO_TOKEN;
 
 
-export async function loadTrelloData() {
+export async function loadTrelloDataFromSource() {
     try {
         const listsData = await fetchListsFromTrello('dL2ehGo7');
         store.dispatch({ type: SET_LISTS, lists: listsData })
@@ -25,6 +28,21 @@ export async function loadTrelloData() {
     } catch (err) {
         console.log('Error fetching listsData: ', err)
     }
+}
+export async function loadTestBoardFromStorage() {
+    const demoBoardId = '66756a34def1a6d3b8cd179d'
+    const boardData = await boardService.getById(demoBoardId)
+    console.log('boardData: ', boardData)
+    store.dispatch({ type: SET_BOARD, board: boardData })
+    const listData = await listService.getById(demoBoardId)
+    console.log('listData: ', listData)
+    store.dispatch({ type: SET_LISTS, lists: listData.lists })
+    const cardData = await cardService.getById(demoBoardId)
+    console.log('cardData: ', cardData)
+    store.dispatch({ type: SET_CARDS, cards: cardData.cards })
+    const memberData = await memberService.getById(demoBoardId)
+    console.log('memberData: ', memberData)
+    store.dispatch({ type: SET_MEMBERS, members: memberData.members })
 }
 async function fetchCardsFromTrello(listId) {
     const data = await fetch(`https://api.trello.com/1/lists/${listId}/cards?key=${apiKey}&token=${token}`)

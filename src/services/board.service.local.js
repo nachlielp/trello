@@ -3,7 +3,7 @@ import { storageService } from './async-storage.service'
 import { utilService } from './util.service'
 import { userService } from './user.service'
 
-const STORAGE_KEY = 'board'
+const STORAGE_KEY = 'boards'
 
 
 export const boardService = {
