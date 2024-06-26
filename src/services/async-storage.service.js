@@ -4,6 +4,7 @@ export const storageService = {
     post,
     postSubEntity,
     put,
+    putSubEntity,
     remove,
 }
 
@@ -41,6 +42,7 @@ function postSubEntity(entityType, newEntity) {
     });
 }
 function put(entityType, updatedEntity) {
+
     return query(entityType).then(entities => {
         const idx = entities.findIndex(entity => entity._id === updatedEntity._id)
         if (idx < 0) throw new Error(`Update failed, cannot find entity with id: ${updatedEntity._id} in: ${entityType}`)
@@ -51,6 +53,21 @@ function put(entityType, updatedEntity) {
     })
 }
 
+function putSubEntity(entityType, updatedEntity, boardId) {
+    return query(entityType).then(entities => {
+        const board = entities.find(entity => entity.id === boardId);
+        if (!board) throw new Error(`Board with id: ${boardId} not found`);
+
+        const idx = board[entityType].findIndex(entity => entity.id === updatedEntity.id);
+        if (idx < 0) throw new Error(`Update failed, cannot find entity with id: ${updatedEntity.id} in: ${entityType}`);
+
+        const entityToUpdate = { ...board[entityType][idx], ...updatedEntity };
+        board[entityType].splice(idx, 1, entityToUpdate);
+
+        _save(entityType, entities);
+        return entityToUpdate;
+    });
+}
 function remove(entityType, entityId) {
     return query(entityType).then(entities => {
         const idx = entities.findIndex(entity => entity._id === entityId)

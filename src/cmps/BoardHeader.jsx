@@ -31,8 +31,7 @@ export function BoardHeader() {
 
   async function fetchUserId() {
     const data = await fetch(
-      `https://api.trello.com/1/members/me?key=${
-        import.meta.env.VITE_TRELLO_API_KEY
+      `https://api.trello.com/1/members/me?key=${import.meta.env.VITE_TRELLO_API_KEY
       }&token=${token}`
     );
     const boardData = await data.json();
@@ -50,7 +49,7 @@ export function BoardHeader() {
       console.log(err);
     }
   }
-  console.log(members);
+
   return (
     <div className="board-header">
       <div className="left-info">

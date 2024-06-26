@@ -13,6 +13,8 @@ export const boardService = {
     remove,
     addCard,
     addList,
+    archiveList,
+    moveListPos,
     // getEmptyBoard,
     // getDemoBoard,
     // addBoardMsg,
@@ -63,13 +65,75 @@ async function addCard(card) {
     return storageService.postSubEntity('cards', newCard)
 }
 async function addList(list) {
-    const listArray = await storageService.get('lists', list.idBoard)
-    list.pos = listArray.length + 1;
+    const listStorage = await storageService.get('lists', list.idBoard)
+    list.pos = listStorage.lists.length + 1;
     const newList = createNewList(list)
     return storageService.postSubEntity('lists', newList)
 }
 
-//TODO: add pos
+async function archiveList(boardId, listId) {
+    const listsStorage = await storageService.get('lists', boardId);
+    const list = listsStorage.lists.find(l => l.id === listId)
+    if (!list) {
+        throw Error(`Attempting to archive a non-exsisting list by id: ${listId}`)
+    }
+    console.log("list to remove: ", list)
+
+    const newList = {
+        ...list,
+        closed: true,
+        pos: null,
+    }
+
+    await storageService.putSubEntity('lists', newList, boardId);
+    await moveListsFromPosOneBackward(list.pos, boardId);
+    return list;
+}
+
+async function moveListPos(listId, newPos) {
+    const boardLists = await storageService.get('lists', list.idBoard);
+    const list = boardLists.lists.find(l => l.id === listId);
+
+    const oldPos = list.pos;
+    boardLists.lists = boardLists.lists.filter(l => l.id !== listId);
+
+    boardLists.lists.forEach(l => {
+        if (oldPos < newPos && l.pos > oldPos && l.pos <= newPos) {
+            l.pos--;
+        } else if (oldPos > newPos && l.pos >= newPos && l.pos < oldPos) {
+            l.pos++;
+        }
+    });
+
+    list.pos = newPos;
+    boardLists.lists.push(list);
+
+    await Promise.all(boardLists.lists.map(l => storageService.put('lists', l)));
+    return list;
+}
+
+async function moveListsFromPosOneForward(pos, boardId) {
+    const boardLists = await storageService.get('lists', boardId);
+    boardLists.lists.forEach(l => {
+        if (l.pos >= pos) {
+            l.pos++;
+        }
+    });
+    await Promise.all(boardLists.lists.map(l => storageService.put('lists', l)));
+    return boardLists;
+}
+
+async function moveListsFromPosOneBackward(pos, boardId) {
+    const boardLists = await storageService.get('lists', boardId);
+    boardLists.lists.forEach(l => {
+        if (l.pos >= pos) {
+            l.pos--;
+        }
+    });
+    await Promise.all(boardLists.lists.map(l => storageService.put('lists', l)));
+    return boardLists;
+}
+
 function createNewList(list) {
     return {
         id: "",
