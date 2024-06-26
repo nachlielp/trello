@@ -54,7 +54,7 @@ export function BoardHeader() {
     <div className="board-header">
       <div className="left-info">
         {" "}
-        <h3>{board.name}</h3>
+        <h3 className="board-name">{board.name}</h3>
         <button
           className="star-icon"
           onMouseOver={() => setHover(true)}
@@ -66,14 +66,14 @@ export function BoardHeader() {
         <button className="visibility-icon">
           <img src={visibilityIcon} />
         </button>
-        <button className="board-icon">
+        <button className="board-btn">
           <img src={boardIcon} />
           Board
           <DownOutlined />
         </button>
       </div>
       <div className="right-info">
-        <button>
+        <button className="filter-btn">
           <IoFilterSharp />
           Filters
         </button>
@@ -82,15 +82,16 @@ export function BoardHeader() {
             <UserAvatar
               member={member}
               key={member.id}
+              size={28}
               className="members-avatar"
             />
           ))}
         </div>
-        <button>
-          <UserAddOutlined />
-          Share
+        <button className="share-btn">
+          <UserAddOutlined className="share-icon"/>
+          <span className="txt">Share</span>
         </button>
-        <button>
+        <button className="dots">
           <EllipsisOutlined />
         </button>
       </div>
