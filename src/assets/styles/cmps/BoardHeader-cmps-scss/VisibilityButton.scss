@@ -1,0 +1,121 @@
+.visibility-popover {
+  background: rgb(40, 46, 51);
+  color: rgb(182, 194, 207);
+  border-radius: 8px;
+  margin: 0 !important;
+  width: 384px;
+  .menu-header {
+    display: grid;
+    box-sizing: border-box;
+    grid-template-columns: 32px 1fr 32px;
+    align-items: center;
+    justify-items: center;
+    width: 100%;
+    padding: 4px 8px;
+    h2 {
+      height: 40px;
+      line-height: 40px;
+      font-size: 14px;
+      font-weight: 600px;
+      margin: 0;
+      padding: 0;
+      text-wrap: nowrap;
+      grid-column: 2 / span 1;
+    }
+    span {
+      display: flex;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      justify-self: self-end;
+      height: 32px;
+      width: 32px;
+      background: none;
+      //   color: white;
+      //   border: none;
+      //   font-size: 14px;
+      //   font-weight: 500px;
+      line-height: 32px;
+      //   justify-content: center;
+      margin: 0;
+      transition-duration: 0.085s;
+      transition-property: background-color, border-color, box-shadow;
+      transition-timing-function: ease;
+      border-radius: 3px;
+      svg {
+        font-size: 16px;
+      }
+      &:hover {
+        background: rgba(166, 197, 226, 0.16);
+      }
+    }
+  }
+  .menu-body {
+    padding-bottom: 12px;
+    .popover-nav {
+      ul {
+        padding: 0;
+        margin: 0;
+        li {
+          list-style: none;
+          .btn {
+            user-select: none;
+            .permission-icon{
+              font-size: 16px;
+            }
+            &:disabled {
+              color: rgba(191, 219, 248, 0.28);
+              pointer-events: none;
+              span{
+                color: rgba(191, 219, 248, 0.28);
+              }
+            }
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            text-align: left;
+            border: none;
+            background: none;
+            color: rgb(182, 194, 207);
+            padding: 6px 12px;
+            &:hover {
+              border: none;
+              box-shadow: none;
+              background: rgba(161, 189, 217, 0.08);
+              color: rgb(182, 194, 207);
+              text-decoration: none;
+            }
+            span {
+              display: flex;
+              align-items: center;
+
+              .icon {
+                font-size: 16px;
+                padding: 0 4px;
+              }
+            }
+            .private-header {
+              line-height: 20px;
+              font-size: 14px;
+              .icon {
+                color: rgb(226, 72, 61);
+              }
+            }
+            .public-header {
+              .icon {
+                color: rgb(42, 187, 127);
+              }
+            }
+
+            div {
+              margin-top: 4px;
+              font-size: 12px;
+              line-height: 16px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
