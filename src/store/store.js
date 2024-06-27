@@ -1,17 +1,17 @@
-import { createStore, combineReducers } from 'redux'
-import { userReducer } from './user.reducer'
+import { createStore, combineReducers } from "redux";
+import { userReducer } from "./user.reducer";
 
-import { trelloReducer } from './trello.reducer'
-
+import { boardReducer } from "./board.reducer";
 
 const rootReducer = combineReducers({
-    userModule: userReducer,
-    boardModule: trelloReducer
-})
+  userModule: userReducer,
+  boardModule: boardReducer,
+});
 
-
-const middleware = (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__() : undefined
-export const store = createStore(rootReducer, middleware)
+const middleware = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+  ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__()
+  : undefined;
+export const store = createStore(rootReducer, middleware);
 
 // For debug:
 // store.subscribe(() => {
@@ -19,6 +19,3 @@ export const store = createStore(rootReducer, middleware)
 //     console.log('storeState:\n', store.getState())
 //     console.log('*******************************')
 // })
-
-
-

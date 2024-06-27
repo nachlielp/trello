@@ -7,7 +7,7 @@ import {
   loadTestBoardFromStorage,
   addCard,
   addList,
-} from "../store/trello.actions";
+} from "../store/board.actions";
 import { AddListBtn } from "../cmps/AddListBtn";
 
 export function BoardIndex() {
