@@ -5,7 +5,7 @@ import { useState } from "react"
 import { ListActionsMenuPopover } from "./ListActionsMenuPopover"
 import { AddCardInList } from "./AddCardInList"
 
-export function BoardList({ list, cards, addCard }) {
+export function BoardList({ list, cards, addCard, archiveList }) {
     const [isAddCardOpen, setIsAddCardOpen] = useState(false)
 
     const openAddCard = () => {
@@ -18,14 +18,16 @@ export function BoardList({ list, cards, addCard }) {
     const lastCardPos = sortedCards.length > 0 ? sortedCards[sortedCards.length - 1].pos : 0
 
     return (
-        <Card className="board-list custom-card">
-            <header className="board-list-header">
-                <p className="list-title">{list.name}</p>
-                <ListActionsMenuPopover openAddCard={openAddCard} />
-            </header>
-            {isAddCardOpen && <AddCardInList idList={list.id} closeAddCard={() => setIsAddCardOpen(false)} addCard={addCard} firstCardPos={firstCardPos} />}
-            {sortedCards.map(card => <ListCardPreview key={card.id} card={card} />)}
-            <ListFooter idList={list.id} addCard={addCard} lastCardPos={lastCardPos} />
-        </Card>
+        <div className="board-list-container">
+            <Card className="board-list custom-card">
+                <header className="board-list-header">
+                    <p className="list-title">{list.name}</p>
+                    <ListActionsMenuPopover openAddCard={openAddCard} archiveList={archiveList} />
+                </header>
+                {isAddCardOpen && <AddCardInList idList={list.id} closeAddCard={() => setIsAddCardOpen(false)} addCard={addCard} firstCardPos={firstCardPos} />}
+                {sortedCards.map(card => <ListCardPreview key={card.id} card={card} />)}
+                <ListFooter idList={list.id} addCard={addCard} lastCardPos={lastCardPos} />
+            </Card>
+        </div>
     )
 }
