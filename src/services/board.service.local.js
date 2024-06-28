@@ -1,26 +1,24 @@
+import { storageService } from "./async-storage.service";
+import { utilService } from "./util.service";
+import { userService } from "./user.service";
 
-import { storageService } from './async-storage.service'
-import { utilService } from './util.service'
-import { userService } from './user.service'
-
-const STORAGE_KEY = 'boards'
-
+const STORAGE_KEY = "boards";
 
 export const boardService = {
-    // query,
-    getById,
-    save,
-    remove,
-    addCard,
-    addList,
-    archiveList,
-    moveListPos,
-    editList,
-    // getEmptyBoard,
-    // getDemoBoard,
-    // addBoardMsg,
-    // updateTask,
-    // getTaskEditCmps
+  // query,
+  getById,
+  save,
+  remove,
+  addCard,
+  addList,
+  archiveList,
+  moveListPos,
+  editList,
+  // getEmptyBoard,
+  // getDemoBoard,
+  // addBoardMsg,
+  // updateTask,
+  // getTaskEditCmps
 }
 window.boardSer = boardService
 
@@ -37,132 +35,128 @@ window.boardSer = boardService
 // }
 
 function getById(boardId) {
-    return storageService.get(STORAGE_KEY, boardId)
+  return storageService.get(STORAGE_KEY, boardId);
 }
 
 async function remove(boardId) {
-    // throw new Error('Nope')
-    await storageService.remove(STORAGE_KEY, boardId)
+  // throw new Error('Nope')
+  await storageService.remove(STORAGE_KEY, boardId);
 }
 
 async function save(board) {
-    var savedBoard
-    if (board._id) {
-        const boardToUpdate = {
-            _id: board._id,
-            title: board.title
-        }
-        savedBoard = await storageService.put(STORAGE_KEY, boardToUpdate)
-    } else {
-        // Later, owner is set by the backend
-        board.owner = userService.getLoggedinUser()
-        savedBoard = await storageService.post(STORAGE_KEY, board)
-    }
-    return savedBoard
+  var savedBoard;
+  if (board.id) {
+    savedBoard = await storageService.put(STORAGE_KEY, board);
+  } else {
+    // Later, owner is set by the backend
+    board.owner = userService.getLoggedinUser();
+    savedBoard = await storageService.post(STORAGE_KEY, board);
+  }
+  return savedBoard;
 }
 
 async function addCard(card) {
-    const newCard = createNewCard(card)
-    return storageService.postSubEntity('cards', newCard)
+  const newCard = createNewCard(card);
+  return storageService.postSubEntity("cards", newCard);
 }
 async function addList(list) {
-    const listStorage = await storageService.get('lists', list.idBoard)
-    list.pos = listStorage.lists.length + 1;
-    const newList = createNewList(list)
-    return storageService.postSubEntity('lists', newList)
+  const listArray = await storageService.get('lists', list.idBoard)
+  list.pos = listArray.length + 1;
+  const newList = createNewList(list)
+  return storageService.postSubEntity('lists', newList)
 }
 
 async function archiveList(boardId, listId) {
-    const listsStorage = await storageService.get('lists', boardId);
-    const list = listsStorage.lists.find(l => l.id === listId)
-    if (!list) {
-        throw Error(`Attempting to archive a non-exsisting list by id: ${listId}`)
-    }
-    console.log("list to remove: ", list)
+  const listsStorage = await storageService.get('lists', boardId);
+  const list = listsStorage.lists.find(l => l.id === listId)
+  if (!list) {
+    throw Error(`Attempting to archive a non-exsisting list by id: ${listId}`)
+  }
+  console.log("list to remove: ", list)
 
-    const newList = {
-        ...list,
-        closed: true,
-        pos: null,
-    }
+  const newList = {
+    ...list,
+    closed: true,
+    pos: null,
+  }
 
-    await storageService.putSubEntity('lists', newList, boardId);
-    await moveListsFromPosOneBackward(list.pos, boardId);
-    return list;
+  await storageService.putSubEntity('lists', newList, boardId);
+  await moveListsFromPosOneBackward(list.pos, boardId);
+  return list;
 }
 
 async function editList(boardId, list) {
-    const listsStorage = await storageService.get('lists', boardId);
-    const listToUpdate = listsStorage.lists.find(l => l.id === list.id)
-    if (!listToUpdate) {
-        throw Error(`Attempting to edit a non-exsisting list by id: ${list.id}`)
-    }
-    console.log("list to remove: ", list)
+  const listsStorage = await storageService.get('lists', boardId);
+  const listToUpdate = listsStorage.lists.find(l => l.id === list.id)
+  if (!listToUpdate) {
+    throw Error(`Attempting to edit a non-exsisting list by id: ${list.id}`)
+  }
+  console.log("list to remove: ", list)
 
-    const newList = {
-        ...list,
-    }
+  const newList = {
+    ...list,
+  }
 
-    await storageService.putSubEntity('lists', newList, boardId);
-    return list;
+  await storageService.putSubEntity('lists', newList, boardId);
+  return list;
 }
 
 
 async function moveListPos(listId, newPos) {
-    const boardLists = await storageService.get('lists', list.idBoard);
-    const list = boardLists.lists.find(l => l.id === listId);
+  const boardLists = await storageService.get('lists', list.idBoard);
+  const list = boardLists.lists.find(l => l.id === listId);
 
-    const oldPos = list.pos;
-    boardLists.lists = boardLists.lists.filter(l => l.id !== listId);
+  const oldPos = list.pos;
+  boardLists.lists = boardLists.lists.filter(l => l.id !== listId);
 
-    boardLists.lists.forEach(l => {
-        if (oldPos < newPos && l.pos > oldPos && l.pos <= newPos) {
-            l.pos--;
-        } else if (oldPos > newPos && l.pos >= newPos && l.pos < oldPos) {
-            l.pos++;
-        }
-    });
+  boardLists.lists.forEach(l => {
+    if (oldPos < newPos && l.pos > oldPos && l.pos <= newPos) {
+      l.pos--;
+    } else if (oldPos > newPos && l.pos >= newPos && l.pos < oldPos) {
+      l.pos++;
+    }
+  });
 
-    list.pos = newPos;
-    boardLists.lists.push(list);
+  list.pos = newPos;
+  boardLists.lists.push(list);
 
-    await Promise.all(boardLists.lists.map(l => storageService.put('lists', l)));
-    return list;
+  await Promise.all(boardLists.lists.map(l => storageService.put('lists', l)));
+  return list;
 }
 
 async function moveListsFromPosOneForward(pos, boardId) {
-    const boardLists = await storageService.get('lists', boardId);
-    boardLists.lists.forEach(l => {
-        if (l.pos >= pos) {
-            l.pos++;
-        }
-    });
-    await Promise.all(boardLists.lists.map(l => storageService.put('lists', l)));
-    return boardLists;
+  const boardLists = await storageService.get('lists', boardId);
+  boardLists.lists.forEach(l => {
+    if (l.pos >= pos) {
+      l.pos++;
+    }
+  });
+  await Promise.all(boardLists.lists.map(l => storageService.put('lists', l)));
+  return boardLists;
 }
 
 async function moveListsFromPosOneBackward(pos, boardId) {
-    const boardLists = await storageService.get('lists', boardId);
-    boardLists.lists.forEach(l => {
-        if (l.pos >= pos) {
-            l.pos--;
-        }
-    });
-    await Promise.all(boardLists.lists.map(l => storageService.put('lists', l)));
-    return boardLists;
+  const boardLists = await storageService.get('lists', boardId);
+  boardLists.lists.forEach(l => {
+    if (l.pos >= pos) {
+      l.pos--;
+    }
+  });
+  await Promise.all(boardLists.lists.map(l => storageService.put('lists', l)));
+  return boardLists;
 }
 
 function createNewList(list) {
-    return {
-        id: "",
-        idBoard: list.idBoard,
-        name: list.name,
-        closed: false,
-        color: null,
-        subscribed: false,
-        softLimit: null,
-        pos: list.pos
-    }
+  return {
+    id: "",
+    idBoard: list.idBoard,
+    name: list.name,
+    closed: false,
+    color: null,
+    subscribed: false,
+    softLimit: null,
+    pos: list.pos,
+  };
 }
 // async function addBoardMsg(boardId, txt) {
 
@@ -239,99 +233,98 @@ function createNewList(list) {
 // }
 
 function _createActivity(title, task, group = null) {
-    return {
-        id: utilService.makeId(),
-        createdAt: Date.now(),
-        byMember: userService.getLoggedinUser(),
-        title,
-        task,
-        group
-    }
+  return {
+    id: utilService.makeId(),
+    createdAt: Date.now(),
+    byMember: userService.getLoggedinUser(),
+    title,
+    task,
+    group,
+  };
 }
 
 function _getStatuses() {
-    return ['open', 'inProgress', 'done']
+  return ["open", "inProgress", "done"];
 }
 
 function _toMiniGroup(group) {
-    return { id: group.id, title: group.title }
+  return { id: group.id, title: group.title };
 }
 
 function _toMiniTask(task) {
-    return { id: task.id, title: task.title }
+  return { id: task.id, title: task.title };
 }
-
 
 // TEST DATA
 // storageService.post(STORAGE_KEY, board).then(savedBoard => console.log('Added board', savedBoard))
 
 function createNewCard(card) {
-    console.log('createNewCard.card', card)
-    return {
-        badges: {
-            attachmentsByType: {
-                trello: {
-                    board: 0,
-                    card: 0
-                }
-            },
-            externalSource: null,
-            location: false,
-            votes: 0,
-            viewingMemberVoted: false,
-            subscribed: false,
-            attachments: 0,
-            fogbugz: "",
-            checkItems: 0,
-            checkItemsChecked: 0,
-            checkItemsEarliestDue: null,
-            comments: 0,
-            description: false,
-            due: null,
-            dueComplete: false,
-            lastUpdatedByAi: false,
-            start: null
+  console.log("createNewCard.card", card);
+  return {
+    badges: {
+      attachmentsByType: {
+        trello: {
+          board: 0,
+          card: 0,
         },
-        checkItemStates: [],
-        closed: false,
-        dueComplete: false,
-        dateLastActivity: new Date().toISOString(),
-        desc: "",
-        descData: {
-            emoji: {}
-        },
-        due: null,
-        dueReminder: null,
-        email: null,
-        idBoard: card.idBoard,
-        idChecklists: [],
-        idList: card.idList,
-        idMembers: [],
-        idMembersVoted: [],
-        idShort: '',// generateShortId(), // Function to generate a short ID
-        idAttachmentCover: null,
-        labels: [],
-        idLabels: [],
-        manualCoverAttachment: true,
-        name: card.name,
-        pos: card.pos, // Default position, can be adjusted
-        shortLink: '', // generateShortLink(), // Function to generate a short link
-        shortUrl: '', // `https://trello.com/c/${generateShortLink()}`,
-        start: null,
-        subscribed: false,
-        url: '', // `https://trello.com/c/${generateShortLink()}`,
-        cover: {
-            idAttachment: null,
-            color: null,
-            idUploadedBackground: null,
-            size: '',
-            brightness: '',
-            scaled: [],
-            edgeColor: '',
-            sharedSourceUrl: null,
-            idPlugin: null
-        },
-        isTemplate: false,
-        cardRole: null
-    };
+      },
+      externalSource: null,
+      location: false,
+      votes: 0,
+      viewingMemberVoted: false,
+      subscribed: false,
+      attachments: 0,
+      fogbugz: "",
+      checkItems: 0,
+      checkItemsChecked: 0,
+      checkItemsEarliestDue: null,
+      comments: 0,
+      description: false,
+      due: null,
+      dueComplete: false,
+      lastUpdatedByAi: false,
+      start: null,
+    },
+    checkItemStates: [],
+    closed: false,
+    dueComplete: false,
+    dateLastActivity: new Date().toISOString(),
+    desc: "",
+    descData: {
+      emoji: {},
+    },
+    due: null,
+    dueReminder: null,
+    email: null,
+    idBoard: card.idBoard,
+    idChecklists: [],
+    idList: card.idList,
+    idMembers: [],
+    idMembersVoted: [],
+    idShort: "", // generateShortId(), // Function to generate a short ID
+    idAttachmentCover: null,
+    labels: [],
+    idLabels: [],
+    manualCoverAttachment: true,
+    name: card.name,
+    pos: card.pos, // Default position, can be adjusted
+    shortLink: "", // generateShortLink(), // Function to generate a short link
+    shortUrl: "", // `https://trello.com/c/${generateShortLink()}`,
+    start: null,
+    subscribed: false,
+    url: "", // `https://trello.com/c/${generateShortLink()}`,
+    cover: {
+      idAttachment: null,
+      color: null,
+      idUploadedBackground: null,
+      size: "",
+      brightness: "",
+      scaled: [],
+      edgeColor: "",
+      sharedSourceUrl: null,
+      idPlugin: null,
+    },
+    isTemplate: false,
+    cardRole: null,
+  };
 }

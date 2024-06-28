@@ -9,7 +9,7 @@
     "bio": "",
     "bioData": null,
     "confirmed": true,
-    "fullName": "Eugene",
+    "fullName": "Eugene Bondarev",
     "idEnterprise": null,
     "idEnterprisesDeactivated": [],
     "idMemberReferrer": null,
@@ -36,6 +36,7 @@
       "64f721f169b14894fac36cdf",
       "66756a34def1a6d3b8cd179d"
     ],
+    "starredBoardIds": [],
     "idOrganizations": ["666fe5e6696fdcc2e7bf2de0"],
     "idEnterprisesAdmin": [],
     "limits": {
@@ -130,6 +131,7 @@
       "64f721f169b14894fac36cdf",
       "66756a34def1a6d3b8cd179d"
     ],
+    "starredBoardIds": [],
     "idOrganizations": ["64f721e4f2e4a8cb0eec149f"],
     "idEnterprisesAdmin": [],
     "limits": {

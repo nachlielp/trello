@@ -4,12 +4,7 @@ import { store } from "../store/store.js";
 
 import { showErrorMsg } from "../services/event-bus.service";
 import { LOADING_DONE, LOADING_START } from "./system.reducer.js";
-import {
-  REMOVE_USER,
-  SET_USER,
-  SET_USERS,
-  SET_WATCHED_USER,
-} from "./user.reducer";
+import { EDIT_USERS, SET_USERS,SET_USER } from "./user.reducer";
 const apiKey = import.meta.env.VITE_TRELLO_API_KEY;
 const token = import.meta.env.VITE_TRELLO_TOKEN;
 
@@ -24,83 +19,20 @@ export async function loadUsers() {
     store.dispatch({ type: LOADING_DONE });
   }
 }
-
-export async function removeUser(userId) {
+export async function updateUser(updatedUser) {
   try {
-    await userService.remove(userId);
-    store.dispatch({ type: REMOVE_USER, userId });
+   
+    store.dispatch({ type: EDIT_USERS, user: updatedUser });
+    await userService.updateUser(updatedUser);
   } catch (err) {
-    console.log("UserActions: err in removeUser", err);
+    console.log("UserActions: err in loadUsers", err);
   }
 }
-
-// export async function login(credentials) {
-//     try {
-//         const user = await userService.login(credentials)
-//         store.dispatch({
-//             type: SET_USER,
-//             user
-//         })
-//         socketService.login(user)
-//         return user
-//     } catch (err) {
-//         console.log('Cannot login', err)
-//         throw err
-//     }
-// }
-export async function login() {
-  try {
-    const data = await fetch(
-      `https://api.trello.com/1/members/me?key=${apiKey}&token=${token}`
-    );
-    const user = await data.json();
-    store.dispatch({
-      type: SET_USER,
-      user,
-    });
-    socketService.login(user);
-    return user;
-  } catch (err) {
-    console.log("Cannot login", err);
-    throw err;
-  }
+export async function login(id){
+try{
+ const user =  await userService.getById(id)
+ store.dispatch({type: SET_USER, user })
+}catch(err){
+console.lo
 }
-
-export async function signup(credentials) {
-  try {
-    const user = await userService.signup(credentials);
-    store.dispatch({
-      type: SET_USER,
-      user,
-    });
-    socketService.login(user);
-    return user;
-  } catch (err) {
-    console.log("Cannot signup", err);
-    throw err;
-  }
-}
-
-export async function logout() {
-  try {
-    await userService.logout();
-    store.dispatch({
-      type: SET_USER,
-      user: null,
-    });
-    socketService.logout();
-  } catch (err) {
-    console.log("Cannot logout", err);
-    throw err;
-  }
-}
-
-export async function loadUser(userId) {
-  try {
-    const user = await userService.getById(userId);
-    store.dispatch({ type: SET_WATCHED_USER, user });
-  } catch (err) {
-    showErrorMsg("Cannot load user");
-    console.log("Cannot load user", err);
-  }
 }

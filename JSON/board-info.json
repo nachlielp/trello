@@ -9,6 +9,7 @@
     "url": "https://trello.com/b/nfwLJTa2/trello-build",
     "shortUrl": "https://trello.com/b/nfwLJTa2",
     "prefs": {
+      "permissionLevel": "org",
       "hideVotes": false,
       "voting": "disabled",
       "comments": "members",
