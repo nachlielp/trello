@@ -101,6 +101,16 @@ export async function archiveList(boardId, listId) {
   return savedList
 }
 
+export async function updateBoard(newBoard) {
+  try {
+    store.dispatch({ type: SET_BOARD, board: newBoard });
+    await boardService.save(newBoard);
+  } catch (err) {
+    console.log("Cannot add list", err);
+    throw err;
+  }
+}
+
 export async function editList(boardId, list) {
   console.log('actions.editList: ', list)
   const savedList = await boardService.editList(boardId, list)

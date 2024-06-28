@@ -11,7 +11,6 @@ import { IoFilterSharp } from "react-icons/io5";
 import { loadUsers, updateUser } from "../store/user.actions";
 import { UserAvatar } from "./UserAvatar";
 import { VisibilityButton } from "./BoardHeader-cmps/VisibilityButton";
-
 import { ReactSVG } from "react-svg";
 import boardIcon from "/img/headerImgs/boardIcon.svg";
 
@@ -42,7 +41,7 @@ export function BoardHeader() {
       updateUser(newUser);
     } else {
       const newUser = currentUser;
-      newUser?.starredBoardIds.push(board.id);
+      newUser?.starredBoardIds?.push(board.id);
       updateUser(newUser);
     }
     if (currentUser?.starredBoardIds?.includes(board.id)) {
@@ -70,7 +69,7 @@ export function BoardHeader() {
         <button className="board-btn">
           <ReactSVG src={boardIcon} wrapper="span" className="board-icon" />
           Board
-          <DownOutlined className="arow"/>
+          <DownOutlined className="arow" />
         </button>
       </div>
       <div className="right-info">

@@ -2,7 +2,6 @@ import { createStore, combineReducers } from "redux";
 import { userReducer } from "./user.reducer";
 
 import { boardReducer } from "./board.reducer";
-import { boardReducer } from './board.reducer'
 
 
 const rootReducer = combineReducers({
