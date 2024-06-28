@@ -1,37 +1,41 @@
 .ant-popover .ant-popover-inner {
-    padding: 0;
+  padding: 0;
 }
 
 .list-actions-menu-content {
-    width: 300px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    // align-items: center;
-
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  // align-items: center;
+  background-color: var(--ds-surface-overlay);
 }
 
 .list-actions-menu-content .menu-header {
-    font-weight: 500;
-    height: 30px;
-    align-self: center;
-    margin: 8px;
+  color: var(--ds-text-subtle);
+  font-weight: 500;
+  height: 30px;
+  align-self: center;
+  margin: 8px;
+  user-select: none;
+  cursor: text;
 }
 
 .list-actions-menu-content .menu-action {
-    margin-block-start: 0;
-    margin-block-end: 0;
-    height: 32px;
-    padding: 6px;
+  cursor: pointer;
+  color: var(--ds-text);
+  margin-block-start: 0;
+  margin-block-end: 0;
+  height: 32px;
+  padding: 6px;
 }
 
 .list-actions-menu-content .menu-action:hover {
-    background-color: #f1f2f4;
-    overflow: hidden;
+  background-color: #f1f2f4;
+  overflow: hidden;
 }
 
-
 .list-actions-menu-content .last-action {
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
 }

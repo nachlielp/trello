@@ -1,130 +1,131 @@
 .list-card {
-    // margin-top: 10px;
-    box-sizing: border-box;
-    cursor: pointer;
+  // margin-top: 10px;
+  cursor: pointer;
 
-    &:hover {
-        outline: 2px solid blue;
-    }
+  &:hover {
+    outline: 2px solid blue;
+  }
+  background-color: var(--ds-surface-raised, #ffffff);
+  border: none;
 }
 
 .list-card.custom-card .ant-card {
-    margin: 10px 0 0 0 !important;
+  margin: 10px 0 0 0 !important;
 }
 
 .card-bg-cover .ant-card-body {
-    min-height: 56px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+  min-height: 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .card-bg-cover .ant-card-body .list-card-content,
 .card-img-cover .ant-card-body .list-card-content {
-    font-weight: 600;
-    font-size: 16px;
+  font-weight: 600;
+  font-size: 16px;
 }
 
 .list-card.custom-card .ant-card-body {
-    padding: 0 !important;
+  padding: 0 !important;
 }
 
 .list-card-header {
-    border-radius: 7px 7px 0 0 !important;
-    min-height: 36px;
+  border-radius: 7px 7px 0 0 !important;
+  min-height: 36px;
 }
 
 .list-card-header.img-cover {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    min-height: 160px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 160px;
 }
 
 .list-card-header-img {
-    border-radius: 7px 7px 0 0 !important;
-    object-fit: cover;
+  border-radius: 7px 7px 0 0 !important;
+  object-fit: cover;
 }
 
 .card-img-cover {
-    min-height: 160px;
-    width: 100%;
+  min-height: 160px;
+  width: 100%;
 }
 
 .list-card-content {
-    padding: 8px 12px 4px 12px;
+  color: var(--ds-text, #172b4d);
+  padding: 8px 12px 4px 12px;
 }
 
 .list-card-content.image-cover {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.8);
-    height: 60px;
-    background: linear-gradient(to top, white, transparent);
-    padding: 10px;
-    box-sizing: border-box;
-    border-radius: 0 0 7px 7px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  height: 60px;
+  background: linear-gradient(to top, white, transparent);
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 0 0 7px 7px;
 }
 
 .list-card-content.image-cover .list-card-content-title {
-    align-self: flex-end;
-    object-fit: cover;
+  align-self: flex-end;
+  object-fit: cover;
 }
 
 .list-card-content-labels {
-
-    display: flex;
-    gap: 4px;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
 }
 
 .list-card-content-icons {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .list-card-content-icons.card-bg-cover,
 .list-card-content-icons.card-img-cover {
-    display: none;
+  display: none;
 }
 
 .list-card-content-icons .aside-right {
-    display: flex;
-    flex-direction: row;
-    gap: 4px;
-    margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  margin-top: 10px;
 }
 
 .list-card-content-icons .aside-left {
-    display: flex;
-    flex-direction: row;
-    gap: 6px;
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
 }
 
 .list-card-content-icons .aside-left .card-preview-icons {
-    display: flex;
-    flex-direction: row;
-    gap: 6px;
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
 }
 
 .card-icon-wrapper {
-    display: flex;
-    align-items: center; // Align items vertically
+  display: flex;
+  align-items: center; // Align items vertically
 }
 
 .card-icon {
-    // margin-top: 10px;
-    height: 16px;
-    width: 16px;
+  // margin-top: 10px;
+  height: 16px;
+  width: 16px;
 }
 
 .card-icon-count {
-    // margin-top: 10px;
-    font-size: 12px;
-    margin-left: 4px; // Adjust spacing as needed
+  // margin-top: 10px;
+  font-size: 12px;
+  margin-left: 4px; // Adjust spacing as needed
 }

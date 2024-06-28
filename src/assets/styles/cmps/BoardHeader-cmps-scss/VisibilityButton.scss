@@ -1,6 +1,6 @@
 .visibility-popover {
-  background: rgb(40, 46, 51);
-  color: rgb(182, 194, 207);
+  background: var(--ds-surface-overlay, #ffffff);
+  color: var(--ds-text, #172b4d);
   border-radius: 8px;
   margin: 0 !important;
   width: 384px;
@@ -14,6 +14,7 @@
     padding: 4px 8px;
     h2 {
       height: 40px;
+      color: var(--ds-text-subtle, #44546f);
       line-height: 40px;
       font-size: 14px;
       font-weight: 600px;
@@ -46,7 +47,7 @@
         font-size: 16px;
       }
       &:hover {
-        background: rgba(166, 197, 226, 0.16);
+        background: var(--ds-background-neutral-hovered);
       }
     }
   }
@@ -60,16 +61,7 @@
           list-style: none;
           .btn {
             user-select: none;
-            .permission-icon{
-              font-size: 16px;
-            }
-            &:disabled {
-              color: rgba(191, 219, 248, 0.28);
-              pointer-events: none;
-              span{
-                color: rgba(191, 219, 248, 0.28);
-              }
-            }
+            color: var(--ds-text-subtle, #44546f);
             cursor: pointer;
             display: flex;
             flex-direction: column;
@@ -77,13 +69,24 @@
             text-align: left;
             border: none;
             background: none;
-            color: rgb(182, 194, 207);
             padding: 6px 12px;
+
+            .permission-icon {
+              font-size: 16px;
+            }
+            &:disabled {
+              color: var(--ds-text-disabled, #091e424f);
+              pointer-events: none;
+              span {
+                color: rgba(191, 219, 248, 0.28);
+              }
+            }
+
             &:hover {
               border: none;
               box-shadow: none;
-              background: rgba(161, 189, 217, 0.08);
-              color: rgb(182, 194, 207);
+              background: var(--ds-background-neutral-subtle-hovered, #091e420f);
+              color: var(--ds-text, #172b4d);
               text-decoration: none;
             }
             span {
@@ -112,6 +115,7 @@
               margin-top: 4px;
               font-size: 12px;
               line-height: 16px;
+              color: var(--ds-text-subtle, #44546f);
             }
           }
         }
