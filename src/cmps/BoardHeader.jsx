@@ -12,7 +12,7 @@ import { loadUsers, updateUser } from "../store/user.actions";
 import { UserAvatar } from "./UserAvatar";
 import { VisibilityButton } from "./BoardHeader-cmps/VisibilityButton";
 import { ReactSVG } from "react-svg";
-import boardIcon from "/img/headerImgs/boardIcon.svg";
+import { BoardButton } from "./BoardHeader-cmps/BoardButton";
 
 export function BoardHeader() {
   const [isStarredBoard, setIsStarredBoard] = useState(false);
@@ -41,7 +41,7 @@ export function BoardHeader() {
       updateUser(newUser);
     } else {
       const newUser = currentUser;
-      newUser?.starredBoardIds?.push(board.id);
+      newUser.starredBoardIds?.push(board.id);
       updateUser(newUser);
     }
     if (currentUser?.starredBoardIds?.includes(board.id)) {
@@ -66,11 +66,7 @@ export function BoardHeader() {
             (isStarredBoard ? <StarFilled /> : <StarOutlined />)}
         </button>
         <VisibilityButton />
-        <button className="board-btn">
-          <ReactSVG src={boardIcon} wrapper="span" className="board-icon" />
-          Board
-          <DownOutlined className="arow" />
-        </button>
+        <BoardButton />
       </div>
       <div className="right-info">
         <button className="filter-btn">
