@@ -2,6 +2,7 @@ import { PlusOutlined } from "@ant-design/icons"
 import { useState } from "react"
 import templateCard from "../assets/svgs/template-card.svg"
 import { AddCardInList } from "./AddCardInList"
+import { ReactSVG } from "react-svg"
 
 export function ListFooter({ idList, addCard, lastCardPos }) {
     const [isAddCardOpen, setIsAddCardOpen] = useState(false)
@@ -16,7 +17,7 @@ export function ListFooter({ idList, addCard, lastCardPos }) {
                     <PlusOutlined />&nbsp;&nbsp;Add a card
                 </button>
                 <button className="use-template-btn">
-                    <img src={templateCard} alt="template card" className="template-card" />
+                    <ReactSVG src={templateCard} alt="template card" className="template-card" wrapper="span"/>
                 </button>
             </>}
             {isAddCardOpen && <AddCardInList idList={idList} closeAddCard={closeAddCard} addCard={addCard} lastCardPos={lastCardPos} />}
