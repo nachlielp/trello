@@ -49,3 +49,9 @@
     padding: 6px 8px 6px 12px;
     margin: 0;
 }
+
+.board-list-main {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}

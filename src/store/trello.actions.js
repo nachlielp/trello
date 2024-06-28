@@ -76,7 +76,6 @@ export function toggleIsExpanded() {
 export async function addCard(card) {
     try {
         const savedCard = await boardService.addCard(card)
-        console.log('saved card', savedCard)
         store.dispatch({ type: ADD_CARD, card: savedCard })
         // return savedCard
     } catch (err) {
