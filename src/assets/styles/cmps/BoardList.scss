@@ -33,6 +33,9 @@
   box-shadow: none;
   background-color: var(--tr-background-list);
   color: var(--ds-icon);
+  span{
+    font-size: 16px;
+  }
 }
 
 .board-list-header .list-more-btn:hover {
