@@ -1,70 +1,60 @@
 import { boardService } from '../services/board.service.local'
-import { listService } from '../services/list.service.local'
-import { cardService } from '../services/cards.service.local'
+
 import { memberService } from '../services/members.service.local'
 import { store } from './store'
-import { SET_LISTS, SET_CARDS, SET_MEMBERS, SET_BOARD, SET_IS_EXPANDED, ADD_CARD, ADD_LIST, ARCHIVE_LIST, EDIT_LIST } from './board.reducer'
+import { SET_MEMBERS, SET_BOARD, SET_IS_EXPANDED, ADD_TASK, ADD_GROUP, ARCHIVE_GROUP, EDIT_GROUP } from './board.reducer'
 
-const apiKey = import.meta.env.VITE_TRELLO_API_KEY;
-const token = import.meta.env.VITE_TRELLO_TOKEN;
+// export async function loadTrelloDataFromSource() {
+//   try {
+//     const listsData = await fetchListsFromTrello('dL2ehGo7');
+//     store.dispatch({ type: SET_LISTS, lists: listsData })
+//     const allCards = [];
+//     for (const list of listsData) {
+//       const cardsData = await fetchCardsFromTrello(list.id);
+//       if (cardsData.length > 0) {
+//         allCards.push(...cardsData);
+//       }
+//     }
+//     store.dispatch({ type: SET_CARDS, cards: allCards })
+//     const membersData = await fetchMembersFromTrello();
+//     store.dispatch({ type: SET_MEMBERS, members: membersData })
+//     const boardData = await fetchBoardFromTrello();
+//     store.dispatch({ type: SET_BOARD, board: boardData })
+//   } catch (err) {
+//     console.log('Error fetching listsData: ', err)
+//   }
+// }
 
-
-export async function loadTrelloDataFromSource() {
-  try {
-    const listsData = await fetchListsFromTrello('dL2ehGo7');
-    store.dispatch({ type: SET_LISTS, lists: listsData })
-    const allCards = [];
-    for (const list of listsData) {
-      const cardsData = await fetchCardsFromTrello(list.id);
-      if (cardsData.length > 0) {
-        allCards.push(...cardsData);
-      }
-    }
-    store.dispatch({ type: SET_CARDS, cards: allCards })
-    const membersData = await fetchMembersFromTrello();
-    store.dispatch({ type: SET_MEMBERS, members: membersData })
-    const boardData = await fetchBoardFromTrello();
-    store.dispatch({ type: SET_BOARD, board: boardData })
-  } catch (err) {
-    console.log('Error fetching listsData: ', err)
-  }
-}
 export async function loadTestBoardFromStorage() {
   const demoBoardId = '66756a34def1a6d3b8cd179d'
 
   const boardData = await boardService.getById(demoBoardId)
   store.dispatch({ type: SET_BOARD, board: boardData })
 
-  const listData = await listService.getById(demoBoardId)
-  store.dispatch({ type: SET_LISTS, lists: listData.lists })
-
-  const cardData = await cardService.getById(demoBoardId)
-  store.dispatch({ type: SET_CARDS, cards: cardData.cards })
-
   const memberData = await memberService.getById(demoBoardId)
   store.dispatch({ type: SET_MEMBERS, members: memberData.members })
 }
 
 async function fetchCardsFromTrello(listId) {
-  const data = await fetch(`https://api.trello.com/1/lists/${listId}/cards?key=${apiKey}&token=${token}`)
+  const data = await fetch(`https://api.trello.com/1/lists/${listId}/cards?key=${import.meta.env.VITE_TRELLO_API_KEY}&token=${import.meta.env.VITE_TRELLO_TOKEN}`)
   const cardsData = await data.json()
   return cardsData;
 }
 
 async function fetchListsFromTrello(boardId) {
-  const data = await fetch(`https://api.trello.com/1/boards/${boardId}/lists?key=${apiKey}&token=${token}`)
+  const data = await fetch(`https://api.trello.com/1/boards/${boardId}/lists?key=${import.meta.env.VITE_TRELLO_API_KEY}&token=${import.meta.env.VITE_TRELLO_TOKEN}`)
   const listsData = await data.json()
   return listsData;
 }
 
 async function fetchMembersFromTrello() {
-  const data = await fetch(`https://api.trello.com/1/boards/nfwLJTa2/members?key=${apiKey}&token=${token}`)
+  const data = await fetch(`https://api.trello.com/1/boards/nfwLJTa2/members?key=${import.meta.env.VITE_TRELLO_API_KEY}&token=${import.meta.env.VITE_TRELLO_TOKEN}`)
   const membersData = await data.json()
   return membersData;
 }
 
 async function fetchBoardFromTrello() {
-  const data = await fetch(`https://api.trello.com/1/boards/dL2ehGo7?key=${apiKey}&token=${token}`)
+  const data = await fetch(`https://api.trello.com/1/boards/dL2ehGo7?key=${import.meta.env.VITE_TRELLO_API_KEY}&token=${import.meta.env.VITE_TRELLO_TOKEN}`)
   const boardData = await data.json()
   return boardData;
 }
@@ -73,32 +63,40 @@ export function toggleIsExpanded() {
   store.dispatch({ type: SET_IS_EXPANDED, isExpanded: !store.getState().boardModule.isExpanded })
 }
 
-export async function addCard(card) {
+export async function addTask(task, groupId) {
   try {
-    const savedCard = await boardService.addCard(card)
-    store.dispatch({ type: ADD_CARD, card: savedCard })
-    // return savedCard
+    const savedTask = await boardService.addTask(task)
+    console.log("savedTask", savedTask);
+    store.dispatch({ type: ADD_TASK, task: savedTask })
+    return savedTask
   } catch (err) {
-    console.log('Cannot add card', err)
+    console.log('Cannot add task', err)
     throw err
   }
 }
 
-export async function addList(list) {
+export async function addGroup(group) {
   try {
-    const savedList = await boardService.addList(list)
-    store.dispatch({ type: ADD_LIST, list: savedList })
-    return savedList
+    const savedGroup = await boardService.addGroup(group)
+    store.dispatch({ type: ADD_GROUP, group: savedGroup })
+    return savedGroup
   } catch (err) {
-    console.log('Cannot add list', err)
+    console.log('Cannot add group', err)
     throw err
   }
 }
 
-export async function archiveList(boardId, listId) {
-  const savedList = await boardService.archiveList(boardId, listId)
-  store.dispatch({ type: ARCHIVE_LIST, list: savedList })
-  return savedList
+export async function archiveGroup(boardId, groupId) {
+  const savedGroup = await boardService.archiveGroup(boardId, groupId)
+  store.dispatch({ type: ARCHIVE_GROUP, group: savedGroup })
+  return savedGroup
+}
+
+
+export async function editGroup(boardId, group) {
+  const savedGroup = await boardService.editGroup(boardId, group)
+  store.dispatch({ type: EDIT_GROUP, group: savedGroup })
+  return savedGroup
 }
 
 export async function updateBoard(newBoard) {
@@ -109,13 +107,6 @@ export async function updateBoard(newBoard) {
     console.log("Cannot add list", err);
     throw err;
   }
-}
-
-export async function editList(boardId, list) {
-  console.log('actions.editList: ', list)
-  const savedList = await boardService.editList(boardId, list)
-  store.dispatch({ type: EDIT_LIST, list: savedList })
-  return savedList
 }
 // export async function addCards(boardId, cards) {
 //     try {

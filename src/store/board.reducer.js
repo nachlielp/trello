@@ -1,27 +1,17 @@
 
 
-export const SET_LISTS = 'SET_LISTS'
 export const SET_MEMBERS = 'SET_MEMBERS'
 export const SET_BOARD = 'SET_BOARD'
-export const SET_CARDS = 'SET_CARDS'
 
 export const SET_IS_EXPANDED = 'SET_IS_EXPANDED'
 
-export const ADD_CARD = 'ADD_CARD'
+export const ADD_TASK = 'ADD_TASK'
 
-export const ADD_LIST = 'ADD_LIST'
-export const ARCHIVE_LIST = 'ARCHIVE_LIST'
-export const EDIT_LIST = 'EDIT_LIST'
-
-import boardInfo from '../../JSON/board-info.json'; // Adjust the path as necessary
-import boardList from '../../JSON/board-list.json';
-import boardMembers from '../../JSON/board-members.json';
-import listCards from '../../JSON/list-cards.json';
-
+export const ADD_GROUP = 'ADD_GROUP'
+export const ARCHIVE_GROUP = 'ARCHIVE_GROUP'
+export const EDIT_GROUP = 'EDIT_GROUP'
 
 const initialState = {
-    cards: [],
-    lists: [],
     members: [],
     board: {},
     isExpanded: true
@@ -30,12 +20,7 @@ const initialState = {
 export function boardReducer(state = initialState, action) {
     var newState = state
     switch (action.type) {
-        case SET_LISTS:
-            newState = { ...state, lists: action.lists }
-            break
-        case SET_CARDS:
-            newState = { ...state, cards: action.cards }
-            break
+
         case SET_MEMBERS:
             newState = { ...state, members: action.members }
             break
@@ -46,29 +31,46 @@ export function boardReducer(state = initialState, action) {
             newState = { ...state, isExpanded: action.isExpanded }
             break
 
-        case ADD_CARD:
-            newState = { ...state, cards: [...state.cards, action.card] }
+        case ADD_GROUP:
+            newState = { ...state, groups: [...state.groups, action.group] }
             break
 
-        case ADD_LIST:
-            newState = { ...state, lists: [...state.lists, action.list] }
-            break
-
-        case ARCHIVE_LIST:
+        case ARCHIVE_GROUP:
             newState = {
                 ...state,
-                lists: state.lists.map(list =>
-                    list.id === action.list.id ? { ...list, closed: true } : list
-                ),
+                board: {
+                    ...state.board,
+                    groups: state.board.groups.map(group =>
+                        group.id === action.groupId ? { ...group, closed: true, pos: null } : group
+                    )
+                }
             };
             break;
 
-        case EDIT_LIST:
+        case EDIT_GROUP:
             newState = {
                 ...state,
-                lists: state.lists.map(list => list.id === action.list.id ? action.list : list)
+                board: {
+                    ...state.board,
+                    groups: state.board.groups.map(group => group.id === action.group.id ? action.group : group)
+                }
             }
             break
+
+        case ADD_TASK:
+            newState = {
+                ...state,
+                board: {
+                    ...state.board,
+                    groups: state.board.groups.map(group =>
+                        group.id === action.task.idGroup
+                            ? { ...group, tasks: [...(group.tasks || []), action.task] }
+                            : group
+                    )
+                }
+            }
+            break
+
         default:
             return state
     }

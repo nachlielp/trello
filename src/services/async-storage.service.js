@@ -2,7 +2,6 @@ export const storageService = {
     query,
     get,
     post,
-    postSubEntity,
     put,
     putSubEntity,
     remove,
@@ -31,16 +30,6 @@ function post(entityType, newEntity) {
     })
 }
 
-function postSubEntity(entityType, newEntity) {
-    newEntity.id = _makeId();
-    return query(entityType).then(entities => {
-        const board = entities.find(entity => entity.id === newEntity.idBoard);
-        if (!board) throw new Error(`Board with id: ${idBoard} not found`);
-        board[entityType].push(newEntity);
-        _save(entityType, entities);
-        return newEntity;
-    });
-}
 function put(entityType, updatedEntity) {
 
     return query(entityType).then(entities => {

@@ -1,67 +1,60 @@
 import { useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { BoardHeader } from "../cmps/BoardHeader";
-import { BoardList } from "../cmps/BoardList";
+import { BoardGroup } from "../cmps/BoardGroup";
 import {
-  loadTrelloDataFromSource,
   loadTestBoardFromStorage,
-  addCard,
-  addList,
-  archiveList, editList
+  addTask,
+  addGroup,
+  archiveGroup,
+  editGroup
 } from "../store/board.actions";
-import { AddListBtn } from "../cmps/AddListBtn";
+import { AddGroupBtn } from "../cmps/AddGroupBtn";
 
 export function BoardIndex() {
-  const lists = useSelector((state) => state.boardModule.lists);
-  const cards = useSelector((state) => state.boardModule.cards);
   const board = useSelector((state) => state.boardModule.board);
 
   useEffect(() => {
-    // loadTrelloDataFromSource();
     loadTestBoardFromStorage();
   }, []);
 
-  // const sortedLists = useMemo(() => {
-  //   return lists.filter(l => !l.closed).sort((a, b) => a.pos - b.pos);
-  // }, [lists]);
 
-  async function onAddCard(e) {
+  async function onAddTask(task, groupId) {
+    const newTask = {
+      ...task,
+      idBoard: board.id,
+    }
     try {
-      const card = {
-        idList: e.idList,
-        name: e.name,
-        pos: e.pos,
-        idBoard: board.id,
-      };
-      await addCard(card);
+      await addTask(newTask, groupId);
     } catch (error) {
       console.log("onAddCard", error);
     }
   }
 
-  async function onAddList(name) {
-    console.log("onAddList", name);
-    const list = {
+  async function onAddGroup(name) {
+    console.log("onAddGroup", name);
+    const group = {
       idBoard: board.id,
       name: name,
     };
-    const res = await addList(list);
-    console.log("onAddList", res);
+    const res = await addGroup(group);
+    console.log("onAddGroup", res);
   }
 
-  async function onArchiveList(boardId, listId) {
-    const res = await archiveList(boardId, listId);
-    console.log("onArchiveList", res);
+  async function onArchiveGroup(boardId, groupId) {
+    const res = await archiveGroup(boardId, groupId);
+    console.log("onArchiveGroup", res);
   }
 
-  async function onEditList(list) {
-    const res = await editList(board.id, list)
-    console.log("onEditList", res);
+  async function onEditGroup(group) {
+    const res = await editGroup(board.id, group)
+    console.log("onEditGroup", res);
   }
-  const sortedLists = lists.filter(l => !l.closed).sort((a, b) => a.pos - b.pos);
+
+  const sortedGroups = board?.groups?.filter(l => !l.closed).sort((a, b) => a.pos - b.pos);
 
   return (
-    <section className="board-index">
+    board.id ? <section className="board-index">
       <div
         className="bg"
         style={{
@@ -70,19 +63,19 @@ export function BoardIndex() {
       >
         {board && <BoardHeader />}
         <main className="board-lists">
-          {sortedLists.map((list) => (
-            <BoardList
-              key={list.id}
-              list={list}
-              cards={cards.filter((card) => card.idList === list.id)}
-              addCard={onAddCard}
-              archiveList={() => onArchiveList(board.id, list.id)}
-              editList={onEditList}
+          {sortedGroups.map((group) => (
+            <BoardGroup
+              key={group.id}
+              group={group}
+              addTask={onAddTask}
+              archiveGroup={() => onArchiveGroup(board.id, group.id)}
+              editGroup={onEditGroup}
             />
           ))}
-          <AddListBtn addList={onAddList} />
+          <AddGroupBtn addGroup={onAddGroup} />
         </main>
       </div>
     </section>
+      : <h1>Loading...</h1>
   );
 }
