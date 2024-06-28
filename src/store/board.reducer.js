@@ -27,7 +27,7 @@ const initialState = {
     isExpanded: true
 }
 
-export function trelloReducer(state = initialState, action) {
+export function boardReducer(state = initialState, action) {
     var newState = state
     switch (action.type) {
         case SET_LISTS:

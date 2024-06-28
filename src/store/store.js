@@ -1,12 +1,12 @@
 import { createStore, combineReducers } from 'redux'
 import { userReducer } from './user.reducer'
 
-import { trelloReducer } from './trello.reducer'
+import { boardReducer } from './board.reducer'
 
 
 const rootReducer = combineReducers({
     userModule: userReducer,
-    boardModule: trelloReducer
+    boardModule: boardReducer
 })
 
 

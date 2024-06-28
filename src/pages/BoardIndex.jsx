@@ -8,7 +8,7 @@ import {
   addCard,
   addList,
   archiveList, editList
-} from "../store/trello.actions";
+} from "../store/board.actions";
 import { AddListBtn } from "../cmps/AddListBtn";
 
 export function BoardIndex() {
