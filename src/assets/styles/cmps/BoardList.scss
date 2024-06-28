@@ -18,6 +18,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 8px;
 }
 
 .board-list-header .list-more-btn {
@@ -48,6 +49,12 @@
     font-weight: 600;
     padding: 6px 8px 6px 12px;
     margin: 0;
+}
+
+.list-title-input {
+    border-radius: 6px;
+    border: 2px solid #5f8eec;
+    font-weight: 600;
 }
 
 .board-list-main {

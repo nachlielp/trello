@@ -15,6 +15,7 @@ export const boardService = {
     addList,
     archiveList,
     moveListPos,
+    editList,
     // getEmptyBoard,
     // getDemoBoard,
     // addBoardMsg,
@@ -89,6 +90,23 @@ async function archiveList(boardId, listId) {
     await moveListsFromPosOneBackward(list.pos, boardId);
     return list;
 }
+
+async function editList(boardId, list) {
+    const listsStorage = await storageService.get('lists', boardId);
+    const listToUpdate = listsStorage.lists.find(l => l.id === list.id)
+    if (!listToUpdate) {
+        throw Error(`Attempting to edit a non-exsisting list by id: ${list.id}`)
+    }
+    console.log("list to remove: ", list)
+
+    const newList = {
+        ...list,
+    }
+
+    await storageService.putSubEntity('lists', newList, boardId);
+    return list;
+}
+
 
 async function moveListPos(listId, newPos) {
     const boardLists = await storageService.get('lists', list.idBoard);

@@ -11,6 +11,7 @@ export const ADD_CARD = 'ADD_CARD'
 
 export const ADD_LIST = 'ADD_LIST'
 export const ARCHIVE_LIST = 'ARCHIVE_LIST'
+export const EDIT_LIST = 'EDIT_LIST'
 
 import boardInfo from '../../JSON/board-info.json'; // Adjust the path as necessary
 import boardList from '../../JSON/board-list.json';
@@ -62,6 +63,12 @@ export function trelloReducer(state = initialState, action) {
             };
             break;
 
+        case EDIT_LIST:
+            newState = {
+                ...state,
+                lists: state.lists.map(list => list.id === action.list.id ? action.list : list)
+            }
+            break
         default:
             return state
     }

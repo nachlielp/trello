@@ -7,7 +7,7 @@ import {
   loadTestBoardFromStorage,
   addCard,
   addList,
-  archiveList,
+  archiveList, editList
 } from "../store/trello.actions";
 import { AddListBtn } from "../cmps/AddListBtn";
 
@@ -54,6 +54,10 @@ export function BoardIndex() {
     console.log("onArchiveList", res);
   }
 
+  async function onEditList(list) {
+    const res = await editList(board.id, list)
+    console.log("onEditList", res);
+  }
   const sortedLists = lists.filter(l => !l.closed).sort((a, b) => a.pos - b.pos);
 
   return (
@@ -73,6 +77,7 @@ export function BoardIndex() {
               cards={cards.filter((card) => card.idList === list.id)}
               addCard={onAddCard}
               archiveList={() => onArchiveList(board.id, list.id)}
+              editList={onEditList}
             />
           ))}
           <AddListBtn addList={onAddList} />

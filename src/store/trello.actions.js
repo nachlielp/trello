@@ -3,7 +3,7 @@ import { listService } from '../services/list.service.local'
 import { cardService } from '../services/cards.service.local'
 import { memberService } from '../services/members.service.local'
 import { store } from './store'
-import { SET_LISTS, SET_CARDS, SET_MEMBERS, SET_BOARD, SET_IS_EXPANDED, ADD_CARD, ADD_LIST, ARCHIVE_LIST } from './trello.reducer'
+import { SET_LISTS, SET_CARDS, SET_MEMBERS, SET_BOARD, SET_IS_EXPANDED, ADD_CARD, ADD_LIST, ARCHIVE_LIST, EDIT_LIST } from './trello.reducer'
 
 const apiKey = import.meta.env.VITE_TRELLO_API_KEY;
 const token = import.meta.env.VITE_TRELLO_TOKEN;
@@ -98,6 +98,13 @@ export async function addList(list) {
 export async function archiveList(boardId, listId) {
     const savedList = await boardService.archiveList(boardId, listId)
     store.dispatch({ type: ARCHIVE_LIST, list: savedList })
+    return savedList
+}
+
+export async function editList(boardId, list) {
+    console.log('actions.editList: ', list)
+    const savedList = await boardService.editList(boardId, list)
+    store.dispatch({ type: EDIT_LIST, list: savedList })
     return savedList
 }
 // export async function addCards(boardId, cards) {
