@@ -2,6 +2,7 @@ import { PlusOutlined } from "@ant-design/icons"
 import { useState } from "react"
 import templateCard from "../../assets/svgs/template-card.svg"
 import { AddTaskInGroup } from "./AddTaskInGroup"
+import { ReactSVG } from "react-svg"
 
 export function GroupFooter({ groupId, addTask, lastTaskPos }) {
     const [isAddTaskOpen, setIsAddTaskOpen] = useState(false)
@@ -17,7 +18,7 @@ export function GroupFooter({ groupId, addTask, lastTaskPos }) {
                         <PlusOutlined />&nbsp;&nbsp;Add a card
                     </button>
                     <button className="use-template-btn">
-                        <img src={templateCard} alt="template card" className="template-card" />
+                        <ReactSVG src={templateCard} alt="template card" className="template-card"  wrapper="span"/>
                     </button>
                 </>
             }
