@@ -23,7 +23,7 @@
 
 // Components
 @import "cmps/BoardHeader-cmps-scss/VisibilityButton.scss";
-@import "cmps/BoardHeader-cmps-scss/BoardButton.scss";
+@import "cmps/BoardHeader-cmps-scss/ViewsButton.scss";
 @import "cmps/AppHeader";
 @import "cmps/AppFooter";
 @import "cmps/UserMsg";
@@ -36,32 +36,37 @@
 @import "cmps/AddListBtn";
 @import "cmps/ListActionsMenuPopover.scss";
 
-
-:root.dark{
-    --ds-surface-overlay: #282E33;
-    --ds-text-subtle: #9FADBC;
-    --ds-text: rgb(182, 194, 207);
-    --ds-text-disabled: #091E424F;
-    --tr-background-list: #101204;
-    --ds-surface-raised: #22272B;
-    --ds-icon-subtle: #8C9BAB;
-    --ds-icon: #9FADBC;
-    --ds-background-neutral-hovered: #A6C5E229;
-    --dynamic-icon: #FFFFFF;
-    --dynamic-text: #FFFFFF;
-    --board-header-background-color: #0000003d;
-    --ds-background-neutral-subtle-hovered: #091E420F;
+:root.dark {
+  --ds-surface-overlay: #282e33;
+  --ds-text-subtle: #9fadbc;
+  --ds-text: rgb(182, 194, 207);
+  --ds-text-inverse: #1D2125;
+  --ds-text-disabled: #BFDBF847;
+  --tr-background-list: #101204;
+  --ds-surface-raised: #22272b;
+  --ds-icon-subtle: #8c9bab;
+  --ds-icon: #9fadbc;
+  --ds-background-neutral-hovered: #a6c5e229;
+  --dynamic-icon: #ffffff;
+  --dynamic-text: #ffffff;
+  --board-header-background-color: #0000003d;
+  --ds-background-neutral-subtle-hovered: #091e420f;
+  --ds-icon-disabled: #bfdbf847;
 }
-:root{
-    --ds-surface-overlay: #FFFFFF;
-    --ds-text-subtle: #44546F;
-    --ds-text: #172B4D;
-    --tr-background-list: #f1f2f4;
-    --ds-surface-raised: #FFFFFF;
-    --ds-icon-subtle: #626F86;
-    --ds-icon: #44546F;
-    --ds-background-neutral-hovered: #091E4224;
-    --dynamic-icon: #FFFFFF;
-    --dynamic-text: #FFFFFF;
-    --board-header-background-color: #0000003d;
+:root {
+  --ds-surface-overlay: #ffffff;
+  --ds-text-subtle: #44546f;
+  --ds-text: #172b4d;
+  --ds-text-inverse: #FFFFFF;
+  --ds-text-disabled: #091E424F;
+  --tr-background-list: #f1f2f4;
+  --ds-surface-raised: #ffffff;
+  --ds-icon-subtle: #626f86;
+  --ds-icon: #44546f;
+  --ds-background-neutral-hovered: #091e4224;
+  --dynamic-icon: #ffffff;
+  --dynamic-text: #ffffff;
+  --board-header-background-color: #0000003d;
+  --ds-icon-disabled: #091e424f;
+  --ds-background-disabled: #BCD6F00A;
 }

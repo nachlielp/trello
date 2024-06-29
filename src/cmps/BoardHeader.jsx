@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import {
-  DownOutlined,
   StarOutlined,
   StarFilled,
   UserAddOutlined,
@@ -11,8 +10,7 @@ import { IoFilterSharp } from "react-icons/io5";
 import { loadUsers, updateUser } from "../store/user.actions";
 import { UserAvatar } from "./UserAvatar";
 import { VisibilityButton } from "./BoardHeader-cmps/VisibilityButton";
-import { ReactSVG } from "react-svg";
-import { BoardButton } from "./BoardHeader-cmps/BoardButton";
+import { ViewsButton } from "./BoardHeader-cmps/ViewsButton";
 
 export function BoardHeader() {
   const [isStarredBoard, setIsStarredBoard] = useState(false);
@@ -66,7 +64,7 @@ export function BoardHeader() {
             (isStarredBoard ? <StarFilled /> : <StarOutlined />)}
         </button>
         <VisibilityButton />
-        <BoardButton />
+        <ViewsButton />
       </div>
       <div className="right-info">
         <button className="filter-btn">

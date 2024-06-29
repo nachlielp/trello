@@ -11,8 +11,9 @@ import dashBoard from "/img/headerImgs/viewBtn-imgs/dashBoard.svg";
 import mapIcon from "/img/headerImgs/viewBtn-imgs/mapIcon.svg";
 import privateIcon from "/img/headerImgs/privateIcon.svg";
 import { CloseOutlined, DownOutlined } from "@ant-design/icons";
+import { GoGrabber } from "react-icons/go";
 
-export function BoardButton() {
+export function ViewsButton() {
   const [openListMenu, setOpenListMenu] = useState(false);
 
   const list = ["Board", "Table", "Calendar", "Timeline", "Dashboard", "Map"];
@@ -35,29 +36,49 @@ export function BoardButton() {
       arrow={false}
       content={
         <section className="view-btn-popover">
-          <header>
-            <h2>Upgrade for Views</h2>
-            <span onClick={() => setOpenListMenu(!openListMenu)}>
-              <CloseOutlined />
-            </span>
+          <header className="view-header">
+            <h2 className="view-title">Upgrade for Views</h2>
+            <button className="close-btn">
+              <span onClick={() => setOpenListMenu(!openListMenu)}>
+                <CloseOutlined />
+              </span>
+            </button>
           </header>
-          <div>
-            <ul>
+          <div className="view-main">
+            <ul className="choose-list">
               {list.map((item, idx) => (
-                <li key={item} className={true?"disabled":''}>
-                  <input type="checkBox"/>
-                  <ReactSVG src={icons[idx]} wrapper="span" />
-                  {item}
-                  <ReactSVG src={privateIcon} wrapper="span" />
+                <li key={item}>
+                  <div>
+                    <span className="grab-icon">
+                      <GoGrabber />
+                    </span>
+                    <span className="checkbox">
+                      <input
+                        type="checkBox"
+                        checked={item === "Board"}
+                        disabled
+                      />
+                    </span>
+                    <div className="item">
+                      <ReactSVG src={icons[idx]} wrapper="span" />
+                      <p>{item}</p>
+                    </div>
+                  </div>
+                  {item !== "Board"&&<ReactSVG src={privateIcon} wrapper="span" />}
                 </li>
               ))}
             </ul>
-            <footer>
-            <h2>See your work in new ways</h2>
-            <p>View key timelines, assignments, data, and more directly from your Trello board with Trello Premium.</p>
-            <button>Start Free Trial</button>
-            <a  target="_blank" href="https://trello.com/premium">Learn more about Trello Premium</a>
-            </footer>
+            <div className="bottom">
+              <h2>See your work in new ways</h2>
+              <p>
+                View key timelines, assignments, data, and more directly from
+                your Trello board with Trello Premium.
+              </p>
+              <button>Start Free Trial</button>
+              <a target="_blank" href="https://trello.com/premium">
+                Learn more about Trello Premium
+              </a>
+            </div>
           </div>
         </section>
       }
