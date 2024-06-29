@@ -11,7 +11,6 @@
 // @import "basics/links";
 // @import "basics/forms";
 
-
 // Views
 @import "views/AboutUs";
 // @import "views/HomePage";
@@ -24,12 +23,17 @@
 
 // Components
 @import "cmps/BoardHeader-cmps-scss/VisibilityButton.scss";
+@import "cmps/BoardHeader-cmps-scss/BoardButton.scss";
 @import "cmps/AppHeader";
 @import "cmps/AppFooter";
 @import "cmps/UserMsg";
 @import "cmps/BoardHeader";
 @import "cmps/Label";
 @import "cmps/ListFooter";
+@import "cmps/AddCardInList";
+@import "cmps/AddListBtn";
+@import "cmps/ListActionsMenuPopover.scss";
+
 
 //Group
 @import "cmps/Group/BoardGroup";
@@ -42,8 +46,32 @@
 @import "cmps/Task/TaskPreview";
 
 
+:root.dark {
+    --ds-surface-overlay: #282E33;
+    --ds-text-subtle: #9FADBC;
+    --ds-text: rgb(182, 194, 207);
+    --ds-text-disabled: #091E424F;
+    --tr-background-list: #101204;
+    --ds-surface-raised: #22272B;
+    --ds-icon-subtle: #8C9BAB;
+    --ds-icon: #9FADBC;
+    --ds-background-neutral-hovered: #A6C5E229;
+    --dynamic-icon: #FFFFFF;
+    --dynamic-text: #FFFFFF;
+    --board-header-background-color: #0000003d;
+    --ds-background-neutral-subtle-hovered: #091E420F;
+}
 
-// @import "cmps/BoardGroup/GroupFooter";
-// @import "cmps/BoardGroup/GroupActionsMenuPopover";
-// @import "cmps/BoardGroup/AddTaskInGroup";
-// @import "cmps/BoardGroup/AddGroupBtn";
+:root {
+    --ds-surface-overlay: #FFFFFF;
+    --ds-text-subtle: #44546F;
+    --ds-text: #172B4D;
+    --tr-background-list: #f1f2f4;
+    --ds-surface-raised: #FFFFFF;
+    --ds-icon-subtle: #626F86;
+    --ds-icon: #44546F;
+    --ds-background-neutral-hovered: #091E4224;
+    --dynamic-icon: #FFFFFF;
+    --dynamic-text: #FFFFFF;
+    --board-header-background-color: #0000003d;
+}

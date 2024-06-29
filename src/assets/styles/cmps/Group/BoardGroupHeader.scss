@@ -1,51 +1,56 @@
 .board-group-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
 }
 
 .board-group-header .group-more-btn {
-    border: none;
-    border-radius: 10px;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    box-shadow: none;
-    background-color: #f0f2f4;
+  border: none;
+  border-radius: 10px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-shadow: none;
+  background-color: var(--tr-background-list);
+  color: var(--ds-icon);
+
+  span {
+    font-size: 16px;
+  }
 }
 
 .board-group-header .group-more-btn:hover {
-    background-color: #d0d4dc !important;
+  background-color: var(--ds-background-neutral-hovered) !important;
 }
 
 .board-group-header .group-more-btn .anticon {
-    color: #2c3e50; // Darker color for the ellipsis icon
+  color: #2c3e50; // Darker color for the ellipsis icon
 }
 
 
 .board-group-header .group-title {
-    display: flex;
-    align-items: center;
-    width: 204px;
-    height: 26px;
-    font-size: 14px;
-    font-weight: 600;
-    padding: 6px 8px 6px 12px;
-    margin: 0;
+  display: flex;
+  align-items: center;
+  width: 204px;
+  height: 26px;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 6px 8px 6px 12px;
+  margin: 0;
 }
 
 .board-group-header .group-title-input.ant-input {
-    height: 26px !important;
-    min-height: 26px !important;
-    border-radius: 6px;
-    border: 2px solid #5f8eec;
-    font-weight: 600;
-    padding: 0 9px;
-    margin-right: 12px;
-    width: 192px;
+  height: 26px !important;
+  min-height: 26px !important;
+  border-radius: 6px;
+  border: 2px solid #5f8eec;
+  font-weight: 600;
+  padding: 0 9px;
+  margin-right: 12px;
+  width: 192px;
 }

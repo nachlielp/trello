@@ -1,128 +1,131 @@
 .group-task {
-    box-sizing: border-box;
-    cursor: pointer;
+  box-sizing: border-box;
+  cursor: pointer;
 
-    &:hover {
-        outline: 2px solid blue;
-    }
+  &:hover {
+    outline: 2px solid blue;
+  }
+
+  background-color: var(--ds-surface-raised, #ffffff);
+  border: none;
 }
 
 .group-task.custom-card .ant-card {
-    margin: 10px 0 0 0 !important;
+  margin: 10px 0 0 0 !important;
 }
 
 .task-bg-cover .ant-card-body {
-    min-height: 56px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+  min-height: 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .task-bg-cover .ant-card-body .group-task-content,
 .task-img-cover .ant-card-body .group-task-content {
-    font-weight: 600;
-    font-size: 16px;
+  font-weight: 600;
+  font-size: 16px;
 }
 
 .group-task.custom-card .ant-card-body {
-    padding: 0 !important;
+  padding: 0 !important;
 }
 
 .group-task-header {
-    border-radius: 7px 7px 0 0 !important;
-    min-height: 36px;
+  border-radius: 7px 7px 0 0 !important;
+  min-height: 36px;
 }
 
 .group-task-header.img-cover {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    min-height: 160px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 160px;
 }
 
 .group-task-header-img {
-    border-radius: 7px 7px 0 0 !important;
-    object-fit: cover;
+  border-radius: 7px 7px 0 0 !important;
+  object-fit: cover;
 }
 
 .task-img-cover {
-    min-height: 160px;
-    width: 100%;
+  min-height: 160px;
+  width: 100%;
 }
 
 .group-task-content {
-    padding: 8px 12px 4px 12px;
+  padding: 8px 12px 4px 12px;
 }
 
 .group-task-content.image-cover {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.8);
-    height: 60px;
-    background: linear-gradient(to top, white, transparent);
-    padding: 10px;
-    box-sizing: border-box;
-    border-radius: 0 0 7px 7px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  height: 60px;
+  background: linear-gradient(to top, white, transparent);
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 0 0 7px 7px;
 }
 
 .group-task-content.image-cover .group-task-content-title {
-    align-self: flex-end;
-    object-fit: cover;
+  align-self: flex-end;
+  object-fit: cover;
 }
 
 .group-task-content-labels {
 
-    display: flex;
-    gap: 4px;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
 }
 
 .group-task-content-icons {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .group-task-content-icons.task-bg-cover,
 .group-task-content-icons.task-img-cover {
-    display: none;
+  display: none;
 }
 
 .group-task-content-icons .aside-right {
-    display: flex;
-    flex-direction: row;
-    gap: 4px;
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
 }
 
 .group-task-content-icons .aside-left {
-    display: flex;
-    flex-direction: row;
-    gap: 6px;
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
 }
 
 .group-task-content-icons .aside-left .task-preview-icons {
-    display: flex;
-    flex-direction: row;
-    gap: 6px;
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
 }
 
 .task-icon-wrapper {
-    display: flex;
-    align-items: center; // Align items vertically
+  display: flex;
+  align-items: center; // Align items vertically
 }
 
 .task-icon {
-    // margin-top: 10px;
-    height: 16px;
-    width: 16px;
+  // margin-top: 10px;
+  height: 16px;
+  width: 16px;
 }
 
 .task-icon-count {
-    // margin-top: 10px;
-    font-size: 12px;
-    margin-left: 4px; // Adjust spacing as needed
+  // margin-top: 10px;
+  font-size: 12px;
+  margin-left: 4px; // Adjust spacing as needed
 }

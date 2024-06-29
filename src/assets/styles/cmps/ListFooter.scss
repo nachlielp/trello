@@ -15,23 +15,29 @@
     /* Ensure flexbox is used */
     align-items: center;
     justify-content: start;
-    background-color: #f0f2f4;
-    // color: var(--color-white);
+    background-color: var(--tr-background-list);
+    color: var(--ds-text-subtle);
 }
 
 .list-footer .add-card-btn:hover {
-    background-color: #d0d4dc;
+    background-color: var(--ds-background-neutral-hovered, #091e4224);
+    color: var(--ds-text);
 }
 
 .list-footer .use-template-btn {
     border-radius: 4px;
     padding: 8px;
     border: none;
-    background-color: #f0f2f4;
+    background-color: var(--tr-background-list);
+    color: var(--ds-text-subtle);
+   span{
+    font-size: 16px;
+   }
 }
 
 .list-footer .use-template-btn:hover {
-    background-color: #d0d4dc;
+    background-color: var(--ds-background-neutral-hovered, #091e4224);
+    color: var(--ds-text);
 }
 
 .template-card {
