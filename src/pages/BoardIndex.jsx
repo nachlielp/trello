@@ -1,7 +1,7 @@
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { BoardHeader } from "../cmps/BoardHeader";
-import { BoardGroup } from "../cmps/BoardGroup";
+import { BoardGroup } from "../cmps/Group/BoardGroup";
 import {
   loadTestBoardFromStorage,
   addTask,
@@ -9,7 +9,7 @@ import {
   archiveGroup,
   editGroup
 } from "../store/board.actions";
-import { AddGroupBtn } from "../cmps/AddGroupBtn";
+import { AddGroupBtn } from "../cmps/Group/AddGroupBtn";
 
 export function BoardIndex() {
   const board = useSelector((state) => state.boardModule.board);
@@ -32,12 +32,10 @@ export function BoardIndex() {
   }
 
   async function onAddGroup(name) {
-    console.log("onAddGroup", name);
     const group = {
-      idBoard: board.id,
       name: name,
     };
-    const res = await addGroup(group);
+    const res = await addGroup(group, board.id);
     console.log("onAddGroup", res);
   }
 
@@ -62,7 +60,7 @@ export function BoardIndex() {
         }}
       >
         {board && <BoardHeader />}
-        <main className="board-lists">
+        <main className="board-groups">
           {sortedGroups.map((group) => (
             <BoardGroup
               key={group.id}

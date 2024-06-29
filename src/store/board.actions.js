@@ -75,9 +75,9 @@ export async function addTask(task, groupId) {
   }
 }
 
-export async function addGroup(group) {
+export async function addGroup(group, boardId) {
   try {
-    const savedGroup = await boardService.addGroup(group)
+    const savedGroup = await boardService.addGroup(group, boardId)
     store.dispatch({ type: ADD_GROUP, group: savedGroup })
     return savedGroup
   } catch (err) {

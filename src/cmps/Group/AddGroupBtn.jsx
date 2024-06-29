@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import { PlusOutlined, CloseOutlined } from "@ant-design/icons"
 import { Input } from "antd"
 import { Card } from "antd"
@@ -6,26 +6,37 @@ import { Card } from "antd"
 export function AddGroupBtn({ addGroup }) {
     const [isAddGroupOpen, setIsAddGroupOpen] = useState(false)
     const [groupName, setGroupName] = useState('');
+    const inputRef = useRef(null)
+
+    useEffect(() => {
+        if (inputRef.current) {
+            const inputElement = inputRef.current;
+            inputElement.focus();
+        }
+    }, [isAddGroupOpen]);
 
     function onAddGroup() {
-        console.log('onAddGroup')
+        if (groupName.trim() === '') {
+            return;
+        }
         addGroup(groupName)
         setIsAddGroupOpen(false)
         setGroupName('')
     }
     return (
-        <div className="add-list-btn-wrapper">
+        <div className="add-group-btn-wrapper">
             {!isAddGroupOpen &&
-                <button className="add-list-btn" onClick={() => setIsAddGroupOpen(true)}>
-                    <span className="add-list-btn-text">
+                <button className="add-group-btn" onClick={() => setIsAddGroupOpen(true)}>
+                    <span className="add-group-btn-text">
                         <PlusOutlined />&nbsp;Add another list
                     </span>
                 </button>
             }
             {isAddGroupOpen &&
-                <Card className="add-list-in-board-card">
+                <Card className="add-group-in-board-card">
                     <Input
-                        className="add-list-input"
+                        ref={inputRef}
+                        className="add-group-input"
                         placeholder="Enter list title..."
                         value={groupName}
                         onChange={(e) => setGroupName(e.target.value)}

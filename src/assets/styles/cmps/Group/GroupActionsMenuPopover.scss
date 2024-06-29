@@ -2,7 +2,7 @@
     padding: 0;
 }
 
-.list-actions-menu-content {
+.group-actions-menu-content {
     width: 300px;
     display: flex;
     flex-direction: column;
@@ -11,27 +11,27 @@
 
 }
 
-.list-actions-menu-content .menu-header {
+.group-actions-menu-content .menu-header {
     font-weight: 500;
     height: 30px;
     align-self: center;
     margin: 8px;
 }
 
-.list-actions-menu-content .menu-action {
+.group-actions-menu-content .menu-action {
     margin-block-start: 0;
     margin-block-end: 0;
     height: 32px;
     padding: 6px;
 }
 
-.list-actions-menu-content .menu-action:hover {
+.group-actions-menu-content .menu-action:hover {
     background-color: #f1f2f4;
     overflow: hidden;
 }
 
 
-.list-actions-menu-content .last-action {
+.group-actions-menu-content .last-action {
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
 }

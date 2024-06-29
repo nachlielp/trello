@@ -1,6 +1,6 @@
 import { PlusOutlined } from "@ant-design/icons"
 import { useState } from "react"
-import templateCard from "../assets/svgs/template-card.svg"
+import templateCard from "../../assets/svgs/template-card.svg"
 import { AddTaskInGroup } from "./AddTaskInGroup"
 
 export function GroupFooter({ groupId, addTask, lastTaskPos }) {

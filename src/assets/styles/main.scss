@@ -28,10 +28,22 @@
 @import "cmps/AppFooter";
 @import "cmps/UserMsg";
 @import "cmps/BoardHeader";
-@import "cmps/BoardList";
-@import "cmps/ListCardPreview";
 @import "cmps/Label";
 @import "cmps/ListFooter";
-@import "cmps/AddCardInList";
-@import "cmps/AddListBtn";
-@import 'cmps/ListActionsMenuPopover.scss'
+
+//Group
+@import "cmps/Group/BoardGroup";
+@import "cmps/Group/BoardGroupHeader";
+@import 'cmps/Group/GroupActionsMenuPopover.scss';
+@import "cmps/Group/AddGroupBtn";
+@import "cmps/Group/AddTaskInGroup";
+
+//Task
+@import "cmps/Task/TaskPreview";
+
+
+
+// @import "cmps/BoardGroup/GroupFooter";
+// @import "cmps/BoardGroup/GroupActionsMenuPopover";
+// @import "cmps/BoardGroup/AddTaskInGroup";
+// @import "cmps/BoardGroup/AddGroupBtn";

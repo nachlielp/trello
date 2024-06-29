@@ -1,10 +1,10 @@
-import { utilService } from "../services/util.service";
+import { utilService } from "../../services/util.service";
 import { useSelector } from "react-redux";
 
-import { toggleIsExpanded } from "../store/board.actions";
+import { toggleIsExpanded } from "../../store/board.actions";
 import { Tooltip } from "antd";
 
-export function Label({ label }) {
+export function TaskPreviewLabel({ label }) {
     const isExpanded = useSelector(state => state.boardModule.isExpanded)
     function onClick() {
         //  utilService.saveToStorage('labelState', { showText: !isExpanded })

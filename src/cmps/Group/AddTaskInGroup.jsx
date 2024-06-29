@@ -25,20 +25,20 @@ export function AddTaskInGroup({ groupId, closeAddTask, addTask, firstTaskPos, l
             return;
         }
 
-        const newCard = {
+        const newTask = {
             name: taskName,
         }
 
         //TODO find a better Strategy for when i add twice to the same column multiple cards
         if (firstTaskPos) {
-            newCard.pos = firstTaskPos - 123
+            newTask.pos = firstTaskPos - 123
         }
         if (lastTaskPos) {
-            newCard.pos = lastTaskPos + 123
+            newTask.pos = lastTaskPos + 123
         }
-        newCard.groupId = groupId;
-        console.log("newCard,groupId", newCard, groupId);
-        await addTask(newCard, groupId)
+        newTask.groupId = groupId;
+        console.log("newTask,groupId", newTask, groupId);
+        await addTask(newTask, groupId)
         setTaskName('')
     }
     return (

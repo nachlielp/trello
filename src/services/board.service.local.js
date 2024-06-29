@@ -76,11 +76,10 @@ async function addTask(task) {
   }
 }
 
-async function addGroup(boardId, group) {
+async function addGroup(group, boardId) {
   try {
     const board = await storageService.get('boards', boardId)
-    const groupArray = board.groups
-    groupArray.pos = groupArray.length + 1;
+    group.pos = board.groups.length + 1;
     const newGroup = createNewGroup(group)
     const newBoard = {
       ...board,
@@ -170,7 +169,7 @@ async function moveGroupsFromPosOneBackward(pos, boardId) {
 
 function createNewGroup(group) {
   return {
-    id: "",
+    id: utilService.makeId(),
     idBoard: group.idBoard,
     name: group.name,
     closed: false,

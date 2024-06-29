@@ -17,14 +17,14 @@ export function GroupActionsMenuPopover({ openAddTask, archiveGroup }) {
 
     return (
         <Popover
-            className="list-actions-menu-popover"
+            className="group-actions-menu-popover"
             trigger="click"
             placement="bottomLeft"
             open={openGroupMenu}
             onOpenChange={setOpenGroupMenu}
             arrow={false}
             content={
-                <section className="list-actions-menu-content">
+                <section className="group-actions-menu-content">
                     <header className="menu-header">List actions</header>
                     <p className="menu-action" onClick={onClickAddTask}>Add card</p>
                     <p className="menu-action">Copy list</p>
@@ -37,7 +37,7 @@ export function GroupActionsMenuPopover({ openAddTask, archiveGroup }) {
                 </section>
             }
         >
-            <Button className="list-more-btn" size="small" onClick={() => setOpenGroupMenu(!openGroupMenu)}>
+            <Button className="group-more-btn" size="small" onClick={() => setOpenGroupMenu(!openGroupMenu)}>
                 <EllipsisOutlined />
             </Button>
         </Popover>
