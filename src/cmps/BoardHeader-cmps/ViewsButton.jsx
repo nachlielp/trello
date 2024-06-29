@@ -38,8 +38,11 @@ export function ViewsButton() {
         <section className="view-btn-popover">
           <header className="view-header">
             <h2 className="view-title">Upgrade for Views</h2>
-            <button className="close-btn">
-              <span onClick={() => setOpenListMenu(!openListMenu)}>
+            <button
+              className="close-btn"
+              onClick={() => setOpenListMenu(!openListMenu)}
+            >
+              <span>
                 <CloseOutlined />
               </span>
             </button>
@@ -64,7 +67,9 @@ export function ViewsButton() {
                       <p>{item}</p>
                     </div>
                   </div>
-                  {item !== "Board"&&<ReactSVG src={privateIcon} wrapper="span" />}
+                  {item !== "Board" && (
+                    <ReactSVG src={privateIcon} wrapper="span" />
+                  )}
                 </li>
               ))}
             </ul>
