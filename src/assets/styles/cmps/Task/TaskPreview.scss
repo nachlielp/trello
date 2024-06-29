@@ -7,6 +7,7 @@
   }
 
   background-color: var(--ds-surface-raised, #ffffff);
+  color: var(--ds-text);
   border: none;
 }
 
@@ -23,6 +24,7 @@
 
 .task-bg-cover .ant-card-body .group-task-content,
 .task-img-cover .ant-card-body .group-task-content {
+  color: var(--ds-text);
   font-weight: 600;
   font-size: 16px;
 }
@@ -75,6 +77,7 @@
 .group-task-content.image-cover .group-task-content-title {
   align-self: flex-end;
   object-fit: cover;
+  color: #000;
 }
 
 .group-task-content-labels {
@@ -122,6 +125,8 @@
   // margin-top: 10px;
   height: 16px;
   width: 16px;
+  color: var(--ds-text-subtle);
+
 }
 
 .task-icon-count {
