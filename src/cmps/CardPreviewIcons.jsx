@@ -4,7 +4,7 @@ import fileIcon from "../assets/svgs/file.svg";
 
 export function CardPreviewBadges({ card }) {
   const cardIcons = [];
-  if (card.badges.description) {
+  if (card.badges?.description) {
     cardIcons.push(
       <Tooltip
         placement="bottom"
@@ -18,7 +18,7 @@ export function CardPreviewBadges({ card }) {
       </Tooltip>
     );
   }
-  if (card.badges.attachments > 0) {
+  if (card.badges?.attachments > 0) {
     cardIcons.push(
       <Tooltip
         placement="bottom"
