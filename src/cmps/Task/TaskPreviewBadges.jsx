@@ -1,7 +1,7 @@
 import { Tooltip } from "antd";
 import descriptionIcon from "../../assets/svgs/description.svg";
 import fileIcon from "../../assets/svgs/file.svg";
-
+import { ReactSVG } from "react-svg";
 export function TaskPreviewBadges({ task }) {
   const taskIcons = [];
   if (task.badges.description) {
@@ -13,7 +13,7 @@ export function TaskPreviewBadges({ task }) {
         arrow={false}
       >
         <span className="task-icon-wrapper">
-          <img src={descriptionIcon} alt="description" className="task-icon" />
+          <ReactSVG src={descriptionIcon} alt="description" className="task-icon" wrapper="span" />
         </span>
       </Tooltip>
     );
@@ -27,7 +27,7 @@ export function TaskPreviewBadges({ task }) {
         arrow={false}
       >
         <span className="task-icon-wrapper">
-          <img src={fileIcon} alt="file" className="task-icon" />
+          <ReactSVG src={fileIcon} alt="file" className="task-icon" wrapper="span" />
           <span className="task-icon-count">{task.badges.attachments}</span>
         </span>
       </Tooltip>

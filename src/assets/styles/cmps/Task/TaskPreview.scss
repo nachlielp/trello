@@ -118,11 +118,10 @@
 
 .task-icon-wrapper {
   display: flex;
-  align-items: center; // Align items vertically
+  align-items: center;
 }
 
 .task-icon {
-  // margin-top: 10px;
   height: 16px;
   width: 16px;
   color: var(--ds-text-subtle);
@@ -130,7 +129,6 @@
 }
 
 .task-icon-count {
-  // margin-top: 10px;
   font-size: 12px;
-  margin-left: 4px; // Adjust spacing as needed
+  margin-left: 4px;
 }

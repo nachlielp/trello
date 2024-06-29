@@ -7,7 +7,7 @@ import {
   addTask,
   addGroup,
   archiveGroup,
-  editGroup
+  editGroup,
 } from "../store/board.actions";
 import { AddGroupBtn } from "../cmps/Group/AddGroupBtn";
 
@@ -18,12 +18,11 @@ export function BoardIndex() {
     loadTestBoardFromStorage();
   }, []);
 
-
   async function onAddTask(task, groupId) {
     const newTask = {
       ...task,
       idBoard: board.id,
-    }
+    };
     try {
       await addTask(newTask, groupId);
     } catch (error) {
@@ -45,14 +44,16 @@ export function BoardIndex() {
   }
 
   async function onEditGroup(group) {
-    const res = await editGroup(board.id, group)
+    const res = await editGroup(board.id, group);
     console.log("onEditGroup", res);
   }
 
-  const sortedGroups = board?.groups?.filter(l => !l.closed).sort((a, b) => a.pos - b.pos);
+  const sortedGroups = board?.groups
+    ?.filter((l) => !l.closed)
+    .sort((a, b) => a.pos - b.pos);
 
-  return (
-    board.id ? <section className="board-index">
+  return board.id ? (
+    <section className="board-index">
       <div
         className="bg"
         style={{
@@ -61,19 +62,21 @@ export function BoardIndex() {
       >
         {board && <BoardHeader />}
         <main className="board-groups">
-          {sortedGroups.map((group) => (
-            <BoardGroup
-              key={group.id}
-              group={group}
-              addTask={onAddTask}
-              archiveGroup={() => onArchiveGroup(board.id, group.id)}
-              editGroup={onEditGroup}
-            />
-          ))}
+          {sortedGroups &&
+            sortedGroups.map((group) => (
+              <BoardGroup
+                key={group.id}
+                group={group}
+                addTask={onAddTask}
+                archiveGroup={() => onArchiveGroup(board.id, group.id)}
+                editGroup={onEditGroup}
+              />
+            ))}
           <AddGroupBtn addGroup={onAddGroup} />
         </main>
       </div>
     </section>
-      : <h1>Loading...</h1>
+  ) : (
+    <h1>Loading...</h1>
   );
 }
