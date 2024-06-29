@@ -16,7 +16,6 @@ export function BoardIndex() {
   const lists = useSelector((state) => state.boardModule.lists);
   const cards = useSelector((state) => state.boardModule.cards);
   const board = useSelector((state) => state.boardModule.board);
-  console.log(board.name);
 
   useEffect(() => {
     // loadTrelloDataFromSource();
@@ -32,7 +31,7 @@ export function BoardIndex() {
     }
 
     // Check if board.name ends with "Trello" or "trello"
-    if (!endsWith(board.name, "trello")) {
+    if (!endsWith(board?.name, "trello")) {
       document.title = board.name + titleSuffix;
     } else {
       document.title = board.name;
