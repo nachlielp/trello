@@ -27,7 +27,7 @@ export function BoardIndex() {
 
     // Function to check if a string ends with a specific suffix
     function endsWith(str, suffix) {
-      return str.toLowerCase().endsWith(suffix.toLowerCase());
+      return str?.toLowerCase().endsWith(suffix.toLowerCase());
     }
 
     // Check if board.name ends with "Trello" or "trello"
