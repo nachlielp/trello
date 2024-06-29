@@ -18,7 +18,7 @@ export function GroupFooter({ groupId, addTask, lastTaskPos }) {
                         <PlusOutlined />&nbsp;&nbsp;Add a card
                     </button>
                     <button className="use-template-btn">
-                        <ReactSVG src={templateCard} alt="template card" className="template-card"  wrapper="span"/>
+                        <ReactSVG src={templateCard} alt="template card" className="template-card" wrapper="span" />
                     </button>
                 </>
             }
