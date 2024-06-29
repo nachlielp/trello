@@ -12,6 +12,7 @@ import mapIcon from "/img/headerImgs/viewBtn-imgs/mapIcon.svg";
 import privateIcon from "/img/headerImgs/privateIcon.svg";
 import { CloseOutlined, DownOutlined } from "@ant-design/icons";
 import { GoGrabber } from "react-icons/go";
+import checkedIcon from "/img/headerImgs/checkedIcon.svg";
 
 export function ViewsButton() {
   const [openListMenu, setOpenListMenu] = useState(false);
@@ -55,17 +56,22 @@ export function ViewsButton() {
                     <span className="grab-icon">
                       <GoGrabber />
                     </span>
-                    <span className="checkbox">
+                    <label>
                       <input
                         type="checkBox"
                         checked={item === "Board"}
                         disabled
                       />
-                    </span>
-                    <div className="item">
-                      <ReactSVG src={icons[idx]} wrapper="span" />
-                      <p>{item}</p>
-                    </div>
+                      <ReactSVG
+                        src={checkedIcon}
+                        wrapper="span"
+                        className="checkbox"
+                      />
+                      <div className="item">
+                        <ReactSVG src={icons[idx]} wrapper="span" />
+                        <p>{item}</p>
+                      </div>
+                    </label>
                   </div>
                   {item !== "Board" && (
                     <ReactSVG src={privateIcon} wrapper="span" />
