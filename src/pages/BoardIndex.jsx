@@ -7,7 +7,8 @@ import {
   loadTestBoardFromStorage,
   addCard,
   addList,
-  archiveList, editList
+  archiveList,
+  editList,
 } from "../store/board.actions";
 import { AddListBtn } from "../cmps/AddListBtn";
 
@@ -15,11 +16,28 @@ export function BoardIndex() {
   const lists = useSelector((state) => state.boardModule.lists);
   const cards = useSelector((state) => state.boardModule.cards);
   const board = useSelector((state) => state.boardModule.board);
+  console.log(board.name);
 
   useEffect(() => {
     // loadTrelloDataFromSource();
     loadTestBoardFromStorage();
   }, []);
+
+  useEffect(() => {
+    let titleSuffix = " | Trello";
+
+    // Function to check if a string ends with a specific suffix
+    function endsWith(str, suffix) {
+      return str.toLowerCase().endsWith(suffix.toLowerCase());
+    }
+
+    // Check if board.name ends with "Trello" or "trello"
+    if (!endsWith(board.name, "trello")) {
+      document.title = board.name + titleSuffix;
+    } else {
+      document.title = board.name;
+    }
+  }, [board.name]);
 
   // const sortedLists = useMemo(() => {
   //   return lists.filter(l => !l.closed).sort((a, b) => a.pos - b.pos);
@@ -55,10 +73,12 @@ export function BoardIndex() {
   }
 
   async function onEditList(list) {
-    const res = await editList(board.id, list)
+    const res = await editList(board.id, list);
     console.log("onEditList", res);
   }
-  const sortedLists = lists.filter(l => !l.closed).sort((a, b) => a.pos - b.pos);
+  const sortedLists = lists
+    .filter((l) => !l.closed)
+    .sort((a, b) => a.pos - b.pos);
 
   return (
     <section className="board-index">
