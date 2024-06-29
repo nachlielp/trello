@@ -94,9 +94,9 @@
               }
               &:disabled + .checkbox {
                 position: relative;
-                pointer-events: none;
                 background-color: var(--ds-background-disabled, #091e4208);
                 box-shadow: inset 0 0 0 1px var(--ds-border-disabled, #091e420f);
+                cursor: not-allowed;
               }
               &:disabled:checked + .checkbox {
                 span {
@@ -108,6 +108,7 @@
             }
             .checkbox {
               position: relative;
+              cursor: pointer;
               flex-shrink: 0;
               width: 16px;
               height: 16px;
@@ -131,6 +132,7 @@
                 color: var(--ds-icon-disabled, #091e424f);
               }
               p {
+                user-select: none;
                 margin-left: 8px;
               }
             }
@@ -160,6 +162,7 @@
       }
       button {
         cursor: pointer;
+        user-select: none;
         width: 280px;
         height: 32px;
         border: none;
