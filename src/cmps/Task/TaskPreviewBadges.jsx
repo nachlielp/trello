@@ -43,10 +43,10 @@ export function TaskPreviewBadges({ task }) {
 
   return (
     <div className="group-task-content-icons">
-      <aside className="aside-left">
+      <aside className="aside-task-icons">
         < section className="task-preview-icons" > {taskIcons}</section>
       </aside>
-      <aside className="aside-right">
+      <aside className="aside-task-users">
         {taskMembers.map((member) => (
           <UserAvatar key={member.id} member={member} />
         ))}

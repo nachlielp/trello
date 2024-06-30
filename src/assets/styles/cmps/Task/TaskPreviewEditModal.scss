@@ -1,0 +1,65 @@
+.task-preview-edit-modal-anchor {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+
+    .edit-button {
+        background: none;
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        margin: 3px 3px 8px 0;
+        width: 28px;
+        height: 28px;
+        background: var(--ds-surface-overlay);
+
+        &:hover {
+            background: var(--tr-background-list);
+        }
+
+        .edit-icon {
+            width: 16px;
+            height: 16px;
+        }
+    }
+}
+
+.task-preview-edit-modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    .ant-modal-content {
+        padding: 8px 12px 4px 12px;
+    }
+}
+
+.task-preview-edit-modal-content {
+    .ant-input-outlined {
+        padding: 0;
+        border: none;
+    }
+
+    .ant-input-outlined:focus {
+        box-shadow: none;
+    }
+}
+
+.floating-button.save-button {
+    position: absolute;
+    bottom: -40px; // Adjust as needed to position the button under the modal
+    left: 12%;
+    transform: translateX(-50%);
+    background-color: #0b65e4;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+    &:hover {
+        background-color: #0055cc;
+    }
+}

@@ -6,7 +6,7 @@ import { BoardGroupHeader } from "./BoardGroupHeader"
 import { TaskPreview } from "../Task/TaskPreview"
 import { TaskPreviewCover } from "../Task/TaskPreviewCover"
 
-export function BoardGroup({ group, addTask, archiveGroup, editGroup }) {
+export function BoardGroup({ group, addTask, archiveGroup, editGroup, editTask }) {
     const [isAddTaskOpen, setIsAddTaskOpen] = useState(false)
     const [newTaskIds, setNewTaskIds] = useState([])
     const [firstTaskPos, setFirstTaskPos] = useState(null)
@@ -48,8 +48,8 @@ export function BoardGroup({ group, addTask, archiveGroup, editGroup }) {
                     {isAddTaskOpen && <AddTaskInGroup groupId={group.id} closeAddTask={() => setIsAddTaskOpen(false)} addTask={addTask} firstTaskPos={firstTaskPos} />}
                     {sortedTasks.filter(task => !newTaskIds.includes(task.id)).map(task => (
                         task.cover.size === "full"
-                            ? <TaskPreviewCover key={task.id} task={task} />
-                            : <TaskPreview key={task.id} task={task} />
+                            ? <TaskPreviewCover key={task.id} task={task} editTask={editTask} />
+                            : <TaskPreview key={task.id} task={task} editTask={editTask} />
                     ))}
                     {!isAddTaskOpen && <GroupFooter groupId={group.id} addTask={addTask} lastTaskPos={lastTaskPos} />}
                 </main>

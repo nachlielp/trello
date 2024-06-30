@@ -1,13 +1,22 @@
 import { Card } from "antd";
+import { useState } from "react";
 import { utilService } from "../../services/util.service";
 import { TaskPreviewLabel } from "./TaskPreviewLabel";
 import { TaskPreviewBadges } from "./TaskPreviewBadges";
+import { TaskPreviewEditModal } from "./TaskPreviewEditModal";
 
-export function TaskPreview({ task }) {
+export function TaskPreview({ task, editTask }) {
+  const [isHovered, setIsHovered] = useState(false);
+
   const taskCover = task.cover;
 
   return (
-    <Card className={`group-task  custom-card `}>
+    <Card
+      className={`group-task custom-card `}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <TaskPreviewEditModal task={task} isHovered={isHovered} editTask={editTask} />
       {taskCover.color && (
         <div
           className="group-task-header"

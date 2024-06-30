@@ -2,7 +2,7 @@ import { boardService } from '../services/board.service.local'
 
 import { memberService } from '../services/members.service.local'
 import { store } from './store'
-import { SET_MEMBERS, SET_BOARD, SET_IS_EXPANDED, ADD_TASK, ADD_GROUP, ARCHIVE_GROUP, EDIT_GROUP } from './board.reducer'
+import { SET_MEMBERS, SET_BOARD, SET_IS_EXPANDED, ADD_TASK, ADD_GROUP, ARCHIVE_GROUP, EDIT_GROUP, EDIT_TASK } from './board.reducer'
 
 // export async function loadTrelloDataFromSource() {
 //   try {
@@ -99,6 +99,11 @@ export async function editGroup(boardId, group) {
   return savedGroup
 }
 
+export async function editTask(boardId, task) {
+  const savedTask = await boardService.editTask(boardId, task)
+  store.dispatch({ type: EDIT_TASK, task: savedTask })
+  return savedTask
+}
 export async function updateBoard(newBoard) {
   try {
     store.dispatch({ type: SET_BOARD, board: newBoard });

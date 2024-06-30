@@ -1,6 +1,7 @@
 .group-task {
   box-sizing: border-box;
   cursor: pointer;
+  position: relative;
 
   &:hover {
     outline: 2px solid blue;
@@ -98,19 +99,19 @@
   display: none;
 }
 
-.group-task-content-icons .aside-right {
+.group-task-content-icons .aside-task-users {
   display: flex;
   flex-direction: row;
   gap: 4px;
 }
 
-.group-task-content-icons .aside-left {
+.group-task-content-icons .aside-task-icons {
   display: flex;
   flex-direction: row;
   gap: 6px;
 }
 
-.group-task-content-icons .aside-left .task-preview-icons {
+.group-task-content-icons .aside-task-icons .task-preview-icons {
   display: flex;
   flex-direction: row;
   gap: 6px;
