@@ -9,12 +9,7 @@ export const boardService = {
   getById,
   save,
   remove,
-  addTask,
-  addGroup,
-  archiveGroup,
-  editGroup,
-  moveGroupPos,
-  editTask,
+
   // editList: editGroup,
   // getEmptyBoard,
   // getDemoBoard,
@@ -57,130 +52,6 @@ async function save(board) {
   return savedBoard;
 }
 
-//TODO add creator to task
-//TODO deal with multiple add's
-async function addTask(task) {
-  try {
-    const board = await storageService.get('boards', task.idBoard);
-    const newBoard = {
-      ...board,
-      groups: board.groups.map(g => {
-        if (g.id === task.idGroup) {
-          return { ...g, tasks: [...(g.tasks || []), task] };
-        }
-        return g;
-      }),
-    };
-    await storageService.put('boards', newBoard)
-    return task
-  } catch (error) {
-    throw Error("Board.service.addTask", error);
-  }
-}
-
-async function addGroup(group, boardId) {
-  try {
-    const board = await storageService.get('boards', boardId)
-    group.pos = board.groups.length + 1;
-    const newBoard = {
-      ...board,
-      groups: [...board.groups, group]
-    }
-    await storageService.put('boards', newBoard)
-    return group
-  } catch (error) {
-    throw Error("Board.service.addGroup", error);
-  }
-}
-
-async function archiveGroup(boardId, groupId) {
-  const board = await storageService.get('boards', boardId);
-  const group = board.groups.find(g => g.id === groupId)
-
-  if (!group) {
-    throw Error(`Attempting to archive a non-exsisting group by id: ${groupId}`)
-  }
-
-  const newBoard = {
-    ...board,
-    groups: board.groups.map(g => g.id !== groupId ? g : { ...g, closed: true, pos: null })
-  }
-  await storageService.put('boards', newBoard)
-  await moveGroupsFromPosOneBackward(group.pos, boardId);
-  return { ...group, closed: true, pos: null };
-}
-
-
-async function editGroup(boardId, group) {
-  const board = await storageService.get('boards', boardId);
-  const groupToUpdate = board.groups.find(g => g.id === group.id)
-  if (!groupToUpdate) {
-    throw Error(`Attempting to edit a non-exsisting group by id: ${group.id}`)
-  }
-
-  const newBoard = {
-    ...board,
-    groups: board.groups.map(g => g.id === group.id ? group : g)
-  }
-  await storageService.put('boards', newBoard);
-  return group;
-}
-
-async function editTask(boardId, task) {
-  const board = await storageService.get('boards', boardId);
-  const taskToUpdate = board.groups.find(g => g.id === task.idGroup).tasks.find(t => t.id === task.id);
-  if (!taskToUpdate) {
-    throw Error(`Attempting to edit a non-exsisting task by id: ${task.id}`)
-  }
-  const newBoard = {
-    ...board,
-    groups: board.groups.map(g => g.id === task.idGroup ? { ...g, tasks: g.tasks.map(t => t.id === task.id ? task : t) } : g)
-  }
-  await storageService.put('boards', newBoard);
-  return task;
-}
-
-async function moveGroupPos(groupId, newPos) {
-  const board = await storageService.get('boards', group.idBoard);
-  const group = board.groups.find(g => g.id === groupId);
-
-  const oldPos = group.pos;
-  board.groups = board.groups.filter(g => g.id !== groupId);
-
-  board.groups.forEach(g => {
-    if (oldPos < newPos && g.pos > oldPos && g.pos <= newPos) {
-      g.pos--;
-    } else if (oldPos > newPos && g.pos >= newPos && g.pos < oldPos) {
-      g.pos++;
-    }
-  });
-
-  group.pos = newPos;
-  board.groups.push(group);
-
-  await storageService.put('boards', board);
-  return group;
-}
-
-async function moveGroupsFromPosOneForward(pos, boardId) {
-  const board = await storageService.get('boards', boardId);
-  const newBoard = {
-    ...board,
-    groups: board.groups.map(g => ({ ...g, pos: g.pos + 1 }))
-  }
-  await storageService.put('boards', newBoard)
-  return newBoard;
-}
-
-async function moveGroupsFromPosOneBackward(pos, boardId) {
-  const board = await storageService.get('boards', boardId);
-  const newBoard = {
-    ...board,
-    groups: board.groups.map(g => ({ ...g, pos: g.pos - 1 }))
-  }
-  await storageService.put('boards', newBoard)
-  return newBoard;
-}
 
 
 // async function addBoardMsg(boardId, txt) {
