@@ -23,7 +23,7 @@ export function TaskPreview({ task, editTask }) {
           style={{
             backgroundColor: utilService.getColorHashByName(
               task.cover.color
-            ),
+            ).bgColor,
           }}></div>
       )}
       {taskCover.idUploadedBackground && (

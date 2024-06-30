@@ -12,6 +12,8 @@ export function TaskPreviewBadges({ task }) {
     members.filter((member) => task.idMembers.includes(member.id)) || [];
 
   const taskIcons = [];
+
+  //TODO refator to Batdg component list
   if (task.badges.description) {
     taskIcons.push(
       <Tooltip
@@ -65,3 +67,4 @@ export function TaskPreviewBadges({ task }) {
     </div>
   );
 }
+

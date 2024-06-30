@@ -57,21 +57,22 @@ async function save(board) {
   return savedBoard;
 }
 
+//TODO add creator to task
+//TODO deal with multiple add's
 async function addTask(task) {
   try {
     const board = await storageService.get('boards', task.idBoard);
-    const newTask = createNewTask(task);
     const newBoard = {
       ...board,
       groups: board.groups.map(g => {
-        if (g.id === newTask.idGroup) {
-          return { ...g, tasks: [...(g.tasks || []), newTask] };
+        if (g.id === task.idGroup) {
+          return { ...g, tasks: [...(g.tasks || []), task] };
         }
         return g;
       }),
     };
     await storageService.put('boards', newBoard)
-    return newTask
+    return task
   } catch (error) {
     throw Error("Board.service.addTask", error);
   }
@@ -81,13 +82,12 @@ async function addGroup(group, boardId) {
   try {
     const board = await storageService.get('boards', boardId)
     group.pos = board.groups.length + 1;
-    const newGroup = createNewGroup(group)
     const newBoard = {
       ...board,
-      groups: [...board.groups, newGroup]
+      groups: [...board.groups, group]
     }
     await storageService.put('boards', newBoard)
-    return newGroup
+    return group
   } catch (error) {
     throw Error("Board.service.addGroup", error);
   }
@@ -109,6 +109,7 @@ async function archiveGroup(boardId, groupId) {
   await moveGroupsFromPosOneBackward(group.pos, boardId);
   return { ...group, closed: true, pos: null };
 }
+
 
 async function editGroup(boardId, group) {
   const board = await storageService.get('boards', boardId);
@@ -181,18 +182,7 @@ async function moveGroupsFromPosOneBackward(pos, boardId) {
   return newBoard;
 }
 
-function createNewGroup(group) {
-  return {
-    id: utilService.makeId(),
-    idBoard: group.idBoard,
-    name: group.name,
-    closed: false,
-    color: null,
-    subscribed: false,
-    softLimit: null,
-    pos: group.pos,
-  };
-}
+
 // async function addBoardMsg(boardId, txt) {
 
 //     // Later, this is all done by the backend
@@ -293,73 +283,4 @@ function _toMiniTask(task) {
 // TEST DATA
 // storageService.post(STORAGE_KEY, board).then(savedBoard => console.log('Added board', savedBoard))
 
-function createNewTask(task) {
-  return {
-    id: utilService.makeId(),
-    badges: {
-      attachmentsByType: {
-        trello: {
-          board: 0,
-          card: 0,
-        },
-      },
-      externalSource: null,
-      location: false,
-      votes: 0,
-      viewingMemberVoted: false,
-      subscribed: false,
-      attachments: 0,
-      fogbugz: "",
-      checkItems: 0,
-      checkItemsChecked: 0,
-      checkItemsEarliestDue: null,
-      comments: 0,
-      description: false,
-      due: null,
-      dueComplete: false,
-      lastUpdatedByAi: false,
-      start: null,
-    },
-    checkItemStates: [],
-    closed: false,
-    dueComplete: false,
-    dateLastActivity: new Date().toISOString(),
-    desc: "",
-    descData: {
-      emoji: {},
-    },
-    due: null,
-    dueReminder: null,
-    email: null,
-    idBoard: task.idBoard,
-    idChecklists: [],
-    idGroup: task.groupId,
-    idMembers: [],
-    idMembersVoted: [],
-    idShort: "", // generateShortId(), // Function to generate a short ID
-    idAttachmentCover: null,
-    labels: [],
-    idLabels: [],
-    manualCoverAttachment: true,
-    name: task.name,
-    pos: task.pos, // Default position, can be adjusted
-    shortLink: "", // generateShortLink(), // Function to generate a short link
-    shortUrl: "", // `https://trello.com/c/${generateShortLink()}`,
-    start: null,
-    subscribed: false,
-    url: "", // `https://trello.com/c/${generateShortLink()}`,
-    cover: {
-      idAttachment: null,
-      color: null,
-      idUploadedBackground: null,
-      size: "",
-      brightness: "",
-      scaled: [],
-      edgeColor: "",
-      sharedSourceUrl: null,
-      idPlugin: null,
-    },
-    isTemplate: false,
-    cardRole: null,
-  };
-}
+

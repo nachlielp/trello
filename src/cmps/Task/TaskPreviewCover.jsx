@@ -9,7 +9,7 @@ export function TaskPreviewCover({ task, editTask }) {
 
     const taskColorCoverStyle =
         taskMember.color
-            ? { backgroundColor: utilService.getColorHashByName(taskMember.color) }
+            ? { backgroundColor: utilService.getColorHashByName(taskMember.color).bgColor }
             : {};
 
     const taskBackgroundCoverImage = taskMember.idUploadedBackground

@@ -1,5 +1,5 @@
 import { boardService } from '../services/board.service.local'
-
+import { utilService } from '../services/util.service'
 import { memberService } from '../services/members.service.local'
 import { store } from './store'
 import { SET_MEMBERS, SET_BOARD, SET_IS_EXPANDED, ADD_TASK, ADD_GROUP, ARCHIVE_GROUP, EDIT_GROUP, EDIT_TASK } from './board.reducer'
@@ -63,11 +63,11 @@ export function toggleIsExpanded() {
   store.dispatch({ type: SET_IS_EXPANDED, isExpanded: !store.getState().boardModule.isExpanded })
 }
 
-export async function addTask(task, groupId) {
+export async function addTask(task) {
   try {
-    const savedTask = await boardService.addTask(task)
-    console.log("savedTask", savedTask);
-    store.dispatch({ type: ADD_TASK, task: savedTask })
+    const newTask = utilService.createNewTask(task);
+    const savedTask = await boardService.addTask(newTask)
+    store.dispatch({ type: ADD_TASK, task: newTask })
     return savedTask
   } catch (err) {
     console.log('Cannot add task', err)
@@ -77,8 +77,9 @@ export async function addTask(task, groupId) {
 
 export async function addGroup(group, boardId) {
   try {
-    const savedGroup = await boardService.addGroup(group, boardId)
-    store.dispatch({ type: ADD_GROUP, group: savedGroup })
+    const newGroup = utilService.createNewGroup(group);
+    const savedGroup = await boardService.addGroup(newGroup, boardId)
+    store.dispatch({ type: ADD_GROUP, group: newGroup })
     return savedGroup
   } catch (err) {
     console.log('Cannot add group', err)
@@ -100,8 +101,8 @@ export async function editGroup(boardId, group) {
 }
 
 export async function editTask(boardId, task) {
+  store.dispatch({ type: EDIT_TASK, task: task })
   const savedTask = await boardService.editTask(boardId, task)
-  store.dispatch({ type: EDIT_TASK, task: savedTask })
   return savedTask
 }
 export async function updateBoard(newBoard) {
@@ -242,7 +243,6 @@ function getCmdUpdateTask(groupId, task, activity) {
     throw err
   }
 }
-
 
 
 // unitTestActions()

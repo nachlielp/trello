@@ -12,6 +12,7 @@ export const ADD_GROUP = 'ADD_GROUP'
 export const ARCHIVE_GROUP = 'ARCHIVE_GROUP'
 export const EDIT_GROUP = 'EDIT_GROUP'
 
+//TODO put members in board
 const initialState = {
     members: [],
     board: {},

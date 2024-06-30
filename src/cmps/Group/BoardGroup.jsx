@@ -6,6 +6,7 @@ import { BoardGroupHeader } from "./BoardGroupHeader"
 import { TaskPreview } from "../Task/TaskPreview"
 import { TaskPreviewCover } from "../Task/TaskPreviewCover"
 
+//TODO put add new task in array of sorted tasks based on position
 export function BoardGroup({ group, addTask, archiveGroup, editGroup, editTask }) {
     const [isAddTaskOpen, setIsAddTaskOpen] = useState(false)
     const [newTaskIds, setNewTaskIds] = useState([])
@@ -32,6 +33,7 @@ export function BoardGroup({ group, addTask, archiveGroup, editGroup, editTask }
             setFirstTaskPos(sortedTasks[0].pos)
             setLastTaskPos(sortedTasks[sortedTasks.length - 1].pos)
         }
+        setNewTaskIds([])
     }, [isAddTaskOpen])
 
 

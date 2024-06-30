@@ -38,8 +38,8 @@ export function AddTaskInGroup({ groupId, closeAddTask, addTask, firstTaskPos, l
         }
         newTask.groupId = groupId;
         console.log("newTask,groupId", newTask, groupId);
-        await addTask(newTask, groupId)
         setTaskName('')
+        await addTask(newTask, groupId)
     }
     return (
         <section className="add-card-in-list-footer">
