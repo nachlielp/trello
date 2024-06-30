@@ -1,7 +1,5 @@
 import usersJson from "../../JSON/user.json";
 import boardsJson from "../../JSON/board-info.json";
-import listsJson from "../../JSON/board-list.json";
-import cardsJson from "../../JSON/list-cards.json";
 import membersJson from "../../JSON/board-members.json";
 
 export const utilService = {
@@ -142,21 +140,21 @@ function getColorHashByName(name) {
 }
 
 function _createStartInfo() {
-  if(!localStorage.getItem("dark")){
-   if( confirm("You want dark mode?")){
-    localStorage.setItem("dark",true)
-   }else{
-    localStorage.setItem("dark",false)
-   }
+  if (!localStorage.getItem("dark")) {
+    if (confirm("You want dark mode?")) {
+      localStorage.setItem("dark", true)
+    } else {
+      localStorage.setItem("dark", false)
+    }
   }
 
-  if(localStorage.getItem("dark") === "true"){
+  if (localStorage.getItem("dark") === "true") {
     document.querySelector('html').classList.add('dark');
   }
 
 
 
-//daily refresh
+  //daily refresh
   if (+localStorage.getItem("date") !== new Date().getDate()) {
     localStorage.clear();
     localStorage.setItem("date", new Date().getDate());
@@ -169,16 +167,11 @@ function _createStartInfo() {
   if (!localStorage.getItem(BOARDS_KEY)) {
     localStorage.setItem(BOARDS_KEY, JSON.stringify(boardsJson));
   }
-  if (!localStorage.getItem(LISTS_KEY)) {
-    localStorage.setItem(LISTS_KEY, JSON.stringify(listsJson));
-  }
-  if (!localStorage.getItem(CARDS_KEY)) {
-    localStorage.setItem(CARDS_KEY, JSON.stringify(cardsJson));
-  }
+
   if (!localStorage.getItem(MEMBERS_KEY)) {
     localStorage.setItem(MEMBERS_KEY, JSON.stringify(membersJson));
   }
- 
+
 }
 
 function getRandomColor(name) {

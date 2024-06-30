@@ -9,11 +9,13 @@ export const boardService = {
   getById,
   save,
   remove,
-  addCard,
-  addList,
-  archiveList,
-  moveListPos,
-  editList,
+  addTask,
+  addGroup,
+  archiveGroup,
+  editGroup,
+  moveGroupPos,
+  editTask,
+  // editList: editGroup,
   // getEmptyBoard,
   // getDemoBoard,
   // addBoardMsg,
@@ -55,107 +57,140 @@ async function save(board) {
   return savedBoard;
 }
 
-async function addCard(card) {
-  const newCard = createNewCard(card);
-  return storageService.postSubEntity("cards", newCard);
-}
-async function addList(list) {
-  const listArray = await storageService.get('lists', list.idBoard)
-  list.pos = listArray.length + 1;
-  const newList = createNewList(list)
-  return storageService.postSubEntity('lists', newList)
-}
-
-async function archiveList(boardId, listId) {
-  const listsStorage = await storageService.get('lists', boardId);
-  const list = listsStorage.lists.find(l => l.id === listId)
-  if (!list) {
-    throw Error(`Attempting to archive a non-exsisting list by id: ${listId}`)
+async function addTask(task) {
+  try {
+    const board = await storageService.get('boards', task.idBoard);
+    const newTask = createNewTask(task);
+    const newBoard = {
+      ...board,
+      groups: board.groups.map(g => {
+        if (g.id === newTask.idGroup) {
+          return { ...g, tasks: [...(g.tasks || []), newTask] };
+        }
+        return g;
+      }),
+    };
+    await storageService.put('boards', newBoard)
+    return newTask
+  } catch (error) {
+    throw Error("Board.service.addTask", error);
   }
-  console.log("list to remove: ", list)
-
-  const newList = {
-    ...list,
-    closed: true,
-    pos: null,
-  }
-
-  await storageService.putSubEntity('lists', newList, boardId);
-  await moveListsFromPosOneBackward(list.pos, boardId);
-  return list;
 }
 
-async function editList(boardId, list) {
-  const listsStorage = await storageService.get('lists', boardId);
-  const listToUpdate = listsStorage.lists.find(l => l.id === list.id)
-  if (!listToUpdate) {
-    throw Error(`Attempting to edit a non-exsisting list by id: ${list.id}`)
+async function addGroup(group, boardId) {
+  try {
+    const board = await storageService.get('boards', boardId)
+    group.pos = board.groups.length + 1;
+    const newGroup = createNewGroup(group)
+    const newBoard = {
+      ...board,
+      groups: [...board.groups, newGroup]
+    }
+    await storageService.put('boards', newBoard)
+    return newGroup
+  } catch (error) {
+    throw Error("Board.service.addGroup", error);
   }
-  console.log("list to remove: ", list)
-
-  const newList = {
-    ...list,
-  }
-
-  await storageService.putSubEntity('lists', newList, boardId);
-  return list;
 }
 
+async function archiveGroup(boardId, groupId) {
+  const board = await storageService.get('boards', boardId);
+  const group = board.groups.find(g => g.id === groupId)
 
-async function moveListPos(listId, newPos) {
-  const boardLists = await storageService.get('lists', list.idBoard);
-  const list = boardLists.lists.find(l => l.id === listId);
+  if (!group) {
+    throw Error(`Attempting to archive a non-exsisting group by id: ${groupId}`)
+  }
 
-  const oldPos = list.pos;
-  boardLists.lists = boardLists.lists.filter(l => l.id !== listId);
+  const newBoard = {
+    ...board,
+    groups: board.groups.map(g => g.id !== groupId ? g : { ...g, closed: true, pos: null })
+  }
+  await storageService.put('boards', newBoard)
+  await moveGroupsFromPosOneBackward(group.pos, boardId);
+  return { ...group, closed: true, pos: null };
+}
 
-  boardLists.lists.forEach(l => {
-    if (oldPos < newPos && l.pos > oldPos && l.pos <= newPos) {
-      l.pos--;
-    } else if (oldPos > newPos && l.pos >= newPos && l.pos < oldPos) {
-      l.pos++;
+async function editGroup(boardId, group) {
+  const board = await storageService.get('boards', boardId);
+  const groupToUpdate = board.groups.find(g => g.id === group.id)
+  if (!groupToUpdate) {
+    throw Error(`Attempting to edit a non-exsisting group by id: ${group.id}`)
+  }
+
+  const newBoard = {
+    ...board,
+    groups: board.groups.map(g => g.id === group.id ? group : g)
+  }
+  await storageService.put('boards', newBoard);
+  return group;
+}
+
+async function editTask(boardId, task) {
+  const board = await storageService.get('boards', boardId);
+  const taskToUpdate = board.groups.find(g => g.id === task.idGroup).tasks.find(t => t.id === task.id);
+  if (!taskToUpdate) {
+    throw Error(`Attempting to edit a non-exsisting task by id: ${task.id}`)
+  }
+  const newBoard = {
+    ...board,
+    groups: board.groups.map(g => g.id === task.idGroup ? { ...g, tasks: g.tasks.map(t => t.id === task.id ? task : t) } : g)
+  }
+  await storageService.put('boards', newBoard);
+  return task;
+}
+
+async function moveGroupPos(groupId, newPos) {
+  const board = await storageService.get('boards', group.idBoard);
+  const group = board.groups.find(g => g.id === groupId);
+
+  const oldPos = group.pos;
+  board.groups = board.groups.filter(g => g.id !== groupId);
+
+  board.groups.forEach(g => {
+    if (oldPos < newPos && g.pos > oldPos && g.pos <= newPos) {
+      g.pos--;
+    } else if (oldPos > newPos && g.pos >= newPos && g.pos < oldPos) {
+      g.pos++;
     }
   });
 
-  list.pos = newPos;
-  boardLists.lists.push(list);
+  group.pos = newPos;
+  board.groups.push(group);
 
-  await Promise.all(boardLists.lists.map(l => storageService.put('lists', l)));
-  return list;
+  await storageService.put('boards', board);
+  return group;
 }
 
-async function moveListsFromPosOneForward(pos, boardId) {
-  const boardLists = await storageService.get('lists', boardId);
-  boardLists.lists.forEach(l => {
-    if (l.pos >= pos) {
-      l.pos++;
-    }
-  });
-  await Promise.all(boardLists.lists.map(l => storageService.put('lists', l)));
-  return boardLists;
+async function moveGroupsFromPosOneForward(pos, boardId) {
+  const board = await storageService.get('boards', boardId);
+  const newBoard = {
+    ...board,
+    groups: board.groups.map(g => ({ ...g, pos: g.pos + 1 }))
+  }
+  await storageService.put('boards', newBoard)
+  return newBoard;
 }
 
-async function moveListsFromPosOneBackward(pos, boardId) {
-  const boardLists = await storageService.get('lists', boardId);
-  boardLists.lists.forEach(l => {
-    if (l.pos >= pos) {
-      l.pos--;
-    }
-  });
-  await Promise.all(boardLists.lists.map(l => storageService.put('lists', l)));
-  return boardLists;
+async function moveGroupsFromPosOneBackward(pos, boardId) {
+  const board = await storageService.get('boards', boardId);
+  const newBoard = {
+    ...board,
+    groups: board.groups.map(g => ({ ...g, pos: g.pos - 1 }))
+  }
+  await storageService.put('boards', newBoard)
+  return newBoard;
 }
 
-function createNewList(list) {
+function createNewGroup(group) {
   return {
-    id: "",
-    idBoard: list.idBoard,
-    name: list.name,
+    id: utilService.makeId(),
+    idBoard: group.idBoard,
+    name: group.name,
     closed: false,
     color: null,
     subscribed: false,
     softLimit: null,
-    pos: list.pos,
+    pos: group.pos,
   };
 }
 // async function addBoardMsg(boardId, txt) {
@@ -258,9 +293,9 @@ function _toMiniTask(task) {
 // TEST DATA
 // storageService.post(STORAGE_KEY, board).then(savedBoard => console.log('Added board', savedBoard))
 
-function createNewCard(card) {
-  console.log("createNewCard.card", card);
+function createNewTask(task) {
   return {
+    id: utilService.makeId(),
     badges: {
       attachmentsByType: {
         trello: {
@@ -296,9 +331,9 @@ function createNewCard(card) {
     due: null,
     dueReminder: null,
     email: null,
-    idBoard: card.idBoard,
+    idBoard: task.idBoard,
     idChecklists: [],
-    idList: card.idList,
+    idGroup: task.groupId,
     idMembers: [],
     idMembersVoted: [],
     idShort: "", // generateShortId(), // Function to generate a short ID
@@ -306,8 +341,8 @@ function createNewCard(card) {
     labels: [],
     idLabels: [],
     manualCoverAttachment: true,
-    name: card.name,
-    pos: card.pos, // Default position, can be adjusted
+    name: task.name,
+    pos: task.pos, // Default position, can be adjusted
     shortLink: "", // generateShortLink(), // Function to generate a short link
     shortUrl: "", // `https://trello.com/c/${generateShortLink()}`,
     start: null,

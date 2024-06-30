@@ -3,8 +3,8 @@ const { TextArea } = Input;
 import { CloseOutlined } from "@ant-design/icons";
 import { useState, useEffect, useRef } from "react";
 
-export function AddCardInList({ idList, closeAddCard, addCard, firstCardPos, lastCardPos }) {
-    const [cardName, setCardName] = useState('');
+export function AddTaskInGroup({ groupId, closeAddTask, addTask, firstTaskPos, lastTaskPos }) {
+    const [taskName, setTaskName] = useState('');
     const textAreaRef = useRef(null);
 
     useEffect(() => {
@@ -16,31 +16,30 @@ export function AddCardInList({ idList, closeAddCard, addCard, firstCardPos, las
     async function onKeyDown(e) {
         if (e.key === 'Enter') {
             e.preventDefault();
-            onAddCard();
+            onAddTask();
         }
     }
-    async function onAddCard() {
-        if (!cardName) {
-            closeAddCard()
+    async function onAddTask() {
+        if (!taskName) {
+            closeAddTask()
             return;
         }
 
-        const newCard = {
-            idList,
-            name: cardName,
+        const newTask = {
+            name: taskName,
         }
 
         //TODO find a better Strategy for when i add twice to the same column multiple cards
-        if (firstCardPos) {
-            newCard.pos = firstCardPos - 123
-            console.log('firstCardPos: ', firstCardPos)
-            console.log('newCard.pos: ', newCard.pos)
+        if (firstTaskPos) {
+            newTask.pos = firstTaskPos - 123
         }
-        if (lastCardPos) {
-            newCard.pos = lastCardPos + 123
+        if (lastTaskPos) {
+            newTask.pos = lastTaskPos + 123
         }
-        await addCard(newCard)
-        setCardName('')
+        newTask.groupId = groupId;
+        console.log("newTask,groupId", newTask, groupId);
+        await addTask(newTask, groupId)
+        setTaskName('')
     }
     return (
         <section className="add-card-in-list-footer">
@@ -49,13 +48,13 @@ export function AddCardInList({ idList, closeAddCard, addCard, firstCardPos, las
                 className="footer-input"
                 placeholder="Enter a title for this card"
                 autoSize={{ minRows: 2, maxRows: 6 }}
-                value={cardName}
-                onChange={(e) => setCardName(e.target.value)}
+                value={taskName}
+                onChange={(e) => setTaskName(e.target.value)}
                 onKeyDown={onKeyDown}
             />
             <article className="footer-actions">
-                <button type="primary" onClick={onAddCard} className="add-card-btn">Add card</button>
-                <button type="secondary" onClick={closeAddCard} className="close-add-card-btn"><CloseOutlined /></button>
+                <button type="primary" onClick={onAddTask} className="add-card-btn">Add card</button>
+                <button type="secondary" onClick={closeAddTask} className="close-add-card-btn"><CloseOutlined /></button>
             </article>
         </section>
     )
