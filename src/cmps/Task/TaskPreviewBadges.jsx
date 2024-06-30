@@ -2,7 +2,7 @@ import { Tooltip } from "antd";
 import descriptionIcon from "../../assets/svgs/description.svg";
 import fileIcon from "../../assets/svgs/file.svg";
 import { ReactSVG } from "react-svg";
-export function TaskPreviewBadges({ task }) {
+export function TaskPreviewBadges({ task, members }) {
   const taskIcons = [];
   if (task.badges.description) {
     taskIcons.push(
