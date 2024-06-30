@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { AddTaskInGroup } from "./AddTaskInGroup"
 import { BoardGroupHeader } from "./BoardGroupHeader"
 import { TaskPreview } from "../Task/TaskPreview"
+import { TaskPreviewCover } from "../Task/TaskPreviewCover"
 
 export function BoardGroup({ group, addTask, archiveGroup, editGroup }) {
     const [isAddTaskOpen, setIsAddTaskOpen] = useState(false)
@@ -45,7 +46,11 @@ export function BoardGroup({ group, addTask, archiveGroup, editGroup }) {
                 <main className="board-group-main">
                     {newTaskIds.map(taskId => <TaskPreview key={taskId} task={group.tasks.find(task => task.id === taskId)} />)}
                     {isAddTaskOpen && <AddTaskInGroup groupId={group.id} closeAddTask={() => setIsAddTaskOpen(false)} addTask={addTask} firstTaskPos={firstTaskPos} />}
-                    {sortedTasks.filter(task => !newTaskIds.includes(task.id)).map(task => <TaskPreview key={task.id} task={task} />)}
+                    {sortedTasks.filter(task => !newTaskIds.includes(task.id)).map(task => (
+                        task.cover.size === "full"
+                            ? <TaskPreviewCover key={task.id} task={task} />
+                            : <TaskPreview key={task.id} task={task} />
+                    ))}
                     {!isAddTaskOpen && <GroupFooter groupId={group.id} addTask={addTask} lastTaskPos={lastTaskPos} />}
                 </main>
             </Card>

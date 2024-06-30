@@ -2,7 +2,14 @@ import { Tooltip } from "antd";
 import descriptionIcon from "../../assets/svgs/description.svg";
 import fileIcon from "../../assets/svgs/file.svg";
 import { ReactSVG } from "react-svg";
+import { UserAvatar } from "../UserAvatar";
+import { useSelector } from "react-redux";
+
 export function TaskPreviewBadges({ task }) {
+  const members = useSelector((state) => state.boardModule.members);
+
+  const taskMembers = members.filter((member) => task.idMembers.includes(member.id)) || [];
+
   const taskIcons = [];
   if (task.badges.description) {
     taskIcons.push(
@@ -34,5 +41,16 @@ export function TaskPreviewBadges({ task }) {
     );
   }
 
-  return < section className="task-preview-icons" > {taskIcons}</section>
+  return (
+    <div className="group-task-content-icons">
+      <aside className="aside-left">
+        < section className="task-preview-icons" > {taskIcons}</section>
+      </aside>
+      <aside className="aside-right">
+        {taskMembers.map((member) => (
+          <UserAvatar key={member.id} member={member} />
+        ))}
+      </aside>
+    </div>
+  )
 }
