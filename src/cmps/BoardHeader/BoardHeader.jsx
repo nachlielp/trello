@@ -8,9 +8,9 @@ import {
 } from "@ant-design/icons";
 import { loadUsers, updateUser } from "../../store/user.actions";
 import { UserAvatar } from "../UserAvatar";
-import { VisibilityButton } from "./BoardHeader-cmps/VisibilityButton";
-import { ViewsButton } from "./BoardHeader-cmps/ViewsButton";
-import { FilterButton } from "./BoardHeader-cmps/FilterButton";
+import { VisibilityButton } from ".//VisibilityButton";
+import { ViewsButton } from "./ViewsButton";
+import { FilterButton } from "./FilterButton";
 
 export function BoardHeader() {
   const [isStarredBoard, setIsStarredBoard] = useState(false);

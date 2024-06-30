@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { BoardHeader } from "../cmps/BoardHeader";
+
 import { BoardGroup } from "../cmps/Group/BoardGroup";
 import {
   loadTestBoardFromStorage,
@@ -11,6 +11,8 @@ import {
   editTask,
 } from "../store/board.actions";
 import { AddGroupBtn } from "../cmps/Group/AddGroupBtn";
+import { TaskDetailsModal } from "../cmps/TaskDetails/TaskDetailsModal.jsx";
+import { BoardHeader } from "../cmps/BoardHeader/BoardHeader.jsx";
 
 export function BoardIndex() {
   const board = useSelector((state) => state.boardModule.board);
@@ -80,6 +82,7 @@ export function BoardIndex() {
           <AddGroupBtn addGroup={onAddGroup} />
         </main>
       </div>
+      {/* <TaskDetailsModal /> */}
     </section>
   ) : (
     <h1>Loading...</h1>
