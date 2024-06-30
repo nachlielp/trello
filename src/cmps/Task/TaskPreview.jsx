@@ -32,7 +32,7 @@ export function TaskPreview({ task, editTask }) {
           style={{ backgroundImage: `url(${task.cover.scaled[2].url})` }}
         ></div>
       )}
-      <section className="group-task-content" onClick={() => console.log("clicked")}>
+      <section className="group-task-content" onClick={() => console.log("lol")}>
         <article className="group-task-content-labels">
           {task.labels.map((label) => (
             <TaskPreviewLabel key={label.id} label={label} isExpanded={true} />
