@@ -30,29 +30,25 @@ export function TaskPreviewCover({ task, editTask }) {
     : "";
 
   return (
-    <div onClick={() => navigate(`/c/${task.id}`, { replace: true })}>
-        lol
-      <Card
-        className={`group-task  custom-card ${componentClass}`}
-        style={{ ...taskColorCoverStyle, ...taskBackgroundCoverImage }}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        
+    <Card
+      className={`group-task  custom-card ${componentClass}`}
+      style={{ ...taskColorCoverStyle, ...taskBackgroundCoverImage }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <TaskPreviewEditModal
+        task={task}
+        isHovered={isHovered}
+        editTask={editTask}
+      />
+      <section
+        className={`group-task-content ${
+          taskMember.idUploadedBackground ? "image-cover" : ""
+        }`}
+        onClick={() => navigate(`/c/${task.id}`, { replace: true })}
       >
-        <TaskPreviewEditModal
-          task={task}
-          isHovered={isHovered}
-          editTask={editTask}
-        />
-        <section
-          className={`group-task-content ${
-            taskMember.idUploadedBackground ? "image-cover" : ""
-          }`}
-          onClick={() => navigate(`/c/${task.id}`, { replace: true })}
-        >
-          <span className="group-task-content-title">{task.name}</span>
-        </section>
-      </Card>
-    </div>
+        <span className="group-task-content-title">{task.name}</span>
+      </section>
+    </Card>
   );
 }
