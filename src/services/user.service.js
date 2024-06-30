@@ -44,8 +44,9 @@ async function updateUser({ id, ...updatedUser }) {
 }
 
 async function login(userCred) {
+  const userId = import.meta.env.VITE_TRELLO_USER_ID
   const users = await storageService.query(USERS_KEY);
-  const user = users.find((user) => user.username === userCred.username);
+  const user = users.find((user) => user.id === userId);
   // const user = await httpService.post('auth/login', userCred)
   if (user) return saveLocalUser(user);
 }
