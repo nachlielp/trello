@@ -2,7 +2,10 @@ import { Popover } from "antd";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { utilService } from "../../services/util.service";
+//svg
 import { DownOutlined } from "@ant-design/icons";
+import { ReactSVG } from "react-svg";
+import checkedIcon from '/img/headerImgs/checkedIcon.svg'
 
 export function ColorSelect() {
   const [openListMenu, setOpenListMenu] = useState(false);
@@ -30,6 +33,7 @@ export function ColorSelect() {
               <li key={label.name}>
                 <label>
                   <input type="checkbox" />
+                  <ReactSVG src={checkedIcon} className="checkbox" wrapper="span"/>
                   <span
                     title={label.value}
                     style={{
