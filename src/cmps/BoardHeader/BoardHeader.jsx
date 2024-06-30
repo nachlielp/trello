@@ -6,8 +6,8 @@ import {
   UserAddOutlined,
   EllipsisOutlined,
 } from "@ant-design/icons";
-import { loadUsers, updateUser } from "../store/user.actions";
-import { UserAvatar } from "./UserAvatar";
+import { loadUsers, updateUser } from "../../store/user.actions";
+import { UserAvatar } from "../UserAvatar";
 import { VisibilityButton } from "./BoardHeader-cmps/VisibilityButton";
 import { ViewsButton } from "./BoardHeader-cmps/ViewsButton";
 import { FilterButton } from "./BoardHeader-cmps/FilterButton";
