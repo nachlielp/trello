@@ -8,7 +8,8 @@ import { useSelector } from "react-redux";
 export function TaskPreviewBadges({ task }) {
   const members = useSelector((state) => state.boardModule.members);
 
-  const taskMembers = members.filter((member) => task.idMembers.includes(member.id)) || [];
+  const taskMembers =
+    members.filter((member) => task.idMembers.includes(member.id)) || [];
 
   const taskIcons = [];
   if (task.badges.description) {
@@ -20,7 +21,12 @@ export function TaskPreviewBadges({ task }) {
         arrow={false}
       >
         <span className="task-icon-wrapper">
-          <ReactSVG src={descriptionIcon} alt="description" className="task-icon" wrapper="span" />
+          <ReactSVG
+            src={descriptionIcon}
+            alt="description"
+            className="task-icon"
+            wrapper="span"
+          />
         </span>
       </Tooltip>
     );
@@ -34,7 +40,12 @@ export function TaskPreviewBadges({ task }) {
         arrow={false}
       >
         <span className="task-icon-wrapper">
-          <ReactSVG src={fileIcon} alt="file" className="task-icon" wrapper="span" />
+          <ReactSVG
+            src={fileIcon}
+            alt="file"
+            className="task-icon"
+            wrapper="span"
+          />
           <span className="task-icon-count">{task.badges.attachments}</span>
         </span>
       </Tooltip>
@@ -44,13 +55,13 @@ export function TaskPreviewBadges({ task }) {
   return (
     <div className="group-task-content-icons">
       <aside className="aside-task-icons">
-        < section className="task-preview-icons" > {taskIcons}</section>
+        <section className="task-preview-icons"> {taskIcons}</section>
       </aside>
       <aside className="aside-task-users">
         {taskMembers.map((member) => (
-          <UserAvatar key={member.id} member={member} />
+          <UserAvatar key={member.id} member={member} onClick={e=>e.stopPropagation()}/>
         ))}
       </aside>
     </div>
-  )
+  );
 }
