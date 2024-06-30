@@ -6,6 +6,7 @@ export const SET_BOARD = 'SET_BOARD'
 export const SET_IS_EXPANDED = 'SET_IS_EXPANDED'
 
 export const ADD_TASK = 'ADD_TASK'
+export const EDIT_TASK = 'EDIT_TASK'
 
 export const ADD_GROUP = 'ADD_GROUP'
 export const ARCHIVE_GROUP = 'ARCHIVE_GROUP'
@@ -70,6 +71,20 @@ export function boardReducer(state = initialState, action) {
                     groups: state.board.groups.map(group =>
                         group.id === action.task.idGroup
                             ? { ...group, tasks: [...(group.tasks || []), action.task] }
+                            : group
+                    )
+                }
+            }
+            break
+
+        case EDIT_TASK:
+            newState = {
+                ...state,
+                board: {
+                    ...state.board,
+                    groups: state.board.groups.map(group =>
+                        group.id === action.task.idGroup
+                            ? { ...group, tasks: group.tasks.map(t => t.id === action.task.id ? action.task : t) }
                             : group
                     )
                 }

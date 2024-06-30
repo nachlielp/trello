@@ -14,6 +14,7 @@ export const boardService = {
   archiveGroup,
   editGroup,
   moveGroupPos,
+  editTask,
   // editList: editGroup,
   // getEmptyBoard,
   // getDemoBoard,
@@ -124,6 +125,19 @@ async function editGroup(boardId, group) {
   return group;
 }
 
+async function editTask(boardId, task) {
+  const board = await storageService.get('boards', boardId);
+  const taskToUpdate = board.groups.find(g => g.id === task.idGroup).tasks.find(t => t.id === task.id);
+  if (!taskToUpdate) {
+    throw Error(`Attempting to edit a non-exsisting task by id: ${task.id}`)
+  }
+  const newBoard = {
+    ...board,
+    groups: board.groups.map(g => g.id === task.idGroup ? { ...g, tasks: g.tasks.map(t => t.id === task.id ? task : t) } : g)
+  }
+  await storageService.put('boards', newBoard);
+  return task;
+}
 
 async function moveGroupPos(groupId, newPos) {
   const board = await storageService.get('boards', group.idBoard);

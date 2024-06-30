@@ -8,6 +8,7 @@ import {
   addGroup,
   archiveGroup,
   editGroup,
+  editTask,
 } from "../store/board.actions";
 import { AddGroupBtn } from "../cmps/Group/AddGroupBtn";
 
@@ -45,7 +46,10 @@ export function BoardIndex() {
 
   async function onEditGroup(group) {
     const res = await editGroup(board.id, group);
-    console.log("onEditGroup", res);
+  }
+
+  async function onEditTask(task) {
+    const res = await editTask(board.id, task);
   }
 
   const sortedGroups = board?.groups
@@ -70,6 +74,7 @@ export function BoardIndex() {
                 addTask={onAddTask}
                 archiveGroup={() => onArchiveGroup(board.id, group.id)}
                 editGroup={onEditGroup}
+                editTask={onEditTask}
               />
             ))}
           <AddGroupBtn addGroup={onAddGroup} />
