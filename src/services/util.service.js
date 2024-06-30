@@ -140,13 +140,8 @@ function getColorHashByName(name) {
 }
 
 function _createStartInfo() {
-  if (!localStorage.getItem("dark")) {
-    if (confirm("You want dark mode?")) {
-      localStorage.setItem("dark", true)
-    } else {
-      localStorage.setItem("dark", false)
-    }
-  }
+  // localStorage.setItem("dark", true)
+
 
   if (localStorage.getItem("dark") === "true") {
     document.querySelector('html').classList.add('dark');
