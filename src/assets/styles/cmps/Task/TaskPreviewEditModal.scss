@@ -12,7 +12,7 @@
         margin: 3px 3px 8px 0;
         width: 28px;
         height: 28px;
-        background: var(--ds-surface-overlay);
+
         color: var(--ds-text-primary);
 
         &:hover {
@@ -33,10 +33,15 @@
 
     .ant-modal-content {
         padding: 8px 12px 4px 12px;
+        background: var(--ds-surface-overlay);
+
     }
 }
 
 .task-preview-edit-modal-content {
+    color: var(--ds-text);
+    border-radius: 4px;
+
     .ant-input-outlined {
         padding: 0;
         border: none;
@@ -45,22 +50,68 @@
     .ant-input-outlined:focus {
         box-shadow: none;
     }
+
+    .task-name-input {
+        margin-top: 2px;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 16px;
+        color: var(--ds-text);
+        background: var(--ds-surface-overlay);
+
+    }
 }
 
 .floating-button.save-button {
     position: absolute;
     bottom: -40px; // Adjust as needed to position the button under the modal
-    left: 12%;
+    left: 32px;
     transform: translateX(-50%);
     background-color: #0b65e4;
-    color: var(--ds-text-primary);
+    color: var(--ds-surface-overlay);
     border: none;
     border-radius: 4px;
     padding: 8px 16px;
     cursor: pointer;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 16px;
 
     &:hover {
         background-color: #0055cc;
+    }
+}
+
+.task-preview-edit-modal {
+    .floating-buttons {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        right: -168px;
+        top: 0;
+
+        .floating-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border-radius: 3px;
+            border: none;
+            background-color: var(--ds-surface-overlay);
+            color: var(--ds-text-primary);
+            padding: 6px 12px 6px 10px;
+            white-space: nowrap;
+            font-size: 14;
+            color: var(--ds-text);
+
+            .task-action-icon {
+                margin-top: 2px;
+                width: 16px;
+                height: 16px;
+            }
+        }
     }
 }
