@@ -30,9 +30,10 @@
     position: absolute;
     top: 0;
     left: 0;
+    width: 300px;
 
     .ant-modal-content {
-        padding: 8px 12px 4px 12px;
+        padding: 0;
         background: var(--ds-surface-overlay);
 
     }
@@ -41,6 +42,7 @@
 .task-preview-edit-modal-content {
     color: var(--ds-text);
     border-radius: 4px;
+    padding: 8px 12px 4px 12px;
 
     .ant-input-outlined {
         padding: 0;

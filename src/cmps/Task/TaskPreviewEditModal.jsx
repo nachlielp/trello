@@ -4,15 +4,16 @@ import { ReactSVG } from "react-svg"
 import editSvg from '../../assets/svgs/edit.svg';
 import { TaskPreviewBadges } from "./TaskPreviewBadges";
 import { TaskPreviewLabel } from "./TaskPreviewLabel";
-
+import { utilService } from '../../services/util.service';
 import cardIcon from '/img/taskActionBtns/cardIcon.svg';
-import moreIcon from '/img/taskActionBtns/moreIcon.svg';
+import moveIcon from '/img/taskActionBtns/moveIcon.svg';
 import labelIcon from '/img/taskActionBtns/labelIcon.svg';
 import userIcon from '/img/taskActionBtns/userIcon.svg';
 import timeIcon from '/img/taskActionBtns/timeIcon.svg';
 import coverIcon from '/img/taskActionBtns/coverIcon.svg';
 import copyIcon from '/img/taskActionBtns/copyIcon.svg';
 import archiveIcon from '/img/taskActionBtns/archiveIcon.svg';
+
 
 const { TextArea } = Input;
 
@@ -44,16 +45,18 @@ export function TaskPreviewEditModal({ task, isHovered, editTask }) {
         setIsOpen(false);
     };
 
-    const modalActionButtons = [
-        { label: 'Open card', icon: cardIcon, onClick: () => console.log('Add to X') },
-        { label: 'Edit labels', icon: labelIcon, onClick: () => console.log('Add to Y') },
-        { label: 'Change members', icon: userIcon, onClick: () => console.log('Add to Y') },
-        { label: 'Change cover', icon: coverIcon, onClick: () => console.log('Add to Y') },
-        { label: 'Edit date', icon: timeIcon, onClick: () => console.log('Add to Y') },
-        { label: 'More', icon: moreIcon, onClick: () => console.log('Add to Y') },
-        { label: 'Copy', icon: copyIcon, onClick: () => console.log('Add to Y') },
-        { label: 'Archive', icon: archiveIcon, onClick: () => console.log('Add to Y') },
+    const allModalActionButtons = [
+        { label: 'Open card', icon: cardIcon, onClick: () => console.log('Add to X'), cover: false },
+        { label: 'Edit labels', icon: labelIcon, onClick: () => console.log('Add to Y'), cover: false },
+        { label: 'Change members', icon: userIcon, onClick: () => console.log('Add to Y'), cover: false },
+        { label: 'Change cover', icon: coverIcon, onClick: () => console.log('Add to Y'), cover: true },
+        { label: 'Edit date', icon: timeIcon, onClick: () => console.log('Add to Y'), cover: false },
+        { label: 'Move', icon: moveIcon, onClick: () => console.log('Add to Y'), cover: true },
+        { label: 'Copy', icon: copyIcon, onClick: () => console.log('Add to Y'), cover: true },
+        { label: 'Archive', icon: archiveIcon, onClick: () => console.log('Add to Y'), cover: true },
     ];
+
+    const modalActionButtons = task.cover.size === 'full' ? allModalActionButtons.filter(btn => btn.cover) : allModalActionButtons;
 
     return (
         <div>
@@ -80,6 +83,21 @@ export function TaskPreviewEditModal({ task, isHovered, editTask }) {
                 closable={false}
                 footer={null}
             >
+                {task.cover.color && (
+                    <div
+                        className="group-task-header"
+                        style={{
+                            backgroundColor: utilService.getColorHashByName(
+                                task.cover.color
+                            ).bgColor,
+                        }}></div>
+                )}
+                {task.cover.idUploadedBackground && (
+                    <div
+                        className="group-task-header img-cover"
+                        style={{ backgroundImage: `url(${task.cover.scaled[2].url})` }}
+                    ></div>
+                )}
                 <div className="task-preview-edit-modal-content">
                     <article className="group-task-content-labels">
                         {task.labels.map((label) => (
@@ -88,7 +106,7 @@ export function TaskPreviewEditModal({ task, isHovered, editTask }) {
                     </article>
                     <TextArea
                         className="task-name-input"
-                        autoSize={{ minRows: 2, maxRows: 6 }}
+                        autoSize={{ minRows: 3, maxRows: 6 }}
                         value={taskName}
                         onChange={(e) => setTaskName(e.target.value)}
                     />
