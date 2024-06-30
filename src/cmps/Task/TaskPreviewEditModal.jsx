@@ -4,6 +4,8 @@ import { ReactSVG } from "react-svg"
 import editSvg from '../../assets/svgs/edit.svg';
 import { Input } from "antd"
 import { TaskPreviewBadges } from "./TaskPreviewBadges";
+import { TaskPreviewLabel } from "./TaskPreviewLabel";
+
 const { TextArea } = Input;
 
 export function TaskPreviewEditModal({ task, isHovered, editTask }) {
@@ -60,19 +62,21 @@ export function TaskPreviewEditModal({ task, isHovered, editTask }) {
                 footer={null}
             >
                 <div className="task-preview-edit-modal-content">
+                    <article className="group-task-content-labels">
+                        {task.labels.map((label) => (
+                            <TaskPreviewLabel key={label.id} label={label} isExpanded={true} />
+                        ))}
+                    </article>
                     <TextArea
                         autoSize={{ minRows: 2, maxRows: 6 }}
                         value={taskName}
-                        height={100}
                         onChange={(e) => setTaskName(e.target.value)}
                     />
                     <TaskPreviewBadges task={task} />
                 </div>
-                {isOpen && (
-                    <button className="floating-button save-button" onClick={handleOk}>
-                        Save
-                    </button>
-                )}
+                <button className="floating-button save-button" onClick={handleOk}>
+                    Save
+                </button>
             </Modal>
         </div>
     )
