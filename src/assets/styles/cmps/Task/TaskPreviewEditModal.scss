@@ -92,8 +92,12 @@
         flex-direction: column;
         align-items: flex-start;
         gap: 8px;
-        right: -168px;
+        right: -172px;
         top: 0;
+
+        &.full-cover {
+            right: -148px;
+        }
 
         .floating-button {
             display: flex;

@@ -13,7 +13,7 @@ import timeIcon from '/img/taskActionBtns/timeIcon.svg';
 import coverIcon from '/img/taskActionBtns/coverIcon.svg';
 import copyIcon from '/img/taskActionBtns/copyIcon.svg';
 import archiveIcon from '/img/taskActionBtns/archiveIcon.svg';
-
+import { SvgButton } from '../CustomCpms/SvgButton';
 
 const { TextArea } = Input;
 
@@ -62,14 +62,11 @@ export function TaskPreviewEditModal({ task, isHovered, editTask }) {
         <div>
             {isHovered && !isOpen &&
                 (<div ref={containerRef} className="task-preview-edit-modal-anchor">
-                    <button className="edit-button" onClick={showModal}>
-                        <ReactSVG
-                            src={editSvg}
-                            beforeInjection={(svg) => {
-                                svg.classList.add('edit-icon');
-                            }}
-                        />
-                    </button>
+                    <SvgButton
+                        src={editSvg}
+                        className="edit-button"
+                        onClick={showModal}
+                    />
                 </div>
                 )}
             <Modal
@@ -98,7 +95,7 @@ export function TaskPreviewEditModal({ task, isHovered, editTask }) {
                         style={{ backgroundImage: `url(${task.cover.scaled[2].url})` }}
                     ></div>
                 )}
-                <div className="task-preview-edit-modal-content">
+                <main className="task-preview-edit-modal-content">
                     <article className="group-task-content-labels">
                         {task.labels.map((label) => (
                             <TaskPreviewLabel key={label.id} label={label} isExpanded={true} />
@@ -111,22 +108,19 @@ export function TaskPreviewEditModal({ task, isHovered, editTask }) {
                         onChange={(e) => setTaskName(e.target.value)}
                     />
                     <TaskPreviewBadges task={task} />
-                </div>
+                </main>
                 <button className="floating-button save-button" onClick={handleOk}>
                     Save
                 </button>
-                <section className='floating-buttons'>
+                <section className={`floating-buttons ${task.cover.size === 'full' ? 'full-cover' : ''}`}>
                     {modalActionButtons.map((btn, index) => (
-                        <a key={index} className="floating-button" onClick={btn.onClick}>
-                            <ReactSVG
-                                src={btn.icon}
-                                beforeInjection={(svg) => {
-                                    svg.classList.add('task-action-icon');
-                                }}
-                                wrapper="span"
-                            />
-                            {btn.label}
-                        </a>
+                        <SvgButton
+                            key={index}
+                            src={btn.icon}
+                            className="floating-button"
+                            onClick={btn.onClick}
+                            label={btn.label}
+                        />
                     ))}
                 </section>
             </Modal>
