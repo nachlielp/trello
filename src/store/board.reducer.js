@@ -9,7 +9,6 @@ export const ADD_TASK = 'ADD_TASK'
 export const EDIT_TASK = 'EDIT_TASK'
 
 export const ADD_GROUP = 'ADD_GROUP'
-export const ARCHIVE_GROUP = 'ARCHIVE_GROUP'
 export const EDIT_GROUP = 'EDIT_GROUP'
 
 //TODO put members in board
@@ -41,18 +40,6 @@ export function boardReducer(state = initialState, action) {
                 }
             }
             break
-
-        case ARCHIVE_GROUP:
-            newState = {
-                ...state,
-                board: {
-                    ...state.board,
-                    groups: state.board.groups.map(group =>
-                        group.id === action.groupId ? { ...group, closed: true, pos: null } : group
-                    )
-                }
-            };
-            break;
 
         case EDIT_GROUP:
             newState = {

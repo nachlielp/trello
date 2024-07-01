@@ -8,13 +8,18 @@ import { useNavigate } from "react-router";
 
 export function TaskPreview({ task, editTask }) {
   const [isHovered, setIsHovered] = useState(false);
+  const [isOpenPreviewModal, setIsOpenPreviewModal] = useState(false);
   const navigate = useNavigate();
 
   const taskCover = task.cover;
 
+  function onOpenPreviewModal(value) {
+    setIsOpenPreviewModal(value);
+  }
+
   return (
     <Card
-      className={`group-task custom-card `}
+      className={`group-task custom-card ${isOpenPreviewModal ? 'open-preview-modal' : ''}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -22,6 +27,8 @@ export function TaskPreview({ task, editTask }) {
         task={task}
         isHovered={isHovered}
         editTask={editTask}
+        isOpen={isOpenPreviewModal}
+        openPreviewModal={onOpenPreviewModal}
       />
       {taskCover.color && (
         <div

@@ -2,7 +2,7 @@ import { boardService } from '../services/board.service.local'
 import { utilService } from '../services/util.service'
 import { memberService } from '../services/members.service.local'
 import { store } from './store'
-import { SET_MEMBERS, SET_BOARD, SET_IS_EXPANDED, ADD_TASK, ADD_GROUP, ARCHIVE_GROUP, EDIT_GROUP, EDIT_TASK } from './board.reducer'
+import { SET_MEMBERS, SET_BOARD, SET_IS_EXPANDED, ADD_TASK, ADD_GROUP, EDIT_GROUP, EDIT_TASK } from './board.reducer'
 
 // export async function loadTrelloDataFromSource() {
 //   try {
@@ -62,13 +62,24 @@ async function fetchBoardFromTrello() {
 export function toggleIsExpanded() {
   store.dispatch({ type: SET_IS_EXPANDED, isExpanded: !store.getState().boardModule.isExpanded })
 }
+//TODO handle error, optimistic updates
 
 export async function addTask(task) {
   try {
     const newTask = utilService.createNewTask(task);
-    const savedTask = await boardService.addTask(newTask)
     store.dispatch({ type: ADD_TASK, task: newTask })
-    return savedTask
+    const board = await boardService.getById(task.idBoard);
+    const newBoard = {
+      ...board,
+      groups: board.groups.map(g => {
+        if (g.id === newTask.idGroup) {
+          return { ...g, tasks: [...(g.tasks || []), newTask] };
+        }
+        return g;
+      }),
+    };
+    await boardService.save(newBoard)
+    return newTask;
   } catch (err) {
     console.log('Cannot add task', err)
     throw err
@@ -77,10 +88,16 @@ export async function addTask(task) {
 
 export async function addGroup(group, boardId) {
   try {
+    const board = await boardService.getById(boardId);
     const newGroup = utilService.createNewGroup(group);
-    const savedGroup = await boardService.addGroup(newGroup, boardId)
+    newGroup.pos = board.groups.length + 1;
     store.dispatch({ type: ADD_GROUP, group: newGroup })
-    return savedGroup
+    const newBoard = {
+      ...board,
+      groups: [...board.groups, newGroup]
+    };
+    await boardService.save(newBoard)
+    return newGroup
   } catch (err) {
     console.log('Cannot add group', err)
     throw err
@@ -88,23 +105,47 @@ export async function addGroup(group, boardId) {
 }
 
 export async function archiveGroup(boardId, groupId) {
-  const savedGroup = await boardService.archiveGroup(boardId, groupId)
-  store.dispatch({ type: ARCHIVE_GROUP, group: savedGroup })
-  return savedGroup
+  const board = await boardService.getById(boardId);
+  const group = board.groups.find(g => g.id === groupId)
+  store.dispatch({ type: EDIT_GROUP, group: { ...group, closed: true, pos: null } })
+  const newBoard = {
+    ...board,
+    groups: board.groups.map(g => {
+      if (g.id === groupId) {
+        return { ...g, closed: true, pos: null }
+      } else if (g.pos > g.pos) {
+        return { ...g, pos: g.pos - 1 }
+      }
+      return g
+    })
+  };
+  await boardService.save(newBoard)
+  return newBoard
 }
 
 
 export async function editGroup(boardId, group) {
-  const savedGroup = await boardService.editGroup(boardId, group)
-  store.dispatch({ type: EDIT_GROUP, group: savedGroup })
-  return savedGroup
+  store.dispatch({ type: EDIT_GROUP, group: group })
+  const board = await boardService.getById(boardId);
+  const newBoard = {
+    ...board,
+    groups: board.groups.map(g => g.id === group.id ? group : g)
+  };
+  await boardService.save(newBoard)
+  return group
 }
 
 export async function editTask(boardId, task) {
   store.dispatch({ type: EDIT_TASK, task: task })
-  const savedTask = await boardService.editTask(boardId, task)
-  return savedTask
+  const board = await boardService.getById(boardId);
+  const newBoard = {
+    ...board,
+    groups: board.groups.map(g => g.id === task.idGroup ? { ...g, tasks: g.tasks.map(t => t.id === task.id ? task : t) } : g)
+  };
+  await boardService.save(newBoard)
+  return task
 }
+
 export async function updateBoard(newBoard) {
   try {
     store.dispatch({ type: SET_BOARD, board: newBoard });
@@ -114,6 +155,17 @@ export async function updateBoard(newBoard) {
     throw err;
   }
 }
+
+export async function getItemById(boardId, taskId) {
+  const board = await boardService.getById(boardId);
+  let task;
+  for (const group of board.groups) {
+    task = group.tasks.find(t => t.id === taskId)
+    if (task) break;
+  }
+  return task;
+}
+
 // export async function addCards(boardId, cards) {
 //     try {
 //         store.dispatch(getCmdAddCards(cards))
