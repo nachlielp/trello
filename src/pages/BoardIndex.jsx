@@ -93,7 +93,7 @@ export function BoardIndex() {
           <AddGroupBtn addGroup={onAddGroup} />
         </main>
       </div>
-      {clickedTaskId && <TaskDetailsModal taskId={clickedTaskId} />}
+      {/* {clickedTaskId && <TaskDetailsModal taskId={clickedTaskId} />} */}
     </section>
   ) : (
     <h1>Loading...</h1>
