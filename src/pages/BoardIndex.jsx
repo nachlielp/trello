@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { BoardHeader } from "../cmps/BoardHeader";
+
 import { BoardGroup } from "../cmps/Group/BoardGroup";
 import {
   loadTestBoardFromStorage,
@@ -11,13 +11,26 @@ import {
   editTask,
 } from "../store/board.actions";
 import { AddGroupBtn } from "../cmps/Group/AddGroupBtn";
+import { TaskDetailsModal } from "../cmps/TaskDetails/TaskDetailsModal.jsx";
+import { BoardHeader } from "../cmps/BoardHeader/BoardHeader.jsx";
+import { useParams } from "react-router";
 
 export function BoardIndex() {
   const board = useSelector((state) => state.boardModule.board);
+  const [clickedTaskId, setClickedTaskId] = useState();
+  const params = useParams();
 
   useEffect(() => {
     loadTestBoardFromStorage();
   }, []);
+
+  useEffect(() => {
+    if (params.cardId) {
+      setClickedTaskId(params.cardId);
+    } else {
+      setClickedTaskId(null);
+    }
+  }, [params]);
 
   async function onAddTask(task, groupId) {
     const newTask = {
@@ -80,6 +93,7 @@ export function BoardIndex() {
           <AddGroupBtn addGroup={onAddGroup} />
         </main>
       </div>
+      {clickedTaskId && <TaskDetailsModal taskId={clickedTaskId} />}
     </section>
   ) : (
     <h1>Loading...</h1>
