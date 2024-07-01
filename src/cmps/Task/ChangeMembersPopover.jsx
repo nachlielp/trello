@@ -9,6 +9,8 @@ export function ChangeMembersPopover({ anchorEl, taskMemberIds, editTask, task }
     const [inputSearch, setInputSearch] = useState('');
     const [isOpen, setIsOpen] = useState(false);
     const [filteredMembers, setFilteredMembers] = useState(members);
+    const [selectedMembers, setSelectedMembers] = useState([]);
+    const [unselectedMembers, setUnselectedMembers] = useState([]);
 
     useEffect(() => {
         if (inputSearch === '') {
@@ -18,6 +20,10 @@ export function ChangeMembersPopover({ anchorEl, taskMemberIds, editTask, task }
         }
     }, [inputSearch]);
 
+    useEffect(() => {
+        setSelectedMembers(members.filter((member) => taskMemberIds.includes(member.id)));
+        setUnselectedMembers(members.filter((member) => !taskMemberIds.includes(member.id)));
+    }, [taskMemberIds]);
     return (
         <Popover
             className="change-members-popover"
@@ -32,18 +38,18 @@ export function ChangeMembersPopover({ anchorEl, taskMemberIds, editTask, task }
                     <header className="members-header">Add members</header>
                     <article className="change-members-content">
                         <Input placeholder="Search members" className="members-search-input" value={inputSearch} onChange={(e) => setInputSearch(e.target.value)} />
-                        <article className="selected-task-members">
+                        {selectedMembers.length > 0 && <article className="selected-task-members">
                             <h3 className="members-sub-title">Card members</h3>
-                            {filteredMembers.filter((member) => taskMemberIds.includes(member.id)).map((member) => (
+                            {selectedMembers.map((member) => (
                                 <ChangeMembersOption task={task} member={member} isSelected={true} editTask={editTask} />
                             ))}
-                        </article>
-                        <article className="unselected-members-list">
+                        </article>}
+                        {unselectedMembers.length > 0 && <article className="unselected-members-list">
                             <h3 className="members-sub-title">Board members</h3>
-                            {filteredMembers.filter((member) => !taskMembers.includes(member)).map((member) => (
+                            {unselectedMembers.map((member) => (
                                 <ChangeMembersOption task={task} member={member} isSelected={false} editTask={editTask} />
                             ))}
-                        </article>
+                        </article>}
                     </article>
                 </section>
             }
