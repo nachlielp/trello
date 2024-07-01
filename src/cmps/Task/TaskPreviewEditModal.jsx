@@ -1,6 +1,5 @@
-import { useRef, useState } from 'react';
-import { Modal, Input, Button } from 'antd';
-import { ReactSVG } from "react-svg"
+import { useRef, useState, useEffect } from 'react';
+import { Modal, Input } from 'antd';
 import editSvg from '../../assets/svgs/edit.svg';
 import { TaskPreviewBadges } from "./TaskPreviewBadges";
 import { TaskPreviewLabel } from "./TaskPreviewLabel";
@@ -21,8 +20,12 @@ export function TaskPreviewEditModal({ task, isHovered, editTask }) {
     const [isOpen, setIsOpen] = useState(false);
     const [modalStyle, setModalStyle] = useState({});
     const [taskName, setTaskName] = useState(task.name || '');
-
+    const [showEditModalBtn, setShowEditModalBtn] = useState(false);
     const containerRef = useRef(null);
+
+    useEffect(() => {
+        setShowEditModalBtn(isHovered);
+    }, [isHovered, isOpen]);
 
     const showModal = () => {
         const rect = containerRef.current.getBoundingClientRect();
@@ -60,7 +63,7 @@ export function TaskPreviewEditModal({ task, isHovered, editTask }) {
 
     return (
         <div>
-            {isHovered && !isOpen &&
+            {showEditModalBtn &&
                 (<div ref={containerRef} className="task-preview-edit-modal-anchor">
                     <SvgButton
                         src={editSvg}
