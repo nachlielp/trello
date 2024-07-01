@@ -1,7 +1,7 @@
 import { UserAvatar } from "../../UserAvatar";
 import { SvgButton } from "../../CustomCpms/SvgButton";
 
-export function ChangeMembersOption({ task, member, isSelected, editTask }) {
+export function MemberOption({ task, member, isSelected, editTask }) {
 
     function onEditTask() {
         const newTaskMemberIds = [...task.idMembers];

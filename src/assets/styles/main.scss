@@ -43,8 +43,8 @@
 //Task
 @import "cmps/Task/TaskPreview";
 @import "cmps/Task/TaskPreviewEditModal";
-@import "cmps/Task/ManageTaskPopovers/ChangeMembersPopover";
-@import "cmps/Task/ManageTaskPopovers/ChangeMembersOption";
+@import "cmps/Task/ManageTaskPopovers/ManageMembersPopover";
+@import "cmps/Task/ManageTaskPopovers/MemberOption";
 @import "cmps/Task/ManageTaskPopovers/ManageTaskPopoverHeader";
 
 :root.dark {

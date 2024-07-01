@@ -13,7 +13,7 @@ import coverIcon from '/img/taskActionBtns/coverIcon.svg';
 import copyIcon from '/img/taskActionBtns/copyIcon.svg';
 import archiveIcon from '/img/taskActionBtns/archiveIcon.svg';
 import { SvgButton } from '../CustomCpms/SvgButton';
-import { ChangeMembersPopover } from './ManageTaskPopovers/ChangeMembersPopover';
+import { ManageMembersPopover } from './ManageTaskPopovers/ManageMembersPopover';
 const { TextArea } = Input;
 
 export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, onOpenPreviewModal }) {
@@ -53,7 +53,7 @@ export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, onOpen
         {
             cover: false,
             popover: (
-                <ChangeMembersPopover
+                <ManageMembersPopover
                     anchorEl={
                         <SvgButton
                             src={userIcon}

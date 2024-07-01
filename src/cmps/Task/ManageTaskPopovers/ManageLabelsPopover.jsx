@@ -1,7 +1,7 @@
 import { Popover, Input } from "antd"
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { ChangeMembersOption } from "./ChangeMembersOption";
+import { ChangeMembersOption } from "./MemberOption";
 
 export function ManageLabelsPopover({ anchorEl, editTask, task }) {
     const members = useSelector((state) => state.boardModule.members);
