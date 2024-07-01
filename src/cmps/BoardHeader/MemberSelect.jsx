@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 
 //svg
-import checkedIcon from "/img/headerImgs/checkedIcon.svg";
+import checkedIcon from "/img/board-index/headerImgs/checkedIcon.svg";
 import { ReactSVG } from "react-svg";
 import { DownOutlined } from "@ant-design/icons";
 

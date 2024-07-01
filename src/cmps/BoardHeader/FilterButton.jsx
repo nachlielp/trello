@@ -10,10 +10,10 @@ import { UserAvatar } from "../UserAvatar";
 
 import { IoFilterSharp } from "react-icons/io5";
 import { useSelector } from "react-redux";
-import calendarIcon from "/img/headerImgs/viewBtn-imgs/calendarIcon.svg";
-import clockIcon from "/img/headerImgs/filterBtn-imgs/clockIcon.svg";
-import labelIcon from "/img/headerImgs/filterBtn-imgs/labelIcon.svg";
-import checkedIcon from "/img/headerImgs/checkedIcon.svg";
+import calendarIcon from "/img/board-index/headerImgs/viewBtn-imgs/calendarIcon.svg";
+import clockIcon from "/img/board-index/headerImgs/filterBtn-imgs/clockIcon.svg";
+import labelIcon from "/img/board-index/headerImgs/filterBtn-imgs/labelIcon.svg";
+import checkedIcon from "/img/board-index/headerImgs/checkedIcon.svg";
 import { ReactSVG } from "react-svg";
 
 export function FilterButton() {

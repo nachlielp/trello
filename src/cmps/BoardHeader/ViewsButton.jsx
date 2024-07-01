@@ -3,16 +3,16 @@ import { useState } from "react";
 
 //svg
 import { ReactSVG } from "react-svg";
-import boardIcon from "/img/headerImgs/viewBtn-imgs/boardIcon.svg";
-import tableIcon from "/img/headerImgs/viewBtn-imgs/tableIcon.svg";
-import calendarIcon from "/img/headerImgs/viewBtn-imgs/calendarIcon.svg";
-import timeLineIcon from "/img/headerImgs/viewBtn-imgs/timeLineIcon.svg";
-import dashBoard from "/img/headerImgs/viewBtn-imgs/dashBoard.svg";
-import mapIcon from "/img/headerImgs/viewBtn-imgs/mapIcon.svg";
-import privateIcon from "/img/headerImgs/privateIcon.svg";
+import boardIcon from "/img/board-index/headerImgs/viewBtn-imgs/boardIcon.svg";
+import tableIcon from "/img/board-index/headerImgs/viewBtn-imgs/tableIcon.svg";
+import calendarIcon from "/img/board-index/headerImgs/viewBtn-imgs/calendarIcon.svg";
+import timeLineIcon from "/img/board-index/headerImgs/viewBtn-imgs/timeLineIcon.svg";
+import dashBoard from "/img/board-index/headerImgs/viewBtn-imgs/dashBoard.svg";
+import mapIcon from "/img/board-index/headerImgs/viewBtn-imgs/mapIcon.svg";
+import privateIcon from "/img/board-index/headerImgs/privateIcon.svg";
 import { CloseOutlined, DownOutlined } from "@ant-design/icons";
 import { GoGrabber } from "react-icons/go";
-import checkedIcon from "/img/headerImgs/checkedIcon.svg";
+import checkedIcon from "/img/board-index/headerImgs/checkedIcon.svg";
 
 export function ViewsButton() {
   const [openListMenu, setOpenListMenu] = useState(false);

@@ -5,7 +5,7 @@ import { utilService } from "../../services/util.service";
 //svg
 import { DownOutlined } from "@ant-design/icons";
 import { ReactSVG } from "react-svg";
-import checkedIcon from '/img/headerImgs/checkedIcon.svg'
+import checkedIcon from '/img/board-index/headerImgs/checkedIcon.svg'
 
 export function ColorSelect() {
   const [openListMenu, setOpenListMenu] = useState(false);

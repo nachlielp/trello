@@ -5,10 +5,10 @@ import { useSelector } from "react-redux";
 
 //svg
 import { ReactSVG } from "react-svg";
-import peopleIcon from "/img/headerImgs/peopleIcon.svg";
-import privateIcon from "/img/headerImgs/privateIcon.svg";
-import publicIcon from "/img/headerImgs/publicIcon.svg";
-import permissionIcon from "/img/headerImgs/permissionIcon.svg";
+import peopleIcon from "/img/board-index/headerImgs/peopleIcon.svg";
+import privateIcon from "/img/board-index/headerImgs/privateIcon.svg";
+import publicIcon from "/img/board-index/headerImgs/publicIcon.svg";
+import permissionIcon from "/img/board-index/headerImgs/permissionIcon.svg";
 import { updateBoard } from "../../store/board.actions";
 
 export function VisibilityButton() {
