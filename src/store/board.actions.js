@@ -155,6 +155,17 @@ export async function updateBoard(newBoard) {
     throw err;
   }
 }
+
+export async function getItemById(boardId, taskId) {
+  const board = await boardService.getById(boardId);
+  let task;
+  for (const group of board.groups) {
+    task = group.tasks.find(t => t.id === taskId)
+    if (task) break;
+  }
+  return task;
+}
+
 // export async function addCards(boardId, cards) {
 //     try {
 //         store.dispatch(getCmdAddCards(cards))

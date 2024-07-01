@@ -2,9 +2,10 @@ import { Popover, Input } from "antd"
 import { useState, useEffect } from "react";
 import { ManageTaskPopoverHeader } from "../ManageTaskPopovers/ManageTaskPopoverHeader";
 
-export function ManageLabelsPopover({ anchorEl, editTask, task }) {
+export function TNAME({ anchorEl, editTask, task }) {
     const [isOpen, setIsOpen] = useState(false);
 
+    const cardTitle = "ADD TITLE";
 
     function onClose() {
         setIsOpen(false);
@@ -21,8 +22,8 @@ export function ManageLabelsPopover({ anchorEl, editTask, task }) {
             arrow={false}
             content={
                 <section className="manage-labels-content">
-                    <ManageTaskPopoverHeader title="Add members" close={onClose} />
-
+                    <ManageTaskPopoverHeader title={cardTitle} close={onClose} />
+                    {/* ADD BODY */}
                 </section>
             }
         >

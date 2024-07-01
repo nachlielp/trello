@@ -14,6 +14,7 @@ import copyIcon from '/img/taskActionBtns/copyIcon.svg';
 import archiveIcon from '/img/taskActionBtns/archiveIcon.svg';
 import { SvgButton } from '../CustomCpms/SvgButton';
 import { ManageMembersPopover } from './ManageTaskPopovers/ManageMembersPopover';
+import { ManageLabelsPopover } from './ManageTaskPopovers/ManageLabelsPopover';
 const { TextArea } = Input;
 
 export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, openPreviewModal }) {
@@ -49,7 +50,22 @@ export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, openPr
 
     const allModalActionButtons = [
         // { label: 'Open card', icon: cardIcon, onClick: () => console.log('Add to X'), cover: false },
-        // { label: 'Edit labels', icon: labelIcon, onClick: () => console.log('Add to Y'), cover: false },
+        {
+            cover: false, popover: (
+                <ManageLabelsPopover
+                    anchorEl={
+                        <SvgButton
+                            src={labelIcon}
+                            className="floating-button"
+                            label="Edit labels"
+                        />
+                    }
+                    taskLabels={task.labels}
+                    editTask={editTask}
+                    task={task}
+                />
+            )
+        },
         {
             cover: false,
             popover: (
