@@ -14,7 +14,6 @@ export function TaskPreview({ task, editTask }) {
   const taskCover = task.cover;
 
   function onOpenPreviewModal(value) {
-    console.log('onOpenPreviewModal', value);
     setIsOpenPreviewModal(value);
   }
 
