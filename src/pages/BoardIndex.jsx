@@ -11,10 +11,11 @@ import {
   editTask,
 } from "../store/board.actions";
 import { AddGroupBtn } from "../cmps/Group/AddGroupBtn";
-import { TaskDetailsModal } from "../cmps/Task/TaskDetailsModal.jsx";
+import { TaskDetailsModal } from "../cmps/Task/TaskDetailsModal/TaskDetailsModal.jsx";
 import { BoardHeader } from "../cmps/BoardHeader/BoardHeader.jsx";
 import { useParams } from "react-router";
 import { setBoards } from "../store/workspace.actions.js";
+import { login } from "../store/user.actions.js";
 
 export function BoardIndex() {
   const board = useSelector((state) => state.boardModule.board);
@@ -24,6 +25,7 @@ export function BoardIndex() {
   useEffect(() => {
     loadTestBoardFromStorage();
     setBoards();
+    login();
   }, []);
 
   useEffect(() => {
