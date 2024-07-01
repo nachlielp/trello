@@ -13,11 +13,10 @@ import coverIcon from '/img/taskActionBtns/coverIcon.svg';
 import copyIcon from '/img/taskActionBtns/copyIcon.svg';
 import archiveIcon from '/img/taskActionBtns/archiveIcon.svg';
 import { SvgButton } from '../CustomCpms/SvgButton';
-
+import { ChangeMembersPopover } from './ChangeMembersPopover';
 const { TextArea } = Input;
 
-export function TaskPreviewEditModal({ task, isHovered, editTask }) {
-    const [isOpen, setIsOpen] = useState(false);
+export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, onOpenPreviewModal }) {
     const [modalStyle, setModalStyle] = useState({});
     const [taskName, setTaskName] = useState(task.name || '');
     const [showEditModalBtn, setShowEditModalBtn] = useState(false);
@@ -34,29 +33,45 @@ export function TaskPreviewEditModal({ task, isHovered, editTask }) {
             top: `${rect.top - 4}px`,
             left: `${rect.left - 205}px`,
         });
-        setIsOpen(true);
+        onOpenPreviewModal(true);
     };
 
     const handleOk = () => {
         if (taskName !== task.name) {
             editTask({ ...task, name: taskName });
         }
-        setIsOpen(false);
+        onOpenPreviewModal(false);
     };
 
     const handleCancel = () => {
-        setIsOpen(false);
+        onOpenPreviewModal(false);
     };
 
     const allModalActionButtons = [
-        { label: 'Open card', icon: cardIcon, onClick: () => console.log('Add to X'), cover: false },
-        { label: 'Edit labels', icon: labelIcon, onClick: () => console.log('Add to Y'), cover: false },
-        { label: 'Change members', icon: userIcon, onClick: () => console.log('Add to Y'), cover: false },
-        { label: 'Change cover', icon: coverIcon, onClick: () => console.log('Add to Y'), cover: true },
-        { label: 'Edit date', icon: timeIcon, onClick: () => console.log('Add to Y'), cover: false },
-        { label: 'Move', icon: moveIcon, onClick: () => console.log('Add to Y'), cover: true },
-        { label: 'Copy', icon: copyIcon, onClick: () => console.log('Add to Y'), cover: true },
-        { label: 'Archive', icon: archiveIcon, onClick: () => console.log('Add to Y'), cover: true },
+        // { label: 'Open card', icon: cardIcon, onClick: () => console.log('Add to X'), cover: false },
+        // { label: 'Edit labels', icon: labelIcon, onClick: () => console.log('Add to Y'), cover: false },
+        {
+            cover: false,
+            popover: (
+                <ChangeMembersPopover
+                    anchorEl={
+                        <SvgButton
+                            src={userIcon}
+                            className="floating-button"
+                            label="Change members"
+                        />
+                    }
+                    taskMemberIds={task.idMembers}
+                    editTask={editTask}
+                    task={task}
+                />
+            )
+        },
+        // { label: 'Change cover', icon: coverIcon, onClick: () => console.log('Add to Y'), cover: true },
+        // { label: 'Edit date', icon: timeIcon, onClick: () => console.log('Add to Y'), cover: false },
+        // { label: 'Move', icon: moveIcon, onClick: () => console.log('Add to Y'), cover: true },
+        // { label: 'Copy', icon: copyIcon, onClick: () => console.log('Add to Y'), cover: true },
+        // { label: 'Archive', icon: archiveIcon, onClick: () => console.log('Add to Y'), cover: true },
     ];
 
     const modalActionButtons = task.cover.size === 'full' ? allModalActionButtons.filter(btn => btn.cover) : allModalActionButtons;
@@ -117,13 +132,9 @@ export function TaskPreviewEditModal({ task, isHovered, editTask }) {
                 </button>
                 <section className={`floating-buttons ${task.cover.size === 'full' ? 'full-cover' : ''}`}>
                     {modalActionButtons.map((btn, index) => (
-                        <SvgButton
-                            key={index}
-                            src={btn.icon}
-                            className="floating-button"
-                            onClick={btn.onClick}
-                            label={btn.label}
-                        />
+                        <div key={index}>
+                            {btn.popover}
+                        </div>
                     ))}
                 </section>
             </Modal>

@@ -5,12 +5,14 @@
   overflow: hidden;
   color: var(--ds-text, #172b4d);
   width: 384px;
+
   .filter-header {
     display: grid;
     grid-template-columns: 32px 1fr 32px;
     align-items: center;
     padding: 4px 8px;
     text-align: center;
+
     h2 {
       grid-column: 2;
       height: 40px;
@@ -21,6 +23,7 @@
       font-size: 14px;
       font-weight: 600;
     }
+
     button {
       display: flex;
       align-items: center;
@@ -30,20 +33,24 @@
       width: 32px;
       height: 32px;
       border: none;
-      background: transparent;
+      // background: transparent;
       cursor: pointer;
+
       &:hover {
         background-color: var(--ds-background-neutral-hovered, #091e4224);
         color: var(--ds-icon, #44546f);
         text-decoration: none;
       }
+
       span {
         font-size: 16px;
       }
     }
   }
+
   .filter-body {
     padding: 0 12px 12px 12px;
+
     .search-title {
       color: var(--ds-text-subtle, #44546f);
       font-size: 12px;
@@ -52,6 +59,7 @@
       margin-top: 16px;
       margin-bottom: 8px;
     }
+
     .search-input {
       box-sizing: border-box;
       border: none;
@@ -72,15 +80,18 @@
       box-shadow: inset 0 0 0 1px var(--ds-border-input, #091e4224);
       width: 100%;
       margin-bottom: 0;
+
       &:hover {
         background-color: var(--ds-background-input-hovered, #f7f8f9);
         box-shadow: inset 0 0 0 1px var(--ds-border-input, #091e4224);
       }
+
       &:focus {
         background-color: var(--ds-background-input, #ffffff);
         box-shadow: inset 0 0 0 2px var(--ds-border-focused, #388bff);
       }
     }
+
     .search-paragraph {
       margin-top: 8px;
       margin-bottom: 4px;
@@ -88,8 +99,10 @@
       font-size: 11px;
       line-height: 14px;
     }
+
     div {
       width: 100%;
+
       .members-title {
         color: var(--ds-text-subtle, #44546f);
         font-size: 12px;
@@ -98,9 +111,11 @@
         margin-top: 16px;
         margin-bottom: 8px;
       }
+
       ul {
         li {
           width: 100%;
+
           label {
             box-sizing: border-box;
             margin: 0;
@@ -115,10 +130,12 @@
             font-size: 12px;
             font-weight: 700;
             line-height: 16px;
-            &.select-label{
+
+            &.select-label {
               width: max-content;
               margin-right: 16px;
             }
+
             input {
               cursor: not-allowed;
               margin: 0;
@@ -126,22 +143,26 @@
               height: 1px;
               appearance: none;
               position: absolute;
-              &:checked + .checkbox {
+
+              &:checked+.checkbox {
                 background-color: var(--ds-background-selected-bold, #0c66e4);
                 box-shadow: inset 0 0 0 1px var(--ds-border-selected, #0c66e4);
+
                 span {
                   svg {
                     fill: var(--ds-icon-inverse, #ffffff);
                   }
                 }
               }
-              &:disabled + .checkbox {
+
+              &:disabled+.checkbox {
                 position: relative;
                 background-color: var(--ds-background-disabled, #091e4208);
                 box-shadow: inset 0 0 0 1px var(--ds-border-disabled, #091e420f);
                 cursor: not-allowed;
               }
-              &:disabled:checked + .checkbox {
+
+              &:disabled:checked+.checkbox {
                 span {
                   svg {
                     fill: var(--ds-icon-disabled, #091e424f);
@@ -149,12 +170,14 @@
                 }
               }
             }
+
             &:hover {
               .checkbox {
                 background-color: var(--ds-background-input-hovered, #f7f8f9);
                 box-shadow: inset 0 0 0 1px var(--ds-border-input, #091e4224);
               }
             }
+
             .checkbox {
               position: relative;
               cursor: pointer;
@@ -167,6 +190,7 @@
               white-space: nowrap;
               background-color: var(--ds-background-input, #ffffff);
               box-shadow: inset 0 0 0 1px var(--ds-border-input, #091e4224);
+
               span {
                 display: flex;
                 align-items: center;
@@ -174,6 +198,7 @@
                 font-size: 16px;
               }
             }
+
             .choose {
               flex-grow: 1;
               min-width: 0;

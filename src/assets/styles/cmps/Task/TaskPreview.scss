@@ -7,6 +7,10 @@
     outline: 2px solid blue;
   }
 
+  &.open-preview-modal:hover {
+    outline: none;
+  }
+
   background-color: var(--ds-surface-raised, #ffffff);
   color: var(--ds-text);
   border: none;

@@ -1,0 +1,35 @@
+.change-members-option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    padding: 4px 8px 4px 4px;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 280px;
+
+    &:hover {
+        background-color: var(--ds-background-neutral-subtle-hovered, #091e420f);
+    }
+
+    .ant-avatar {
+        margin-right: 8px;
+    }
+
+    .member-name {
+        width: 200px;
+        margin-right: 8px;
+    }
+
+    .remove-member-button {
+        font-size: 14;
+        color: var(--ds-text);
+        background-color: transparent;
+        border: none;
+
+        .injected-svg {
+            width: 16px;
+            height: 16px;
+        }
+    }
+}

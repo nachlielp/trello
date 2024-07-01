@@ -43,6 +43,8 @@
 //Task
 @import "cmps/Task/TaskPreview";
 @import "cmps/Task/TaskPreviewEditModal";
+@import "cmps/Task/ChangeMembersPopover";
+@import "cmps/Task/ChangeMembersOption";
 
 :root.dark {
   --ds-surface-overlay: #282e33;
@@ -65,6 +67,7 @@
   --ds-background-input-hovered: #282E33;
   --ds-border-disabled: #A1BDD914;
 }
+
 :root {
   --ds-surface-overlay: #ffffff;
   --ds-text-subtle: #44546f;
@@ -84,6 +87,6 @@
   --ds-background-input: #ffffff;
   --ds-border-input: #8590a2;
   --ds-background-input-hovered: #F7F8F9;
-  --ds-background-neutral-subtle-hovered: #091E420F;
+  --ds-background-neutral-subtle-hovered: #091e420f;
   --ds-background-disabled: #091E4208;
 }

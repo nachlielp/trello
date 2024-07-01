@@ -3,7 +3,7 @@ import { ReactSVG } from 'react-svg';
 
 export function SvgButton({ src, className, onClick, label }) {
     return (
-        <button className={className} onClick={onClick}>
+        <button className={className} onClick={onClick} >
             <ReactSVG
                 src={src}
                 wrapper="span"

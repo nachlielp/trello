@@ -7,16 +7,20 @@ import { TaskPreviewEditModal } from "./TaskPreviewEditModal";
 
 export function TaskPreview({ task, editTask }) {
   const [isHovered, setIsHovered] = useState(false);
-
+  const [isOpenPreviewModal, setIsOpenPreviewModal] = useState(false);
   const taskCover = task.cover;
+
+  function onOpenPreviewModal(value) {
+    setIsOpenPreviewModal(value);
+  }
 
   return (
     <Card
-      className={`group-task custom-card `}
+      className={`group-task custom-card ${isOpenPreviewModal ? 'open-preview-modal' : ''}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <TaskPreviewEditModal task={task} isHovered={isHovered} editTask={editTask} />
+      <TaskPreviewEditModal task={task} isHovered={isHovered} editTask={editTask} isOpen={isOpenPreviewModal} onOpenPreviewModal={onOpenPreviewModal} />
       {taskCover.color && (
         <div
           className="group-task-header"
