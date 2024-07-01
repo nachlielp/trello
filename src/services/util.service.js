@@ -142,7 +142,10 @@ function getColorHashByName(name) {
 }
 
 function _createStartInfo() {
-  // localStorage.setItem("dark", true)
+  if(import.meta.env.VITE_TRELLO_DARKMODE){
+
+    localStorage.setItem("dark", import.meta.env.VITE_TRELLO_DARKMODE)
+  }
 
 
   if (localStorage.getItem("dark") === "true") {
