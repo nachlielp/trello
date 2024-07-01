@@ -6,28 +6,33 @@ import { useNavigate } from "react-router";
 
 export function TaskPreviewCover({ task, editTask }) {
   const [isHovered, setIsHovered] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const taskMember = task.cover;
   const navigate = useNavigate();
 
+  const openPreviewModal = (value) => {
+    setIsOpen(value);
+  }
+
   const taskColorCoverStyle = taskMember.color
     ? {
-        backgroundColor: utilService.getColorHashByName(taskMember.color)
-          .bgColor,
-      }
+      backgroundColor: utilService.getColorHashByName(taskMember.color)
+        .bgColor,
+    }
     : {};
 
   const taskBackgroundCoverImage = taskMember.idUploadedBackground
     ? {
-        backgroundImage: `url(${taskMember.scaled[2].url})`,
-        backgroundSize: "cover",
-      }
+      backgroundImage: `url(${taskMember.scaled[2].url})`,
+      backgroundSize: "cover",
+    }
     : {};
 
   const componentClass = taskMember.color
     ? "task-bg-cover"
     : taskMember.idUploadedBackground
-    ? "task-img-cover"
-    : "";
+      ? "task-img-cover"
+      : "";
 
   return (
     <Card
@@ -40,11 +45,12 @@ export function TaskPreviewCover({ task, editTask }) {
         task={task}
         isHovered={isHovered}
         editTask={editTask}
+        isOpen={isOpen}
+        openPreviewModal={openPreviewModal}
       />
       <section
-        className={`group-task-content ${
-          taskMember.idUploadedBackground ? "image-cover" : ""
-        }`}
+        className={`group-task-content ${taskMember.idUploadedBackground ? "image-cover" : ""
+          }`}
         onClick={() => navigate(`/c/${task.id}`, { replace: true })}
       >
         <span className="group-task-content-title">{task.name}</span>

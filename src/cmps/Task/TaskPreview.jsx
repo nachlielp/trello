@@ -14,6 +14,7 @@ export function TaskPreview({ task, editTask }) {
   const taskCover = task.cover;
 
   function onOpenPreviewModal(value) {
+    console.log('onOpenPreviewModal', value);
     setIsOpenPreviewModal(value);
   }
 
@@ -26,8 +27,9 @@ export function TaskPreview({ task, editTask }) {
       <TaskPreviewEditModal
         task={task}
         isHovered={isHovered}
-        editTask={editTask} isOpen={isOpenPreviewModal}
-        onOpenPreviewModal={onOpenPreviewModal}
+        editTask={editTask}
+        isOpen={isOpenPreviewModal}
+        openPreviewModal={onOpenPreviewModal}
       />
       {taskCover.color && (
         <div

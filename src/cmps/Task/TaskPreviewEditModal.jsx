@@ -16,7 +16,7 @@ import { SvgButton } from '../CustomCpms/SvgButton';
 import { ManageMembersPopover } from './ManageTaskPopovers/ManageMembersPopover';
 const { TextArea } = Input;
 
-export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, onOpenPreviewModal }) {
+export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, openPreviewModal }) {
     const [modalStyle, setModalStyle] = useState({});
     const [taskName, setTaskName] = useState(task.name || '');
     const [showEditModalBtn, setShowEditModalBtn] = useState(false);
@@ -33,18 +33,18 @@ export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, onOpen
             top: `${rect.top - 4}px`,
             left: `${rect.left - 205}px`,
         });
-        onOpenPreviewModal(true);
+        openPreviewModal(true);
     };
 
     const handleOk = () => {
         if (taskName !== task.name) {
             editTask({ ...task, name: taskName });
         }
-        onOpenPreviewModal(false);
+        openPreviewModal(false);
     };
 
     const handleCancel = () => {
-        onOpenPreviewModal(false);
+        openPreviewModal(false);
     };
 
     const allModalActionButtons = [
