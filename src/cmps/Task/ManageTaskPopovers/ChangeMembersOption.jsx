@@ -1,5 +1,5 @@
-import { UserAvatar } from "../../cmps/UserAvatar";
-import { SvgButton } from "../../cmps/CustomCpms/SvgButton";
+import { UserAvatar } from "../../UserAvatar";
+import { SvgButton } from "../../CustomCpms/SvgButton";
 
 export function ChangeMembersOption({ task, member, isSelected, editTask }) {
 

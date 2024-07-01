@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { ChangeMembersOption } from "./ChangeMembersOption";
 
-export function ChangeMembersPopover({ anchorEl, taskMemberIds, editTask, task }) {
+export function ManageLabelsPopover({ anchorEl, editTask, task }) {
     const members = useSelector((state) => state.boardModule.members);
     const [inputSearch, setInputSearch] = useState('');
     const [isOpen, setIsOpen] = useState(false);
