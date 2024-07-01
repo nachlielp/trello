@@ -2,11 +2,13 @@ import { createStore, combineReducers } from "redux";
 import { userReducer } from "./user.reducer";
 
 import { boardReducer } from "./board.reducer";
+import { workspaceReducer } from "./workspace.reducer";
 
 
 const rootReducer = combineReducers({
   userModule: userReducer,
-  boardModule: boardReducer
+  boardModule: boardReducer,
+  workspaceModule: workspaceReducer,
 })
 
 

@@ -100,31 +100,31 @@ export function boardReducer(state = initialState, action) {
 
 // unitTestReducer()
 
-function unitTestReducer() {
-    var state = initialState
-    const board1 = { _id: 'b101', title: 'Board ' + parseInt(Math.random() * 10) }
-    const board2 = { _id: 'b102', title: 'Board ' + parseInt(Math.random() * 10) }
+// function unitTestReducer() {
+//     var state = initialState
+//     const board1 = { _id: 'b101', title: 'Board ' + parseInt(Math.random() * 10) }
+//     const board2 = { _id: 'b102', title: 'Board ' + parseInt(Math.random() * 10) }
 
-    state = boardReducer(state, { type: SET_BOARDS, boards: [board1] })
-    console.log('After SET_BOARDS:', state)
+//     state = boardReducer(state, { type: SET_BOARDS, boards: [board1] })
+//     console.log('After SET_BOARDS:', state)
 
-    state = boardReducer(state, { type: ADD_BOARD, board: board2 })
-    console.log('After ADD_BOARD:', state)
+//     state = boardReducer(state, { type: ADD_BOARD, board: board2 })
+//     console.log('After ADD_BOARD:', state)
 
-    state = boardReducer(state, { type: UPDATE_BOARD, board: { ...board2, title: 'Good' } })
-    console.log('After UPDATE_BOARD:', state)
+//     state = boardReducer(state, { type: UPDATE_BOARD, board: { ...board2, title: 'Good' } })
+//     console.log('After UPDATE_BOARD:', state)
 
-    state = boardReducer(state, { type: REMOVE_BOARD, boardId: board2._id })
-    console.log('After REMOVE_BOARD:', state)
+//     state = boardReducer(state, { type: REMOVE_BOARD, boardId: board2._id })
+//     console.log('After REMOVE_BOARD:', state)
 
-    const msg = { _id: 'm' + parseInt(Math.random() * 100), txt: 'Some msg' }
-    state = boardReducer(state, { type: ADD_BOARD_MSG, boardId: board1._id, msg })
-    console.log('After ADD_BOARD_MSG:', state)
+//     const msg = { _id: 'm' + parseInt(Math.random() * 100), txt: 'Some msg' }
+//     state = boardReducer(state, { type: ADD_BOARD_MSG, boardId: board1._id, msg })
+//     console.log('After ADD_BOARD_MSG:', state)
 
 
 
-    // state = boardReducer(state, {type: REMOVE_BOARD, boardId: board1._id})
-    // console.log('After REMOVE_BOARD:', state)
-}
+//     state = boardReducer(state, {type: REMOVE_BOARD, boardId: board1._id})
+//     console.log('After REMOVE_BOARD:', state)
+// }
 
 
