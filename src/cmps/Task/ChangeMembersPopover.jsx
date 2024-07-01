@@ -25,7 +25,7 @@ export function ChangeMembersPopover({ anchorEl, taskMemberIds, editTask, task }
         <Popover
             className="change-members-popover"
             trigger="click"
-            placement="bottomLeft"
+            placement="bottomRight"
             open={isOpen}
             close={() => { }}
             onOpenChange={setIsOpen}

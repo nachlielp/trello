@@ -10,7 +10,6 @@ export function ChangeMembersOption({ task, member, isSelected, editTask }) {
         } else {
             newTaskMemberIds.push(member.id);
         }
-        console.log('newTaskMemberIds', newTaskMemberIds);
         editTask({ ...task, idMembers: newTaskMemberIds });
     }
     return (
