@@ -67,7 +67,7 @@ export function BoardHeader() {
         <ViewsButton />
       </div>
       <div className="right-info">
-        <FilterButton />
+        {/* <FilterButton /> */}
         <div className="members">
           {members?.slice(0, 3).map((member) => (
             <UserAvatar
