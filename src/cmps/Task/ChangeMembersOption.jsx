@@ -4,7 +4,6 @@ import { SvgButton } from "../../cmps/CustomCpms/SvgButton";
 export function ChangeMembersOption({ task, member, isSelected, editTask }) {
 
     function onEditTask() {
-        console.log('onEditTask', task);
         const newTaskMemberIds = [...task.idMembers];
         if (isSelected) {
             newTaskMemberIds.splice(newTaskMemberIds.indexOf(member.id), 1);
