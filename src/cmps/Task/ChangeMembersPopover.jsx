@@ -5,25 +5,22 @@ import { ChangeMembersOption } from "./ChangeMembersOption";
 
 export function ChangeMembersPopover({ anchorEl, taskMemberIds, editTask, task }) {
     const members = useSelector((state) => state.boardModule.members);
-    const taskMembers = members.filter((member) => taskMemberIds.includes(member.id));
     const [inputSearch, setInputSearch] = useState('');
     const [isOpen, setIsOpen] = useState(false);
-    const [filteredMembers, setFilteredMembers] = useState(members);
     const [selectedMembers, setSelectedMembers] = useState([]);
     const [unselectedMembers, setUnselectedMembers] = useState([]);
 
     useEffect(() => {
         if (inputSearch === '') {
-            setFilteredMembers(members);
+            setSelectedMembers(members.filter((member) => taskMemberIds.includes(member.id)));
+            setUnselectedMembers(members.filter((member) => !taskMemberIds.includes(member.id)));
         } else {
-            setFilteredMembers(members.filter((member) => member.fullName.toLowerCase().includes(inputSearch.toLowerCase())));
+            setSelectedMembers(members.filter((member) => taskMemberIds.includes(member.id)).filter((member) => member.fullName.toLowerCase().includes(inputSearch.toLowerCase())));
+            setUnselectedMembers(members.filter((member) => !taskMemberIds.includes(member.id)).filter((member) => member.fullName.toLowerCase().includes(inputSearch.toLowerCase())));
         }
-    }, [inputSearch]);
 
-    useEffect(() => {
-        setSelectedMembers(members.filter((member) => taskMemberIds.includes(member.id)));
-        setUnselectedMembers(members.filter((member) => !taskMemberIds.includes(member.id)));
-    }, [taskMemberIds]);
+    }, [taskMemberIds, inputSearch]);
+
     return (
         <Popover
             className="change-members-popover"
@@ -50,6 +47,7 @@ export function ChangeMembersPopover({ anchorEl, taskMemberIds, editTask, task }
                                 <ChangeMembersOption task={task} member={member} isSelected={false} editTask={editTask} />
                             ))}
                         </article>}
+                        {unselectedMembers.length === 0 && selectedMembers.length === 0 && <article className="no-members-found">No results</article>}
                     </article>
                 </section>
             }

@@ -36,5 +36,14 @@
             font-weight: 600;
             color: var(--ds-text-subtle, #44546f);
         }
+
+        .no-members-found {
+            margin: 0;
+            padding: 24px 6px;
+            border-radius: 3px;
+            background-color: var(--ds-background-neutral, #091e420f);
+            color: var(--ds-text-subtle, #44546f);
+            text-align: center;
+        }
     }
 }
