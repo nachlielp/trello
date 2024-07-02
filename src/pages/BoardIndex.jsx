@@ -16,11 +16,19 @@ import { BoardHeader } from "../cmps/BoardHeader/BoardHeader.jsx";
 import { useParams } from "react-router";
 import { setBoards } from "../store/workspace.actions.js";
 import { login } from "../store/user.actions.js";
+import useScrollByGrab from "../customHooks/useScrollByGrab.js";
 
 export function BoardIndex() {
   const board = useSelector((state) => state.boardModule.board);
   const [clickedTaskId, setClickedTaskId] = useState();
   const params = useParams();
+  const {
+    scrollContainerRef,
+    handleMouseDown,
+    handleMouseLeave,
+    handleMouseUp,
+    handleMouseMove
+} = useScrollByGrab();
 
   useEffect(() => {
     loadTestBoardFromStorage();
@@ -53,12 +61,12 @@ export function BoardIndex() {
       name: name,
     };
     const res = await addGroup(group, board.id);
-    console.log("onAddGroup", res);
+    // console.log("onAddGroup", res);
   }
 
   async function onArchiveGroup(boardId, groupId) {
     const res = await archiveGroup(boardId, groupId);
-    console.log("onArchiveGroup", res);
+    // console.log("onArchiveGroup", res);
   }
 
   async function onEditGroup(group) {
@@ -82,7 +90,12 @@ export function BoardIndex() {
         }}
       >
         {board && <BoardHeader />}
-        <main className="board-groups">
+        <main className="board-groups"
+         ref={scrollContainerRef}
+         onMouseDown={handleMouseDown}
+         onMouseLeave={handleMouseLeave}
+         onMouseUp={handleMouseUp}
+         onMouseMove={handleMouseMove}>
           {sortedGroups &&
             sortedGroups.map((group) => (
               <BoardGroup
