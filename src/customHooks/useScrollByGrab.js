@@ -12,7 +12,7 @@ const useScrollByGrab = () => {
 
         // Prevent scrolling if the target element is a child of scrollContainer
         // if (e.target !== scrollContainer) return;
-        if (!firstLevelChild) return;
+        if (!firstLevelChild && e.target !== scrollContainer) return;
 
         setIsDown(true);
         setStartX(e.pageX - scrollContainer.offsetLeft);
