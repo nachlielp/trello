@@ -4,6 +4,7 @@ import fileIcon from "../../assets/svgs/file.svg";
 import { ReactSVG } from "react-svg";
 import { UserAvatar } from "../UserAvatar";
 import { useSelector } from "react-redux";
+import { ProfilePopover } from "./ManageTaskPopovers/ProfilePopover";
 
 export function TaskPreviewBadges({ task }) {
   const members = useSelector((state) => state.boardModule.members);
@@ -61,10 +62,18 @@ export function TaskPreviewBadges({ task }) {
       </aside>
       <aside className="aside-task-users">
         {taskMembers.map((member) => (
-          <UserAvatar key={member.id} member={member} onClick={e=>e.stopPropagation()}/>
+          <ProfilePopover
+            member={member}
+            key={member.id}
+            anchorEl={
+              <UserAvatar
+                member={member}
+                onClick={(e) => e.stopPropagation()}
+              />
+            }
+          />
         ))}
       </aside>
     </div>
   );
 }
-

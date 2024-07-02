@@ -11,6 +11,7 @@ export function UserAvatar({
   src = defaultProfile,
   img,
   style = {},
+  offTitle = false,
   ...other
 }) {
   const dynamicStyles = member
@@ -18,7 +19,7 @@ export function UserAvatar({
     : {};
 
   return (
-    <Tooltip placement="bottom" title={member?.fullName} arrow={false}>
+    <Tooltip placement="bottom" title={!!!offTitle&&member?.fullName} arrow={false}>
       <Avatar
         key={member?.id}
         src={member?.avatarHash}

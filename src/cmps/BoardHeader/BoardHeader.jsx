@@ -11,6 +11,7 @@ import { UserAvatar } from "../UserAvatar";
 import { VisibilityButton } from ".//VisibilityButton";
 import { ViewsButton } from "./ViewsButton";
 import { FilterButton } from "./FilterButton";
+import { ProfilePopover } from "../Task/ManageTaskPopovers/ProfilePopover";
 
 export function BoardHeader() {
   const [isStarredBoard, setIsStarredBoard] = useState(false);
@@ -70,11 +71,18 @@ export function BoardHeader() {
         {/* <FilterButton /> */}
         <div className="members">
           {members?.slice(0, 3).map((member) => (
-            <UserAvatar
-              member={member}
-              key={member.id}
-              size={28}
-              className="members-avatar"
+            <ProfilePopover
+            member={member}
+            placement="bottom"
+            key={member.id}
+              anchorEl={
+                <UserAvatar
+                  member={member}
+                  key={member.id}
+                  size={28}
+                  className="members-avatar"
+                />
+              }
             />
           ))}
         </div>

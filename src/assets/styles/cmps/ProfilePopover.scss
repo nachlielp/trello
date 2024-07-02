@@ -1,0 +1,99 @@
+.ant-popover-inner:has(.profile-popover) {
+  background-color: inherit !important;
+// border-radius: 10px !important;
+}
+.profile-popover {
+  width: 304px;
+  background: var(--ds-surface-overlay, #fff);
+  border-radius: 8px;
+  overflow: hidden;
+  border: none;
+  padding: 0 12px 12px 12px;
+  .close-btn {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 10px 12px 10px 8px;
+  }
+  .profile-header {
+    display: flex;
+    padding: 24px 12px 8px 14px;
+    background-image: linear-gradient(
+      to bottom,
+      var(--ds-background-brand-bold, #0c66e4) 0%,
+      var(--ds-background-brand-bold, #0c66e4) 100%
+    );
+    background-repeat: no-repeat;
+    background-size: 100% 82px;
+    margin: 0 -12px;
+    > span {
+      border: 1px solid var(--ds-background-accent-gray-subtler, #dcdfe4);
+      span {
+        font-size: 42px;
+      }
+    }
+    .profile-info {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-width: 0;
+      margin-top: 8px;
+      margin-left: 8px;
+      height: min-content;
+      .profile-name {
+        color: var(--ds-text-inverse, #ffffff);
+        overflow: hidden;
+        font-size: 16px;
+        font-weight: 500;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .profile-username {
+        overflow: hidden;
+        color: var(--ds-text-inverse, #ffffff);
+        font-size: 12px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+  ul {
+    margin: 0 -12px;
+    .profile-link {
+      display: block;
+      padding: 6px 12px 6px 12px;
+      color: var(--ds-text, #172b4d);
+      line-height: 20px;
+      &:hover {
+        background-color: var(
+          --ds-background-neutral-subtle-hovered,
+          #091e420f
+        );
+      }
+    }
+  }
+  hr {
+    border-top: none;
+    border-color: var(--ds-border, #091e4224);
+  }
+  .profile-other {
+    margin: 0 -12px;
+    button {
+      cursor: pointer;
+      padding: 6px 12px;
+      display: block;
+      width: 100%;
+      text-align: left;
+      background-color: inherit;
+      border: none;
+      color: var(--ds-text, #172b4d);
+      &:hover {
+        background-color: var(
+          --ds-background-neutral-subtle-hovered,
+          #091e420f
+        );
+      }
+    }
+  }
+}

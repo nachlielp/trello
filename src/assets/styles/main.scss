@@ -32,6 +32,7 @@
 @import "cmps/UserMsg";
 @import "cmps/Label";
 @import "cmps/ListFooter";
+@import "cmps/ProfilePopover.scss";
 
 //Group
 @import "cmps/Group/BoardGroup";
@@ -68,6 +69,10 @@
   --ds-background-input-hovered: #282e33;
   --ds-border-disabled: #a1bdd914;
   --ds-background-neutral: #a1bdd914;
+  --ds-background-accent-gray-subtler: #454f59;
+  --ds-background-brand-bold: #579dff;
+  --ds-border: #a6c5e229;
+  --ds-background-neutral-subtle-hovered: #a1bdd914;
 }
 
 :root {
@@ -92,4 +97,8 @@
   --ds-background-neutral-subtle-hovered: #091e420f;
   --ds-background-disabled: #091e4208;
   --ds-background-neutral: #091e420f;
+  --ds-background-accent-gray-subtler: #dcdfe4;
+  --ds-background-brand-bold: #0c66e4;
+  --ds-border: #091e4224;
+  --ds-background-neutral-subtle-hovered: #091e420f;
 }
