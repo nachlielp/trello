@@ -3,7 +3,7 @@ import { GroupActionsMenuPopover } from "./GroupActionsMenuPopover"
 import { Input } from "antd"
 const { TextArea } = Input;
 
-export function BoardGroupHeader({ group, editGroup, openAddTask, archiveGroup, copyGroup, moveAllCards }) {
+export function BoardGroupHeader({ group, editGroup, openAddTask, archiveGroup, copyGroup, moveAllCards, archiveAllCards }) {
     const [isEditGroupName, setIsEditGroupName] = useState(false)
     const [newGroupName, setNewGroupName] = useState(group.name)
     const textAreaRef = useRef(null)
@@ -44,7 +44,7 @@ export function BoardGroupHeader({ group, editGroup, openAddTask, archiveGroup, 
                     onBlur={onRenameGroup}
                 />
                 : <p className="group-title" onClick={() => setIsEditGroupName(true)}>{group.name}</p>}
-            <GroupActionsMenuPopover openAddTask={openAddTask} archiveGroup={archiveGroup} group={group} copyGroup={copyGroup} moveAllCards={moveAllCards} />
+            <GroupActionsMenuPopover openAddTask={openAddTask} archiveGroup={archiveGroup} group={group} copyGroup={copyGroup} moveAllCards={moveAllCards} archiveAllCards={archiveAllCards} />
         </header>
     )
 }

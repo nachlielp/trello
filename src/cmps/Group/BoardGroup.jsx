@@ -7,7 +7,7 @@ import { TaskPreview } from "../Task/TaskPreview"
 import { TaskPreviewCover } from "../Task/TaskPreviewCover"
 
 //TODO put add new task in array of sorted tasks based on position
-export function BoardGroup({ group, addTask, archiveGroup, editGroup, editTask, editLabel, copyGroup, moveAllCards }) {
+export function BoardGroup({ group, addTask, archiveGroup, editGroup, editTask, editLabel, copyGroup, moveAllCards, archiveAllCards }) {
     const [isAddTaskOpen, setIsAddTaskOpen] = useState(false)
     const [newTaskIds, setNewTaskIds] = useState([])
     const [firstTaskPos, setFirstTaskPos] = useState(null)
@@ -15,12 +15,14 @@ export function BoardGroup({ group, addTask, archiveGroup, editGroup, editTask, 
     const [sortedTasks, setSortedTasks] = useState([])
 
     useEffect(() => {
-        setSortedTasks(group.tasks?.sort((a, b) => a.pos - b.pos) || [])
-        setNewTaskIds(group.tasks?.filter(task => task.pos < firstTaskPos).map(task => task.id) || [])
+        const filteredTasks = group.tasks?.filter(task => !task.closed) || [];
+        setSortedTasks(filteredTasks.sort((a, b) => a.pos - b.pos) || [])
+        setNewTaskIds(filteredTasks.filter(task => task.pos < firstTaskPos).map(task => task.id) || [])
     }, [group.tasks])
 
     useEffect(() => {
-        const sortedTasks = group.tasks?.sort((a, b) => a.pos - b.pos) || []
+        const filteredTasks = group.tasks?.filter(task => !task.closed) || [];
+        const sortedTasks = filteredTasks.sort((a, b) => a.pos - b.pos) || []
         if (sortedTasks.length > 0) {
             setFirstTaskPos(sortedTasks[0].pos)
             setLastTaskPos(sortedTasks[sortedTasks.length - 1].pos)
@@ -28,12 +30,13 @@ export function BoardGroup({ group, addTask, archiveGroup, editGroup, editTask, 
     }, [])
 
     useEffect(() => {
-        const sortedTasks = group.tasks?.sort((a, b) => a.pos - b.pos) || []
+        const filteredTasks = group.tasks?.filter(task => !task.closed) || [];
+        const sortedTasks = filteredTasks.sort((a, b) => a.pos - b.pos) || []
         if (sortedTasks.length > 0) {
             setFirstTaskPos(sortedTasks[0].pos)
             setLastTaskPos(sortedTasks[sortedTasks.length - 1].pos)
         }
-        setNewTaskIds([])
+        setNewTaskIds(filteredTasks.filter(task => task.pos < firstTaskPos).map(task => task.id) || [])
     }, [isAddTaskOpen])
 
 
@@ -44,7 +47,7 @@ export function BoardGroup({ group, addTask, archiveGroup, editGroup, editTask, 
     return (
         <div className="board-group-container">
             <Card className="board-group custom-card">
-                <BoardGroupHeader group={group} editGroup={editGroup} openAddTask={openAddTask} archiveGroup={archiveGroup} copyGroup={copyGroup} moveAllCards={moveAllCards} />
+                <BoardGroupHeader group={group} editGroup={editGroup} openAddTask={openAddTask} archiveGroup={archiveGroup} copyGroup={copyGroup} moveAllCards={moveAllCards} archiveAllCards={archiveAllCards} />
                 <main className="board-group-main">
                     {newTaskIds.map(taskId => <TaskPreview key={taskId} task={group.tasks.find(task => task.id === taskId)} />)}
                     {isAddTaskOpen && <AddTaskInGroup groupId={group.id} closeAddTask={() => setIsAddTaskOpen(false)} addTask={addTask} firstTaskPos={firstTaskPos} />}

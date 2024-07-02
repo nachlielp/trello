@@ -2,7 +2,7 @@ import { boardService } from '../services/board.service.local'
 import { utilService } from '../services/util.service'
 import { memberService } from '../services/members.service.local'
 import { store } from './store'
-import { SET_MEMBERS, SET_BOARD, SET_IS_EXPANDED, ADD_TASK, ADD_GROUP, EDIT_GROUP, EDIT_TASK, EDIT_LABEL, COPY_GROUP, MOVE_ALL_CARDS } from './board.reducer'
+import { SET_MEMBERS, SET_BOARD, SET_IS_EXPANDED, ADD_TASK, ADD_GROUP, EDIT_GROUP, EDIT_TASK, EDIT_LABEL, COPY_GROUP, MOVE_ALL_CARDS, ARCHIVE_ALL_CARDS } from './board.reducer'
 
 // export async function loadTrelloDataFromSource() {
 //   try {
@@ -162,6 +162,17 @@ export async function moveAllCards(boardId, sourceGroupId, targetGroupId) {
   console.log('newBoard', newBoard)
   console.log({ sourceGroup: { ...sourceGroup, tasks: [] }, targetGroup: newTargetGroup })
   store.dispatch({ type: MOVE_ALL_CARDS, sourceGroup: { ...sourceGroup, tasks: [] }, targetGroup: newTargetGroup });
+  await boardService.save(newBoard);
+}
+
+
+export async function archiveAllCards(boardId, groupId) {
+  const board = await boardService.getById(boardId);
+  const group = board.groups.find(g => g.id === groupId);
+  const newGroup = { ...group, tasks: group.tasks.map(t => ({ ...t, closed: true })) };
+  store.dispatch({ type: ARCHIVE_ALL_CARDS, group: newGroup })
+
+  const newBoard = { ...board, groups: board.groups.map(g => g.id === groupId ? newGroup : g) };
   await boardService.save(newBoard);
 }
 

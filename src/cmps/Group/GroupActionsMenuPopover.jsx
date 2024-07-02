@@ -5,7 +5,7 @@ import { ManageTaskPopoverHeader } from "../Task/ManageTaskPopovers/ManageTaskPo
 import TextArea from "antd/es/input/TextArea"
 import { useSelector } from "react-redux"
 
-export function GroupActionsMenuPopover({ group, openAddTask, archiveGroup, copyGroup, moveAllCards }) {
+export function GroupActionsMenuPopover({ group, openAddTask, archiveGroup, copyGroup, moveAllCards, archiveAllCards }) {
     const board = useSelector((state) => state.boardModule.board);
     const [openGroupMenu, setOpenGroupMenu] = useState(false)
     const [backToList, setBackToList] = useState(null);
@@ -72,6 +72,17 @@ export function GroupActionsMenuPopover({ group, openAddTask, archiveGroup, copy
         setOpenGroupMenu(false)
         moveAllCards(board.id, group.id, targetGroupId)
     }
+
+    function onSelectArchiveAllCards() {
+        setAction("Archive all cards in list")
+        setBackToList(() => onBackToList);
+    }
+    function onArchiveAllCards() {
+        setAction(null)
+        setBackToList(null)
+        setOpenGroupMenu(false)
+        archiveAllCards(board.id, group.id)
+    }
     return (
         <Popover
             className="group-actions-menu-popover"
@@ -91,8 +102,9 @@ export function GroupActionsMenuPopover({ group, openAddTask, archiveGroup, copy
                             <p className="menu-action" onClick={onSelectMoveAllCards}>Move all cards in the list</p>
                             {/* <p className="menu-action">Sort by...</p> */}
                             {/* <p className="menu-action">Watch</p> */}
+                            <hr className="simple-gray-line" />
                             <p className="menu-action" onClick={onArchiveGroup}>Archive this list</p>
-                            {/* <p className="menu-action">Archive all cards in the list</p> */}
+                            <p className="menu-action" onClick={onSelectArchiveAllCards}>Archive all cards in the list</p>
                         </article>
                     }
                     {action === "Copy list" &&
@@ -116,6 +128,12 @@ export function GroupActionsMenuPopover({ group, openAddTask, archiveGroup, copy
                                 }
                                 return <p className="menu-action" key={g.id} onClick={() => onMoveAllCards(g.id)}>{g.name}</p>
                             })}
+                        </article>
+                    }
+                    {action === "Archive all cards in list" &&
+                        <article className="group-actions-menu-actions">
+                            <p className="warning-text">Are you sure you want to archive the selected cards?</p>
+                            <button className="action-btn danger-btn" onClick={onArchiveAllCards}>Archive cards</button>
                         </article>
                     }
                 </section>
