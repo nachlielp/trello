@@ -10,6 +10,7 @@ import {
   editGroup,
   editTask,
   editLabel,
+  copyGroup,
 } from "../store/board.actions";
 import { AddGroupBtn } from "../cmps/Group/AddGroupBtn";
 import { TaskDetailsModal } from "../cmps/Task/TaskDetailsModal/TaskDetailsModal.jsx";
@@ -76,6 +77,9 @@ export function BoardIndex() {
     const res = await editLabel(board.id, label);
   }
 
+  async function onCopyGroup(group) {
+    const res = await copyGroup(board.id, group);
+  }
   const sortedGroups = board?.groups
     ?.filter((l) => !l.closed)
     .sort((a, b) => a.pos - b.pos);
@@ -90,8 +94,8 @@ export function BoardIndex() {
       >
         {board && <BoardHeader />}
         <main className="board-groups"
-         ref={scrollContainerRef}
-       {...handlers} >
+          ref={scrollContainerRef}
+          {...handlers} >
           {sortedGroups &&
             sortedGroups.map((group) => (
               <BoardGroup
@@ -102,6 +106,7 @@ export function BoardIndex() {
                 editGroup={onEditGroup}
                 editTask={onEditTask}
                 editLabel={onEditLabel}
+                copyGroup={onCopyGroup}
               />
             ))}
           <AddGroupBtn addGroup={onAddGroup} />

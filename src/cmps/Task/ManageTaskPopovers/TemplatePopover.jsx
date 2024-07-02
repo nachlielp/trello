@@ -4,11 +4,22 @@ import { ManageTaskPopoverHeader } from "../ManageTaskPopovers/ManageTaskPopover
 
 export function TNAME({ anchorEl, editTask, task }) {
     const [isOpen, setIsOpen] = useState(false);
+    const [backToList, setBackToList] = useState(null);
 
     const cardTitle = "ADD TITLE";
 
     function onClose() {
         setIsOpen(false);
+    }
+
+    function onNextPage(_) {
+        //
+        setBackToList(() => onBackToList);
+    }
+
+    function onBackToList() {
+        //
+        setBackToList(null);
     }
 
     return (
@@ -22,7 +33,7 @@ export function TNAME({ anchorEl, editTask, task }) {
             arrow={false}
             content={
                 <section className="manage-labels-content">
-                    <ManageTaskPopoverHeader title={cardTitle} close={onClose} />
+                    <ManageTaskPopoverHeader title="cardTitle" close={onClose} back={backToList} />
                     {/* ADD BODY */}
                 </section>
             }

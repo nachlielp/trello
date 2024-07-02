@@ -2,7 +2,7 @@ import { boardService } from '../services/board.service.local'
 import { utilService } from '../services/util.service'
 import { memberService } from '../services/members.service.local'
 import { store } from './store'
-import { SET_MEMBERS, SET_BOARD, SET_IS_EXPANDED, ADD_TASK, ADD_GROUP, EDIT_GROUP, EDIT_TASK, EDIT_LABEL } from './board.reducer'
+import { SET_MEMBERS, SET_BOARD, SET_IS_EXPANDED, ADD_TASK, ADD_GROUP, EDIT_GROUP, EDIT_TASK, EDIT_LABEL, COPY_GROUP } from './board.reducer'
 
 // export async function loadTrelloDataFromSource() {
 //   try {
@@ -123,6 +123,25 @@ export async function archiveGroup(boardId, groupId) {
   return newBoard
 }
 
+export async function copyGroup(boardId, group) {
+  const board = await boardService.getById(boardId);
+  const groupTasks = group.tasks.map(t => ({ ...t, id: utilService.makeId() }));
+  const newGroup = { ...group, id: utilService.makeId(), pos: group.pos + 1, tasks: groupTasks };
+
+  const updatedGroups = board.groups.map(g => {
+    if (g.pos >= newGroup.pos) {
+      return { ...g, pos: g.pos + 1 };
+    }
+    return g;
+  });
+
+  updatedGroups.push(newGroup);
+
+  store.dispatch({ type: COPY_GROUP, groups: updatedGroups });
+
+  const newBoard = { ...board, groups: updatedGroups };
+  await boardService.save(newBoard);
+}
 
 export async function editGroup(boardId, group) {
   store.dispatch({ type: EDIT_GROUP, group: group })

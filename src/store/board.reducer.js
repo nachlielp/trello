@@ -11,6 +11,7 @@ export const EDIT_TASK = 'EDIT_TASK'
 
 export const ADD_GROUP = 'ADD_GROUP'
 export const EDIT_GROUP = 'EDIT_GROUP'
+export const COPY_GROUP = 'COPY_GROUP'
 
 //TODO put members in board
 const initialState = {
@@ -52,6 +53,15 @@ export function boardReducer(state = initialState, action) {
             }
             break
 
+        case COPY_GROUP:
+            newState = {
+                ...state,
+                board: {
+                    ...state.board,
+                    groups: action.groups
+                }
+            }
+            break
         case ADD_TASK:
             newState = {
                 ...state,
