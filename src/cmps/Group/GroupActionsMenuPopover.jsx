@@ -122,7 +122,7 @@ export function GroupActionsMenuPopover({ group, openAddTask, archiveGroup, copy
                     }
                     {action === "Move all cards in list" &&
                         <article className="group-actions-menu-actions">
-                            {board.groups.map(g => {
+                            {board.groups.sort((a, b) => a.pos - b.pos).map(g => {
                                 if (g.id === group.id) {
                                     return <p className="menu-action disabled" key={g.id}>{g.name} (current)</p>
                                 }
