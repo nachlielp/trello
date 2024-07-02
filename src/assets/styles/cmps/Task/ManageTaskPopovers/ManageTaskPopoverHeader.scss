@@ -1,41 +1,42 @@
 .manage-task-popover-header {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--ds-text-subtle, #44546f);
-    display: flex;
-    align-items: center;
-    width: 304px;
-    height: 40px;
-    padding: 4px 8px;
-    display: flex;
-    justify-content: center;
-    position: relative;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ds-text-subtle, #44546f);
+  background: var(--ds-surface-overlay, #fff);
+  display: flex;
+  align-items: center;
+  width: 304px;
+  height: 40px;
+  padding: 4px 8px;
+  display: flex;
+  justify-content: center;
+  position: relative;
 
-    .close-button-wrapper {
-        position: absolute;
-        right: 8px;
-        top: 50%;
-        transform: translateY(-50%);
+  .close-button-wrapper {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
 
-        &:hover {
-            background-color: var(--ds-background-neutral-hovered);
-            border-radius: 3px;
-        }
-
-        .close-button {
-            margin-top: 4px;
-            font-size: 14;
-            color: var(--ds-text);
-            background-color: transparent;
-            border: none;
-            align-self: center;
-            cursor: pointer;
-
-            .injected-svg {
-                width: 16px;
-                height: 16px;
-            }
-        }
+    &:hover {
+      background-color: var(--ds-background-neutral-hovered);
+      border-radius: 3px;
+      color: var(--ds-icon, #44546f);
     }
 
+    .close-button {
+      margin-top: 4px;
+      font-size: 14;
+      color: var(--ds-icon-subtle, #626f86);
+      background-color: transparent;
+      border: none;
+      align-self: center;
+      cursor: pointer;
+
+      .injected-svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
 }
