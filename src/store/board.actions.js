@@ -2,7 +2,7 @@ import { boardService } from '../services/board.service.local'
 import { utilService } from '../services/util.service'
 import { memberService } from '../services/members.service.local'
 import { store } from './store'
-import { SET_MEMBERS, SET_BOARD, SET_IS_EXPANDED, ADD_TASK, ADD_GROUP, EDIT_GROUP, EDIT_TASK, EDIT_LABEL, COPY_GROUP } from './board.reducer'
+import { SET_MEMBERS, SET_BOARD, SET_IS_EXPANDED, ADD_TASK, ADD_GROUP, EDIT_GROUP, EDIT_TASK, EDIT_LABEL, COPY_GROUP, MOVE_ALL_CARDS } from './board.reducer'
 
 // export async function loadTrelloDataFromSource() {
 //   try {
@@ -140,6 +140,28 @@ export async function copyGroup(boardId, group) {
   store.dispatch({ type: COPY_GROUP, groups: updatedGroups });
 
   const newBoard = { ...board, groups: updatedGroups };
+  await boardService.save(newBoard);
+}
+
+export async function moveAllCards(boardId, sourceGroupId, targetGroupId) {
+  const board = await boardService.getById(boardId);
+  const sourceGroup = board.groups.find(g => g.id === sourceGroupId);
+  const targetGroup = board.groups.find(g => g.id === targetGroupId);
+
+  const newTargetGroup = { ...targetGroup, tasks: [...(targetGroup?.tasks || []), ...(sourceGroup?.tasks?.map(t => ({ ...t, idGroup: targetGroupId })) || [])] };
+  const updatedGroups = board.groups.map(g => {
+    if (g.id === sourceGroupId) {
+      return { ...g, tasks: [] };
+    }
+    if (g.id === targetGroupId) {
+      return newTargetGroup;
+    }
+    return g;
+  });
+  const newBoard = { ...board, groups: updatedGroups };
+  console.log('newBoard', newBoard)
+  console.log({ sourceGroup: { ...sourceGroup, tasks: [] }, targetGroup: newTargetGroup })
+  store.dispatch({ type: MOVE_ALL_CARDS, sourceGroup: { ...sourceGroup, tasks: [] }, targetGroup: newTargetGroup });
   await boardService.save(newBoard);
 }
 

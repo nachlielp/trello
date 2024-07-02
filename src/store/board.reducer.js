@@ -12,6 +12,7 @@ export const EDIT_TASK = 'EDIT_TASK'
 export const ADD_GROUP = 'ADD_GROUP'
 export const EDIT_GROUP = 'EDIT_GROUP'
 export const COPY_GROUP = 'COPY_GROUP'
+export const MOVE_ALL_CARDS = 'MOVE_ALL_CARDS'
 
 //TODO put members in board
 const initialState = {
@@ -62,6 +63,25 @@ export function boardReducer(state = initialState, action) {
                 }
             }
             break
+
+        case MOVE_ALL_CARDS:
+            newState = {
+                ...state,
+                board: {
+                    ...state.board,
+                    groups: state.board.groups.map(g => {
+                        if (g.id === action.sourceGroup.id) {
+                            return { ...g, tasks: action.sourceGroup.tasks };
+                        }
+                        if (g.id === action.targetGroup.id) {
+                            return { ...g, tasks: [...action.targetGroup.tasks] };
+                        }
+                        return g;
+                    })
+                }
+            }
+            break
+
         case ADD_TASK:
             newState = {
                 ...state,

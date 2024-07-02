@@ -11,6 +11,7 @@ import {
   editTask,
   editLabel,
   copyGroup,
+  moveAllCards
 } from "../store/board.actions";
 import { AddGroupBtn } from "../cmps/Group/AddGroupBtn";
 import { TaskDetailsModal } from "../cmps/Task/TaskDetailsModal/TaskDetailsModal.jsx";
@@ -107,6 +108,7 @@ export function BoardIndex() {
                 editTask={onEditTask}
                 editLabel={onEditLabel}
                 copyGroup={onCopyGroup}
+                moveAllCards={moveAllCards}
               />
             ))}
           <AddGroupBtn addGroup={onAddGroup} />

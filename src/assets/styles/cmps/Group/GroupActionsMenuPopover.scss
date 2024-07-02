@@ -21,6 +21,7 @@
   .group-actions-menu-actions {
     display: flex;
     flex-direction: column;
+    padding-bottom: 12px;
 
     .menu-action {
       cursor: pointer;
@@ -35,6 +36,16 @@
         overflow: hidden;
       }
 
+    }
+
+    .menu-action.disabled {
+      cursor: default;
+      color: var(--ds-text-disabled, #091e424f);
+
+      &:hover {
+        background-color: transparent;
+        overflow: hidden;
+      }
     }
 
     .menu-action.last-action {
