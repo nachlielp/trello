@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { MemberOption } from "./MemberOption";
 import { ManageTaskPopoverHeader } from "./ManageTaskPopoverHeader";
 
-export function ManageMembersPopover({ anchorEl, taskMemberIds, editTask, task }) {
+export function ManageMembersPopover({ anchorEl, editTask, task }) {
     const members = useSelector((state) => state.boardModule.members);
     const [inputSearch, setInputSearch] = useState('');
     const [isOpen, setIsOpen] = useState(false);
@@ -13,14 +13,14 @@ export function ManageMembersPopover({ anchorEl, taskMemberIds, editTask, task }
 
     useEffect(() => {
         if (inputSearch === '') {
-            setSelectedMembers(members.filter((member) => taskMemberIds.includes(member.id)));
-            setUnselectedMembers(members.filter((member) => !taskMemberIds.includes(member.id)));
+            setSelectedMembers(members.filter((member) => task.idMembers.includes(member.id)));
+            setUnselectedMembers(members.filter((member) => !task.idMembers.includes(member.id)));
         } else {
-            setSelectedMembers(members.filter((member) => taskMemberIds.includes(member.id)).filter((member) => member.fullName.toLowerCase().includes(inputSearch.toLowerCase())));
-            setUnselectedMembers(members.filter((member) => !taskMemberIds.includes(member.id)).filter((member) => member.fullName.toLowerCase().includes(inputSearch.toLowerCase())));
+            setSelectedMembers(members.filter((member) => task.idMembers.includes(member.id)).filter((member) => member.fullName.toLowerCase().includes(inputSearch.toLowerCase())));
+            setUnselectedMembers(members.filter((member) => !task.idMembers.includes(member.id)).filter((member) => member.fullName.toLowerCase().includes(inputSearch.toLowerCase())));
         }
 
-    }, [taskMemberIds, inputSearch]);
+    }, [task.idMembers, inputSearch]);
 
     function onClose() {
         setIsOpen(false);

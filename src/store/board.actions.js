@@ -166,6 +166,21 @@ export async function getItemById(boardId, taskId) {
   return task;
 }
 
+export async function getBoardLabels(boardId) {
+  const board = await boardService.getById(boardId);
+  return board.labelNames;
+}
+
+export async function editBoardLabel(boardId, label) {
+  const board = await boardService.getById(boardId);
+  const newBoard = {
+    ...board,
+    labelNames: board.labelNames.map(l => l.title === label.title ? label : l)
+  };
+  await boardService.save(newBoard)
+  return newBoard
+}
+
 // export async function addCards(boardId, cards) {
 //     try {
 //         store.dispatch(getCmdAddCards(cards))

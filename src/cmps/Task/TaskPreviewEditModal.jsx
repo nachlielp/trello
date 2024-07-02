@@ -15,9 +15,14 @@ import archiveIcon from '/img/taskActionBtns/archiveIcon.svg';
 import { SvgButton } from '../CustomCpms/SvgButton';
 import { ManageMembersPopover } from './ManageTaskPopovers/ManageMembersPopover';
 import { ManageLabelsPopover } from './ManageTaskPopovers/ManageLabelsPopover';
+import { useSelector } from 'react-redux';
+
 const { TextArea } = Input;
 
 export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, openPreviewModal }) {
+    const boardLabels = useSelector((state) => state.boardModule.board.labelNames);
+    const [taskLabels, setTaskLabels] = useState([]);
+
     const [modalStyle, setModalStyle] = useState({});
     const [taskName, setTaskName] = useState(task.name || '');
     const [showEditModalBtn, setShowEditModalBtn] = useState(false);
@@ -26,6 +31,11 @@ export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, openPr
     useEffect(() => {
         setShowEditModalBtn(isHovered);
     }, [isHovered, isOpen]);
+
+
+    useEffect(() => {
+        setTaskLabels(task.labels.map((label) => boardLabels.find(boardLabel => boardLabel.color === label.color)));
+    }, [task.labels]);
 
     const showModal = () => {
         const rect = containerRef.current.getBoundingClientRect();
@@ -77,7 +87,6 @@ export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, openPr
                             label="Change members"
                         />
                     }
-                    taskMemberIds={task.idMembers}
                     editTask={editTask}
                     task={task}
                 />
@@ -133,8 +142,8 @@ export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, openPr
                 )}
                 <main className="task-preview-edit-modal-content">
                     <article className="group-task-content-labels">
-                        {task.labels.map((label) => (
-                            <TaskPreviewLabel key={label.id} label={label} isExpanded={true} />
+                        {taskLabels?.map((label) => (
+                            <TaskPreviewLabel key={label.color} label={label} isExpanded={true} />
                         ))}
                     </article>
                     <TextArea

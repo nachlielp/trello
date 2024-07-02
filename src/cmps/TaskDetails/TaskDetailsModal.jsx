@@ -23,13 +23,20 @@ export function TaskDetailsModal({ taskId }) {
 
   return (
     <Modal
-      title={<div className="details-header"><span className="info"><span className="task-name">{currentTask?.name}</span><span className="task-board">in list {currentGroup?.name}</span></span></div>}
+      title={
+        <div className="details-header">
+          <span className="info">
+            <span className="task-name">{currentTask?.name}</span>
+            <span className="task-board">in list {currentGroup?.name}</span>
+          </span>
+        </div>
+      }
       open
       onCancel={() => navigate("/", { replace: true })}
       footer=""
       className="task-details"
     >
-     
+
     </Modal>
   );
 }
