@@ -4,7 +4,7 @@ import { Popover } from "antd";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-export function MoveCardPopover({ board, group, task }) {
+export function MoveCardPopover({ board, group, task, anchorEl }) {
   const [openListMenu, setOpenListMenu] = useState(false);
   const boards = useSelector((state) => state.workspaceModule.boards);
 
@@ -26,7 +26,7 @@ export function MoveCardPopover({ board, group, task }) {
   }, [selectedBoardId]);
 
   function onSelectBoard(event) {
-    setSelectedBoardId(event.target.value)
+    setSelectedBoardId(event.target.value);
   }
 
   return (
@@ -62,7 +62,9 @@ export function MoveCardPopover({ board, group, task }) {
                 <p>List</p>
                 <select>
                   {listSelectOption?.map((currentOptions) => (
-                    <option key={currentOptions.id} value={currentOptions.id}>{currentOptions.name}</option>
+                    <option key={currentOptions.id} value={currentOptions.id}>
+                      {currentOptions.name}
+                    </option>
                   ))}
                 </select>
               </span>
@@ -76,7 +78,7 @@ export function MoveCardPopover({ board, group, task }) {
         </div>
       }
     >
-      <button>Move</button>
+      {anchorEl}
     </Popover>
   );
 }
