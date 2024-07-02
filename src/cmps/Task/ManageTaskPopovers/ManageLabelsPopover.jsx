@@ -80,7 +80,7 @@ export function ManageLabelsPopover({ anchorEl, editTask, task, editLabel }) {
             arrow={false}
             content={
                 <section className="manage-labels-content">
-                    <ManageTaskPopoverHeader title="Labels" close={onClose} back={backToList} />
+                    <ManageTaskPopoverHeader title={backToList ? "Edit label" : 'Labels'} close={onClose} back={backToList} />
                     {!editColor &&
                         <section className="select-labels-page">
                             <Input placeholder="Search labels..." className="labels-search-input" value={inputSearch} onChange={(e) => setInputSearch(e.target.value)} />
