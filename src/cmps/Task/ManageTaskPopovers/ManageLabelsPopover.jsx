@@ -14,7 +14,7 @@ export function ManageLabelsPopover({ anchorEl, editTask, task }) {
         <Popover
             className="manage-labels-popover"
             trigger="click"
-            placement="bottomRight"
+            placement="bottomLeft"
             open={isOpen}
             close={() => { }}
             onOpenChange={setIsOpen}

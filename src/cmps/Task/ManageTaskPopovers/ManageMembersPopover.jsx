@@ -29,7 +29,7 @@ export function ManageMembersPopover({ anchorEl, taskMemberIds, editTask, task }
         <Popover
             className="change-members-popover"
             trigger="click"
-            placement="bottomRight"
+            placement="bottomLeft"
             open={isOpen}
             close={onClose}
             onOpenChange={setIsOpen}
