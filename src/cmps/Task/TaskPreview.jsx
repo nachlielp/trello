@@ -7,7 +7,7 @@ import { TaskPreviewEditModal } from "./TaskPreviewEditModal";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 
-export function TaskPreview({ task, editTask }) {
+export function TaskPreview({ task, editTask, editLabel }) {
   const boardLabels = useSelector((state) => state.boardModule.board.labelNames);
   const [isHovered, setIsHovered] = useState(false);
   const [isOpenPreviewModal, setIsOpenPreviewModal] = useState(false);
@@ -17,8 +17,10 @@ export function TaskPreview({ task, editTask }) {
   const taskCover = task.cover;
 
   useEffect(() => {
+    // console.log('boardLabels rerender', boardLabels)
+
     setTaskLabels(task.labels.map((label) => boardLabels.find(boardLabel => boardLabel.color === label.color)));
-  }, [task.labels]);
+  }, [task.labels, boardLabels]);
 
   function onOpenPreviewModal(value) {
     setIsOpenPreviewModal(value);
@@ -37,6 +39,7 @@ export function TaskPreview({ task, editTask }) {
         isOpen={isOpenPreviewModal}
         openPreviewModal={onOpenPreviewModal}
         taskLabels={taskLabels}
+        editLabel={editLabel}
       />
       {taskCover.color && (
         <div

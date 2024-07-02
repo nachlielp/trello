@@ -19,7 +19,7 @@ import { useSelector } from 'react-redux';
 
 const { TextArea } = Input;
 
-export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, openPreviewModal }) {
+export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, openPreviewModal, editLabel }) {
     const boardLabels = useSelector((state) => state.boardModule.board.labelNames);
     const [taskLabels, setTaskLabels] = useState([]);
 
@@ -35,7 +35,7 @@ export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, openPr
 
     useEffect(() => {
         setTaskLabels(task.labels.map((label) => boardLabels.find(boardLabel => boardLabel.color === label.color)));
-    }, [task.labels]);
+    }, [task.labels, boardLabels]);
 
     const showModal = () => {
         const rect = containerRef.current.getBoundingClientRect();
@@ -73,6 +73,7 @@ export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, openPr
                     taskLabels={task.labels}
                     editTask={editTask}
                     task={task}
+                    editLabel={editLabel}
                 />
             )
         },

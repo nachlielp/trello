@@ -2,7 +2,7 @@ import { boardService } from '../services/board.service.local'
 import { utilService } from '../services/util.service'
 import { memberService } from '../services/members.service.local'
 import { store } from './store'
-import { SET_MEMBERS, SET_BOARD, SET_IS_EXPANDED, ADD_TASK, ADD_GROUP, EDIT_GROUP, EDIT_TASK } from './board.reducer'
+import { SET_MEMBERS, SET_BOARD, SET_IS_EXPANDED, ADD_TASK, ADD_GROUP, EDIT_GROUP, EDIT_TASK, EDIT_LABEL } from './board.reducer'
 
 // export async function loadTrelloDataFromSource() {
 //   try {
@@ -171,11 +171,12 @@ export async function getBoardLabels(boardId) {
   return board.labelNames;
 }
 
-export async function editBoardLabel(boardId, label) {
+export async function editLabel(boardId, label) {
+  store.dispatch({ type: EDIT_LABEL, label: label })
   const board = await boardService.getById(boardId);
   const newBoard = {
     ...board,
-    labelNames: board.labelNames.map(l => l.title === label.title ? label : l)
+    labelNames: board.labelNames.map(l => l.color === label.color ? label : l)
   };
   await boardService.save(newBoard)
   return newBoard

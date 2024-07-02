@@ -11,6 +11,34 @@
     justify-content: center;
     position: relative;
 
+    .back-button-wrapper {
+        position: absolute;
+        left: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+
+        &:hover {
+            background-color: var(--ds-background-neutral-hovered);
+            border-radius: 3px;
+        }
+
+        .back-button {
+            margin-top: 4px;
+            font-size: 14;
+            color: var(--ds-text);
+            background-color: transparent;
+            border: none;
+            align-self: center;
+            cursor: pointer;
+
+            .injected-svg {
+                width: 16px;
+                height: 16px;
+            }
+        }
+    }
+
     .close-button-wrapper {
         position: absolute;
         right: 8px;

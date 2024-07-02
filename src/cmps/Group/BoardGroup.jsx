@@ -7,7 +7,7 @@ import { TaskPreview } from "../Task/TaskPreview"
 import { TaskPreviewCover } from "../Task/TaskPreviewCover"
 
 //TODO put add new task in array of sorted tasks based on position
-export function BoardGroup({ group, addTask, archiveGroup, editGroup, editTask }) {
+export function BoardGroup({ group, addTask, archiveGroup, editGroup, editTask, editLabel }) {
     const [isAddTaskOpen, setIsAddTaskOpen] = useState(false)
     const [newTaskIds, setNewTaskIds] = useState([])
     const [firstTaskPos, setFirstTaskPos] = useState(null)
@@ -50,8 +50,8 @@ export function BoardGroup({ group, addTask, archiveGroup, editGroup, editTask }
                     {isAddTaskOpen && <AddTaskInGroup groupId={group.id} closeAddTask={() => setIsAddTaskOpen(false)} addTask={addTask} firstTaskPos={firstTaskPos} />}
                     {sortedTasks.filter(task => !newTaskIds.includes(task.id)).map(task => (
                         task.cover.size === "full"
-                            ? <TaskPreviewCover key={task.id} task={task} editTask={editTask} />
-                            : <TaskPreview key={task.id} task={task} editTask={editTask} />
+                            ? <TaskPreviewCover key={task.id} task={task} editTask={editTask} editLabel={editLabel} />
+                            : <TaskPreview key={task.id} task={task} editTask={editTask} editLabel={editLabel} />
                     ))}
                     {!isAddTaskOpen && <GroupFooter groupId={group.id} addTask={addTask} lastTaskPos={lastTaskPos} />}
                 </main>

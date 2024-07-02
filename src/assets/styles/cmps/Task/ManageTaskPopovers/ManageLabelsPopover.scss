@@ -33,6 +33,57 @@
         flex-direction: column;
         gap: 4px;
     }
+
+    .edit-labels-page {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        .edit-label-block-wrapper {
+
+            width: calc(100% + 24px);
+            height: 100px;
+            background-color: var(--ds-surface-sunken, #f7f8f9);
+            margin: 0 -12px;
+
+            .disbly-label-block {
+                margin: 34px;
+                height: 32px;
+                border-radius: 3px;
+                display: flex;
+                align-items: center;
+                justify-content: start;
+                padding-left: 12px;
+                color: var(--label-text-color, var(--ds-text, #172b4d));
+
+                .label-color-name {
+                    font-size: 14px;
+                    // font-weight: 600;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+            }
+        }
+
+        .edit-label-buttons {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: start;
+            gap: 4px;
+
+            .save-button {
+                width: 64px;
+                height: 32px;
+                margin: 6px 12px;
+                border-radius: 3px;
+                border: none;
+                background-color: var(--ds-background-primary, #0052cc);
+                color: var(--ds-text-on-primary, #fff);
+            }
+        }
+    }
 }
 
 .popover-labels-option {
