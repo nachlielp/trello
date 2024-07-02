@@ -2,7 +2,7 @@ import { Modal } from "antd";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { MoveCardPopover } from "../MoveCardPopover";
+import { MoveCardPopover } from "./MoveCardPopover";
 import { editTask, getItemById } from "../../../store/board.actions";
 
 //svg
@@ -98,7 +98,15 @@ export function TaskDetailsModal({ taskId }) {
         <div className="details-body__left">
           {/* Additional content here */}
           {/* {utilService.makeLorem(1000)} */}
-          lol
+          <section className="subsection">
+            {!!currentTask.idMembers.length && (
+              <div className="members">
+                <p>Members</p>
+
+              </div>
+            )}
+            <div className="labels"><p>Labels</p></div>
+          </section>
         </div>
         <div className="details-body__right">
           {currentTask && !isMember && (
