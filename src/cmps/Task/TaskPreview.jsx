@@ -1,17 +1,26 @@
 import { Card } from "antd";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { utilService } from "../../services/util.service";
 import { TaskPreviewLabel } from "./TaskPreviewLabel";
 import { TaskPreviewBadges } from "./TaskPreviewBadges";
 import { TaskPreviewEditModal } from "./TaskPreviewEditModal";
 import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
 
-export function TaskPreview({ task, editTask }) {
+export function TaskPreview({ task, editTask, editLabel }) {
+  const boardLabels = useSelector((state) => state.boardModule.board.labelNames);
   const [isHovered, setIsHovered] = useState(false);
   const [isOpenPreviewModal, setIsOpenPreviewModal] = useState(false);
+  const [taskLabels, setTaskLabels] = useState([]);
   const navigate = useNavigate();
 
   const taskCover = task.cover;
+
+  useEffect(() => {
+    // console.log('boardLabels rerender', boardLabels)
+
+    setTaskLabels(task.labels.map((label) => boardLabels.find(boardLabel => boardLabel.color === label.color)));
+  }, [task.labels, boardLabels]);
 
   function onOpenPreviewModal(value) {
     setIsOpenPreviewModal(value);
@@ -29,6 +38,8 @@ export function TaskPreview({ task, editTask }) {
         editTask={editTask}
         isOpen={isOpenPreviewModal}
         openPreviewModal={onOpenPreviewModal}
+        taskLabels={taskLabels}
+        editLabel={editLabel}
       />
       {taskCover.color && (
         <div
@@ -52,8 +63,8 @@ export function TaskPreview({ task, editTask }) {
         onClick={() => navigate(`/c/${task.id}`, { replace: true })}
       >
         <article className="group-task-content-labels">
-          {task.labels.map((label) => (
-            <TaskPreviewLabel key={label.id} label={label} isExpanded={true} />
+          {taskLabels.map((label) => (
+            <TaskPreviewLabel key={label.color} label={label} isExpanded={true} />
           ))}
         </article>
         <span className="group-task-content-title">{task.name}</span>

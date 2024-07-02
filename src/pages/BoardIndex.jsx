@@ -9,6 +9,7 @@ import {
   archiveGroup,
   editGroup,
   editTask,
+  editLabel,
 } from "../store/board.actions";
 import { AddGroupBtn } from "../cmps/Group/AddGroupBtn";
 import { TaskDetailsModal } from "../cmps/Task/TaskDetailsModal/TaskDetailsModal.jsx";
@@ -71,6 +72,10 @@ export function BoardIndex() {
     const res = await editTask(board.id, task);
   }
 
+  async function onEditLabel(label) {
+    const res = await editLabel(board.id, label);
+  }
+
   const sortedGroups = board?.groups
     ?.filter((l) => !l.closed)
     .sort((a, b) => a.pos - b.pos);
@@ -96,6 +101,7 @@ export function BoardIndex() {
                 archiveGroup={() => onArchiveGroup(board.id, group.id)}
                 editGroup={onEditGroup}
                 editTask={onEditTask}
+                editLabel={onEditLabel}
               />
             ))}
           <AddGroupBtn addGroup={onAddGroup} />

@@ -2,6 +2,49 @@ import usersJson from "../../JSON/user.json";
 import boardsJson from "../../JSON/board-info.json";
 import membersJson from "../../JSON/board-members.json";
 
+const boardLabelsArray = [
+  // { color: "subtle green", bgColor: "#baf3db" },
+  { color: "green", bgColor: "#baf3db" },
+  // { color: "bold green", bgColor: "#1f845a", },
+
+  // { color: "subtle yellow", bgColor: "#f8e6a0" },
+  { color: "yellow", bgColor: "#f5cd47" },
+  // { color: "bold yellow", bgColor: "#946f01", },
+
+  // { color: "subtle orange", bgColor: "#fedec8" },
+  { color: "orange", bgColor: "#fea362" },
+  // { color: "bold orange", bgColor: "#c25100", },
+
+  // { color: "subtle red", bgColor: "#ffd5d2" },
+  { color: "red", bgColor: "#f87168" },
+  // { color: "bold red", bgColor: "#c9372c", },
+
+  // { color: "subtle purple", bgColor: "#dfd8fd" },
+  { color: "purple", bgColor: "#9f8fef" },
+  // { color: "bold purple", bgColor: "#6e5dc6", },
+
+
+  // { color: "subtle blue", bgColor: "#cce0ff" },
+  { color: "blue", bgColor: "#579dff" },
+  // { color: "bold blue", bgColor: "#0c66e4", },
+
+  // { color: "subtle sky", bgColor: "#c6edfb" },
+  { color: "sky", bgColor: "#6cc3e0" },
+  // { color: "bold sky", bgColor: "#227d9b", },
+
+  // { color: "subtle lime", bgColor: "#d3f1a7" },
+  { color: "lime", bgColor: "#94c748" },
+  // { color: "bold lime", bgColor: "#5b7f24", },
+
+  // { color: "subtle pink", bgColor: "#fdd0ec" },
+  { color: "pink", bgColor: "#e774bb" },
+  // { color: "bold pink", bgColor: "#ae4787", },
+
+  // { color: "subtle black", bgColor: "#dcdfe4" },
+  { color: "black", bgColor: "#8590a2" },
+  // { color: "bold black", bgColor: "#626f86", },
+]
+
 export const utilService = {
   makeId,
   makeLorem,
@@ -16,7 +59,9 @@ export const utilService = {
   getRandomColor,
   createNewTask,
   createNewGroup,
+  boardLabelsArray
 };
+
 export const USERS_KEY = "users";
 export const BOARDS_KEY = "boards";
 export const LISTS_KEY = "lists";
@@ -114,31 +159,11 @@ function loadFromStorage(key) {
   return data ? JSON.parse(data) : undefined;
 }
 
-function getColorHashByName(name) {
-  switch (name) {
-    case "yellow":
-      return { bgColor: "#f5cd47", color: "dark" };
-    case "green":
-      return { bgColor: "#4cce97", color: "dark" };
-    case "purple":
-      return { bgColor: "#9f8fef", color: "dark" };
-    case "orange":
-      return { bgColor: "#fea362", color: "dark" };
-    case "red":
-      return { bgColor: "#f87169", color: "dark" };
-    case "blue":
-      return { bgColor: "#569dff", color: "dark" };
-    case "sky":
-      return { bgColor: "#6cc3e0", color: "dark" };
-    case "lime":
-      return { bgColor: "#94c748", color: "dark" };
-    case "pink":
-      return { bgColor: "#e774bb", color: "dark" };
-    case "black":
-      return { bgColor: "#8590a2", color: "dark" };
-    default:
-      return { bgColor: "#fff", color: "dark" };
-  }
+
+
+function getColorHashByName(colorName) {
+  const color = boardLabelsArray.find(color => color.color === colorName);
+  return color;
 }
 
 function _createStartInfo() {

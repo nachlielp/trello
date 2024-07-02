@@ -214,17 +214,49 @@
       "canBePrivate": true,
       "canInvite": true
     },
-    "labelNames": {
-      "green": "",
-      "yellow": "",
-      "orange": "",
-      "red": "",
-      "purple": "",
-      "blue": "",
-      "sky": "",
-      "lime": "",
-      "pink": "",
-      "black": "",
+    "labelNames": [
+      {
+        "color": "green",
+        "label": "Ok"
+      },
+      {
+        "color": "yellow",
+        "label": ""
+      },
+      {
+        "color": "orange",
+        "label": ""
+      },
+      {
+        "color": "red",
+        "label": "Urgent"
+      },
+      {
+        "color": "purple",
+        "label": ""
+      },
+      {
+        "color": "blue",
+        "label": ""
+      },
+      {
+        "color": "sky",
+        "label": ""
+      },
+      {
+        "color": "lime",
+        "label": ""
+      },
+      {
+        "color": "pink",
+        "label": "Im Pinkalicious"
+      },
+      {
+        "color": "black",
+        "label": ""
+      }
+    ],
+    "noInUseLabels": {
       "green_dark": "",
       "yellow_dark": "",
       "orange_dark": "",
@@ -1517,17 +1549,49 @@
       "canBePrivate": true,
       "canInvite": true
     },
-    "labelNames": {
-      "green": ";fdkds;kf;skdf;sdkf;sdkf;s",
-      "yellow": "",
-      "orange": "",
-      "red": "Urgent",
-      "purple": "",
-      "blue": "",
-      "sky": "",
-      "lime": "",
-      "pink": "",
-      "black": "",
+    "labelNames": [
+      {
+        "color": "green",
+        "label": "Ok"
+      },
+      {
+        "color": "yellow",
+        "label": ""
+      },
+      {
+        "color": "orange",
+        "label": ""
+      },
+      {
+        "color": "red",
+        "label": "Urgent"
+      },
+      {
+        "color": "purple",
+        "label": ""
+      },
+      {
+        "color": "blue",
+        "label": ""
+      },
+      {
+        "color": "sky",
+        "label": ""
+      },
+      {
+        "color": "lime",
+        "label": ""
+      },
+      {
+        "color": "pink",
+        "label": "Im Pinkalicious"
+      },
+      {
+        "color": "black",
+        "label": ""
+      }
+    ],
+    "noInUseLabels": {
       "green_dark": "",
       "yellow_dark": "",
       "orange_dark": "",

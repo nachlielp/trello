@@ -4,7 +4,7 @@ import { utilService } from "../../services/util.service";
 import { TaskPreviewEditModal } from "./TaskPreviewEditModal";
 import { useNavigate } from "react-router";
 
-export function TaskPreviewCover({ task, editTask }) {
+export function TaskPreviewCover({ task, editTask, editLabel }) {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpenPreviewModal, setIsOpenPreviewModal] = useState(false);
   const taskMember = task.cover;
@@ -47,6 +47,7 @@ export function TaskPreviewCover({ task, editTask }) {
         editTask={editTask}
         isOpen={isOpenPreviewModal}
         openPreviewModal={openPreviewModal}
+        editLabel={editLabel}
       />
       <section
         className={`group-task-content ${taskMember.idUploadedBackground ? "image-cover" : ""

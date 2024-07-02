@@ -2,6 +2,7 @@
 
 export const SET_MEMBERS = 'SET_MEMBERS'
 export const SET_BOARD = 'SET_BOARD'
+export const EDIT_LABEL = 'EDIT_LABEL'
 
 export const SET_IS_EXPANDED = 'SET_IS_EXPANDED'
 
@@ -75,6 +76,16 @@ export function boardReducer(state = initialState, action) {
                             ? { ...group, tasks: group.tasks.map(t => t.id === action.task.id ? action.task : t) }
                             : group
                     )
+                }
+            }
+            break
+
+        case EDIT_LABEL:
+            newState = {
+                ...state,
+                board: {
+                    ...state.board,
+                    labelNames: state.board.labelNames.map(l => l.color === action.label.color ? action.label : l)
                 }
             }
             break

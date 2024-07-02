@@ -3,6 +3,9 @@
     top: 0;
     right: 0;
     cursor: pointer;
+    // transform: translate(-50%) !important;
+    animation: none !important;
+    opacity: 1 !important;
 
     .edit-button {
         background: none;
