@@ -38,10 +38,12 @@ const useScrollByGrab = () => {
 
     return {
         scrollContainerRef,
-        handleMouseDown,
-        handleMouseLeave,
-        handleMouseUp,
-        handleMouseMove
+        handlers: {
+            onMouseDown: handleMouseDown,
+            onMouseLeave: handleMouseLeave,
+            onMouseUp: handleMouseUp,
+            onMouseMove: handleMouseMove,
+        }
     };
 };
 

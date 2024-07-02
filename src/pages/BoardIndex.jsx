@@ -22,13 +22,7 @@ export function BoardIndex() {
   const board = useSelector((state) => state.boardModule.board);
   const [clickedTaskId, setClickedTaskId] = useState();
   const params = useParams();
-  const {
-    scrollContainerRef,
-    handleMouseDown,
-    handleMouseLeave,
-    handleMouseUp,
-    handleMouseMove
-} = useScrollByGrab();
+  const { scrollContainerRef, handlers } = useScrollByGrab();
 
   useEffect(() => {
     loadTestBoardFromStorage();
@@ -92,10 +86,7 @@ export function BoardIndex() {
         {board && <BoardHeader />}
         <main className="board-groups"
          ref={scrollContainerRef}
-         onMouseDown={handleMouseDown}
-         onMouseLeave={handleMouseLeave}
-         onMouseUp={handleMouseUp}
-         onMouseMove={handleMouseMove}>
+       {...handlers} >
           {sortedGroups &&
             sortedGroups.map((group) => (
               <BoardGroup
