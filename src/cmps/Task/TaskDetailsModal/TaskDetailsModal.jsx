@@ -8,33 +8,35 @@ import { editTask, getItemById } from "../../../store/board.actions";
 //svg
 import { ReactSVG } from "react-svg";
 import detailsIcon from "/img/board-index/detailsImgs/detailsIcon.svg";
+import defaultProfile from "/img/defaultProfile.svg";
 import checkListIcon from "/img/board-index/detailsImgs/checkListIcon.svg";
 import coverIcon from "/img/board-index/detailsImgs/coverIcon.svg";
 import fieldsIcon from "/img/board-index/detailsImgs/fieldsIcon.svg";
-import defaultProfile from "/img/defaultProfile.svg";
 import file from "../../../../src/assets/svgs/file.svg";
 import labelIcon from "/img/board-index/headerImgs/filterBtn-imgs/labelIcon.svg";
 import clockIcon from "/img/board-index/headerImgs/filterBtn-imgs/clockIcon.svg";
 import { utilService } from "../../../services/util.service";
+import { TaskDetailsAddToCard } from "./TaskDetailsAddToCard";
+import { TaskDetailsActions } from "./TaskDetailsActions";
 
 export function TaskDetailsModal({ taskId }) {
-  const board = useSelector((state) => state.boardModule.board);
+  const currentBoard = useSelector((state) => state.boardModule.board);
+  const currentGroup = useSelector((state) =>
+    state.boardModule.board.groups?.find((g) =>
+      g.tasks.find((t) => t.id === taskId)
+    )
+  );
+  const currentTask = useSelector((state) =>
+    state.boardModule.board.groups
+      ?.find((g) => g.tasks?.find((t) => t.id === taskId))
+      .tasks.find((t) => t.id === taskId)
+  );
+
   const currentUser = useSelector((state) => state.userModule.user);
   const navigate = useNavigate();
-  const [currentTask, setCurrentTask] = useState(null);
-  const [currentGroup, setCurrentGroup] = useState(null);
-  const [currentBoard, setCurrentBoard] = useState(null);
+
   const [isMember, setIsMember] = useState(false);
 
-  const addToCard = [
-    { svg: defaultProfile, text: "Members" },
-    { svg: labelIcon, text: "Labels" },
-    { svg: checkListIcon, text: "Checklist" },
-    { svg: clockIcon, text: "Dates" },
-    { svg: file, text: "Attachment" },
-    { svg: coverIcon, text: "Cover" },
-    { svg: fieldsIcon, text: "Custom Fields" },
-  ];
   const actions = [
     { svg: defaultProfile, text: "Move" },
     { svg: labelIcon, text: "Copy" },
@@ -44,35 +46,21 @@ export function TaskDetailsModal({ taskId }) {
   ];
 
   useEffect(() => {
-    if (board) {
-      getItemById(board.id, taskId).then((task) => {
-        const group = board.groups.find((grp) => grp.id === task.idGroup);
-        setCurrentBoard(board);
-        setCurrentGroup(group);
-        setCurrentTask(task);
-      });
-    }
-    if (board && currentTask?.idMembers.includes(currentUser.id)) {
+    if (currentBoard && currentTask?.idMembers.includes(currentUser?.id)) {
       setIsMember(true);
     } else {
       setIsMember(false);
     }
-  }, [board, taskId]);
+  }, [currentBoard, taskId]);
 
   async function onJoin() {
-    setCurrentTask((prevTask) => {
-      const updatedTask = { ...prevTask };
-      updatedTask.idMembers = [...updatedTask.idMembers, currentUser.id];
-      return updatedTask;
-    });
-
     const updatedTask = {
       ...currentTask,
       idMembers: [...currentTask.idMembers, currentUser.id],
     };
 
     setIsMember(true);
-    await editTask(board.id, updatedTask);
+    await editTask(currentBoard.id, updatedTask);
   }
 
   return (
@@ -109,6 +97,7 @@ export function TaskDetailsModal({ taskId }) {
       <div className="details-body">
         <div className="details-body__left">
           {/* Additional content here */}
+          {/* {utilService.makeLorem(1000)} */}
           lol
         </div>
         <div className="details-body__right">
@@ -121,24 +110,8 @@ export function TaskDetailsModal({ taskId }) {
               </button>
             </section>
           )}
-          <section className="tittle">
-            <p>Add to card</p>
-            {addToCard.map((body) => (
-              <button key={body.text} onClick={onJoin}>
-                <ReactSVG wrapper="span" src={body.svg} />
-                {body.text}
-              </button>
-            ))}
-          </section>
-          <section>
-            <p>Actions</p>
-            {actions.map((body) => (
-              <button key={body.text} onClick={onJoin}>
-                <ReactSVG wrapper="span" src={body.svg} />
-                {body.text}
-              </button>
-            ))}
-          </section>
+          <TaskDetailsAddToCard />
+          <TaskDetailsActions />
         </div>
       </div>
     </Modal>
