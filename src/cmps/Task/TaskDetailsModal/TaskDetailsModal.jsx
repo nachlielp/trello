@@ -3,23 +3,17 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { MoveCardPopover } from "./MoveCardPopover";
-import { editTask, getItemById } from "../../../store/board.actions";
+import { TaskDetailsAddToCard } from "./TaskDetailsAddToCard";
+import { TaskDetailsActions } from "./TaskDetailsActions";
+import { SvgButton } from "../../CustomCpms/SvgButton";
+import { TaskDetailsMembers } from "./TaskDetailsMembers";
 
 //svg
 import { ReactSVG } from "react-svg";
 import detailsIcon from "/img/board-index/detailsImgs/detailsIcon.svg";
 import defaultProfile from "/img/defaultProfile.svg";
-import checkListIcon from "/img/board-index/detailsImgs/checkListIcon.svg";
-import coverIcon from "/img/board-index/detailsImgs/coverIcon.svg";
-import fieldsIcon from "/img/board-index/detailsImgs/fieldsIcon.svg";
-import file from "../../../../src/assets/svgs/file.svg";
-import labelIcon from "/img/board-index/headerImgs/filterBtn-imgs/labelIcon.svg";
-import clockIcon from "/img/board-index/headerImgs/filterBtn-imgs/clockIcon.svg";
-import { utilService } from "../../../services/util.service";
-import { TaskDetailsAddToCard } from "./TaskDetailsAddToCard";
-import { TaskDetailsActions } from "./TaskDetailsActions";
 
-export function TaskDetailsModal({ taskId }) {
+export function TaskDetailsModal({ taskId, editTask }) {
   const currentBoard = useSelector((state) => state.boardModule.board);
   const currentGroup = useSelector((state) =>
     state.boardModule.board.groups?.find((g) =>
@@ -31,27 +25,24 @@ export function TaskDetailsModal({ taskId }) {
       ?.find((g) => g.tasks?.find((t) => t.id === taskId))
       .tasks.find((t) => t.id === taskId)
   );
-
   const currentUser = useSelector((state) => state.userModule.user);
   const navigate = useNavigate();
 
   const [isMember, setIsMember] = useState(false);
-
-  const actions = [
-    { svg: defaultProfile, text: "Move" },
-    { svg: labelIcon, text: "Copy" },
-    { svg: checkListIcon, text: "Make template" },
-    { svg: clockIcon, text: "Archive" },
-    { svg: file, text: "Share" },
-  ];
+  const [hasMembers, setHasMember] = useState(false);
 
   useEffect(() => {
-    if (currentBoard && currentTask?.idMembers.includes(currentUser?.id)) {
+    if (currentTask?.idMembers.includes(currentUser?.id)) {
       setIsMember(true);
     } else {
       setIsMember(false);
     }
-  }, [currentBoard, taskId]);
+    if (currentTask.idMembers.length > 0) {
+      setHasMember(true);
+    } else {
+      setHasMember(false);
+    }
+  }, [currentBoard, currentTask, currentUser]);
 
   async function onJoin() {
     const updatedTask = {
@@ -60,7 +51,7 @@ export function TaskDetailsModal({ taskId }) {
     };
 
     setIsMember(true);
-    await editTask(currentBoard.id, updatedTask);
+    editTask(updatedTask);
   }
 
   return (
@@ -99,23 +90,22 @@ export function TaskDetailsModal({ taskId }) {
           {/* Additional content here */}
           {/* {utilService.makeLorem(1000)} */}
           <section className="subsection">
-            {!!currentTask.idMembers.length && (
-              <div className="members">
-                <p>Members</p>
-
-              </div>
+            {hasMembers && (
+              <TaskDetailsMembers
+                currentTask={currentTask}
+                editTask={editTask}
+              />
             )}
-            <div className="labels"><p>Labels</p></div>
+            <div className="labels">
+              <p>Labels</p>
+            </div>
           </section>
         </div>
         <div className="details-body__right">
           {currentTask && !isMember && (
             <section>
               <p>Suggested</p>
-              <button onClick={onJoin}>
-                <ReactSVG wrapper="span" src={defaultProfile} />
-                Join
-              </button>
+              <SvgButton src={defaultProfile} label={"Join"} onClick={onJoin} />
             </section>
           )}
           <TaskDetailsAddToCard />
