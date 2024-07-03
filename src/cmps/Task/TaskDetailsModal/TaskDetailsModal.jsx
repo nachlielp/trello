@@ -2,7 +2,7 @@ import { Modal } from "antd";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { MoveCardPopover } from "./MoveCardPopover";
+import { MoveCardPopover } from "../ManageTaskPopovers/MoveCardPopover";
 import { TaskDetailsAddToCard } from "./TaskDetailsAddToCard";
 import { TaskDetailsActions } from "./TaskDetailsActions";
 import { SvgButton } from "../../CustomCpms/SvgButton";
@@ -12,6 +12,8 @@ import { TaskDetailsMembers } from "./TaskDetailsMembers";
 import { ReactSVG } from "react-svg";
 import detailsIcon from "/img/board-index/detailsImgs/detailsIcon.svg";
 import defaultProfile from "/img/defaultProfile.svg";
+import { loadTestBoardFromStorage } from "../../../store/board.actions";
+import { setBoards } from "../../../store/workspace.actions";
 
 export function TaskDetailsModal({ taskId, editTask }) {
   const currentBoard = useSelector((state) => state.boardModule.board);
@@ -27,30 +29,20 @@ export function TaskDetailsModal({ taskId, editTask }) {
   );
   const currentUser = useSelector((state) => state.userModule.user);
   const navigate = useNavigate();
-
-  const [isMember, setIsMember] = useState(false);
-  const [hasMembers, setHasMember] = useState(false);
+  const isMember = currentTask?.idMembers.includes(currentUser?.id);
+  const hasMembers = currentTask.idMembers.length > 0;
 
   useEffect(() => {
-    if (currentTask?.idMembers.includes(currentUser?.id)) {
-      setIsMember(true);
-    } else {
-      setIsMember(false);
-    }
-    if (currentTask.idMembers.length > 0) {
-      setHasMember(true);
-    } else {
-      setHasMember(false);
-    }
-  }, [currentBoard, currentTask, currentUser]);
+    setBoards();
 
+    loadTestBoardFromStorage();
+  }, []);
   async function onJoin() {
     const updatedTask = {
       ...currentTask,
       idMembers: [...currentTask.idMembers, currentUser.id],
     };
 
-    setIsMember(true);
     editTask(updatedTask);
   }
 
@@ -102,7 +94,7 @@ export function TaskDetailsModal({ taskId, editTask }) {
           </section>
         </div>
         <div className="details-body__right">
-          {currentTask && !isMember && (
+          {!isMember && (
             <section>
               <p>Suggested</p>
               <SvgButton src={defaultProfile} label={"Join"} onClick={onJoin} />
