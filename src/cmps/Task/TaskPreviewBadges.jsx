@@ -53,6 +53,26 @@ export function TaskPreviewBadges({ task }) {
         </span>
       </Tooltip>
     );
+    if (task.badges.checkItems > 0) {
+      taskIcons.push(
+        <Tooltip
+          placement="bottom"
+          title="Checklist items"
+          key="checklist"
+          arrow={false}
+        >
+          <span className="task-icon-wrapper">
+            <ReactSVG
+              src={"/img/board-index/detailsImgs/checkListIcon.svg"}
+              alt="check"
+              className="task-icon checklist-icon"
+              wrapper="span"
+            />
+            <span className="task-icon-count">{task.badges.checkItemsChecked}/{task.badges.checkItems}</span>
+          </span>
+        </Tooltip>
+      );
+    }
   }
 
   return (

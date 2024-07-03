@@ -213,7 +213,6 @@ export async function sortGroup(boardId, groupId, sortBy, sortOrder) {
 }
 
 export async function editTask(task) {
-  console.log('editTask', task)
   store.dispatch({ type: EDIT_TASK, task: task })
   const board = await boardService.getById(task.idBoard);
   const newBoard = {

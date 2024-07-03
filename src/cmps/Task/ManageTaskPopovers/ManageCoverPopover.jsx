@@ -33,6 +33,8 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
     const isCover = task.cover.color || task.cover.scaled;
     const backgroundColor = utilService.getColorHashByName(task.cover.color)?.bgColor || '#dcdfe4';
 
+
+    //TODO wrap cover box with blue border if selected
     return (
         <Popover
             className="manage-cover-popover"
