@@ -20,7 +20,7 @@ import { useSelector } from 'react-redux';
 
 const { TextArea } = Input;
 
-export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, openPreviewModal, editLabel }) {
+export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, openPreviewModal, editLabel, taskWidth }) {
     const boardLabels = useSelector((state) => state.boardModule.board.labelNames);
     const [taskLabels, setTaskLabels] = useState([]);
 
@@ -42,8 +42,8 @@ export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, openPr
         const rect = containerRef.current.getBoundingClientRect();
         setModalStyle({
             position: 'absolute',
-            top: `${rect.top - 4}px`,
-            left: `${rect.left - 205}px`,
+            top: `${rect.top}px`,
+            left: `${rect.right - taskWidth}px`,
         });
         openPreviewModal(true);
     };
@@ -131,7 +131,7 @@ export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, openPr
                 onCancel={handleCancel}
                 getContainer={() => containerRef.current}
                 style={modalStyle}
-                width={236}
+                width={taskWidth}
                 closable={false}
                 footer={null}
                 transitionName=""          // Disable modal open animation
