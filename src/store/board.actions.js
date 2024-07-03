@@ -2,7 +2,7 @@ import { boardService } from '../services/board.service.local'
 import { utilService } from '../services/util.service'
 import { memberService } from '../services/members.service.local'
 import { store } from './store'
-import { SET_MEMBERS, SET_BOARD, SET_IS_EXPANDED, ADD_TASK, ADD_GROUP, EDIT_GROUP, EDIT_TASK, EDIT_LABEL, COPY_GROUP, MOVE_ALL_CARDS, ARCHIVE_ALL_CARDS } from './board.reducer'
+import { SET_MEMBERS, SET_BOARD, SET_IS_EXPANDED, ADD_TASK, ADD_GROUP, EDIT_GROUP, EDIT_TASK, EDIT_LABEL, COPY_GROUP, MOVE_ALL_CARDS, ARCHIVE_ALL_CARDS, SORT_GROUP } from './board.reducer'
 
 // export async function loadTrelloDataFromSource() {
 //   try {
@@ -185,6 +185,31 @@ export async function editGroup(boardId, group) {
   };
   await boardService.save(newBoard)
   return group
+}
+
+export async function sortGroup(boardId, groupId, sortBy, sortOrder) {
+  const board = await boardService.getById(boardId);
+  const group = board.groups.find(g => g.id === groupId);
+  let newGroup = {};
+  if (sortBy === "name") {
+    newGroup = { ...group, tasks: group.tasks.sort((a, b) => a.name.localeCompare(b.name)) };
+  } else if (sortBy === "createdAt") {
+    newGroup = { ...group, tasks: group.tasks.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt)) };
+  }
+  if (sortOrder === "desc") {
+    newGroup.tasks.reverse();
+  }
+  const STARTING_POS = 87654;
+  newGroup.tasks.forEach((task, index) => {
+    task.pos = STARTING_POS * (1 + index);
+  });
+  console.log('newGroup', newGroup)
+  const newBoard = {
+    ...board,
+    groups: board.groups.map(g => g.id === groupId ? { ...g, sortBy, sortOrder } : g)
+  };
+  store.dispatch({ type: SORT_GROUP, group: newGroup })
+  await boardService.save(newBoard)
 }
 
 export async function editTask(boardId, task) {

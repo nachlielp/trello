@@ -12,7 +12,8 @@ import {
   editLabel,
   copyGroup,
   moveAllCards,
-  archiveAllCards
+  archiveAllCards,
+  sortGroup
 } from "../store/board.actions";
 import { AddGroupBtn } from "../cmps/Group/AddGroupBtn";
 import { TaskDetailsModal } from "../cmps/Task/TaskDetailsModal/TaskDetailsModal.jsx";
@@ -82,6 +83,11 @@ export function BoardIndex() {
   async function onCopyGroup(group) {
     const res = await copyGroup(board.id, group);
   }
+
+  async function onSortGroup(groupId, sortBy, sortOrder) {
+    const res = await sortGroup(board.id, groupId, sortBy, sortOrder);
+  }
+
   const sortedGroups = board?.groups
     ?.filter((l) => !l.closed)
     .sort((a, b) => a.pos - b.pos);
@@ -111,6 +117,7 @@ export function BoardIndex() {
                 copyGroup={onCopyGroup}
                 moveAllCards={moveAllCards}
                 archiveAllCards={archiveAllCards}
+                sortGroup={onSortGroup}
               />
             ))}
           <AddGroupBtn addGroup={onAddGroup} />

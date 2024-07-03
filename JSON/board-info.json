@@ -17,6 +17,7 @@
             "checkItemStates": [],
             "closed": false,
             "dueComplete": false,
+            "createdAt": "2024-06-21T11:21:43.178Z",
             "dateLastActivity": "2024-06-21T11:21:43.178Z",
             "desc": "[board-info.js](https://trello.com/1/cards/66754df7468a0b72581f2de8/attachments/66754e0faeb4c24c7994c291/download/board-info.js \"‌\")\n[board-members.js](https://trello.com/1/cards/66754df7468a0b72581f2de8/attachments/66754e12d267e69fbed5c04f/download/board-members.js \"‌\")\n[user.js](https://trello.com/1/cards/66754df7468a0b72581f2de8/attachments/66754e9696844f09df931eb2/download/user.js \"‌\")",
             "descData": {
@@ -320,6 +321,7 @@
             "checkItemStates": [],
             "closed": false,
             "dueComplete": false,
+            "createdAt": "2024-06-26T05:38:01.628Z",
             "dateLastActivity": "2024-06-26T05:38:01.628Z",
             "desc": "",
             "descData": {
@@ -482,6 +484,7 @@
             "checkItemStates": [],
             "closed": false,
             "dueComplete": false,
+            "createdAt": "2024-06-25T13:33:53.860Z",
             "dateLastActivity": "2024-06-25T13:33:53.860Z",
             "desc": "",
             "descData": {
@@ -600,6 +603,7 @@
             "checkItemStates": [],
             "closed": false,
             "dueComplete": false,
+            "createdAt": "2024-06-22T08:31:57.097Z",
             "dateLastActivity": "2024-06-22T08:31:57.097Z",
             "desc": "[https://github.com/nachpok/trello/blob/main/src/services/event-bus.service.js](https://github.com/nachpok/trello/blob/main/src/services/event-bus.service.js \"smartCard-inline\")",
             "descData": {
@@ -676,6 +680,7 @@
             "checkItemStates": [],
             "closed": false,
             "dueComplete": false,
+            "createdAt": "2024-06-26T05:38:23.499Z",
             "dateLastActivity": "2024-06-26T05:38:23.499Z",
             "desc": "",
             "descData": {
@@ -826,6 +831,7 @@
             "checkItemStates": [],
             "closed": false,
             "dueComplete": false,
+            "createdAt": "2024-06-22T08:15:30.466Z",
             "dateLastActivity": "2024-06-22T08:15:30.466Z",
             "desc": "",
             "descData": {
@@ -901,6 +907,7 @@
             "checkItemStates": [],
             "closed": false,
             "dueComplete": false,
+            "createdAt": "2024-06-22T08:33:00.870Z",
             "dateLastActivity": "2024-06-22T08:33:00.870Z",
             "desc": "- 1\n- 2\n- 3\n- 4",
             "descData": {
@@ -966,6 +973,7 @@
             "checkItemStates": [],
             "closed": false,
             "dueComplete": false,
+            "createdAt": "2024-06-22T08:16:12.518Z",
             "dateLastActivity": "2024-06-22T08:16:12.518Z",
             "desc": "",
             "descData": {
@@ -1061,6 +1069,7 @@
             ],
             "closed": false,
             "dueComplete": false,
+            "createdAt": "2024-06-22T08:15:18.743Z",
             "dateLastActivity": "2024-06-22T08:15:18.743Z",
             "desc": "",
             "descData": {
@@ -1128,6 +1137,7 @@
             "checkItemStates": [],
             "closed": false,
             "dueComplete": false,
+            "createdAt": "2024-06-22T08:37:33.462Z",
             "dateLastActivity": "2024-06-22T08:37:33.462Z",
             "desc": "",
             "descData": {
@@ -1194,6 +1204,7 @@
             },
             "checkItemStates": [],
             "closed": false,
+            "createdAt": "2024-06-21T13:11:07.746Z",
             "dueComplete": false,
             "dateLastActivity": "2024-06-21T13:11:07.746Z",
             "desc": "",
@@ -1271,6 +1282,7 @@
             "checkItemStates": [],
             "closed": false,
             "dueComplete": false,
+            "createdAt": "2024-06-22T08:41:08.198Z",
             "dateLastActivity": "2024-06-22T08:41:08.198Z",
             "desc": "![Screenshot\\_2.png](https://trello.com/1/cards/66756fdbdfdce3305b75f751/attachments/66758cda9b6ddd6d9eb72b20/download/Screenshot_2.png)",
             "descData": {
@@ -1336,6 +1348,7 @@
             "checkItemStates": [],
             "closed": false,
             "dueComplete": false,
+            "createdAt": "2024-06-22T08:12:54.424Z",
             "dateLastActivity": "2024-06-22T08:12:54.424Z",
             "desc": "![Screenshot\\_3.png](https://trello.com/1/cards/66757099dbeaed543b4603b1/attachments/66758d1fffc9a9d1a2cd085f/download/Screenshot_3.png)",
             "descData": {
@@ -1401,6 +1414,7 @@
             "checkItemStates": [],
             "closed": false,
             "dueComplete": false,
+            "createdAt": "2024-06-22T08:41:13.547Z",
             "dateLastActivity": "2024-06-22T08:41:13.547Z",
             "desc": "![Screenshot\\_1.png](https://trello.com/1/cards/66758c6d3b868a6ca2bc0cef/attachments/66758cc12183e8943bcf98c4/download/Screenshot_1.png)",
             "descData": {

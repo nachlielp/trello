@@ -7,7 +7,7 @@ import { TaskPreview } from "../Task/TaskPreview"
 import { TaskPreviewCover } from "../Task/TaskPreviewCover"
 
 //TODO put add new task in array of sorted tasks based on position
-export function BoardGroup({ group, addTask, archiveGroup, editGroup, editTask, editLabel, copyGroup, moveAllCards, archiveAllCards }) {
+export function BoardGroup({ group, addTask, archiveGroup, editGroup, editTask, editLabel, copyGroup, moveAllCards, archiveAllCards, sortGroup }) {
     const [isAddTaskOpen, setIsAddTaskOpen] = useState(false)
     const [newTaskIds, setNewTaskIds] = useState([])
     const [firstTaskPos, setFirstTaskPos] = useState(null)
@@ -47,7 +47,7 @@ export function BoardGroup({ group, addTask, archiveGroup, editGroup, editTask, 
     return (
         <div className="board-group-container">
             <Card className="board-group custom-card">
-                <BoardGroupHeader group={group} editGroup={editGroup} openAddTask={openAddTask} archiveGroup={archiveGroup} copyGroup={copyGroup} moveAllCards={moveAllCards} archiveAllCards={archiveAllCards} />
+                <BoardGroupHeader group={group} editGroup={editGroup} openAddTask={openAddTask} archiveGroup={archiveGroup} copyGroup={copyGroup} moveAllCards={moveAllCards} archiveAllCards={archiveAllCards} sortGroup={sortGroup} />
                 <main className="board-group-main">
                     {newTaskIds.map(taskId => <TaskPreview key={taskId} task={group.tasks.find(task => task.id === taskId)} />)}
                     {isAddTaskOpen && <AddTaskInGroup groupId={group.id} closeAddTask={() => setIsAddTaskOpen(false)} addTask={addTask} firstTaskPos={firstTaskPos} />}

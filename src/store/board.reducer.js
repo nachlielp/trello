@@ -14,6 +14,7 @@ export const EDIT_GROUP = 'EDIT_GROUP'
 export const COPY_GROUP = 'COPY_GROUP'
 export const MOVE_ALL_CARDS = 'MOVE_ALL_CARDS'
 export const ARCHIVE_ALL_CARDS = 'ARCHIVE_ALL_CARDS'
+export const SORT_GROUP = 'SORT_GROUP'
 
 //TODO put members in board
 const initialState = {
@@ -127,6 +128,16 @@ export function boardReducer(state = initialState, action) {
                 board: {
                     ...state.board,
                     labelNames: state.board.labelNames.map(l => l.color === action.label.color ? action.label : l)
+                }
+            }
+            break
+
+        case SORT_GROUP:
+            newState = {
+                ...state,
+                board: {
+                    ...state.board,
+                    groups: state.board.groups.map(g => g.id === action.group.id ? action.group : g)
                 }
             }
             break

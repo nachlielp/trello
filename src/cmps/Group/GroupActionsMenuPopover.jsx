@@ -5,7 +5,7 @@ import { ManageTaskPopoverHeader } from "../Task/ManageTaskPopovers/ManageTaskPo
 import TextArea from "antd/es/input/TextArea"
 import { useSelector } from "react-redux"
 
-export function GroupActionsMenuPopover({ group, openAddTask, archiveGroup, copyGroup, moveAllCards, archiveAllCards }) {
+export function GroupActionsMenuPopover({ group, openAddTask, archiveGroup, copyGroup, moveAllCards, archiveAllCards, sortGroup }) {
     const board = useSelector((state) => state.boardModule.board);
     const [openGroupMenu, setOpenGroupMenu] = useState(false)
     const [backToList, setBackToList] = useState(null);
@@ -83,6 +83,18 @@ export function GroupActionsMenuPopover({ group, openAddTask, archiveGroup, copy
         setOpenGroupMenu(false)
         archiveAllCards(board.id, group.id)
     }
+
+    function onSelectSortBy() {
+        setAction("Sort by...")
+        setBackToList(() => onBackToList);
+    }
+
+    function onSortBy(sortBy, sortOrder) {
+        setAction(null)
+        setBackToList(null)
+        setOpenGroupMenu(false)
+        sortGroup(group.id, sortBy, sortOrder)
+    }
     return (
         <Popover
             className="group-actions-menu-popover"
@@ -100,7 +112,7 @@ export function GroupActionsMenuPopover({ group, openAddTask, archiveGroup, copy
                             <p className="menu-action" onClick={onSelectCopyList}>Copy list</p>
                             {/* <p className="menu-action">Move list</p> */}
                             <p className="menu-action" onClick={onSelectMoveAllCards}>Move all cards in the list</p>
-                            {/* <p className="menu-action">Sort by...</p> */}
+                            <p className="menu-action" onClick={onSelectSortBy}>Sort by...</p>
                             {/* <p className="menu-action">Watch</p> */}
                             <hr className="simple-gray-line" />
                             <p className="menu-action" onClick={onArchiveGroup}>Archive this list</p>
@@ -134,6 +146,14 @@ export function GroupActionsMenuPopover({ group, openAddTask, archiveGroup, copy
                         <article className="group-actions-menu-actions">
                             <p className="warning-text">Are you sure you want to archive the selected cards?</p>
                             <button className="action-btn danger-btn" onClick={onArchiveAllCards}>Archive cards</button>
+                        </article>
+                    }
+                    {action === "Sort by..." &&
+                        <article className="group-actions-menu-actions">
+                            <p className="menu-action" onClick={() => onSortBy("createdAt", "desc")}>Date created (newest first)</p>
+                            <p className="menu-action" onClick={() => onSortBy("createdAt", "asc")}>Date created (oldest first)</p>
+                            <p className="menu-action" onClick={() => onSortBy("name", "asc")}>Card name (alphabeticlly)</p>
+                            <p className="menu-action disabled">Due date</p>
                         </article>
                     }
                 </section>
