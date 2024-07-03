@@ -26,7 +26,6 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
     }
 
     function onSelectPhoto(id) {
-        console.log(id);
         const img = boardCoverImgs.find((img) => img.id === id);
         editTask({ ...task, cover: { ...task.cover, scaled: img.scaledImgs, color: null, idUploadedBackground: img.id } });
     }

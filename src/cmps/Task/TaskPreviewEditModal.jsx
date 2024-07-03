@@ -108,7 +108,7 @@ export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, openPr
         // { label: 'Edit date', icon: timeIcon, onClick: () => console.log('Add to Y'), cover: false },
         // { label: 'Move', icon: moveIcon, onClick: () => console.log('Add to Y'), cover: true },
         // { label: 'Copy', icon: copyIcon, onClick: () => console.log('Add to Y'), cover: true },
-        // { label: 'Archive', icon: archiveIcon, onClick: () => console.log('Add to Y'), cover: true },
+        { popover: <SvgButton src={archiveIcon} className="floating-button" label="Archive" onClick={() => editTask({ ...task, closed: true })} />, cover: true },
     ];
 
     const modalActionButtons = task.cover.size === 'full' ? allModalActionButtons.filter(btn => btn.cover) : allModalActionButtons;
