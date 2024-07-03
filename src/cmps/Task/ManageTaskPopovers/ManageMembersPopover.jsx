@@ -27,7 +27,7 @@ export function ManageMembersPopover({ anchorEl, editTask, task }) {
     }
     return (
         <Popover
-            className="change-members-popover"
+            className="manage-members-popover"
             trigger="click"
             placement="bottomLeft"
             open={isOpen}

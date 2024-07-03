@@ -4,44 +4,44 @@ import membersJson from "../../JSON/board-members.json";
 
 const boardLabelsArray = [
   // { color: "subtle green", bgColor: "#baf3db" },
-  { color: "green", bgColor: "#baf3db" },
+  { color: "green", bgColor: "#4bce97", isBase: true },
   // { color: "bold green", bgColor: "#1f845a", },
 
   // { color: "subtle yellow", bgColor: "#f8e6a0" },
-  { color: "yellow", bgColor: "#f5cd47" },
+  { color: "yellow", bgColor: "#f5cd47", isBase: true },
   // { color: "bold yellow", bgColor: "#946f01", },
 
   // { color: "subtle orange", bgColor: "#fedec8" },
-  { color: "orange", bgColor: "#fea362" },
+  { color: "orange", bgColor: "#fea362", isBase: true },
   // { color: "bold orange", bgColor: "#c25100", },
 
   // { color: "subtle red", bgColor: "#ffd5d2" },
-  { color: "red", bgColor: "#f87168" },
+  { color: "red", bgColor: "#f87168", isBase: true },
   // { color: "bold red", bgColor: "#c9372c", },
 
   // { color: "subtle purple", bgColor: "#dfd8fd" },
-  { color: "purple", bgColor: "#9f8fef" },
+  { color: "purple", bgColor: "#9f8fef", isBase: true },
   // { color: "bold purple", bgColor: "#6e5dc6", },
 
 
   // { color: "subtle blue", bgColor: "#cce0ff" },
-  { color: "blue", bgColor: "#579dff" },
+  { color: "blue", bgColor: "#579dff", isBase: true },
   // { color: "bold blue", bgColor: "#0c66e4", },
 
   // { color: "subtle sky", bgColor: "#c6edfb" },
-  { color: "sky", bgColor: "#6cc3e0" },
+  { color: "sky", bgColor: "#6cc3e0", isBase: true },
   // { color: "bold sky", bgColor: "#227d9b", },
 
   // { color: "subtle lime", bgColor: "#d3f1a7" },
-  { color: "lime", bgColor: "#94c748" },
+  { color: "lime", bgColor: "#94c748", isBase: true },
   // { color: "bold lime", bgColor: "#5b7f24", },
 
   // { color: "subtle pink", bgColor: "#fdd0ec" },
-  { color: "pink", bgColor: "#e774bb" },
+  { color: "pink", bgColor: "#e774bb", isBase: true },
   // { color: "bold pink", bgColor: "#ae4787", },
 
   // { color: "subtle black", bgColor: "#dcdfe4" },
-  { color: "black", bgColor: "#8590a2" },
+  { color: "black", bgColor: "#8590a2", isBase: true },
   // { color: "bold black", bgColor: "#626f86", },
 ]
 
@@ -59,7 +59,8 @@ export const utilService = {
   getRandomColor,
   createNewTask,
   createNewGroup,
-  boardLabelsArray
+  boardLabelsArray,
+  getBaseColors
 };
 
 export const USERS_KEY = "users";
@@ -167,7 +168,7 @@ function getColorHashByName(colorName) {
 }
 
 function _createStartInfo() {
-  if(import.meta.env.VITE_TRELLO_DARKMODE){
+  if (import.meta.env.VITE_TRELLO_DARKMODE) {
 
     localStorage.setItem("dark", import.meta.env.VITE_TRELLO_DARKMODE)
   }
@@ -316,4 +317,8 @@ function createNewGroup(group) {
     softLimit: null,
     pos: group.pos,
   };
+}
+
+function getBaseColors() {
+  return boardLabelsArray.filter(color => color.isBase);
 }

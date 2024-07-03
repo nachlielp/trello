@@ -15,6 +15,7 @@ import archiveIcon from '/img/taskActionBtns/archiveIcon.svg';
 import { SvgButton } from '../CustomCpms/SvgButton';
 import { ManageMembersPopover } from './ManageTaskPopovers/ManageMembersPopover';
 import { ManageLabelsPopover } from './ManageTaskPopovers/ManageLabelsPopover';
+import { ManageCoverPopover } from './ManageTaskPopovers/ManageCoverPopover';
 import { useSelector } from 'react-redux';
 
 const { TextArea } = Input;
@@ -93,7 +94,17 @@ export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, openPr
                 />
             )
         },
-        // { label: 'Change cover', icon: coverIcon, onClick: () => console.log('Add to Y'), cover: true },
+        {
+            cover: true, popover: (
+                <ManageCoverPopover
+                    anchorEl={
+                        <SvgButton src={coverIcon} className="floating-button" label="Change cover" />
+                    }
+                    editTask={editTask}
+                    task={task}
+                />
+            )
+        },
         // { label: 'Edit date', icon: timeIcon, onClick: () => console.log('Add to Y'), cover: false },
         // { label: 'Move', icon: moveIcon, onClick: () => console.log('Add to Y'), cover: true },
         // { label: 'Copy', icon: copyIcon, onClick: () => console.log('Add to Y'), cover: true },

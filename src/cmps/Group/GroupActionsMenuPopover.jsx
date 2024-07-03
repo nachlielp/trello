@@ -110,10 +110,10 @@ export function GroupActionsMenuPopover({ group, openAddTask, archiveGroup, copy
                         <article className="group-actions-menu-actions">
                             <p className="menu-action" onClick={onSelectAddTask}>Add card</p>
                             <p className="menu-action" onClick={onSelectCopyList}>Copy list</p>
-                            {/* <p className="menu-action">Move list</p> */}
+                            <p className="menu-action disabled">Move list</p>
                             <p className="menu-action" onClick={onSelectMoveAllCards}>Move all cards in the list</p>
                             <p className="menu-action" onClick={onSelectSortBy}>Sort by...</p>
-                            {/* <p className="menu-action">Watch</p> */}
+                            <p className="menu-action disabled">Watch</p>
                             <hr className="simple-gray-line" />
                             <p className="menu-action" onClick={onArchiveGroup}>Archive this list</p>
                             <p className="menu-action" onClick={onSelectArchiveAllCards}>Archive all cards in the list</p>

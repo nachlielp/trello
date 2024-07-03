@@ -73,7 +73,7 @@ export function BoardIndex() {
   }
 
   async function onEditTask(task) {
-    const res = await editTask(board.id, task);
+    const res = await editTask(task);
   }
 
   async function onEditLabel(label) {
