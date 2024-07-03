@@ -6,19 +6,30 @@ import checkListIcon from "/img/board-index/detailsImgs/checkListIcon.svg";
 
 import { SvgButton } from "../../CustomCpms/SvgButton";
 
-export function TaskDetailsActions() {
+import { useNavigate } from "react-router-dom";
+
+export function TaskDetailsActions({ task, editTask }) {
+  const navigate = useNavigate();
+
+  function onArchiveTask() {
+    editTask({ ...task, closed: true });
+    navigate('/')
+  }
+
   const actions = [
     { svg: defaultProfile, text: "Move" },
     { svg: labelIcon, text: "Copy" },
     { svg: checkListIcon, text: "Make template" },
-    { svg: clockIcon, text: "Archive" },
+    { popover: <SvgButton src={clockIcon} className="floating-button" label="Archive" onClick={onArchiveTask} /> },
     { svg: file, text: "Share" },
   ];
   return (
     <section>
       <p>Actions</p>
-      {actions.map((body) => (
-        <SvgButton src={body.svg} label={body.text} key={body.text} />
+      {actions.map((btn, index) => (
+        <div key={index}>
+          {btn.popover}
+        </div>
       ))}
     </section>
   );

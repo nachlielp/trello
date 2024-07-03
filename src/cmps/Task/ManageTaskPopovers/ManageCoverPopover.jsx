@@ -33,7 +33,6 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
     const isCover = task.cover.color || task.cover.scaled;
     const backgroundColor = utilService.getColorHashByName(task.cover.color)?.bgColor || '#dcdfe4';
 
-
     //TODO wrap cover box with blue border if selected
     return (
         <Popover
@@ -55,32 +54,36 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
                     <section className="cover-body">
                         <h3 className="cover-sub-title">Size</h3>
                         <article className={`cover-btns `}>
-                            <div className="half-size-btn" onClick={() => onChangeSize("normal")}
-                            >
-                                <div className={`sub-block-1 ${task.cover.color ? "active" : "non-active"}`} style={{
-                                    backgroundImage: task.cover.scaled ? `url(${task.cover.scaled[0].url})` : 'none',
-                                    backgroundSize: 'cover',
-                                    backgroundPosition: 'center'
-                                }} ></div>
-                                <div className="sub-block-2">
-                                    <div className="row-1"></div>
-                                    <div className="row-2"></div>
-                                    <div className="row-3">
-                                        <div className="col-1"></div>
-                                        <div className="col-2"></div>
+                            <div className={`half-size-wrapper ${isCover && task.cover.size === "normal" ? "active" : "non-active"}`}>
+                                <div className={`half-size-btn `} onClick={() => onChangeSize("normal")}
+                                >
+                                    <div className={`sub-block-1 ${task.cover.color ? "active" : "non-active"}`} style={{
+                                        backgroundImage: task.cover.scaled ? `url(${task.cover?.scaled[0]?.url})` : 'none',
+                                        backgroundSize: 'cover',
+                                        backgroundPosition: 'center'
+                                    }} ></div>
+                                    <div className="sub-block-2">
+                                        <div className="row-1"></div>
+                                        <div className="row-2"></div>
+                                        <div className="row-3">
+                                            <div className="col-1"></div>
+                                            <div className="col-2"></div>
+                                        </div>
+                                        <div className="row-4"></div>
                                     </div>
-                                    <div className="row-4"></div>
                                 </div>
                             </div>
-                            <div className={`full-size-btn ${task.cover.idUploadedBackground ? "has-image" : "no-image"}`} onClick={() => onChangeSize("full")}
-                                style={{
-                                    backgroundImage: task.cover.scaled ? `url(${task.cover.scaled[0].url})` : 'none',
-                                    backgroundSize: 'cover',
-                                    backgroundPosition: 'center'
-                                }}>
-                                <div className="sub-block-1" >
-                                    <div className="row-1"></div>
-                                    <div className="row-2"></div>
+                            <div className={`full-size-wrapper ${isCover && task.cover.size === "full" ? "active" : "non-active"}`}>
+                                <div className={`full-size-btn ${task.cover.idUploadedBackground ? "has-image" : "no-image"}`} onClick={() => onChangeSize("full")}
+                                    style={{
+                                        backgroundImage: task.cover.scaled ? `url(${task.cover.scaled[0]?.url})` : 'none',
+                                        backgroundSize: 'cover',
+                                        backgroundPosition: 'center'
+                                    }}>
+                                    <div className="sub-block-1" >
+                                        <div className="row-1"></div>
+                                        <div className="row-2"></div>
+                                    </div>
                                 </div>
                             </div>
                         </article>

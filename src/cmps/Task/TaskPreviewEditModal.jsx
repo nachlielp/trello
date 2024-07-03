@@ -20,7 +20,7 @@ import { useSelector } from 'react-redux';
 
 const { TextArea } = Input;
 
-export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, openPreviewModal, editLabel }) {
+export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, openPreviewModal, editLabel, taskWidth }) {
     const boardLabels = useSelector((state) => state.boardModule.board.labelNames);
     const [taskLabels, setTaskLabels] = useState([]);
 
@@ -38,24 +38,27 @@ export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, openPr
         setTaskLabels(task.labels.map((label) => boardLabels.find(boardLabel => boardLabel.color === label.color)));
     }, [task.labels, boardLabels]);
 
-    const showModal = () => {
+    function showModal(e) {
+        e.stopPropagation();
         const rect = containerRef.current.getBoundingClientRect();
         setModalStyle({
             position: 'absolute',
-            top: `${rect.top - 4}px`,
-            left: `${rect.left - 205}px`,
+            top: `${rect.top}px`,
+            left: `${rect.right - taskWidth}px`,
         });
         openPreviewModal(true);
     };
 
-    const handleOk = () => {
+    function handleOk(e) {
+        e.stopPropagation();
         if (taskName !== task.name) {
             editTask({ ...task, name: taskName });
         }
         openPreviewModal(false);
     };
 
-    const handleCancel = () => {
+    function handleCancel(e) {
+        e.stopPropagation();
         openPreviewModal(false);
     };
 
@@ -131,7 +134,7 @@ export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, openPr
                 onCancel={handleCancel}
                 getContainer={() => containerRef.current}
                 style={modalStyle}
-                width={236}
+                width={taskWidth}
                 closable={false}
                 footer={null}
                 transitionName=""          // Disable modal open animation

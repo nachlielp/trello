@@ -1,5 +1,5 @@
 import { Card } from "antd";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { utilService } from "../../services/util.service";
 import { TaskPreviewLabel } from "./TaskPreviewLabel";
 import { TaskPreviewBadges } from "./TaskPreviewBadges";
@@ -12,15 +12,21 @@ export function TaskPreview({ task, editTask, editLabel }) {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpenPreviewModal, setIsOpenPreviewModal] = useState(false);
   const [taskLabels, setTaskLabels] = useState([]);
+  const taskRef = useRef(null);
+  const [taskWidth, setTaskWidth] = useState(0);
   const navigate = useNavigate();
 
   const taskCover = task.cover;
 
   useEffect(() => {
-    // console.log('boardLabels rerender', boardLabels)
-
     setTaskLabels(task.labels.map((label) => boardLabels.find(boardLabel => boardLabel.color === label.color)));
   }, [task.labels, boardLabels]);
+
+  useEffect(() => {
+    if (taskRef.current) {
+      setTaskWidth(taskRef.current.offsetWidth);
+    }
+  }, [taskRef]);
 
   function onOpenPreviewModal(value) {
     setIsOpenPreviewModal(value);
@@ -28,6 +34,7 @@ export function TaskPreview({ task, editTask, editLabel }) {
 
   return (
     <Card
+      ref={taskRef}
       className={`group-task custom-card ${isOpenPreviewModal ? 'open-preview-modal' : ''}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -40,6 +47,7 @@ export function TaskPreview({ task, editTask, editLabel }) {
         openPreviewModal={onOpenPreviewModal}
         taskLabels={taskLabels}
         editLabel={editLabel}
+        taskWidth={taskWidth}
       />
       {taskCover.color && (
         <div
