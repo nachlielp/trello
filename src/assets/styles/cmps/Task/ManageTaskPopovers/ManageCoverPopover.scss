@@ -113,23 +113,13 @@
                     width: 100%;
                     height: 100%;
                     background: rgba(0, 0, 0, 0.8);
-                    /* Adjust the tint color and opacity as needed */
                     opacity: 0.5;
-                    /* Initially hidden */
                     transition: opacity 0.3s ease;
-                    /* Smooth transition */
                 }
 
                 &.has-image::before {
                     opacity: 0.5;
                 }
-
-
-                // .sub-block-1 {
-                //     background: var(--ds-background-accent-gray-subtler, #dcdfe4);
-                //     height: 28px;
-                //     border-radius: 3px 3px 0 0;
-                // }
 
                 .sub-block-1 {
                     padding: 6px 4px 4px 6px;
