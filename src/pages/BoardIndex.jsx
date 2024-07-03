@@ -123,7 +123,7 @@ export function BoardIndex() {
           <AddGroupBtn addGroup={onAddGroup} />
         </main>
       </div>
-      {clickedTaskId && <TaskDetailsModal taskId={clickedTaskId} editTask={onEditTask} editLabel={onEditLabel} />}
+      {/* {clickedTaskId && <TaskDetailsModal taskId={clickedTaskId} editTask={onEditTask} editLabel={onEditLabel} />} */}
     </section>
   ) : (
     <h1>Loading...</h1>
