@@ -2,6 +2,7 @@
   box-sizing: border-box;
   cursor: pointer;
   position: relative;
+  margin: 0 5px;
 
   &:hover {
     outline: 2px solid blue;
@@ -57,7 +58,6 @@
 
 .task-img-cover {
   min-height: 160px;
-  width: 100%;
 }
 
 .group-task-content {

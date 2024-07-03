@@ -56,8 +56,8 @@ export function BoardGroup({ group, addTask, archiveGroup, editGroup, editTask, 
                             ? <TaskPreviewCover key={task.id} task={task} editTask={editTask} editLabel={editLabel} />
                             : <TaskPreview key={task.id} task={task} editTask={editTask} editLabel={editLabel} />
                     ))}
-                    {!isAddTaskOpen && <GroupFooter groupId={group.id} addTask={addTask} lastTaskPos={lastTaskPos} />}
                 </main>
+                {!isAddTaskOpen && <GroupFooter groupId={group.id} addTask={addTask} lastTaskPos={lastTaskPos} />}
             </Card>
         </div>
     )
