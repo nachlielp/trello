@@ -7,11 +7,12 @@ import { TaskDetailsAddToCard } from "./TaskDetailsAddToCard";
 import { TaskDetailsActions } from "./TaskDetailsActions";
 import { SvgButton } from "../../CustomCpms/SvgButton";
 import { TaskDetailsMembers } from "./TaskDetailsMembers";
-
-//svg
+import { ManageCoverPopover } from "../ManageTaskPopovers/ManageCoverPopover";
+import coverIcon from "/img/board-index/detailsImgs/coverIcon.svg";
 import { ReactSVG } from "react-svg";
 import detailsIcon from "/img/board-index/detailsImgs/detailsIcon.svg";
 import defaultProfile from "/img/defaultProfile.svg";
+import { utilService } from "../../../services/util.service";
 
 export function TaskDetailsModal({ taskId, editTask, editLabel }) {
   const currentBoard = useSelector((state) => state.boardModule.board);
@@ -37,7 +38,43 @@ export function TaskDetailsModal({ taskId, editTask, editLabel }) {
 
   return (
     <Modal
+      open
+      onCancel={() => navigate("/", { replace: true })}
+      loading={!currentTask}
+      footer=""
+      className="task-details"
       title={
+        currentTask.cover.color && (
+          <div className={`details-header-color-cover`} style={{ backgroundColor: utilService.getColorHashByName(currentTask.cover.color).bgColor }}>
+            <ManageCoverPopover
+              anchorEl={
+                <SvgButton src={coverIcon} className="cover-btn" label="Cover" />
+              }
+              editTask={editTask}
+              task={currentTask}
+            />
+          </div>
+        )
+      }
+    >
+      {
+        currentTask.cover.scaled?.length > 0 && (
+          <div className={`details-header-img-cover ${currentTask.cover.brightness === "dark" ? 'dark' : 'light'}`} >
+            {currentTask.cover.scaled?.length > 0 && <img src={currentTask.cover.scaled[1].url} alt="task cover" />}
+            <div className={`details-header-cover-actions-wrapper`} >
+              <ManageCoverPopover
+                anchorEl={
+                  <SvgButton src={coverIcon} className="cover-btn" label="Cover" />
+                }
+                editTask={editTask}
+                task={currentTask}
+              />
+            </div>
+          </div>
+        )
+      }
+
+      {
         currentTask && (
           <div className="details-header">
             <ReactSVG src={detailsIcon} className="icon" wrapper="span" />
@@ -60,12 +97,6 @@ export function TaskDetailsModal({ taskId, editTask, editLabel }) {
           </div>
         )
       }
-      open
-      onCancel={() => navigate("/", { replace: true })}
-      loading={!currentTask}
-      footer=""
-      className="task-details"
-    >
       <div className="details-body">
         <div className="details-body__left">
           {/* Additional content here */}

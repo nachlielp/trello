@@ -1,6 +1,6 @@
 import defaultProfile from "/img/defaultProfile.svg";
 import checkListIcon from "/img/board-index/detailsImgs/checkListIcon.svg";
-
+import { useState, useEffect } from "react";
 import coverIcon from "/img/board-index/detailsImgs/coverIcon.svg";
 import fieldsIcon from "/img/board-index/detailsImgs/fieldsIcon.svg";
 import file from "../../../../src/assets/svgs/file.svg";
@@ -14,6 +14,11 @@ import { ManageLabelsPopover } from "../ManageTaskPopovers/ManageLabelsPopover";
 import { ManageCoverPopover } from "../ManageTaskPopovers/ManageCoverPopover";
 
 export function TaskDetailsAddToCard({ task, editTask, editLabel }) {
+  const [isCover, setIsCover] = useState(false);
+  useEffect(() => {
+    setIsCover(task.cover.color || task.cover.scaled);
+  }, [task.cover.color, task.cover.scaled]);
+
 
   const addToCard = [
     {
@@ -50,13 +55,17 @@ export function TaskDetailsAddToCard({ task, editTask, editLabel }) {
     { svg: clockIcon, text: "Dates" },
     { svg: file, text: "Attachment" },
     {
-      popover: <ManageCoverPopover
-        anchorEl={
-          <SvgButton src={coverIcon} className="floating-button" label="Change cover" />
-        }
-        editTask={editTask}
-        task={task}
-      />
+      popover: !isCover ? (
+        <ManageCoverPopover
+          anchorEl={
+            <SvgButton src={coverIcon} className="floating-button" label="Change cover" />
+          }
+          editTask={editTask}
+          task={task}
+        />
+      ) : (
+        <></>
+      )
     },
     { svg: fieldsIcon, text: "Custom Fields" },
   ];
