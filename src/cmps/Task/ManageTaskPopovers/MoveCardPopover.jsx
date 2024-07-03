@@ -2,7 +2,7 @@ import { CloseOutlined } from "@ant-design/icons";
 import { Popover } from "antd";
 import { useEffect, useState, useMemo } from "react";
 import { useSelector } from "react-redux";
-import { CustomSelect } from "./CustomSelect";
+import { CustomSelect } from "../../CustomCpms/CustomSelect";
 
 export function MoveCardPopover({ board, group, task, anchorEl }) {
   const [isOpen, setIsOpen] = useState(false);
