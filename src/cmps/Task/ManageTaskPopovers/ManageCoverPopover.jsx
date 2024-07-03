@@ -22,7 +22,7 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
     }
 
     function onRemoveCover() {
-        editTask({ ...task, cover: { ...task.cover, color: null, scaled: null } });
+        editTask({ ...task, cover: { ...task.cover, color: null, scaled: null, idUploadedBackground: null } });
     }
 
     function onSelectPhoto(id) {
@@ -32,6 +32,7 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
     }
 
     const isCover = task.cover.color || task.cover.scaled;
+    const backgroundColor = utilService.getColorHashByName(task.cover.color)?.bgColor || '#dcdfe4';
 
     return (
         <Popover
@@ -43,13 +44,23 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
             onOpenChange={setIsOpen}
             arrow={false}
             content={
-                <section className="manage-cover-content" style={{ '--dynamic-bg-color': utilService.getColorHashByName(task.cover.color)?.bgColor }}>
+                <section className="manage-cover-content"
+                    style={{
+                        '--dynamic-bg-color': backgroundColor,
+                        '--active-bg-color': backgroundColor,
+                        '--non-active-bg-color': '#dcdfe4',
+                    }}>
                     <ManageTaskPopoverHeader title="Cover" close={onClose} />
                     <section className="cover-body">
                         <h3 className="cover-sub-title">Size</h3>
                         <article className={`cover-btns `}>
-                            <div className="half-size-btn" onClick={() => onChangeSize("normal")}>
-                                <div className={`sub-block-1 ${task.cover.color ? "active" : "non-active"}`} ></div>
+                            <div className="half-size-btn" onClick={() => onChangeSize("normal")}
+                            >
+                                <div className={`sub-block-1 ${task.cover.color ? "active" : "non-active"}`} style={{
+                                    backgroundImage: task.cover.scaled ? `url(${task.cover.scaled[0].url})` : 'none',
+                                    backgroundSize: 'cover',
+                                    backgroundPosition: 'center'
+                                }} ></div>
                                 <div className="sub-block-2">
                                     <div className="row-1"></div>
                                     <div className="row-2"></div>
@@ -60,7 +71,12 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
                                     <div className="row-4"></div>
                                 </div>
                             </div>
-                            <div className="full-size-btn" onClick={() => onChangeSize("full")}>
+                            <div className="full-size-btn" onClick={() => onChangeSize("full")}
+                                style={{
+                                    backgroundImage: task.cover.scaled ? `url(${task.cover.scaled[0].url})` : 'none',
+                                    backgroundSize: 'cover',
+                                    backgroundPosition: 'center'
+                                }}>
                                 <div className="sub-block-1" >
                                     <div className="row-1"></div>
                                     <div className="row-2"></div>
