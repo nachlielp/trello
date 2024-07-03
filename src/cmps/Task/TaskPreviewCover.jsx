@@ -1,5 +1,5 @@
 import { Card } from "antd";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { utilService } from "../../services/util.service";
 import { TaskPreviewEditModal } from "./TaskPreviewEditModal";
 import { useNavigate } from "react-router";
@@ -8,8 +8,15 @@ export function TaskPreviewCover({ task, editTask, editLabel }) {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpenPreviewModal, setIsOpenPreviewModal] = useState(false);
   const taskMember = task.cover;
+  const taskRef = useRef(null);
+  const [taskWidth, setTaskWidth] = useState(0);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (taskRef.current) {
+      setTaskWidth(taskRef.current.offsetWidth);
+    }
+  }, [taskRef]);
   const openPreviewModal = (value) => {
     setIsOpenPreviewModal(value);
   }
@@ -36,6 +43,7 @@ export function TaskPreviewCover({ task, editTask, editLabel }) {
 
   return (
     <Card
+      ref={taskRef}
       className={`group-task  custom-card ${componentClass} ${isOpenPreviewModal ? 'open-preview-modal' : ''} `}
       style={{ ...taskColorCoverStyle, ...taskBackgroundCoverImage }}
       onMouseEnter={() => setIsHovered(true)}
@@ -48,6 +56,7 @@ export function TaskPreviewCover({ task, editTask, editLabel }) {
         isOpen={isOpenPreviewModal}
         openPreviewModal={openPreviewModal}
         editLabel={editLabel}
+        taskWidth={taskWidth}
       />
       <section
         className={`group-task-content ${taskMember.idUploadedBackground ? "image-cover" : ""
