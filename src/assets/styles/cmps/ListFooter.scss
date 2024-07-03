@@ -4,6 +4,7 @@
     gap: 10px;
     justify-content: space-between;
     align-items: center;
+    margin: 8px;
 }
 
 .list-footer .add-card-btn {
@@ -11,6 +12,7 @@
     border: none;
     border-radius: 4px;
     padding: 8px;
+
     display: flex;
     /* Ensure flexbox is used */
     align-items: center;
@@ -30,9 +32,10 @@
     border: none;
     background-color: var(--tr-background-list);
     color: var(--ds-text-subtle);
-   span{
-    font-size: 16px;
-   }
+
+    span {
+        font-size: 16px;
+    }
 }
 
 .list-footer .use-template-btn:hover {
