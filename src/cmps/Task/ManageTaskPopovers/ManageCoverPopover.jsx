@@ -58,7 +58,7 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
                             <div className="half-size-btn" onClick={() => onChangeSize("normal")}
                             >
                                 <div className={`sub-block-1 ${task.cover.color ? "active" : "non-active"}`} style={{
-                                    backgroundImage: task.cover.scaled ? `url(${task.cover.scaled[0].url})` : 'none',
+                                    backgroundImage: task.cover.scaled ? `url(${task.cover?.scaled[0]?.url})` : 'none',
                                     backgroundSize: 'cover',
                                     backgroundPosition: 'center'
                                 }} ></div>
@@ -74,7 +74,7 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
                             </div>
                             <div className={`full-size-btn ${task.cover.idUploadedBackground ? "has-image" : "no-image"}`} onClick={() => onChangeSize("full")}
                                 style={{
-                                    backgroundImage: task.cover.scaled ? `url(${task.cover.scaled[0].url})` : 'none',
+                                    backgroundImage: task.cover.scaled ? `url(${task.cover.scaled[0]?.url})` : 'none',
                                     backgroundSize: 'cover',
                                     backgroundPosition: 'center'
                                 }}>

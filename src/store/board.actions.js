@@ -159,8 +159,6 @@ export async function moveAllCards(boardId, sourceGroupId, targetGroupId) {
     return g;
   });
   const newBoard = { ...board, groups: updatedGroups };
-  console.log('newBoard', newBoard)
-  console.log({ sourceGroup: { ...sourceGroup, tasks: [] }, targetGroup: newTargetGroup })
   store.dispatch({ type: MOVE_ALL_CARDS, sourceGroup: { ...sourceGroup, tasks: [] }, targetGroup: newTargetGroup });
   await boardService.save(newBoard);
 }
@@ -219,6 +217,7 @@ export async function editTask(task) {
     ...board,
     groups: board.groups.map(g => g.id === task.idGroup ? { ...g, tasks: g.tasks.map(t => t.id === task.id ? task : t) } : g)
   };
+  console.log('newBoard', newBoard)
   await boardService.save(newBoard)
   return task
 }

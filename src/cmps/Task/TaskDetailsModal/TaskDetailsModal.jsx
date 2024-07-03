@@ -13,7 +13,7 @@ import { ReactSVG } from "react-svg";
 import detailsIcon from "/img/board-index/detailsImgs/detailsIcon.svg";
 import defaultProfile from "/img/defaultProfile.svg";
 
-export function TaskDetailsModal({ taskId, editTask }) {
+export function TaskDetailsModal({ taskId, editTask, editLabel }) {
   const currentBoard = useSelector((state) => state.boardModule.board);
   const currentGroup = useSelector((state) =>
     state.boardModule.board.groups?.find((g) =>
@@ -28,30 +28,11 @@ export function TaskDetailsModal({ taskId, editTask }) {
   const currentUser = useSelector((state) => state.userModule.user);
   const navigate = useNavigate();
 
-  const [isMember, setIsMember] = useState(false);
-  const [hasMembers, setHasMember] = useState(false);
+  const isMember = currentTask?.idMembers.includes(currentUser?.id);
+  const hasMembers = currentTask.idMembers.length > 0;
 
-  useEffect(() => {
-    if (currentTask?.idMembers.includes(currentUser?.id)) {
-      setIsMember(true);
-    } else {
-      setIsMember(false);
-    }
-    if (currentTask.idMembers.length > 0) {
-      setHasMember(true);
-    } else {
-      setHasMember(false);
-    }
-  }, [currentBoard, currentTask, currentUser]);
-
-  async function onJoin() {
-    const updatedTask = {
-      ...currentTask,
-      idMembers: [...currentTask.idMembers, currentUser.id],
-    };
-
-    setIsMember(true);
-    editTask(updatedTask);
+  function onJoin() {
+    editTask({ ...currentTask, idMembers: [...currentTask.idMembers, currentUser.id] });
   }
 
   return (
@@ -108,8 +89,8 @@ export function TaskDetailsModal({ taskId, editTask }) {
               <SvgButton src={defaultProfile} label={"Join"} onClick={onJoin} />
             </section>
           )}
-          <TaskDetailsAddToCard />
-          <TaskDetailsActions />
+          <TaskDetailsAddToCard task={currentTask} editTask={editTask} editLabel={editLabel} />
+          <TaskDetailsActions task={currentTask} editTask={editTask} />
         </div>
       </div>
     </Modal>
