@@ -105,7 +105,7 @@
                 position: relative;
                 overflow: hidden;
 
-                &::before {
+                &.has-image::before {
                     content: '';
                     position: absolute;
                     top: 0;
@@ -121,9 +121,9 @@
                 }
 
                 &.has-image::before {
-                    opacity: 1;
-                    /* Show the tint overlay when the button has an image */
+                    opacity: 0.5;
                 }
+
 
                 // .sub-block-1 {
                 //     background: var(--ds-background-accent-gray-subtler, #dcdfe4);

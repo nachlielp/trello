@@ -13,7 +13,7 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
     }
 
     function onSelectColor(color) {
-        editTask({ ...task, cover: { ...task.cover, color } });
+        editTask({ ...task, cover: { ...task.cover, color, idUploadedBackground: null, scaled: null } });
     }
 
     //BUG: when the size is changed, the popover closes
@@ -71,7 +71,7 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
                                     <div className="row-4"></div>
                                 </div>
                             </div>
-                            <div className="full-size-btn" onClick={() => onChangeSize("full")}
+                            <div className={`full-size-btn ${task.cover.idUploadedBackground ? "has-image" : "no-image"}`} onClick={() => onChangeSize("full")}
                                 style={{
                                     backgroundImage: task.cover.scaled ? `url(${task.cover.scaled[0].url})` : 'none',
                                     backgroundSize: 'cover',
