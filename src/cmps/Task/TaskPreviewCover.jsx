@@ -41,6 +41,10 @@ export function TaskPreviewCover({ task, editTask, editLabel }) {
       ? "task-img-cover"
       : "";
 
+  function onClick(e) {
+    e.stopPropagation();
+    navigate(`/c/${task.id}`, { replace: true });
+  }
   return (
     <Card
       ref={taskRef}
@@ -48,6 +52,7 @@ export function TaskPreviewCover({ task, editTask, editLabel }) {
       style={{ ...taskColorCoverStyle, ...taskBackgroundCoverImage }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={onClick}
     >
       <TaskPreviewEditModal
         task={task}
@@ -59,8 +64,7 @@ export function TaskPreviewCover({ task, editTask, editLabel }) {
         taskWidth={taskWidth}
       />
       <section
-        className={`group-task-content ${taskMember.idUploadedBackground ? "image-cover" : ""
-          }`}
+        className={`group-task-content ${taskMember.idUploadedBackground ? "image-cover" : ""}`}
         onClick={() => navigate(`/c/${task.id}`, { replace: true })}
       >
         <span className="group-task-content-title">{task.name}</span>

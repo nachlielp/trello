@@ -18,19 +18,23 @@
 
     background-color: var(--ds-surface-overlay, #ffffff);
     color: var(--ds-text, #172b4d);
+
     .details-header {
       display: flex;
       color: var(--ds-text, #172b4d);
       background-color: var(--ds-surface-overlay, #ffffff);
+
       .icon {
         font-size: 24px;
         line-height: 32px;
         margin-right: 10px;
         color: var(--ds-text-subtle, #44546f);
       }
+
       .info {
         display: flex;
         flex-direction: column;
+
         .task-name {
           font-size: 20px;
           font-weight: 600;
@@ -38,6 +42,7 @@
           max-width: calc(100% - 20px);
           text-wrap: nowrap;
         }
+
         .task-group {
           font-size: 14px;
           font-weight: 400;
@@ -46,6 +51,7 @@
           margin: 4px 8px 4px 2px;
           width: max-content;
           color: var(--ds-text-subtle, #44546f);
+
           a {
             color: inherit;
             text-decoration: underline;
@@ -53,17 +59,22 @@
         }
       }
     }
+
     .details-body {
       height: min-content;
       display: grid;
       grid-template-columns: 552px 192px;
+
       .details-body__right {
         padding: 0 16px 8px 8px;
+
         section {
           margin-bottom: 24px;
+
           &:last-child {
             margin: 0;
           }
+
           p {
             margin: 0;
             font-size: 12px;
@@ -89,11 +100,13 @@
           padding: 6px 12px;
           margin-top: 8px;
           align-items: center;
+
           &:hover {
             background-color: var(--ds-background-neutral-hovered, #091e4224);
             text-decoration: none;
           }
-          > span {
+
+          >span {
             background: none;
             color: var(--ds-icon, #44546f);
             font-size: 16px;
@@ -103,19 +116,23 @@
           }
         }
       }
+
       .details-body__left {
         .subsection {
           display: flex;
+
           div {
             max-width: 100%;
             margin: 0 16px 16px 0;
           }
+
           .members {
             .member {
               cursor: pointer;
               margin: 0 4px 4px 0;
             }
-            .change-members-popover {
+
+            .manage-members-popover {
               cursor: pointer;
               color: var(--ds-icon, #44546f);
               width: 32px;
@@ -124,7 +141,8 @@
               border: none;
               background-color: var(--ds-background-neutral, #091e420f);
               margin: 0 4px 4px 0;
-              &:hover{
+
+              &:hover {
                 background-color: var(--ds-background-neutral-hovered, #091e4224);
                 border: none;
                 box-shadow: none;

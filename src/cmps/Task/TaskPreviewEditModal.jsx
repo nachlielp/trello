@@ -38,7 +38,8 @@ export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, openPr
         setTaskLabels(task.labels.map((label) => boardLabels.find(boardLabel => boardLabel.color === label.color)));
     }, [task.labels, boardLabels]);
 
-    const showModal = () => {
+    function showModal(e) {
+        e.stopPropagation();
         const rect = containerRef.current.getBoundingClientRect();
         setModalStyle({
             position: 'absolute',
@@ -48,14 +49,16 @@ export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, openPr
         openPreviewModal(true);
     };
 
-    const handleOk = () => {
+    function handleOk(e) {
+        e.stopPropagation();
         if (taskName !== task.name) {
             editTask({ ...task, name: taskName });
         }
         openPreviewModal(false);
     };
 
-    const handleCancel = () => {
+    function handleCancel(e) {
+        e.stopPropagation();
         openPreviewModal(false);
     };
 
