@@ -16,8 +16,8 @@ import { ManageCoverPopover } from "../ManageTaskPopovers/ManageCoverPopover";
 export function TaskDetailsAddToCard({ task, editTask, editLabel }) {
   const [isCover, setIsCover] = useState(false);
   useEffect(() => {
-    setIsCover(task.cover.color || task.cover.scaled);
-  }, [task.cover.color, task.cover.scaled]);
+    setIsCover(task?.cover.color || task?.cover.scaled);
+  }, [task?.cover.color, task?.cover.scaled]);
 
 
   const addToCard = [
@@ -45,7 +45,7 @@ export function TaskDetailsAddToCard({ task, editTask, editLabel }) {
               label="Edit labels"
             />
           }
-          taskLabels={task.labels}
+          taskLabels={task?.labels}
           editTask={editTask}
           task={task}
           editLabel={editLabel}

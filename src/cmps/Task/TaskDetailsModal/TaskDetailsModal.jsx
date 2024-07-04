@@ -15,42 +15,83 @@ import defaultProfile from "/img/defaultProfile.svg";
 import { loadTestBoardFromStorage } from "../../../store/board.actions";
 import { setBoards } from "../../../store/workspace.actions";
 import { utilService } from "../../../services/util.service";
+import { login } from "../../../store/user.actions";
 
 export function TaskDetailsModal({ taskId, editTask, editLabel }) {
-  const currentBoard = useSelector((state) => state.boardModule.board);
   const currentGroup = useSelector((state) =>
     state.boardModule.board.groups?.find((g) =>
-      g.tasks.find((t) => t.id === taskId)
-    )
-  );
-  const currentTask = useSelector((state) =>
-    state.boardModule.board.groups
-      ?.find((g) => g.tasks?.find((t) => t.id === taskId))
-      .tasks.find((t) => t.id === taskId)
-  );
-  const currentUser = useSelector((state) => state.userModule.user);
-  const navigate = useNavigate();
+      g.tasks?.find((t) => t.id === taskId)
+)
+);
+const currentTask = useSelector((state) =>
+  state.boardModule.board.groups
+?.find((g) => g.tasks?.find((t) => t.id === taskId))
+?.tasks.find((t) => t.id === taskId)
+);
+const currentUser = useSelector((state) => state.userModule.user);
+const navigate = useNavigate();
 
-  const isMember = currentTask?.idMembers.includes(currentUser?.id);
-  const hasMembers = currentTask.idMembers.length > 0;
+const isMember = currentTask?.idMembers?.includes(currentUser?.id);
+const hasMembers = currentTask?.idMembers?.length > 0;
+const currentCoveredColor = useSelector(
+  (state) =>
+    state.boardModule.board.groups
+  ?.find((g) => g.tasks?.find((t) => t.id === taskId))
+  ?.tasks.find((t) => t.id === taskId)?.cover.color
+);
+const isScaled = useSelector(
+  (state) =>
+    state.boardModule.board.groups
+  ?.find((g) => g.tasks?.find((t) => t.id === taskId))
+  ?.tasks.find((t) => t.id === taskId)?.cover?.scaled?.length
+);
+
+
+//pitaron zmani
+const board = useSelector((state) => state.boardModule.board);
+useEffect(() => {
+  if (currentGroup == undefined) {
+    loadTestBoardFromStorage();
+  }
+
+    console.log("currentGroup", currentCoveredColor);
+    console.log("isScaled", isScaled);
+  }, [currentCoveredColor, isScaled, board]);
+/////////////////////////////////////////////////////////////////////
+
+
+
+
 
   function onJoin() {
-    editTask({ ...currentTask, idMembers: [...currentTask.idMembers, currentUser.id] });
+    editTask({
+      ...currentTask,
+      idMembers: [...currentTask.idMembers, currentUser.id],
+    });
   }
 
   return (
     <Modal
       open
       onCancel={() => navigate("/", { replace: true })}
-      loading={!currentTask}
       footer=""
       className="task-details"
       title={
-        currentTask.cover.color && (
-          <div className={`details-header-color-cover`} style={{ backgroundColor: utilService.getColorHashByName(currentTask.cover.color).bgColor }}>
+        currentCoveredColor && (
+          <div
+            className={`details-header-color-cover`}
+            style={{
+              backgroundColor:
+                utilService.getColorHashByName(currentCoveredColor).bgColor,
+            }}
+          >
             <ManageCoverPopover
               anchorEl={
-                <SvgButton src={coverIcon} className="cover-btn" label="Cover" />
+                <SvgButton
+                  src={coverIcon}
+                  className="cover-btn"
+                  label="Cover"
+                />
               }
               editTask={editTask}
               task={currentTask}
@@ -59,46 +100,48 @@ export function TaskDetailsModal({ taskId, editTask, editLabel }) {
         )
       }
     >
-      {
-        currentTask.cover.scaled?.length > 0 && (
-          <div className={`details-header-img-cover ${currentTask.cover.brightness === "dark" ? 'dark' : 'light'}`} >
-            {currentTask.cover.scaled?.length > 0 && <img src={currentTask.cover.scaled[1].url} alt="task cover" />}
-            <div className={`details-header-cover-actions-wrapper`} >
-              <ManageCoverPopover
-                anchorEl={
-                  <SvgButton src={coverIcon} className="cover-btn" label="Cover" />
-                }
-                editTask={editTask}
-                task={currentTask}
-              />
-            </div>
-          </div>
-        )
-      }
-
-      {
-        currentTask && (
-          <div className="details-header">
-            <ReactSVG src={detailsIcon} className="icon" wrapper="span" />
-            <span className="info">
-              <span className="task-name">{currentTask?.name}</span>
-              <span className="task-group">
-                in list{" "}
-                <MoveCardPopover
-                  board={currentBoard}
-                  group={currentGroup}
-                  task={currentTask}
-                  anchorEl={
-                    <a className="group-link" href="#">
-                      {currentGroup?.name}
-                    </a>
-                  }
+      {!!isScaled > 0 && (
+        <div
+          className={`details-header-img-cover ${
+            currentTask.cover.brightness === "dark" ? "dark" : "light"
+          }`}
+        >
+          {!!isScaled > 0 && (
+            <img src={currentTask.cover.scaled[1].url} alt="task cover" />
+          )}
+          <div className={`details-header-cover-actions-wrapper`}>
+            <ManageCoverPopover
+              anchorEl={
+                <SvgButton
+                  src={coverIcon}
+                  className="cover-btn"
+                  label="Cover"
                 />
-              </span>
-            </span>
+              }
+              editTask={editTask}
+              task={currentTask}
+            />
           </div>
-        )
-      }
+        </div>
+      )}
+
+      {currentTask && (
+        <div className="details-header">
+          <ReactSVG src={detailsIcon} className="icon" wrapper="span" />
+          <span className="info">
+            <span className="task-name">{currentTask?.name}</span>
+            <span className="task-group">
+              in list{" "}
+              <MoveCardPopover
+                group={currentGroup}
+                task={currentTask}
+                taskId={taskId}
+                anchorEl={<a className="group-link">{currentGroup?.name}</a>}
+              />
+            </span>
+          </span>
+        </div>
+      )}
       <div className="details-body">
         <div className="details-body__left">
           {/* Additional content here */}
@@ -122,7 +165,11 @@ export function TaskDetailsModal({ taskId, editTask, editLabel }) {
               <SvgButton src={defaultProfile} label={"Join"} onClick={onJoin} />
             </section>
           )}
-          <TaskDetailsAddToCard task={currentTask} editTask={editTask} editLabel={editLabel} />
+          <TaskDetailsAddToCard
+            task={currentTask}
+            editTask={editTask}
+            editLabel={editLabel}
+          />
           <TaskDetailsActions task={currentTask} editTask={editTask} />
         </div>
       </div>
