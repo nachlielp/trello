@@ -4,7 +4,7 @@ import templateCard from "../../assets/svgs/template-card.svg"
 import { AddTaskInGroup } from "./AddTaskInGroup"
 import { ReactSVG } from "react-svg"
 
-export function GroupFooter({ groupId, addTask, lastTaskPos }) {
+export function GroupFooter({ groupId, addTask }) {
     const [isAddTaskOpen, setIsAddTaskOpen] = useState(false)
     function closeAddTask() {
         setIsAddTaskOpen(false)
@@ -22,7 +22,7 @@ export function GroupFooter({ groupId, addTask, lastTaskPos }) {
                     </button>
                 </>
             }
-            {isAddTaskOpen && <AddTaskInGroup groupId={groupId} closeAddTask={closeAddTask} addTask={addTask} lastTaskPos={lastTaskPos} />}
+            {isAddTaskOpen && <AddTaskInGroup groupId={groupId} closeAddTask={closeAddTask} addTask={addTask} addToTop={false} />}
         </div>
     )
 }

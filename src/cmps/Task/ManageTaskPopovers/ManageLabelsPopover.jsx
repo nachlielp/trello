@@ -69,6 +69,10 @@ export function ManageLabelsPopover({ anchorEl, editTask, task, editLabel }) {
         setBackToList(null);
     }
 
+    function onOpenPopover(e) {
+        e.stopPropagation();
+        setIsOpen(true);
+    }
     return (
         <Popover
             className="manage-labels-popover"

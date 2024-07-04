@@ -4,7 +4,8 @@
   .change-members-content {
     padding: 0 12px 12px 12px;
     background: var(--ds-surface-overlay, #fff);
-    
+    border-radius: 10px;
+
     .members-search-input {
       width: 250px;
       background-color: var(--ds-background-input, #fff);

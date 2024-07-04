@@ -50,14 +50,14 @@ export function BoardGroup({ group, addTask, archiveGroup, editGroup, editTask, 
                 <BoardGroupHeader group={group} editGroup={editGroup} openAddTask={openAddTask} archiveGroup={archiveGroup} copyGroup={copyGroup} moveAllCards={moveAllCards} archiveAllCards={archiveAllCards} sortGroup={sortGroup} />
                 <main className="board-group-main">
                     {newTaskIds.map(taskId => <TaskPreview key={taskId} task={group.tasks.find(task => task.id === taskId)} />)}
-                    {isAddTaskOpen && <AddTaskInGroup groupId={group.id} closeAddTask={() => setIsAddTaskOpen(false)} addTask={addTask} firstTaskPos={firstTaskPos} />}
+                    {isAddTaskOpen && <AddTaskInGroup groupId={group.id} closeAddTask={() => setIsAddTaskOpen(false)} addTask={addTask} addToTop={true} />}
                     {sortedTasks.filter(task => !newTaskIds.includes(task.id)).map(task => (
                         task.cover.size === "full"
                             ? <TaskPreviewCover key={task.id} task={task} editTask={editTask} editLabel={editLabel} />
                             : <TaskPreview key={task.id} task={task} editTask={editTask} editLabel={editLabel} />
                     ))}
                 </main>
-                {!isAddTaskOpen && <GroupFooter groupId={group.id} addTask={addTask} lastTaskPos={lastTaskPos} />}
+                {!isAddTaskOpen && <GroupFooter groupId={group.id} addTask={addTask} />}
             </Card>
         </div>
     )

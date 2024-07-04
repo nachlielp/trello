@@ -204,6 +204,7 @@
         .subsection {
           display: flex;
           padding-left: 34px;
+
           div {
             max-width: 100%;
             margin: 0 16px 16px 0;
@@ -214,6 +215,8 @@
               cursor: pointer;
               margin: 0 4px 4px 0;
             }
+
+            //TODO change name, this is a mambers icon not mangae members popover
             .manage-members-popover {
               cursor: pointer;
               color: var(--ds-icon, #44546f);
