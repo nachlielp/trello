@@ -18,7 +18,9 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
 
     //BUG: when the size is changed, the popover closes
     function onChangeSize(size) {
-        editTask({ ...task, cover: { ...task.cover, size: size } });
+        if (task.cover.color || task.cover.idUploadedBackground) {
+            editTask({ ...task, cover: { ...task.cover, size: size } });
+        }
     }
 
     function onRemoveCover() {
@@ -44,7 +46,6 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
             trigger="click"
             placement="bottomRight"
             open={isOpen}
-            close={onClose}
             onOpenChange={setIsOpen}
             arrow={false}
             content={
