@@ -61,7 +61,7 @@ export function MoveCardPopover({ anchorEl, taskId }) {
   }, []);
 
   useEffect(() => {
-    // 
+    //
     if (selectedBoardId && boards.length > 0) {
       setPositions([...newPositions, Math.max(...newPositions) + 12111]);
       if (task.idGroup === selectedGroupId && newPositions.length > 0) {
@@ -112,7 +112,6 @@ export function MoveCardPopover({ anchorEl, taskId }) {
       setPosition(65536);
     }
   }
-  
 
   function onSelectPosition(item) {
     setSelectedPosition(item?.id - 1);
@@ -120,8 +119,6 @@ export function MoveCardPopover({ anchorEl, taskId }) {
   }
 
   async function onMoveClick() {
-    // console.log(selectedBoardId, selectedGroupId, position);
-    // console.log(task)
     let newPosDetails = {
       idBoard: selectedBoardId,
       idGroup: selectedGroupId,
@@ -131,7 +128,6 @@ export function MoveCardPopover({ anchorEl, taskId }) {
     if (task.pos > position) {
       newPosDetails = { ...newPosDetails, pos: position - 12111 };
     }
-    console.log(newPosDetails);
     setIsOpen(false);
     await moveCard(newPosDetails);
     loadTestBoardFromStorage();
