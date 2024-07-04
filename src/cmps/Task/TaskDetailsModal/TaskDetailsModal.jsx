@@ -154,9 +154,9 @@ useEffect(() => {
                 editTask={editTask}
               />
             )}
-            <div className="labels">
+            {/* <div className="labels">
               <p>Labels</p>
-            </div>
+            </div> */}
           </section>
         </div>
         <div className="details-body__right">
