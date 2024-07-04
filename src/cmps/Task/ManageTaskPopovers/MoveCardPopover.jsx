@@ -61,8 +61,9 @@ export function MoveCardPopover({ anchorEl, taskId }) {
   }, []);
 
   useEffect(() => {
+    // 
     if (selectedBoardId && boards.length > 0) {
-      setPositions(newPositions);
+      setPositions([...newPositions, Math.max(...newPositions) + 12111]);
       if (task.idGroup === selectedGroupId && newPositions.length > 0) {
         setSelectedPosition(newPositions.findIndex((p) => p === task.pos));
       } else {
@@ -111,6 +112,7 @@ export function MoveCardPopover({ anchorEl, taskId }) {
       setPosition(65536);
     }
   }
+  
 
   function onSelectPosition(item) {
     setSelectedPosition(item?.id - 1);

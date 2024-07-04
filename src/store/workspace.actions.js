@@ -1,5 +1,6 @@
 import { boardService } from "../services/board.service.local";
 import { workspaceService } from "../services/workspace.service";
+import { updateBoard } from "./board.actions";
 import { store } from "./store";
 import { EDIT_BOARD, SET_BOARDS } from "./workspace.reducer";
 
@@ -30,10 +31,13 @@ export async function moveCard(details) {
     ...oldBoard,
     groups: updatedGroups,
   };
+  // store.dispatch({ type: EDIT_BOARD, board: updatedOldBoard });
+  console.log(updatedOldBoard)
   await boardService.save(updatedOldBoard);
 
-  const newBoard = boards.find((b) => b.id === details.idBoard);
+  const findNewBoard = await workspaceService.getAllBoards();
 
+  const newBoard = findNewBoard.find((b) => b.id === details.idBoard);
   const newGroup = newBoard.groups.find((g) => g.id === details.idGroup);
 
   // Modify task details and update new group tasks
@@ -57,14 +61,14 @@ export async function moveCard(details) {
 
   // Update new board with modified group
   const modifiedNewBoard = {
-    ...updatedOldBoard,
-    groups: updatedOldBoard.groups.map((g) =>
+    ...newBoard,
+    groups: newBoard.groups.map((g) =>
       g.id === details.idGroup ? modifiedNewGroup : g
     ),
   };
 
   // Save modified boards
-  console.log(modifiedNewBoard);
+
   store.dispatch({ type: EDIT_BOARD, board: modifiedNewBoard });
   await boardService.save(modifiedNewBoard);
 }
