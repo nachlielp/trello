@@ -78,6 +78,7 @@ export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, openPr
                     editTask={editTask}
                     task={task}
                     editLabel={editLabel}
+                    onClick={(e) => e.stopPropagation()}
                 />
             )
         },
@@ -90,6 +91,7 @@ export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, openPr
                             src={userIcon}
                             className="floating-button"
                             label="Change members"
+                            onClick={(e) => e.stopPropagation()}
                         />
                     }
                     editTask={editTask}
@@ -101,7 +103,7 @@ export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, openPr
             cover: true, popover: (
                 <ManageCoverPopover
                     anchorEl={
-                        <SvgButton src={coverIcon} className="floating-button" label="Change cover" />
+                        <SvgButton src={coverIcon} className="floating-button" label="Change cover" onClick={(e) => e.stopPropagation()} />
                     }
                     editTask={editTask}
                     task={task}
