@@ -25,7 +25,7 @@ import useScrollByGrab from "../customHooks/useScrollByGrab.js";
 
 export function BoardIndex() {
   const board = useSelector((state) => state.boardModule.board);
-  const [clickedTaskId, setClickedTaskId] = useState();
+  const [clickedTaskId, setClickedTaskId] = useState(null);
   const params = useParams();
   const { scrollContainerRef, handlers } = useScrollByGrab();
 

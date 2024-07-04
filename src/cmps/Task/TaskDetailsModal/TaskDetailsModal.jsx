@@ -21,44 +21,46 @@ export function TaskDetailsModal({ taskId, editTask, editLabel }) {
   const currentGroup = useSelector((state) =>
     state.boardModule.board.groups?.find((g) =>
       g.tasks?.find((t) => t.id === taskId)
-)
-);
-const currentTask = useSelector((state) =>
-  state.boardModule.board.groups
-?.find((g) => g.tasks?.find((t) => t.id === taskId))
-?.tasks.find((t) => t.id === taskId)
-);
-const currentUser = useSelector((state) => state.userModule.user);
-const navigate = useNavigate();
-
-const isMember = currentTask?.idMembers?.includes(currentUser?.id);
-const hasMembers = currentTask?.idMembers?.length > 0;
-const currentCoveredColor = useSelector(
-  (state) =>
+    )
+  );
+  const currentTask = useSelector((state) =>
     state.boardModule.board.groups
-  ?.find((g) => g.tasks?.find((t) => t.id === taskId))
-  ?.tasks.find((t) => t.id === taskId)?.cover.color
-);
-const isScaled = useSelector(
-  (state) =>
-    state.boardModule.board.groups
-  ?.find((g) => g.tasks?.find((t) => t.id === taskId))
-  ?.tasks.find((t) => t.id === taskId)?.cover?.scaled?.length
-);
+      ?.find((g) => g.tasks?.find((t) => t.id === taskId))
+      ?.tasks.find((t) => t.id === taskId)
+  );
+  const currentUser = useSelector((state) => state.userModule.user);
+  const navigate = useNavigate();
 
+  const isMember = currentTask?.idMembers?.includes(currentUser?.id);
+  const hasMembers = currentTask?.idMembers?.length > 0;
 
-//pitaron zmani
-const board = useSelector((state) => state.boardModule.board);
-useEffect(() => {
-  if (currentGroup == undefined) {
-    loadTestBoardFromStorage();
-  }
+  // const currentCoveredColor = useSelector(
+  //   (state) =>
+  //     state.boardModule.board.groups
+  //   ?.find((g) => g.tasks?.find((t) => t.id === taskId))
+  //   ?.tasks.find((t) => t.id === taskId)?.cover.color
+  // );
+  // const isScaled = useSelector(
+  //   (state) =>
+  //     state.boardModule.board.groups
+  //   ?.find((g) => g.tasks?.find((t) => t.id === taskId))
+  //   ?.tasks.find((t) => t.id === taskId)?.cover?.scaled?.length
+  // );
 
-    console.log("currentGroup", currentCoveredColor);
-    console.log("isScaled", isScaled);
-  }, [currentCoveredColor, isScaled, board]);
-/////////////////////////////////////////////////////////////////////
+  //pitaron zmani
+  // const board = useSelector((state) => state.boardModule.board);
+  // useEffect(() => {
+  //   if (currentGroup == undefined) {
+  //     loadTestBoardFromStorage();
+  //   }
 
+  //   console.log("currentGroup", currentCoveredColor);
+  //   console.log("isScaled", isScaled);
+  // }, [currentCoveredColor, isScaled, board]);
+  /////////////////////////////////////////////////////////////////////
+
+  const isImgCover = currentTask?.cover?.idUploadedBackground;
+  const isColorCover = currentTask?.cover?.color;
 
 
 
@@ -78,12 +80,12 @@ useEffect(() => {
       footer=""
       className="task-details"
       title={
-        currentCoveredColor && (
+        isColorCover && (
           <div
             className={`details-header-color-cover`}
             style={{
               backgroundColor:
-                utilService.getColorHashByName(currentCoveredColor).bgColor,
+                utilService.getColorHashByName(currentTask.cover.color).bgColor,
             }}
           >
             <ManageCoverPopover
@@ -101,14 +103,11 @@ useEffect(() => {
         )
       }
     >
-      {!!isScaled > 0 && (
+      {!!isImgCover && (
         <div
-          className={`details-header-img-cover ${
-            currentTask.cover.brightness === "dark" ? "dark" : "light"
-          }`}
-        >
-          {!!isScaled > 0 && (
-            <img src={currentTask.cover.scaled[1].url} alt="task cover" />
+          className={`details-header-img-cover ${currentTask?.cover?.brightness === "dark" ? "dark" : "light"}`}>
+          {!!currentTask?.cover?.scaled?.length > 0 && (
+            <img src={currentTask?.cover?.scaled[1].url} alt="task cover" />
           )}
           <div className={`details-header-cover-actions-wrapper`}>
             <ManageCoverPopover
