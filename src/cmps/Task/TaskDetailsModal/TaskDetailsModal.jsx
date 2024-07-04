@@ -74,6 +74,7 @@ useEffect(() => {
     <Modal
       open
       onCancel={() => navigate("/", { replace: true })}
+      loading={currentGroup == undefined}
       footer=""
       className="task-details"
       title={
