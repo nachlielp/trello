@@ -3,7 +3,6 @@
     flex-direction: column;
     align-items: start;
     gap: 6px;
-    width: 100%;
 }
 
 .add-card-in-list-footer.first-task {
@@ -13,9 +12,11 @@
 
 
 .add-card-in-list-footer .footer-input {
-    // width: 100%;
     border-color: transparent;
+}
 
+.add-card-in-list-footer.last-task {
+    width: 100%;
 }
 
 .add-card-in-list-footer .footer-actions {
