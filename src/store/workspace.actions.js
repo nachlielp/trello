@@ -13,7 +13,6 @@ export async function moveCard(details) {
 
   // Find old board and group
   const oldBoard = boards.find((b) => b.id === details.task.idBoard);
-  const oldGroup = oldBoard.groups.find((g) => g.id === details.task.idGroup);
 
   // Remove task from old group
   const updatedGroups = oldBoard.groups.map((g) => {
@@ -31,8 +30,11 @@ export async function moveCard(details) {
     ...oldBoard,
     groups: updatedGroups,
   };
+  await boardService.save(updatedOldBoard);
 
-  const newGroup = updatedOldBoard.groups.find((g) => g.id === details.idGroup);
+  const newBoard = boards.find((b) => b.id === details.idBoard);
+
+  const newGroup = newBoard.groups.find((g) => g.id === details.idGroup);
 
   // Modify task details and update new group tasks
   const modifiedTask = {
