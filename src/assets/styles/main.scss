@@ -21,6 +21,12 @@
 @import "views/BoardDetails";
 @import "views/TaskDetails";
 
+
+//Workspace
+@import "cmps/Workspace/Workspace";
+@import "cmps/Workspace/WorkspaceHeader";
+@import "cmps/Workspace/WorkspaceDrawer";
+
 // Components
 @import "cmps/BoardHeader/VisibilityButton.scss";
 @import "cmps/BoardHeader/ViewsButton.scss";

@@ -1,0 +1,54 @@
+.workspace-drawer {
+    .workspace-sidebar-closed {
+        width: 16px;
+        height: 100%;
+        background-color: var(--color-bg-primary);
+        position: relative;
+
+        .open-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 16px;
+            left: 4px;
+            z-index: 9999;
+            transform: rotate(180deg);
+            border-radius: 50%;
+            padding-top: 4px;
+            border: 1px solid var(--dynamic-text-transparent, hsla(218, 54%, 19.6%, 0.16));
+            border-radius: 50%;
+            background-color: var(--ds-surface-overlay, #fff);
+            width: 24px;
+            height: 24px;
+
+            .injected-svg {
+                width: 16px;
+                height: 16px;
+            }
+        }
+    }
+
+    .workspace-sidebar-open {
+        width: 260px;
+        height: 100%;
+        background-color: var(--color-bg-primary);
+
+
+        .close-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+            border: 1px solid var(--dynamic-text-transparent, hsla(218, 54%, 19.6%, 0.16));
+            background-color: var(--color-bg-primary);
+            width: 24px;
+            height: 24px;
+
+            .injected-svg {
+                width: 16px;
+                height: 16px;
+            }
+        }
+    }
+}
