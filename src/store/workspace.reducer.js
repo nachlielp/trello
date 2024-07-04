@@ -2,7 +2,7 @@ export const SET_BOARDS = "SET_BOARDS";
 export const EDIT_BOARD = "EDIT_BOARD";
 
 const initialState = {
-  boards:[]
+  boards: [],
 };
 
 export function workspaceReducer(state = initialState, action) {
@@ -10,6 +10,14 @@ export function workspaceReducer(state = initialState, action) {
   switch (action.type) {
     case SET_BOARDS:
       newState = { ...state, boards: action.boards };
+      break;
+    case EDIT_BOARD:
+      newState = {
+        ...state,
+        boards: state.boards.map((board) =>
+          board.id === action.board.id ? action.board : board
+        ),
+      };
       break;
     // case EDIT_USERS:
     //     newState = {...state, users: [...state.users,action.user],undoUsers: [...state.users] }

@@ -30,8 +30,8 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
         editTask({ ...task, cover: { ...task.cover, scaled: img.scaledImgs, color: null, idUploadedBackground: img.id } });
     }
 
-    const isCover = task.cover.color || task.cover.scaled;
-    const backgroundColor = utilService.getColorHashByName(task.cover.color)?.bgColor || '#dcdfe4';
+    const isCover = task?.cover.color || task?.cover.scaled;
+    const backgroundColor = utilService.getColorHashByName(task?.cover.color)?.bgColor || '#dcdfe4';
 
     //TODO wrap cover box with blue border if selected
     return (
@@ -57,8 +57,8 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
                             <div className={`half-size-wrapper ${isCover && task.cover.size === "normal" ? "active" : "non-active"}`}>
                                 <div className={`half-size-btn `} onClick={() => onChangeSize("normal")}
                                 >
-                                    <div className={`sub-block-1 ${task.cover.color ? "active" : "non-active"}`} style={{
-                                        backgroundImage: task.cover.scaled ? `url(${task.cover?.scaled[0]?.url})` : 'none',
+                                    <div className={`sub-block-1 ${task?.cover.color ? "active" : "non-active"}`} style={{
+                                        backgroundImage: task?.cover.scaled ? `url(${task?.cover?.scaled[0]?.url})` : 'none',
                                         backgroundSize: 'cover',
                                         backgroundPosition: 'center'
                                     }} ></div>
@@ -74,9 +74,9 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
                                 </div>
                             </div>
                             <div className={`full-size-wrapper ${isCover && task.cover.size === "full" ? "active" : "non-active"}`}>
-                                <div className={`full-size-btn ${task.cover.idUploadedBackground ? "has-image" : "no-image"}`} onClick={() => onChangeSize("full")}
+                                <div className={`full-size-btn ${task?.cover.idUploadedBackground ? "has-image" : "no-image"}`} onClick={() => onChangeSize("full")}
                                     style={{
-                                        backgroundImage: task.cover.scaled ? `url(${task.cover.scaled[0]?.url})` : 'none',
+                                        backgroundImage: task?.cover.scaled ? `url(${task?.cover.scaled[0]?.url})` : 'none',
                                         backgroundSize: 'cover',
                                         backgroundPosition: 'center'
                                     }}>
@@ -91,7 +91,7 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
                         <h3 className="cover-sub-title">Colors</h3>
                         <article className="color-btns">
                             {utilService.getBaseColors().map((color) => (
-                                <div className={`color-btn ${task.cover.color === color.color ? "active" : ""}`} style={{ backgroundColor: color.bgColor }} key={color.color} onClick={() => onSelectColor(color.color)}></div>
+                                <div className={`color-btn ${task?.cover.color === color.color ? "active" : ""}`} style={{ backgroundColor: color.bgColor }} key={color.color} onClick={() => onSelectColor(color.color)}></div>
                             ))}
                         </article>
                         <h3 className="cover-sub-title">Photos from Unsplash</h3>

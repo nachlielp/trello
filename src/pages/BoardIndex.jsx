@@ -13,7 +13,7 @@ import {
   copyGroup,
   moveAllCards,
   archiveAllCards,
-  sortGroup
+  sortGroup,
 } from "../store/board.actions";
 import { AddGroupBtn } from "../cmps/Group/AddGroupBtn";
 import { TaskDetailsModal } from "../cmps/Task/TaskDetailsModal/TaskDetailsModal.jsx";
@@ -101,9 +101,7 @@ export function BoardIndex() {
         }}
       >
         {board && <BoardHeader />}
-        <main className="board-groups"
-          ref={scrollContainerRef}
-          {...handlers} >
+        <main className="board-groups" ref={scrollContainerRef} {...handlers}>
           {sortedGroups &&
             sortedGroups.map((group) => (
               <BoardGroup
@@ -123,7 +121,13 @@ export function BoardIndex() {
           <AddGroupBtn addGroup={onAddGroup} />
         </main>
       </div>
-      {/* {clickedTaskId && <TaskDetailsModal taskId={clickedTaskId} editTask={onEditTask} editLabel={onEditLabel} />} */}
+      {clickedTaskId && (
+        <TaskDetailsModal
+          taskId={clickedTaskId}
+          editTask={onEditTask}
+          editLabel={onEditLabel}
+        />
+      )}
     </section>
   ) : (
     <h1>Loading...</h1>
