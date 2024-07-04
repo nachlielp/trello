@@ -40,12 +40,13 @@ export function TaskDetailsMembers({ currentTask, editTask }) {
       <ManageMembersPopover
         editTask={editTask}
         anchorEl={
-          <button>
+          <button className="manage-members-popover">
             <PlusOutlined />
           </button>
         }
         task={currentTask}
         taskMemberIds={currentTask.idMembers}
+        
       />
     </div>
   );
