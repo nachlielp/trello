@@ -42,7 +42,7 @@ export function AddTaskInGroup({ groupId, closeAddTask, addTask, firstTaskPos, l
         await addTask(newTask, groupId)
     }
     return (
-        <section className="add-card-in-list-footer">
+        <section className={`add-card-in-list-footer ${firstTaskPos ? 'first-task' : ''} ${lastTaskPos ? 'last-task' : ''}`}>
             <TextArea
                 ref={textAreaRef}
                 className="footer-input"
