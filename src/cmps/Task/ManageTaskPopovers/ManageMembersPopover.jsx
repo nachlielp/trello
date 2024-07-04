@@ -13,14 +13,14 @@ export function ManageMembersPopover({ anchorEl, editTask, task }) {
 
     useEffect(() => {
         if (inputSearch === '') {
-            setSelectedMembers(members.filter((member) => task.idMembers.includes(member.id)));
-            setUnselectedMembers(members.filter((member) => !task.idMembers.includes(member.id)));
+            setSelectedMembers(members.filter((member) => task?.idMembers.includes(member?.id)));
+            setUnselectedMembers(members.filter((member) => !task?.idMembers.includes(member?.id)));
         } else {
-            setSelectedMembers(members.filter((member) => task.idMembers.includes(member.id)).filter((member) => member.fullName.toLowerCase().includes(inputSearch.toLowerCase())));
-            setUnselectedMembers(members.filter((member) => !task.idMembers.includes(member.id)).filter((member) => member.fullName.toLowerCase().includes(inputSearch.toLowerCase())));
+            setSelectedMembers(members.filter((member) => task?.idMembers.includes(member?.id)).filter((member) => member?.fullName.toLowerCase().includes(inputSearch.toLowerCase())));
+            setUnselectedMembers(members.filter((member) => !task?.idMembers.includes(member?.id)).filter((member) => member?.fullName.toLowerCase().includes(inputSearch.toLowerCase())));
         }
 
-    }, [task.idMembers, inputSearch]);
+    }, [task?.idMembers, inputSearch]);
 
     function onClose() {
         setIsOpen(false);

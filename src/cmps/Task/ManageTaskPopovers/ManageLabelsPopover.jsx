@@ -17,7 +17,7 @@ export function ManageLabelsPopover({ anchorEl, editTask, task, editLabel }) {
     const [backToList, setBackToList] = useState(null);
 
     useEffect(() => {
-        if (task.labels) {
+        if (task?.labels) {
             const arr = boardLabels.map(boardLabel => {
                 const isTask = task.labels.find(taskLabel => taskLabel.color === boardLabel.color);
                 if (isTask) {
@@ -27,7 +27,7 @@ export function ManageLabelsPopover({ anchorEl, editTask, task, editLabel }) {
             });
             setBoardTaskLabels(arr);
         }
-    }, [task.labels, boardLabels]);
+    }, [task?.labels, boardLabels]);
 
     useEffect(() => {
         if (inputSearch !== '') {
