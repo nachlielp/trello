@@ -3,6 +3,9 @@ export const EDIT_BOARD = "EDIT_BOARD";
 
 const initialState = {
   boards: [],
+  name: "My Workspace",
+  members: [],
+  views: [],
 };
 
 export function workspaceReducer(state = initialState, action) {

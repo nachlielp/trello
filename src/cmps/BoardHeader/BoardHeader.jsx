@@ -13,11 +13,11 @@ import { ViewsButton } from "./ViewsButton";
 import { FilterButton } from "./FilterButton";
 import { ProfilePopover } from "../Task/ManageTaskPopovers/ProfilePopover";
 
-export function BoardHeader() {
+export function BoardHeader({ board }) {
   const [isStarredBoard, setIsStarredBoard] = useState(false);
   const [hover, setHover] = useState(false);
   const members = useSelector((state) => state.boardModule.members);
-  const board = useSelector((state) => state.boardModule.board);
+  // const board = useSelector((state) => state.boardModule.board);
   const currentUser = useSelector((state) =>
     state.userModule.users?.find(
       (user) => (user.id = "666fe4efda8643029b6710f3")
@@ -72,9 +72,9 @@ export function BoardHeader() {
         <div className="members">
           {members?.slice(0, 3).map((member) => (
             <ProfilePopover
-            member={member}
-            placement="bottom"
-            key={member.id}
+              member={member}
+              placement="bottom"
+              key={member.id}
               anchorEl={
                 <UserAvatar
                   member={member}

@@ -4,6 +4,7 @@ import { store } from "./store";
 import { EDIT_BOARD, SET_BOARDS } from "./workspace.reducer";
 
 export async function setBoards() {
+  console.log("setBoards");
   const boards = await workspaceService.getAllBoards();
   store.dispatch({ type: SET_BOARDS, boards });
 }

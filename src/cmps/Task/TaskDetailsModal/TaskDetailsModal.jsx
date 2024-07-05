@@ -75,7 +75,7 @@ export function TaskDetailsModal({ taskId, editTask, editLabel }) {
   return (
     <Modal
       open
-      onCancel={() => navigate("/", { replace: true })}
+      onCancel={() => navigate(`/b/${currentTask.idBoard}`, { replace: true })}
       loading={currentGroup == undefined}
       footer=""
       className="task-details"

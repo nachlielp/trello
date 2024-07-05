@@ -50,6 +50,7 @@ export function MoveCardPopover({ anchorEl, taskId }) {
   }, [selectedBoardId, selectedGroupId, boards]);
 
   useEffect(() => {
+    //TODO notice 
     setBoards();
     loadTestBoardFromStorage();
     if (newPositions.length > 0) {
