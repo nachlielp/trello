@@ -1,0 +1,86 @@
+.add-board-popover-content {
+    width: 280px;
+    padding: 0 12px 12px 12px;
+    color: var(--ds-text-subtle, #44546f);
+
+    .header-hr {
+        height: 1px;
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid var(--ds-border-subtle, #e2e4e6);
+        margin: 16px 0 16px 0;
+    }
+
+    .title {
+        color: var(--ds-text-subtle, #44546f);
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px;
+        margin: 0;
+    }
+
+    .board-name-input {
+        transition-property: background-color, border-color, box-shadow;
+        transition-duration: 85ms;
+        transition-timing-function: ease;
+        padding: 8px 12px;
+        border-radius: 3px;
+        background-color: var(--ds-background-input, #ffffff);
+        width: 100%;
+        margin-bottom: 0;
+        border: 1px solid var(--ds-border-input, #091e4224);
+    }
+
+    .board-visibility-select {
+        width: 100%;
+        transition-property: background-color, border-color, box-shadow;
+        transition-duration: 85ms;
+        transition-timing-function: ease;
+        padding: 8px 12px;
+        border-radius: 3px;
+        background-color: var(--ds-background-input, #ffffff);
+        width: 100%;
+        margin-bottom: 0;
+        border: 1px solid var(--ds-border-input, #091e4224);
+
+
+        .ant-select-selector {
+            border: none;
+            box-shadow: none !important; // Ensure no box-shadow is applied
+
+            &:focus,
+            &:active,
+            &:focus-visible,
+            &:focus-within {
+                border: none !important; // Ensure no border is applied
+                box-shadow: none !important; // Ensure no box-shadow is applied
+            }
+
+            .ant-select-selection-item {
+
+                &:focus,
+                &:active,
+                &:focus-visible,
+                &:focus-within {
+                    border: none !important; // Ensure no border is applied
+                    box-shadow: none !important; // Ensure no box-shadow is applied
+                }
+            }
+        }
+    }
+
+    .add-board-btn {
+        width: 100%;
+        height: 32px;
+        margin: 16px 0 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif !important;
+        border: none;
+        border-radius: 3px;
+        background-color: var(--ds-background-brand-bold, #0c66e4);
+        box-shadow: none;
+        color: var(--ds-text-inverse, #ffffff);
+        font-weight: 500;
+        cursor: pointer;
+
+    }
+}

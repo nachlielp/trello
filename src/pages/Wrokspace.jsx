@@ -2,15 +2,17 @@ import { useLocation, Outlet, useSearchParams } from "react-router-dom";
 import { WorkspaceHeader } from "../cmps/Workspace/WorkspaceHeader";
 import { WorkspaceMenu } from "../cmps/Workspace/WorkspaceMenu";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { setBoard } from "../store/board.actions";
-import { login, editUser } from "../store/user.actions";
+import { login, editUser, addBoardToUser } from "../store/user.actions";
+import { createBoard } from "../store/workspace.actions";
 
 export function Workspace({ boardsInfo }) {
     const [selectedBoardId, setSelectedBoardId] = useState(null);
     const [selectedTaskId, setSelectedTaskId] = useState(null);
     const [starredBoardIds, setStarredBoardIds] = useState([]);
+    const navigate = useNavigate();
 
     const board = useSelector((state) => state.workspaceModule.boards.find((b) => b.id === selectedBoardId));
     const task = useSelector((state) =>
@@ -52,13 +54,20 @@ export function Workspace({ boardsInfo }) {
         console.log("starredBoardIds", starredBoardIds);
         editUser({ ...user, starredBoardIds });
     }
+
+    async function onAddBoard(board) {
+        console.log("onAddBoard", board);
+        await createBoard(board);
+        await addBoardToUser(board.id);
+        navigate(`/b/${board.id}`);
+    }
     return (
         <section className="workspace">
             {/* <WorkspaceHeader /> */}
 
             {user && board && starredBoardIds ? (
                 <section className="workspace-content">
-                    <WorkspaceMenu boardsInfo={boardsInfo} selectedBoardId={selectedBoardId} starredBoardIds={starredBoardIds} onStarClick={onStarClick} />
+                    <WorkspaceMenu boardsInfo={boardsInfo} selectedBoardId={selectedBoardId} starredBoardIds={starredBoardIds} onStarClick={onStarClick} onAddBoard={onAddBoard} />
                     <Outlet context={{ board, task }} />
                 </section>
             ) : (

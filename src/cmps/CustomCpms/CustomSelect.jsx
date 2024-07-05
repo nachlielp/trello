@@ -2,36 +2,37 @@ import { DownOutlined } from "@ant-design/icons";
 import { Popover } from "antd";
 import { useState, useEffect, useRef } from "react";
 
-export function CustomSelect({ options = [], onSelect,currentSelect }) {
+export function CustomSelect({ options = [], onSelect, currentSelect }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(options[0]);
   const [searchValue, setSearchValue] = useState("");
   const [filteredItems, setFilteredItems] = useState(options);
   const divRef = useRef(null);
-  useEffect(()=>{
-    onSelect(options.find(o=>o.id===currentSelect))
-  },[currentSelect])
-  
+
+  useEffect(() => {
+    onSelect(options.find(o => o.id === currentSelect))
+  }, [currentSelect])
+
   useEffect(() => {
 
     setFilteredItems(options);
     if (options.length > 0) {
       setSelectedItem(options[0]);
     }
-    
-    if(currentSelect){
-    setSelectedItem(options.find(o=>o.id===currentSelect))
+
+    if (currentSelect) {
+      setSelectedItem(options.find(o => o.id === currentSelect))
     }
   }, [options]);
-  
+
 
   function onInput(e) {
     setSearchValue(e.target.value);
-  
+
   }
 
   function onSelectOption(item) {
-   
+
     setSelectedItem(item);
     if (onSelect) {
       onSelect(item);
@@ -55,7 +56,7 @@ export function CustomSelect({ options = [], onSelect,currentSelect }) {
           {filteredItems.map((item) => (
             <button
               key={item?.id}
-              onClick={()=>onSelectOption(item)}
+              onClick={() => onSelectOption(item)}
               className={selectedItem?.name === item?.name ? "selected" : ""}
             >
               {item?.name}

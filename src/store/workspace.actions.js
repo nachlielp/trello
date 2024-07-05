@@ -1,7 +1,7 @@
 import { boardService } from "../services/board.service.local";
 import { workspaceService } from "../services/workspace.service";
 import { store } from "./store";
-import { EDIT_BOARD, SET_BOARDS } from "./workspace.reducer";
+import { EDIT_BOARD, SET_BOARDS, ADD_BOARD } from "./workspace.reducer";
 
 export async function setBoards() {
   console.log("setBoards");
@@ -68,4 +68,9 @@ export async function moveCard(details) {
   console.log(modifiedNewBoard);
   store.dispatch({ type: EDIT_BOARD, board: modifiedNewBoard });
   await boardService.save(modifiedNewBoard);
+}
+
+export async function createBoard(board) {
+  const newBoard = await boardService.create(board);
+  store.dispatch({ type: ADD_BOARD, board: newBoard });
 }

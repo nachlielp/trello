@@ -9,6 +9,7 @@ export const boardService = {
   getById,
   save,
   remove,
+  create,
 
   // editList: editGroup,
   // getEmptyBoard,
@@ -52,7 +53,9 @@ async function save(board) {
   return savedBoard;
 }
 
-
+async function create(board) {
+  return await storageService.post(STORAGE_KEY, board);
+}
 
 // async function addBoardMsg(boardId, txt) {
 

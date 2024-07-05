@@ -4,17 +4,17 @@ import { useNavigate } from "react-router-dom";
 import { PlusOutlined, EllipsisOutlined } from "@ant-design/icons"
 import { StarBoardBtn } from "../CustomCpms/StarBoardBtn";
 import { Button } from "antd";
+import { AddBoardPopover } from "./AddBoardPopover";
 
-
-export function WorkspaceMenu({ boardsInfo, selectedBoardId, starredBoardIds, onStarClick }) {
+export function WorkspaceMenu({ boardsInfo, selectedBoardId, starredBoardIds, onStarClick, onAddBoard }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [hoveredBoardId, setHoveredBoardId] = useState(null);
-    const [selectedBoard, setSelectedBoard] = useState(null);
+    // const [selectedBoard, setSelectedBoard] = useState(null);
 
     const navigate = useNavigate();
 
     function onSelectBoard(boardId) {
-        setSelectedBoard(boardId);
+        // setSelectedBoard(boardId);
         navigate(`/b/${boardId}`, { replace: true });
     }
 
@@ -60,7 +60,8 @@ export function WorkspaceMenu({ boardsInfo, selectedBoardId, starredBoardIds, on
                         <article className="workspace-menu-boards">
                             <header className="workspace-menu-boards-header">
                                 <h3>Your Boards</h3>
-                                <SvgButton className="board-add-btn" src="/img/workspace/pluseIcon.svg" />
+                                {/* <SvgButton className="board-add-btn" src="/img/workspace/pluseIcon.svg" /> */}
+                                <AddBoardPopover onAddBoard={onAddBoard} />
                             </header>
                             {boardsInfo.sort((a, b) => b.name - a.name).map((board) => (
                                 <div
