@@ -1,4 +1,3 @@
-
 [
   {
     "id": "666fe4efda8643029b6710f3",
@@ -37,7 +36,9 @@
       "66756a34def1a6d3b8cd179d"
     ],
     "starredBoardIds": [],
-    "idOrganizations": ["666fe5e6696fdcc2e7bf2de0"],
+    "idOrganizations": [
+      "666fe5e6696fdcc2e7bf2de0"
+    ],
     "idEnterprisesAdmin": [],
     "limits": {
       "boards": {
@@ -55,7 +56,9 @@
         }
       }
     },
-    "loginTypes": ["atlassian"],
+    "loginTypes": [
+      "atlassian"
+    ],
     "marketingOptIn": {
       "optedIn": true,
       "date": "2024-06-17T07:25:36.927Z"
@@ -131,8 +134,12 @@
       "64f721f169b14894fac36cdf",
       "66756a34def1a6d3b8cd179d"
     ],
-    "starredBoardIds": [],
-    "idOrganizations": ["64f721e4f2e4a8cb0eec149f"],
+    "starredBoardIds": [
+      "64f721f169b14894fac36cdf"
+    ],
+    "idOrganizations": [
+      "64f721e4f2e4a8cb0eec149f"
+    ],
     "idEnterprisesAdmin": [],
     "limits": {
       "boards": {
@@ -150,7 +157,9 @@
         }
       }
     },
-    "loginTypes": ["atlassian"],
+    "loginTypes": [
+      "atlassian"
+    ],
     "marketingOptIn": {
       "optedIn": true,
       "date": "2023-09-05T12:41:05.349Z"

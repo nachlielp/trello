@@ -1,0 +1,29 @@
+.star-board-btn {
+    cursor: pointer;
+    height: 32px;
+    width: 32px;
+    background: none;
+    color: #41526e;
+    border: none;
+    font-size: 14px;
+    font-weight: 500px;
+    line-height: 0px;
+    padding: 6px;
+    justify-content: center;
+    margin: 0;
+    transition-duration: 0.085s;
+    transition-property: background-color, border-color, box-shadow;
+    transition-timing-function: ease;
+    border-radius: 3px;
+
+    svg {
+        width: 16px;
+        height: 16px;
+        fill: #41526e;
+    }
+
+    &:hover {
+        background: rgba(166, 197, 226, 0.16);
+        font-size: 20px;
+    }
+}

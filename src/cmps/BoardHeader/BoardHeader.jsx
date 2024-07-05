@@ -12,6 +12,7 @@ import { VisibilityButton } from ".//VisibilityButton";
 import { ViewsButton } from "./ViewsButton";
 import { FilterButton } from "./FilterButton";
 import { ProfilePopover } from "../Task/ManageTaskPopovers/ProfilePopover";
+import { StarBoardBtn } from "../CustomCpms/StarBoardBtn";
 
 export function BoardHeader({ board }) {
   const [isStarredBoard, setIsStarredBoard] = useState(false);
@@ -20,7 +21,7 @@ export function BoardHeader({ board }) {
   // const board = useSelector((state) => state.boardModule.board);
   const currentUser = useSelector((state) =>
     state.userModule.users?.find(
-      (user) => (user.id = "666fe4efda8643029b6710f3")
+      (user) => (user.id = import.meta.env.VITE_TRELLO_USER_ID)
     )
   );
 
@@ -31,8 +32,8 @@ export function BoardHeader({ board }) {
     }
   }, []);
 
-  function onStarClick() {
-    if (currentUser?.starredBoardIds?.includes(board.id)) {
+  function onStarClick({ boardId }) {
+    if (currentUser?.starredBoardIds?.includes(boardId)) {
       const newUser = currentUser;
       newUser.starredBoardIds = currentUser.starredBoardIds.filter(
         (id) => id !== board.id

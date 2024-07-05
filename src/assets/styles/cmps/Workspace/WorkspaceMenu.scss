@@ -177,9 +177,8 @@
 
                     .option-add-btn {
                         padding: 4px;
-
                         margin-left: auto;
-                        margin-right: 8px;
+                        margin-right: 16px;
                         align-self: center;
                         background-color: var(--color-bg-primary);
                         border: none;
@@ -260,6 +259,10 @@
                         background-color: var(--ds-background-neutral-subtle-hovered);
                     }
 
+                    &.active-board {
+                        background-color: #b9b7b4;
+                    }
+
                     .board-cover-img {
                         width: 28px;
                         height: 24px;
@@ -274,6 +277,40 @@
                         white-space: nowrap;
                         font-size: 14px;
                         color: var(--ds-text);
+                    }
+
+                    .board-option-btns {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: flex-start;
+                        margin-left: auto;
+
+                        .more-btn {
+                            border: none;
+                            border-radius: 3px;
+                            width: 26px;
+                            height: 26px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            padding: 0;
+                            box-shadow: none;
+                            background-color: transparent;
+                            color: var(--ds-icon);
+
+                            span {
+                                font-size: 16px;
+                            }
+                        }
+
+                        .more-btn:hover {
+                            background-color: var(--ds-background-neutral-hovered) !important;
+                        }
+
+                        .more-btn .anticon {
+                            color: #2c3e50; // Darker color for the ellipsis icon
+                        }
                     }
                 }
             }

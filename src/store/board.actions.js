@@ -48,20 +48,13 @@ export async function loadTestBoardFromStorage() {
   store.dispatch({ type: SET_MEMBERS, members: memberData.members });
 }
 
-async function fetchCardsFromTrello(listId) {
-  const data = await fetch(
-    `https://api.trello.com/1/lists/${listId}/cards?key=${
-      import.meta.env.VITE_TRELLO_API_KEY
-    }&token=${import.meta.env.VITE_TRELLO_TOKEN}`
-  );
-  const cardsData = await data.json();
-  return cardsData;
+export async function setBoard(board) {
+  store.dispatch({ type: SET_BOARD, board: board });
 }
 
 async function fetchListsFromTrello(boardId) {
   const data = await fetch(
-    `https://api.trello.com/1/boards/${boardId}/lists?key=${
-      import.meta.env.VITE_TRELLO_API_KEY
+    `https://api.trello.com/1/boards/${boardId}/lists?key=${import.meta.env.VITE_TRELLO_API_KEY
     }&token=${import.meta.env.VITE_TRELLO_TOKEN}`
   );
   const listsData = await data.json();
@@ -70,8 +63,7 @@ async function fetchListsFromTrello(boardId) {
 
 async function fetchMembersFromTrello() {
   const data = await fetch(
-    `https://api.trello.com/1/boards/nfwLJTa2/members?key=${
-      import.meta.env.VITE_TRELLO_API_KEY
+    `https://api.trello.com/1/boards/nfwLJTa2/members?key=${import.meta.env.VITE_TRELLO_API_KEY
     }&token=${import.meta.env.VITE_TRELLO_TOKEN}`
   );
   const membersData = await data.json();
@@ -80,8 +72,7 @@ async function fetchMembersFromTrello() {
 
 async function fetchBoardFromTrello() {
   const data = await fetch(
-    `https://api.trello.com/1/boards/dL2ehGo7?key=${
-      import.meta.env.VITE_TRELLO_API_KEY
+    `https://api.trello.com/1/boards/dL2ehGo7?key=${import.meta.env.VITE_TRELLO_API_KEY
     }&token=${import.meta.env.VITE_TRELLO_TOKEN}`
   );
   const boardData = await data.json();

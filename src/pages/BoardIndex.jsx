@@ -18,39 +18,12 @@ import {
 import { AddGroupBtn } from "../cmps/Group/AddGroupBtn";
 import { TaskDetailsModal } from "../cmps/Task/TaskDetailsModal/TaskDetailsModal.jsx";
 import { BoardHeader } from "../cmps/BoardHeader/BoardHeader.jsx";
-import { useParams } from "react-router";
-import { setBoards } from "../store/workspace.actions.js";
-import { login } from "../store/user.actions.js";
 import useScrollByGrab from "../customHooks/useScrollByGrab.js";
 import { useOutletContext } from "react-router-dom";
 
 export function BoardIndex() {
   const { board, task } = useOutletContext();
   const { scrollContainerRef, handlers } = useScrollByGrab();
-
-  const [selectedBoardId, setSelectedBoardId] = useState(null);
-  const [selectedTaskId, setSelectedTaskId] = useState(null);
-  // const board = useSelector((state) => state.workspaceModule.boards.find((b) => b.id === selectedBoardId));
-  // const task = useSelector((state) =>
-  //   state.boardModule.board.groups
-  //     ?.find((g) => g.tasks?.find((t) => t.id === selectedTaskId))
-  //     ?.tasks.find((t) => t.id === selectedTaskId)
-  // );
-  const params = useParams();
-
-  useEffect(() => {
-    loadTestBoardFromStorage();
-    setBoards();
-    login();
-  }, []);
-
-  useEffect(() => {
-    params.cardId ? setSelectedTaskId(params.cardId) : setSelectedTaskId(null);
-    params.boardId && setSelectedBoardId(params.boardId);
-    if (selectedTaskId && !selectedBoardId && task) {
-      setSelectedBoardId(task.idBoard);
-    }
-  }, [params]);
 
   async function onAddTask(task, groupId) {
     const newTask = {
@@ -102,7 +75,7 @@ export function BoardIndex() {
     .sort((a, b) => a.pos - b.pos);
 
   return (
-    selectedBoardId && board ? (
+    board ? (
       <section className="board-index">
         <div
           className="bg"
@@ -131,9 +104,9 @@ export function BoardIndex() {
             <AddGroupBtn addGroup={onAddGroup} />
           </main>
         </div>
-        {selectedTaskId && (
+        {task && (
           <TaskDetailsModal
-            taskId={selectedTaskId}
+            taskId={task.id}
             editTask={onEditTask}
             editLabel={onEditLabel}
           />

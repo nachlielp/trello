@@ -58,6 +58,9 @@
 @import "cmps/Task/ManageTaskPopovers/MoveCardPopover";
 @import "cmps/Task/ManageTaskPopovers/CustomSelect";
 
+//Custom Cpms
+@import "cmps/CustomCpms/StarBoardBtn";
+
 
 :root.dark {
   --ds-surface-overlay: #282e33;

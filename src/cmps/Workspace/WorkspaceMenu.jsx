@@ -1,12 +1,23 @@
 import { useState } from "react";
 import { SvgButton } from "../CustomCpms/SvgButton";
 import { useNavigate } from "react-router-dom";
-import { PlusOutlined } from "@ant-design/icons"
+import { PlusOutlined, EllipsisOutlined } from "@ant-design/icons"
+import { StarBoardBtn } from "../CustomCpms/StarBoardBtn";
+import { Button } from "antd";
 
-export function WorkspaceMenu({ boardsInfo }) {
+
+export function WorkspaceMenu({ boardsInfo, selectedBoardId, starredBoardIds, onStarClick }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [hoveredBoardId, setHoveredBoardId] = useState(null);
+    const [selectedBoard, setSelectedBoard] = useState(null);
+
     const navigate = useNavigate();
-    console.log(boardsInfo)
+
+    function onSelectBoard(boardId) {
+        setSelectedBoard(boardId);
+        navigate(`/b/${boardId}`, { replace: true });
+    }
+
     return (
         <aside className="workspace-menu">
             {isMenuOpen ?
@@ -51,10 +62,30 @@ export function WorkspaceMenu({ boardsInfo }) {
                                 <h3>Your Boards</h3>
                                 <SvgButton className="board-add-btn" src="/img/workspace/pluseIcon.svg" />
                             </header>
-                            {boardsInfo.map((board) => (
-                                <div className="board-option" key={board.id} onClick={() => navigate(`/b/${board.id}`, { replace: true })}>
+                            {boardsInfo.sort((a, b) => b.name - a.name).map((board) => (
+                                <div
+                                    className={`board-option ${selectedBoardId === board.id ? "active-board" : ""}`}
+                                    key={board.id}
+                                    onClick={() => onSelectBoard(board.id)}
+                                    onMouseEnter={() => setHoveredBoardId(board.id)}
+                                    onMouseLeave={() => setHoveredBoardId(null)}
+                                >
                                     <img className="board-cover-img" src={board.coverImg} alt="board cover" />
                                     <p className="board-name">{board.name}</p>
+                                    <aside className="board-option-btns">
+                                        {hoveredBoardId === board.id &&
+                                            <Button className="more-btn" size="small" >
+                                                <EllipsisOutlined />
+                                            </Button>
+                                        }
+                                        {(selectedBoardId === board.id || starredBoardIds.includes(board.id) || hoveredBoardId === board.id) && (
+                                            <StarBoardBtn
+                                                starredBoardIds={starredBoardIds}
+                                                boardId={board.id}
+                                                starClick={onStarClick}
+                                            />
+                                        )}
+                                    </aside>
                                 </div>
                             ))}
                         </article>
