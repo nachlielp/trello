@@ -44,11 +44,11 @@ export async function moveCard(details) {
     idBoard: details.idBoard,
     idGroup: details.idGroup,
   };
-  const modifiedNewTasks = newGroup.tasks.map((t) => ({
+  const modifiedNewTasks = newGroup?.tasks.map((t) => ({
     ...t,
     pos: t.pos >= modifiedTask.pos ? t.pos + 12111 : t.pos,
   }));
-  modifiedNewTasks.push(modifiedTask);
+  modifiedNewTasks?.push(modifiedTask);
 
   // Update new group with modified tasks
   const modifiedNewGroup = {
@@ -71,6 +71,6 @@ export async function moveCard(details) {
 }
 
 export async function createBoard(board) {
-  const newBoard = await boardService.create(board);
+  const newBoard = await boardService.save(board);
   store.dispatch({ type: ADD_BOARD, board: newBoard });
 }

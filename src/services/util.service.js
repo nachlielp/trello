@@ -322,7 +322,7 @@ function createNewGroup(group) {
 
 function createNewBoard(board) {
   return {
-    "id": utilService.makeId(),
+    "members": [],
     "name": board.name,
     "groups": [],
     "desc": "",

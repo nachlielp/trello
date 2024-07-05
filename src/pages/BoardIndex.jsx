@@ -13,15 +13,35 @@ import {
   moveAllCards,
   archiveAllCards,
   sortGroup,
+  loadBoard,
+
+  loadBoardByTaskId,
 } from "../store/board.actions";
+import { editUser } from "../store/user.actions";
+
 import { AddGroupBtn } from "../cmps/Group/AddGroupBtn";
 import { TaskDetailsModal } from "../cmps/Task/TaskDetailsModal/TaskDetailsModal.jsx";
 import { BoardHeader } from "../cmps/BoardHeader/BoardHeader.jsx";
 import useScrollByGrab from "../customHooks/useScrollByGrab.js";
-import { useOutletContext } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export function BoardIndex() {
-  const { board, task } = useOutletContext();
+  const [selectedTaskId, setSelectedTaskId] = useState(null);
+  const board = useSelector((state) => state.boardModule.board);
+  const user = useSelector((state) => state.userModule.user);
+
+  const params = useParams();
+
+  useEffect(() => {
+    if (params.boardId) {
+      loadBoard(params.boardId);
+    }
+    if (params.cardId) {
+      loadBoardByTaskId(params.cardId);
+      setSelectedTaskId(params.cardId);
+    }
+  }, [params]);
+
   const { scrollContainerRef, handlers } = useScrollByGrab();
 
   async function onAddTask(task, groupId) {
@@ -69,6 +89,10 @@ export function BoardIndex() {
     const res = await sortGroup(board.id, groupId, sortBy, sortOrder);
   }
 
+  function onStarToggle(starredIds) {
+    editUser({ ...user, starredBoardIds: starredIds });
+  }
+
   const sortedGroups = board?.groups
     ?.filter((l) => !l.closed)
     .sort((a, b) => a.pos - b.pos);
@@ -82,7 +106,7 @@ export function BoardIndex() {
             backgroundImage: `url(${board.prefs?.backgroundImage})`,
           }}
         >
-          {board && <BoardHeader board={board} />}
+          {board && <BoardHeader board={board} starToggle={onStarToggle} starredBoardIds={user?.starredBoardIds} />}
           <main className="board-groups" ref={scrollContainerRef} {...handlers}>
             {sortedGroups &&
               sortedGroups.map((group) => (
@@ -103,11 +127,12 @@ export function BoardIndex() {
             <AddGroupBtn addGroup={onAddGroup} />
           </main>
         </div>
-        {task && (
+        {selectedTaskId && (
           <TaskDetailsModal
-            taskId={task.id}
+            taskId={selectedTaskId}
             editTask={onEditTask}
             editLabel={onEditLabel}
+            onCloseTask={() => setSelectedTaskId(null)}
           />
         )}
       </section>

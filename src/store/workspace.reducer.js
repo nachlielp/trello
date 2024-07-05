@@ -26,6 +26,7 @@ export function workspaceReducer(state = initialState, action) {
     case SET_BOARDS:
       newState = { ...state, boards: action.boards };
       break;
+
     case EDIT_BOARD:
       newState = {
         ...state,
@@ -34,108 +35,7 @@ export function workspaceReducer(state = initialState, action) {
         ),
       };
       break;
-    case ADD_BOARD:
-      newState = { ...state, boards: [...state.boards, action.board] };
-      break;
-    case SET_BOARD:
-      newState = { ...state, board: action.board };
-      break;
-    case EDIT_LABEL:
-      newState = {
-        ...state,
-        board: {
-          ...state.board,
-          labelNames: state.board.labelNames.map(l => l.color === action.label.color ? action.label : l)
-        }
-      };
-      break;
-    case ADD_TASK:
-      newState = {
-        ...state,
-        board: {
-          ...state.board,
-          groups: state.board.groups.map(group =>
-            group.id === action.task.idGroup
-              ? { ...group, tasks: [...(group.tasks || []), action.task] }
-              : group
-          )
-        }
-      };
-      break;
-    case EDIT_TASK:
-      newState = {
-        ...state,
-        board: {
-          ...state.board,
-          groups: state.board.groups.map(group =>
-            group.id === action.task.idGroup
-              ? { ...group, tasks: group.tasks.map(t => t.id === action.task.id ? action.task : t) }
-              : group
-          )
-        }
-      };
-      break;
-    case ADD_GROUP:
-      newState = {
-        ...state, board: {
-          ...state.board,
-          groups: [...state.board.groups, action.group]
-        }
-      };
-      break;
-    case EDIT_GROUP:
-      newState = {
-        ...state,
-        board: {
-          ...state.board,
-          groups: state.board.groups.map(group => group.id === action.group.id ? action.group : group)
-        }
-      };
-      break;
-    case COPY_GROUP:
-      newState = {
-        ...state,
-        board: {
-          ...state.board,
-          groups: action.groups
-        }
-      };
-      break;
-    case MOVE_ALL_CARDS:
-      newState = {
-        ...state,
-        board: {
-          ...state.board,
-          groups: state.board.groups.map(g => {
-            if (g.id === action.sourceGroup.id) {
-              return { ...g, tasks: action.sourceGroup.tasks };
-            }
-            if (g.id === action.targetGroup.id) {
-              return { ...g, tasks: [...action.targetGroup.tasks] };
-            }
-            return g;
-          })
-        }
-      };
-      break;
-    case ARCHIVE_ALL_CARDS:
-      newState = {
-        ...state,
-        board: {
-          ...state.board,
-          groups: state.board.groups.map(g => g.id === action.group.id ? action.group : g)
-        }
-      };
-      break;
-    case SORT_GROUP:
-      newState = {
-        ...state,
-        board: {
-          ...state.board,
-          groups: state.board.groups.map(g => g.id === action.group.id ? action.group : g)
-        }
-      };
-      break;
+
     default:
       return state;
   }

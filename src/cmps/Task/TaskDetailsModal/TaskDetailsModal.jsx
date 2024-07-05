@@ -17,7 +17,7 @@ import { setBoards } from "../../../store/workspace.actions";
 import { utilService } from "../../../services/util.service";
 import { login } from "../../../store/user.actions";
 
-export function TaskDetailsModal({ taskId, editTask, editLabel }) {
+export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
   const currentGroup = useSelector((state) =>
     state.boardModule.board.groups?.find((g) =>
       g.tasks?.find((t) => t.id === taskId)
@@ -72,10 +72,16 @@ export function TaskDetailsModal({ taskId, editTask, editLabel }) {
     });
   }
 
+  function onClose() {
+    console.log("On close. Task", currentTask);
+    onCloseTask();
+    navigate(`/b/${currentTask.idBoard}`, { replace: true });
+  }
+
   return (
     <Modal
       open
-      onCancel={() => navigate(`/b/${currentTask.idBoard}`, { replace: true })}
+      onCancel={onClose}
       loading={currentGroup == undefined}
       footer=""
       className="task-details"

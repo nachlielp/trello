@@ -133,7 +133,7 @@ export function MoveCardPopover({ anchorEl, taskId }) {
     console.log(newPosDetails);
     setIsOpen(false);
     await moveCard(newPosDetails);
-    loadTestBoardFromStorage();
+    loadBoard(selectedBoardId);
   }
 
   return (

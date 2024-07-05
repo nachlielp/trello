@@ -33,7 +33,7 @@ window.boardSer = boardService
 // }
 async function getByTaskId(taskId) {
   const boards = await storageService.query(STORAGE_KEY);
-  const board = boards.find(board => board.groups.some(group => group.tasks.some(task => task.id === taskId)));
+  const board = boards?.find(board => board.groups?.some(group => group.tasks?.some(task => task.id === taskId)));
   return board;
 }
 

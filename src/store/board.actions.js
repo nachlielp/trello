@@ -50,7 +50,9 @@ export async function loadBoard(boardId) {
 export async function loadBoardByTaskId(taskId) {
   const board = await boardService.getByTaskId(taskId);
   store.dispatch({ type: SET_BOARD, board: board });
+  return board.id
 }
+
 export async function setBoard(board) {
   store.dispatch({ type: SET_BOARD, board: board });
 }
@@ -61,7 +63,6 @@ export function toggleIsExpanded() {
     isExpanded: !store.getState().boardModule.isExpanded,
   });
 }
-//TODO handle error, optimistic updates
 
 export async function addTask(task) {
   try {
@@ -438,7 +439,5 @@ async function unitTestActions() {
     title: "Board-Good",
   });
   await removeBoard("m1oC7");
-  // TODO unit test loadBoard
-  // TODO unit test addBoardMsg
-  // TODO unit test updateTask
+
 }

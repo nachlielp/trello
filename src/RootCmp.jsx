@@ -4,14 +4,8 @@ import { HomePage } from "./pages/HomePage.jsx";
 import { BoardIndex } from "./pages/BoardIndex.jsx";
 import { Workspace } from "./pages/Wrokspace.jsx";
 import { UserProfile } from "./pages/UserProfile.jsx";
-import { useSelector } from "react-redux";
-import { setBoards } from "./store/workspace.actions";
-import { useEffect } from "react";
+
 export function RootCmp() {
-  const boards = useSelector((state) => state.workspaceModule.boards);
-  useEffect(() => {
-    setBoards();
-  }, []);
 
   return (
     <div>
@@ -20,7 +14,7 @@ export function RootCmp() {
         <Routes>
           <Route
             path="*"
-            element={<Workspace boardsInfo={boards.map((b) => ({ id: b.id, name: b.name, closed: b.closed, coverImg: b.prefs.backgroundImage }))} />}
+            element={<Workspace />}
           >
             <Route path="b/:boardId" element={<BoardIndex />} />
             <Route path="c/:cardId" element={<BoardIndex />} />

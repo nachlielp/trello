@@ -17,19 +17,14 @@ export async function loadUsers() {
     store.dispatch({ type: LOADING_DONE });
   }
 }
-export async function updateUser(updatedUser) {
-  try {
-
-    store.dispatch({ type: EDIT_USERS, user: updatedUser });
-    await userService.updateUser(updatedUser);
-  } catch (err) {
-    console.log("UserActions: err in loadUsers", err);
-  }
-}
 
 export async function editUser(user) {
-  store.dispatch({ type: EDIT_USER, user })
-  await userService.updateUser(user)
+  try {
+    store.dispatch({ type: EDIT_USERS, user });
+    await userService.updateUser(user);
+  } catch (err) {
+    console.log("UserActions: err in editUser", err);
+  }
 }
 export async function login() {
   const userId = import.meta.env.VITE_TRELLO_USER_ID
@@ -38,7 +33,7 @@ export async function login() {
     const user = await userService.getById(userId)
     store.dispatch({ type: SET_USER, user })
   } catch (err) {
-    console.lo
+    console.log("UserActions: err in login", err)
   }
 }
 
