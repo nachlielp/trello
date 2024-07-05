@@ -4,7 +4,7 @@ import { WorkspaceMenu } from "../cmps/Workspace/WorkspaceMenu";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { setBoard } from "../store/board.actions";
+import { setBoard, loadBoard, loadBoardByTaskId } from "../store/board.actions";
 import { login, editUser, addBoardToUser } from "../store/user.actions";
 import { createBoard } from "../store/workspace.actions";
 
@@ -14,22 +14,24 @@ export function Workspace({ boardsInfo }) {
     const [starredBoardIds, setStarredBoardIds] = useState([]);
     const navigate = useNavigate();
 
-    const board = useSelector((state) => state.workspaceModule.boards.find((b) => b.id === selectedBoardId));
-    const task = useSelector((state) =>
-        state.workspaceModule.boards
-            ?.flatMap((b) => b.groups || [])
-            ?.flatMap((g) => g.tasks || [])
-            ?.find((t) => t.id === selectedTaskId)
-    );
+    const board = useSelector((state) => state.boardModule.board);
+    const task = useSelector((state) => state.boardModule.board?.groups?.flatMap((g) => g.tasks || [])?.find((t) => t.id === selectedTaskId));
     const user = useSelector((state) => state.userModule.user);
 
     const params = useParams();
 
     useEffect(() => {
+
         params.boardId && setSelectedBoardId(params.boardId);
         params.cardId ? setSelectedTaskId(params.cardId) : setSelectedTaskId(null);
         if (selectedTaskId && !selectedBoardId && task) {
             setSelectedBoardId(task.idBoard);
+        }
+        if (params.boardId) {
+            loadBoard(params.boardId);
+        }
+        if (params.cardId) {
+            loadBoardByTaskId(params.cardId);
         }
     }, [params]);
 

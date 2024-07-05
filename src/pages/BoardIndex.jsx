@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 
 import { BoardGroup } from "../cmps/Group/BoardGroup";
 import {
-  loadTestBoardFromStorage,
   addTask,
   addGroup,
   archiveGroup,

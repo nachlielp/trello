@@ -14,7 +14,6 @@ export function WorkspaceMenu({ boardsInfo, selectedBoardId, starredBoardIds, on
     const navigate = useNavigate();
 
     function onSelectBoard(boardId) {
-        // setSelectedBoard(boardId);
         navigate(`/b/${boardId}`, { replace: true });
     }
 

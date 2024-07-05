@@ -12,7 +12,7 @@ import coverIcon from "/img/board-index/detailsImgs/coverIcon.svg";
 import { ReactSVG } from "react-svg";
 import detailsIcon from "/img/board-index/detailsImgs/detailsIcon.svg";
 import defaultProfile from "/img/defaultProfile.svg";
-import { loadTestBoardFromStorage } from "../../../store/board.actions";
+import { loadBoard } from "../../../store/board.actions";
 import { setBoards } from "../../../store/workspace.actions";
 import { utilService } from "../../../services/util.service";
 import { login } from "../../../store/user.actions";

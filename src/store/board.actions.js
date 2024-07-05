@@ -38,16 +38,19 @@ import {
 //   }
 // }
 
-export async function loadTestBoardFromStorage() {
-  const demoBoardId = "66756a34def1a6d3b8cd179d";
+export async function loadBoard(boardId) {
 
-  const boardData = await boardService.getById(demoBoardId);
+  const boardData = await boardService.getById(boardId);
   store.dispatch({ type: SET_BOARD, board: boardData });
 
-  const memberData = await memberService.getById(demoBoardId);
+  const memberData = await memberService.getById(boardId);
   store.dispatch({ type: SET_MEMBERS, members: memberData.members });
 }
 
+export async function loadBoardByTaskId(taskId) {
+  const board = await boardService.getByTaskId(taskId);
+  store.dispatch({ type: SET_BOARD, board: board });
+}
 export async function setBoard(board) {
   store.dispatch({ type: SET_BOARD, board: board });
 }

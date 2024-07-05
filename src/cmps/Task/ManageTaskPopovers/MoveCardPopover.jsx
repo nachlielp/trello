@@ -4,7 +4,7 @@ import { useEffect, useState, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { CustomSelect } from "../../CustomCpms/CustomSelect";
 import { moveCard, setBoards } from "../../../store/workspace.actions";
-import { loadTestBoardFromStorage } from "../../../store/board.actions";
+import { loadBoard } from "../../../store/board.actions";
 import { useNavigate } from "react-router";
 
 export function MoveCardPopover({ anchorEl, taskId }) {
@@ -52,7 +52,7 @@ export function MoveCardPopover({ anchorEl, taskId }) {
   useEffect(() => {
     //TODO notice 
     setBoards();
-    loadTestBoardFromStorage();
+    loadBoard(selectedBoardId);
     if (newPositions.length > 0) {
       setPosition(newPositions[0] + 1);
     } else {
