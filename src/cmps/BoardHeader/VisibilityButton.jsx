@@ -20,7 +20,7 @@ export function VisibilityButton() {
     )
   );
   const board = useSelector((state) => state.boardModule.board);
-
+//TODO make custom component
   useEffect(() => {
     if (currentMember?.permissionStatus === "admin") {
       setHasAcces(true);
