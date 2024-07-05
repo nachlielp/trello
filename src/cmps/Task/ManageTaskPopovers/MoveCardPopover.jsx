@@ -8,11 +8,9 @@ import { loadBoard } from "../../../store/board.actions";
 import { useNavigate } from "react-router";
 
 export function MoveCardPopover({ anchorEl, taskId }) {
-  const [isOpen, setIsOpen] = useState(false);
+  //selectors
   const boards = useSelector((state) => state.workspaceModule.boards);
   const board = useSelector((state) => state.boardModule.board);
-  const navigate = useNavigate();
-
   const group = useSelector((state) =>
     state.boardModule.board.groups?.find((g) =>
       g.tasks.find((t) => t.id === taskId)
@@ -24,6 +22,8 @@ export function MoveCardPopover({ anchorEl, taskId }) {
       .tasks.find((t) => t.id === taskId)
   );
 
+  // states
+  const [isOpen, setIsOpen] = useState(false);
   const [selectedBoardId, setSelectedBoardId] = useState(board.id);
   const [selectedGroupId, setSelectedGroupId] = useState(group.id);
   const [selectedGroups, setSelectedGroups] = useState(
@@ -31,55 +31,54 @@ export function MoveCardPopover({ anchorEl, taskId }) {
       return { name: group.name, id: group.id };
     })
   );
-
   const [positions, setPositions] = useState(
     group.tasks.map((g) => g.pos).sort((a, b) => a - b)
   );
-  const [position, setPosition] = useState(task.pos);
-  const [selectedPosition, setSelectedPosition] = useState(
-    positions?.findIndex((p) => p === position)
-  );
+  const [selectedPosition, setSelectedPosition] = useState(task.pos);
 
+  ///memo
   const newPositions = useMemo(() => {
     const selectedBoard = boards.find((b) => b.id === selectedBoardId);
     const selectedGroup = selectedBoard?.groups?.find(
       (g) => g.id === selectedGroupId
     );
-
+    
     return selectedGroup?.tasks?.map((t) => t.pos).sort((a, b) => a - b) || [];
   }, [selectedBoardId, selectedGroupId, boards]);
-
+  
   useEffect(() => {
     //TODO notice 
     setBoards();
     loadBoard(selectedBoardId);
     if (newPositions.length > 0) {
-      setPosition(newPositions[0] + 1);
+      setSelectedPosition(newPositions[0]);
     } else {
+      console.log("lol")
       setPositions([65536]);
-      setPosition(65536);
+      setSelectedPosition(65536);
     }
   }, []);
-
+  
+  // useEffect position
   useEffect(() => {
-    if (selectedBoardId && boards.length > 0) {
-      setPositions(newPositions);
-      if (task.idGroup === selectedGroupId && newPositions.length > 0) {
-        setSelectedPosition(newPositions.findIndex((p) => p === task.pos));
-      } else {
-        setSelectedPosition(0);
-        setPosition(newPositions[0] || 65536); // Default position if no tasks
-      }
-    }
-  }, [
-    selectedBoardId,
-    selectedGroupId,
-    boards,
-    newPositions,
-    task.idGroup,
-    task.pos,
-  ]);
-
+      if (selectedBoardId && boards.length > 0) {
+          setPositions([...newPositions, Math.max(...newPositions) + 12111]);
+          if (task.idGroup === selectedGroupId && newPositions.length > 0) {
+              setSelectedPosition(task.pos);
+            } else {
+                setSelectedPosition(newPositions[0] || 65536); // Default position if no tasks
+              }
+            }
+          }, [
+              selectedBoardId,
+              selectedGroupId,
+              boards,
+              newPositions,
+              task.idGroup,
+              task.pos,
+            ]);
+            
+  // use effect board
   useEffect(() => {
     const selectedBoard = boards.find((b) => b.id === selectedBoardId);
     if (selectedBoard) {
@@ -92,10 +91,10 @@ export function MoveCardPopover({ anchorEl, taskId }) {
     }
   }, [selectedBoardId, boards]);
 
-  function generatePositionOptions(n) {
-    return Array.from({ length: n }, (v, i) => i + 1).map((i) => ({
-      name: i,
-      id: i,
+  function generatePositionOptions(array) {
+    return array.map((item, i) => ({
+      name: i + 1,
+      id: item,
     }));
   }
 
@@ -105,32 +104,23 @@ export function MoveCardPopover({ anchorEl, taskId }) {
 
   function onSelectGroup(group) {
     setSelectedGroupId(group.id);
-    if (newPositions.length > 0) {
-      setPosition(newPositions[0]);
-    } else {
-      setPositions([65536]);
-      setPosition(65536);
-    }
   }
 
   function onSelectPosition(item) {
-    setSelectedPosition(item?.id - 1);
-    setPosition(positions[item?.id - 1] || 65536);
+    setSelectedPosition(item?.id);
   }
 
   async function onMoveClick() {
-    // console.log(selectedBoardId, selectedGroupId, position);
-    // console.log(task)
     let newPosDetails = {
       idBoard: selectedBoardId,
       idGroup: selectedGroupId,
-      pos: position + 12111,
+      pos: selectedPosition + 12111,
       task,
     };
-    if (task.pos > position) {
-      newPosDetails = { ...newPosDetails, pos: position - 12111 };
+
+    if (task.pos > selectedPosition) {
+      newPosDetails = { ...newPosDetails, pos: selectedPosition - 12111 };
     }
-    console.log(newPosDetails);
     setIsOpen(false);
     await moveCard(newPosDetails);
     loadBoard(selectedBoardId);
@@ -177,12 +167,8 @@ export function MoveCardPopover({ anchorEl, taskId }) {
               <span>
                 <p>Position</p>
                 <CustomSelect
-                  options={
-                    positions.length > 0
-                      ? generatePositionOptions(positions.length)
-                      : generatePositionOptions(1)
-                  }
-                  currentSelect={selectedPosition + 1}
+                  options={generatePositionOptions(positions)}
+                  currentSelect={selectedPosition}
                   onSelect={onSelectPosition}
                 />
               </span>
