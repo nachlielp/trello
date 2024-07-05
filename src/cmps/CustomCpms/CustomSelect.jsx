@@ -2,15 +2,15 @@ import { DownOutlined } from "@ant-design/icons";
 import { Popover } from "antd";
 import { useState, useEffect, useRef } from "react";
 
-export function CustomSelect({ options = [], onSelect, currentSelect }) {
+export function CustomSelect({ options = [], onSelect, value, defaultValue }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(options[0]);
+  const [selectedItem, setSelectedItem] = useState(defaultValue || null);
   const [searchValue, setSearchValue] = useState("");
   const [filteredItems, setFilteredItems] = useState(options);
   const divRef = useRef(null);
   useEffect(() => {
-    onSelect(options.find((o) => o.id === currentSelect));
-  }, [currentSelect]);
+    onSelect(options.find((o) => o.id === value));
+  }, [value]);
 
   useEffect(() => {
     setFilteredItems(options);
@@ -18,8 +18,8 @@ export function CustomSelect({ options = [], onSelect, currentSelect }) {
       setSelectedItem(options[0]);
     }
 
-    if (currentSelect) {
-      setSelectedItem(options.find((o) => o.id === currentSelect));
+    if (value) {
+      setSelectedItem(options.find((o) => o.id === value));
     }
   }, [options]);
 
@@ -66,7 +66,7 @@ export function CustomSelect({ options = [], onSelect, currentSelect }) {
       >
         {
           <input
-            placeholder={selectedItem?.name || options[0]?.name}
+            placeholder={selectedItem?.name || defaultValue?.name}
             value={searchValue}
             onChange={onInput}
           />
