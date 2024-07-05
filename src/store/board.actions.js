@@ -38,6 +38,9 @@ import {
 //   }
 // }
 
+
+
+//TODO add apdatedAt to every board action
 export async function loadTestBoardFromStorage() {
   const demoBoardId = "66756a34def1a6d3b8cd179d";
 

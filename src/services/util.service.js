@@ -234,7 +234,7 @@ export function stringToColor(str) {
   }
   return color;
 }
-
+//TODO make members inside board and chancge all find members
 function createNewTask(task) {
   return {
     id: utilService.makeId(),

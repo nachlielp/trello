@@ -124,7 +124,7 @@ export function MoveCardPopover({ anchorEl, taskId }) {
     await moveCard(newPosDetails);
     loadTestBoardFromStorage();
   }
-
+//TODO when moving to new bourd navigate to origin board
   return (
     <Popover
       className="list-actions-menu-popover"
@@ -151,7 +151,7 @@ export function MoveCardPopover({ anchorEl, taskId }) {
                   id: board.id,
                 }))}
                 onSelect={onSelectBoard}
-                currentSelect={selectedBoardId}
+                value={selectedBoardId}
               />
             </section>
             <section className="list-select">
@@ -160,14 +160,14 @@ export function MoveCardPopover({ anchorEl, taskId }) {
                 <CustomSelect
                   options={selectedGroups}
                   onSelect={onSelectGroup}
-                  currentSelect={selectedGroupId}
+                  value={selectedGroupId}
                 />
               </span>
               <span>
                 <p>Position</p>
                 <CustomSelect
                   options={generatePositionOptions(positions)}
-                  currentSelect={selectedPosition}
+                  value={selectedPosition}
                   onSelect={onSelectPosition}
                 />
               </span>
