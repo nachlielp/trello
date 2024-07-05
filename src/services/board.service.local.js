@@ -9,7 +9,8 @@ export const boardService = {
   getById,
   save,
   remove,
-
+  create,
+  getByTaskId,
   // editList: editGroup,
   // getEmptyBoard,
   // getDemoBoard,
@@ -30,6 +31,11 @@ window.boardSer = boardService
 //     boards = boards.map(({ _id, title, owner }) => ({ _id, title, owner }))
 //     return boards
 // }
+async function getByTaskId(taskId) {
+  const boards = await storageService.query(STORAGE_KEY);
+  const board = boards?.find(board => board.groups?.some(group => group.tasks?.some(task => task.id === taskId)));
+  return board;
+}
 
 function getById(boardId) {
   return storageService.get(STORAGE_KEY, boardId);
@@ -52,7 +58,9 @@ async function save(board) {
   return savedBoard;
 }
 
-
+async function create(board) {
+  return await storageService.post(STORAGE_KEY, board);
+}
 
 // async function addBoardMsg(boardId, txt) {
 

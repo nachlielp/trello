@@ -21,6 +21,13 @@
 @import "views/BoardDetails";
 @import "views/TaskDetails";
 
+
+//Workspace
+@import "cmps/Workspace/Workspace";
+@import "cmps/Workspace/WorkspaceHeader";
+@import "cmps/Workspace/WorkspaceMenu";
+@import "cmps/Workspace/AddBoardPopover";
+
 // Components
 @import "cmps/BoardHeader/VisibilityButton.scss";
 @import "cmps/BoardHeader/ViewsButton.scss";
@@ -51,6 +58,9 @@
 @import "cmps/Task/ManageTaskPopovers/ManageCoverPopover";
 @import "cmps/Task/ManageTaskPopovers/MoveCardPopover";
 @import "cmps/Task/ManageTaskPopovers/CustomSelect";
+
+//Custom Cpms
+@import "cmps/CustomCpms/StarBoardBtn";
 
 
 :root.dark {

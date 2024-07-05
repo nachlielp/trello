@@ -39,56 +39,24 @@ import {
 // }
 
 
-
 //TODO add apdatedAt to every board action
-export async function loadTestBoardFromStorage() {
-  const demoBoardId = "66756a34def1a6d3b8cd179d";
+export async function loadBoard(boardId) {
 
-  const boardData = await boardService.getById(demoBoardId);
+  const boardData = await boardService.getById(boardId);
   store.dispatch({ type: SET_BOARD, board: boardData });
 
-  const memberData = await memberService.getById(demoBoardId);
+  const memberData = await memberService.getById(boardId);
   store.dispatch({ type: SET_MEMBERS, members: memberData.members });
 }
 
-async function fetchCardsFromTrello(listId) {
-  const data = await fetch(
-    `https://api.trello.com/1/lists/${listId}/cards?key=${
-      import.meta.env.VITE_TRELLO_API_KEY
-    }&token=${import.meta.env.VITE_TRELLO_TOKEN}`
-  );
-  const cardsData = await data.json();
-  return cardsData;
+export async function loadBoardByTaskId(taskId) {
+  const board = await boardService.getByTaskId(taskId);
+  store.dispatch({ type: SET_BOARD, board: board });
+  return board.id
 }
 
-async function fetchListsFromTrello(boardId) {
-  const data = await fetch(
-    `https://api.trello.com/1/boards/${boardId}/lists?key=${
-      import.meta.env.VITE_TRELLO_API_KEY
-    }&token=${import.meta.env.VITE_TRELLO_TOKEN}`
-  );
-  const listsData = await data.json();
-  return listsData;
-}
-
-async function fetchMembersFromTrello() {
-  const data = await fetch(
-    `https://api.trello.com/1/boards/nfwLJTa2/members?key=${
-      import.meta.env.VITE_TRELLO_API_KEY
-    }&token=${import.meta.env.VITE_TRELLO_TOKEN}`
-  );
-  const membersData = await data.json();
-  return membersData;
-}
-
-async function fetchBoardFromTrello() {
-  const data = await fetch(
-    `https://api.trello.com/1/boards/dL2ehGo7?key=${
-      import.meta.env.VITE_TRELLO_API_KEY
-    }&token=${import.meta.env.VITE_TRELLO_TOKEN}`
-  );
-  const boardData = await data.json();
-  return boardData;
+export async function setBoard(board) {
+  store.dispatch({ type: SET_BOARD, board: board });
 }
 
 export function toggleIsExpanded() {
@@ -97,7 +65,6 @@ export function toggleIsExpanded() {
     isExpanded: !store.getState().boardModule.isExpanded,
   });
 }
-//TODO handle error, optimistic updates
 
 export async function addTask(task) {
   try {
@@ -474,7 +441,5 @@ async function unitTestActions() {
     title: "Board-Good",
   });
   await removeBoard("m1oC7");
-  // TODO unit test loadBoard
-  // TODO unit test addBoardMsg
-  // TODO unit test updateTask
+
 }

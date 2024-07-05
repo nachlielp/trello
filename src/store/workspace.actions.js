@@ -2,9 +2,10 @@ import { boardService } from "../services/board.service.local";
 import { workspaceService } from "../services/workspace.service";
 import { updateBoard } from "./board.actions";
 import { store } from "./store";
-import { EDIT_BOARD, SET_BOARDS } from "./workspace.reducer";
+import { EDIT_BOARD, SET_BOARDS, ADD_BOARD } from "./workspace.reducer";
 
 export async function setBoards() {
+  console.log("setBoards");
   const boards = await workspaceService.getAllBoards();
   store.dispatch({ type: SET_BOARDS, boards });
 }
@@ -47,11 +48,11 @@ export async function moveCard(details) {
     idBoard: details.idBoard,
     idGroup: details.idGroup,
   };
-  const modifiedNewTasks = newGroup.tasks.map((t) => ({
+  const modifiedNewTasks = newGroup?.tasks.map((t) => ({
     ...t,
     pos: t.pos >= modifiedTask.pos ? t.pos + 12111 : t.pos,
   }));
-  modifiedNewTasks.push(modifiedTask);
+  modifiedNewTasks?.push(modifiedTask);
 
   // Update new group with modified tasks
   const modifiedNewGroup = {
@@ -71,4 +72,9 @@ export async function moveCard(details) {
 
   store.dispatch({ type: EDIT_BOARD, board: modifiedNewBoard });
   await boardService.save(modifiedNewBoard);
+}
+
+export async function createBoard(board) {
+  const newBoard = await boardService.save(board);
+  store.dispatch({ type: ADD_BOARD, board: newBoard });
 }

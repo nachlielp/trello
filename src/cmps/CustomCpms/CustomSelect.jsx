@@ -12,6 +12,8 @@ export function CustomSelect({ options = [], onSelect, value, defaultValue }) {
     onSelect(options.find((o) => o.id === value));
   }, [value]);
 
+
+
   useEffect(() => {
     setFilteredItems(options);
     if (options.length > 0) {
@@ -23,11 +25,14 @@ export function CustomSelect({ options = [], onSelect, value, defaultValue }) {
     }
   }, [options]);
 
+
   function onInput(e) {
     setSearchValue(e.target.value);
+
   }
 
   function onSelectOption(item) {
+
     setSelectedItem(item);
     if (onSelect) {
       onSelect(item);

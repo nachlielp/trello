@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 
 import { BoardGroup } from "../cmps/Group/BoardGroup";
 import {
-  loadTestBoardFromStorage,
   addTask,
   addGroup,
   archiveGroup,
@@ -14,34 +13,36 @@ import {
   moveAllCards,
   archiveAllCards,
   sortGroup,
+  loadBoard,
+
+  loadBoardByTaskId,
 } from "../store/board.actions";
+import { editUser } from "../store/user.actions";
+
 import { AddGroupBtn } from "../cmps/Group/AddGroupBtn";
 import { TaskDetailsModal } from "../cmps/Task/TaskDetailsModal/TaskDetailsModal.jsx";
 import { BoardHeader } from "../cmps/BoardHeader/BoardHeader.jsx";
-import { useParams } from "react-router";
-import { setBoards } from "../store/workspace.actions.js";
-import { login } from "../store/user.actions.js";
 import useScrollByGrab from "../customHooks/useScrollByGrab.js";
+import { useParams } from "react-router-dom";
 
 export function BoardIndex() {
+  const [selectedTaskId, setSelectedTaskId] = useState(null);
   const board = useSelector((state) => state.boardModule.board);
-  const [clickedTaskId, setClickedTaskId] = useState(null);
+  const user = useSelector((state) => state.userModule.user);
+
   const params = useParams();
-  const { scrollContainerRef, handlers } = useScrollByGrab();
 
   useEffect(() => {
-    loadTestBoardFromStorage();
-    setBoards();
-    login();
-  }, []);
-
-  useEffect(() => {
+    if (params.boardId) {
+      loadBoard(params.boardId);
+    }
     if (params.cardId) {
-      setClickedTaskId(params.cardId);
-    } else {
-      setClickedTaskId(null);
+      loadBoardByTaskId(params.cardId);
+      setSelectedTaskId(params.cardId);
     }
   }, [params]);
+
+  const { scrollContainerRef, handlers } = useScrollByGrab();
 
   async function onAddTask(task, groupId) {
     const newTask = {
@@ -88,48 +89,54 @@ export function BoardIndex() {
     const res = await sortGroup(board.id, groupId, sortBy, sortOrder);
   }
 
+  function onStarToggle(starredIds) {
+    editUser({ ...user, starredBoardIds: starredIds });
+  }
+
   const sortedGroups = board?.groups
     ?.filter((l) => !l.closed)
     .sort((a, b) => a.pos - b.pos);
 
-  return board.id ? (
-    <section className="board-index">
-      <div
-        className="bg"
-        style={{
-          backgroundImage: `url(${board.prefs?.backgroundImage})`,
-        }}
-      >
-        {board && <BoardHeader />}
-        <main className="board-groups" ref={scrollContainerRef} {...handlers}>
-          {sortedGroups &&
-            sortedGroups.map((group) => (
-              <BoardGroup
-                key={group.id}
-                group={group}
-                addTask={onAddTask}
-                archiveGroup={() => onArchiveGroup(board.id, group.id)}
-                editGroup={onEditGroup}
-                editTask={onEditTask}
-                editLabel={onEditLabel}
-                copyGroup={onCopyGroup}
-                moveAllCards={moveAllCards}
-                archiveAllCards={archiveAllCards}
-                sortGroup={onSortGroup}
-              />
-            ))}
-          <AddGroupBtn addGroup={onAddGroup} />
-        </main>
-      </div>
-      {clickedTaskId && (
-        <TaskDetailsModal
-          taskId={clickedTaskId}
-          editTask={onEditTask}
-          editLabel={onEditLabel}
-        />
-      )}
-    </section>
-  ) : (
-    <h1>Loading...</h1>
-  );
+  return (
+    board ? (
+      <section className="board-index">
+        <div
+          className="bg"
+          style={{
+            backgroundImage: `url(${board.prefs?.backgroundImage})`,
+          }}
+        >
+          {board && <BoardHeader board={board} starToggle={onStarToggle} starredBoardIds={user?.starredBoardIds} />}
+          <main className="board-groups" ref={scrollContainerRef} {...handlers}>
+            {sortedGroups &&
+              sortedGroups.map((group) => (
+                <BoardGroup
+                  key={group.id}
+                  group={group}
+                  addTask={onAddTask}
+                  archiveGroup={() => onArchiveGroup(board.id, group.id)}
+                  editGroup={onEditGroup}
+                  editTask={onEditTask}
+                  editLabel={onEditLabel}
+                  copyGroup={onCopyGroup}
+                  moveAllCards={moveAllCards}
+                  archiveAllCards={archiveAllCards}
+                  sortGroup={onSortGroup}
+                />
+              ))}
+            <AddGroupBtn addGroup={onAddGroup} />
+          </main>
+        </div>
+        {selectedTaskId && (
+          <TaskDetailsModal
+            taskId={selectedTaskId}
+            editTask={onEditTask}
+            editLabel={onEditLabel}
+            onCloseTask={() => setSelectedTaskId(null)}
+          />
+        )}
+      </section>
+    ) : (
+      <h1>Loading...</h1>
+    ));
 }

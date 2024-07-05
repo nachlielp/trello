@@ -4,7 +4,7 @@ import { useEffect, useState, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { CustomSelect } from "../../CustomCpms/CustomSelect";
 import { moveCard, setBoards } from "../../../store/workspace.actions";
-import { loadTestBoardFromStorage } from "../../../store/board.actions";
+import { loadBoard } from "../../../store/board.actions";
 import { useNavigate } from "react-router";
 
 export function MoveCardPopover({ anchorEl, taskId }) {
@@ -47,8 +47,9 @@ export function MoveCardPopover({ anchorEl, taskId }) {
   }, [selectedBoardId, selectedGroupId, boards]);
   
   useEffect(() => {
+    //TODO notice 
     setBoards();
-    loadTestBoardFromStorage();
+    loadBoard(selectedBoardId);
     if (newPositions.length > 0) {
       setSelectedPosition(newPositions[0]);
     } else {
@@ -122,7 +123,7 @@ export function MoveCardPopover({ anchorEl, taskId }) {
     }
     setIsOpen(false);
     await moveCard(newPosDetails);
-    loadTestBoardFromStorage();
+    loadBoard(selectedBoardId);
   }
 //TODO when moving to new bourd navigate to origin board
   return (
