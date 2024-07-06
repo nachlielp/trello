@@ -1,6 +1,6 @@
 import { Card } from "antd"
 import { GroupFooter } from "./GroupFooter"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import { AddTaskInGroup } from "./AddTaskInGroup"
 import { BoardGroupHeader } from "./BoardGroupHeader"
 import { TaskPreview } from "../Task/TaskPreview"
@@ -13,6 +13,26 @@ export function BoardGroup({ group, addTask, archiveGroup, editGroup, editTask, 
     const [firstTaskPos, setFirstTaskPos] = useState(null)
     const [lastTaskPos, setLastTaskPos] = useState(null)
     const [sortedTasks, setSortedTasks] = useState([])
+    const footerRef = useRef(null);
+    const handleClickOutside = useCallback(
+      (event) => {
+        if (footerRef.current && !footerRef.current.contains(event.target)) {
+          setIsAddTaskOpen(false);
+        }
+      },
+      [footerRef]
+    );
+  
+    useEffect(() => {
+      if (isAddTaskOpen) {
+        document.addEventListener("mousedown", handleClickOutside);
+      } else {
+        document.removeEventListener("mousedown", handleClickOutside);
+      }
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [isAddTaskOpen, handleClickOutside]);
 
     useEffect(() => {
         const filteredTasks = group.tasks?.filter(task => !task.closed) || [];
@@ -46,7 +66,7 @@ export function BoardGroup({ group, addTask, archiveGroup, editGroup, editTask, 
 
     return (
         <div className="board-group-container">
-            <Card className="board-group custom-card">
+            <Card className="board-group custom-card" ref={footerRef}>
                 <BoardGroupHeader group={group} editGroup={editGroup} openAddTask={openAddTask} archiveGroup={archiveGroup} copyGroup={copyGroup} moveAllCards={moveAllCards} archiveAllCards={archiveAllCards} sortGroup={sortGroup} />
                 <main className="board-group-main">
                     {newTaskIds.map(taskId => <TaskPreview key={taskId} task={group.tasks.find(task => task.id === taskId)} />)}
