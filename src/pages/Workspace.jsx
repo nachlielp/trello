@@ -60,6 +60,9 @@ export function Workspace() {
     return (
         <section className="workspace" style={{
             backgroundImage: boardBgPrefs?.backgroundImage ? `url(${boardBgPrefs.backgroundImage})` : 'none',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
         }}>
             {/* <WorkspaceHeader /> */}
 
