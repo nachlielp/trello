@@ -37,7 +37,7 @@ export function Workspace() {
 
     useEffect(() => {
         setStarredBoardIds(user?.starredBoardIds);
-    }, [user?.starredBoardIds.length]);
+    }, [user]);
 
 
     useEffect(() => {

@@ -41,7 +41,6 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
   }
 
   function onClose() {
-    console.log("On close. Task", task);
     onCloseTask();
     navigate(`/b/${task.idBoard}`, { replace: true });
   }
@@ -79,9 +78,8 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
     >
       {!!isImgCover && (
         <div
-          className={`details-header-img-cover ${
-            task?.cover?.brightness === "dark" ? "dark" : "light"
-          }`}
+          className={`details-header-img-cover ${task?.cover?.brightness === "dark" ? "dark" : "light"
+            }`}
         >
           {!!task?.cover?.scaled?.length > 0 && (
             <img src={task?.cover?.scaled[1].url} alt="task cover" />
