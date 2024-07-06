@@ -39,22 +39,27 @@ import {
 // }
 
 export async function loadBoard(boardId) {
-
   const boardData = await boardService.getById(boardId);
-  store.dispatch({ type: SET_BOARD, board: boardData });
-
-  const memberData = await memberService.getById(boardId);
-  store.dispatch({ type: SET_MEMBERS, members: memberData.members });
+  store.dispatch({
+    type: SET_BOARD,
+    board: { ...boardData, apdatedAt: new Date().getTime() },
+  });
 }
 
 export async function loadBoardByTaskId(taskId) {
   const board = await boardService.getByTaskId(taskId);
-  store.dispatch({ type: SET_BOARD, board: board });
-  return board.id
+  store.dispatch({
+    type: SET_BOARD,
+    board: { ...board, apdatedAt: new Date().getTime() },
+  });
+  return board.id;
 }
 
 export async function setBoard(board) {
-  store.dispatch({ type: SET_BOARD, board: board });
+  store.dispatch({
+    type: SET_BOARD,
+    board: { ...board, apdatedAt: new Date().getTime() },
+  });
 }
 
 export function toggleIsExpanded() {
@@ -77,6 +82,7 @@ export async function addTask(task) {
         }
         return g;
       }),
+      apdatedAt: new Date().getTime(),
     };
     await boardService.save(newBoard);
     return newTask;
@@ -95,6 +101,7 @@ export async function addGroup(group, boardId) {
     const newBoard = {
       ...board,
       groups: [...board.groups, newGroup],
+      apdatedAt: new Date().getTime(),
     };
     await boardService.save(newBoard);
     return newGroup;
@@ -121,6 +128,7 @@ export async function archiveGroup(boardId, groupId) {
       }
       return g;
     }),
+    apdatedAt: new Date().getTime(),
   };
   await boardService.save(newBoard);
   return newBoard;
@@ -150,7 +158,11 @@ export async function copyGroup(boardId, group) {
 
   store.dispatch({ type: COPY_GROUP, groups: updatedGroups });
 
-  const newBoard = { ...board, groups: updatedGroups };
+  const newBoard = {
+    ...board,
+    groups: updatedGroups,
+    apdatedAt: new Date().getTime(),
+  };
   await boardService.save(newBoard);
 }
 
@@ -176,7 +188,11 @@ export async function moveAllCards(boardId, sourceGroupId, targetGroupId) {
     }
     return g;
   });
-  const newBoard = { ...board, groups: updatedGroups };
+  const newBoard = {
+    ...board,
+    groups: updatedGroups,
+    apdatedAt: new Date().getTime(),
+  };
   store.dispatch({
     type: MOVE_ALL_CARDS,
     sourceGroup: { ...sourceGroup, tasks: [] },
@@ -197,6 +213,7 @@ export async function archiveAllCards(boardId, groupId) {
   const newBoard = {
     ...board,
     groups: board.groups.map((g) => (g.id === groupId ? newGroup : g)),
+    apdatedAt: new Date().getTime(),
   };
   await boardService.save(newBoard);
 }
@@ -207,6 +224,7 @@ export async function editGroup(boardId, group) {
   const newBoard = {
     ...board,
     groups: board.groups.map((g) => (g.id === group.id ? group : g)),
+    apdatedAt: new Date().getTime(),
   };
   await boardService.save(newBoard);
   return group;
@@ -242,6 +260,7 @@ export async function sortGroup(boardId, groupId, sortBy, sortOrder) {
     groups: board.groups.map((g) =>
       g.id === groupId ? { ...g, sortBy, sortOrder } : g
     ),
+    apdatedAt: new Date().getTime(),
   };
   store.dispatch({ type: SORT_GROUP, group: newGroup });
   await boardService.save(newBoard);
@@ -257,6 +276,7 @@ export async function editTask(task) {
         ? { ...g, tasks: g.tasks.map((t) => (t.id === task.id ? task : t)) }
         : g
     ),
+    apdatedAt: new Date().getTime(),
   };
   console.log("newBoard", newBoard);
   await boardService.save(newBoard);
@@ -265,8 +285,11 @@ export async function editTask(task) {
 
 export async function updateBoard(newBoard) {
   try {
-    store.dispatch({ type: SET_BOARD, board: newBoard });
-    await boardService.save(newBoard);
+    store.dispatch({
+      type: SET_BOARD,
+      board: { ...newBoard, apdatedAt: new Date().getTime() },
+    });
+    await boardService.save({ ...newBoard, apdatedAt: new Date().getTime() });
   } catch (err) {
     console.log("Cannot add list", err);
     throw err;
@@ -296,6 +319,7 @@ export async function editLabel(boardId, label) {
     labelNames: board.labelNames.map((l) =>
       l.color === label.color ? label : l
     ),
+    apdatedAt: new Date().getTime(),
   };
   await boardService.save(newBoard);
   return newBoard;
@@ -439,5 +463,4 @@ async function unitTestActions() {
     title: "Board-Good",
   });
   await removeBoard("m1oC7");
-
 }

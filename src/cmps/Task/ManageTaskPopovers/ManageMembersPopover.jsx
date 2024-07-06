@@ -5,7 +5,7 @@ import { MemberOption } from "./MemberOption";
 import { ManageTaskPopoverHeader } from "./ManageTaskPopoverHeader";
 
 export function ManageMembersPopover({ anchorEl, editTask, task }) {
-    const members = useSelector((state) => state.boardModule.members);
+    const members = useSelector((state) => state.boardModule.board.members);
     const [inputSearch, setInputSearch] = useState('');
     const [isOpen, setIsOpen] = useState(false);
     const [selectedMembers, setSelectedMembers] = useState([]);

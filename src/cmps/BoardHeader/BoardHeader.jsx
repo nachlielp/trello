@@ -11,7 +11,7 @@ import { ProfilePopover } from "../Task/ManageTaskPopovers/ProfilePopover";
 import { StarBoardBtn } from "../CustomCpms/StarBoardBtn";
 
 export function BoardHeader({ board, starredBoardIds, starToggle }) {
-  const members = useSelector((state) => state.boardModule.members);
+  const members = useSelector((state) => state.boardModule.board.members);
 
 
   function onToggleStar(boardId) {

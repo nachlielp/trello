@@ -6,7 +6,7 @@ import { ManageMembersPopover } from "../ManageTaskPopovers/ManageMembersPopover
 import { ProfilePopover } from "../ManageTaskPopovers/ProfilePopover";
 
 export function TaskDetailsMembers({ currentTask, editTask }) {
-  const boardMembers = useSelector((state) => state.boardModule.members);
+  const boardMembers = useSelector((state) => state.boardModule.board.members);
   const [selectedMembers, setSelectedMembers] = useState([]);
 
  

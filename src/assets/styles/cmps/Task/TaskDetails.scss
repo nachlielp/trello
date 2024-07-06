@@ -26,7 +26,6 @@
       position: relative;
       margin-top: -20px;
 
-
       img {
         object-fit: cover;
         // Add this line
@@ -46,8 +45,6 @@
         right: 0;
         bottom: 12px;
 
-
-
         .cover-btn {
           border-radius: 3px;
           // color: var(--dynamic-text, #172b4d);
@@ -58,12 +55,10 @@
           justify-content: center;
           padding: 4px 8px;
 
-
           .injected-svg {
             width: 16px;
             height: 16px;
             margin: 4px 4px 0 0;
-
           }
         }
       }
@@ -97,7 +92,6 @@
           width: 16px;
           height: 16px;
           margin: 4px 4px 0 0;
-
         }
       }
     }
@@ -189,7 +183,7 @@
             text-decoration: none;
           }
 
-          >span {
+          > span {
             background: none;
             color: var(--ds-icon, #44546f);
             font-size: 16px;
@@ -216,7 +210,6 @@
               margin: 0 4px 4px 0;
             }
 
-            //TODO change name, this is a mambers icon not mangae members popover
             .add-members-btn {
               cursor: pointer;
               color: var(--ds-icon, #44546f);
@@ -228,7 +221,10 @@
               margin: 0 4px 4px 0;
 
               &:hover {
-                background-color: var(--ds-background-neutral-hovered, #091e4224);
+                background-color: var(
+                  --ds-background-neutral-hovered,
+                  #091e4224
+                );
                 border: none;
                 box-shadow: none;
                 color: var(--ds-text, #172b4d);

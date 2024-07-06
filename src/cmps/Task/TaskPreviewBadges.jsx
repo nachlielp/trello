@@ -7,15 +7,15 @@ import { useSelector } from "react-redux";
 import { ProfilePopover } from "./ManageTaskPopovers/ProfilePopover";
 
 export function TaskPreviewBadges({ task }) {
-  const members = useSelector((state) => state.boardModule.members);
+  const members = useSelector((state) => state.boardModule.board.members);
 
   const taskMembers =
-    members.filter((member) => task.idMembers.includes(member.id)) || [];
+    members?.filter((member) => task.idMembers.includes(member.id)) || [];
 
   const taskIcons = [];
 
   //TODO refator to Batdg component list
-  if (task.badges.description) {
+  if (task?.badges?.description) {
     taskIcons.push(
       <Tooltip
         placement="bottom"
@@ -34,7 +34,7 @@ export function TaskPreviewBadges({ task }) {
       </Tooltip>
     );
   }
-  if (task.badges.attachments > 0) {
+  if (task.badges?.attachments > 0) {
     taskIcons.push(
       <Tooltip
         placement="bottom"
@@ -68,7 +68,9 @@ export function TaskPreviewBadges({ task }) {
               className="task-icon checklist-icon"
               wrapper="span"
             />
-            <span className="task-icon-count">{task.badges.checkItemsChecked}/{task.badges.checkItems}</span>
+            <span className="task-icon-count">
+              {task.badges.checkItemsChecked}/{task.badges.checkItems}
+            </span>
           </span>
         </Tooltip>
       );

@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SvgButton } from "../CustomCpms/SvgButton";
 import { useNavigate } from "react-router-dom";
 import { PlusOutlined, EllipsisOutlined } from "@ant-design/icons"
 import { StarBoardBtn } from "../CustomCpms/StarBoardBtn";
 import { Button } from "antd";
 import { AddBoardPopover } from "./AddBoardPopover";
+import { login } from "../../store/user.actions";
 
 export function WorkspaceMenu({ boardsInfo, selectedBoardId, starredBoardIds, onStarClick, onAddBoard }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,6 +17,9 @@ export function WorkspaceMenu({ boardsInfo, selectedBoardId, starredBoardIds, on
     function onSelectBoard(boardId) {
         navigate(`/b/${boardId}`, { replace: true });
     }
+    useEffect(()=>{
+        login()
+    },[])
 
     return (
         <aside className="workspace-menu">

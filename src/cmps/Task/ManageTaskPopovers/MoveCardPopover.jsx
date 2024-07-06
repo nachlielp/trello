@@ -7,7 +7,7 @@ import { moveCard, setBoards } from "../../../store/workspace.actions";
 import { loadBoard } from "../../../store/board.actions";
 import { useNavigate } from "react-router";
 
-export function MoveCardPopover({ anchorEl, taskId }) {
+export function MoveCardPopover({ anchorEl, taskId, onCloseTask }) {
   //selectors
   const boards = useSelector((state) => state.workspaceModule.boards);
   const board = useSelector((state) => state.boardModule.board);
@@ -42,43 +42,46 @@ export function MoveCardPopover({ anchorEl, taskId }) {
     const selectedGroup = selectedBoard?.groups?.find(
       (g) => g.id === selectedGroupId
     );
-    
+
     return selectedGroup?.tasks?.map((t) => t.pos).sort((a, b) => a - b) || [];
   }, [selectedBoardId, selectedGroupId, boards]);
-  
+  const navigate = useNavigate();
+
   useEffect(() => {
-    //TODO notice 
     setBoards();
     loadBoard(selectedBoardId);
-    if (newPositions.length > 0) {
-      setSelectedPosition(newPositions[0]);
-    } else {
-      console.log("lol")
-      setPositions([65536]);
-      setSelectedPosition(65536);
-    }
   }, []);
-  
+
   // useEffect position
   useEffect(() => {
-      if (selectedBoardId && boards.length > 0) {
-          setPositions([...newPositions, Math.max(...newPositions) + 12111]);
-          if (task.idGroup === selectedGroupId && newPositions.length > 0) {
-              setSelectedPosition(task.pos);
-            } else {
-                setSelectedPosition(newPositions[0] || 65536); // Default position if no tasks
-              }
-            }
-          }, [
-              selectedBoardId,
-              selectedGroupId,
-              boards,
-              newPositions,
-              task.idGroup,
-              task.pos,
-            ]);
-            
-  // use effect board
+    if (selectedBoardId && boards.length > 0) {
+      if (
+        selectedBoardId !== task.idBoard ||
+        selectedGroupId !== task.idGroup
+      ) {
+        setPositions([...newPositions, Math.max(...newPositions) + 12111]);
+      } else {
+        setPositions(newPositions);
+      }
+      if (task.idGroup === selectedGroupId) {
+        setSelectedPosition(task.pos);
+      } else if (newPositions.length > 0) {
+        setSelectedPosition(newPositions[0]);
+      } else {
+        setPositions([65536]);
+        setSelectedPosition(newPositions[0] || 65536); // Default position if no tasks
+      }
+    }
+  }, [
+    selectedBoardId,
+    selectedGroupId,
+    boards,
+    newPositions,
+    task.idGroup,
+    task.pos,
+  ]);
+
+  // use effect board & groups
   useEffect(() => {
     const selectedBoard = boards.find((b) => b.id === selectedBoardId);
     if (selectedBoard) {
@@ -88,6 +91,11 @@ export function MoveCardPopover({ anchorEl, taskId }) {
           id: group.id,
         }))
       );
+      if (selectedBoard.id !== task.idBoard) {
+        setSelectedGroupId(selectedBoard.groups[0].id);
+      } else {
+        setSelectedGroupId(task.idGroup);
+      }
     }
   }, [selectedBoardId, boards]);
 
@@ -99,15 +107,15 @@ export function MoveCardPopover({ anchorEl, taskId }) {
   }
 
   function onSelectBoard(board) {
-    setSelectedBoardId(board.id);
+    board && setSelectedBoardId(board?.id);
   }
 
   function onSelectGroup(group) {
-    setSelectedGroupId(group.id);
+    group && setSelectedGroupId(group.id);
   }
 
   function onSelectPosition(item) {
-    setSelectedPosition(item?.id);
+    item && setSelectedPosition(item.id);
   }
 
   async function onMoveClick() {
@@ -119,11 +127,16 @@ export function MoveCardPopover({ anchorEl, taskId }) {
     };
 
     if (task.pos > selectedPosition) {
-      newPosDetails = { ...newPosDetails, pos: selectedPosition - 12111 };
+      newPosDetails = { ...newPosDetails, pos: selectedPosition };
     }
-    setIsOpen(false);
     await moveCard(newPosDetails);
-    loadBoard(selectedBoardId);
+    setIsOpen(false);
+    if (newPosDetails.task.idBoard !== newPosDetails.idBoard) {
+      navigate(`/b/${task.idBoard}`, { replace: true });
+      onCloseTask();
+    } else {
+      loadBoard(task?.idBoard);
+    }
   }
 
   return (
@@ -152,7 +165,7 @@ export function MoveCardPopover({ anchorEl, taskId }) {
                   id: board.id,
                 }))}
                 onSelect={onSelectBoard}
-                currentSelect={selectedBoardId}
+                value={selectedBoardId}
               />
             </section>
             <section className="list-select">
@@ -161,14 +174,14 @@ export function MoveCardPopover({ anchorEl, taskId }) {
                 <CustomSelect
                   options={selectedGroups}
                   onSelect={onSelectGroup}
-                  currentSelect={selectedGroupId}
+                  value={selectedGroupId}
                 />
               </span>
               <span>
                 <p>Position</p>
                 <CustomSelect
                   options={generatePositionOptions(positions)}
-                  currentSelect={selectedPosition}
+                  value={selectedPosition}
                   onSelect={onSelectPosition}
                 />
               </span>

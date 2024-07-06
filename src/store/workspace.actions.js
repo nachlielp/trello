@@ -5,7 +5,6 @@ import { store } from "./store";
 import { EDIT_BOARD, SET_BOARDS, ADD_BOARD } from "./workspace.reducer";
 
 export async function setBoards() {
-  console.log("setBoards");
   const boards = await workspaceService.getAllBoards();
   store.dispatch({ type: SET_BOARDS, boards });
 }
@@ -33,7 +32,7 @@ export async function moveCard(details) {
     groups: updatedGroups,
   };
   // store.dispatch({ type: EDIT_BOARD, board: updatedOldBoard });
-  console.log(updatedOldBoard)
+  console.log(updatedOldBoard);
   await boardService.save(updatedOldBoard);
 
   const findNewBoard = await workspaceService.getAllBoards();
