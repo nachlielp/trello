@@ -76,7 +76,9 @@ export function BoardIndex() {
   }
 
   async function onEditTask(task) {
-    navigate(`/b/${board.id}`, { replace: true });
+    if (task.closed) {
+      navigate(`/b/${board.id}`, { replace: true });
+    }
 
     const res = await editTask(task);
   }
