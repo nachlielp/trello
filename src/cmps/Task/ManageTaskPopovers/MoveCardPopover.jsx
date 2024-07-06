@@ -55,7 +55,14 @@ export function MoveCardPopover({ anchorEl, taskId, onCloseTask }) {
   // useEffect position
   useEffect(() => {
     if (selectedBoardId && boards.length > 0) {
-      setPositions([...newPositions, Math.max(...newPositions) + 12111]);
+      if (
+        selectedBoardId !== task.idBoard ||
+        selectedGroupId !== task.idGroup
+      ) {
+        setPositions([...newPositions, Math.max(...newPositions) + 12111]);
+      } else {
+        setPositions(newPositions);
+      }
       if (task.idGroup === selectedGroupId) {
         setSelectedPosition(task.pos);
       } else if (newPositions.length > 0) {
@@ -120,7 +127,7 @@ export function MoveCardPopover({ anchorEl, taskId, onCloseTask }) {
     };
 
     if (task.pos > selectedPosition) {
-      newPosDetails = { ...newPosDetails, pos: selectedPosition - 12111 };
+      newPosDetails = { ...newPosDetails, pos: selectedPosition };
     }
     await moveCard(newPosDetails);
     setIsOpen(false);
