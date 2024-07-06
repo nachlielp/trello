@@ -56,10 +56,13 @@ export function AddBoardPopover({ onAddBoard }) {
   const [isOpen, setIsOpen] = useState(false);
   const [boardName, setBoardName] = useState("");
   const [focused, setFocused] = useState(false);
+  const [selectedBg, setSelectedBg] = useState(utilService.getBgImgs()[0]);
+  const [selectedBgUrl, setSelectedBgUrl] = useState(utilService.getBgImgs()[0].backgroundImageScaled[2]?.url);
 
-  function onClose() {
+
+  function onOpenChange(e) {
     setBoardName("");
-    setIsOpen(false);
+    setIsOpen(e);
   }
 
   function handleFocus() {
@@ -67,14 +70,25 @@ export function AddBoardPopover({ onAddBoard }) {
     setFocused(true);
   }
 
+  function onBgSelect(background) {
+    const bgImg = utilService.getBgImgs().find(bg => bg.background === background);
+    const bgColor = utilService.getBgColors().find(bg => bg.background === background);
+    setSelectedBg(bgImg || bgColor);
+    if (bgImg) {
+      setSelectedBgUrl(bgImg.backgroundImageScaled[2]?.url);
+    } else if (bgColor) {
+      setSelectedBgUrl(bgColor.backgroundImage);
+    }
+  }
+
   async function onCreateBoard() {
     if (boardName === "") {
       return;
     }
-    const newBoard = await utilService.createNewBoard({ name: boardName });
+    const newBoard = await utilService.createNewBoard({ name: boardName, backgroundData: selectedBg });
     onAddBoard(newBoard);
-
-    onClose();
+    setBoardName("");
+    onOpenChange(false);
   }
 
   return (
@@ -83,18 +97,44 @@ export function AddBoardPopover({ onAddBoard }) {
       trigger="click"
       placement="bottomRight"
       open={isOpen}
-      close={onClose}
-      onOpenChange={setIsOpen}
+      onOpenChange={onOpenChange}
       arrow={false}
       content={
         <section className="add-board-popover-content">
-          <ManageTaskPopoverHeader title="Create board" close={onClose} />
+          <ManageTaskPopoverHeader title="Create board" close={() => onOpenChange(false)} />
           <hr className="header-hr" />
+
+          <article className="selected-bg-wrapper">
+            <article
+              className="selected-bg"
+              style={{
+                backgroundImage: selectedBgUrl ? `url(${selectedBgUrl})` : 'none',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center'
+              }}
+            >
+              <ReactSVG src='/img/workspace/board-bg-skeleton.svg' wrapper="span" />
+            </article>
+          </article>
+          <p className="title">Background</p>
+          <article className="bg-img-options">
+            {utilService.getBgImgs().map((bg) => (
+              <div key={bg.background} className="bg-img-option" style={{ backgroundImage: `url(${bg.backgroundImageScaled[0].url})` }} onClick={() => onBgSelect(bg.background)}></div>
+            ))}
+          </article>
+          <article className="bg-color-options">
+            {utilService.getBgColors().map((bg) => (
+              <div key={bg.background} className="bg-color-option" style={{ backgroundImage: `url(${bg.backgroundImage})` }} onClick={() => onBgSelect(bg.background)}></div>
+            ))}
+          </article>
+
+
           <p className="title">Board title*</p>
           <Input
             className="board-name-input"
             onFocus={handleFocus}
             onChange={(e) => setBoardName(e.target.value)}
+            value={boardName}
           />
           {focused && boardName === "" && (
             <p className="add-board-popover-desc">

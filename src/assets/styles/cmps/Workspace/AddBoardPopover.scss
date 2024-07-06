@@ -8,7 +8,7 @@
         width: 100%;
         border: none;
         border-bottom: 1px solid var(--ds-border-subtle, #e2e4e6);
-        margin: 16px 0 16px 0;
+        margin: 16px 0 0 0;
     }
 
     .title {
@@ -18,6 +18,67 @@
         line-height: 16px;
         margin: 12px 0 2px;
     }
+
+    .selected-bg-wrapper {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 16px;
+
+        .selected-bg {
+            width: 200px;
+            height: 120px;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .injected-svg {
+                display: flex;
+                align-self: center;
+                justify-self: center;
+                width: 186px;
+                height: 103px;
+                border-radius: 3px;
+                background: none;
+                background-position: center center;
+                background-size: cover;
+            }
+        }
+    }
+
+    .bg-img-options {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        .bg-img-option {
+            width: 60px;
+            height: 40px;
+            border-radius: 3px;
+            margin-right: 4px;
+        }
+    }
+
+
+    .bg-color-options {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        .bg-color-option {
+            width: 40px;
+            height: 32px;
+            border-radius: 3px;
+            margin-top: 8px;
+
+        }
+    }
+
+
 
     .board-name-input {
         transition-property: background-color, border-color, box-shadow;
