@@ -8,47 +8,26 @@ import { ReactSVG } from "react-svg";
 import peopleIcon from "/img/board-index/headerImgs/peopleIcon.svg";
 import privateIcon from "/img/board-index/headerImgs/privateIcon.svg";
 import publicIcon from "/img/board-index/headerImgs/publicIcon.svg";
-import permissionIcon from "/img/board-index/headerImgs/permissionIcon.svg";
-import { updateBoard } from "../../store/board.actions";
+import { VisilityOptions } from "./VisilityOptions";
 
 export function VisibilityButton() {
   const [openListMenu, setOpenListMenu] = useState(false);
-  const [hasAcces, setHasAcces] = useState(false);
-  const currentMember = useSelector((state) =>
-    state.boardModule.members.find(
-      (member) => member.id === "666fe4efda8643029b6710f3"
-    )
+  const [svg, setSvg] = useState(privateIcon);
+  const permissionLevel = useSelector(
+    (state) => state.boardModule.board.prefs.permissionLevel
   );
-  const board = useSelector((state) => state.boardModule.board);
-//TODO make custom component
+
+  const icon = [
+    { permission: "private", svg: privateIcon },
+    { permission: "org", svg: peopleIcon },
+    { permission: "public", svg: publicIcon },
+  ];
+
   useEffect(() => {
-    if (currentMember?.permissionStatus === "admin") {
-      setHasAcces(true);
-    } else {
-      setHasAcces(false);
-    }
-  }, [currentMember]);
+    const currentSvg = icon.find((i) => i.permission === permissionLevel);
+    setSvg(currentSvg.svg);
+  }, [permissionLevel]);
 
-  function permissionCheck(permission) {
-    if (permission === board.prefs?.permissionLevel) {
-      return (
-        <ReactSVG
-          src={permissionIcon}
-          wrapper="span"
-          className="permission-icon"
-        />
-      );
-    }
-    return "";
-  }
-
-  function onPermissionClick(value) {
-    const newBoard = board;
-    board.prefs.permissionLevel = value;
-    updateBoard(newBoard);
-    setOpenListMenu(false);
-  }
-  // console.log(hasAcces);
   return (
     <Popover
       className="list-actions-menu-popover"
@@ -66,73 +45,7 @@ export function VisibilityButton() {
             </span>
           </header>
           <div className="menu-body">
-            <nav className="popover-nav">
-              <ul>
-                <li>
-                  <button
-                    className="private-btn btn"
-                    disabled={!hasAcces}
-                    onClick={() => onPermissionClick("private")}
-                  >
-                    <span className="private-header">
-                      <ReactSVG
-                        src={privateIcon}
-                        wrapper="span"
-                        className="icon"
-                      />
-                      Private
-                      {permissionCheck("private")}
-                    </span>
-                    <div>
-                      Only board members can see this board. Workspace admins
-                      can close the board or remove members.
-                    </div>
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className="workspace-btn btn"
-                    disabled={!hasAcces}
-                    onClick={() => onPermissionClick("org")}
-                  >
-                    <span className="workspace-header">
-                      <ReactSVG
-                        src={peopleIcon}
-                        wrapper="span"
-                        className="icon"
-                      />
-                      Workspace
-                      {permissionCheck("org")}
-                    </span>
-                    <div className="workspace-body">
-                      All members of the Trello Workspace Workspace can see and
-                      edit this board.
-                    </div>
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className="public-btn btn"
-                    disabled={!hasAcces}
-                    onClick={() => onPermissionClick("public")}
-                  >
-                    <span className="public-header">
-                      <ReactSVG
-                        src={publicIcon}
-                        wrapper="span"
-                        className="icon"
-                      />
-                      Public
-                      {permissionCheck("public")}
-                    </span>
-                    <div className="public-body">
-                      Anyone on the internet can see this board. Only board
-                      members can edit.
-                    </div>
-                  </button>
-                </li>
-              </ul>
-            </nav>
+            <VisilityOptions setOpenListMenu={setOpenListMenu} />
           </div>
         </section>
       }
@@ -141,7 +54,7 @@ export function VisibilityButton() {
         className="visibility-btn"
         onClick={() => setOpenListMenu(!openListMenu)}
       >
-        <ReactSVG src={peopleIcon} wrapper="span" />
+        <ReactSVG src={svg || null} wrapper="span" />
       </button>
     </Popover>
   );
