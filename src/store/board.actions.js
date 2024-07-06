@@ -254,7 +254,6 @@ export async function sortGroup(boardId, groupId, sortBy, sortOrder) {
   newGroup.tasks.forEach((task, index) => {
     task.pos = STARTING_POS * (1 + index);
   });
-  console.log("newGroup", newGroup);
   const newBoard = {
     ...board,
     groups: board.groups.map((g) =>
