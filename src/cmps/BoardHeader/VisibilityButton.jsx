@@ -8,7 +8,7 @@ import { ReactSVG } from "react-svg";
 import peopleIcon from "/img/board-index/headerImgs/peopleIcon.svg";
 import privateIcon from "/img/board-index/headerImgs/privateIcon.svg";
 import publicIcon from "/img/board-index/headerImgs/publicIcon.svg";
-import { VisilityOptions } from "./VisilityOptions";
+import { VisibilityOptions } from "./VisibilityOptions";
 
 export function VisibilityButton() {
   const [openListMenu, setOpenListMenu] = useState(false);
@@ -47,7 +47,7 @@ export function VisibilityButton() {
             </span>
           </header>
           <div className="menu-body">
-            <VisilityOptions setOpenListMenu={setOpenListMenu} />
+            <VisibilityOptions setOpenListMenu={setOpenListMenu} />
           </div>
         </section>
       }

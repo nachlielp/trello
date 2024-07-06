@@ -7,7 +7,7 @@ import peopleIcon from "/img/board-index/headerImgs/peopleIcon.svg";
 import permissionIcon from "/img/board-index/headerImgs/permissionIcon.svg";
 import { updateBoard } from "../../store/board.actions";
 
-export function VisilityOptions({ setOpenListMenu, setPermission }) {
+export function VisibilityOptions({ setOpenListMenu, setPermission }) {
   const [hasAcces, setHasAcces] = useState(false);
   const currentMember = useSelector((state) =>
     state.boardModule.board.members.find(
