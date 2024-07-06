@@ -28,7 +28,7 @@ export function TaskDetailsAddToCard({ task, editTask, editLabel }) {
             <SvgButton
               src={defaultProfile}
               className="floating-button"
-              label="Change members"
+              label="Members"
             />
           }
           editTask={editTask}
@@ -42,7 +42,7 @@ export function TaskDetailsAddToCard({ task, editTask, editLabel }) {
             <SvgButton
               src={labelIcon}
               className="floating-button"
-              label="Edit labels"
+              label="Labels"
             />
           }
           taskLabels={task?.labels}
