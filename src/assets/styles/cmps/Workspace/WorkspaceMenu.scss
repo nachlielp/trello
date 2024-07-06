@@ -2,7 +2,7 @@
     .workspace-sidebar-closed {
         width: 16px;
         height: 100%;
-        background-color: var(--color-bg-primary);
+        background-color: hsla(358, 23%, 26.5%, 0.9);
         position: relative;
 
         .open-btn {
@@ -18,13 +18,18 @@
             padding-top: 4px;
             border: 1px solid var(--dynamic-text-transparent, hsla(218, 54%, 19.6%, 0.16));
             border-radius: 50%;
-            background-color: var(--ds-surface-overlay, #fff);
+            background-color: hsla(358, 23%, 26.5%, 0.9);
             width: 24px;
             height: 24px;
 
             .injected-svg {
+                color: var(--dynamic-icon);
                 width: 16px;
                 height: 16px;
+
+                span {
+                    color: var(--dynamic-icon);
+                }
             }
         }
     }
@@ -34,7 +39,10 @@
         flex-direction: column;
         width: 260px;
         height: 100%;
-        background-color: hsla(358, 23%, 26.5%, 0.9); // Inherit the background color from the parent component
+        backdrop-filter: blur(6px);
+        background-color: hsla(124, 34.1%, 17.3%, 0.9);
+        // background-color: var(--dynamic-background-transparent, var(--ds-surface, #ffffff));
+
 
         .workspace-sidebar-open-header {
             width: 100%;
@@ -149,12 +157,12 @@
 
 
                     &:hover {
-                        background-color: var(--ds-background-neutral-subtle-hovered);
+                        background-color: var(--dynamic-nav-button-background-color-hovered, hsla(0, 0%, 100%, 0.16));
                     }
 
-                    &:active {
-                        background-color: var(--ds-background-neutral-subtle-active);
-                    }
+                    // &:active {
+                    //     background-color: var(--ds-background-neutral-subtle-active);
+                    // }
 
                     .option-icon {
                         background-color: var(--color-bg-primary);
@@ -259,11 +267,11 @@
                     height: 32px;
 
                     &:hover {
-                        background-color: var(--ds-background-neutral-subtle-hovered);
+                        background-color: var(--dynamic-nav-button-background-color-hovered, hsla(0, 0%, 100%, 0.16));
                     }
 
                     &.active-board {
-                        background-color: #b9b7b4;
+                        background-color: var(--dynamic-nav-button-background-color-pressed, hsla(0, 0%, 100%, 0.3));
                     }
 
                     .board-cover-img {
@@ -288,6 +296,7 @@
                         align-items: center;
                         justify-content: flex-start;
                         margin-left: auto;
+                        margin-right: 4px;
 
                         .more-btn {
                             border: none;
