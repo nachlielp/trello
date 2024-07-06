@@ -36,6 +36,10 @@ export function workspaceReducer(state = initialState, action) {
       };
       break;
 
+    case ADD_BOARD:
+      newState = { ...state, boards: [...state.boards, action.board] };
+      break;
+
     default:
       return state;
   }
