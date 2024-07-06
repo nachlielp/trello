@@ -324,6 +324,12 @@
                             color: var(--dynamic-icon);
                             // Darker color for the ellipsis icon
                         }
+
+                        .star-board-btn {
+                            span {
+                                color: var(--dynamic-icon);
+                            }
+                        }
                     }
                 }
             }
