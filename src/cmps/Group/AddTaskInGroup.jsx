@@ -79,7 +79,10 @@ export function AddTaskInGroup({ groupId, closeAddTask, addTask, addToTop }) {
     }
 
     return (
-        <section className={`add-card-in-list-footer ${addToTop ? 'first-task' : ''} ${!addToTop ? 'last-task' : ''}`}>
+        <section
+            className={`add-card-in-list-footer ${addToTop ? 'first-task' : ''} ${!addToTop ? 'last-task' : ''}`}
+            onBlur={closeAddTask}
+        >
             <TextArea
                 ref={textAreaRef}
                 className="footer-input"
