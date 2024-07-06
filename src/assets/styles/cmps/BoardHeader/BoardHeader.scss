@@ -44,15 +44,19 @@
       transition-timing-function: ease;
       border-radius: 3px;
 
-      svg {
-        width: 16px;
-        height: 16px;
-        fill: white;
+      span {
+        font-size: 16px;
+        color: white;
       }
 
       &:hover {
         background: rgba(166, 197, 226, 0.16);
         font-size: 20px;
+      }
+      &.starred {
+        span {
+          color: #e2b203;
+        }
       }
     }
 
@@ -77,12 +81,12 @@
       transition-timing-function: ease;
       border-radius: 3px;
 
-      >.board-icon {
+      > .board-icon {
         font-size: 16px;
         margin: 0 10px 0 0;
       }
 
-      >.arow {
+      > .arow {
         font-size: 16px;
         margin-left: 8px;
       }
