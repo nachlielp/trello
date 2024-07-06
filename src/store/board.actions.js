@@ -38,21 +38,17 @@ import {
 //   }
 // }
 
-
 //TODO add apdatedAt to every board action
 export async function loadBoard(boardId) {
-
   const boardData = await boardService.getById(boardId);
   store.dispatch({ type: SET_BOARD, board: boardData });
 
-  const memberData = await memberService.getById(boardId);
-  store.dispatch({ type: SET_MEMBERS, members: memberData.members });
 }
 
 export async function loadBoardByTaskId(taskId) {
   const board = await boardService.getByTaskId(taskId);
   store.dispatch({ type: SET_BOARD, board: board });
-  return board.id
+  return board.id;
 }
 
 export async function setBoard(board) {
@@ -80,6 +76,7 @@ export async function addTask(task) {
         return g;
       }),
     };
+    console.log(newBoard);
     await boardService.save(newBoard);
     return newTask;
   } catch (err) {
@@ -441,5 +438,4 @@ async function unitTestActions() {
     title: "Board-Good",
   });
   await removeBoard("m1oC7");
-
 }

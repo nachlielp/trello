@@ -10,7 +10,7 @@ import { updateBoard } from "../../store/board.actions";
 export function VisilityOptions({ setOpenListMenu, setPermission }) {
   const [hasAcces, setHasAcces] = useState(false);
   const currentMember = useSelector((state) =>
-    state.boardModule.members.find(
+    state.boardModule.board.members.find(
       (member) => member.id === "666fe4efda8643029b6710f3"
     )
   );

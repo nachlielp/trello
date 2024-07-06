@@ -14,7 +14,7 @@ export function VisibilityButton() {
   const [openListMenu, setOpenListMenu] = useState(false);
   const [svg, setSvg] = useState(privateIcon);
   const permissionLevel = useSelector(
-    (state) => state.boardModule.board.prefs.permissionLevel
+    (state) => state.boardModule.board.prefs?.permissionLevel
   );
 
   const icon = [
@@ -25,7 +25,9 @@ export function VisibilityButton() {
 
   useEffect(() => {
     const currentSvg = icon.find((i) => i.permission === permissionLevel);
-    setSvg(currentSvg.svg);
+    if (currentSvg) {
+      setSvg(currentSvg.svg);
+    }
   }, [permissionLevel]);
 
   return (
