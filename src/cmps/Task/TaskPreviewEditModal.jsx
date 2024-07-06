@@ -17,6 +17,7 @@ import { ManageMembersPopover } from './ManageTaskPopovers/ManageMembersPopover'
 import { ManageLabelsPopover } from './ManageTaskPopovers/ManageLabelsPopover';
 import { ManageCoverPopover } from './ManageTaskPopovers/ManageCoverPopover';
 import { useSelector } from 'react-redux';
+import { MoveCardPopover } from './ManageTaskPopovers/MoveCardPopover';
 
 const { TextArea } = Input;
 
@@ -112,6 +113,7 @@ export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, openPr
         },
         // { label: 'Edit date', icon: timeIcon, onClick: () => console.log('Add to Y'), cover: false },
         // { label: 'Move', icon: moveIcon, onClick: () => console.log('Add to Y'), cover: true },
+        {cover:true, popover: <MoveCardPopover taskId={task.id} onCloseTask={()=>openPreviewModal(false)} closeAfter={true} anchorEl={<SvgButton src={moveIcon} label="Move" className="floating-button" />}/>},
         // { label: 'Copy', icon: copyIcon, onClick: () => console.log('Add to Y'), cover: true },
         { popover: <SvgButton src={archiveIcon} className="floating-button" label="Archive" onClick={() => editTask({ ...task, closed: true })} />, cover: true },
     ];
