@@ -36,6 +36,7 @@ function remove(userId) {
 }
 
 async function updateUser({ id, ...updatedUser }) {
+  console.log("service.updatedUser", updatedUser);
   let user = await storageService.get(USERS_KEY, id);
   user = { ...updatedUser, id };
   await storageService.put(USERS_KEY, user);

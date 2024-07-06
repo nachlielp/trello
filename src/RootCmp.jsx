@@ -1,8 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router";
-import { HomePage } from "./pages/HomePage.jsx";
 import { BoardIndex } from "./pages/BoardIndex.jsx";
-import { Workspace } from "./pages/Wrokspace.jsx";
+import { Workspace } from "./pages/Workspace.jsx";
 import { UserProfile } from "./pages/UserProfile.jsx";
 
 export function RootCmp() {

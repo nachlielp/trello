@@ -20,7 +20,7 @@ export async function loadUsers() {
 
 export async function editUser(user) {
   try {
-    store.dispatch({ type: EDIT_USERS, user });
+    store.dispatch({ type: EDIT_USER, user });
     await userService.updateUser(user);
   } catch (err) {
     console.log("UserActions: err in editUser", err);
