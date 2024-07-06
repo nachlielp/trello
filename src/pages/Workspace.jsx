@@ -10,6 +10,8 @@ import { useSelector } from "react-redux";
 import { setBoards } from "../store/workspace.actions"
 export function Workspace() {
     const boardsInfo = useSelector((state) => state.workspaceModule.boards).map((b) => ({ id: b.id, name: b.name, closed: b.closed, coverImg: b.prefs.backgroundImage }));
+    const boardBgPrefs = useSelector((state) => state.boardModule.board)?.prefs;
+
     useEffect(() => {
         setBoards();
         login();
@@ -56,12 +58,14 @@ export function Workspace() {
         navigate(`/b/${board.id}`);
     }
     return (
-        <section className="workspace">
+        <section className="workspace" style={{
+            backgroundImage: boardBgPrefs?.backgroundImage ? `url(${boardBgPrefs.backgroundImage})` : 'none',
+        }}>
             {/* <WorkspaceHeader /> */}
 
             {user && starredBoardIds ? (
                 <section className="workspace-content">
-                    <WorkspaceMenu boardsInfo={boardsInfo} selectedBoardId={selectedBoardId} starredBoardIds={starredBoardIds} onStarClick={onStarClick} onAddBoard={onAddBoard} />
+                    <WorkspaceMenu colorTheme={boardBgPrefs?.backgroundBrightness} boardsInfo={boardsInfo} selectedBoardId={selectedBoardId} starredBoardIds={starredBoardIds} onStarClick={onStarClick} onAddBoard={onAddBoard} />
                     <Outlet />
                 </section>
             ) : (

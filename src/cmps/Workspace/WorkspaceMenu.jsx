@@ -6,10 +6,19 @@ import { StarBoardBtn } from "../CustomCpms/StarBoardBtn";
 import { Button } from "antd";
 import { AddBoardPopover } from "./AddBoardPopover";
 
-export function WorkspaceMenu({ boardsInfo, selectedBoardId, starredBoardIds, onStarClick, onAddBoard }) {
+export function WorkspaceMenu({ boardsInfo, selectedBoardId, starredBoardIds, onStarClick, onAddBoard, colorTheme }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [hoveredBoardId, setHoveredBoardId] = useState(null);
 
+    useEffect(() => {
+        const root = document.documentElement;
+        const dynamicIconColor = colorTheme === "dark" ? "#fff" : "#42526E";
+        const dynamicTextColor = colorTheme === "dark" ? "#fff" : "#172B4D";
+
+        root.style.setProperty('--dynamic-icon', dynamicIconColor);
+        root.style.setProperty('--dynamic-text', dynamicTextColor);
+    }, [colorTheme]);
+    // const bgTextColor = colorTheme === "dark" ? "#fff" : "#000";
     const navigate = useNavigate();
 
     function onSelectBoard(boardId) {

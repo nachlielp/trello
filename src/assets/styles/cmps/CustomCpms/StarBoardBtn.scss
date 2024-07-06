@@ -3,7 +3,8 @@
     height: 32px;
     width: 32px;
     background: none;
-    color: #41526e;
+    // color: #41526e;
+    color: var(--dynamic-icon);
     border: none;
     font-size: 14px;
     font-weight: 500px;
@@ -19,7 +20,7 @@
     svg {
         width: 16px;
         height: 16px;
-        fill: #41526e;
+        // fill: #41526e;
     }
 
     &:hover {

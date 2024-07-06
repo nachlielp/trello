@@ -106,12 +106,7 @@ export function BoardIndex() {
   return (
     board ? (
       <section className="board-index">
-        <div
-          className="bg"
-          style={{
-            backgroundImage: `url(${board.prefs?.backgroundImage})`,
-          }}
-        >
+        <div className="bg">
           {board && <BoardHeader board={board} starToggle={onStarToggle} starredBoardIds={user?.starredBoardIds} />}
           <main className="board-groups" ref={scrollContainerRef} {...handlers}>
             {sortedGroups &&
