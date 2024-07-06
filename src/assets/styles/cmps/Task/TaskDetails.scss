@@ -56,6 +56,11 @@
           justify-content: center;
           padding: 4px 8px;
           margin-right: 12px;
+          background-color: transparent;
+
+          &:hover {
+            background-color: var(--ds-background-neutral-hovered, #091e4224);
+          }
 
           .injected-svg {
             width: 16px;
