@@ -23,18 +23,20 @@ import { AddGroupBtn } from "../cmps/Group/AddGroupBtn";
 import { TaskDetailsModal } from "../cmps/Task/TaskDetailsModal/TaskDetailsModal.jsx";
 import { BoardHeader } from "../cmps/BoardHeader/BoardHeader.jsx";
 import useScrollByGrab from "../customHooks/useScrollByGrab.js";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 export function BoardIndex() {
   const [selectedTaskId, setSelectedTaskId] = useState(null);
   const board = useSelector((state) => state.boardModule.board);
   const user = useSelector((state) => state.userModule.user);
+  const navigate = useNavigate();
 
   const params = useParams();
 
   useEffect(() => {
     if (params.boardId) {
       loadBoard(params.boardId);
+      setSelectedTaskId(null);
     }
     if (params.cardId) {
       loadBoardByTaskId(params.cardId);
@@ -74,6 +76,8 @@ export function BoardIndex() {
   }
 
   async function onEditTask(task) {
+    navigate(`/b/${board.id}`, { replace: true });
+
     const res = await editTask(task);
   }
 

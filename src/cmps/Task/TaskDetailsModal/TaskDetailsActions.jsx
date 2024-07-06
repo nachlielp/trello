@@ -13,7 +13,6 @@ export function TaskDetailsActions({ task, editTask }) {
 
   function onArchiveTask() {
     editTask({ ...task, closed: true });
-    navigate('/')
   }
 
   const actions = [
