@@ -52,7 +52,6 @@ export function TaskPreviewCover({ task, editTask, editLabel }) {
       style={{ ...taskColorCoverStyle, ...taskBackgroundCoverImage }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      onClick={onClick}
     >
       <TaskPreviewEditModal
         task={task}
@@ -65,7 +64,7 @@ export function TaskPreviewCover({ task, editTask, editLabel }) {
       />
       <section
         className={`group-task-content ${taskCover.idUploadedBackground ? "image-cover" : ""}`}
-        onClick={() => navigate(`/c/${task.id}`, { replace: true })}
+        onClick={onClick}
       >
         <span className="group-task-content-title">{task.name}</span>
       </section>
