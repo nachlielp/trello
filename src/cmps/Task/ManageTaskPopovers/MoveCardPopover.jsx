@@ -13,7 +13,7 @@ export function MoveCardPopover({ anchorEl, taskId, onCloseTask }) {
   const board = useSelector((state) => state.boardModule.board);
   const group = useSelector((state) =>
     state.boardModule.board.groups?.find((g) =>
-      g.tasks.find((t) => t.id === taskId)
+      g.tasks?.find((t) => t.id === taskId)
     )
   );
   const task = useSelector((state) =>
