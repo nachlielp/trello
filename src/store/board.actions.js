@@ -38,7 +38,6 @@ import {
 //   }
 // }
 
-//TODO add apdatedAt to every board action
 export async function loadBoard(boardId) {
   const boardData = await boardService.getById(boardId);
   store.dispatch({
@@ -102,7 +101,7 @@ export async function addGroup(group, boardId) {
     const newBoard = {
       ...board,
       groups: [...board.groups, newGroup],
-      apdatedAt: new Date().getTime()
+      apdatedAt: new Date().getTime(),
     };
     await boardService.save(newBoard);
     return newGroup;
@@ -129,7 +128,7 @@ export async function archiveGroup(boardId, groupId) {
       }
       return g;
     }),
-    apdatedAt: new Date().getTime()
+    apdatedAt: new Date().getTime(),
   };
   await boardService.save(newBoard);
   return newBoard;
@@ -159,7 +158,11 @@ export async function copyGroup(boardId, group) {
 
   store.dispatch({ type: COPY_GROUP, groups: updatedGroups });
 
-  const newBoard = { ...board, groups: updatedGroups,apdatedAt: new Date().getTime() };
+  const newBoard = {
+    ...board,
+    groups: updatedGroups,
+    apdatedAt: new Date().getTime(),
+  };
   await boardService.save(newBoard);
 }
 
@@ -185,7 +188,11 @@ export async function moveAllCards(boardId, sourceGroupId, targetGroupId) {
     }
     return g;
   });
-  const newBoard = { ...board, groups: updatedGroups,apdatedAt: new Date().getTime() };
+  const newBoard = {
+    ...board,
+    groups: updatedGroups,
+    apdatedAt: new Date().getTime(),
+  };
   store.dispatch({
     type: MOVE_ALL_CARDS,
     sourceGroup: { ...sourceGroup, tasks: [] },
@@ -206,7 +213,7 @@ export async function archiveAllCards(boardId, groupId) {
   const newBoard = {
     ...board,
     groups: board.groups.map((g) => (g.id === groupId ? newGroup : g)),
-    apdatedAt: new Date().getTime()
+    apdatedAt: new Date().getTime(),
   };
   await boardService.save(newBoard);
 }
@@ -217,7 +224,7 @@ export async function editGroup(boardId, group) {
   const newBoard = {
     ...board,
     groups: board.groups.map((g) => (g.id === group.id ? group : g)),
-    apdatedAt: new Date().getTime()
+    apdatedAt: new Date().getTime(),
   };
   await boardService.save(newBoard);
   return group;
@@ -253,7 +260,7 @@ export async function sortGroup(boardId, groupId, sortBy, sortOrder) {
     groups: board.groups.map((g) =>
       g.id === groupId ? { ...g, sortBy, sortOrder } : g
     ),
-    apdatedAt: new Date().getTime()
+    apdatedAt: new Date().getTime(),
   };
   store.dispatch({ type: SORT_GROUP, group: newGroup });
   await boardService.save(newBoard);
@@ -269,7 +276,7 @@ export async function editTask(task) {
         ? { ...g, tasks: g.tasks.map((t) => (t.id === task.id ? task : t)) }
         : g
     ),
-    apdatedAt: new Date().getTime()
+    apdatedAt: new Date().getTime(),
   };
   console.log("newBoard", newBoard);
   await boardService.save(newBoard);
@@ -278,8 +285,11 @@ export async function editTask(task) {
 
 export async function updateBoard(newBoard) {
   try {
-    store.dispatch({ type: SET_BOARD, board: {...newBoard,apdatedAt: new Date().getTime()} });
-    await boardService.save({...newBoard,apdatedAt: new Date().getTime()});
+    store.dispatch({
+      type: SET_BOARD,
+      board: { ...newBoard, apdatedAt: new Date().getTime() },
+    });
+    await boardService.save({ ...newBoard, apdatedAt: new Date().getTime() });
   } catch (err) {
     console.log("Cannot add list", err);
     throw err;
@@ -309,7 +319,7 @@ export async function editLabel(boardId, label) {
     labelNames: board.labelNames.map((l) =>
       l.color === label.color ? label : l
     ),
-    apdatedAt: new Date().getTime()
+    apdatedAt: new Date().getTime(),
   };
   await boardService.save(newBoard);
   return newBoard;
