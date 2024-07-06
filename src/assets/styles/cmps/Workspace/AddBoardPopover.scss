@@ -1,3 +1,10 @@
+.ant-popover{
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--ds-shadow-overlay, 0 8px 12px #091e4226, 0 0 1px #091e424f);
+}
+
+
 .add-board-popover-content {
     width: 280px;
     padding: 0 12px 12px 12px;
