@@ -1,6 +1,7 @@
 import { DownOutlined } from "@ant-design/icons";
 import { Popover } from "antd";
 import { useState, useEffect, useRef } from "react";
+import { ReactSVG } from "react-svg";
 
 export function CustomSelect({
   options = [],
@@ -60,7 +61,7 @@ export function CustomSelect({
               onClick={() => onSelectOption(item)}
               className={selectedItem?.name === item?.name ? "selected" : ""}
             >
-              {item?.name}
+              {item?.element || item?.name}
             </button>
           ))}
         </div>
@@ -78,7 +79,8 @@ export function CustomSelect({
             onChange={onInput}
           />
         }
-        <DownOutlined className="arrow-down" />
+        {/* <DownOutlined className="arrow-down" /> */}
+        <ReactSVG className="arrow-down" src='/img/workspace/backIcon.svg' wrapper="span" />
       </div>
     </Popover>
   );

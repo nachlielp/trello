@@ -9,11 +9,13 @@
   appearance: none;
   display: flex;
   justify-content: space-between;
+
   &:hover {
     cursor: pointer;
     background-color: var(--ds-background-input-hovered, #ebecf0);
     border-color: var(--ds-border-input, #7a869a);
   }
+
   input {
     cursor: pointer;
     width: 100%;
@@ -21,22 +23,27 @@
     border: none;
     outline: none;
     color: var(--ds-text, #172b4d);
+
     &::placeholder {
       color: var(--ds-text, #172b4d);
     }
   }
+
+  .arrow-down {
+    rotate: 270deg;
+  }
 }
+
 .options {
   padding: 8px 0 8px 0;
   display: flex;
   flex-direction: column;
   background-color: var(--ds-surface-overlay, white);
-  box-shadow: var(
-    --ds-shadow-overlay,
-    0 0 0 1px hsl(0deg 0% 0% / 10%),
-    0 4px 11px hsl(0deg 0% 0% / 10%)
-  );
+  box-shadow: var(--ds-shadow-overlay,
+      0 0 0 1px hsl(0deg 0% 0% / 10%),
+      0 4px 11px hsl(0deg 0% 0% / 10%));
   border-radius: 4px;
+
   button {
     background: none;
     border: none;
@@ -46,10 +53,12 @@
     line-height: 20px;
     padding: 12px 24px;
     text-align: left;
+
     &:hover {
       box-shadow: inset 2px 0px 0px var(--ds-border-selected, #0052cc);
       background-color: var(--ds-background-neutral-subtle-hovered, #f4f5f7);
     }
+
     &.selected {
       color: var(--ds-text-selected, #0052cc);
       box-shadow: inset 2px 0px 0px var(--ds-border-selected, #0052cc);
