@@ -6,8 +6,7 @@ import { ReactSVG } from "react-svg";
 export function CustomSelect({
   options = [],
   onSelect,
-  value,
-  defaultValue = null,
+  value
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(options[0]);
@@ -74,7 +73,7 @@ export function CustomSelect({
       >
         {
           <input
-            placeholder={selectedItem?.name || defaultValue?.name}
+            placeholder={selectedItem?.name}
             value={searchValue}
             onChange={onInput}
           />
