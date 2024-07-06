@@ -7,7 +7,12 @@ import { moveCard, setBoards } from "../../../store/workspace.actions";
 import { loadBoard } from "../../../store/board.actions";
 import { useNavigate } from "react-router";
 
-export function MoveCardPopover({ anchorEl, taskId, onCloseTask }) {
+export function MoveCardPopover({
+  anchorEl,
+  taskId,
+  onCloseTask,
+  closeAfter = false,
+}) {
   //selectors
   const boards = useSelector((state) => state.workspaceModule.boards);
   const board = useSelector((state) => state.boardModule.board);
@@ -136,6 +141,9 @@ export function MoveCardPopover({ anchorEl, taskId, onCloseTask }) {
       onCloseTask();
     } else {
       loadBoard(task?.idBoard);
+    }
+    if (closeAfter) {
+      onCloseTask();
     }
   }
 

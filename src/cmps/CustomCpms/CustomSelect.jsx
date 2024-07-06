@@ -3,22 +3,23 @@ import { Popover } from "antd";
 import { useState, useEffect, useRef } from "react";
 import { ReactSVG } from "react-svg";
 
-export function CustomSelect({
-  options = [],
-  onSelect,
-  value,
-  defaultValue = null,
-}) {
+export function CustomSelect({ options = [], onSelect, value }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(options[0]);
   const [searchValue, setSearchValue] = useState("");
   const [filteredItems, setFilteredItems] = useState(options);
   const divRef = useRef(null);
+  const inputRef = useRef(null);
   useEffect(() => {
     onSelect(options.find((o) => o.id === value));
   }, [value]);
 
-
+  //when opens modal input focus
+  useEffect(() => {
+    if (isOpen) {
+      inputRef.current.focus();
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     setFilteredItems(options);
@@ -74,13 +75,18 @@ export function CustomSelect({
       >
         {
           <input
-            placeholder={selectedItem?.name || defaultValue?.name}
+            ref={inputRef}
+            placeholder={selectedItem?.name}
             value={searchValue}
             onChange={onInput}
           />
         }
         {/* <DownOutlined className="arrow-down" /> */}
-        <ReactSVG className="arrow-down" src='/img/workspace/backIcon.svg' wrapper="span" />
+        <ReactSVG
+          className="arrow-down"
+          src="/img/workspace/backIcon.svg"
+          wrapper="span"
+        />
       </div>
     </Popover>
   );

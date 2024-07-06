@@ -20,7 +20,7 @@ export function StarBoardBtn({ starredBoardIds, boardId, starClick }) {
     }
     return (
         <button
-            className="star-board-btn  "
+            className={`star-board-btn  ${isStarredBoard?'starred':""}`}
             onMouseOver={() => setHover(true)}
             onMouseOut={() => setHover(false)}
             onClick={onStarClick}

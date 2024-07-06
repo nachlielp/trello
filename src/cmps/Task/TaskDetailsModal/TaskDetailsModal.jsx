@@ -80,6 +80,8 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
         <div
           className={`details-header-img-cover ${task?.cover?.brightness === "dark" ? "dark" : "light"
             }`}
+          className={`details-header-img-cover ${task?.cover?.brightness === "dark" ? "dark" : "light"
+            }`}
           style={{
             backgroundColor: task?.cover?.bg,
           }}
@@ -111,8 +113,6 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
             <span className="task-group">
               in list{" "}
               <MoveCardPopover
-                group={group}
-                task={task}
                 taskId={taskId}
                 anchorEl={<a className="group-link">{group?.name}</a>}
                 onCloseTask={onCloseTask}
@@ -146,7 +146,7 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
             editTask={editTask}
             editLabel={editLabel}
           />
-          <TaskDetailsActions task={task} editTask={editTask} />
+          <TaskDetailsActions task={task} editTask={editTask} onClose={onClose} />
         </div>
       </div>
     </Modal>

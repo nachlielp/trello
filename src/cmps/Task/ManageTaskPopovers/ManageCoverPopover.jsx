@@ -33,7 +33,7 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
     }
 
     const isCover = task?.cover.color || task?.cover.scaled;
-    const backgroundColor = utilService.getColorHashByName(task?.cover.color)?.bgColor || '#dcdfe4';
+    const backgroundColor = utilService.getColorHashByName(task?.cover.color)?.bgColor || null;
 
     function onOpenPopover(e) {
         e.stopPropagation();
@@ -50,7 +50,7 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
             arrow={false}
             content={
                 <section className="manage-cover-content"
-                    style={{
+                    style={backgroundColor&&{
                         '--dynamic-bg-color': backgroundColor,
                         '--active-bg-color': backgroundColor,
                         '--non-active-bg-color': '#dcdfe4',
