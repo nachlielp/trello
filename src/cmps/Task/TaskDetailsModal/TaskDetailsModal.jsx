@@ -12,77 +12,45 @@ import coverIcon from "/img/board-index/detailsImgs/coverIcon.svg";
 import { ReactSVG } from "react-svg";
 import detailsIcon from "/img/board-index/detailsImgs/detailsIcon.svg";
 import defaultProfile from "/img/defaultProfile.svg";
-import { loadBoard } from "../../../store/board.actions";
-import { setBoards } from "../../../store/workspace.actions";
 import { utilService } from "../../../services/util.service";
-import { login } from "../../../store/user.actions";
 
 export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
-  const currentGroup = useSelector((state) =>
+  const group = useSelector((state) =>
     state.boardModule.board.groups?.find((g) =>
       g.tasks?.find((t) => t.id === taskId)
     )
   );
-  const currentTask = useSelector((state) =>
+  const task = useSelector((state) =>
     state.boardModule.board.groups
       ?.find((g) => g.tasks?.find((t) => t.id === taskId))
       ?.tasks.find((t) => t.id === taskId)
   );
-  const currentUser = useSelector((state) => state.userModule.user);
+  const user = useSelector((state) => state.userModule.user);
   const navigate = useNavigate();
 
-  const isMember = currentTask?.idMembers?.includes(currentUser?.id);
-  const hasMembers = currentTask?.idMembers?.length > 0;
-
-  // const currentCoveredColor = useSelector(
-  //   (state) =>
-  //     state.boardModule.board.groups
-  //   ?.find((g) => g.tasks?.find((t) => t.id === taskId))
-  //   ?.tasks.find((t) => t.id === taskId)?.cover.color
-  // );
-  // const isScaled = useSelector(
-  //   (state) =>
-  //     state.boardModule.board.groups
-  //   ?.find((g) => g.tasks?.find((t) => t.id === taskId))
-  //   ?.tasks.find((t) => t.id === taskId)?.cover?.scaled?.length
-  // );
-
-  //pitaron zmani
-  // const board = useSelector((state) => state.boardModule.board);
-  // useEffect(() => {
-  //   if (currentGroup == undefined) {
-  //     loadTestBoardFromStorage();
-  //   }
-
-  //   console.log("currentGroup", currentCoveredColor);
-  //   console.log("isScaled", isScaled);
-  // }, [currentCoveredColor, isScaled, board]);
-  /////////////////////////////////////////////////////////////////////
-
-  const isImgCover = currentTask?.cover?.idUploadedBackground;
-  const isColorCover = currentTask?.cover?.color;
-
-
-
+  const isMember = task?.idMembers?.includes(user?.id);
+  const hasMembers = task?.idMembers?.length > 0;
+  const isImgCover = task?.cover?.idUploadedBackground;
+  const isColorCover = task?.cover?.color;
 
   function onJoin() {
     editTask({
-      ...currentTask,
-      idMembers: [...currentTask.idMembers, currentUser.id],
+      ...task,
+      idMembers: [...task.idMembers, user.id],
     });
   }
 
   function onClose() {
-    console.log("On close. Task", currentTask);
+    console.log("On close. Task", task);
     onCloseTask();
-    navigate(`/b/${currentTask.idBoard}`, { replace: true });
+    navigate(`/b/${task.idBoard}`, { replace: true });
   }
 
   return (
     <Modal
       open
       onCancel={onClose}
-      loading={currentGroup == undefined}
+      loading={group == undefined}
       footer=""
       className="task-details"
       title={
@@ -90,8 +58,8 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
           <div
             className={`details-header-color-cover`}
             style={{
-              backgroundColor:
-                utilService.getColorHashByName(currentTask.cover.color).bgColor,
+              backgroundColor: utilService.getColorHashByName(task.cover.color)
+                .bgColor,
             }}
           >
             <ManageCoverPopover
@@ -103,7 +71,7 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
                 />
               }
               editTask={editTask}
-              task={currentTask}
+              task={task}
             />
           </div>
         )
@@ -111,9 +79,12 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
     >
       {!!isImgCover && (
         <div
-          className={`details-header-img-cover ${currentTask?.cover?.brightness === "dark" ? "dark" : "light"}`}>
-          {!!currentTask?.cover?.scaled?.length > 0 && (
-            <img src={currentTask?.cover?.scaled[1].url} alt="task cover" />
+          className={`details-header-img-cover ${
+            task?.cover?.brightness === "dark" ? "dark" : "light"
+          }`}
+        >
+          {!!task?.cover?.scaled?.length > 0 && (
+            <img src={task?.cover?.scaled[1].url} alt="task cover" />
           )}
           <div className={`details-header-cover-actions-wrapper`}>
             <ManageCoverPopover
@@ -125,24 +96,25 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
                 />
               }
               editTask={editTask}
-              task={currentTask}
+              task={task}
             />
           </div>
         </div>
       )}
 
-      {currentTask && (
+      {task && (
         <div className="details-header">
           <ReactSVG src={detailsIcon} className="icon" wrapper="span" />
           <span className="info">
-            <span className="task-name">{currentTask?.name}</span>
+            <span className="task-name">{task?.name}</span>
             <span className="task-group">
               in list{" "}
               <MoveCardPopover
-                group={currentGroup}
-                task={currentTask}
+                group={group}
+                task={task}
                 taskId={taskId}
-                anchorEl={<a className="group-link">{currentGroup?.name}</a>}
+                anchorEl={<a className="group-link">{group?.name}</a>}
+                onCloseTask={onCloseTask}
               />
             </span>
           </span>
@@ -154,10 +126,7 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
           {/* {utilService.makeLorem(1000)} */}
           <section className="subsection">
             {hasMembers && (
-              <TaskDetailsMembers
-                currentTask={currentTask}
-                editTask={editTask}
-              />
+              <TaskDetailsMembers currentTask={task} editTask={editTask} />
             )}
             {/* <div className="labels">
               <p>Labels</p>
@@ -172,11 +141,11 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
             </section>
           )}
           <TaskDetailsAddToCard
-            task={currentTask}
+            task={task}
             editTask={editTask}
             editLabel={editLabel}
           />
-          <TaskDetailsActions task={currentTask} editTask={editTask} />
+          <TaskDetailsActions task={task} editTask={editTask} />
         </div>
       </div>
     </Modal>

@@ -15,7 +15,7 @@ export function TaskPreviewBadges({ task }) {
   const taskIcons = [];
 
   //TODO refator to Batdg component list
-  if (task.badges.description) {
+  if (task?.badges?.description) {
     taskIcons.push(
       <Tooltip
         placement="bottom"
@@ -34,7 +34,7 @@ export function TaskPreviewBadges({ task }) {
       </Tooltip>
     );
   }
-  if (task.badges.attachments > 0) {
+  if (task.badges?.attachments > 0) {
     taskIcons.push(
       <Tooltip
         placement="bottom"

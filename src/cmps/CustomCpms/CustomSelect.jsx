@@ -2,9 +2,14 @@ import { DownOutlined } from "@ant-design/icons";
 import { Popover } from "antd";
 import { useState, useEffect, useRef } from "react";
 
-export function CustomSelect({ options = [], onSelect, value, defaultValue }) {
+export function CustomSelect({
+  options = [],
+  onSelect,
+  value,
+  defaultValue = null,
+}) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(defaultValue || null);
+  const [selectedItem, setSelectedItem] = useState(options[0]);
   const [searchValue, setSearchValue] = useState("");
   const [filteredItems, setFilteredItems] = useState(options);
   const divRef = useRef(null);
@@ -25,14 +30,11 @@ export function CustomSelect({ options = [], onSelect, value, defaultValue }) {
     }
   }, [options]);
 
-
   function onInput(e) {
     setSearchValue(e.target.value);
-
   }
 
   function onSelectOption(item) {
-
     setSelectedItem(item);
     if (onSelect) {
       onSelect(item);
