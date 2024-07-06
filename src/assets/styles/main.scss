@@ -21,7 +21,6 @@
 @import "views/BoardDetails";
 @import "views/TaskDetails";
 
-
 //Workspace
 @import "cmps/Workspace/Workspace";
 @import "cmps/Workspace/WorkspaceHeader";
@@ -62,7 +61,6 @@
 //Custom Cpms
 @import "cmps/CustomCpms/StarBoardBtn";
 
-
 :root.dark {
   --ds-surface-overlay: #282e33;
   --ds-text-subtle: #9fadbc;
@@ -88,8 +86,9 @@
   --ds-background-brand-bold: #579dff;
   --ds-border: #a6c5e229;
   --ds-background-neutral-subtle-hovered: #a1bdd914;
-  --ds-background-selected-hovered: #09326C;
-  
+  --ds-background-selected-hovered: #09326c;
+  --ds-text-subtlest: #8c9bab;
+  --ds-background-brand-bold-hovered: #85b8ff;
 }
 
 :root {
@@ -118,5 +117,7 @@
   --ds-background-brand-bold: #0c66e4;
   --ds-border: #091e4224;
   --ds-background-neutral-subtle-hovered: #091e420f;
-  --ds-background-selected-hovered: #CCE0FF;
+  --ds-background-selected-hovered: #cce0ff;
+  --ds-text-subtlest: #626f86;
+  --ds-background-brand-bold-hovered: #0055cc;
 }

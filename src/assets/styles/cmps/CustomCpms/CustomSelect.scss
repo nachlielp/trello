@@ -15,7 +15,10 @@
     background-color: var(--ds-background-input-hovered, #ebecf0);
     border-color: var(--ds-border-input, #7a869a);
   }
-
+&:has(input:focus){
+  background-color: var(--ds-background-input, #ffffff);
+  box-shadow: inset 0 0 0 2px var(--ds-border-focused, #388bff);
+}
   input {
     cursor: pointer;
     width: 100%;
@@ -23,7 +26,7 @@
     border: none;
     outline: none;
     color: var(--ds-text, #172b4d);
-
+   
     &::placeholder {
       color: var(--ds-text, #172b4d);
     }

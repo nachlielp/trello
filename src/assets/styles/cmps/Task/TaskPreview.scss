@@ -4,10 +4,6 @@
   position: relative;
   margin: 0 5px;
 
-  &:hover {
-    outline: 2px solid blue;
-  }
-
   &.open-preview-modal:hover {
     outline: none;
   }
@@ -62,6 +58,12 @@
 
 .group-task-content {
   padding: 8px 12px 4px 12px;
+  box-shadow: var(
+    --ds-shadow-raised,
+    0px 1px 1px #091e4240,
+    0px 0px 1px #091e424f
+  );
+  border-radius: 8px;
 }
 
 .group-task-content.image-cover {
@@ -86,7 +88,6 @@
 }
 
 .group-task-content-labels {
-
   display: flex;
   gap: 4px;
   flex-wrap: wrap;
@@ -131,7 +132,6 @@
   height: 16px;
   width: 16px;
   color: var(--ds-text-subtle);
-
 }
 
 .task-icon-count {

@@ -2,13 +2,14 @@
     width: 280px;
     padding: 0 12px 12px 12px;
     color: var(--ds-text-subtle, #44546f);
-
+    background: var(--ds-surface-overlay, #fff);
     .header-hr {
         height: 1px;
         width: 100%;
         border: none;
         border-bottom: 1px solid var(--ds-border-subtle, #e2e4e6);
         margin: 16px 0 16px 0;
+        border-color: var(--ds-border, #091e4224);
     }
 
     .title {

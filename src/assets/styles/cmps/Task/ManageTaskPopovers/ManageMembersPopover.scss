@@ -1,5 +1,7 @@
 .change-members-popover {
   color: var(--ds-text, #172b4d);
+  background: var(--ds-surface-overlay, #fff);
+
 
   .change-members-content {
     padding: 0 12px 12px 12px;
@@ -21,6 +23,10 @@
       transition-timing-function: ease;
       box-shadow: inset 0 0 0 1px var(--ds-border-input, #091e4224);
       color: var(--ds-text, #172b4d);
+      &:focus{
+        background-color: var(--ds-background-input, #ffffff);
+        box-shadow: inset 0 0 0 2px var(--ds-border-focused, #388bff);
+      }
 
       &::placeholder {
         color: var(--ds-text-subtlest, #626f86);

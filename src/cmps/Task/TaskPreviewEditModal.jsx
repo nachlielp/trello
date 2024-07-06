@@ -31,7 +31,8 @@ export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, openPr
     const containerRef = useRef(null);
 
     useEffect(() => {
-        setShowEditModalBtn(isHovered);
+        // setShowEditModalBtn(isHovered);
+        setShowEditModalBtn(true);
     }, [isHovered, isOpen]);
 
 
@@ -113,7 +114,7 @@ export function TaskPreviewEditModal({ task, isHovered, editTask, isOpen, openPr
         },
         // { label: 'Edit date', icon: timeIcon, onClick: () => console.log('Add to Y'), cover: false },
         // { label: 'Move', icon: moveIcon, onClick: () => console.log('Add to Y'), cover: true },
-        {cover:true, popover: <MoveCardPopover taskId={task.id} onCloseTask={()=>openPreviewModal(false)} closeAfter={true} anchorEl={<SvgButton src={moveIcon} label="Move" className="floating-button" />}/>},
+        {cover:true, popover: <MoveCardPopover taskId={task.id} onCloseTask={handleCancel} closeAfter={true} anchorEl={<SvgButton src={moveIcon} label="Move" className="floating-button" onClick={(e) => e.stopPropagation()}/>}/>},
         // { label: 'Copy', icon: copyIcon, onClick: () => console.log('Add to Y'), cover: true },
         { popover: <SvgButton src={archiveIcon} className="floating-button" label="Archive" onClick={() => editTask({ ...task, closed: true })} />, cover: true },
     ];
