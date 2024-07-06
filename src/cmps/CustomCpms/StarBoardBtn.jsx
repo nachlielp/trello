@@ -14,7 +14,8 @@ export function StarBoardBtn({ starredBoardIds, boardId, starClick }) {
         }
     }, [starredBoardIds]);
 
-    function onStarClick() {
+    function onStarClick(e) {
+        e.stopPropagation();
         starClick(boardId);
     }
     return (
