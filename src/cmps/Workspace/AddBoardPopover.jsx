@@ -107,7 +107,7 @@ export function AddBoardPopover({ onAddBoard }) {
             className="board-visibility-select"
             options={options}
             onSelect={() => { }}
-            defaultValue="workspace"
+            value="workspace"
           />
           <button className={`add-board-btn ${boardName === "" ? "disabled" : ""}`} onClick={onCreateBoard}>
             Create
