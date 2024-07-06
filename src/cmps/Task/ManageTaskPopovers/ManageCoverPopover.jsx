@@ -1,4 +1,4 @@
-import { Popover, Input, Image } from "antd"
+import { Popover, Input, Image, Tooltip } from "antd"
 import { useState, useEffect } from "react";
 import { ManageTaskPopoverHeader } from "../ManageTaskPopovers/ManageTaskPopoverHeader";
 import { utilService } from "../../../services/util.service";
@@ -29,7 +29,7 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
 
     function onSelectPhoto(id) {
         const img = boardCoverImgs.find((img) => img.id === id);
-        editTask({ ...task, cover: { ...task.cover, scaled: img.scaledImgs, color: null, idUploadedBackground: img.id } });
+        editTask({ ...task, cover: { ...task.cover, scaled: img.scaledImgs, color: null, idUploadedBackground: img.id, bg: img.bg } });
     }
 
     const isCover = task?.cover.color || task?.cover.scaled;
@@ -59,7 +59,7 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
                     <section className="cover-body">
                         <h3 className="cover-sub-title">Size</h3>
                         <article className={`cover-btns `}>
-                            <div className={`half-size-wrapper ${isCover && task.cover.size === "normal" ? "active" : "non-active"}`}>
+                            <div className={`half-size-wrapper ${isCover && task?.cover?.size === "normal" ? "active" : "non-active"}`}>
                                 <div className={`half-size-btn `} onClick={() => onChangeSize("normal")}
                                 >
                                     <div className={`sub-block-1 ${task?.cover.color ? "active" : "non-active"}`} style={{
@@ -103,7 +103,9 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
                         <article className="photo-btns">
                             {boardCoverImgs.map((img) => (
                                 <div className="photo-btn" key={img.id} onClick={() => onSelectPhoto(img.id)}>
-                                    <Image className="photo-item" src={img.scaledImgs[0].url} alt={img.photographer} preview={false} />
+                                    <Tooltip title={img.photographer} arrow={false}>
+                                        <Image className="photo-item" src={img.scaledImgs[0].url} alt={img.photographer} preview={false} />
+                                    </Tooltip>
                                 </div>
                             ))}
                         </article>

@@ -80,6 +80,9 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
         <div
           className={`details-header-img-cover ${task?.cover?.brightness === "dark" ? "dark" : "light"
             }`}
+          style={{
+            backgroundColor: task?.cover?.bg,
+          }}
         >
           {!!task?.cover?.scaled?.length > 0 && (
             <img src={task?.cover?.scaled[1].url} alt="task cover" />

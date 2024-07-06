@@ -24,7 +24,8 @@
       align-items: center;
       justify-content: center;
       position: relative;
-      margin-top: -20px;
+      margin: -20px -24px 0 -24px;
+      border-radius: 8px 8px 0 0;
 
       img {
         object-fit: cover;
@@ -54,6 +55,7 @@
           align-items: center;
           justify-content: center;
           padding: 4px 8px;
+          margin-right: 12px;
 
           .injected-svg {
             width: 16px;
@@ -183,7 +185,7 @@
             text-decoration: none;
           }
 
-          > span {
+          >span {
             background: none;
             color: var(--ds-icon, #44546f);
             font-size: 16px;
@@ -221,10 +223,8 @@
               margin: 0 4px 4px 0;
 
               &:hover {
-                background-color: var(
-                  --ds-background-neutral-hovered,
-                  #091e4224
-                );
+                background-color: var(--ds-background-neutral-hovered,
+                    #091e4224);
                 border: none;
                 box-shadow: none;
                 color: var(--ds-text, #172b4d);

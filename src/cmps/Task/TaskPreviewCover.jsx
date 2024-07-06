@@ -7,7 +7,7 @@ import { useNavigate } from "react-router";
 export function TaskPreviewCover({ task, editTask, editLabel }) {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpenPreviewModal, setIsOpenPreviewModal] = useState(false);
-  const taskMember = task.cover;
+  const taskCover = task?.cover;
   const taskRef = useRef(null);
   const [taskWidth, setTaskWidth] = useState(0);
   const navigate = useNavigate();
@@ -21,23 +21,23 @@ export function TaskPreviewCover({ task, editTask, editLabel }) {
     setIsOpenPreviewModal(value);
   }
 
-  const taskColorCoverStyle = taskMember.color
+  const taskColorCoverStyle = taskCover.color
     ? {
-      backgroundColor: utilService.getColorHashByName(taskMember.color)
+      backgroundColor: utilService.getColorHashByName(taskCover?.color)
         .bgColor,
     }
     : {};
 
-  const taskBackgroundCoverImage = taskMember.idUploadedBackground
+  const taskBackgroundCoverImage = taskCover.idUploadedBackground
     ? {
-      backgroundImage: `url(${taskMember.scaled[2].url})`,
+      backgroundImage: `url(${taskCover.scaled[2].url})`,
       backgroundSize: "cover",
     }
     : {};
 
-  const componentClass = taskMember.color
+  const componentClass = taskCover.color
     ? "task-bg-cover"
-    : taskMember.idUploadedBackground
+    : taskCover.idUploadedBackground
       ? "task-img-cover"
       : "";
 
@@ -64,7 +64,7 @@ export function TaskPreviewCover({ task, editTask, editLabel }) {
         taskWidth={taskWidth}
       />
       <section
-        className={`group-task-content ${taskMember.idUploadedBackground ? "image-cover" : ""}`}
+        className={`group-task-content ${taskCover.idUploadedBackground ? "image-cover" : ""}`}
         onClick={() => navigate(`/c/${task.id}`, { replace: true })}
       >
         <span className="group-task-content-title">{task.name}</span>

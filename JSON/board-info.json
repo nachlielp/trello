@@ -2,7 +2,7 @@
   {
     "id": "64f721f169b14894fac36cdf",
     "name": "Trello Build",
-    "apdatedAt":1720234120009,
+    "apdatedAt": 1720234120009,
     "members": [
       {
         "id": "666fe4efda8643029b6710f3",
@@ -527,6 +527,8 @@
     },
     "coverImgs": [
       {
+        "bg": "#f2a912",
+        "fontColor": "#fff",
         "id": "kmeEGE",
         "photographer": "Tomas Malik",
         "scaledImgs": [
@@ -622,6 +624,8 @@
         ]
       },
       {
+        "bg": "#a4d4e4",
+        "fontColor": "#000",
         "id": "LrFmk",
         "photographer": "Furkan Elveren",
         "scaledImgs": [
@@ -718,6 +722,8 @@
         ]
       },
       {
+        "bg": "#7e8d90",
+        "fontColor": "#000",
         "id": "PsFBt",
         "photographer": "Plwel Czerwinski",
         "scaledImgs": [
@@ -805,6 +811,8 @@
         ]
       },
       {
+        "bg": "#d9d3c3",
+        "fontColor": "#000",
         "id": "ZSfv7J",
         "photographer": "Eberhard Grossgasteiger",
         "scaledImgs": [
@@ -901,6 +909,8 @@
         ]
       },
       {
+        "bg": "#e2e6e6",
+        "fontColor": "#fff",
         "id": "Ui4Dng",
         "photographer": "George Bale",
         "scaledImgs": [
@@ -988,6 +998,8 @@
         ]
       },
       {
+        "bg": "#f2f2fb",
+        "fontColor": "#000",
         "id": "W3Vgbg",
         "photographer": "Eberhard Grossgasteiger",
         "scaledImgs": [
@@ -1078,7 +1090,7 @@
   },
   {
     "id": "66756a34def1a6d3b8cd179d",
-    "apdatedAt":1720234168827,
+    "apdatedAt": 1720234168827,
     "members": [
       {
         "id": "666fe4efda8643029b6710f3",
@@ -1667,7 +1679,9 @@
                 "uses": 1
               }
             ],
-            "idLabels": ["66756a351dc51400eb1968e8"],
+            "idLabels": [
+              "66756a351dc51400eb1968e8"
+            ],
             "manualCoverAttachment": false,
             "name": "store.js",
             "pos": 196608,
@@ -1807,7 +1821,9 @@
                 "uses": 1
               }
             ],
-            "idLabels": ["66756a351dc51400eb1968ed"],
+            "idLabels": [
+              "66756a351dc51400eb1968ed"
+            ],
             "manualCoverAttachment": false,
             "name": "trello.actions.js",
             "pos": 327690,
@@ -1886,7 +1902,9 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
-            "idChecklists": ["667686e9352dcdb311b45003"],
+            "idChecklists": [
+              "667686e9352dcdb311b45003"
+            ],
             "idGroup": "66756b31250742f334ce4cf0",
             "idMembers": [],
             "idMembersVoted": [],
@@ -1954,7 +1972,9 @@
             "idBoard": "66756a34def1a6d3b8cd179d",
             "idChecklists": [],
             "idGroup": "66756b31250742f334ce4cf0",
-            "idMembers": ["666fe4efda8643029b6710f3"],
+            "idMembers": [
+              "666fe4efda8643029b6710f3"
+            ],
             "idMembersVoted": [],
             "idShort": 13,
             "idAttachmentCover": null,
@@ -2432,6 +2452,8 @@
     },
     "coverImgs": [
       {
+        "bg": "#f2a912",
+        "fontColor": "#fff",
         "id": "kmeEGE",
         "photographer": "Tomas Malik",
         "scaledImgs": [
@@ -2527,6 +2549,8 @@
         ]
       },
       {
+        "bg": "#a4d4e4",
+        "fontColor": "#000",
         "id": "LrFmk",
         "photographer": "Furkan Elveren",
         "scaledImgs": [
@@ -2623,6 +2647,8 @@
         ]
       },
       {
+        "bg": "#7e8d90",
+        "fontColor": "#000",
         "id": "PsFBt",
         "photographer": "Plwel Czerwinski",
         "scaledImgs": [
@@ -2710,6 +2736,8 @@
         ]
       },
       {
+        "bg": "#d9d3c3",
+        "fontColor": "#000",
         "id": "ZSfv7J",
         "photographer": "Eberhard Grossgasteiger",
         "scaledImgs": [
@@ -2806,6 +2834,8 @@
         ]
       },
       {
+        "bg": "#e2e6e6",
+        "fontColor": "#fff",
         "id": "Ui4Dng",
         "photographer": "George Bale",
         "scaledImgs": [
@@ -2893,6 +2923,8 @@
         ]
       },
       {
+        "bg": "#f2f2fb",
+        "fontColor": "#000",
         "id": "W3Vgbg",
         "photographer": "Eberhard Grossgasteiger",
         "scaledImgs": [
