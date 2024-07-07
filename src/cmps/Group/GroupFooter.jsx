@@ -3,33 +3,16 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import templateCard from "../../assets/svgs/template-card.svg";
 import { AddTaskInGroup } from "./AddTaskInGroup";
 import { ReactSVG } from "react-svg";
+import { useClickOutside } from "../../customHooks/useClickOutside";
 
 export function GroupFooter({ groupId, addTask }) {
-  const [isAddTaskOpen, setIsAddTaskOpen] = useState(false);
+  const [footerRef, isAddTaskOpen, setIsAddTaskOpen] = useClickOutside(false);
+  
   function closeAddTask() {
     setIsAddTaskOpen(false);
   }
 
-  const footerRef = useRef(null);
-  const handleClickOutside = useCallback(
-    (event) => {
-      if (footerRef.current && !footerRef.current.contains(event.target)) {
-        setIsAddTaskOpen(false);
-      }
-    },
-    [footerRef]
-  );
-
-  useEffect(() => {
-    if (isAddTaskOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isAddTaskOpen, handleClickOutside]);
+  
 
   return (
     <div className="list-footer" ref={footerRef}>
