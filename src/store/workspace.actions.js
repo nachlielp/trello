@@ -77,3 +77,9 @@ export async function createBoard(board) {
   const newBoard = await boardService.save(board);
   store.dispatch({ type: ADD_BOARD, board: newBoard });
 }
+
+
+//Notice, the board action updates the storage, this updates the workspace state
+export async function editWorkspaceBoardState(board) {
+  store.dispatch({ type: EDIT_BOARD, board: { ...board, closed: true } });
+}

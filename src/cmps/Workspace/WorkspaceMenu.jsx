@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { SvgButton } from "../CustomCpms/SvgButton";
 import { useNavigate } from "react-router-dom";
-import { EllipsisOutlined } from "@ant-design/icons"
 import { StarBoardBtn } from "../CustomCpms/StarBoardBtn";
-import { Button } from "antd";
 import { AddBoardPopover } from "./AddBoardPopover";
+import { CloseBoardPopover } from "./CloseBoardPopover";
 
-export function WorkspaceMenu({ boardsInfo, selectedBoardId, starredBoardIds, onStarClick, onAddBoard, colorTheme }) {
+export function WorkspaceMenu({ boardsInfo, selectedBoardId, starredBoardIds, onStarClick, onAddBoard, colorTheme, closeBoard, leaveBoard }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [hoveredBoardId, setHoveredBoardId] = useState(null);
+    const [selectedBoardOptionsId, setSelectedBoardOptionsId] = useState(null);
 
     useEffect(() => {
         const root = document.documentElement;
@@ -22,6 +22,10 @@ export function WorkspaceMenu({ boardsInfo, selectedBoardId, starredBoardIds, on
 
     function onSelectBoard(boardId) {
         navigate(`/b/${boardId}`, { replace: true });
+    }
+
+    function onSelectBoardOptions(boardId) {
+        setSelectedBoardOptionsId(boardId);
     }
 
     return (
@@ -80,10 +84,8 @@ export function WorkspaceMenu({ boardsInfo, selectedBoardId, starredBoardIds, on
                                     <img className="board-cover-img" src={board.coverImg} alt="board cover" />
                                     <p className="board-name">{board.name}</p>
                                     <aside className="board-option-btns">
-                                        {hoveredBoardId === board.id &&
-                                            <Button className="more-btn" size="small" >
-                                                <EllipsisOutlined />
-                                            </Button>
+                                        {(hoveredBoardId === board.id || selectedBoardOptionsId === board.id) &&
+                                            <CloseBoardPopover boardName={board.name} boardId={board.id} onSelectBoardOptions={onSelectBoardOptions} closeBoard={closeBoard} leaveBoard={leaveBoard} />
                                         }
                                         {(selectedBoardId === board.id || starredBoardIds.includes(board.id) || hoveredBoardId === board.id) && (
                                             <StarBoardBtn
