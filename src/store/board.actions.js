@@ -278,7 +278,6 @@ export async function editTask(task) {
     ),
     apdatedAt: new Date().getTime(),
   };
-  console.log("newBoard", newBoard);
   await boardService.save(newBoard);
   return task;
 }
@@ -292,7 +291,7 @@ export async function updateBoard(newBoard) {
     await boardService.save({ ...newBoard, apdatedAt: new Date().getTime() });
     setBoards() //TODO need something Better to update workspace boards after change in board
   } catch (err) {
-    console.log("Cannot add list", err);
+    console.error("Cannot update board", err);
     throw err;
   }
 }

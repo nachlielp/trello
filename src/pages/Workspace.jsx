@@ -7,10 +7,14 @@ import { setBoard, loadBoard, loadBoardByTaskId } from "../store/board.actions";
 import { login, editUser, addBoardToUser } from "../store/user.actions";
 import { createBoard } from "../store/workspace.actions";
 import { useSelector } from "react-redux";
-import { setBoards } from "../store/workspace.actions"
+import { setBoards, editWorkspaceBoardState } from "../store/workspace.actions"
+import { updateBoard } from "../store/board.actions";
 export function Workspace() {
-    const boardsInfo = useSelector((state) => state.workspaceModule.boards).map((b) => ({ id: b.id, name: b.name, closed: b.closed, coverImg: b.prefs.backgroundImage }));
+    const boardsInfo = useSelector((state) => state.workspaceModule.boards).filter((b) => !b.closed).map((b) => ({ id: b.id, name: b.name, closed: b.closed, coverImg: b.prefs.backgroundImage }));
+    const boards = useSelector((state) => state.workspaceModule.boards);
     const boardBgPrefs = useSelector((state) => state.boardModule.board)?.prefs;
+    const user = useSelector((state) => state.userModule.user);
+    const params = useParams();
 
     useEffect(() => {
         setBoards();
@@ -22,8 +26,7 @@ export function Workspace() {
     const navigate = useNavigate();
 
 
-    const user = useSelector((state) => state.userModule.user);
-    const params = useParams();
+
 
     useEffect(() => {
         if (params.boardId) {
@@ -57,6 +60,24 @@ export function Workspace() {
         await addBoardToUser(board.id);
         navigate(`/b/${board.id}`);
     }
+
+    function onCloseBoard(boardId) {
+        console.log("onCloseBoard", boardId);
+        const board = boards.find((b) => b.id === boardId);
+        if (board) {
+            updateBoard({ ...board, closed: true });
+            editWorkspaceBoardState({ ...board, closed: true });
+        }
+    }
+
+    function onLeaveBoard(boardId) {
+        const board = boards.find((b) => b.id === boardId);
+        if (board) {
+            updateBoard({ ...board, members: board.members.filter((m) => m.id !== user.id) });
+            editWorkspaceBoardState({ ...board, members: board.members.filter((m) => m.id !== user.id) });
+            editUser({ ...user, idBoards: user.idBoards.filter((id) => id !== boardId) });
+        }
+    }
     return (
         <section className="workspace" style={{
             backgroundImage: boardBgPrefs?.backgroundImage ? `url(${boardBgPrefs.backgroundImage})` : 'none',
@@ -64,11 +85,11 @@ export function Workspace() {
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
         }}>
-            {/* <WorkspaceHeader /> */}
+            <WorkspaceHeader />
 
             {user && starredBoardIds ? (
                 <section className="workspace-content">
-                    <WorkspaceMenu colorTheme={boardBgPrefs?.backgroundBrightness} boardsInfo={boardsInfo} selectedBoardId={selectedBoardId} starredBoardIds={starredBoardIds} onStarClick={onStarClick} onAddBoard={onAddBoard} />
+                    <WorkspaceMenu colorTheme={boardBgPrefs?.backgroundBrightness} boardsInfo={boardsInfo} selectedBoardId={selectedBoardId} starredBoardIds={starredBoardIds} onStarClick={onStarClick} onAddBoard={onAddBoard} closeBoard={onCloseBoard} leaveBoard={onLeaveBoard} />
                     <Outlet />
                 </section>
             ) : (

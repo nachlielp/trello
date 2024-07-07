@@ -10,10 +10,10 @@ import timeLineIcon from "/img/board-index/headerImgs/viewBtn-imgs/timeLineIcon.
 import dashBoard from "/img/board-index/headerImgs/viewBtn-imgs/dashBoard.svg";
 import mapIcon from "/img/board-index/headerImgs/viewBtn-imgs/mapIcon.svg";
 import privateIcon from "/img/board-index/headerImgs/privateIcon.svg";
-import { CloseOutlined, DownOutlined } from "@ant-design/icons";
+import { CloseOutlined } from "@ant-design/icons";
 import { GoGrabber } from "react-icons/go";
 import checkedIcon from "/img/board-index/headerImgs/checkedIcon.svg";
-
+import more from "/img/workspace/more.svg"
 export function ViewsButton() {
   const [openListMenu, setOpenListMenu] = useState(false);
 
@@ -97,7 +97,9 @@ export function ViewsButton() {
       <button className="view-btn">
         <ReactSVG src={boardIcon} wrapper="span" className="board-icon" />
         Board
-        <DownOutlined className="arow" />
+       
+        <ReactSVG src={more} wrapper="span" className="arow" />
+
       </button>
     </Popover>
   );

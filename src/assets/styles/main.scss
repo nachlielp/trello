@@ -26,6 +26,7 @@
 @import "cmps/Workspace/WorkspaceHeader";
 @import "cmps/Workspace/WorkspaceMenu";
 @import "cmps/Workspace/AddBoardPopover";
+@import "cmps/Workspace/CloseBoardPopover";
 
 // Components
 @import "cmps/BoardHeader/VisibilityButton.scss";
@@ -93,19 +94,24 @@
 }
 
 :root {
+  --tr-background-list: #f1f2f4;
+  --dynamic-icon: #ffffff;
+  --dynamic-text: #ffffff;
+  --board-header-background-color: #0000003d;
+  --header-button-hovered: var(--dynamic-button-hovered, rgba(255, 255, 255, 0.3));
+  --header-button-color: var(--ds-text-subtle, #44546f);
+  --create-menu-button-background: rgba(255, 255, 255, 0.2);
+  --create-menu-button-background-hovered: rgba(255, 255, 255, 0.3);
+  --create-menu-button-background-active: rgba(255, 255, 255, 0.3);
   --ds-surface-overlay: #ffffff;
   --ds-text-subtle: #44546f;
   --ds-text: #172b4d;
   --ds-text-inverse: #ffffff;
   --ds-text-disabled: #091e424f;
-  --tr-background-list: #f1f2f4;
   --ds-surface-raised: #ffffff;
   --ds-icon-subtle: #626f86;
   --ds-icon: #44546f;
   --ds-background-neutral-hovered: #091e4224;
-  --dynamic-icon: #ffffff;
-  --dynamic-text: #ffffff;
-  --board-header-background-color: #0000003d;
   --ds-icon-disabled: #091e424f;
   --ds-background-disabled: #bcd6f00a;
   --ds-background-input: #ffffff;
@@ -122,4 +128,5 @@
   --ds-text-subtlest: #626f86;
   --ds-background-brand-bold-hovered: #0055cc;
   --ds-shadow-overlay: 0px 8px 12px #091E4226, 0px 0px 1px #091E424F;
+
 }
