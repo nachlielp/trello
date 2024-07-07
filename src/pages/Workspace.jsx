@@ -64,7 +64,7 @@ export function Workspace() {
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
         }}>
-            {/* <WorkspaceHeader /> */}
+            <WorkspaceHeader />
 
             {user && starredBoardIds ? (
                 <section className="workspace-content">

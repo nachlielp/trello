@@ -306,6 +306,7 @@ function createNewGroup(group) {
     subscribed: false,
     softLimit: null,
     pos: group.pos,
+    tasks: [],
   };
 }
 
@@ -1123,7 +1124,7 @@ const bgImgs = [
     background: "6689479b23f99fc8d05a696c",
     title: "Zo Razafindramamba",
     backgroundImage: "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/original/cd1b0e862504085ae903290e12238a8c/photo-1719822077838-b48bf2c7903d",
-    backgroundBrightness: "light",
+    backgroundBrightness: "dark",
     backgroundImageScaled: [
       {
         "width": 63,

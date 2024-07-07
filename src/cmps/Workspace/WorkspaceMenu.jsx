@@ -14,7 +14,6 @@ export function WorkspaceMenu({ boardsInfo, selectedBoardId, starredBoardIds, on
         const root = document.documentElement;
         const dynamicIconColor = colorTheme === "dark" ? "#fff" : "#42526E";
         const dynamicTextColor = colorTheme === "dark" ? "#fff" : "#172B4D";
-
         root.style.setProperty('--dynamic-icon', dynamicIconColor);
         root.style.setProperty('--dynamic-text', dynamicTextColor);
     }, [colorTheme]);
