@@ -34,14 +34,21 @@ export function BoardIndex() {
   const params = useParams();
 
   useEffect(() => {
-    if (params.boardId) {
-      loadBoard(params.boardId);
-      setSelectedTaskId(null);
+
+    async function load() {
+      if (params.boardId) {
+        const res = await loadBoard(params.boardId);
+        if (res?.status === 404) {
+          navigate("/");
+        }
+        setSelectedTaskId(null);
+      }
+      if (params.cardId) {
+        loadBoardByTaskId(params.cardId);
+        setSelectedTaskId(params.cardId);
+      }
     }
-    if (params.cardId) {
-      loadBoardByTaskId(params.cardId);
-      setSelectedTaskId(params.cardId);
-    }
+    load();
   }, [params]);
 
   const { scrollContainerRef, handlers } = useScrollByGrab();

@@ -44,6 +44,7 @@ export async function loadBoard(boardId) {
     type: SET_BOARD,
     board: { ...boardData, apdatedAt: new Date().getTime() },
   });
+  return boardData;
 }
 
 export async function loadBoardByTaskId(taskId) {

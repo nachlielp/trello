@@ -9,7 +9,8 @@ import { createBoard } from "../store/workspace.actions";
 import { useSelector } from "react-redux";
 import { setBoards, editWorkspaceBoardState } from "../store/workspace.actions"
 import { updateBoard } from "../store/board.actions";
-export function Workspace() {
+
+export function WorkspaceIndex() {
     const boardsInfo = useSelector((state) => state.workspaceModule.boards).filter((b) => !b.closed).map((b) => ({ id: b.id, name: b.name, closed: b.closed, coverImg: b.prefs.backgroundImage }));
     const boards = useSelector((state) => state.workspaceModule.boards);
     const boardBgPrefs = useSelector((state) => state.boardModule.board)?.prefs;

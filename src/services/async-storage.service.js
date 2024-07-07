@@ -14,10 +14,17 @@ function query(entityType, delay = 1) {
 
 function get(entityType, entityId) {
     return query(entityType).then(entities => {
-        const entity = entities.find(entity => entity.id === entityId)
-        if (!entity) throw new Error(`Get failed, cannot find entity with id: ${entityId} in: ${entityType}`)
-        return entity
-    })
+        const entity = entities.find(entity => entity.id === entityId);
+        if (!entity) {
+            return {
+                error: `Get failed, cannot find entity with id: ${entityId} in: ${entityType}`,
+                entityType,
+                entityId,
+                status: 404
+            };
+        }
+        return entity;
+    });
 }
 
 function post(entityType, newEntity) {
