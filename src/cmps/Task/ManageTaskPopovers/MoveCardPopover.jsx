@@ -29,6 +29,7 @@ export function MoveCardPopover({
 
   // states
   const [isOpen, setIsOpen] = useState(false);
+  const [isDisable, setIsDisable] = useState(false);
   const [selectedBoardId, setSelectedBoardId] = useState(board.id);
   const [selectedGroupId, setSelectedGroupId] = useState(group.id);
   const [selectedGroups, setSelectedGroups] = useState(
@@ -59,7 +60,7 @@ export function MoveCardPopover({
 
   // useEffect position
   useEffect(() => {
-    if (selectedBoardId && boards.length > 0) {
+    if (selectedBoardId && boards.length > 0 && newPositions.length > 0) {
       if (
         selectedBoardId !== task.idBoard ||
         selectedGroupId !== task.idGroup
@@ -89,7 +90,8 @@ export function MoveCardPopover({
   // use effect board & groups
   useEffect(() => {
     const selectedBoard = boards.find((b) => b.id === selectedBoardId);
-    if (selectedBoard) {
+    if (selectedBoard && selectedBoard.groups.length > 0) {
+      setIsDisable(false);
       setSelectedGroups(
         selectedBoard.groups.map((group) => ({
           name: group.name,
@@ -101,6 +103,8 @@ export function MoveCardPopover({
       } else {
         setSelectedGroupId(task.idGroup);
       }
+    } else {
+      setIsDisable(true);
     }
   }, [selectedBoardId, boards]);
 
@@ -183,6 +187,7 @@ export function MoveCardPopover({
                   options={selectedGroups}
                   onSelect={onSelectGroup}
                   value={selectedGroupId}
+                  disabled={isDisable}
                 />
               </span>
               <span>
@@ -191,10 +196,11 @@ export function MoveCardPopover({
                   options={generatePositionOptions(positions)}
                   value={selectedPosition}
                   onSelect={onSelectPosition}
+                  disabled={isDisable}
                 />
               </span>
             </section>
-            <button className="move-btn" onClick={onMoveClick}>
+            <button className="move-btn" onClick={onMoveClick} disabled={isDisable}>
               Move
             </button>
           </div>
