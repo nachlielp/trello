@@ -41,9 +41,6 @@ import {
 
 export async function loadBoard(boardId) {
   const boardData = await boardService.getById(boardId);
-  if (boardData.error) {
-    return boardData;
-  }
   store.dispatch({
     type: SET_BOARD,
     board: { ...boardData, apdatedAt: new Date().getTime() },
@@ -53,6 +50,7 @@ export async function loadBoard(boardId) {
 
 export async function loadBoardByTaskId(taskId) {
   const board = await boardService.getByTaskId(taskId);
+  console.log("board", board);
   if (board.error) {
     return board;
   }

@@ -40,8 +40,7 @@ async function getByTaskId(taskId) {
       status: 404
     };
   }
-  console.log("board", board);
-  // return board;
+  return board;
 }
 
 async function getById(boardId) {
