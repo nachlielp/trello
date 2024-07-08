@@ -1,6 +1,7 @@
 import TextArea from "antd/es/input/TextArea";
 import { useEffect, useRef, useState } from "react";
 import { useClickOutside } from "../../customHooks/useClickOutside";
+import { useEffectUpdate } from "../../customHooks/useEffectUpdate";
 
 export function NameInput({
   value = "",
@@ -15,11 +16,15 @@ export function NameInput({
   const textAreaRef = useRef(null);
   const paragraphRef = useRef(null);
 
-  useEffect(() => {
-    setNewName(value);
-    if (!isChangeable) {
+  useEffectUpdate(() => {
+    if (!isChangeable && newName !== value) {
       onRename();
     }
+  }, [isChangeable]);
+
+  useEffect(() => {
+    setNewName(value);
+
     if (textAreaRef.current) {
       const textAreaElement = textAreaRef.current.resizableTextArea.textArea;
       textAreaElement.focus();
