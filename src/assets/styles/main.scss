@@ -19,7 +19,6 @@
 // @import "views/UserDetails";
 @import "views/BoardIndex";
 @import "views/BoardDetails";
-@import "views/TaskDetails";
 
 //Workspace
 @import "cmps/Workspace/Workspace";
@@ -58,6 +57,9 @@
 @import "cmps/Task/ManageTaskPopovers/ManageCoverPopover";
 @import "cmps/Task/ManageTaskPopovers/MoveCardPopover";
 @import "cmps/CustomCpms/CustomSelect";
+
+//Task details
+@import "cmps/Task/TaskDetailsModal/TaskDetailsLabels.scss";
 
 //Custom Cpms
 @import "cmps/CustomCpms/StarBoardBtn";

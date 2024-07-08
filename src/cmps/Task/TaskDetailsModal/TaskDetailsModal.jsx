@@ -13,6 +13,7 @@ import { ReactSVG } from "react-svg";
 import detailsIcon from "/img/board-index/detailsImgs/detailsIcon.svg";
 import defaultProfile from "/img/defaultProfile.svg";
 import { utilService } from "../../../services/util.service";
+import { TaskDetailsLabels } from "./TaskDetailsLabels";
 
 export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
   const group = useSelector((state) =>
@@ -45,6 +46,59 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
     navigate(`/b/${task.idBoard}`, { replace: true });
   }
 
+  if (!task) {
+    return <></>
+  }
+
+  const colorCoverHeader = (
+    <section
+      className={`details-header-color-cover`}
+      style={{
+        backgroundColor: utilService.getColorHashByName(task.cover.color)
+          ?.bgColor,
+      }}
+    >
+      <ManageCoverPopover
+        anchorEl={
+          <SvgButton
+            src={coverIcon}
+            className="cover-btn"
+            label="Cover"
+          />
+        }
+        editTask={editTask}
+        task={task}
+      />
+    </section>
+  )
+
+  const imgCoverHeader = (
+    <section
+      className={`details-header-img-cover ${task?.cover?.brightness === "dark" ? "dark" : "light"
+        }`}
+      style={{
+        backgroundColor: task?.cover?.bg,
+      }}
+    >
+      {!!task?.cover?.scaled?.length > 0 && (
+        <img src={task?.cover?.scaled[2].url} alt="task cover" />
+      )}
+      <article className={`details-header-cover-actions-wrapper`}>
+        <ManageCoverPopover
+          anchorEl={
+            <SvgButton
+              src={coverIcon}
+              className="cover-btn"
+              label="Cover"
+            />
+          }
+          editTask={editTask}
+          task={task}
+        />
+      </article>
+    </section>
+  )
+
   return (
     <Modal
       open
@@ -52,74 +106,25 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
       loading={group == undefined}
       footer=""
       className="task-details"
-      title={
-        isColorCover && (
-          <div
-            className={`details-header-color-cover`}
-            style={{
-              backgroundColor: utilService.getColorHashByName(task.cover.color)
-                .bgColor,
-            }}
-          >
-            <ManageCoverPopover
-              anchorEl={
-                <SvgButton
-                  src={coverIcon}
-                  className="cover-btn"
-                  label="Cover"
-                />
-              }
-              editTask={editTask}
-              task={task}
-            />
-          </div>
-        )
-      }
+      title={isColorCover && colorCoverHeader}
     >
-      {!!isImgCover && (
-        <div
-          className={`details-header-img-cover ${task?.cover?.brightness === "dark" ? "dark" : "light"
-            }`}
-          style={{
-            backgroundColor: task?.cover?.bg,
-          }}
-        >
-          {!!task?.cover?.scaled?.length > 0 && (
-            <img src={task?.cover?.scaled[1].url} alt="task cover" />
-          )}
-          <div className={`details-header-cover-actions-wrapper`}>
-            <ManageCoverPopover
-              anchorEl={
-                <SvgButton
-                  src={coverIcon}
-                  className="cover-btn"
-                  label="Cover"
-                />
-              }
-              editTask={editTask}
-              task={task}
+      {!!isImgCover && imgCoverHeader}
+      <article className="details-header">
+        <ReactSVG src={detailsIcon} className="icon" wrapper="span" />
+        <span className="info">
+          <span className="task-name">{task?.name}</span>
+          <span className="task-group">
+            in list{" "}
+            <MoveCardPopover
+              taskId={taskId}
+              anchorEl={<a className="group-link">{group?.name}</a>}
+              onCloseTask={onCloseTask}
             />
-          </div>
-        </div>
-      )}
-
-      {task && (
-        <div className="details-header">
-          <ReactSVG src={detailsIcon} className="icon" wrapper="span" />
-          <span className="info">
-            <span className="task-name">{task?.name}</span>
-            <span className="task-group">
-              in list{" "}
-              <MoveCardPopover
-                taskId={taskId}
-                anchorEl={<a className="group-link">{group?.name}</a>}
-                onCloseTask={onCloseTask}
-              />
-            </span>
           </span>
-        </div>
-      )}
-      <div className="details-body">
+        </span>
+      </article>
+
+      <section className="details-body">
         <div className="details-body__left">
           {/* Additional content here */}
           {/* {utilService.makeLorem(1000)} */}
@@ -130,6 +135,9 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
             {/* <div className="labels">
               <p>Labels</p>
             </div> */}
+            <div className="labels">
+              <TaskDetailsLabels task={task} editTask={editTask} editLabel={editLabel} />
+            </div>
           </section>
         </div>
         <div className="details-body__right">
@@ -146,7 +154,7 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
           />
           <TaskDetailsActions task={task} editTask={editTask} onClose={onClose} />
         </div>
-      </div>
+      </section>
     </Modal>
   );
 }
