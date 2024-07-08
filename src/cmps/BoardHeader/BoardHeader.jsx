@@ -1,28 +1,37 @@
 import { useSelector } from "react-redux";
-import {
-  UserAddOutlined,
-  EllipsisOutlined,
-} from "@ant-design/icons";
+import { UserAddOutlined, EllipsisOutlined } from "@ant-design/icons";
 import { UserAvatar } from "../UserAvatar";
 import { VisibilityButton } from ".//VisibilityButton";
 import { ViewsButton } from "./ViewsButton";
 import { FilterButton } from "./FilterButton";
 import { ProfilePopover } from "../Task/ManageTaskPopovers/ProfilePopover";
 import { StarBoardBtn } from "../CustomCpms/StarBoardBtn";
+import { NameInput } from "../CustomCpms/NameInput";
+import { updateBoard } from "../../store/board.actions";
+import { setBoards } from "../../store/workspace.actions";
 import { useEffect } from "react";
 
 export function BoardHeader({ board, starredBoardIds, starToggle }) {
   const members = useSelector((state) => state.boardModule.board.members);
 
   function onToggleStar(boardId) {
-    const starredIds = starredBoardIds.includes(boardId) ? starredBoardIds.filter((id) => id !== boardId) : [...starredBoardIds, boardId];
+    const starredIds = starredBoardIds.includes(boardId)
+      ? starredBoardIds.filter((id) => id !== boardId)
+      : [...starredBoardIds, boardId];
     starToggle(starredIds);
   }
 
+  function onBoardNameChange(name) {
+    updateBoard({ ...board, name });
+  }
   return (
     <div className="board-header">
       <div className="left-info">
-        <h3 className="board-name">{board.name}</h3>
+        <NameInput
+          value={board.name}
+          className="board-name"
+          onSubmit={onBoardNameChange}
+        />
         <StarBoardBtn
           starredBoardIds={starredBoardIds}
           boardId={board.id}

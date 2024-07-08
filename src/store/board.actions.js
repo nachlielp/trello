@@ -17,6 +17,7 @@ import {
   ARCHIVE_ALL_CARDS,
   SORT_GROUP,
 } from "./board.reducer";
+import { setBoards } from "./workspace.actions";
 
 // export async function loadTrelloDataFromSource() {
 //   try {
@@ -294,6 +295,7 @@ export async function updateBoard(newBoard) {
     });
     editWorkspaceBoardState({ ...newBoard, apdatedAt: new Date().getTime() });
     await boardService.save({ ...newBoard, apdatedAt: new Date().getTime() });
+    setBoards() //TODO need something Better to update workspace boards after change in board
   } catch (err) {
     console.error("Cannot update board", err);
     throw err;

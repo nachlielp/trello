@@ -3,7 +3,12 @@ import { Popover } from "antd";
 import { useState, useEffect, useRef } from "react";
 import { ReactSVG } from "react-svg";
 
-export function CustomSelect({ options = [], onSelect, value }) {
+export function CustomSelect({
+  options = [],
+  onSelect,
+  value,
+  disabled = false,
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(options[0]);
   const [searchValue, setSearchValue] = useState("");
@@ -16,7 +21,7 @@ export function CustomSelect({ options = [], onSelect, value }) {
 
   //when opens modal input focus
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen && !disabled) {
       inputRef.current.focus();
     }
   }, [isOpen]);
@@ -49,28 +54,30 @@ export function CustomSelect({ options = [], onSelect, value }) {
       trigger="click"
       placement="bottomLeft"
       open={isOpen}
-      onOpenChange={setIsOpen}
+      onOpenChange={disabled ? null : setIsOpen}
       arrow={false}
       content={
-        <div
-          className="options"
-          style={{ width: `${divRef.current?.clientWidth}px` }}
-        >
-          {filteredItems.map((item) => (
-            <button
-              key={item?.id}
-              onClick={() => onSelectOption(item)}
-              className={selectedItem?.name === item?.name ? "selected" : ""}
-            >
-              {item?.element || item?.name}
-            </button>
-          ))}
-        </div>
+        !disabled && (
+          <div
+            className="options"
+            style={{ width: `${divRef.current?.clientWidth}px` }}
+          >
+            {filteredItems.map((item) => (
+              <button
+                key={item?.id}
+                onClick={() => onSelectOption(item)}
+                className={selectedItem?.name === item?.name ? "selected" : ""}
+              >
+                {item?.element || item?.name}
+              </button>
+            ))}
+          </div>
+        )
       }
     >
       <div
         className="custom-select-item"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => (disabled ? null : setIsOpen(!isOpen))}
         ref={divRef}
       >
         {
@@ -79,6 +86,7 @@ export function CustomSelect({ options = [], onSelect, value }) {
             placeholder={selectedItem?.name}
             value={searchValue}
             onChange={onInput}
+            disabled={disabled}
           />
         }
         {/* <DownOutlined className="arrow-down" /> */}
