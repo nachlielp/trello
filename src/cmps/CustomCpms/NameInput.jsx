@@ -45,9 +45,9 @@ export function NameInput({
   useEffect(() => {
     if (paragraphRef.current) {
       const currentWidth = paragraphRef.current.clientWidth;
-      setCustomWith({ width: `${currentWidth}px` });
+      setCustomWith({ width: `${currentWidth + 0.4}px` });
     } else {
-      setCustomWith({ width: `${20 + (newName.length * 12 + 1)}px` });
+      setCustomWith({ width: `${20 + (newName.length * 12 + 1.04)}px` });
     }
   }, [value, newName]);
 
@@ -92,6 +92,8 @@ export function NameInput({
           className="title"
           onClick={() => setIsChangeable(true)}
           ref={paragraphRef}
+          style={expandInputWidth ? customWith : {}}
+          
         >
           {value}
         </p>
