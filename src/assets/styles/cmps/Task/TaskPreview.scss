@@ -62,11 +62,14 @@
       0px 1px 1px #091e4240,
       0px 0px 1px #091e424f);
   border-radius: 8px;
+  // box-shadow: none;
+
 }
 
 .group-task-content.cover {
   border-radius: 0 0 8px 8px;
 }
+
 
 .group-task-content.image-cover {
   display: flex;
@@ -81,6 +84,11 @@
   padding: 10px;
   box-sizing: border-box;
   border-radius: 0 0 7px 7px;
+  box-shadow: none;
+}
+
+.group-task-content.color-cover {
+  box-shadow: none;
 }
 
 .group-task-content.image-cover .group-task-content-title {

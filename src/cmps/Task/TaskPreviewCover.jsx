@@ -64,7 +64,7 @@ export function TaskPreviewCover({ task, editTask, editLabel }) {
         taskWidth={taskWidth}
       />
       <section
-        className={`group-task-content ${taskCover.idUploadedBackground ? "image-cover" : ""}`}
+        className={`group-task-content ${taskCover.idUploadedBackground && "image-cover"} ${taskCover.color && "color-cover"}`}
 
       >
         <span className="group-task-content-title">{task.name}</span>
