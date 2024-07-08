@@ -41,7 +41,7 @@ export function ManageLabelsPopover({ anchorEl, editTask, task, editLabel }) {
         setIsOpen(false);
     }
 
-    function onChangeLabel(label, isTask) {
+    function onSelectLabel(label, isTask) {
         if (isTask) {
             editTask({ ...task, labels: [...task.labels, { color: label.color, label: label.label }] });
         } else {
@@ -50,6 +50,7 @@ export function ManageLabelsPopover({ anchorEl, editTask, task, editLabel }) {
     }
 
     function onEditColor(color) {
+
         setEditColor({ color: color.color, label: color.label });
         setEditTitle(color.label);
         setBackToList(() => onBackToList);
@@ -62,7 +63,6 @@ export function ManageLabelsPopover({ anchorEl, editTask, task, editLabel }) {
     }
 
     function onSaveLabel() {
-
         editLabel({ color: editColor.color, label: editTitle });
         setEditColor(null);
         setEditTitle('');
@@ -90,7 +90,7 @@ export function ManageLabelsPopover({ anchorEl, editTask, task, editLabel }) {
                             <Input placeholder="Search labels..." className="labels-search-input" value={inputSearch} onChange={(e) => setInputSearch(e.target.value)} />
                             <h3 className="labels-sub-title">Labels</h3>
                             <div className="labels-list">
-                                {filteredLabels.map((label) => <LabelsOption key={label.color} label={label} onChangeLabel={onChangeLabel} editColor={onEditColor} />)}
+                                {filteredLabels.map((taskLabel) => <LabelsOption key={taskLabel.color} taskLabel={taskLabel} selectLabel={onSelectLabel} editColor={onEditColor} />)}
                             </div>
                         </section>}
                     {editColor &&
@@ -115,18 +115,18 @@ export function ManageLabelsPopover({ anchorEl, editTask, task, editLabel }) {
     );
 }
 
-function LabelsOption({ label, onChangeLabel, editColor }) {
+function LabelsOption({ taskLabel, selectLabel, editColor }) {
     return (
         <div className="popover-labels-option">
-            <Checkbox className="checkbox" checked={label.isTask} onChange={(e) => {
-                onChangeLabel(label, !label.isTask);
+            <input type="checkbox" className="checkbox" checked={taskLabel.isTask} onChange={(e) => {
+                selectLabel(taskLabel, e.target.checked);
             }} />
-            <Tooltip title={`Color: ${label.color}, title: ${label.label ? label.label : 'none'}`} arrow={false}>
-                <div className="label-block" style={{ backgroundColor: utilService.getColorHashByName(label.color).bgColor }} onClick={() => onChangeLabel(label, !label.isTask)}>
-                    <span className="label-color-name">{label.label}</span>
+            <Tooltip title={`Color: ${taskLabel.color}, title: ${taskLabel.label ? taskLabel.label : 'none'}`} arrow={false}>
+                <div className="label-block" style={{ backgroundColor: utilService.getColorHashByName(taskLabel.color).bgColor }} onClick={() => onChangeLabel(taskLabel, !taskLabel.isTask)}>
+                    <span className="label-color-name">{taskLabel.label}</span>
                 </div>
             </Tooltip>
-            <SvgButton src='/img/edit.svg' className="edit-button" onClick={() => editColor(label)} />
+            <SvgButton src='/img/edit.svg' className="edit-button" onClick={() => editColor(taskLabel)} />
         </div>
     );
 }
