@@ -67,7 +67,7 @@ export function TaskPreview({ task, editTask, editLabel }) {
         ></div>
       )}
       <section
-        className="group-task-content"
+        className={`group-task-content ${taskCover.idUploadedBackground || taskCover.color ? 'cover' : ''}`}
         onClick={() => navigate(`/c/${task.id}`, { replace: true })}
       >
         <article className="group-task-content-labels">
