@@ -7,6 +7,9 @@ export function NameInput({
   value = "",
   onSubmit,
   expandInputWidth = true,
+  maxRows= 1,
+  className,
+  autoSelect = true,
   ...other
 }) {
   const [sectionRef, isChangeable, setIsChangeable] = useClickOutside(false);
@@ -28,7 +31,14 @@ export function NameInput({
     if (textAreaRef.current) {
       const textAreaElement = textAreaRef.current.resizableTextArea.textArea;
       textAreaElement.focus();
-      textAreaElement.setSelectionRange(0, textAreaElement.value.length); // Select all text
+      if (autoSelect) {
+        textAreaElement.setSelectionRange(0, textAreaElement.value.length); // Select all text
+      } else {
+        textAreaElement.setSelectionRange(
+          textAreaElement.value.length,
+          textAreaElement.value.length
+        );
+      }
     }
   }, [isChangeable, value]);
 
@@ -62,12 +72,16 @@ export function NameInput({
   }
 
   return (
-    <section {...other} ref={sectionRef}>
+    <section
+      className={`name-input ${className ? className : ""}`}
+      {...other}
+      ref={sectionRef}
+    >
       {isChangeable ? (
         <TextArea
           ref={textAreaRef}
           className="title-input"
-          autoSize={{ minRows: 1, maxRows: 1 }}
+          autoSize={{ minRows: 1 ,maxRows:maxRows}}
           value={newName}
           onChange={(e) => setNewName(e.target.value)}
           onKeyDown={onKeyDown}

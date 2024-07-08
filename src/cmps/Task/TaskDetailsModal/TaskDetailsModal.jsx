@@ -13,6 +13,8 @@ import { ReactSVG } from "react-svg";
 import detailsIcon from "/img/board-index/detailsImgs/detailsIcon.svg";
 import defaultProfile from "/img/defaultProfile.svg";
 import { utilService } from "../../../services/util.service";
+import { NameInput } from "../../CustomCpms/NameInput";
+import TextArea from "antd/es/input/TextArea";
 
 export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
   const group = useSelector((state) =>
@@ -43,6 +45,10 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
   function onClose() {
     onCloseTask();
     navigate(`/b/${task.idBoard}`, { replace: true });
+  }
+
+  function onRenameTask(name) {
+    editTask({ ...task, name });
   }
 
   return (
@@ -78,8 +84,9 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
     >
       {!!isImgCover && (
         <div
-          className={`details-header-img-cover ${task?.cover?.brightness === "dark" ? "dark" : "light"
-            }`}
+          className={`details-header-img-cover ${
+            task?.cover?.brightness === "dark" ? "dark" : "light"
+          }`}
           style={{
             backgroundColor: task?.cover?.bg,
           }}
@@ -107,7 +114,15 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
         <div className="details-header">
           <ReactSVG src={detailsIcon} className="icon" wrapper="span" />
           <span className="info">
-            <span className="task-name">{task?.name}</span>
+            <NameInput
+              className="task-name"
+              value={task.name}
+              expandInputWidth={false}
+              onSubmit={onRenameTask}
+              autoSelect={false}
+              maxRows={20}
+            />
+            {/* <TextArea autoSize={{ minRows: 1, maxRows: 20 }} /> */}
             <span className="task-group">
               in list{" "}
               <MoveCardPopover
@@ -144,7 +159,11 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
             editTask={editTask}
             editLabel={editLabel}
           />
-          <TaskDetailsActions task={task} editTask={editTask} onClose={onClose} />
+          <TaskDetailsActions
+            task={task}
+            editTask={editTask}
+            onClose={onClose}
+          />
         </div>
       </div>
     </Modal>

@@ -6,7 +6,7 @@ export function useClickOutside(initialIsOpen) {
   const ref = useRef(null);
 
   const handleClickOutside = useCallback(
-    function (event) {
+    (event) => {
       if (ref.current && !ref.current.contains(event.target)) {
         setIsOpen(false);
       }
@@ -14,16 +14,23 @@ export function useClickOutside(initialIsOpen) {
     [ref]
   );
 
+  const handleWindowBlur = useCallback(() => {
+    setIsOpen(false);
+  }, []);
+
   useEffect(() => {
     if (isOpen) {
       document.addEventListener("mousedown", handleClickOutside);
+      window.addEventListener("blur", handleWindowBlur);
     } else {
       document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("blur", handleWindowBlur);
     }
-    return function cleanup() {
+    return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("blur", handleWindowBlur);
     };
-  }, [isOpen, handleClickOutside]);
+  }, [isOpen, handleClickOutside, handleWindowBlur]);
 
   return [ref, isOpen, setIsOpen];
 }
