@@ -44,7 +44,10 @@ export function BoardIndex() {
         setSelectedTaskId(null);
       }
       if (params.cardId) {
-        loadBoardByTaskId(params.cardId);
+        const res = await loadBoardByTaskId(params.cardId);
+        if (res?.status === 404) {
+          navigate("/");
+        }
         setSelectedTaskId(params.cardId);
       }
     }

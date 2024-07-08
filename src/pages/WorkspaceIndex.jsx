@@ -67,7 +67,6 @@ export function WorkspaceIndex() {
         const board = boards.find((b) => b.id === boardId);
         if (board) {
             updateBoard({ ...board, closed: true });
-            editWorkspaceBoardState({ ...board, closed: true });
         }
     }
 
@@ -75,7 +74,6 @@ export function WorkspaceIndex() {
         const board = boards.find((b) => b.id === boardId);
         if (board) {
             updateBoard({ ...board, members: board.members.filter((m) => m.id !== user.id) });
-            editWorkspaceBoardState({ ...board, members: board.members.filter((m) => m.id !== user.id) });
             editUser({ ...user, idBoards: user.idBoards.filter((id) => id !== boardId) });
         }
     }

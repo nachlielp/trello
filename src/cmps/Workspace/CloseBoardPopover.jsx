@@ -32,12 +32,14 @@ export function CloseBoardPopover({ boardName, boardId, onSelectBoardOptions, cl
         onSelectBoardOptions(boardId);
     }
 
-    function onCloseBoard() {
+    function onCloseBoard(e) {
+        e.stopPropagation();
         closeBoard(boardId);
         setIsOpen(false);
     }
 
-    function onLeaveBoard() {
+    function onLeaveBoard(e) {
+        e.stopPropagation();
         leaveBoard(boardId);
         setIsOpen(false);
     }

@@ -2,6 +2,7 @@ import { boardService } from "../services/board.service.local";
 import { utilService } from "../services/util.service";
 import { memberService } from "../services/members.service.local";
 import { store } from "./store";
+import { editWorkspaceBoardState } from "./workspace.actions";
 import {
   SET_MEMBERS,
   SET_BOARD,
@@ -40,6 +41,9 @@ import {
 
 export async function loadBoard(boardId) {
   const boardData = await boardService.getById(boardId);
+  if (boardData.error) {
+    return boardData;
+  }
   store.dispatch({
     type: SET_BOARD,
     board: { ...boardData, apdatedAt: new Date().getTime() },
@@ -49,6 +53,9 @@ export async function loadBoard(boardId) {
 
 export async function loadBoardByTaskId(taskId) {
   const board = await boardService.getByTaskId(taskId);
+  if (board.error) {
+    return board;
+  }
   store.dispatch({
     type: SET_BOARD,
     board: { ...board, apdatedAt: new Date().getTime() },
@@ -288,6 +295,7 @@ export async function updateBoard(newBoard) {
       type: SET_BOARD,
       board: { ...newBoard, apdatedAt: new Date().getTime() },
     });
+    editWorkspaceBoardState({ ...newBoard, apdatedAt: new Date().getTime() });
     await boardService.save({ ...newBoard, apdatedAt: new Date().getTime() });
   } catch (err) {
     console.error("Cannot update board", err);

@@ -58,12 +58,10 @@
 
 .group-task-content {
   padding: 8px 12px 4px 12px;
-  box-shadow: var(
-    --ds-shadow-raised,
-    0px 1px 1px #091e4240,
-    0px 0px 1px #091e424f
-  );
-  border-radius: 8px;
+  box-shadow: var(--ds-shadow-raised,
+      0px 1px 1px #091e4240,
+      0px 0px 1px #091e424f);
+  border-radius: 0 0 8px 8px;
 }
 
 .group-task-content.image-cover {

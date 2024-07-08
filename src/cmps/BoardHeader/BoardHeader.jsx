@@ -9,10 +9,10 @@ import { ViewsButton } from "./ViewsButton";
 import { FilterButton } from "./FilterButton";
 import { ProfilePopover } from "../Task/ManageTaskPopovers/ProfilePopover";
 import { StarBoardBtn } from "../CustomCpms/StarBoardBtn";
+import { useEffect } from "react";
 
 export function BoardHeader({ board, starredBoardIds, starToggle }) {
   const members = useSelector((state) => state.boardModule.board.members);
-
 
   function onToggleStar(boardId) {
     const starredIds = starredBoardIds.includes(boardId) ? starredBoardIds.filter((id) => id !== boardId) : [...starredBoardIds, boardId];
