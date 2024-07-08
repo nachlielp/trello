@@ -45,7 +45,6 @@ export function BoardIndex() {
       }
       if (params.cardId) {
         const res = await loadBoardByTaskId(params.cardId);
-        console.log("res", res);
         if (res?.status === 404) {
           navigate("/");
         }

@@ -50,7 +50,6 @@ export async function loadBoard(boardId) {
 
 export async function loadBoardByTaskId(taskId) {
   const board = await boardService.getByTaskId(taskId);
-  console.log("board", board);
   if (board.error) {
     return board;
   }
