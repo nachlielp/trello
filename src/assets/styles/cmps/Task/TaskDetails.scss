@@ -1,13 +1,15 @@
 .task-details {
   position: absolute;
   inset: 56px 50% auto 50%;
+  background-color: var(--ds-surface-overlay, #ffffff);
 
   margin: 0 !important;
   transform: translate(-50%) !important;
   width: 768px !important;
   animation: none !important;
   opacity: 1 !important;
-
+  padding: 0;
+  border-radius: 12px;
   .anticon-close {
     color: var(--ds-text, #172b4d);
   }
@@ -21,7 +23,7 @@
   }
 
   .ant-modal-content {
-    background-color: var(--ds-surface-overlay, #ffffff);
+    background-color: var(--ds-background-neutral, #091e420f);
     color: var(--ds-text, #172b4d);
 
     .details-header-img-cover {
@@ -32,7 +34,6 @@
       margin: -20px -24px 0 -24px;
       border-radius: 8px 8px 0 0;
       height: 160px;
-
       img {
         object-fit: cover;
         // Add this line
@@ -112,7 +113,6 @@
     .details-header {
       display: flex;
       color: var(--ds-text, #172b4d);
-      background-color: var(--ds-surface-overlay, #ffffff);
 
       .icon {
         font-size: 24px;
@@ -180,8 +180,6 @@
           &:last-child {
             margin: 0;
           }
-
-
         }
 
         button {
@@ -206,7 +204,7 @@
             text-decoration: none;
           }
 
-          >span {
+          > span {
             background: none;
             color: var(--ds-icon, #44546f);
             font-size: 16px;
@@ -222,14 +220,12 @@
           display: flex;
           padding-left: 34px;
 
-          >section {
+          > section {
             max-width: 100%;
             margin: 0 16px 16px 0;
           }
 
           .task-details-members {
-
-
             .members {
               display: flex;
               flex-direction: row;
@@ -250,8 +246,10 @@
                 margin: 0 4px 4px 0;
 
                 &:hover {
-                  background-color: var(--ds-background-neutral-hovered,
-                      #091e4224);
+                  background-color: var(
+                    --ds-background-neutral-hovered,
+                    #091e4224
+                  );
                   border: none;
                   box-shadow: none;
                   color: var(--ds-text, #172b4d);
@@ -260,7 +258,6 @@
               }
             }
           }
-
         }
       }
     }
