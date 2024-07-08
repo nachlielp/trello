@@ -45,7 +45,7 @@ export function TaskDetailsActions({ task, editTask, onClose }) {
   ];
   return (
     <section>
-      <p>Actions</p>
+      <p className="sub-title">Actions</p>
       {actions.map((btn, index) => (
         <div key={index}>{btn.popover}</div>
       ))}

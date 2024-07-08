@@ -71,7 +71,7 @@ export function TaskDetailsAddToCard({ task, editTask, editLabel }) {
   ];
   return (
     <section className="tittle">
-      <p>Add to card</p>
+      <p className="sub-title">Add to card</p>
       {addToCard.map((btn, index) => (
         <div key={index}>
           {btn.popover}
