@@ -141,9 +141,7 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
             {/* <div className="labels">
               <p>Labels</p>
             </div> */}
-            <div className="labels">
-              <TaskDetailsLabels task={task} editTask={editTask} editLabel={editLabel} />
-            </div>
+            {task.labels.length > 0 && <TaskDetailsLabels task={task} editTask={editTask} editLabel={editLabel} />}
           </section>
         </div>
         <div className="details-body__right">

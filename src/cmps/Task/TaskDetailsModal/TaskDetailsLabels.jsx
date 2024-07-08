@@ -2,14 +2,14 @@ import { SvgButton } from "../../CustomCpms/SvgButton";
 import { ManageLabelsPopover } from "../ManageTaskPopovers/ManageLabelsPopover";
 
 export function TaskDetailsLabels({ task, editTask, editLabel }) {
-    console.log('task', task)
     return (
         <section className="task-details-labels">
             <p className="sub-title">Labels</p>
             <article className="label-list">
                 {task.labels.map((label) => (
-                    <div className="task-details-label" key={label.id} style={{ backgroundColor: label.color }}>
-                        {label.name}
+
+                    <div className="task-details-label" key={label.color} style={{ backgroundColor: label.color }}>
+                        {label.label}
                     </div>
                 ))}
                 <ManageLabelsPopover editTask={editTask} editLabel={editLabel} task={task} anchorEl={popoverAncher} />
