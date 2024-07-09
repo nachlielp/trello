@@ -99,13 +99,7 @@
 
   .checkbox {
     margin-right: 8px;
-    > span {
-      span {
-        box-shadow: inset 0 0 0 1px var(--ds-border-input, #091e4224);
-        background-color: var(--ds-background-input, #ffffff);
-        border: none;
-      }
-    }
+  
   }
 
   .label-block {

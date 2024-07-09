@@ -5,6 +5,7 @@ import { utilService } from "../../../services/util.service";
 import { useSelector } from "react-redux";
 import { SvgButton } from "../../CustomCpms/SvgButton";
 import { Tooltip } from "antd";
+import { CheckBox } from "../../CustomCpms/CheckBox";
 
 export function ManageLabelsPopover({ anchorEl, editTask, task, editLabel }) {
     const boardLabels = useSelector((state) => state.boardModule.board.labelNames) || [];
@@ -118,7 +119,7 @@ export function ManageLabelsPopover({ anchorEl, editTask, task, editLabel }) {
 function LabelsOption({ taskLabel, selectLabel, editColor }) {
     return (
         <div className="popover-labels-option">
-            <input type="checkbox" className="checkbox" checked={taskLabel.isTask} onChange={(e) => {
+            <CheckBox type="checkbox" className="checkbox" checked={taskLabel.isTask} onChange={(e) => {
                 selectLabel(taskLabel, e.target.checked);
             }} />
             <Tooltip title={`Color: ${taskLabel.color}, title: ${taskLabel.label ? taskLabel.label : 'none'}`} arrow={false}>
