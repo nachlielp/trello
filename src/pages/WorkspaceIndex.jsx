@@ -11,10 +11,12 @@ import { setBoards, editWorkspaceBoardState } from "../store/workspace.actions"
 import { updateBoard } from "../store/board.actions";
 
 export function WorkspaceIndex() {
-    const boardsInfo = useSelector((state) => state.workspaceModule.boards).filter((b) => !b.closed).map((b) => ({ id: b.id, name: b.name, closed: b.closed, coverImg: b.prefs.backgroundImage }));
+    const user = useSelector((state) => state.userModule.user);
+    const boardsInfo = useSelector((state) => state.workspaceModule.boards)
+        .filter(b => user && b.members.some(m => m.id === user.id)).filter((b) => !b.closed)
+        .map((b) => ({ id: b.id, name: b.name, closed: b.closed, coverImg: b.prefs.backgroundImage }));
     const boards = useSelector((state) => state.workspaceModule.boards);
     const boardBgPrefs = useSelector((state) => state.boardModule.board)?.prefs;
-    const user = useSelector((state) => state.userModule.user);
     const params = useParams();
 
     useEffect(() => {
