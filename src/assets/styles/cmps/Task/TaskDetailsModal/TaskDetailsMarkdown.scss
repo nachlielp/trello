@@ -15,6 +15,10 @@
     .markdown-body {
         margin-left: 32px;
 
+        .markdown-content-wraper {
+            cursor: pointer;
+        }
+
         .empty-description {
             background-color: #e3e6ea;
             padding: 10px;

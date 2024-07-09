@@ -44,9 +44,11 @@ export function TaskDetailsMarkdown({ editTask, task }) {
                     </article>
                 }
                 {!isEditing && !isEmpty &&
-                    <ReactMarkdown rehypePlugins={[rehypeRaw]}>
-                        {task.desc}
-                    </ReactMarkdown>
+                    <article className='markdown-content-wraper' onClick={() => setIsEditing(true)}>
+                        <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+                            {task.desc}
+                        </ReactMarkdown>
+                    </article>
                 }
                 {isEditing && <MDXEditor
                     ref={ref}
