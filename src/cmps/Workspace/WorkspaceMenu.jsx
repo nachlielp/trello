@@ -14,8 +14,10 @@ export function WorkspaceMenu({ boardsInfo, selectedBoardId, starredBoardIds, on
         const root = document.documentElement;
         const dynamicIconColor = colorTheme === "dark" ? "#fff" : "#42526E";
         const dynamicTextColor = colorTheme === "dark" ? "#fff" : "#172B4D";
+        const dynamicLightDecrease = colorTheme === "dark" ? "0.25" : "0.0";
         root.style.setProperty('--dynamic-icon', dynamicIconColor);
         root.style.setProperty('--dynamic-text', dynamicTextColor);
+        root.style.setProperty('--dynamic-light-decrease', dynamicLightDecrease);
     }, [colorTheme]);
     // const bgTextColor = colorTheme === "dark" ? "#fff" : "#000";
     const navigate = useNavigate();
