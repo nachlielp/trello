@@ -1,7 +1,6 @@
 import { SvgButton } from "../CustomCpms/SvgButton";
 
 export function WorkspaceHeader({ bgColor }) {
-    console.log("bgColor: ", bgColor);
     return (
         <nav className="workspace-header" style={{ backgroundColor: bgColor }}>
             <SvgButton className="btn main" src="/img/workspace/appSwitcher.svg" />
