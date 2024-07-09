@@ -1,0 +1,20 @@
+.task-details-section-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    gap: 8px;
+
+    .section-title {
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: 600;
+        color: var(--color-text-primary);
+        padding-bottom: 8px;
+    }
+
+    .injected-svg {
+        width: 24px;
+        height: 24px;
+    }
+}
