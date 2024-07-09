@@ -13,9 +13,9 @@ import { ReactSVG } from "react-svg";
 import detailsIcon from "/img/board-index/detailsImgs/detailsIcon.svg";
 import defaultProfile from "/img/defaultProfile.svg";
 import { utilService } from "../../../services/util.service";
-import { NameInput } from "../../CustomCpms/NameInput";
-import TextArea from "antd/es/input/TextArea";
 import { TaskDetailsLabels } from "./TaskDetailsLabels";
+import { TaskDetailsMarkdown } from "./TaskDetailsMarkdown";
+import { NameInput } from "../../CustomCpms/NameInput";
 
 export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
   const group = useSelector((state) =>
@@ -76,9 +76,8 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
 
   const imgCoverHeader = (
     <section
-      className={`details-header-img-cover ${
-        task?.cover?.brightness === "dark" ? "dark" : "light"
-      }`}
+      className={`details-header-img-cover ${task?.cover?.brightness === "dark" ? "dark" : "light"
+        }`}
       style={{
         backgroundColor: task?.cover?.bg,
       }}
@@ -130,26 +129,23 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
         </span>
       </article>
 
-      <section className="details-body">
-        <div className="details-body__left">
-          {/* Additional content here */}
-          {/* {utilService.makeLorem(1000)} */}
-          <section className="subsection">
+      <main className="details-body">
+        <section className="details-body__left">
+          <article className="subsection">
             {hasMembers && (
               <TaskDetailsMembers currentTask={task} editTask={editTask} />
             )}
-            {/* <div className="labels">
-              <p>Labels</p>
-            </div> */}
             {task.labels.length > 0 && <TaskDetailsLabels task={task} editTask={editTask} editLabel={editLabel} />}
-          </section>
-        </div>
-        <div className="details-body__right">
+          </article>
+          <TaskDetailsMarkdown editTask={editTask} task={task} />
+
+        </section>
+        <section className="details-body__right">
           {!isMember && (
-            <section>
+            <article>
               <p>Suggested</p>
               <SvgButton src={defaultProfile} label={"Join"} onClick={onJoin} />
-            </section>
+            </article>
           )}
           <TaskDetailsAddToCard
             task={task}
@@ -161,8 +157,8 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
             editTask={editTask}
             onClose={onClose}
           />
-        </div>
-      </section>
+        </section>
+      </main>
     </Modal>
   );
 }

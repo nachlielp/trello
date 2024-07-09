@@ -40,7 +40,7 @@
               "location": false,
               "votes": 0,
               "viewingMemberVoted": false,
-              "subscribed": true,
+              "subscribed": false,
               "attachments": 2,
               "fogbugz": "",
               "checkItems": 5,
@@ -1416,7 +1416,7 @@
               "checkItemsChecked": 0,
               "checkItemsEarliestDue": null,
               "comments": 0,
-              "description": true,
+              "description": false,
               "due": null,
               "dueComplete": false,
               "lastUpdatedByAi": false,
@@ -1427,7 +1427,7 @@
             "dueComplete": false,
             "createdAt": "2024-06-22T08:31:57.097Z",
             "dateLastActivity": "2024-06-22T08:31:57.097Z",
-            "desc": "[https://github.com/nachpok/trello/blob/main/src/services/event-bus.service.js](https://github.com/nachpok/trello/blob/main/src/services/event-bus.service.js \"smartCard-inline\")",
+            "desc": "",
             "descData": {
               "emoji": {}
             },
@@ -1721,7 +1721,7 @@
               "checkItemsChecked": 0,
               "checkItemsEarliestDue": null,
               "comments": 0,
-              "description": true,
+              "description": false,
               "due": null,
               "dueComplete": false,
               "lastUpdatedByAi": false,
@@ -1732,7 +1732,7 @@
             "dueComplete": false,
             "createdAt": "2024-06-22T08:33:00.870Z",
             "dateLastActivity": "2024-06-22T08:33:00.870Z",
-            "desc": "- 1\n- 2\n- 3\n- 4",
+            "desc": "",
             "descData": {
               "emoji": {}
             },
@@ -2107,7 +2107,7 @@
             "dueComplete": false,
             "createdAt": "2024-06-22T08:41:08.198Z",
             "dateLastActivity": "2024-06-22T08:41:08.198Z",
-            "desc": "![Screenshot\\_2.png](https://trello.com/1/cards/66756fdbdfdce3305b75f751/attachments/66758cda9b6ddd6d9eb72b20/download/Screenshot_2.png)",
+            "desc": "**dlkjfsldfj**\n\n- fkjljT\n  fjj\n  d\n- _fdf_\n- df",
             "descData": {
               "emoji": {}
             },
@@ -2173,7 +2173,7 @@
             "dueComplete": false,
             "createdAt": "2024-06-22T08:12:54.424Z",
             "dateLastActivity": "2024-06-22T08:12:54.424Z",
-            "desc": "![Screenshot\\_3.png](https://trello.com/1/cards/66757099dbeaed543b4603b1/attachments/66758d1fffc9a9d1a2cd085f/download/Screenshot_3.png)",
+            "desc": "**What is Lorem Ipsum?** Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.  ",
             "descData": {
               "emoji": {}
             },
@@ -2228,7 +2228,7 @@
               "checkItemsChecked": 0,
               "checkItemsEarliestDue": null,
               "comments": 0,
-              "description": true,
+              "description": false,
               "due": null,
               "dueComplete": false,
               "lastUpdatedByAi": false,
@@ -2239,7 +2239,7 @@
             "dueComplete": false,
             "createdAt": "2024-06-22T08:41:13.547Z",
             "dateLastActivity": "2024-06-22T08:41:13.547Z",
-            "desc": "![Screenshot\\_1.png](https://trello.com/1/cards/66758c6d3b868a6ca2bc0cef/attachments/66758cc12183e8943bcf98c4/download/Screenshot_1.png)",
+            "desc": "",
             "descData": {
               "emoji": {}
             },
