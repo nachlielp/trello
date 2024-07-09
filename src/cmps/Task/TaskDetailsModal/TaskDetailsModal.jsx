@@ -142,8 +142,8 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
         </section>
         <section className="details-body__right">
           {!isMember && (
-            <article>
-              <p>Suggested</p>
+            <article className="suggestions">
+              <p className="sub-title">Suggested</p>
               <SvgButton src={defaultProfile} label={"Join"} onClick={onJoin} />
             </article>
           )}
