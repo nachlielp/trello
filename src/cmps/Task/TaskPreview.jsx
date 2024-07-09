@@ -62,7 +62,7 @@ export function TaskPreview({ task, editTask, editLabel }) {
       {taskCover.idUploadedBackground && (
         <div
           className="group-task-header img-cover"
-          style={{ backgroundImage: `url(${task.cover.scaled[2].url})` }}
+          style={{ backgroundImage: `url(${task?.cover?.scaled[2]?.url})` }}
           onClick={() => navigate(`/c/${task.id}`, { replace: true })}
         ></div>
       )}

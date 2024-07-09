@@ -91,6 +91,7 @@
               "idUploadedBackground": "66797e79c154d387c3406e55",
               "size": "normal",
               "brightness": "dark",
+              "bg": "#191d27",
               "scaled": [
                 {
                   "id": "66797e79c154d387c3406e56",
@@ -1176,6 +1177,7 @@
               "idUploadedBackground": "66797e79c154d387c3406e55",
               "size": "normal",
               "brightness": "dark",
+              "bg": "#191d27",
               "scaled": [
                 {
                   "id": "66797e79c154d387c3406e56",
@@ -1529,6 +1531,7 @@
             "cover": {
               "idAttachment": null,
               "color": null,
+              "bg": "#0d1417",
               "idUploadedBackground": "667ba65889e9ea823c590c0c",
               "size": "full",
               "brightness": "dark",
