@@ -84,7 +84,7 @@ export function WorkspaceIndex() {
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
         }}>
-            <WorkspaceHeader />
+            <WorkspaceHeader bgColor={boardBgPrefs?.backgroundColor || "#000"} />
 
             {user && starredBoardIds ? (
                 <section className="workspace-content">

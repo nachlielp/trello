@@ -30,7 +30,6 @@ function get(entityType, entityId) {
 function post(entityType, newEntity) {
     newEntity.id = _makeId()
     return query(entityType).then(entities => {
-        console.log("storage.ent: ", entities)
         entities.push(newEntity)
         _save(entityType, entities)
         return newEntity

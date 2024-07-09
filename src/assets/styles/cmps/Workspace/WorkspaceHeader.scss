@@ -6,8 +6,9 @@
     min-height: 48px;
     max-height: 48px;
     overflow: hidden;
-    backdrop-filter: blur(6px);
-    background-color: hsla(124, 34.1%, 17.3%, 0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--dynamic-text-transparent, #dfe1e6);
+
     padding: 8px;
     gap: 4px;
 
@@ -57,9 +58,11 @@
 
         &:hover {
             background-color: var(--create-menu-button-background-hovered);
+            color: var(--header-button-color);
         }
 
         .injected-svg {
+
             margin-left: 4px;
             margin-top: 4px;
             width: 16px;
@@ -78,6 +81,7 @@
         border: none;
         cursor: pointer;
 
+        color: var(--dynamic-text);
 
         &:hover {
             background-color: var(--header-button-hovered);

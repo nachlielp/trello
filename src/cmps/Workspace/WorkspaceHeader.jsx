@@ -1,8 +1,8 @@
 import { SvgButton } from "../CustomCpms/SvgButton";
 
-export function WorkspaceHeader() {
+export function WorkspaceHeader({ bgColor }) {
     return (
-        <nav className="workspace-header">
+        <nav className="workspace-header" style={{ backgroundColor: bgColor }}>
             <SvgButton className="btn main" src="/img/workspace/appSwitcher.svg" />
             <button className="gif-btn">
                 <div className="gif"></div>
