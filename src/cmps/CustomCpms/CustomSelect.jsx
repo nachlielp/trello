@@ -82,6 +82,7 @@ export function CustomSelect({
       >
         {
           <input
+          className="custom-input"
             ref={inputRef}
             placeholder={selectedItem?.name}
             value={searchValue}
