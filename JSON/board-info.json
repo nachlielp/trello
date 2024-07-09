@@ -241,46 +241,22 @@
             "idAttachmentCover": null,
             "labels": [
               {
-                "id": "66756a351dc51400eb1968el",
-                "idBoard": "64f721f169b14894fac36cdf",
-                "name": "",
-                "color": "blue",
-                "uses": 1
+                "color": "blue"
               },
               {
-                "id": "66793c8367673bb5384b068h",
-                "idBoard": "64f721f169b14894fac36cdf",
-                "name": "",
-                "color": "pink",
-                "uses": 1
+                "color": "pink"
               },
               {
-                "id": "66756a351dc51400eb1968ec",
-                "idBoard": "64f721f169b14894fac36cdf",
-                "name": "Urgent",
-                "color": "red",
-                "uses": 2
+                "color": "red"
               },
               {
-                "id": "66756a351dc51400eb1968f4",
-                "idBoard": "64f721f169b14894fac36cdf",
-                "name": "",
-                "color": "purple",
-                "uses": 1
+                "color": "purple"
               },
               {
-                "id": "66756a351dc51400eb1968e3",
-                "idBoard": "64f721f169b14894fac36cdf",
-                "name": "",
-                "color": "orange",
-                "uses": 2
+                "color": "orange"
               },
               {
-                "id": "66756a351dc51400eb1968e1",
-                "idBoard": "64f721f169b14894fac36cdf",
-                "name": ";fdkds;kf;skdf;sdkf;sdkf;s",
-                "color": "green",
-                "uses": 2
+                "color": "green"
               }
             ],
             "idLabels": [
@@ -1327,46 +1303,22 @@
             "idAttachmentCover": null,
             "labels": [
               {
-                "id": "66756a351dc51400eb1968ee",
-                "idBoard": "66756a34def1a6d3b8cd179d",
-                "name": "",
-                "color": "blue",
-                "uses": 1
+                "color": "blue"
               },
               {
-                "id": "66793c8367673bb5384b068f",
-                "idBoard": "66756a34def1a6d3b8cd179d",
-                "name": "",
-                "color": "pink",
-                "uses": 1
+                "color": "pink"
               },
               {
-                "id": "66756a351dc51400eb1968ed",
-                "idBoard": "66756a34def1a6d3b8cd179d",
-                "name": "Urgent",
-                "color": "red",
-                "uses": 2
+                "color": "red"
               },
               {
-                "id": "66756a351dc51400eb1968f3",
-                "idBoard": "66756a34def1a6d3b8cd179d",
-                "name": "",
-                "color": "purple",
-                "uses": 1
+                "color": "purple"
               },
               {
-                "id": "66756a351dc51400eb1968e8",
-                "idBoard": "66756a34def1a6d3b8cd179d",
-                "name": "",
-                "color": "orange",
-                "uses": 2
+                "color": "orange"
               },
               {
-                "id": "66756a351dc51400eb1968e2",
-                "idBoard": "66756a34def1a6d3b8cd179d",
-                "name": ";fdkds;kf;skdf;sdkf;sdkf;s",
-                "color": "green",
-                "uses": 2
+                "color": "green"
               }
             ],
             "idLabels": [
@@ -1672,11 +1624,7 @@
             "idAttachmentCover": null,
             "labels": [
               {
-                "id": "66756a351dc51400eb1968e8",
-                "idBoard": "66756a34def1a6d3b8cd179d",
-                "name": "",
-                "color": "orange",
-                "uses": 1
+                "color": "orange"
               }
             ],
             "idLabels": [
@@ -1814,11 +1762,7 @@
             "idAttachmentCover": null,
             "labels": [
               {
-                "id": "66756a351dc51400eb1968ed",
-                "idBoard": "66756a34def1a6d3b8cd179d",
-                "name": "Urgent",
-                "color": "red",
-                "uses": 1
+                "color": "red"
               }
             ],
             "idLabels": [
