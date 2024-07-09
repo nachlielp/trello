@@ -1,11 +1,20 @@
 .name-input {
   padding: 0;
+  position: relative;
   .title {
     margin: 0;
     padding: 0 2px;
     font-size: 18px;
     font-weight: 700;
     // line-height: 20px;
+  }
+  span.title-input{
+    position: absolute;
+    opacity: 0;
+    height: 0;
+   padding-top: 0;
+   padding-bottom: 0;
+   margin: 0;
   }
   .title-input {
     appearance: none;
@@ -16,7 +25,6 @@
     font-weight: 700;
     overflow: hidden;
     text-overflow: clip;
-
     transition: none;
     border-radius: 3px;
     &:focus {

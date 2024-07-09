@@ -7,7 +7,7 @@ export function NameInput({
   value = "",
   onSubmit,
   expandInputWidth = true,
-  maxRows= 1,
+  maxRows = 1,
   className,
   autoSelect = true,
   maxLength = 30,
@@ -16,9 +16,9 @@ export function NameInput({
   const [sectionRef, isChangeable, setIsChangeable] = useClickOutside(false);
 
   const [newName, setNewName] = useState(value);
-  const [customWith, setCustomWith] = useState(null);
+  const [customWidth, setCustomWidth] = useState(null);
   const textAreaRef = useRef(null);
-  const paragraphRef = useRef(null);
+  const spanRef = useRef(null);
 
   useEffectUpdate(() => {
     if (!isChangeable && newName !== value) {
@@ -43,14 +43,13 @@ export function NameInput({
     }
   }, [isChangeable, value]);
 
+  //sutom width
   useEffect(() => {
-    if (paragraphRef.current) {
-      const currentWidth = paragraphRef.current.clientWidth;
-      setCustomWith({ width: `${currentWidth + 0.4}px` });
-    } else {
-      setCustomWith({ width: `${20 + (newName.length * 12 + 1.04)}px` });
+    if (spanRef.current && expandInputWidth) {
+      const currentWidth = spanRef.current.offsetWidth;
+      setCustomWidth(currentWidth);
     }
-  }, [value, newName]);
+  }, [value, newName,isChangeable]);
 
   async function onKeyDown(e) {
     if (e.key === "Enter") {
@@ -79,24 +78,23 @@ export function NameInput({
       ref={sectionRef}
     >
       {isChangeable ? (
-        <TextArea
-          ref={textAreaRef}
-          className="title-input"
-          autoSize={{ minRows: 1 ,maxRows:maxRows}}
-          value={newName}
-          onChange={(e) => setNewName(e.target.value)}
-          onKeyDown={onKeyDown}
-          style={expandInputWidth ? customWith : {}}
-          maxLength={maxLength}
-        />
+        <>
+          <span className="title-input" ref={spanRef}>
+            {newName}
+          </span>
+          <TextArea
+            ref={textAreaRef}
+            className="title-input"
+            autoSize={{ minRows: 1, maxRows: maxRows }}
+            value={newName}
+            onChange={(e) => setNewName(e.target.value)}
+            onKeyDown={onKeyDown}
+            style={expandInputWidth ? { width: customWidth + "px" } : {}}
+            maxLength={maxLength}
+          />
+        </>
       ) : (
-        <p
-          className="title"
-          onClick={() => setIsChangeable(true)}
-          ref={paragraphRef}
-          style={expandInputWidth ? customWith : {}}
-          
-        >
+        <p className="title" onClick={() => setIsChangeable(true)}>
           {value}
         </p>
       )}
