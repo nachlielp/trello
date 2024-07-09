@@ -115,10 +115,10 @@
                 padding: 4px;
 
 
-                background-color: var(--ds-background-neutral-subtle-hovered);
+                background-color: var(--dynamic-button-hovered);
 
                 &:hover {
-                    background-color: var(--dynamic-button-hovered);
+                    background-color: var(--ds-background-neutral-subtle-hovered);
                     color: var(--dynamic-text);
                 }
 
