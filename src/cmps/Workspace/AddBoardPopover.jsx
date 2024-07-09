@@ -66,7 +66,6 @@ export function AddBoardPopover({ onAddBoard }) {
   }
 
   function handleFocus() {
-    console.log("focus");
     setFocused(true);
   }
 
