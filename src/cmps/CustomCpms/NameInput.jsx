@@ -10,6 +10,7 @@ export function NameInput({
   maxRows = 1,
   className,
   autoSelect = true,
+  maxLength = 30,
   ...other
 }) {
   const [sectionRef, isChangeable, setIsChangeable] = useClickOutside(false);
@@ -87,7 +88,7 @@ export function NameInput({
           onChange={(e) => setNewName(e.target.value)}
           onKeyDown={onKeyDown}
           style={expandInputWidth ? customWith : {}}
-          maxLength={30}
+          maxLength={maxLength}
         />
       ) : (
         <p
