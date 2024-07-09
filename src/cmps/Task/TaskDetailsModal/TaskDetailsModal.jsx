@@ -15,6 +15,7 @@ import defaultProfile from "/img/defaultProfile.svg";
 import { utilService } from "../../../services/util.service";
 import { TaskDetailsLabels } from "./TaskDetailsLabels";
 import { TaskDetailsMarkdown } from "./TaskDetailsMarkdown";
+import { NameInput } from "../../CustomCpms/NameInput";
 
 export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
   const group = useSelector((state) =>
@@ -75,9 +76,8 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
 
   const imgCoverHeader = (
     <section
-      className={`details-header-img-cover ${
-        task?.cover?.brightness === "dark" ? "dark" : "light"
-      }`}
+      className={`details-header-img-cover ${task?.cover?.brightness === "dark" ? "dark" : "light"
+        }`}
       style={{
         backgroundColor: task?.cover?.bg,
       }}

@@ -5,7 +5,6 @@ import { MDXEditor, headingsPlugin, listsPlugin, BlockTypeSelect, quotePlugin, C
 import { TaskDetailsSectionHeader } from "./TaskDetailsSectionHeader";
 
 export function TaskDetailsMarkdown({ editTask, task }) {
-    console.log(task.desc)
     const [isEditing, setIsEditing] = useState(false)
     const [markdown, setMarkdown] = useState("")
     const ref = useRef(null)
@@ -28,7 +27,6 @@ export function TaskDetailsMarkdown({ editTask, task }) {
     function onSave() {
         const isDesc = markdown.trim() !== ""
         const newTask = { ...task, desc: markdown, badges: { ...task.badges, "description": isDesc } }
-        console.log('newTask', newTask)
         editTask(newTask)
         setIsEditing(false)
     }
