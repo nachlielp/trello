@@ -44,9 +44,11 @@ export function TaskDetailsMarkdown({ editTask, task }) {
                     </article>
                 }
                 {!isEditing && !isEmpty &&
-                    <ReactMarkdown rehypePlugins={[rehypeRaw]}>
-                        {task.desc}
-                    </ReactMarkdown>
+                    <article className='markdown-content-wraper' onClick={() => setIsEditing(true)}>
+                        <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+                            {task.desc}
+                        </ReactMarkdown>
+                    </article>
                 }
                 {isEditing && <MDXEditor
                     ref={ref}
@@ -66,10 +68,16 @@ export function TaskDetailsMarkdown({ editTask, task }) {
                     ]}
                 />
                 }
-                {isEditing && <footer className='markdown-footer'>
-                    <button className='btn btn-action' onClick={onSave}>Save</button>
-                    <button className='btn btn-secondary' onClick={onCancel}>Cancel</button>
-                </footer>}
+                {isEditing &&
+                    <footer className='markdown-footer'>
+                        <article className='markdown-footer-buttons'>
+                            <button className='btn btn-action' onClick={onSave}>Save</button>
+                            <button className='btn btn-secondary' onClick={onCancel}>Cancel</button>
+                        </article>
+                        <article className='markdown-footer-links'>
+                            <a className='btn btn-primary' href='https://support.atlassian.com/trello/docs/how-to-format-your-text-in-trello/' target='_blank'>Formatting help</a>
+                        </article>
+                    </footer>}
             </main>
         </section>
     );

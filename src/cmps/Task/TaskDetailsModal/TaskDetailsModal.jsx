@@ -104,8 +104,8 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
       loading={group == undefined}
       footer=""
       className="task-details"
-      title={isColorCover && colorCoverHeader}
     >
+      {isColorCover && colorCoverHeader}
       {!!isImgCover && imgCoverHeader}
       <article className="details-header">
         <ReactSVG src={detailsIcon} className="icon" wrapper="span" />
