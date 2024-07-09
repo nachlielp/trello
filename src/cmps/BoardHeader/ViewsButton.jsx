@@ -14,6 +14,7 @@ import { CloseOutlined } from "@ant-design/icons";
 import { GoGrabber } from "react-icons/go";
 import checkedIcon from "/img/board-index/headerImgs/checkedIcon.svg";
 import more from "/img/workspace/more.svg"
+import { CheckBox } from "../CustomCpms/CheckBox";
 export function ViewsButton() {
   const [openListMenu, setOpenListMenu] = useState(false);
 
@@ -57,16 +58,8 @@ export function ViewsButton() {
                       <GoGrabber />
                     </span>
                     <label>
-                      <input
-                        type="checkBox"
-                        checked={item === "Board"}
-                        disabled
-                      />
-                      <ReactSVG
-                        src={checkedIcon}
-                        wrapper="span"
-                        className="checkbox"
-                      />
+                     
+                      <CheckBox disabled checked={item === "Board"}/>
                       <div className="item">
                         <ReactSVG src={icons[idx]} wrapper="span" />
                         <p>{item}</p>

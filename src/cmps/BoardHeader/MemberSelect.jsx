@@ -9,7 +9,7 @@ import { DownOutlined } from "@ant-design/icons";
 
 export function MemberSelect() {
   const [openListMenu, setOpenListMenu] = useState(false);
-  const members = useSelector((state) => state.boardModule.members).filter(
+  const members = useSelector((state) => state.boardModule.members)?.filter(
     (member) => member.id !== "666fe4efda8643029b6710f3"
   );
   return (
