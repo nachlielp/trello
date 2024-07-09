@@ -52,7 +52,7 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
   }
 
   if (!task) {
-    return <></>
+    return <></>;
   }
 
   const colorCoverHeader = (
@@ -65,22 +65,19 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
     >
       <ManageCoverPopover
         anchorEl={
-          <SvgButton
-            src={coverIcon}
-            className="cover-btn"
-            label="Cover"
-          />
+          <SvgButton src={coverIcon} className="cover-btn" label="Cover" />
         }
         editTask={editTask}
         task={task}
       />
     </section>
-  )
+  );
 
   const imgCoverHeader = (
     <section
-      className={`details-header-img-cover ${task?.cover?.brightness === "dark" ? "dark" : "light"
-        }`}
+      className={`details-header-img-cover ${
+        task?.cover?.brightness === "dark" ? "dark" : "light"
+      }`}
       style={{
         backgroundColor: task?.cover?.bg,
       }}
@@ -91,18 +88,14 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
       <article className={`details-header-cover-actions-wrapper`}>
         <ManageCoverPopover
           anchorEl={
-            <SvgButton
-              src={coverIcon}
-              className="cover-btn"
-              label="Cover"
-            />
+            <SvgButton src={coverIcon} className="cover-btn" label="Cover" />
           }
           editTask={editTask}
           task={task}
         />
       </article>
     </section>
-  )
+  );
 
   return (
     <Modal
@@ -117,7 +110,14 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
       <article className="details-header">
         <ReactSVG src={detailsIcon} className="icon" wrapper="span" />
         <span className="info">
-          <span className="task-name">{task?.name}</span>
+          <NameInput
+            className="task-name"
+            value={task.name}
+            maxRows={5}
+            expandInputWidth={false}
+            maxLength={null}
+            onSubmit={onRenameTask}
+          />
           <span className="task-group">
             in list{" "}
             <MoveCardPopover
