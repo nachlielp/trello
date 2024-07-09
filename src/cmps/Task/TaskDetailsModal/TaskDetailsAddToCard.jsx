@@ -3,7 +3,6 @@ import checkListIcon from "/img/board-index/detailsImgs/checkListIcon.svg";
 import { useState, useEffect } from "react";
 import coverIcon from "/img/board-index/detailsImgs/coverIcon.svg";
 import fieldsIcon from "/img/board-index/detailsImgs/fieldsIcon.svg";
-import file from "../../../../src/assets/svgs/file.svg";
 import labelIcon from "/img/board-index/headerImgs/filterBtn-imgs/labelIcon.svg";
 import clockIcon from "/img/board-index/headerImgs/filterBtn-imgs/clockIcon.svg";
 // import userIcon from "/img/board-index/headerImgs/filterBtn-imgs/userIcon.svg";
@@ -53,7 +52,7 @@ export function TaskDetailsAddToCard({ task, editTask, editLabel }) {
     },
     { svg: checkListIcon, text: "Checklist" },
     { svg: clockIcon, text: "Dates" },
-    { svg: file, text: "Attachment" },
+    { svg: "/img/taskBadges/file.svg", text: "Attachment" },
     {
       popover: !isCover ? (
         <ManageCoverPopover

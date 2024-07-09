@@ -1,6 +1,4 @@
 import { Tooltip } from "antd";
-import descriptionIcon from "../../assets/svgs/description.svg";
-import fileIcon from "../../assets/svgs/file.svg";
 import { ReactSVG } from "react-svg";
 import { UserAvatar } from "../UserAvatar";
 import { useSelector } from "react-redux";
@@ -25,7 +23,7 @@ export function TaskPreviewBadges({ task }) {
       >
         <span className="task-icon-wrapper">
           <ReactSVG
-            src={descriptionIcon}
+            src="/img/taskBadges/description.svg"
             alt="description"
             className="task-icon"
             wrapper="span"
@@ -44,7 +42,7 @@ export function TaskPreviewBadges({ task }) {
       >
         <span className="task-icon-wrapper">
           <ReactSVG
-            src={fileIcon}
+            src="/img/taskBadges/file.svg"
             alt="file"
             className="task-icon"
             wrapper="span"

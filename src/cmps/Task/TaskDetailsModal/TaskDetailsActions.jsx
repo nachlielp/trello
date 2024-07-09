@@ -1,4 +1,3 @@
-import file from "../../../../src/assets/svgs/file.svg";
 import labelIcon from "/img/board-index/headerImgs/filterBtn-imgs/labelIcon.svg";
 import clockIcon from "/img/board-index/headerImgs/filterBtn-imgs/clockIcon.svg";
 import defaultProfile from "/img/defaultProfile.svg";
@@ -41,7 +40,7 @@ export function TaskDetailsActions({ task, editTask, onClose }) {
         <SvgButton src={clockIcon} label="Archive" onClick={onArchiveTask} />
       ),
     },
-    { svg: file, text: "Share" },
+    { svg: "/img/taskBadges/file.svg", text: "Share" },
   ];
   return (
     <section>
