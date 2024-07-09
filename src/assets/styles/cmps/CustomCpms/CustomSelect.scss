@@ -1,4 +1,4 @@
-.custom-select-item {
+.custom-checkbox {
   width: 100%;
   background-color: var(--ds-background-input, #f4f5f7);
   color: var(--ds-text, #172b4d);
@@ -19,7 +19,7 @@
     background-color: var(--ds-background-input, #ffffff);
     box-shadow: inset 0 0 0 2px var(--ds-border-focused, #388bff);
   }
-  input {
+  .input-checkbox {
     cursor: pointer;
     width: 100%;
     background: none;
