@@ -17,7 +17,7 @@ export function BoardGroupHeader({ group, editGroup, openAddTask, archiveGroup, 
     }, [isEditGroupName]);
 
     async function onKeyDown(e) {
-        if (e.key === 'Enter') {
+        if (e.key === 'Enter' || e.key === 'Escape') {
             e.preventDefault();
             onRenameGroup()
         }
