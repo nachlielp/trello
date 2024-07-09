@@ -8,26 +8,31 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
     const boardCoverImgs = useSelector((state) => state.boardModule.board.coverImgs);
     const [isOpen, setIsOpen] = useState(false);
 
-    function onClose() {
+    function onClose(e) {
+        e.stopPropagation();
         setIsOpen(false);
     }
 
-    function onSelectColor(color) {
+    function onSelectColor(e, color) {
+        e.stopPropagation();
         editTask({ ...task, cover: { ...task.cover, color, idUploadedBackground: null, scaled: null } });
     }
 
     //BUG: when the size is changed, the popover closes
-    function onChangeSize(size) {
+    function onChangeSize(e, size) {
+        e.stopPropagation();
         if (task.cover.color || task.cover.idUploadedBackground) {
             editTask({ ...task, cover: { ...task.cover, size: size } });
         }
     }
 
-    function onRemoveCover() {
+    function onRemoveCover(e) {
+        e.stopPropagation();
         editTask({ ...task, cover: { ...task.cover, color: null, scaled: null, idUploadedBackground: null } });
     }
 
-    function onSelectPhoto(id) {
+    function onSelectPhoto(e, id) {
+        e.stopPropagation();
         const img = boardCoverImgs.find((img) => img.id === id);
         editTask({ ...task, cover: { ...task.cover, scaled: img.scaledImgs, color: null, idUploadedBackground: img.id, bg: img.bg } });
     }
@@ -39,6 +44,10 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
         e.stopPropagation();
         setIsOpen(true);
     }
+
+    function onPopoverClick(e) {
+        e.stopPropagation();
+    }
     //TODO wrap cover box with blue border if selected
     return (
         <Popover
@@ -48,9 +57,10 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
             open={isOpen}
             onOpenChange={setIsOpen}
             arrow={false}
+            onClick={(e) => onPopoverClick(e)}
             content={
                 <section className="manage-cover-content"
-                    style={backgroundColor&&{
+                    style={backgroundColor && {
                         '--dynamic-bg-color': backgroundColor,
                         '--active-bg-color': backgroundColor,
                         '--non-active-bg-color': '#dcdfe4',
@@ -60,7 +70,7 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
                         <h3 className="cover-sub-title">Size</h3>
                         <article className={`cover-btns `}>
                             <div className={`half-size-wrapper ${isCover && task?.cover?.size === "normal" ? "active" : "non-active"}`}>
-                                <div className={`half-size-btn `} onClick={() => onChangeSize("normal")}
+                                <div className={`half-size-btn `} onClick={(e) => onChangeSize(e, "normal")}
                                 >
                                     <div className={`sub-block-1 ${task?.cover.color ? "active" : "non-active"}`} style={{
                                         backgroundImage: task?.cover.scaled ? `url(${task?.cover?.scaled[0]?.url})` : 'none',
@@ -92,17 +102,17 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
                                 </div>
                             </div>
                         </article>
-                        {isCover && <button className="remove-cover-btn" onClick={onRemoveCover}>Remove cover</button>}
+                        {isCover && <button className="remove-cover-btn" onClick={(e) => onRemoveCover(e)}>Remove cover</button>}
                         <h3 className="cover-sub-title">Colors</h3>
                         <article className="color-btns">
                             {utilService.getBaseColors().map((color) => (
-                                <div className={`color-btn ${task?.cover.color === color.color ? "active" : ""}`} style={{ backgroundColor: color.bgColor }} key={color.color} onClick={() => onSelectColor(color.color)}></div>
+                                <div className={`color-btn ${task?.cover.color === color.color ? "active" : ""}`} style={{ backgroundColor: color.bgColor }} key={color.color} onClick={(e) => onSelectColor(e, color.color)}></div>
                             ))}
                         </article>
                         <h3 className="cover-sub-title">Photos from Unsplash</h3>
                         <article className="photo-btns">
                             {boardCoverImgs.map((img) => (
-                                <div className="photo-btn" key={img.id} onClick={() => onSelectPhoto(img.id)}>
+                                <div className="photo-btn" key={img.id} onClick={(e) => onSelectPhoto(e, img.id)}>
                                     <Tooltip title={img.photographer} arrow={false}>
                                         <Image className="photo-item" src={img.scaledImgs[0].url} alt={img.photographer} preview={false} />
                                     </Tooltip>
