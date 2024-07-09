@@ -4,7 +4,9 @@
     .workspace-sidebar-closed {
         width: 16px;
         height: 100%;
-        background-color: hsla(358, 23%, 26.5%, 0.9);
+        backdrop-filter: blur(10px);
+        opacity: 1;
+        background-color: rgba(0, 0, 0, var(--dynamic-light-decrease));
         position: relative;
 
         .open-btn {
@@ -20,7 +22,7 @@
             padding-top: 4px;
             border: 1px solid var(--dynamic-text-transparent, hsla(218, 54%, 19.6%, 0.16));
             border-radius: 50%;
-            background-color: hsla(358, 23%, 26.5%, 0.9);
+            background-color: rgba(0, 0, 0, var(--dynamic-light-decrease));
             width: 24px;
             height: 24px;
 
