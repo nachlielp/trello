@@ -7,7 +7,7 @@ export function NameInput({
   value = "",
   onSubmit,
   expandInputWidth = true,
-  maxRows= 1,
+  maxRows = 1,
   className,
   autoSelect = true,
   ...other
@@ -43,11 +43,12 @@ export function NameInput({
   }, [isChangeable, value]);
 
   useEffect(() => {
+    setCustomWith(null);
     if (paragraphRef.current) {
       const currentWidth = paragraphRef.current.clientWidth;
       setCustomWith({ width: `${currentWidth + 0.4}px` });
     } else {
-      setCustomWith({ width: `${20 + (newName.length * 12 + 1.04)}px` });
+      setCustomWith({ width: `${(newName.length * 11.1) + 20.54}px` });
     }
   }, [value, newName]);
 
@@ -81,11 +82,12 @@ export function NameInput({
         <TextArea
           ref={textAreaRef}
           className="title-input"
-          autoSize={{ minRows: 1 ,maxRows:maxRows}}
+          autoSize={{ minRows: 1, maxRows: maxRows }}
           value={newName}
           onChange={(e) => setNewName(e.target.value)}
           onKeyDown={onKeyDown}
           style={expandInputWidth ? customWith : {}}
+          maxLength={30}
         />
       ) : (
         <p
@@ -93,7 +95,6 @@ export function NameInput({
           onClick={() => setIsChangeable(true)}
           ref={paragraphRef}
           style={expandInputWidth ? customWith : {}}
-          
         >
           {value}
         </p>
