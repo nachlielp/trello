@@ -123,7 +123,7 @@ function LabelsOption({ taskLabel, selectLabel, editColor }) {
                 selectLabel(taskLabel, e.target.checked);
             }} />
             <Tooltip title={`Color: ${taskLabel.color}, title: ${taskLabel.label ? taskLabel.label : 'none'}`} arrow={false}>
-                <div className="label-block" style={{ backgroundColor: utilService.getColorHashByName(taskLabel.color).bgColor }} onClick={() => onChangeLabel(taskLabel, !taskLabel.isTask)}>
+                <div className="label-block" style={{ backgroundColor: utilService.getColorHashByName(taskLabel.color).bgColor }} onClick={() => selectLabel(taskLabel, !taskLabel.isTask)}>
                     <span className="label-color-name">{taskLabel.label}</span>
                 </div>
             </Tooltip>
