@@ -47,7 +47,7 @@ export function NameInput({
   useEffect(() => {
     if (spanRef.current && expandInputWidth) {
       const currentWidth = spanRef.current.offsetWidth;
-      setCustomWidth(currentWidth);
+      setCustomWidth(currentWidth+6);
     }
   }, [value, newName,isChangeable]);
 
