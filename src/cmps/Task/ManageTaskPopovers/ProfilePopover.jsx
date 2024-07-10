@@ -46,9 +46,9 @@ export function ProfilePopover({
               </span>
             </div>
           </header>
-          {/* <ul >
-            <Link to={`/u/${member.id}`} className="profile-link">Edit profile info</Link>
-          </ul>*/}
+          <ul >
+            <Link to={`/u/${member.username}`} className="profile-link">Edit profile info</Link>
+          </ul>
           {anchorLinks && (
             <>
               <hr style={{ margin: "8px 0px" }} />

@@ -4,7 +4,7 @@ import { WorkspaceMenu } from "../cmps/Workspace/WorkspaceMenu";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { setBoard, loadBoard, loadBoardByTaskId, viewBoard } from "../store/board.actions";
-import { login, editUser, addBoardToUser } from "../store/user.actions";
+import { login, editUser, addBoardToUser, loadUsers } from "../store/user.actions";
 import { createBoard } from "../store/workspace.actions";
 import { useSelector } from "react-redux";
 import { setBoards, editWorkspaceBoardState } from "../store/workspace.actions"
@@ -29,6 +29,7 @@ export function WorkspaceIndex() {
     useEffect(() => {
         setBoards();
         login();
+        loadUsers()
     }, []);
 
 
@@ -54,9 +55,9 @@ export function WorkspaceIndex() {
     //Make sure that changes dont break navigation
     useEffect(() => {
         if (!params.boardId && !params.cardId && user && !isUserBoards) {
-            setIsUserBoards(true);
+         
             setSelectedBoardId(null);
-            navigate(`/u/${user.username}/boards`);
+       
         }
     }, [params, user, isUserBoards]);
 
@@ -64,10 +65,6 @@ export function WorkspaceIndex() {
         setStarredBoardIds(user?.starredBoardIds);
     }, [user]);
 
-
-    useEffect(() => {
-        login()
-    }, []);
 
     function onStarClick(boardId) {
         const isStarred = user.starredBoardIds.includes(boardId);
@@ -104,18 +101,17 @@ export function WorkspaceIndex() {
             backgroundRepeat: 'no-repeat',
         }}>
             <WorkspaceHeader bgColor={selectedBoardId && boardBgPrefs?.backgroundColor || "#fff"} userName={user?.username} />
-            {user && starredBoardIds && selectedBoardId && !isUserBoards && (
+            {(user && starredBoardIds && selectedBoardId) ?(
                 <section className="workspace-content">
                     <WorkspaceMenu colorTheme={boardBgPrefs?.backgroundBrightness} boardsInfo={boardsInfo} selectedBoardId={selectedBoardId} starredBoardIds={starredBoardIds} onStarClick={onStarClick} onAddBoard={onAddBoard} closeBoard={onCloseBoard} leaveBoard={onLeaveBoard} />
                     <Outlet />
                 </section>
-            )}
-            {isUserBoards && (
-                <UserBoards starClick={onStarClick} onAddBoard={onAddBoard} />
-            )}
+            ):<Outlet />}
+           
             {!user && (
                 <div>Loading...</div>
             )}
         </section>
+    
     );
 }
