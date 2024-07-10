@@ -12,15 +12,13 @@ export function RootCmp() {
     <div>
       <main>
         <Routes>
-          <Route
-            path="*"
-            element={<WorkspaceIndex />}
-          >
-            <Route path="*" element={<ErrorPage />} />
+          <Route path="/" element={<WorkspaceIndex />}>
+            <Route path="/" element={<UserProfile />} />
             <Route path="b/:boardId" element={<BoardIndex />} />
             <Route path="c/:cardId" element={<BoardIndex />} />
-            <Route path="u/:userName" element={<UserProfile />} />
+            <Route path="u/:userName/boards" element={<UserProfile />} />
           </Route>
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </main>
     </div>

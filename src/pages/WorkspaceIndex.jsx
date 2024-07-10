@@ -9,6 +9,7 @@ import { createBoard } from "../store/workspace.actions";
 import { useSelector } from "react-redux";
 import { setBoards, editWorkspaceBoardState } from "../store/workspace.actions"
 import { updateBoard } from "../store/board.actions";
+import { UserProfile } from "../pages/UserProfile";
 
 export function WorkspaceIndex() {
     const user = useSelector((state) => state.userModule.user);
@@ -86,14 +87,17 @@ export function WorkspaceIndex() {
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
         }}>
-            <WorkspaceHeader bgColor={boardBgPrefs?.backgroundColor || "#000"} />
-
-            {user && starredBoardIds ? (
+            <WorkspaceHeader bgColor={boardBgPrefs?.backgroundColor || "#fff"} />
+            {user && starredBoardIds && selectedBoardId && (
                 <section className="workspace-content">
                     <WorkspaceMenu colorTheme={boardBgPrefs?.backgroundBrightness} boardsInfo={boardsInfo} selectedBoardId={selectedBoardId} starredBoardIds={starredBoardIds} onStarClick={onStarClick} onAddBoard={onAddBoard} closeBoard={onCloseBoard} leaveBoard={onLeaveBoard} />
                     <Outlet />
                 </section>
-            ) : (
+            )}
+            {!selectedBoardId && (
+                <UserProfile />
+            )}
+            {!user && (
                 <div>Loading...</div>
             )}
         </section>

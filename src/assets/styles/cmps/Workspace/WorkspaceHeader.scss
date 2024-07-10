@@ -22,7 +22,7 @@
         margin: 8px 0px 8px 8px;
         border-radius: 3px;
         padding: 6px;
-        color: var(--dynamic-text);
+        color: var(--dynamic-header-text);
         white-space: nowrap;
         font-size: 14px;
         font-weight: 400;
@@ -50,7 +50,7 @@
         margin: 15px 0px 16px 8px;
         border-radius: 3px;
         padding: 9px;
-        color: var(--dynamic-text);
+        color: var(--dynamic-header-text);
         white-space: nowrap;
         font-size: 14px;
         font-weight: 400;
@@ -62,7 +62,7 @@
         }
 
         .injected-svg {
-
+            color: var(--dynamic-header-text);
             margin-left: 4px;
             margin-top: 4px;
             width: 16px;
@@ -81,7 +81,7 @@
         border: none;
         cursor: pointer;
 
-        color: var(--dynamic-text);
+        color: var(--dynamic-header-text);
 
         &:hover {
             background-color: var(--header-button-hovered);
@@ -89,7 +89,7 @@
         }
 
         .injected-svg {
-            color: #fff;
+            color: var(--dynamic-header-text);
             margin: 3px 2px 0 2px;
             width: 20px;
             height: 20px;
@@ -121,5 +121,12 @@
         &:hover {
             background-image: url('/img/workspace/animated-trello-home.gif');
         }
+
+
+    }
+
+    .gif.gray-filter {
+        filter: brightness(0) saturate(100%) invert(30%) sepia(53%) saturate(323%) hue-rotate(179deg) brightness(91%) contrast(88%);
+
     }
 }
