@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Popover } from "antd";
 import { ManageTaskPopoverHeader } from "./ManageTaskPopoverHeader";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 export function ProfilePopover({
   member,
@@ -12,6 +13,7 @@ export function ProfilePopover({
   placement = "bottomLeft",
 }) {
   const [isOpen, setIsOpen] = useState(false);
+  const user = useSelector((state) => state.userModule.user);
 
   function onClose() {
     setIsOpen(false);
@@ -26,7 +28,7 @@ export function ProfilePopover({
       onOpenChange={setIsOpen}
       arrow={false}
       content={
-        <section className="profile-popover">
+        <section className="profile-popover" onClick={e=>e.stopPropagation()}>
           <div onClick={() => setIsOpen(false)} className="close-btn">
             <CloseOutlined />
           </div>
@@ -47,7 +49,7 @@ export function ProfilePopover({
             </div>
           </header>
           <ul >
-            <Link to={`/u/${member.username}`} className="profile-link">Edit profile info</Link>
+            <Link to={`/u/${member.username}`} onClick={e=>e.stopPropagation()} className="profile-link">{user.id === member.id?"Edit":"View"} profile info</Link>
           </ul>
           {anchorLinks && (
             <>
