@@ -7,7 +7,11 @@
     max-height: 48px;
     overflow: hidden;
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--dynamic-text-transparent, #dfe1e6);
+    border-bottom: 1px solid var(--dynamic-text-transparent, #13161d);
+
+    &.white-bg {
+        border-bottom: 1px solid #d7dce1;
+    }
 
     padding: 8px;
     gap: 4px;
@@ -54,7 +58,6 @@
         white-space: nowrap;
         font-size: 14px;
         font-weight: 400;
-
 
         &:hover {
             background-color: var(--create-menu-button-background-hovered);

@@ -227,6 +227,7 @@ export function stringToColor(str) {
 function createNewTask(task) {
   return {
     id: utilService.makeId(),
+    apdatedAt: new Date().toISOString(),
     members: [],
     badges: {
       attachmentsByType: {

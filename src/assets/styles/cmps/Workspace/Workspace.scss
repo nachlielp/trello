@@ -1,4 +1,8 @@
 .workspace {
+    &.user-boards-bg {
+        background-color: #fff;
+    }
+
     .workspace-content {
         display: flex;
         flex-direction: row;

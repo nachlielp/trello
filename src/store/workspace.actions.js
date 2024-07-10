@@ -74,8 +74,9 @@ export async function moveCard(details) {
 }
 
 export async function createBoard(board) {
-  const newBoard = await boardService.save(board);
+  const newBoard = await boardService.save({ ...board, apdatedAt: Date.now() });
   store.dispatch({ type: ADD_BOARD, board: newBoard });
+  return newBoard.id;
 }
 
 

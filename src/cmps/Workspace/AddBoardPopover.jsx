@@ -52,7 +52,7 @@ const options = [
   },
 ];
 
-export function AddBoardPopover({ onAddBoard }) {
+export function AddBoardPopover({ onAddBoard, anchorEl }) {
   const [isOpen, setIsOpen] = useState(false);
   const [boardName, setBoardName] = useState("");
   const [focused, setFocused] = useState(false);
@@ -155,7 +155,8 @@ export function AddBoardPopover({ onAddBoard }) {
         </section>
       }
     >
-      <SvgButton className="board-add-btn" src="/img/workspace/pluseIcon.svg" />
+      {anchorEl}
+      {/* <SvgButton className="board-add-btn" src="/img/workspace/pluseIcon.svg" /> */}
     </Popover>
   );
 }

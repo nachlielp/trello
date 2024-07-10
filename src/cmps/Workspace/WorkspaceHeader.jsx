@@ -1,12 +1,16 @@
 import { SvgButton } from "../CustomCpms/SvgButton";
 
-export function WorkspaceHeader({ bgColor }) {
+import { useNavigate } from "react-router-dom";
+
+export function WorkspaceHeader({ bgColor, userName }) {
+    const navigate = useNavigate();
     const dynamicHeaderText = bgColor === '#fff' ? '#44546f' : '#fff';
+    const borderColor = bgColor === '#fff' ? '#d7dce1' : 'hsla(0, 0%, 100%, 0.16)';
 
     return (
-        <nav className="workspace-header" style={{ backgroundColor: bgColor, '--dynamic-header-text': dynamicHeaderText }}>
+        <nav className={`workspace-header ${bgColor === '#fff' ? 'white-bg' : ''}`} style={{ backgroundColor: bgColor, '--dynamic-header-text': dynamicHeaderText, '--border-color': borderColor }}>
             <SvgButton className="btn main" src="/img/workspace/appSwitcher.svg" />
-            <button className="gif-btn">
+            <button className="gif-btn" onClick={() => navigate(`/u/${userName}/boards`)}>
                 <div className={`gif ${bgColor === '#fff' ? 'gray-filter' : ''}`}></div>
             </button>
             <SvgButton className="svg-btn" src="/img/workspace/more.svg" preLabel="Workspace" />

@@ -72,8 +72,7 @@ export function WorkspaceMenu({ boardsInfo, selectedBoardId, starredBoardIds, on
                         <article className="workspace-menu-boards">
                             <header className="workspace-menu-boards-header">
                                 <h3>Your Boards</h3>
-                                {/* <SvgButton className="board-add-btn" src="/img/workspace/pluseIcon.svg" /> */}
-                                <AddBoardPopover onAddBoard={onAddBoard} />
+                                <AddBoardPopover onAddBoard={onAddBoard} anchorEl={<SvgButton className="board-add-btn" src="/img/workspace/pluseIcon.svg" />} />
                             </header>
                             {boardsInfo.sort((a, b) => b.name - a.name).map((board) => (
                                 <div
@@ -104,5 +103,14 @@ export function WorkspaceMenu({ boardsInfo, selectedBoardId, starredBoardIds, on
                 </section>
             }
         </aside>
+    )
+}
+
+const AddBoardBtn = () => {
+    return (
+        <article className="board-tab-add">
+            <p>Create new board</p>
+            <p>{10 - boards.length} remaining</p>
+        </article>
     )
 }

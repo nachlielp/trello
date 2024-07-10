@@ -9,7 +9,7 @@ import { createBoard } from "../store/workspace.actions";
 import { useSelector } from "react-redux";
 import { setBoards, editWorkspaceBoardState } from "../store/workspace.actions"
 import { updateBoard } from "../store/board.actions";
-import { UserProfile } from "../pages/UserProfile";
+import { UserBoards } from "./UserBoards";
 
 export function WorkspaceIndex() {
     const user = useSelector((state) => state.userModule.user);
@@ -18,16 +18,18 @@ export function WorkspaceIndex() {
         .map((b) => ({ id: b.id, name: b.name, closed: b.closed, coverImg: b.prefs.backgroundImage }));
     const boards = useSelector((state) => state.workspaceModule.boards);
     const boardBgPrefs = useSelector((state) => state.boardModule.board)?.prefs;
+
+    const [selectedBoardId, setSelectedBoardId] = useState(null);
+    const [starredBoardIds, setStarredBoardIds] = useState([]);
+    const [isUserBoards, setIsUserBoards] = useState(false);
+
+    const navigate = useNavigate();
     const params = useParams();
 
     useEffect(() => {
         setBoards();
         login();
     }, []);
-
-    const [selectedBoardId, setSelectedBoardId] = useState(null);
-    const [starredBoardIds, setStarredBoardIds] = useState([]);
-    const navigate = useNavigate();
 
 
 
@@ -36,13 +38,23 @@ export function WorkspaceIndex() {
         if (params.boardId) {
             loadBoard(params.boardId);
             setSelectedBoardId(params.boardId);
+            setIsUserBoards(false);
         }
         if (params.cardId) {
             loadBoardByTaskId(params.cardId).then((boardId) => {
                 setSelectedBoardId(boardId);
+                setIsUserBoards(false);
             });
         }
     }, [params]);
+
+    useEffect(() => {
+        if (!params.boardId && !params.cardId && user && !isUserBoards) {
+            setIsUserBoards(true);
+            setSelectedBoardId(null);
+            navigate(`/u/${user.username}/boards`);
+        }
+    }, [params, user, isUserBoards]);
 
     useEffect(() => {
         setStarredBoardIds(user?.starredBoardIds);
@@ -60,9 +72,9 @@ export function WorkspaceIndex() {
     }
 
     async function onAddBoard(board) {
-        await createBoard(board);
-        await addBoardToUser(board.id);
-        navigate(`/b/${board.id}`);
+        const boardId = await createBoard(board);
+        await addBoardToUser(boardId);
+        navigate(`/b/${boardId}`);
     }
 
     function onCloseBoard(boardId) {
@@ -81,21 +93,21 @@ export function WorkspaceIndex() {
         }
     }
     return (
-        <section className="workspace" style={{
-            backgroundImage: boardBgPrefs?.backgroundImage ? `url(${boardBgPrefs.backgroundImage})` : 'none',
+        <section className={`workspace ${isUserBoards ? "user-boards-bg" : ""}`} style={{
+            backgroundImage: selectedBoardId && boardBgPrefs?.backgroundImage ? `url(${boardBgPrefs.backgroundImage})` : 'none',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
         }}>
-            <WorkspaceHeader bgColor={boardBgPrefs?.backgroundColor || "#fff"} />
-            {user && starredBoardIds && selectedBoardId && (
+            <WorkspaceHeader bgColor={boardBgPrefs?.backgroundColor || "#fff"} userName={user?.username} />
+            {user && starredBoardIds && selectedBoardId && !isUserBoards && (
                 <section className="workspace-content">
                     <WorkspaceMenu colorTheme={boardBgPrefs?.backgroundBrightness} boardsInfo={boardsInfo} selectedBoardId={selectedBoardId} starredBoardIds={starredBoardIds} onStarClick={onStarClick} onAddBoard={onAddBoard} closeBoard={onCloseBoard} leaveBoard={onLeaveBoard} />
                     <Outlet />
                 </section>
             )}
-            {!selectedBoardId && (
-                <UserProfile />
+            {isUserBoards && (
+                <UserBoards starClick={onStarClick} onAddBoard={onAddBoard} />
             )}
             {!user && (
                 <div>Loading...</div>
