@@ -5,6 +5,7 @@ import {
 import { useState, useEffect } from "react";
 
 export function StarBoardBtn({ starredBoardIds, boardId, starClick }) {
+
     const [hover, setHover] = useState(false);
     const [isStarredBoard, setIsStarredBoard] = useState(false);
 
@@ -20,7 +21,7 @@ export function StarBoardBtn({ starredBoardIds, boardId, starClick }) {
     }
     return (
         <button
-            className={`star-board-btn  ${isStarredBoard?'starred':""}`}
+            className={`star-board-btn  ${isStarredBoard ? 'starred' : ""}`}
             onMouseOver={() => setHover(true)}
             onMouseOut={() => setHover(false)}
             onClick={onStarClick}

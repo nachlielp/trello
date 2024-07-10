@@ -3,7 +3,7 @@ import { WorkspaceHeader } from "../cmps/Workspace/WorkspaceHeader";
 import { WorkspaceMenu } from "../cmps/Workspace/WorkspaceMenu";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { setBoard, loadBoard, loadBoardByTaskId } from "../store/board.actions";
+import { setBoard, loadBoard, loadBoardByTaskId, viewBoard } from "../store/board.actions";
 import { login, editUser, addBoardToUser } from "../store/user.actions";
 import { createBoard } from "../store/workspace.actions";
 import { useSelector } from "react-redux";
@@ -14,7 +14,7 @@ import { UserBoards } from "./UserBoards";
 export function WorkspaceIndex() {
     const user = useSelector((state) => state.userModule.user);
     const boardsInfo = useSelector((state) => state.workspaceModule.boards)
-        .filter(b => user && b.members.some(m => m.id === user.id)).filter((b) => !b.closed)
+        ?.filter(b => user && b?.members?.some(m => m.id === user.id)).filter((b) => !b.closed)
         .map((b) => ({ id: b.id, name: b.name, closed: b.closed, coverImg: b.prefs.backgroundImage }));
     const boards = useSelector((state) => state.workspaceModule.boards);
     const boardBgPrefs = useSelector((state) => state.boardModule.board)?.prefs;
@@ -39,15 +39,19 @@ export function WorkspaceIndex() {
             loadBoard(params.boardId);
             setSelectedBoardId(params.boardId);
             setIsUserBoards(false);
+            viewBoard(params.boardId);
         }
         if (params.cardId) {
             loadBoardByTaskId(params.cardId).then((boardId) => {
                 setSelectedBoardId(boardId);
                 setIsUserBoards(false);
+                viewBoard(boardId);
             });
         }
     }, [params]);
 
+    //Notice any change in user page is through this 
+    //Make sure that changes dont break navigation
     useEffect(() => {
         if (!params.boardId && !params.cardId && user && !isUserBoards) {
             setIsUserBoards(true);
@@ -99,7 +103,7 @@ export function WorkspaceIndex() {
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
         }}>
-            <WorkspaceHeader bgColor={boardBgPrefs?.backgroundColor || "#fff"} userName={user?.username} />
+            <WorkspaceHeader bgColor={selectedBoardId && boardBgPrefs?.backgroundColor || "#fff"} userName={user?.username} />
             {user && starredBoardIds && selectedBoardId && !isUserBoards && (
                 <section className="workspace-content">
                     <WorkspaceMenu colorTheme={boardBgPrefs?.backgroundBrightness} boardsInfo={boardsInfo} selectedBoardId={selectedBoardId} starredBoardIds={starredBoardIds} onStarClick={onStarClick} onAddBoard={onAddBoard} closeBoard={onCloseBoard} leaveBoard={onLeaveBoard} />

@@ -16,8 +16,9 @@ import {
   MOVE_ALL_CARDS,
   ARCHIVE_ALL_CARDS,
   SORT_GROUP,
+  VIEW_BOARD,
 } from "./board.reducer";
-import { setBoards } from "./workspace.actions";
+import { setBoards, viewWorkspaceBoard } from "./workspace.actions";
 
 // export async function loadTrelloDataFromSource() {
 //   try {
@@ -59,6 +60,20 @@ export async function loadBoardByTaskId(taskId) {
     board: { ...board, apdatedAt: new Date().getTime() },
   });
   return board.id;
+}
+
+export async function viewBoard(boardId) {
+  const board = await boardService.getById(boardId);
+  const newBoard = {
+    ...board,
+    viewedAt: Date.now(),
+  };
+  await boardService.save(newBoard);
+  store.dispatch({
+    type: VIEW_BOARD,
+    board: newBoard,
+  });
+  viewWorkspaceBoard(boardId);
 }
 
 export async function setBoard(board) {

@@ -12,9 +12,8 @@ export function UserBoards({ starClick, onAddBoard }) {
     const user = useSelector((state) => state.userModule.user);
     const boards = useSelector((state) => state.workspaceModule.boards)
 
-    console.log(boards.map((board) => ({ apdatedAt: board.apdatedAt, name: board.name })))
     if (!user) return null;
-    console.log(user)
+
     return (
         <section className="user-boards">
             <menu className="user-boards-menu">
@@ -39,7 +38,7 @@ export function UserBoards({ starClick, onAddBoard }) {
                     </header>
                     <article className="section-content">
                         {boards
-                            .sort((a, b) => b.apdatedAt - a.apdatedAt)
+                            .sort((a, b) => b.viewedAt - a.viewedAt)
                             .slice(0, 3)
                             .map((board) => (
                                 <BoardTab key={board.id} board={board} starredBoardIds={user.starredBoardIds} starClick={starClick} />
@@ -61,10 +60,6 @@ export function UserBoards({ starClick, onAddBoard }) {
                                     <p className="board-tab-add-subtitle">{10 - boards.length} remaining</p>
                                 </article>
                             } />
-                        {/* <article className="board-tab-add">
-                            <p className="board-tab-add-title">Create new board</p>
-                            <p className="board-tab-add-subtitle">{10 - boards.length} remaining</p>
-                        </article> */}
                     </article>
                 </section>
             </main>
@@ -79,7 +74,7 @@ const BoardTab = ({ board, starredBoardIds, starClick }) => {
     return (
         <article
             className="board-tab"
-            style={{ backgroundImage: `url(${board?.prefs?.backgroundImageScaled[1]?.url})` }}
+            style={{ backgroundImage: `url(${board?.prefs?.backgroundImageScaled ? board?.prefs?.backgroundImageScaled[1]?.url : board?.prefs?.backgroundImage})` }}
             onMouseEnter={() => setIsHover(true)}
             onMouseLeave={() => setIsHover(false)}
             onClick={() => navigate(`/b/${board.id}`)}

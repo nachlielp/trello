@@ -14,7 +14,7 @@ export function WorkspaceMenu({ boardsInfo, selectedBoardId, starredBoardIds, on
         const root = document.documentElement;
         const dynamicIconColor = colorTheme === "dark" ? "#fff" : "#42526E";
         const dynamicTextColor = colorTheme === "dark" ? "#fff" : "#172B4D";
-        const dynamicLightDecrease = colorTheme === "dark" ? "0.25" : "0.0";
+        const dynamicLightDecrease = colorTheme === "dark" ? "0.35" : "0.0";
         root.style.setProperty('--dynamic-icon', dynamicIconColor);
         root.style.setProperty('--dynamic-text', dynamicTextColor);
         root.style.setProperty('--dynamic-light-decrease', dynamicLightDecrease);
@@ -74,7 +74,15 @@ export function WorkspaceMenu({ boardsInfo, selectedBoardId, starredBoardIds, on
                                 <h3>Your Boards</h3>
                                 <AddBoardPopover onAddBoard={onAddBoard} anchorEl={<SvgButton className="board-add-btn" src="/img/workspace/pluseIcon.svg" />} />
                             </header>
-                            {boardsInfo.sort((a, b) => b.name - a.name).map((board) => (
+                            {boardsInfo.sort((a, b) => {
+                                const aIsStarred = starredBoardIds.includes(a.id);
+                                const bIsStarred = starredBoardIds.includes(b.id);
+
+                                if (aIsStarred && !bIsStarred) return -1;
+                                if (!aIsStarred && bIsStarred) return 1;
+
+                                return a.name.localeCompare(b.name);
+                            }).map((board) => (
                                 <div
                                     className={`board-option ${selectedBoardId === board.id ? "active-board" : ""}`}
                                     key={board.id}

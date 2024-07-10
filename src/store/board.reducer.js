@@ -1,6 +1,7 @@
 export const SET_MEMBERS = "SET_MEMBERS";
 export const SET_BOARD = "SET_BOARD";
 export const EDIT_LABEL = "EDIT_LABEL";
+export const VIEW_BOARD = "VIEW_BOARD";
 
 export const SET_IS_EXPANDED = "SET_IS_EXPANDED";
 
@@ -119,11 +120,11 @@ export function boardReducer(state = initialState, action) {
           groups: state.board.groups.map((group) =>
             group.id === action.task.idGroup
               ? {
-                  ...group,
-                  tasks: group.tasks.map((t) =>
-                    t.id === action.task.id ? action.task : t
-                  ),
-                }
+                ...group,
+                tasks: group.tasks.map((t) =>
+                  t.id === action.task.id ? action.task : t
+                ),
+              }
               : group
           ),
           apdatedAt: new Date().getTime(),
@@ -154,6 +155,13 @@ export function boardReducer(state = initialState, action) {
           ),
           apdatedAt: new Date().getTime(),
         },
+      };
+      break;
+
+    case VIEW_BOARD:
+      newState = {
+        ...state,
+        board: { ...state.board, viewedAt: Date.now() },
       };
       break;
 

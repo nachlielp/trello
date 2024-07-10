@@ -2,11 +2,17 @@ import { boardService } from "../services/board.service.local";
 import { workspaceService } from "../services/workspace.service";
 import { updateBoard } from "./board.actions";
 import { store } from "./store";
-import { EDIT_BOARD, SET_BOARDS, ADD_BOARD } from "./workspace.reducer";
+import { EDIT_BOARD, SET_BOARDS, ADD_BOARD, VIEW_BOARD } from "./workspace.reducer";
 
 export async function setBoards() {
   const boards = await workspaceService.getAllBoards();
   store.dispatch({ type: SET_BOARDS, boards });
+}
+
+export async function viewWorkspaceBoard(boardId) {
+  const boards = await workspaceService.getAllBoards();
+  const board = boards.find((b) => b.id === boardId);
+  store.dispatch({ type: VIEW_BOARD, boardId: board.id });
 }
 
 export async function moveCard(details) {

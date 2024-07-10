@@ -11,6 +11,7 @@ export const COPY_GROUP = "COPY_GROUP";
 export const MOVE_ALL_CARDS = "MOVE_ALL_CARDS";
 export const ARCHIVE_ALL_CARDS = "ARCHIVE_ALL_CARDS";
 export const SORT_GROUP = "SORT_GROUP";
+export const VIEW_BOARD = "VIEW_BOARD";
 
 const initialState = {
   boards: [],
@@ -38,6 +39,10 @@ export function workspaceReducer(state = initialState, action) {
 
     case ADD_BOARD:
       newState = { ...state, boards: [...state.boards, action.board] };
+      break;
+
+    case VIEW_BOARD:
+      newState = { ...state, boards: state.boards.map((board) => board.id === action.boardId ? { ...board, viewedAt: Date.now() } : board) };
       break;
 
     default:
