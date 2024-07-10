@@ -11,10 +11,11 @@
   .footer-input {
     border-color: transparent;
     background-color: var(--ds-surface-raised, #ffffff);
-    &::placeholder{
-        color: var(--ds-text-subtlest, #626f86);
-    }
     box-shadow: var(--ds-shadow-raised, 0px 1px 1px #091e4240, 0px 0px 1px #091e424f);
+
+    &::placeholder {
+      color: var(--ds-text-subtlest, #626f86);
+    }
   }
 
   &.last-task {
@@ -25,6 +26,7 @@
     display: flex;
     justify-content: flex-end;
     gap: 6px;
+
     .close-add-card-btn {
       cursor: pointer;
       border: none;
@@ -32,6 +34,7 @@
       background-color: transparent;
       color: var(--ds-text, #172b4d);
       font-size: 16px;
+
       &:hover {
         border: none;
         background-color: var(--ds-background-neutral-hovered, #091e4224);
@@ -41,6 +44,7 @@
       }
     }
   }
+
   .add-card-btn {
     cursor: pointer;
     padding: 6px 12px;
@@ -50,8 +54,9 @@
     font-size: 14px;
     font-weight: 600;
     border-radius: 4px;
+
     &:hover {
-        background-color: var(--ds-background-brand-bold-hovered, #0055cc);
+      background-color: var(--ds-background-brand-bold-hovered, #0055cc);
     }
   }
 }

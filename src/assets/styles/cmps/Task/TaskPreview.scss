@@ -3,14 +3,14 @@
   cursor: pointer;
   position: relative;
   margin: 0 5px;
+  background-color: var(--ds-surface-raised, #ffffff);
+  color: var(--ds-text);
+  border: none;
 
   &.open-preview-modal:hover {
     outline: none;
   }
 
-  background-color: var(--ds-surface-raised, #ffffff);
-  color: var(--ds-text);
-  border: none;
 }
 
 .group-task.custom-card .ant-card {
