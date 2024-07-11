@@ -49,7 +49,7 @@ export function ProfilePopover({
             </div>
           </header>
           <ul >
-            <Link to={`/u/${member.username}`} onClick={e=>e.stopPropagation()} className="profile-link">{user.id === member.id?"Edit":"View"} profile info</Link>
+            <Link to={`/u/${member.username}`} onClick={e=>e.stopPropagation()} className="profile-link">{user?.id === member?.id?"Edit":"View"} profile info</Link>
           </ul>
           {anchorLinks && (
             <>
