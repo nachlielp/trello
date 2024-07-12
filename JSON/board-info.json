@@ -260,14 +260,7 @@
                 "color": "green"
               }
             ],
-            "idLabels": [
-              "66756a351dc51400eb1968el",
-              "66793c8367673bb5384b068h",
-              "66756a351dc51400eb1968ec",
-              "66756a351dc51400eb1968f4",
-              "66756a351dc51400eb1968e3",
-              "66756a351dc51400eb1968e1"
-            ],
+            "idLabels": [],
             "manualCoverAttachment": true,
             "name": "custom-hooks.js",
             "pos": 131072,
@@ -1104,7 +1097,10 @@
             "idShort": 6,
             "idAttachmentCover": null,
             "labels": [],
-            "idLabels": [],
+            "idLabels": [
+              "51bcee7",
+              "66756c"
+            ],
             "manualCoverAttachment": true,
             "name": "json",
             "pos": 65536,
@@ -1288,12 +1284,8 @@
               }
             ],
             "idLabels": [
-              "66756a351dc51400eb1968ee",
-              "66793c8367673bb5384b068f",
-              "66756a351dc51400eb1968ed",
-              "66756a351dc51400eb1968f3",
-              "66756a351dc51400eb1968e8",
-              "66756a351dc51400eb1968e2"
+              "66756c",
+              "51bcee7"
             ],
             "manualCoverAttachment": true,
             "name": "custom-hooks.js",
@@ -1594,7 +1586,7 @@
               }
             ],
             "idLabels": [
-              "66756a351dc51400eb1968e8"
+              "51bcee7"
             ],
             "manualCoverAttachment": false,
             "name": "store.js",
@@ -1731,9 +1723,7 @@
                 "color": "red"
               }
             ],
-            "idLabels": [
-              "66756a351dc51400eb1968ed"
-            ],
+            "idLabels": [],
             "manualCoverAttachment": false,
             "name": "trello.actions.js",
             "pos": 327690,
@@ -2298,6 +2288,18 @@
       "canBePrivate": true,
       "canInvite": true
     },
+    "labels": [
+      {
+        "id": "66756c",
+        "name": "label A",
+        "color": "green"
+      },
+      {
+        "id": "51bcee7",
+        "name": "Label B",
+        "color": "yellow"
+      }
+    ],
     "labelNames": [
       {
         "color": "green",

@@ -8,7 +8,7 @@ import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 
 export function TaskPreview({ task, editTask, editLabel }) {
-  const boardLabels = useSelector((state) => state.boardModule.board.labelNames);
+  const boardLabels = useSelector((state) => state.boardModule.board.labels);
   const [isHovered, setIsHovered] = useState(false);
   const [isOpenPreviewModal, setIsOpenPreviewModal] = useState(false);
   const [taskLabels, setTaskLabels] = useState([]);
@@ -19,8 +19,8 @@ export function TaskPreview({ task, editTask, editLabel }) {
   const taskCover = task.cover;
 
   useEffect(() => {
-    setTaskLabels(task.labels.map((label) => boardLabels.find(boardLabel => boardLabel.color === label.color)));
-  }, [task.labels, boardLabels]);
+    setTaskLabels(task.idLabels.map((labelId) => boardLabels.find(boardLabel => boardLabel.id === labelId)));
+  }, [task.idLabels, boardLabels]);
 
   useEffect(() => {
     if (taskRef.current) {
