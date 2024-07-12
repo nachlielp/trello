@@ -4,6 +4,7 @@
     "id": "64f721f169b14894fac36cdf",
     "name": "Trello Build",
     "apdatedAt": 1720234120009,
+    "checkListTaskIds": ["66756e111dfc591fbd5518f9"],
     "members": [
       {
         "id": "666fe4efda8643029b6710f3",
@@ -67,7 +68,6 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "64f721f169b14894fac36cdf",
-            "idChecklists": [],
             "idGroup": "64f721f169b14894fac36ce6",
             "idMembers": [
               "666fe4efda8643029b6710f3",
@@ -190,7 +190,8 @@
               "idPlugin": null
             },
             "isTemplate": false,
-            "cardRole": null
+            "cardRole": null,
+            "checkLists": []
           },
           {
             "id": "66756e1d26d147ec3f62e2a1",
@@ -231,7 +232,6 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "64f721f169b14894fac36cdf",
-            "idChecklists": [],
             "idGroup": "64f721f169b14894fac36ce6",
             "idMembers": [
               "666fe4efda8643029b6710f3",
@@ -285,7 +285,8 @@
               "idPlugin": null
             },
             "isTemplate": false,
-            "cardRole": null
+            "cardRole": null,
+            "checkLists": []
           }
         ]
       },
@@ -1030,6 +1031,7 @@
   {
     "id": "66756a34def1a6d3b8cd179d",
     "apdatedAt": 1720234168827,
+    "checkListTaskIds": [],
     "viewedAt": 1720234120123,
     "members": [
       {
@@ -1094,7 +1096,6 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
-            "idChecklists": [],
             "idGroup": "66756b3a4a97ac163d32e9e2",
             "idMembers": [
               "666fe4efda8643029b6710f3",
@@ -1217,7 +1218,30 @@
               "idPlugin": null
             },
             "isTemplate": false,
-            "cardRole": null
+            "cardRole": null,
+            "checkLists": [
+              {
+                "id": "RSGBQbE74HO41SmVJiquIXJr",
+                "label": "Todo",
+                "checkItems": [
+                  {
+                    "id": "7jNnRxeTBymg2XxcS4DMSndE",
+                    "label": "query",
+                    "isChecked": false
+                  },
+                  {
+                    "id": "KOmiNaCH17k1REK6BTwTivx5",
+                    "label": "getId",
+                    "isChecked": true
+                  },
+                  {
+                    "id": "LmfqdqAUmgNmqeJUrkHSvCsz",
+                    "label": "Have fun",
+                    "isChecked": false
+                  }
+                ]
+              }
+            ]
           },
           {
             "id": "66756e1d26d147ec3f62e2a0",
@@ -1258,7 +1282,6 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
-            "idChecklists": [],
             "idGroup": "66756b3a4a97ac163d32e9e2",
             "idMembers": [
               "666fe4efda8643029b6710f3",
@@ -1312,7 +1335,8 @@
               "idPlugin": null
             },
             "isTemplate": false,
-            "cardRole": null
+            "cardRole": null,
+            "checkLists": []
           },
           {
             "id": "66756eb4a7de8f40f2005930",
@@ -1353,7 +1377,6 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
-            "idChecklists": [],
             "idGroup": "66756b3a4a97ac163d32e9e2",
             "idMembers": [],
             "idMembersVoted": [],
@@ -1378,7 +1401,8 @@
               "idPlugin": null
             },
             "isTemplate": false,
-            "cardRole": null
+            "cardRole": null,
+            "checkLists": []
           }
         ]
       },
@@ -1430,7 +1454,6 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
-            "idChecklists": [],
             "idGroup": "66756e74ebad01c3a662aea7",
             "idMembers": [],
             "idMembersVoted": [],
@@ -1541,7 +1564,8 @@
               "idPlugin": null
             },
             "isTemplate": false,
-            "cardRole": null
+            "cardRole": null,
+            "checkLists": []
           },
           {
             "id": "66756e6e9c4ae2c7b3046b1c",
@@ -1582,7 +1606,6 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
-            "idChecklists": [],
             "idGroup": "66756e74ebad01c3a662aea7",
             "idMembers": [],
             "idMembersVoted": [],
@@ -1593,9 +1616,7 @@
                 "color": "orange"
               }
             ],
-            "idLabels": [
-              "66756a351dc51400eb1968e8"
-            ],
+            "idLabels": ["66756a351dc51400eb1968e8"],
             "manualCoverAttachment": false,
             "name": "store.js",
             "pos": 196608,
@@ -1613,7 +1634,8 @@
               "idPlugin": null
             },
             "isTemplate": false,
-            "cardRole": null
+            "cardRole": null,
+            "checkLists": []
           },
           {
             "id": "66756f33b58d05c2fe06ab15",
@@ -1654,7 +1676,6 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
-            "idChecklists": [],
             "idGroup": "66756e74ebad01c3a662aea7",
             "idMembers": [],
             "idMembersVoted": [],
@@ -1679,7 +1700,8 @@
               "idPlugin": null
             },
             "isTemplate": false,
-            "cardRole": null
+            "cardRole": null,
+            "checkLists": []
           },
           {
             "id": "66756fae5d6d187ed3bcb956",
@@ -1720,7 +1742,6 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
-            "idChecklists": [],
             "idGroup": "66756e74ebad01c3a662aea7",
             "idMembers": [],
             "idMembersVoted": [],
@@ -1731,9 +1752,7 @@
                 "color": "red"
               }
             ],
-            "idLabels": [
-              "66756a351dc51400eb1968ed"
-            ],
+            "idLabels": ["66756a351dc51400eb1968ed"],
             "manualCoverAttachment": false,
             "name": "trello.actions.js",
             "pos": 327690,
@@ -1751,7 +1770,8 @@
               "idPlugin": null
             },
             "isTemplate": false,
-            "cardRole": null
+            "cardRole": null,
+            "checkLists": []
           }
         ]
       },
@@ -1812,9 +1832,7 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
-            "idChecklists": [
-              "667686e9352dcdb311b45003"
-            ],
+
             "idGroup": "66756b31250742f334ce4cf0",
             "idMembers": [],
             "idMembersVoted": [],
@@ -1839,7 +1857,8 @@
               "idPlugin": null
             },
             "isTemplate": false,
-            "cardRole": null
+            "cardRole": null,
+            "checkLists": []
           },
           {
             "id": "66756fcdb4aa68fc565190af",
@@ -1880,11 +1899,8 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
-            "idChecklists": [],
             "idGroup": "66756b31250742f334ce4cf0",
-            "idMembers": [
-              "666fe4efda8643029b6710f3"
-            ],
+            "idMembers": ["666fe4efda8643029b6710f3"],
             "idMembersVoted": [],
             "idShort": 13,
             "idAttachmentCover": null,
@@ -1907,7 +1923,8 @@
               "idPlugin": null
             },
             "isTemplate": false,
-            "cardRole": null
+            "cardRole": null,
+            "checkLists": []
           },
           {
             "id": "66757beb9839d858e2fc69af",
@@ -1948,7 +1965,6 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
-            "idChecklists": [],
             "idGroup": "66756b31250742f334ce4cf0",
             "idMembers": [],
             "idMembersVoted": [],
@@ -1973,7 +1989,8 @@
               "idPlugin": null
             },
             "isTemplate": false,
-            "cardRole": null
+            "cardRole": null,
+            "checkLists": []
           }
         ]
       },
@@ -2025,7 +2042,6 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
-            "idChecklists": [],
             "idGroup": "66756c51bcee71bff3ee6112",
             "idMembers": [],
             "idMembersVoted": [],
@@ -2050,7 +2066,8 @@
               "idPlugin": null
             },
             "isTemplate": false,
-            "cardRole": null
+            "cardRole": null,
+            "checkLists": []
           },
           {
             "id": "66757099dbeaed543b4603b1",
@@ -2091,7 +2108,6 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
-            "idChecklists": [],
             "idGroup": "66756c51bcee71bff3ee6112",
             "idMembers": [],
             "idMembersVoted": [],
@@ -2116,7 +2132,8 @@
               "idPlugin": null
             },
             "isTemplate": false,
-            "cardRole": null
+            "cardRole": null,
+            "checkLists": []
           },
           {
             "id": "66758c6d3b868a6ca2bc0cef",
@@ -2157,7 +2174,6 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
-            "idChecklists": [],
             "idGroup": "66756c51bcee71bff3ee6112",
             "idMembers": [],
             "idMembersVoted": [],
@@ -2182,7 +2198,8 @@
               "idPlugin": null
             },
             "isTemplate": false,
-            "cardRole": null
+            "cardRole": null,
+            "checkLists": []
           }
         ]
       }
