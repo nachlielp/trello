@@ -18,6 +18,8 @@ export function ManageLabelsPopover({ anchorEl, editTask, task, labelActions }) 
     const [filteredLabels, setFilteredLabels] = useState([]);
     const [backToList, setBackToList] = useState(null);
     const [isCreateLabel, setIsCreateLabel] = useState(false);
+    const [isDeleteLabel, setIsDeleteLabel] = useState(false);
+    const [popoverTitle, setPopoverTitle] = useState('Labels');
 
     useEffect(() => {
         if (task?.idLabels) {
@@ -52,10 +54,30 @@ export function ManageLabelsPopover({ anchorEl, editTask, task, labelActions }) 
         }
     }
 
-    function onEditLabel(label) {
+    function openEditLabel(label) {
+        setPopoverTitle('Edit label');
         setSelectedLabel(label);
         setEditTitle(label.name);
         setEditColor(label.color);
+        setBackToList(() => onBackToList);
+    }
+
+    function openCreateLabel() {
+        setPopoverTitle('Create label');
+        setEditColor('green');
+        setIsCreateLabel(true);
+        setBackToList(() => onBackToList);
+    }
+
+    function openDeleteLabel() {
+        setPopoverTitle('Delete label');
+        setIsDeleteLabel(true)
+        setBackToList(() => onBackToEditList);
+    }
+
+    function onBackToEditList() {
+        setPopoverTitle('Edit label');
+        setIsDeleteLabel(false);
         setBackToList(() => onBackToList);
     }
 
@@ -65,6 +87,7 @@ export function ManageLabelsPopover({ anchorEl, editTask, task, labelActions }) 
         setBackToList(null);
         setIsCreateLabel(false);
     }
+
 
     function onSaveLabel() {
         labelActions("edit", { ...selectedLabel, name: editTitle, color: editColor });
@@ -81,26 +104,17 @@ export function ManageLabelsPopover({ anchorEl, editTask, task, labelActions }) 
         setIsCreateLabel(false);
     }
 
-    function openCreateLabel() {
-        setEditColor('green');
-        setIsCreateLabel(true);
-        setBackToList(() => onBackToList);
-    }
-
     function onDeleteLabel() {
         labelActions("delete", selectedLabel);
         setSelectedLabel(null);
         setEditTitle('');
         setBackToList(null);
         setIsCreateLabel(false);
-    }
-    function onOpenPopover(e) {
-        e.stopPropagation();
-        setIsOpen(true);
+        setIsDeleteLabel(false);
     }
 
-    const isEditPage = selectedLabel || isCreateLabel;
-    const isSelectPage = !selectedLabel && !isCreateLabel
+    const isEditPage = (selectedLabel || isCreateLabel) && !isDeleteLabel;
+    const isSelectPage = !selectedLabel && !isCreateLabel && !isDeleteLabel;
     return (
         <Popover
             className="manage-labels-popover"
@@ -112,18 +126,18 @@ export function ManageLabelsPopover({ anchorEl, editTask, task, labelActions }) 
             arrow={false}
             content={
                 <section className="manage-labels-content">
-                    <ManageTaskPopoverHeader title={backToList ? "Edit label" : 'Labels'} close={onClose} back={backToList} />
-                    {!selectedLabel && !isCreateLabel &&
+                    <ManageTaskPopoverHeader title={popoverTitle} close={onClose} back={backToList} />
+                    {isSelectPage &&
                         <section className="select-labels-page">
                             <Input placeholder="Search labels..." className="labels-search-input" value={inputSearch} onChange={(e) => setInputSearch(e.target.value)} />
                             <h3 className="labels-sub-title">Labels</h3>
                             <article className="labels-list">
-                                {filteredLabels.map((taskLabel) => <LabelsOption key={taskLabel.color} taskLabel={taskLabel} selectLabel={onSelectLabel} editColor={onEditLabel} />)}
+                                {filteredLabels.map((taskLabel) => <LabelsOption key={taskLabel.color} taskLabel={taskLabel} selectLabel={onSelectLabel} editColor={openEditLabel} />)}
                             </article>
                             <button className="lebel-full-btn" onClick={openCreateLabel}>Create label</button>
                         </section>
                     }
-                    {(selectedLabel || isCreateLabel) &&
+                    {isEditPage &&
                         <section className="edit-labels-page">
                             <article className="edit-label-block-wrapper">
                                 <div className="disbly-label-block" style={{ backgroundColor: utilService.getColorHashByName(editColor).bgColor }} >
@@ -145,11 +159,18 @@ export function ManageLabelsPopover({ anchorEl, editTask, task, labelActions }) 
                                 {!isCreateLabel &&
                                     <>
                                         <button className="save-button" onClick={onSaveLabel}>Save</button>
-                                        <button className="delete-button" onClick={onDeleteLabel}>Delete</button>
+                                        <button className="delete-button" onClick={openDeleteLabel}>Delete</button>
                                     </>
                                 }
                             </article>
-                        </section>}
+                        </section>
+                    }
+                    {isDeleteLabel &&
+                        <section className="delete-label-page">
+                            <p>This will remove this label from all cards. There is no undo.</p>
+                            <button className="full-delete-label-button" onClick={onDeleteLabel}>Delete</button>
+                        </section>
+                    }
                 </ section>
             }
         >
