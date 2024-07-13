@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useClickOutside } from "../../customHooks/useClickOutside";
 import { useEffectUpdate } from "../../customHooks/useEffectUpdate";
 import { CloseOutlined } from "@ant-design/icons";
+import { EmojiPopover } from "../Task/ManageTaskPopovers/EmojiPopover";
 
 export function NameInput({
   onPressEnter,
@@ -20,6 +21,7 @@ export function NameInput({
   maxLength = 30,
   withButtons = false,
   addButtons = [],
+  emojiButton = false,
   ...other
 }) {
   const [sectionRef, isChangeable, setIsChangeable] = useClickOutside(false);
@@ -31,8 +33,10 @@ export function NameInput({
   useEffect(() => {
     if (inputIsOpen) {
       setIsChangeable(true);
+    } else {
+      setIsChangeable(false);
     }
-  }, []);
+  }, [inputIsOpen]);
 
   useEffectUpdate(() => {
     if (!isChangeable && newName !== value && !withButtons) {
@@ -97,6 +101,9 @@ export function NameInput({
       onChange(value);
     }
   }
+  function addEmojy(emojy){
+    setNewName(prev=>prev+emojy)
+  }
 
   return (
     <section
@@ -122,24 +129,32 @@ export function NameInput({
             maxLength={maxLength}
             placeholder={placeholder}
           />
-          <section className="name-input-buttons">
-            {withButtons && (
-              <span className="right-buttons">
-                <button className="btn btn-action" onClick={onRename}>
-                  Save
-                </button>
-                <button
-                  className="btn btn-secondary"
-                  onClick={() => setIsChangeable(false)}
-                >
-                  <CloseOutlined />
-                </button>
-              </span>
-            )}
-            {addButtons.length > 0 && (
-              <span className="left-buttons">{addButtons}</span>
-            )}
-          </section>
+          {(withButtons || addButtons.length > 0 || emojiButton) && (
+            <section className="name-input-buttons">
+              {withButtons && (
+                <span className="right-buttons">
+                  <button className="btn btn-action" onClick={onRename}>
+                    Save
+                  </button>
+                  <button
+                    className="btn btn-secondary"
+                    onClick={() => setIsChangeable(false)}
+                  >
+                    <CloseOutlined />
+                  </button>
+                </span>
+              )}
+
+              {(addButtons.length > 0 || emojiButton) && (
+                <span className="left-buttons">
+                  {emojiButton && (
+                    <EmojiPopover onAddEmojy={addEmojy} anchorEl={<button className="btn btn-secondary">😀</button>} />
+                  )}
+                  {addButtons}
+                </span>
+              )}
+            </section>
+          )}
         </>
       ) : (
         <p className="title" onClick={() => setIsChangeable(true)}>

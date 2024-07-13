@@ -19,7 +19,7 @@ export function useClickOutside(initialIsOpen) {
   }, []);
 
   useEffect(() => {
-    if (isOpen&ref) {
+    if (isOpen&&ref) {
       document.addEventListener("mousedown", handleClickOutside);
       window.addEventListener("blur", handleWindowBlur);
     } else {
@@ -30,7 +30,7 @@ export function useClickOutside(initialIsOpen) {
       document.removeEventListener("mousedown", handleClickOutside);
       window.removeEventListener("blur", handleWindowBlur);
     };
-  }, [isOpen, handleClickOutside, handleWindowBlur]);
+  }, [isOpen, handleClickOutside, handleWindowBlur,ref]);
 
   return [ref, isOpen, setIsOpen];
 }

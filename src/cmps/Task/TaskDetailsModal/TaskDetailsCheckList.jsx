@@ -8,13 +8,14 @@ import TextArea from "antd/es/input/TextArea";
 import { utilService } from "../../../services/util.service";
 import { EllipsisOutlined } from "@ant-design/icons";
 import { MoreActionsItemPopover } from "../ManageTaskPopovers/MoreActionsItemPopover";
+import { EmojiPopover } from "../ManageTaskPopovers/EmojiPopover";
 export function TaskDetailsCheckList({
   checkList,
   changeCheckList,
   changeItem,
   deleteList,
   deleteItem,
-  createAsTask
+  createAsTask,
 }) {
   const [checkedCount, setCheckedCount] = useState({
     checked: 0,
@@ -24,6 +25,7 @@ export function TaskDetailsCheckList({
   const [hideChecked, setHideCHecked] = useState(false);
   const [checkItems, setCheckItems] = useState([]);
   const [isChangingTitle, setIsChangingTitle] = useState(false);
+  const [openedInputId, setOpenedInputId] = useState(null);
 
   useEffect(() => {
     if (hideChecked) {
@@ -60,6 +62,10 @@ export function TaskDetailsCheckList({
     changeItem(checkList.id, itemId, changes);
   }
   function onAddNewItem(label) {
+    if ( label.trim() === "") {
+      setOnAdd(false)
+      return;
+    }
     var maxPos = 2111;
 
     if (checkList.checkItems.length > 0) {
@@ -82,8 +88,8 @@ export function TaskDetailsCheckList({
   function onDeleteItem(itemId) {
     deleteItem(checkList.id, itemId);
   }
-  async function onConvertToTask(itemId,itemName){
-    await createAsTask(itemName)
+  async function onConvertToTask(itemId, itemName) {
+    await createAsTask(itemName);
     deleteItem(checkList.id, itemId);
   }
 
@@ -98,7 +104,8 @@ export function TaskDetailsCheckList({
           minRows={2}
           withButtons={true}
           onSubmit={onChangeCheckListLabel}
-          inputStatus={setIsChangingTitle}
+          inputStatus={s=>{setIsChangingTitle(s),setOpenedInputId(null)}}
+          inputIsOpen={isChangingTitle&&!openedInputId}
         />
         {!isChangingTitle && (
           <>
@@ -147,17 +154,20 @@ export function TaskDetailsCheckList({
                 className={`checkbox-label ${item.isChecked ? "checked" : ""}`}
                 minRows={2}
                 withButtons={true}
-                // onSubmit={(label) => onChangeItem(item.id, { label })}
+                inputStatus={(s) => (s ? setOpenedInputId(item.id) : null)}
+                inputIsOpen={openedInputId === item.id}
+                onSubmit={(label) => onChangeItem(item.id, { label })}
+                emojiButton={true}
                 addButtons={[
                   <MoreActionsItemPopover
-                  key={item.id}
+                    key={item.id}
                     anchorEl={
                       <button className="btn btn-secondary options-btn">
                         <EllipsisOutlined />
                       </button>
                     }
                     onDeleteItem={() => onDeleteItem(item.id)}
-                    onConvertToTask={()=>onConvertToTask(item.id,item.label)}
+                    onConvertToTask={() => onConvertToTask(item.id, item.label)}
                   />,
                 ]}
               />
