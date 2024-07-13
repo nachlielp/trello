@@ -76,8 +76,10 @@
             "idMembersVoted": [],
             "idShort": 6,
             "idAttachmentCover": null,
-            "labels": [],
-            "idLabels": [],
+            "idLabels": [
+              "51bcee7",
+              "66756c"
+            ],
             "manualCoverAttachment": true,
             "name": "json",
             "pos": 65536,
@@ -191,112 +193,8 @@
             },
             "isTemplate": false,
             "cardRole": null
-          },
-          {
-            "id": "66756e1d26d147ec3f62e2a1",
-            "badges": {
-              "attachmentsByType": {
-                "trello": {
-                  "board": 0,
-                  "card": 0
-                }
-              },
-              "externalSource": null,
-              "location": false,
-              "votes": 0,
-              "viewingMemberVoted": false,
-              "subscribed": false,
-              "attachments": 0,
-              "fogbugz": "",
-              "checkItems": 0,
-              "checkItemsChecked": 0,
-              "checkItemsEarliestDue": null,
-              "comments": 0,
-              "description": false,
-              "due": null,
-              "dueComplete": false,
-              "lastUpdatedByAi": false,
-              "start": null
-            },
-            "checkItemStates": [],
-            "closed": false,
-            "dueComplete": false,
-            "createdAt": "2024-06-25T13:33:53.860Z",
-            "dateLastActivity": "2024-06-25T13:33:53.860Z",
-            "desc": "",
-            "descData": {
-              "emoji": {}
-            },
-            "due": null,
-            "dueReminder": null,
-            "email": null,
-            "idBoard": "64f721f169b14894fac36cdf",
-            "idChecklists": [],
-            "idGroup": "64f721f169b14894fac36ce6",
-            "idMembers": [
-              "666fe4efda8643029b6710f3",
-              "64f721dfe7ac348348a02895"
-            ],
-            "idMembersVoted": [],
-            "idShort": 7,
-            "idAttachmentCover": null,
-            "labels": [
-              {
-                "color": "blue"
-              },
-              {
-                "color": "pink"
-              },
-              {
-                "color": "red"
-              },
-              {
-                "color": "purple"
-              },
-              {
-                "color": "orange"
-              },
-              {
-                "color": "green"
-              }
-            ],
-            "idLabels": [
-              "66756a351dc51400eb1968el",
-              "66793c8367673bb5384b068h",
-              "66756a351dc51400eb1968ec",
-              "66756a351dc51400eb1968f4",
-              "66756a351dc51400eb1968e3",
-              "66756a351dc51400eb1968e1"
-            ],
-            "manualCoverAttachment": true,
-            "name": "custom-hooks.js",
-            "pos": 131072,
-            "shortLink": "R9PKNvmN",
-            "shortUrl": "https://trello.com/c/R9PKNvmN",
-            "start": null,
-            "subscribed": false,
-            "url": "https://trello.com/c/R9PKNvmN/7-custom-hooksjs",
-            "cover": {
-              "idAttachment": null,
-              "color": "black",
-              "idUploadedBackground": null,
-              "size": "normal",
-              "brightness": "dark",
-              "idPlugin": null
-            },
-            "isTemplate": false,
-            "cardRole": null
           }
         ]
-      },
-      {
-        "id": "64f721f169b14894fac36ce7",
-        "name": "Backlog-Client",
-        "closed": false,
-        "color": null,
-        "pos": 2,
-        "subscribed": false,
-        "softLimit": null
       }
     ],
     "desc": "",
@@ -400,70 +298,22 @@
       "canBePrivate": true,
       "canInvite": true
     },
-    "labelNames": [
+    "labels": [
       {
+        "id": "66756c",
+        "name": "label A",
         "color": "green",
-        "label": "Ok"
+        "darkFontColor": "#BAF3DB",
+        "lightFontColor": "#164B35"
       },
       {
+        "id": "51bcee7",
+        "name": "Label B",
         "color": "yellow",
-        "label": ""
-      },
-      {
-        "color": "orange",
-        "label": ""
-      },
-      {
-        "color": "red",
-        "label": "Urgent"
-      },
-      {
-        "color": "purple",
-        "label": ""
-      },
-      {
-        "color": "blue",
-        "label": ""
-      },
-      {
-        "color": "sky",
-        "label": ""
-      },
-      {
-        "color": "lime",
-        "label": ""
-      },
-      {
-        "color": "pink",
-        "label": "Im Pinkalicious"
-      },
-      {
-        "color": "black",
-        "label": ""
+        "darkFontColor": "#F8E6A0",
+        "lightFontColor": "#533F04"
       }
     ],
-    "noInUseLabels": {
-      "green_dark": "",
-      "yellow_dark": "",
-      "orange_dark": "",
-      "red_dark": "",
-      "purple_dark": "",
-      "blue_dark": "",
-      "sky_dark": "",
-      "lime_dark": "",
-      "pink_dark": "",
-      "black_dark": "",
-      "green_light": "",
-      "yellow_light": "",
-      "orange_light": "",
-      "red_light": "",
-      "purple_light": "",
-      "blue_light": "",
-      "sky_light": "",
-      "lime_light": "",
-      "pink_light": "",
-      "black_light": ""
-    },
     "coverImgs": [
       {
         "bg": "#f2a912",
@@ -1103,8 +953,10 @@
             "idMembersVoted": [],
             "idShort": 6,
             "idAttachmentCover": null,
-            "labels": [],
-            "idLabels": [],
+            "idLabels": [
+              "51bcee7",
+              "66756c"
+            ],
             "manualCoverAttachment": true,
             "name": "json",
             "pos": 65536,
@@ -1267,34 +1119,7 @@
             "idMembersVoted": [],
             "idShort": 7,
             "idAttachmentCover": null,
-            "labels": [
-              {
-                "color": "blue"
-              },
-              {
-                "color": "pink"
-              },
-              {
-                "color": "red"
-              },
-              {
-                "color": "purple"
-              },
-              {
-                "color": "orange"
-              },
-              {
-                "color": "green"
-              }
-            ],
-            "idLabels": [
-              "66756a351dc51400eb1968ee",
-              "66793c8367673bb5384b068f",
-              "66756a351dc51400eb1968ed",
-              "66756a351dc51400eb1968f3",
-              "66756a351dc51400eb1968e8",
-              "66756a351dc51400eb1968e2"
-            ],
+            "idLabels": [],
             "manualCoverAttachment": true,
             "name": "custom-hooks.js",
             "pos": 131072,
@@ -1359,7 +1184,6 @@
             "idMembersVoted": [],
             "idShort": 10,
             "idAttachmentCover": null,
-            "labels": [],
             "idLabels": [],
             "manualCoverAttachment": true,
             "name": "event.bus.js",
@@ -1436,7 +1260,6 @@
             "idMembersVoted": [],
             "idShort": 25,
             "idAttachmentCover": null,
-            "labels": [],
             "idLabels": [],
             "manualCoverAttachment": true,
             "name": "Some test",
@@ -1588,14 +1411,7 @@
             "idMembersVoted": [],
             "idShort": 8,
             "idAttachmentCover": null,
-            "labels": [
-              {
-                "color": "orange"
-              }
-            ],
-            "idLabels": [
-              "66756a351dc51400eb1968e8"
-            ],
+            "idLabels": [],
             "manualCoverAttachment": false,
             "name": "store.js",
             "pos": 196608,
@@ -1660,7 +1476,6 @@
             "idMembersVoted": [],
             "idShort": 11,
             "idAttachmentCover": null,
-            "labels": [],
             "idLabels": [],
             "manualCoverAttachment": false,
             "name": "trello.reduccer.js",
@@ -1726,14 +1541,7 @@
             "idMembersVoted": [],
             "idShort": 12,
             "idAttachmentCover": null,
-            "labels": [
-              {
-                "color": "red"
-              }
-            ],
-            "idLabels": [
-              "66756a351dc51400eb1968ed"
-            ],
+            "idLabels": [],
             "manualCoverAttachment": false,
             "name": "trello.actions.js",
             "pos": 327690,
@@ -1820,7 +1628,6 @@
             "idMembersVoted": [],
             "idShort": 5,
             "idAttachmentCover": null,
-            "labels": [],
             "idLabels": [],
             "manualCoverAttachment": false,
             "name": "TrelloIndex.jsx",
@@ -1888,7 +1695,6 @@
             "idMembersVoted": [],
             "idShort": 13,
             "idAttachmentCover": null,
-            "labels": [],
             "idLabels": [],
             "manualCoverAttachment": false,
             "name": "TrelloBoards.jsx",
@@ -1954,7 +1760,6 @@
             "idMembersVoted": [],
             "idShort": 19,
             "idAttachmentCover": null,
-            "labels": [],
             "idLabels": [],
             "manualCoverAttachment": false,
             "name": "App.js",
@@ -2031,7 +1836,6 @@
             "idMembersVoted": [],
             "idShort": 15,
             "idAttachmentCover": "66758cda9b6ddd6d9eb72b20",
-            "labels": [],
             "idLabels": [],
             "manualCoverAttachment": true,
             "name": "SideBar.jsx",
@@ -2097,7 +1901,6 @@
             "idMembersVoted": [],
             "idShort": 16,
             "idAttachmentCover": "66758d1fffc9a9d1a2cd085f",
-            "labels": [],
             "idLabels": [],
             "manualCoverAttachment": false,
             "name": "SettingsSideBar.jsx",
@@ -2163,7 +1966,6 @@
             "idMembersVoted": [],
             "idShort": 20,
             "idAttachmentCover": "66758cc12183e8943bcf98c4",
-            "labels": [],
             "idLabels": [],
             "manualCoverAttachment": false,
             "name": "UserMessage.jsx",
@@ -2298,70 +2100,22 @@
       "canBePrivate": true,
       "canInvite": true
     },
-    "labelNames": [
+    "labels": [
       {
+        "id": "66756c",
+        "name": "label A",
         "color": "green",
-        "label": "Ok"
+        "darkFontColor": "#BAF3DB",
+        "lightFontColor": "#164B35"
       },
       {
+        "id": "51bcee7",
+        "name": "Label B",
         "color": "yellow",
-        "label": ""
-      },
-      {
-        "color": "orange",
-        "label": ""
-      },
-      {
-        "color": "red",
-        "label": "Urgent"
-      },
-      {
-        "color": "purple",
-        "label": ""
-      },
-      {
-        "color": "blue",
-        "label": ""
-      },
-      {
-        "color": "sky",
-        "label": ""
-      },
-      {
-        "color": "lime",
-        "label": ""
-      },
-      {
-        "color": "pink",
-        "label": "Im Pinkalicious"
-      },
-      {
-        "color": "black",
-        "label": ""
+        "darkFontColor": "#F8E6A0",
+        "lightFontColor": "#533F04"
       }
     ],
-    "noInUseLabels": {
-      "green_dark": "",
-      "yellow_dark": "",
-      "orange_dark": "",
-      "red_dark": "",
-      "purple_dark": "",
-      "blue_dark": "",
-      "sky_dark": "",
-      "lime_dark": "",
-      "pink_dark": "",
-      "black_dark": "",
-      "green_light": "",
-      "yellow_light": "",
-      "orange_light": "",
-      "red_light": "",
-      "purple_light": "",
-      "blue_light": "",
-      "sky_light": "",
-      "lime_light": "",
-      "pink_light": "",
-      "black_light": ""
-    },
     "coverImgs": [
       {
         "bg": "#f2a912",

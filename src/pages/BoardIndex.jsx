@@ -15,6 +15,8 @@ import {
   sortGroup,
   loadBoard,
   loadBoardByTaskId,
+  createLabel,
+  deleteLabel,
 } from "../store/board.actions";
 import { editUser } from "../store/user.actions";
 
@@ -92,9 +94,6 @@ export function BoardIndex() {
     const res = await editTask(task);
   }
 
-  async function onEditLabel(label) {
-    const res = await editLabel(board.id, label);
-  }
 
   async function onCopyGroup(group) {
     const res = await copyGroup(board.id, group);
@@ -106,6 +105,32 @@ export function BoardIndex() {
 
   function onStarToggle(starredIds) {
     editUser({ ...user, starredBoardIds: starredIds });
+  }
+
+  // function onCreateLabel(task, label) {
+  //   createLabel(board.id, task, label);
+  // }
+
+  // function onDeleteLabel(labelId) {
+  //   deleteLabel(board.id, labelId);
+  // }
+
+  // async function onEditLabel(label) {
+  //   console.log(label);
+  //   const res = await editLabel(board.id, label);
+  // }
+
+  async function onLabelAction(action, label, task) {
+    if (action === "edit") {
+      editLabel(board.id, label);
+    }
+    if (action === "delete") {
+      console.log("delete label", label);
+      deleteLabel(board.id, label.id);
+    }
+    if (action === "create") {
+      createLabel(board.id, task, label);
+    }
   }
 
   const sortedGroups = board?.groups
@@ -127,11 +152,11 @@ export function BoardIndex() {
                   archiveGroup={() => onArchiveGroup(board.id, group.id)}
                   editGroup={onEditGroup}
                   editTask={onEditTask}
-                  editLabel={onEditLabel}
                   copyGroup={onCopyGroup}
                   moveAllCards={moveAllCards}
                   archiveAllCards={archiveAllCards}
                   sortGroup={onSortGroup}
+                  labelActions={onLabelAction}
                 />
               ))}
             <AddGroupBtn addGroup={onAddGroup} />
@@ -141,8 +166,8 @@ export function BoardIndex() {
           <TaskDetailsModal
             taskId={selectedTaskId}
             editTask={onEditTask}
-            editLabel={onEditLabel}
             onCloseTask={() => setSelectedTaskId(null)}
+            labelActions={onLabelAction}
           />
         )}
       </section>

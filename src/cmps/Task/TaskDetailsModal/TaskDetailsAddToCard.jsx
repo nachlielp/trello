@@ -12,7 +12,7 @@ import { ManageMembersPopover } from "../ManageTaskPopovers/ManageMembersPopover
 import { ManageLabelsPopover } from "../ManageTaskPopovers/ManageLabelsPopover";
 import { ManageCoverPopover } from "../ManageTaskPopovers/ManageCoverPopover";
 
-export function TaskDetailsAddToCard({ task, editTask, editLabel }) {
+export function TaskDetailsAddToCard({ task, editTask, labelActions }) {
   const [isCover, setIsCover] = useState(false);
   useEffect(() => {
     setIsCover(task?.cover?.color || task?.cover?.idUploadedBackground);
@@ -47,7 +47,7 @@ export function TaskDetailsAddToCard({ task, editTask, editLabel }) {
           taskLabels={task?.labels}
           editTask={editTask}
           task={task}
-          editLabel={editLabel}
+          labelActions={labelActions}
         />
     },
     { svg: checkListIcon, text: "Checklist" },
