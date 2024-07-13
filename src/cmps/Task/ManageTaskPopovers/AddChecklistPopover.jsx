@@ -3,8 +3,10 @@ import { Popover, Input } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { useState, useEffect, useRef } from "react";
 import { utilService } from "../../../services/util.service";
+import { useSelector } from "react-redux";
 
-export function AddChecklistPopover({ anchorEl, task,editTask }) {
+export function AddChecklistPopover({ anchorEl, task, editTask, editBoard }) {
+  const board = useSelector((state) => state.boardModule.board);
   const [isOpen, setIsOpen] = useState(false);
   const inputRef = useRef(null);
   const [text, setText] = useState("Checklist");
@@ -14,7 +16,6 @@ export function AddChecklistPopover({ anchorEl, task,editTask }) {
   }
 
   useEffect(() => {
-    // setNewName(value);
     if (isOpen && inputRef.current) {
       const inputRefElement = inputRef.current.resizableTextArea.textArea;
       setTimeout(() => {
@@ -26,10 +27,18 @@ export function AddChecklistPopover({ anchorEl, task,editTask }) {
   function onChange(e) {
     setText(e.target.value);
   }
-  function onSubmit() {
-    // setIsOpen(false);
+  async function onSubmit() {
     var minPos = 12222;
-
+//add taskId to checkListTaskIds
+    if (
+      !board.checkListTaskIds.length ||
+      !board.checkListTaskIds.includes(task.id)
+    ) {
+      await editBoard({
+        ...board,
+        checkListTaskIds: [...board.checkListTaskIds, task.id],
+      });
+    }
     if (task.checkLists.length > 0) {
       minPos = task.checkLists.reduce(
         (min, item) => (item.pos > min ? item.pos : min),
@@ -42,7 +51,7 @@ export function AddChecklistPopover({ anchorEl, task,editTask }) {
       pos: minPos - 1000,
     });
     const newTask = { ...task, checkLists: [...task.checkLists, newCheckList] };
-    editTask(newTask);
+    await editTask(newTask);
   }
 
   return (

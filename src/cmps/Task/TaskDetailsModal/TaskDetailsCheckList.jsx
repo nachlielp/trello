@@ -77,7 +77,7 @@ export function TaskDetailsCheckList({
     changeCheckList(checkList.id, { checkItems });
   }
   function onDeleteList() {
-    deleteList(deleteItem);
+    deleteList(checkList.id);
   }
   function onDeleteItem(itemId) {
     deleteItem(checkList.id, itemId);

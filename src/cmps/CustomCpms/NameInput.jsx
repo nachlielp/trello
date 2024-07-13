@@ -106,9 +106,11 @@ export function NameInput({
     >
       {isChangeable ? (
         <>
-          <span className="title-input" ref={spanRef}>
-            {newName}
-          </span>
+          {expandInputWidth && (
+            <span className="title-input" ref={spanRef}>
+              {newName}
+            </span>
+          )}
           <TextArea
             ref={textAreaRef}
             className="title-input"
@@ -135,9 +137,7 @@ export function NameInput({
               </span>
             )}
             {addButtons.length > 0 && (
-              <span className="left-buttons">
-                {addButtons}
-              </span>
+              <span className="left-buttons">{addButtons}</span>
             )}
           </section>
         </>
