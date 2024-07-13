@@ -60,6 +60,7 @@ export function BoardIndex() {
       ...task,
       idBoard: board.id,
     };
+    console.log(newTask)
     try {
       await addTask(newTask, groupId);
     } catch (error) {
@@ -143,6 +144,7 @@ export function BoardIndex() {
             editTask={onEditTask}
             editLabel={onEditLabel}
             onCloseTask={() => setSelectedTaskId(null)}
+            addTask={onAddTask}
           />
         )}
       </section>

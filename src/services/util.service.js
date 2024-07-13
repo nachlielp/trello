@@ -247,7 +247,7 @@ export function stringToColor(str) {
 }
 function createNewTask(task) {
   return {
-    id: utilService.makeId(),
+    id: utilService.makeId(24),
     apdatedAt: new Date().toISOString(),
     members: [],
     badges: {
@@ -290,6 +290,7 @@ function createNewTask(task) {
     idGroup: task.groupId,
     idMembers: [],
     idMembersVoted: [],
+    //TODO generateShortLink() 
     idShort: "", // generateShortId(), // Function to generate a short ID
     idAttachmentCover: null,
     labels: [],
@@ -315,6 +316,7 @@ function createNewTask(task) {
     },
     isTemplate: false,
     cardRole: null,
+    checkLists:[]
   };
 }
 

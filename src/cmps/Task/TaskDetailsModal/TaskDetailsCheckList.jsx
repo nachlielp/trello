@@ -14,6 +14,7 @@ export function TaskDetailsCheckList({
   changeItem,
   deleteList,
   deleteItem,
+  createAsTask
 }) {
   const [checkedCount, setCheckedCount] = useState({
     checked: 0,
@@ -62,9 +63,10 @@ export function TaskDetailsCheckList({
     var maxPos = 2111;
 
     if (checkList.checkItems.length > 0) {
-      maxPos = checkList.checkItems
-        .filter((item) => item.pos > 0)
-        .reduce((max, item) => (item.pos > max ? item.pos : max), 0);
+      maxPos = checkList.checkItems.reduce(
+        (max, item) => (item.pos > max ? item.pos : max),
+        0
+      );
       maxPos;
     }
     const newItem = utilService.createCheckListItem({
@@ -78,6 +80,10 @@ export function TaskDetailsCheckList({
     deleteList(deleteItem);
   }
   function onDeleteItem(itemId) {
+    deleteItem(checkList.id, itemId);
+  }
+  async function onConvertToTask(itemId,itemName){
+    await createAsTask(itemName)
     deleteItem(checkList.id, itemId);
   }
 
@@ -144,12 +150,14 @@ export function TaskDetailsCheckList({
                 // onSubmit={(label) => onChangeItem(item.id, { label })}
                 addButtons={[
                   <MoreActionsItemPopover
+                  key={item.id}
                     anchorEl={
                       <button className="btn btn-secondary options-btn">
                         <EllipsisOutlined />
                       </button>
                     }
                     onDeleteItem={() => onDeleteItem(item.id)}
+                    onConvertToTask={()=>onConvertToTask(item.id,item.label)}
                   />,
                 ]}
               />

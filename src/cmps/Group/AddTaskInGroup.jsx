@@ -70,9 +70,11 @@ export function AddTaskInGroup({ groupId, closeAddTask, addTask, addToTop }) {
         }
 
         newTask.groupId = groupId;
+   
         if (typeof (newTask.pos) !== 'number') {
             console.error('newTask.pos is not a number')
         } else {
+            console.log(newTask)
             setTaskName('')
             await addTask(newTask, groupId)
         }

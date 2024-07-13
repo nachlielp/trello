@@ -18,7 +18,8 @@ import { TaskDetailsMarkdown } from "./TaskDetailsMarkdown";
 import { NameInput } from "../../CustomCpms/NameInput";
 import { TaskDetailsCheckList } from "./TaskDetailsCheckList";
 
-export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
+
+export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask,addTask }) {
   const group = useSelector((state) =>
     state.boardModule.board.groups?.find((g) =>
       g.tasks?.find((t) => t.id === taskId)
@@ -135,7 +136,6 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
     editTask(newTask);
   }
   function deleteItem(listId, itemId) {
-    console.log(listId)
     const newTask = {
       ...task,
       checkLists: task.checkLists.map((c) =>
@@ -149,6 +149,23 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
     };
     editTask(newTask);
   }
+
+  async function createAsTask(name) {
+    let maxPos = group.tasks.reduce(
+      (max, item) => (item.pos > max ? item.pos : max),
+      0
+    );
+    maxPos;
+    const newTask = {
+      name,
+      pos: maxPos + 1000,
+      groupId: task.idGroup,
+    };
+
+
+    await addTask(newTask);
+  }
+
   return (
     <Modal
       open
@@ -207,6 +224,7 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
                   changeItem={changeItem}
                   deleteList={deleteList}
                   deleteItem={deleteItem}
+                  createAsTask={createAsTask}
                 />
               ))}
         </section>

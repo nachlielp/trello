@@ -136,7 +136,7 @@ export function NameInput({
             )}
             {addButtons.length > 0 && (
               <span className="left-buttons">
-                {addButtons.map((button) => button)}
+                {addButtons}
               </span>
             )}
           </section>

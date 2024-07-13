@@ -2,7 +2,7 @@ import { CloseOutlined } from "@ant-design/icons";
 import { Popover, Input } from "antd";
 import { useState, useEffect } from "react";
 
-export function MoreActionsItemPopover({ anchorEl,onDeleteItem }) {
+export function MoreActionsItemPopover({ anchorEl,onDeleteItem ,onConvertToTask}) {
   const [isOpen, setIsOpen] = useState(false);
 
   function onClose(e) {
@@ -28,7 +28,7 @@ export function MoreActionsItemPopover({ anchorEl,onDeleteItem }) {
             </button>
           </header>
           <div className="more-actions-main">
-        <button className="btn">Convert to card</button>
+        <button className="btn" onClick={onConvertToTask}>Convert to card</button>
         <button className="btn" onClick={onDeleteItem}>Delete</button>
           </div>
         </section>
