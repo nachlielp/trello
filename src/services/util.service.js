@@ -62,7 +62,8 @@ export const utilService = {
   createNewBoard,
   getBgImgs,
   getBgColors,
-  createCheckListItem
+  createCheckListItem,
+  createCheckList
 };
 
 export const USERS_KEY = "users";
@@ -197,6 +198,16 @@ function createCheckListItem(changes){
     isChecked:false,
     pos:0,
     ...changes
+  }
+}
+function createCheckList(changes){
+  return{
+  id: utilService.makeId(24),
+  label: changes.label,
+  pos:0,
+  checkItems:[],
+  ...changes
+
   }
 }
 

@@ -37,8 +37,7 @@ export function ManageMembersPopover({ anchorEl, editTask, task }) {
     }
   }, [task?.idMembers, inputSearch]);
 
-  function onClose(e) {
-    e.stopPrapagation();
+  function onClose() {
     setIsOpen(false);
   }
   return (

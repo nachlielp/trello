@@ -5,12 +5,13 @@ import coverIcon from "/img/board-index/detailsImgs/coverIcon.svg";
 import fieldsIcon from "/img/board-index/detailsImgs/fieldsIcon.svg";
 import labelIcon from "/img/board-index/headerImgs/filterBtn-imgs/labelIcon.svg";
 import clockIcon from "/img/board-index/headerImgs/filterBtn-imgs/clockIcon.svg";
-// import userIcon from "/img/board-index/headerImgs/filterBtn-imgs/userIcon.svg";
+
 
 import { SvgButton } from "../../CustomCpms/SvgButton";
 import { ManageMembersPopover } from "../ManageTaskPopovers/ManageMembersPopover";
 import { ManageLabelsPopover } from "../ManageTaskPopovers/ManageLabelsPopover";
 import { ManageCoverPopover } from "../ManageTaskPopovers/ManageCoverPopover";
+import { AddChecklistPopover } from "../ManageTaskPopovers/AddChecklistPopover";
 
 export function TaskDetailsAddToCard({ task, editTask, editLabel }) {
   const [isCover, setIsCover] = useState(false);
@@ -18,10 +19,9 @@ export function TaskDetailsAddToCard({ task, editTask, editLabel }) {
     setIsCover(task?.cover?.color || task?.cover?.idUploadedBackground);
   }, [task?.cover?.color, task?.cover?.idUploadedBackground]);
 
-
   const addToCard = [
     {
-      popover:
+      popover: (
         <ManageMembersPopover
           anchorEl={
             <SvgButton
@@ -33,9 +33,10 @@ export function TaskDetailsAddToCard({ task, editTask, editLabel }) {
           editTask={editTask}
           task={task}
         />
+      ),
     },
     {
-      popover:
+      popover: (
         <ManageLabelsPopover
           anchorEl={
             <SvgButton
@@ -49,22 +50,41 @@ export function TaskDetailsAddToCard({ task, editTask, editLabel }) {
           task={task}
           editLabel={editLabel}
         />
+      ),
     },
-    { svg: checkListIcon, text: "Checklist" },
+    {
+      popover: (
+        <AddChecklistPopover
+          anchorEl={
+            <SvgButton
+              src={checkListIcon}
+              className="floating-button"
+              label="Checklist"
+            />
+          }
+          task={task}
+          editTask={editTask}
+        />
+      ),
+    },
     { svg: clockIcon, text: "Dates" },
     { svg: "/img/taskBadges/file.svg", text: "Attachment" },
     {
       popover: !isCover ? (
         <ManageCoverPopover
           anchorEl={
-            <SvgButton src={coverIcon} className="floating-button" label="Change cover" />
+            <SvgButton
+              src={coverIcon}
+              className="floating-button"
+              label="Change cover"
+            />
           }
           editTask={editTask}
           task={task}
         />
       ) : (
         <></>
-      )
+      ),
     },
     { svg: fieldsIcon, text: "Custom Fields" },
   ];
@@ -72,9 +92,7 @@ export function TaskDetailsAddToCard({ task, editTask, editLabel }) {
     <section className="tittle">
       <p className="sub-title">Add to card</p>
       {addToCard.map((btn, index) => (
-        <div key={index}>
-          {btn.popover}
-        </div>
+        <div key={index}>{btn.popover}</div>
       ))}
     </section>
   );

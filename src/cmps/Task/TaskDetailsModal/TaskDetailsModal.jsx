@@ -45,7 +45,7 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
   }
 
   function onClose(e) {
-    if(e.key === 'Escape')return
+    if (e.key === "Escape") return;
     onCloseTask();
     navigate(`/b/${task.idBoard}`, { replace: true });
   }
@@ -129,12 +129,26 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
   function deleteList(checkListId) {
     const newTask = {
       ...task,
-      checkLists: task.checkLists.filter((c) => !c.id === checkListId),
+      checkLists: task.checkLists.filter((c) => c.id !== checkListId),
     };
 
     editTask(newTask);
   }
-
+  function deleteItem(listId, itemId) {
+    console.log(listId)
+    const newTask = {
+      ...task,
+      checkLists: task.checkLists.map((c) =>
+        c.id === listId
+          ? {
+              ...c,
+              checkItems: c.checkItems.filter((i) => i.id !== itemId),
+            }
+          : c
+      ),
+    };
+    editTask(newTask);
+  }
   return (
     <Modal
       open
@@ -183,15 +197,18 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
           </article>
           <TaskDetailsMarkdown editTask={editTask} task={task} />
           {task.checkLists.length > 0 &&
-            task.checkLists.map((checkList) => (
-              <TaskDetailsCheckList
-                checkList={checkList}
-                key={checkList.id}
-                changeCheckList={changeCheckList}
-                changeItem={changeItem}
-                deleteList={deleteList}
-              />
-            ))}
+            task.checkLists
+              .sort((a, b) => a.pos - b.pos)
+              .map((checkList) => (
+                <TaskDetailsCheckList
+                  checkList={checkList}
+                  key={checkList.id}
+                  changeCheckList={changeCheckList}
+                  changeItem={changeItem}
+                  deleteList={deleteList}
+                  deleteItem={deleteItem}
+                />
+              ))}
         </section>
         <section className="details-body__right">
           {!isMember && (

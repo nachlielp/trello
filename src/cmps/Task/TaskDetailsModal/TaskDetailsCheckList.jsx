@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 import { CheckBox } from "../../CustomCpms/CheckBox";
 import { NameInput } from "../../CustomCpms/NameInput";
-import taskCheckList from "/img/taskBadges/taskCheckList.svg";
+import checkListIcon from "/img/board-index/detailsImgs/checkListIcon.svg";
 import { ReactSVG } from "react-svg";
 import { Progress } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { utilService } from "../../../services/util.service";
+import { EllipsisOutlined } from "@ant-design/icons";
+import { MoreActionsItemPopover } from "../ManageTaskPopovers/MoreActionsItemPopover";
 export function TaskDetailsCheckList({
   checkList,
   changeCheckList,
   changeItem,
   deleteList,
+  deleteItem,
 }) {
   const [checkedCount, setCheckedCount] = useState({
     checked: 0,
@@ -23,12 +26,17 @@ export function TaskDetailsCheckList({
 
   useEffect(() => {
     if (hideChecked) {
-      setCheckItems(checkList.checkItems.filter((item) => !item.isChecked));
+      setCheckItems(
+        checkList.checkItems
+          .filter((item) => !item.isChecked)
+          .sort((a, b) => a.pos - b.pos)
+      );
     } else {
-      setCheckItems(checkList.checkItems);
+      setCheckItems(checkList.checkItems.sort((a, b) => a.pos - b.pos));
     }
   }, [hideChecked, checkList.checkItems]);
 
+  //proggress bar
   useEffect(() => {
     setCheckedCount(() => {
       return { all: checkList.checkItems.length, checked: 0 };
@@ -43,6 +51,7 @@ export function TaskDetailsCheckList({
       );
     }
   }, [checkList]);
+
   function onChangeCheckListLabel(newName) {
     changeCheckList(checkList.id, { label: newName });
   }
@@ -66,20 +75,22 @@ export function TaskDetailsCheckList({
     changeCheckList(checkList.id, { checkItems });
   }
   function onDeleteList() {
-    deleteList(checkList.id);
+    deleteList(deleteItem);
+  }
+  function onDeleteItem(itemId) {
+    deleteItem(checkList.id, itemId);
   }
 
   return (
     <section className="task-details-checklist">
       <header className="task-details-header">
-        <ReactSVG src={taskCheckList} wrapper="span" />
+        <ReactSVG src={checkListIcon} wrapper="span" />
         <NameInput
           value={checkList.label}
           expandInputWidth={false}
           className="checkbox-label"
           minRows={2}
-          // withButtons={true}
-          addButtons={[<button className="btn">lol</button>]}
+          withButtons={true}
           onSubmit={onChangeCheckListLabel}
           inputStatus={setIsChangingTitle}
         />
@@ -101,7 +112,11 @@ export function TaskDetailsCheckList({
         )}
       </header>
       <Progress
-        percent={((checkedCount.checked / checkedCount.all) * 100).toFixed(0)}
+        percent={
+          Number(
+            ((checkedCount.checked / checkedCount.all) * 100).toFixed(0)
+          ) || 0
+        }
         percentPosition={{ align: "start", type: "outer" }}
         className={`progres-bar ${
           ((checkedCount.checked / checkedCount.all) * 100).toFixed(0) >= 100
@@ -128,11 +143,16 @@ export function TaskDetailsCheckList({
                 withButtons={true}
                 // onSubmit={(label) => onChangeItem(item.id, { label })}
                 addButtons={[
-                  <button className="btn btn-secondary">LOl</button>,
-                  <button className="btn btn-secondary">kek</button>,
-                  <button className="btn btn-secondary">cheburek</button>,
+                  <MoreActionsItemPopover
+                    anchorEl={
+                      <button className="btn btn-secondary options-btn">
+                        <EllipsisOutlined />
+                      </button>
+                    }
+                    onDeleteItem={() => onDeleteItem(item.id)}
+                  />,
                 ]}
-                />
+              />
             </li>
           ))}
         <section className="add-item">
@@ -142,15 +162,15 @@ export function TaskDetailsCheckList({
             </button>
           ) : (
             <NameInput
-            inputIsOpen={true}
-            className="checkbox-label"
-            expandInputWidth={false}
-            withButtons={true}
-            inputStatus={(e) => setOnAdd(e)}
-            minRows={2}
-            onPressEnter={(e)=>onAddNewItem(e)}
-            placeholder="Add an item"
-            onSubmit={(e) => onAddNewItem(e)}
+              inputIsOpen={true}
+              className="checkbox-label"
+              expandInputWidth={false}
+              withButtons={true}
+              inputStatus={(e) => setOnAdd(e)}
+              minRows={2}
+              onPressEnter={(e) => onAddNewItem(e)}
+              placeholder="Add an item"
+              onSubmit={(e) => onAddNewItem(e)}
             />
           )}
         </section>
