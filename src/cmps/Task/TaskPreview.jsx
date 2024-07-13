@@ -7,7 +7,7 @@ import { TaskPreviewEditModal } from "./TaskPreviewEditModal";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 
-export function TaskPreview({ task, editTask, editLabel }) {
+export function TaskPreview({ task, editTask, labelActions }) {
   const boardLabels = useSelector((state) => state.boardModule.board.labels);
   const [isHovered, setIsHovered] = useState(false);
   const [isOpenPreviewModal, setIsOpenPreviewModal] = useState(false);
@@ -19,7 +19,10 @@ export function TaskPreview({ task, editTask, editLabel }) {
   const taskCover = task.cover;
 
   useEffect(() => {
-    setTaskLabels(task.idLabels.map((labelId) => boardLabels.find(boardLabel => boardLabel.id === labelId)));
+    const taskLabels = task.idLabels
+      .filter((labelId) => boardLabels.some(boardLabel => boardLabel.id === labelId)) // Filter out non-existing labels
+      .map((labelId) => boardLabels.find(boardLabel => boardLabel.id === labelId)) || [];
+    setTaskLabels(taskLabels);
   }, [task.idLabels, boardLabels]);
 
   useEffect(() => {
@@ -46,8 +49,8 @@ export function TaskPreview({ task, editTask, editLabel }) {
         isOpen={isOpenPreviewModal}
         openPreviewModal={onOpenPreviewModal}
         taskLabels={taskLabels}
-        editLabel={editLabel}
         taskWidth={taskWidth}
+        labelActions={labelActions}
       />
       {taskCover.color && (
         <div
@@ -71,9 +74,11 @@ export function TaskPreview({ task, editTask, editLabel }) {
         onClick={() => navigate(`/c/${task.id}`, { replace: true })}
       >
         <article className="group-task-content-labels">
-          {taskLabels.map((label) => (
-            <TaskPreviewLabel key={label.color} label={label} isExpanded={true} />
-          ))}
+          {taskLabels.length > 0 && (
+            taskLabels.map((label) => (
+              <TaskPreviewLabel key={label?.color} label={label} isExpanded={true} />
+            ))
+          )}
         </article>
         <span className="group-task-content-title">{task.name}</span>
         <TaskPreviewBadges task={task} />

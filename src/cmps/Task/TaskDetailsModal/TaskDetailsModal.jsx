@@ -17,7 +17,7 @@ import { TaskDetailsLabels } from "./TaskDetailsLabels";
 import { TaskDetailsMarkdown } from "./TaskDetailsMarkdown";
 import { NameInput } from "../../CustomCpms/NameInput";
 
-export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
+export function TaskDetailsModal({ taskId, editTask, labelActions, onCloseTask }) {
   const group = useSelector((state) =>
     state.boardModule.board.groups?.find((g) =>
       g.tasks?.find((t) => t.id === taskId)
@@ -135,7 +135,7 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
             {hasMembers && (
               <TaskDetailsMembers currentTask={task} editTask={editTask} />
             )}
-            {task.labels.length > 0 && <TaskDetailsLabels task={task} editTask={editTask} editLabel={editLabel} />}
+            {task.idLabels.length > 0 && <TaskDetailsLabels task={task} editTask={editTask} labelActions={labelActions} />}
           </article>
           <TaskDetailsMarkdown editTask={editTask} task={task} />
 
@@ -150,7 +150,7 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
           <TaskDetailsAddToCard
             task={task}
             editTask={editTask}
-            editLabel={editLabel}
+            labelActions={labelActions}
           />
           <TaskDetailsActions
             task={task}

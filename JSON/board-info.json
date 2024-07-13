@@ -191,105 +191,8 @@
             },
             "isTemplate": false,
             "cardRole": null
-          },
-          {
-            "id": "66756e1d26d147ec3f62e2a1",
-            "badges": {
-              "attachmentsByType": {
-                "trello": {
-                  "board": 0,
-                  "card": 0
-                }
-              },
-              "externalSource": null,
-              "location": false,
-              "votes": 0,
-              "viewingMemberVoted": false,
-              "subscribed": false,
-              "attachments": 0,
-              "fogbugz": "",
-              "checkItems": 0,
-              "checkItemsChecked": 0,
-              "checkItemsEarliestDue": null,
-              "comments": 0,
-              "description": false,
-              "due": null,
-              "dueComplete": false,
-              "lastUpdatedByAi": false,
-              "start": null
-            },
-            "checkItemStates": [],
-            "closed": false,
-            "dueComplete": false,
-            "createdAt": "2024-06-25T13:33:53.860Z",
-            "dateLastActivity": "2024-06-25T13:33:53.860Z",
-            "desc": "",
-            "descData": {
-              "emoji": {}
-            },
-            "due": null,
-            "dueReminder": null,
-            "email": null,
-            "idBoard": "64f721f169b14894fac36cdf",
-            "idChecklists": [],
-            "idGroup": "64f721f169b14894fac36ce6",
-            "idMembers": [
-              "666fe4efda8643029b6710f3",
-              "64f721dfe7ac348348a02895"
-            ],
-            "idMembersVoted": [],
-            "idShort": 7,
-            "idAttachmentCover": null,
-            "labels": [
-              {
-                "color": "blue"
-              },
-              {
-                "color": "pink"
-              },
-              {
-                "color": "red"
-              },
-              {
-                "color": "purple"
-              },
-              {
-                "color": "orange"
-              },
-              {
-                "color": "green"
-              }
-            ],
-            "idLabels": [],
-            "manualCoverAttachment": true,
-            "name": "custom-hooks.js",
-            "pos": 131072,
-            "shortLink": "R9PKNvmN",
-            "shortUrl": "https://trello.com/c/R9PKNvmN",
-            "start": null,
-            "subscribed": false,
-            "url": "https://trello.com/c/R9PKNvmN/7-custom-hooksjs",
-            "cover": {
-              "idAttachment": null,
-              "color": "black",
-              "idUploadedBackground": null,
-              "size": "normal",
-              "brightness": "dark",
-              "idPlugin": null
-            },
-            "isTemplate": false,
-            "cardRole": null
           }
         ]
-      },
-      {
-        "id": "64f721f169b14894fac36ce7",
-        "name": "Backlog-Client",
-        "closed": false,
-        "color": null,
-        "pos": 2,
-        "subscribed": false,
-        "softLimit": null
       }
     ],
     "desc": "",
@@ -393,6 +296,7 @@
       "canBePrivate": true,
       "canInvite": true
     },
+    "labels": [],
     "labelNames": [
       {
         "color": "green",
@@ -1097,10 +1001,7 @@
             "idShort": 6,
             "idAttachmentCover": null,
             "labels": [],
-            "idLabels": [
-              "51bcee7",
-              "66756c"
-            ],
+            "idLabels": [],
             "manualCoverAttachment": true,
             "name": "json",
             "pos": 65536,
@@ -1283,10 +1184,7 @@
                 "color": "green"
               }
             ],
-            "idLabels": [
-              "66756c",
-              "51bcee7"
-            ],
+            "idLabels": [],
             "manualCoverAttachment": true,
             "name": "custom-hooks.js",
             "pos": 131072,
