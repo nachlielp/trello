@@ -14,7 +14,10 @@ export function TaskPreviewLabel({ label }) {
         <Tooltip placement="bottom" title={`Color: ${label.color}, title: ${label.name ? `"${label.name}"` : "none"}`} arrow={false}>
             <button
                 className={`card-label ${isExpanded ? 'expanded' : 'minimized'}`}
-                style={{ backgroundColor: utilService.getColorHashByName(label.color).bgColor }}
+                style={{
+                    backgroundColor: utilService.getColorHashByName(label.color).bgColor,
+                    color: utilService.getColorHashByName(label.color).lightFontColor
+                }}
                 onClick={onClick}>
                 {isExpanded ? label.name : ''}
             </button>

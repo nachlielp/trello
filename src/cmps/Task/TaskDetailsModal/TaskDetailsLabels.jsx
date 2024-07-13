@@ -11,7 +11,13 @@ export function TaskDetailsLabels({ task, editTask, labelActions }) {
                 {task.idLabels.map((tLabelId) => {
                     const labelInfo = boardLabels?.find((bLabel) => bLabel.id === tLabelId)
                     return (
-                        <div className="task-details-label" key={labelInfo.id} style={{ backgroundColor: utilService.getColorHashByName(labelInfo.color).bgColor }}>
+                        <div
+                            className="task-details-label"
+                            key={labelInfo.id}
+                            style={{
+                                backgroundColor: utilService.getColorHashByName(labelInfo.color).bgColor,
+                                color: utilService.getColorHashByName(labelInfo.color).lightFontColor
+                            }}>
                             {labelInfo.name}
                         </div>)
                 })}

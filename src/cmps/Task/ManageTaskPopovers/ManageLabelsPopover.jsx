@@ -1,5 +1,5 @@
-import { Popover, Input, Checkbox } from "antd"
-import { useState, useEffect } from "react";
+import { Popover, Input } from "antd"
+import { useState, useEffect, useRef } from "react";
 import { ManageTaskPopoverHeader } from "../ManageTaskPopovers/ManageTaskPopoverHeader";
 import { utilService } from "../../../services/util.service";
 import { useSelector } from "react-redux";
@@ -20,6 +20,9 @@ export function ManageLabelsPopover({ anchorEl, editTask, task, labelActions }) 
     const [isCreateLabel, setIsCreateLabel] = useState(false);
     const [isDeleteLabel, setIsDeleteLabel] = useState(false);
     const [popoverTitle, setPopoverTitle] = useState('Labels');
+    const [popoverPlacement, setPopoverPlacement] = useState('bottomLeft');
+
+    const popoverRef = useRef(null);
 
     useEffect(() => {
         if (task?.idLabels) {
@@ -119,20 +122,22 @@ export function ManageLabelsPopover({ anchorEl, editTask, task, labelActions }) 
         <Popover
             className="manage-labels-popover"
             trigger="click"
-            placement="bottomLeft"
+            placement={popoverPlacement}
             open={isOpen}
             close={() => { }}
             onOpenChange={setIsOpen}
             arrow={false}
+            // getPopupContainer={triggerNode => triggerNode.parentNode}
+            // autoAdjustOverflow={true}
             content={
-                <section className="manage-labels-content">
+                <section className="manage-labels-content" ref={popoverRef}>
                     <ManageTaskPopoverHeader title={popoverTitle} close={onClose} back={backToList} />
                     {isSelectPage &&
                         <section className="select-labels-page">
                             <Input placeholder="Search labels..." className="labels-search-input" value={inputSearch} onChange={(e) => setInputSearch(e.target.value)} />
                             <h3 className="labels-sub-title">Labels</h3>
                             <article className="labels-list">
-                                {filteredLabels.map((taskLabel) => <LabelsOption key={taskLabel.color} taskLabel={taskLabel} selectLabel={onSelectLabel} editColor={openEditLabel} />)}
+                                {filteredLabels.map((taskLabel) => <LabelsOption key={taskLabel.id} taskLabel={taskLabel} selectLabel={onSelectLabel} editColor={openEditLabel} />)}
                             </article>
                             <button className="lebel-full-btn" onClick={openCreateLabel}>Create label</button>
                         </section>
@@ -141,7 +146,7 @@ export function ManageLabelsPopover({ anchorEl, editTask, task, labelActions }) 
                         <section className="edit-labels-page">
                             <article className="edit-label-block-wrapper">
                                 <div className="disbly-label-block" style={{ backgroundColor: utilService.getColorHashByName(editColor).bgColor }} >
-                                    <span className="label-color-name">{editTitle}</span>
+                                    <span className="label-color-name" style={{ color: utilService.getColorHashByName(editColor).lightFontColor }}>{editTitle}</span>
                                 </div>
                             </article>
                             <h3 className="labels-sub-title">Title</h3>
@@ -187,7 +192,7 @@ function LabelsOption({ taskLabel, selectLabel, editColor }) {
             }} />
             <Tooltip title={`Color: ${taskLabel.color}, title: ${taskLabel.label ? taskLabel.label : 'none'}`} arrow={false}>
                 <div className="label-block" style={{ backgroundColor: utilService.getColorHashByName(taskLabel.color).bgColor }} onClick={() => selectLabel(taskLabel, !taskLabel.isTask)}>
-                    <span className="label-color-name">{taskLabel.name}</span>
+                    <span className="label-color-name" style={{ color: utilService.getColorHashByName(taskLabel.color).lightFontColor }}>{taskLabel.name}</span>
                 </div>
             </Tooltip>
             <SvgButton src='/img/edit.svg' className="edit-button" onClick={() => editColor(taskLabel)} />

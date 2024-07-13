@@ -2,46 +2,46 @@ import usersJson from "../../JSON/user.json";
 import boardsJson from "../../JSON/board-info.json";
 
 const boardLabelColorOptions = [
-  { color: "subtle green", bgColor: "#baf3db" },
-  { color: "subtle yellow", bgColor: "#f8e6a0" },
-  { color: "subtle orange", bgColor: "#fedec8" },
-  { color: "subtle red", bgColor: "#ffd5d2" },
-  { color: "subtle purple", bgColor: "#dfd8fd" },
+  { color: "subtle green", bgColor: "#baf3db", darkFontColor: "#BAF3DB", lightFontColor: "#164B35" },
+  { color: "subtle yellow", bgColor: "#f8e6a0", darkFontColor: "#F8E6A0", lightFontColor: "#533F04" },
+  { color: "subtle orange", bgColor: "#fedec8", darkFontColor: "#FEDEC8", lightFontColor: "#702E00" },
+  { color: "subtle red", bgColor: "#ffd5d2", darkFontColor: "#FFD5D2", lightFontColor: "#5D1F1A" },
+  { color: "subtle purple", bgColor: "#dfd8fd", darkFontColor: "#DFD8FD", lightFontColor: "#352C63" },
 
-  { color: "green", bgColor: "#4bce97", isCover: true },
-  { color: "yellow", bgColor: "#f5cd47", isCover: true },
-  { color: "orange", bgColor: "#fea362", isCover: true },
-  { color: "red", bgColor: "#f87168", isCover: true },
-  { color: "purple", bgColor: "#9f8fef", isCover: true },
+  { color: "green", bgColor: "#4bce97", isCover: true, darkFontColor: "#BAF3DB", lightFontColor: "#164B35" },
+  { color: "yellow", bgColor: "#f5cd47", isCover: true, darkFontColor: "#F8E6A0", lightFontColor: "#533F04" },
+  { color: "orange", bgColor: "#fea362", isCover: true, darkFontColor: "#FEDEC8", lightFontColor: "#702E00" },
+  { color: "red", bgColor: "#f87168", isCover: true, darkFontColor: "#FFD5D2", lightFontColor: "#5D1F1A" },
+  { color: "purple", bgColor: "#9f8fef", isCover: true, darkFontColor: "#DFD8FD", lightFontColor: "#352C63" },
 
-  { color: "bold green", bgColor: "#1f845a", },
-  { color: "bold yellow", bgColor: "#946f01", },
-  { color: "bold orange", bgColor: "#c25100", },
-  { color: "bold red", bgColor: "#c9372c", },
-  { color: "bold purple", bgColor: "#6e5dc6", },
-
-  //
-
-  { color: "subtle blue", bgColor: "#cce0ff" },
-  { color: "subtle sky", bgColor: "#c6edfb" },
-  { color: "subtle lime", bgColor: "#d3f1a7" },
-  { color: "subtle pink", bgColor: "#fdd0ec" },
-  { color: "subtle black", bgColor: "#dcdfe4" },
-
-  { color: "blue", bgColor: "#579dff", isCover: true },
-  { color: "sky", bgColor: "#6cc3e0", isCover: true },
-  { color: "lime", bgColor: "#94c748", isCover: true },
-  { color: "pink", bgColor: "#e774bb", isCover: true },
-  { color: "black", bgColor: "#8590a2", isCover: true },
-
-  { color: "bold blue", bgColor: "#0c66e4", },
-  { color: "bold sky", bgColor: "#227d9b", },
-  { color: "bold lime", bgColor: "#5b7f24", },
-  { color: "bold pink", bgColor: "#ae4787", },
-  { color: "bold black", bgColor: "#626f86", },
+  { color: "bold green", bgColor: "#1f845a", darkFontColor: "#1D2125", lightFontColor: "#fff" },
+  { color: "bold yellow", bgColor: "#946f01", darkFontColor: "#1D2125", lightFontColor: "#fff" },
+  { color: "bold orange", bgColor: "#c25100", darkFontColor: "#1D2125", lightFontColor: "#fff" },
+  { color: "bold red", bgColor: "#c9372c", darkFontColor: "#1D2125", lightFontColor: "#fff" },
+  { color: "bold purple", bgColor: "#6e5dc6", darkFontColor: "#1D2125", lightFontColor: "#fff" },
 
   //
-  { color: "none", bgColor: "#091e420f" },
+
+  { color: "subtle blue", bgColor: "#cce0ff", darkFontColor: "#CCE0FF", lightFontColor: "#09326C" },
+  { color: "subtle sky", bgColor: "#c6edfb", darkFontColor: "#C6EDFB", lightFontColor: "#164555" },
+  { color: "subtle lime", bgColor: "#d3f1a7", darkFontColor: "#D3F1A7", lightFontColor: "#37471F" },
+  { color: "subtle pink", bgColor: "#fdd0ec", darkFontColor: "#FDD0EC", lightFontColor: "#50253F" },
+  { color: "subtle black", bgColor: "#dcdfe4", darkFontColor: "#DEE4EA", lightFontColor: "#091E42" },
+
+  { color: "blue", bgColor: "#579dff", isCover: true, darkFontColor: "#CCE0FF", lightFontColor: "#091E42" },
+  { color: "sky", bgColor: "#6cc3e0", isCover: true, darkFontColor: "#C6EDFB", lightFontColor: "#164555" },
+  { color: "lime", bgColor: "#94c748", isCover: true, darkFontColor: "#D3F1A7", lightFontColor: "#37471F" },
+  { color: "pink", bgColor: "#e774bb", isCover: true, darkFontColor: "#FDD0EC", lightFontColor: "#50253F" },
+  { color: "black", bgColor: "#8590a2", isCover: true, darkFontColor: "#DEE4EA", lightFontColor: "#091E42" },
+
+  { color: "bold blue", bgColor: "#0c66e4", darkFontColor: "#1D2125", lightFontColor: "#fff" },
+  { color: "bold sky", bgColor: "#227d9b", darkFontColor: "#1D2125", lightFontColor: "#fff" },
+  { color: "bold lime", bgColor: "#5b7f24", darkFontColor: "#1D2125", lightFontColor: "#fff" },
+  { color: "bold pink", bgColor: "#ae4787", darkFontColor: "#1D2125", lightFontColor: "#fff" },
+  { color: "bold black", bgColor: "#626f86", darkFontColor: "#1D2125", lightFontColor: "#fff" },
+
+  //
+  { color: "none", bgColor: "#091e420f", darkFontColor: "#B6C2CF", lightFontColor: "#172B4D" },
 ];
 
 export const utilService = {
