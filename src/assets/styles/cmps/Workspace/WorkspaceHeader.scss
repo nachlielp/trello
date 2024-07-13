@@ -8,13 +8,13 @@
     overflow: hidden;
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--dynamic-text-transparent, #13161d);
+    padding: 8px;
+    gap: 4px;
 
     &.white-bg {
         border-bottom: 1px solid #d7dce1;
     }
 
-    padding: 8px;
-    gap: 4px;
 
     .svg-btn {
         display: flex;

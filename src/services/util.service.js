@@ -62,6 +62,7 @@ export const utilService = {
   createNewBoard,
   getBgImgs,
   getBgColors,
+  createCheckListItem
 };
 
 export const USERS_KEY = "users";
@@ -187,6 +188,15 @@ function _createStartInfo() {
   }
   if (!localStorage.getItem(BOARDS_KEY)) {
     localStorage.setItem(BOARDS_KEY, JSON.stringify(boardsJson));
+  }
+}
+function createCheckListItem(changes){
+  return{
+    id: utilService.makeId(24),
+    label: changes.label,
+    isChecked:false,
+    pos:0,
+    ...changes
   }
 }
 

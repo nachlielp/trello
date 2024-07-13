@@ -3,9 +3,10 @@ import rehypeRaw from 'rehype-raw';
 import { useRef, useState, useEffect } from 'react'
 import { MDXEditor, headingsPlugin, listsPlugin, BlockTypeSelect, quotePlugin, CreateLink, markdownShortcutPlugin, thematicBreakPlugin, InsertImage, ListsToggle, CodeToggle, UndoRedo, BoldItalicUnderlineToggles, toolbarPlugin } from '@mdxeditor/editor'
 import { TaskDetailsSectionHeader } from "./TaskDetailsSectionHeader";
+import { useClickOutside } from '../../../customHooks/useClickOutside';
 
 export function TaskDetailsMarkdown({ editTask, task }) {
-    const [isEditing, setIsEditing] = useState(false)
+    const [sectionRef,isEditing, setIsEditing] = useClickOutside(false)
     const [markdown, setMarkdown] = useState("")
     const ref = useRef(null)
 
@@ -37,7 +38,7 @@ export function TaskDetailsMarkdown({ editTask, task }) {
                 <TaskDetailsSectionHeader title="Description" icon="/img/taskBadges/description.svg" />
                 {!isEditing && !isEmpty && <button className='btn btn-primary' onClick={() => setIsEditing(true)}>Edit</button>}
             </header>
-            <main className='markdown-body'>
+            <main className='markdown-body' ref={sectionRef}>
                 {!isEditing && isEmpty &&
                     <article className='empty-description' onClick={() => setIsEditing(true)}>
                         <span>Add a more detailed description…</span>

@@ -43,7 +43,9 @@ export function GroupActionsMenuPopover({ group, openAddTask, archiveGroup, copy
         setAction(null)
     }
 
-    function onClose() {
+    function onClose(e) {
+        e.stopPrapagation()
+
         setOpenGroupMenu(false)
         setAction(null)
     }

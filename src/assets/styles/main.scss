@@ -63,6 +63,7 @@
 @import "cmps/Task/TaskDetailsModal/TaskDetailsLabels.scss";
 @import "cmps/Task/TaskDetailsModal/TaskDetailsMarkdown.scss";
 @import "cmps/Task/TaskDetailsModal/TaskDetailsSectionHeader.scss";
+@import "cmps/Task/TaskDetailsModal/TaskDetailsCheckList";
 
 //Custom Cpms
 @import "cmps/CustomCpms/StarBoardBtn";
@@ -104,8 +105,13 @@
   --dynamic-text-transparent: hsla(211, 18%, 68%, 0.16);
   --tr-background-list: #101204;
   --dynamic-background-transparent: hsla(206, 13.7%, 10%, 0.9);
-  --ds-border-selected: #579DFF;
-  --ds-link: #579DFF;
+  --ds-border-selected: #579dff;
+  --ds-link: #579dff;
+  --ds-background-selected-bold: #579dff;
+  --ds-background-selected-bold-hovered: #85b8ff;
+  --ds-border-selected: #579dff;
+  --ds-background-success-bold: #4bce97;
+  --ds-background-accent-blue-subtle: #0055cc;
 }
 
 :root {
@@ -149,6 +155,11 @@
     rgba(255, 255, 255, 0.3)
   );
   --tr-background-list: #f1f2f4;
-  --ds-border-selected: #0C66E4;
-  --ds-link: #0C66E4;
+  --ds-border-selected: #0c66e4;
+  --ds-link: #0c66e4;
+  --ds-background-selected-bold: #0c66e4;
+  --ds-background-selected-bold-hovered: #0055cc;
+  --ds-border-selected: #0c66e4;
+  --ds-background-success-bold: #1f845a;
+  --ds-background-accent-blue-subtle: #579dff;
 }

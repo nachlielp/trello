@@ -38,7 +38,8 @@ export function ManageLabelsPopover({ anchorEl, editTask, task, editLabel }) {
         }
     }, [inputSearch, boardTaskLabels, boardLabels]);
 
-    function onClose() {
+    function onClose(e) {
+        e.stopPrapagation()
         setIsOpen(false);
     }
 

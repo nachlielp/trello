@@ -1223,21 +1223,25 @@
               {
                 "id": "RSGBQbE74HO41SmVJiquIXJr",
                 "label": "Todo",
+                "pos":12222,
                 "checkItems": [
                   {
                     "id": "7jNnRxeTBymg2XxcS4DMSndE",
                     "label": "query",
-                    "isChecked": false
+                    "isChecked": false,
+                    "pos":12222
                   },
                   {
                     "id": "KOmiNaCH17k1REK6BTwTivx5",
                     "label": "getId",
-                    "isChecked": true
+                    "isChecked": false,
+                    "pos":14425
                   },
                   {
                     "id": "LmfqdqAUmgNmqeJUrkHSvCsz",
                     "label": "Have fun",
-                    "isChecked": false
+                    "isChecked": false,
+                    "pos":15123
                   }
                 ]
               }

@@ -16,6 +16,7 @@ import { utilService } from "../../../services/util.service";
 import { TaskDetailsLabels } from "./TaskDetailsLabels";
 import { TaskDetailsMarkdown } from "./TaskDetailsMarkdown";
 import { NameInput } from "../../CustomCpms/NameInput";
+import { TaskDetailsCheckList } from "./TaskDetailsCheckList";
 
 export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
   const group = useSelector((state) =>
@@ -43,7 +44,8 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
     });
   }
 
-  function onClose() {
+  function onClose(e) {
+    if(e.key === 'Escape')return
     onCloseTask();
     navigate(`/b/${task.idBoard}`, { replace: true });
   }
@@ -76,8 +78,9 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
 
   const imgCoverHeader = (
     <section
-      className={`details-header-img-cover ${task?.cover?.brightness === "dark" ? "dark" : "light"
-        }`}
+      className={`details-header-img-cover ${
+        task?.cover?.brightness === "dark" ? "dark" : "light"
+      }`}
       style={{
         backgroundColor: task?.cover?.bg,
       }}
@@ -96,6 +99,41 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
       </article>
     </section>
   );
+
+  // checkList functions
+  function changeCheckList(checkListId, changes) {
+    const newTask = {
+      ...task,
+      checkLists: task.checkLists.map((c) =>
+        c.id === checkListId ? { ...c, ...changes } : c
+      ),
+    };
+    editTask(newTask);
+  }
+  function changeItem(checkListId, itemId, changes) {
+    const newTask = {
+      ...task,
+      checkLists: task.checkLists.map((c) =>
+        c.id === checkListId
+          ? {
+              ...c,
+              checkItems: c.checkItems.map((i) =>
+                i.id === itemId ? { ...i, ...changes } : i
+              ),
+            }
+          : c
+      ),
+    };
+    editTask(newTask);
+  }
+  function deleteList(checkListId) {
+    const newTask = {
+      ...task,
+      checkLists: task.checkLists.filter((c) => !c.id === checkListId),
+    };
+
+    editTask(newTask);
+  }
 
   return (
     <Modal
@@ -135,10 +173,25 @@ export function TaskDetailsModal({ taskId, editTask, editLabel, onCloseTask }) {
             {hasMembers && (
               <TaskDetailsMembers currentTask={task} editTask={editTask} />
             )}
-            {task.labels.length > 0 && <TaskDetailsLabels task={task} editTask={editTask} editLabel={editLabel} />}
+            {task.labels.length > 0 && (
+              <TaskDetailsLabels
+                task={task}
+                editTask={editTask}
+                editLabel={editLabel}
+              />
+            )}
           </article>
           <TaskDetailsMarkdown editTask={editTask} task={task} />
-
+          {task.checkLists.length > 0 &&
+            task.checkLists.map((checkList) => (
+              <TaskDetailsCheckList
+                checkList={checkList}
+                key={checkList.id}
+                changeCheckList={changeCheckList}
+                changeItem={changeItem}
+                deleteList={deleteList}
+              />
+            ))}
         </section>
         <section className="details-body__right">
           {!isMember && (

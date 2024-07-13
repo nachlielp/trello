@@ -15,12 +15,12 @@ export function ProfilePopover({
   const [isOpen, setIsOpen] = useState(false);
   const user = useSelector((state) => state.userModule.user);
 
-  function onClose() {
+  function onClose(e) {
+    e.stopPrapagation();
     setIsOpen(false);
   }
   return (
     <Popover
-      //   className="profile-popover"
       trigger="click"
       placement={placement}
       open={isOpen}
@@ -28,7 +28,10 @@ export function ProfilePopover({
       onOpenChange={setIsOpen}
       arrow={false}
       content={
-        <section className="profile-popover" onClick={e=>e.stopPropagation()}>
+        <section
+          className="profile-popover"
+          onClick={(e) => e.stopPropagation()}
+        >
           <div onClick={() => setIsOpen(false)} className="close-btn">
             <CloseOutlined />
           </div>
@@ -48,8 +51,14 @@ export function ProfilePopover({
               </span>
             </div>
           </header>
-          <ul >
-            <Link to={`/u/${member?.username}`} onClick={e=>e.stopPropagation()} className="profile-link">{user?.id === member?.id?"Edit":"View"} profile info</Link>
+          <ul>
+            <Link
+              to={`/u/${member?.username}`}
+              onClick={(e) => e.stopPropagation()}
+              className="profile-link"
+            >
+              {user?.id === member?.id ? "Edit" : "View"} profile info
+            </Link>
           </ul>
           {anchorLinks && (
             <>

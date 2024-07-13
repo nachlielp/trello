@@ -1,0 +1,89 @@
+.task-details-checklist {
+  margin: 20px 0 16px 0;
+  .checkbox-label {
+    cursor: pointer;
+  }
+  .task-details-header {
+    display: flex;
+    flex-direction: row;
+    .checkbox-label {
+      width: 100%;
+    }
+    span {
+      font-size: 24px;
+      line-height: 24px;
+      display: flex;
+    }
+    > span {
+      margin-right: 8px;
+    }
+    .hide-btn {
+      margin-right: 8px;
+      text-wrap: nowrap;
+    }
+  }
+  .progres-bar {
+    margin: 6px 0 6px 4px;
+    .ant-progress-text-start {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--ds-text-subtle, #44546f);
+    }
+    &.completed {
+      .ant-progress-bg {
+        background: var(--ds-background-success-bold, #1f845a);
+      }
+    }
+    .ant-progress-bg{
+        background: var(--ds-background-accent-blue-subtle, #579dff);
+    }
+  }
+  .task-details-list {
+    margin-bottom: 10px;
+    .checkbox-item {
+      display: flex;
+      flex-direction: row;
+      .custom-checkbox {
+        margin: 6px 6px 6px 4px;
+        align-self: start;
+      }
+      .checkbox-label {
+          font-size: 14px;
+          font-weight: 400;
+          width: 100%;
+          padding: 8px 8px 0 8px;
+          border-radius: 12px;
+        &.checked {
+          .title {
+            color: var(--ds-text-subtle, #44546f);
+            text-decoration: line-through;
+          }
+        }
+        &:has(.title) {
+          display: flex;
+          padding: 6px 8px;
+        }
+        .title {
+          align-self: center;
+          width: 100%;
+        }
+        &:hover {
+          background-color: var(--ds-background-neutral, #091e420f) !important;
+        }
+      }
+    }
+  }
+  .add-item {
+    margin-top: 10px;
+    margin-left: 34px;
+    .checkbox-label {
+      .title-input {
+        font-size: 14px;
+        font-weight: 400;
+        &::placeholder {
+          color: var(--ds-text-subtlest, #626f86);
+        }
+      }
+    }
+  }
+}
