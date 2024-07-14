@@ -11,12 +11,15 @@ export function TaskPreviewLabel({ label }) {
         toggleIsExpanded()
     }
     return (
-        <Tooltip placement="bottom" title={`Color: ${label.color}, title: ${label.label ? `"${label.label}"` : "none"}`} arrow={false}>
+        <Tooltip placement="bottom" title={`Color: ${label.color}, title: ${label.name ? `"${label.name}"` : "none"}`} arrow={false}>
             <button
                 className={`card-label ${isExpanded ? 'expanded' : 'minimized'}`}
-                style={{ backgroundColor: utilService.getColorHashByName(label.color).bgColor }}
+                style={{
+                    backgroundColor: utilService.getColorHashByName(label.color).bgColor,
+                    color: utilService.getColorHashByName(label.color).lightFontColor
+                }}
                 onClick={onClick}>
-                {isExpanded ? label.label : ''}
+                {isExpanded ? label.name : ''}
             </button>
         </Tooltip>
     );

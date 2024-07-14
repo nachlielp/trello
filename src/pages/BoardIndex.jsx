@@ -15,6 +15,8 @@ import {
   sortGroup,
   loadBoard,
   loadBoardByTaskId,
+  createLabel,
+  deleteLabel,
   updateBoard,
 } from "../store/board.actions";
 import { editUser } from "../store/user.actions";
@@ -93,9 +95,6 @@ export function BoardIndex() {
     const res = await editTask(task);
   }
 
-  async function onEditLabel(label) {
-    const res = await editLabel(board.id, label);
-  }
 
   async function onCopyGroup(group) {
     const res = await copyGroup(board.id, group);
@@ -109,58 +108,46 @@ export function BoardIndex() {
     editUser({ ...user, starredBoardIds: starredIds });
   }
 
-  async function editBoard(changes) {
-    console.log({ ...board, ...changes });
-    await updateBoard({ ...board, ...changes });
-  }
 
   const sortedGroups = board?.groups
     ?.filter((l) => !l.closed)
     .sort((a, b) => a.pos - b.pos);
 
-  return board ? (
-    <section className="board-index">
-      <div className="bg">
-        {board && (
-          <BoardHeader
-            board={board}
-            starToggle={onStarToggle}
-            starredBoardIds={user?.starredBoardIds}
+  return (
+    board ? (
+      <section className="board-index">
+        <div className="bg">
+          {board && <BoardHeader board={board} starToggle={onStarToggle} starredBoardIds={user?.starredBoardIds} />}
+          <main className="board-groups" ref={scrollContainerRef} {...handlers}>
+            {sortedGroups &&
+              sortedGroups.map((group) => (
+                <BoardGroup
+                  key={group.id}
+                  group={group}
+                  addTask={onAddTask}
+                  archiveGroup={() => onArchiveGroup(board.id, group.id)}
+                  editGroup={onEditGroup}
+                  editTask={onEditTask}
+                  copyGroup={onCopyGroup}
+                  moveAllCards={moveAllCards}
+                  archiveAllCards={archiveAllCards}
+                  sortGroup={onSortGroup}
+                  labelActions={onLabelAction}
+                />
+              ))}
+            <AddGroupBtn addGroup={onAddGroup} />
+          </main>
+        </div>
+        {selectedTaskId && (
+          <TaskDetailsModal
+            taskId={selectedTaskId}
+            editTask={onEditTask}
+            onCloseTask={() => setSelectedTaskId(null)}
+            labelActions={onLabelAction}
           />
         )}
-        <main className="board-groups" ref={scrollContainerRef} {...handlers}>
-          {sortedGroups &&
-            sortedGroups.map((group) => (
-              <BoardGroup
-                key={group.id}
-                group={group}
-                addTask={onAddTask}
-                archiveGroup={() => onArchiveGroup(board.id, group.id)}
-                editGroup={onEditGroup}
-                editTask={onEditTask}
-                editLabel={onEditLabel}
-                copyGroup={onCopyGroup}
-                moveAllCards={moveAllCards}
-                archiveAllCards={archiveAllCards}
-                sortGroup={onSortGroup}
-              />
-            ))}
-          <AddGroupBtn addGroup={onAddGroup} />
-        </main>
-      </div>
-      {selectedTaskId && (
-        <TaskDetailsModal
-          taskId={selectedTaskId}
-          editTask={onEditTask}
-          editLabel={onEditLabel}
-          onCloseTask={() => setSelectedTaskId(null)}
-          addTask={onAddTask}
-          editBoard={editBoard}
-          board={board}
-        />
-      )}
-    </section>
-  ) : (
-    <h1>Loading...</h1>
-  );
+      </section>
+    ) : (
+      <h1>Loading...</h1>
+    ));
 }
