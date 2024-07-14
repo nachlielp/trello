@@ -1,0 +1,46 @@
+.task-preview-badges {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-weight: 300;
+
+    .task-bg-cover,
+    .task-img-cover {
+        display: none;
+    }
+
+    .aside-task-users {
+        display: flex;
+        flex-direction: row;
+        gap: 4px;
+    }
+
+    .aside-task-icons {
+        display: flex;
+        flex-direction: row;
+        gap: 6px;
+    }
+
+    .aside-task-icons .task-preview-icons {
+        display: flex;
+        flex-direction: row;
+        gap: 6px;
+    }
+
+    .task-icon-wrapper {
+        display: flex;
+        align-items: center;
+        margin-right: 10px;
+    }
+
+    .task-icon {
+        height: 16px;
+        width: 16px;
+        color: var(--ds-text-subtle);
+    }
+
+    .task-icon-count {
+        font-size: 12px;
+        margin-left: 4px;
+    }
+}

@@ -76,7 +76,7 @@ export function TaskPreviewBadges({ task }) {
   }
 
   return (
-    <div className="group-task-content-icons">
+    <div className="task-preview-badges">
       <aside className="aside-task-icons">
         <section className="task-preview-icons"> {taskIcons}</section>
       </aside>
