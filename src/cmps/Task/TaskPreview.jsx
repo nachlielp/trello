@@ -36,6 +36,11 @@ export function TaskPreview({ task, editTask, labelActions }) {
     setIsOpenPreviewModal(value);
   }
 
+  function onClickTask() {
+    if (isOpenPreviewModal) return;
+    navigate(`/c/${task.id}`, { replace: true });
+  }
+
   const covorCardClass = (taskCover.color && coverSize === "full")
     ? "task-bg-cover"
     : taskCover.idUploadedBackground
@@ -63,6 +68,7 @@ export function TaskPreview({ task, editTask, labelActions }) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{ ...taskColorCoverStyle, ...taskBackgroundCoverImage }}
+      onClick={onClickTask}
     >
       <TaskPreviewEditModal
         task={task}
@@ -81,20 +87,17 @@ export function TaskPreview({ task, editTask, labelActions }) {
             backgroundColor: utilService.getColorHashByName(task.cover.color)
               .bgColor,
           }}
-          onClick={() => navigate(`/c/${task.id}`, { replace: true })}
         ></div>
       )}
       {coverSize === "normal" && taskCover.idUploadedBackground && (
         <div
           className="group-task-header img-cover"
           style={{ backgroundImage: `url(${task?.cover?.scaled[2]?.url})` }}
-          onClick={() => navigate(`/c/${task.id}`, { replace: true })}
         ></div>
       )}
       {coverSize === "normal" &&
         <section
           className={`group-task-content ${taskCover.idUploadedBackground || taskCover.color ? 'cover' : ''}`}
-          onClick={() => navigate(`/c/${task.id}`, { replace: true })}
         >
           <article className="group-task-content-labels">
             {taskLabels.length > 0 && (
