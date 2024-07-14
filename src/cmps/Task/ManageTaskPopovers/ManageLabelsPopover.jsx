@@ -21,6 +21,7 @@ export function ManageLabelsPopover({ anchorEl, editTask, task, labelActions }) 
     const [isDeleteLabel, setIsDeleteLabel] = useState(false);
     const [popoverTitle, setPopoverTitle] = useState('Labels');
     const [popoverPlacement, setPopoverPlacement] = useState('bottomLeft');
+    const [hoveredColor, setHoveredColor] = useState(null);
 
     const popoverRef = useRef(null);
 
@@ -153,7 +154,22 @@ export function ManageLabelsPopover({ anchorEl, editTask, task, labelActions }) 
                             <Input className="labels-search-input" value={editTitle} onChange={(e) => setEditTitle(e.target.value)} />
                             <h3 className="labels-sub-title">Select a color</h3>
                             <article className="color-picker-wrapper">
-                                {utilService.boardLabelColorOptions.filter(color => color.color !== 'none').map((color) => <div className="color-picker-option" key={color.color} style={{ backgroundColor: color.bgColor }} onClick={() => setEditColor(color.color)}></div>)}
+                                {utilService.boardLabelColorOptions
+                                    .filter(color => color.color !== 'none')
+                                    .map((color) =>
+                                        <div
+                                            className="color-picker-option"
+                                            key={color.color}
+                                            style={{
+                                                backgroundColor: hoveredColor === color.color ? color.hoverdBgColor : color.bgColor
+                                            }}
+                                            onClick={() => setEditColor(color.color)}
+                                            onMouseEnter={() => setHoveredColor(color.color)}
+                                            onMouseLeave={() => setHoveredColor(null)}
+                                        >
+                                        </div>
+                                    )
+                                }
                             </article>
                             <button className="lebel-full-btn" onClick={() => setEditColor('none')}>Remove color</button>
                             <label className="label-hr" />
@@ -185,13 +201,26 @@ export function ManageLabelsPopover({ anchorEl, editTask, task, labelActions }) 
 }
 
 function LabelsOption({ taskLabel, selectLabel, editColor }) {
+    const [hoveredLabelId, setHoveredLabelId] = useState(null);
+
     return (
         <div className="popover-labels-option">
             <CheckBox type="checkbox" className="checkbox" checked={taskLabel.isTask} onChange={(e) => {
                 selectLabel(taskLabel, e.target.checked);
             }} />
             <Tooltip title={`Color: ${taskLabel.color}, title: ${taskLabel.label ? taskLabel.label : 'none'}`} arrow={false}>
-                <div className="label-block" style={{ backgroundColor: utilService.getColorHashByName(taskLabel.color).bgColor }} onClick={() => selectLabel(taskLabel, !taskLabel.isTask)}>
+                <div
+                    className="label-block"
+                    style={{
+                        backgroundColor: hoveredLabelId === taskLabel.id ?
+                            utilService.getColorHashByName(taskLabel.color).hoverdBgColor
+                            :
+                            utilService.getColorHashByName(taskLabel.color).bgColor
+                    }}
+                    onClick={() => selectLabel(taskLabel, !taskLabel.isTask)}
+                    onMouseEnter={() => setHoveredLabelId(taskLabel.id)}
+                    onMouseLeave={() => setHoveredLabelId(null)}
+                >
                     <span className="label-color-name" style={{ color: utilService.getColorHashByName(taskLabel.color).lightFontColor }}>{taskLabel.name}</span>
                 </div>
             </Tooltip>

@@ -1,10 +1,11 @@
 import { utilService } from "../../services/util.service";
 import { useSelector } from "react-redux";
-
+import { useState } from "react";
 import { toggleIsExpanded } from "../../store/board.actions";
 import { Tooltip } from "antd";
 
 export function TaskPreviewLabel({ label }) {
+    const [hoveredLabelId, setHoveredLabelId] = useState(null);
     const isExpanded = useSelector(state => state.boardModule.isExpanded)
     function onClick(e) {
         e.stopPropagation()
@@ -15,10 +16,13 @@ export function TaskPreviewLabel({ label }) {
             <button
                 className={`card-label ${isExpanded ? 'expanded' : 'minimized'}`}
                 style={{
-                    backgroundColor: utilService.getColorHashByName(label.color).bgColor,
+                    backgroundColor: hoveredLabelId === label.id ? utilService.getColorHashByName(label.color).hoverdBgColor : utilService.getColorHashByName(label.color).bgColor,
                     color: utilService.getColorHashByName(label.color).lightFontColor
                 }}
-                onClick={onClick}>
+                onClick={onClick}
+                onMouseEnter={() => setHoveredLabelId(label.id)}
+                onMouseLeave={() => setHoveredLabelId(null)}
+            >
                 {isExpanded ? label.name : ''}
             </button>
         </Tooltip>

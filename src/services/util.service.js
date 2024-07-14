@@ -2,46 +2,46 @@ import usersJson from "../../JSON/user.json";
 import boardsJson from "../../JSON/board-info.json";
 
 const boardLabelColorOptions = [
-  { color: "subtle green", bgColor: "#baf3db", darkFontColor: "#BAF3DB", lightFontColor: "#164B35" },
-  { color: "subtle yellow", bgColor: "#f8e6a0", darkFontColor: "#F8E6A0", lightFontColor: "#533F04" },
-  { color: "subtle orange", bgColor: "#fedec8", darkFontColor: "#FEDEC8", lightFontColor: "#702E00" },
-  { color: "subtle red", bgColor: "#ffd5d2", darkFontColor: "#FFD5D2", lightFontColor: "#5D1F1A" },
-  { color: "subtle purple", bgColor: "#dfd8fd", darkFontColor: "#DFD8FD", lightFontColor: "#352C63" },
+  { color: "subtle green", bgColor: "#baf3db", hoverdBgColor: "#7ee2b8", darkFontColor: "#BAF3DB", lightFontColor: "#164B35" },
+  { color: "subtle yellow", bgColor: "#f8e6a0", hoverdBgColor: "#F5CD47", darkFontColor: "#F8E6A0", lightFontColor: "#533F04" },
+  { color: "subtle orange", bgColor: "#fedec8", hoverdBgColor: "#FEC195", darkFontColor: "#FEDEC8", lightFontColor: "#702E00" },
+  { color: "subtle red", bgColor: "#ffd5d2", hoverdBgColor: "#FD9891", darkFontColor: "#FFD5D2", lightFontColor: "#5D1F1A" },
+  { color: "subtle purple", bgColor: "#dfd8fd", hoverdBgColor: "#B8ACF6", darkFontColor: "#DFD8FD", lightFontColor: "#352C63" },
 
-  { color: "green", bgColor: "#4bce97", isCover: true, darkFontColor: "#BAF3DB", lightFontColor: "#164B35", brightness: "light" },
-  { color: "yellow", bgColor: "#f5cd47", isCover: true, darkFontColor: "#F8E6A0", lightFontColor: "#533F04", brightness: "light" },
-  { color: "orange", bgColor: "#fea362", isCover: true, darkFontColor: "#FEDEC8", lightFontColor: "#702E00", brightness: "light" },
-  { color: "red", bgColor: "#f87168", isCover: true, darkFontColor: "#FFD5D2", lightFontColor: "#5D1F1A", brightness: "light" },
-  { color: "purple", bgColor: "#9f8fef", isCover: true, darkFontColor: "#DFD8FD", lightFontColor: "#352C63", brightness: "light" },
+  { color: "green", bgColor: "#4bce97", hoverdBgColor: "#7EE2B8", isCover: true, darkFontColor: "#BAF3DB", lightFontColor: "#164B35", brightness: "light" },
+  { color: "yellow", bgColor: "#f5cd47", hoverdBgColor: "#E2B203", isCover: true, darkFontColor: "#F8E6A0", lightFontColor: "#533F04", brightness: "light" },
+  { color: "orange", bgColor: "#fea362", hoverdBgColor: "#FEC195", isCover: true, darkFontColor: "#FEDEC8", lightFontColor: "#702E00", brightness: "light" },
+  { color: "red", bgColor: "#f87168", hoverdBgColor: "#FD9891", isCover: true, darkFontColor: "#FFD5D2", lightFontColor: "#5D1F1A", brightness: "light" },
+  { color: "purple", bgColor: "#9f8fef", hoverdBgColor: "#B8ACF6", isCover: true, darkFontColor: "#DFD8FD", lightFontColor: "#352C63", brightness: "light" },
 
-  { color: "bold green", bgColor: "#1f845a", darkFontColor: "#1D2125", lightFontColor: "#fff" },
-  { color: "bold yellow", bgColor: "#946f01", darkFontColor: "#1D2125", lightFontColor: "#fff" },
-  { color: "bold orange", bgColor: "#c25100", darkFontColor: "#1D2125", lightFontColor: "#fff" },
-  { color: "bold red", bgColor: "#c9372c", darkFontColor: "#1D2125", lightFontColor: "#fff" },
-  { color: "bold purple", bgColor: "#6e5dc6", darkFontColor: "#1D2125", lightFontColor: "#fff" },
-
-  //
-
-  { color: "subtle blue", bgColor: "#cce0ff", darkFontColor: "#CCE0FF", lightFontColor: "#09326C" },
-  { color: "subtle sky", bgColor: "#c6edfb", darkFontColor: "#C6EDFB", lightFontColor: "#164555" },
-  { color: "subtle lime", bgColor: "#d3f1a7", darkFontColor: "#D3F1A7", lightFontColor: "#37471F" },
-  { color: "subtle pink", bgColor: "#fdd0ec", darkFontColor: "#FDD0EC", lightFontColor: "#50253F" },
-  { color: "subtle black", bgColor: "#dcdfe4", darkFontColor: "#DEE4EA", lightFontColor: "#091E42" },
-
-  { color: "blue", bgColor: "#579dff", isCover: true, darkFontColor: "#CCE0FF", lightFontColor: "#091E42", brightness: "light" },
-  { color: "sky", bgColor: "#6cc3e0", isCover: true, darkFontColor: "#C6EDFB", lightFontColor: "#164555", brightness: "light" },
-  { color: "lime", bgColor: "#94c748", isCover: true, darkFontColor: "#D3F1A7", lightFontColor: "#37471F", brightness: "light" },
-  { color: "pink", bgColor: "#e774bb", isCover: true, darkFontColor: "#FDD0EC", lightFontColor: "#50253F", brightness: "light" },
-  { color: "black", bgColor: "#8590a2", isCover: true, darkFontColor: "#DEE4EA", lightFontColor: "#091E42", brightness: "light" },
-
-  { color: "bold blue", bgColor: "#0c66e4", darkFontColor: "#1D2125", lightFontColor: "#fff" },
-  { color: "bold sky", bgColor: "#227d9b", darkFontColor: "#1D2125", lightFontColor: "#fff" },
-  { color: "bold lime", bgColor: "#5b7f24", darkFontColor: "#1D2125", lightFontColor: "#fff" },
-  { color: "bold pink", bgColor: "#ae4787", darkFontColor: "#1D2125", lightFontColor: "#fff" },
-  { color: "bold black", bgColor: "#626f86", darkFontColor: "#1D2125", lightFontColor: "#fff" },
+  { color: "bold green", bgColor: "#1f845a", hoverdBgColor: "#216E4E", darkFontColor: "#1D2125", lightFontColor: "#fff" },
+  { color: "bold yellow", bgColor: "#946f01", hoverdBgColor: "#7F5F01", darkFontColor: "#1D2125", lightFontColor: "#fff" },
+  { color: "bold orange", bgColor: "#c25100", hoverdBgColor: "#A54800", darkFontColor: "#1D2125", lightFontColor: "#fff" },
+  { color: "bold red", bgColor: "#c9372c", hoverdBgColor: "#AE2E24", darkFontColor: "#1D2125", lightFontColor: "#fff" },
+  { color: "bold purple", bgColor: "#6e5dc6", hoverdBgColor: "#5E4DB2", darkFontColor: "#1D2125", lightFontColor: "#fff" },
 
   //
-  { color: "none", bgColor: "#091e420f", darkFontColor: "#B6C2CF", lightFontColor: "#172B4D" },
+
+  { color: "subtle blue", bgColor: "#cce0ff", hoverdBgColor: "#85B8FF", darkFontColor: "#CCE0FF", lightFontColor: "#09326C" },
+  { color: "subtle sky", bgColor: "#c6edfb", hoverdBgColor: "#9DD9EE", darkFontColor: "#C6EDFB", lightFontColor: "#164555" },
+  { color: "subtle lime", bgColor: "#d3f1a7", hoverdBgColor: "#B3DF72", darkFontColor: "#D3F1A7", lightFontColor: "#37471F" },
+  { color: "subtle pink", bgColor: "#fdd0ec", hoverdBgColor: "#F797D2", darkFontColor: "#FDD0EC", lightFontColor: "#50253F" },
+  { color: "subtle black", bgColor: "#dcdfe4", hoverdBgColor: "#B3B9C4", darkFontColor: "#DEE4EA", lightFontColor: "#091E42" },
+
+  { color: "blue", bgColor: "#579dff", hoverdBgColor: "#85B8FF", isCover: true, darkFontColor: "#CCE0FF", lightFontColor: "#091E42", brightness: "light" },
+  { color: "sky", bgColor: "#6cc3e0", hoverdBgColor: "#9DD9EE", isCover: true, darkFontColor: "#C6EDFB", lightFontColor: "#164555", brightness: "light" },
+  { color: "lime", bgColor: "#94c748", hoverdBgColor: "#B3DF72", isCover: true, darkFontColor: "#D3F1A7", lightFontColor: "#37471F", brightness: "light" },
+  { color: "pink", bgColor: "#e774bb", hoverdBgColor: "#F797D2", isCover: true, darkFontColor: "#FDD0EC", lightFontColor: "#50253F", brightness: "light" },
+  { color: "black", bgColor: "#8590a2", hoverdBgColor: "#B3B9C4", isCover: true, darkFontColor: "#DEE4EA", lightFontColor: "#091E42", brightness: "light" },
+
+  { color: "bold blue", bgColor: "#0c66e4", hoverdBgColor: "#0055CC", darkFontColor: "#1D2125", lightFontColor: "#fff" },
+  { color: "bold sky", bgColor: "#227d9b", hoverdBgColor: "#206A83", darkFontColor: "#1D2125", lightFontColor: "#fff" },
+  { color: "bold lime", bgColor: "#5b7f24", hoverdBgColor: "#4C6B1F", darkFontColor: "#1D2125", lightFontColor: "#fff" },
+  { color: "bold pink", bgColor: "#ae4787", hoverdBgColor: "#943D73", darkFontColor: "#1D2125", lightFontColor: "#fff" },
+  { color: "bold black", bgColor: "#626f86", hoverdBgColor: "#44546F", darkFontColor: "#1D2125", lightFontColor: "#fff" },
+
+  //
+  { color: "none", bgColor: "#091e420f", hoverdBgColor: "#091e4224", darkFontColor: "#B6C2CF", lightFontColor: "#172B4D" },
 ];
 
 export const utilService = {
