@@ -23,24 +23,24 @@ export function MoveCardPopover({
   );
   const task = useSelector((state) =>
     state.boardModule.board.groups
-      ?.find((g) => g.tasks?.find((t) => t.id === taskId))
-      .tasks.find((t) => t.id === taskId)
+      ?.find((g) => g?.tasks?.find((t) => t?.id === taskId))
+      ?.tasks.find((t) => t?.id === taskId)
   );
 
   // states
   const [isOpen, setIsOpen] = useState(false);
   const [isDisable, setIsDisable] = useState(false);
-  const [selectedBoardId, setSelectedBoardId] = useState(board.id);
-  const [selectedGroupId, setSelectedGroupId] = useState(group.id);
+  const [selectedBoardId, setSelectedBoardId] = useState(board?.id);
+  const [selectedGroupId, setSelectedGroupId] = useState(group?.id);
   const [selectedGroups, setSelectedGroups] = useState(
     board.groups.map((group) => {
       return { name: group.name, id: group.id };
     })
   );
   const [positions, setPositions] = useState(
-    group.tasks.map((g) => g.pos).sort((a, b) => a - b)
+    group?.tasks.map((g) => g.pos).sort((a, b) => a - b)
   );
-  const [selectedPosition, setSelectedPosition] = useState(task.pos);
+  const [selectedPosition, setSelectedPosition] = useState(task?.pos);
 
   ///memo
   const newPositions = useMemo(() => {
@@ -62,15 +62,15 @@ export function MoveCardPopover({
   useEffect(() => {
     if (selectedBoardId && boards.length > 0 && newPositions.length > 0) {
       if (
-        selectedBoardId !== task.idBoard ||
-        selectedGroupId !== task.idGroup
+        selectedBoardId !== task?.idBoard ||
+        selectedGroupId !== task?.idGroup
       ) {
         setPositions([...newPositions, Math.max(...newPositions) + 12111]);
       } else {
         setPositions(newPositions);
       }
-      if (task.idGroup === selectedGroupId) {
-        setSelectedPosition(task.pos);
+      if (task?.idGroup === selectedGroupId) {
+        setSelectedPosition(task?.pos);
       } else if (newPositions.length > 0) {
         setSelectedPosition(newPositions[0]);
       } else {
@@ -83,8 +83,8 @@ export function MoveCardPopover({
     selectedGroupId,
     boards,
     newPositions,
-    task.idGroup,
-    task.pos,
+    task?.idGroup,
+    task?.pos,
   ]);
 
   // use effect board & groups
@@ -136,7 +136,7 @@ export function MoveCardPopover({
     };
 
     if (task.pos > selectedPosition) {
-      newPosDetails = { ...newPosDetails, pos: selectedPosition };
+      newPosDetails = { ...newPosDetails, pos: selectedPosition - 12111 };
     }
     await moveCard(newPosDetails);
     setIsOpen(false);

@@ -71,8 +71,7 @@ export function TaskPreviewEditModal({
     openPreviewModal(false);
   }
 
-  function handleCancel(e) {
-    e.stopPropagation();
+  function handleCancel() {
     openPreviewModal(false);
   }
 
