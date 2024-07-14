@@ -190,6 +190,7 @@ export function TaskDetailsCheckList({
               onPressEnter={(e) => onAddNewItem(e)}
               placeholder="Add an item"
               onSubmit={(e) => onAddNewItem(e)}
+              emojiButton={true}
             />
           )}
         </section>
