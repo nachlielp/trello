@@ -28,6 +28,8 @@ export function TaskDetailsModal({ taskId, editTask, labelActions, onCloseTask }
       ?.find((g) => g.tasks?.find((t) => t.id === taskId))
       ?.tasks.find((t) => t.id === taskId)
   );
+  console.log("cover brightness", task?.cover?.brightness);
+
   const user = useSelector((state) => state.userModule.user);
   const navigate = useNavigate();
 
@@ -76,8 +78,7 @@ export function TaskDetailsModal({ taskId, editTask, labelActions, onCloseTask }
 
   const imgCoverHeader = (
     <section
-      className={`details-header-img-cover ${task?.cover?.brightness === "dark" ? "dark" : "light"
-        }`}
+      className={`details-header-img-cover ${task?.cover?.brightness}`}
       style={{
         backgroundColor: task?.cover?.bg,
       }}
@@ -88,7 +89,7 @@ export function TaskDetailsModal({ taskId, editTask, labelActions, onCloseTask }
       <article className={`details-header-cover-actions-wrapper`}>
         <ManageCoverPopover
           anchorEl={
-            <SvgButton src={coverIcon} className={`cover-btn ${task?.cover?.brightness === "dark" ? "dark" : "light"}`} label="Cover" />
+            <SvgButton src={coverIcon} className={`cover-btn ${task?.cover?.brightness}`} label="Cover" />
           }
           editTask={editTask}
           task={task}
@@ -103,7 +104,7 @@ export function TaskDetailsModal({ taskId, editTask, labelActions, onCloseTask }
       onCancel={onClose}
       loading={group == undefined}
       footer=""
-      className={`task-details ${task?.cover?.brightness === "dark" ? "dark" : "light"}`}
+      className={`task-details ${task?.cover?.brightness}`}
     >
       {isColorCover && colorCoverHeader}
       {!!isImgCover && imgCoverHeader}
