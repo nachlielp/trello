@@ -28,7 +28,7 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
 
     function onRemoveCover(e) {
         e.stopPropagation();
-        editTask({ ...task, cover: { ...task.cover, color: null, scaled: null, idUploadedBackground: null } });
+        editTask({ ...task, cover: { ...task.cover, color: null, scaled: null, idUploadedBackground: null, size: "normal" } });
     }
 
     function onSelectPhoto(e, id) {
