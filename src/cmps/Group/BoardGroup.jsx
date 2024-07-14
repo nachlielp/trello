@@ -14,11 +14,11 @@ export function BoardGroup({
   archiveGroup,
   editGroup,
   editTask,
-  editLabel,
   copyGroup,
   moveAllCards,
   archiveAllCards,
   sortGroup,
+  labelActions
 }) {
   const [newTaskIds, setNewTaskIds] = useState([]);
   const [firstTaskPos, setFirstTaskPos] = useState(null);
@@ -81,6 +81,7 @@ export function BoardGroup({
             <TaskPreview
               key={taskId}
               task={group.tasks.find((task) => task.id === taskId)}
+              labelActions={labelActions}
             />
           ))}
           {isAddTaskOpen && (
@@ -99,14 +100,14 @@ export function BoardGroup({
                   key={task.id}
                   task={task}
                   editTask={editTask}
-                  editLabel={editLabel}
+                  labelActions={labelActions}
                 />
               ) : (
                 <TaskPreview
                   key={task.id}
                   task={task}
                   editTask={editTask}
-                  editLabel={editLabel}
+                  labelActions={labelActions}
                 />
               )
             )}

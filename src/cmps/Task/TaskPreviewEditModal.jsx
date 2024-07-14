@@ -27,11 +27,11 @@ export function TaskPreviewEditModal({
   editTask,
   isOpen,
   openPreviewModal,
-  editLabel,
   taskWidth,
+  labelActions,
 }) {
   const boardLabels = useSelector(
-    (state) => state.boardModule.board.labelNames
+    (state) => state.boardModule.board.labels
   );
   const [taskLabels, setTaskLabels] = useState([]);
 
@@ -45,12 +45,13 @@ export function TaskPreviewEditModal({
   }, [isHovered, isOpen]);
 
   useEffect(() => {
-    setTaskLabels(
-      task.labels.map((label) =>
-        boardLabels.find((boardLabel) => boardLabel.color === label.color)
-      )
-    );
-  }, [task.labels, boardLabels]);
+    const labels = task.idLabels
+      .filter((labelId) => boardLabels.some(boardLabel => boardLabel.id === labelId))
+      .map((labelId) =>
+        boardLabels.find((boardLabel) => boardLabel.id === labelId)
+      );
+    setTaskLabels(labels || []);
+  }, [task.idLabels, boardLabels]);
 
   function showModal(e) {
     e.stopPropagation();
@@ -89,10 +90,9 @@ export function TaskPreviewEditModal({
               label="Edit labels"
             />
           }
-          taskLabels={task.labels}
           editTask={editTask}
           task={task}
-          editLabel={editLabel}
+          labelActions={labelActions}
           onClick={(e) => e.stopPropagation()}
         />
       ),
@@ -213,7 +213,7 @@ export function TaskPreviewEditModal({
           <article className="group-task-content-labels">
             {taskLabels?.map((label) => (
               <TaskPreviewLabel
-                key={label.color}
+                key={label.id}
                 label={label}
                 isExpanded={true}
               />
@@ -231,9 +231,8 @@ export function TaskPreviewEditModal({
           Save
         </button>
         <section
-          className={`floating-buttons ${
-            task.cover.size === "full" ? "full-cover" : ""
-          }`}
+          className={`floating-buttons ${task.cover.size === "full" ? "full-cover" : ""
+            }`}
         >
           {modalActionButtons.map((btn, index) => (
             <div key={index}>{btn.popover}</div>

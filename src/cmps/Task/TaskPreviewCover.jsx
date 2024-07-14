@@ -4,7 +4,7 @@ import { utilService } from "../../services/util.service";
 import { TaskPreviewEditModal } from "./TaskPreviewEditModal";
 import { useNavigate } from "react-router";
 
-export function TaskPreviewCover({ task, editTask, editLabel }) {
+export function TaskPreviewCover({ task, editTask, labelActions }) {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpenPreviewModal, setIsOpenPreviewModal] = useState(false);
   const taskCover = task?.cover;
@@ -60,7 +60,7 @@ export function TaskPreviewCover({ task, editTask, editLabel }) {
         editTask={editTask}
         isOpen={isOpenPreviewModal}
         openPreviewModal={openPreviewModal}
-        editLabel={editLabel}
+        labelActions={labelActions}
         taskWidth={taskWidth}
       />
       <section
