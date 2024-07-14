@@ -17,8 +17,6 @@ import {
   ARCHIVE_ALL_CARDS,
   SORT_GROUP,
   VIEW_BOARD,
-  ADD_LABEL,
-  DELETE_LABEL,
 } from "./board.reducer";
 import { setBoards, viewWorkspaceBoard } from "./workspace.actions";
 
@@ -331,7 +329,7 @@ export async function getItemById(boardId, taskId) {
 
 export async function getBoardLabels(boardId) {
   const board = await boardService.getById(boardId);
-  return board.labels;
+  return board.labelNames;
 }
 
 export async function editLabel(boardId, label) {
@@ -339,50 +337,11 @@ export async function editLabel(boardId, label) {
   const board = await boardService.getById(boardId);
   const newBoard = {
     ...board,
-    labels: board.labels.map((l) =>
-      l.id === label.id ? label : l
+    labelNames: board.labelNames.map((l) =>
+      l.color === label.color ? label : l
     ),
     apdatedAt: new Date().getTime(),
   };
-  await boardService.save(newBoard);
-  return newBoard;
-}
-
-export async function createLabel(boardId, task, label) {
-  const newLabel = utilService.createNewLabel(label.name, label.color);
-  console.log('newLabel', newLabel);
-  store.dispatch({ type: ADD_LABEL, label: newLabel });
-  store.dispatch({ type: EDIT_TASK, task: { ...task, idLabels: [...task.idLabels, newLabel.id] } });
-  const board = await boardService.getById(boardId);
-  const newBoard = {
-    ...board,
-    labels: [...board.labels, newLabel],
-    groups: board.groups.map((g) =>
-      g.id === task.idGroup
-        ? { ...g, tasks: g.tasks.map((t) => (t.id === task.id ? { ...task, idLabels: [...task.idLabels, newLabel.id] } : t)) }
-        : g
-    ),
-    apdatedAt: new Date().getTime(),
-  };
-  await boardService.save(newBoard);
-  return newBoard;
-}
-
-export async function deleteLabel(boardId, labelId) {
-  const board = await boardService.getById(boardId);
-  const newBoard = {
-    ...board,
-    labels: board.labels.filter((l) => l.id !== labelId),
-    groups: board.groups.map((g) => ({
-      ...g,
-      tasks: g.tasks.map((t) => ({
-        ...t,
-        idLabels: t.idLabels.filter((id) => id !== labelId),
-      })),
-    })),
-    apdatedAt: new Date().getTime(),
-  };
-  store.dispatch({ type: DELETE_LABEL, labelId: labelId });
   await boardService.save(newBoard);
   return newBoard;
 }
