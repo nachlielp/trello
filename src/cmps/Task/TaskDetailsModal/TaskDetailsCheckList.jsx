@@ -88,6 +88,7 @@ export function TaskDetailsCheckList({
   function onDeleteItem(itemId) {
     deleteItem(checkList.id, itemId);
   }
+  //TODO 1 action
   async function onConvertToTask(itemId, itemName) {
     await createAsTask(itemName);
     deleteItem(checkList.id, itemId);

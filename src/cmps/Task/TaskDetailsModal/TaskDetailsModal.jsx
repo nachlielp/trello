@@ -118,6 +118,7 @@ export function TaskDetailsModal({
     };
     editTask(newTask);
   }
+  
   function changeItem(checkListId, itemId, changes) {
     const newTask = {
       ...task,
@@ -134,6 +135,7 @@ export function TaskDetailsModal({
     };
     editTask(newTask);
   }
+
   async function deleteList(checkListId) {
     const newTask = {
       ...task,
@@ -149,6 +151,7 @@ export function TaskDetailsModal({
     }
     await editTask(newTask);
   }
+
   function deleteItem(listId, itemId) {
     const newTask = {
       ...task,
