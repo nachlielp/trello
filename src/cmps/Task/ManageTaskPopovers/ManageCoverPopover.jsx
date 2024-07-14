@@ -89,7 +89,7 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
                                 </div>
                             </div>
                             <div className={`full-size-wrapper ${isCover && task.cover.size === "full" ? "active" : "non-active"}`}>
-                                <div className={`full-size-btn ${task?.cover.idUploadedBackground ? "has-image" : "no-image"}`} onClick={() => onChangeSize("full")}
+                                <div className={`full-size-btn ${task?.cover.idUploadedBackground ? "has-image" : "no-image"}`} onClick={(e) => onChangeSize(e, "full")}
                                     style={{
                                         backgroundImage: task?.cover.scaled ? `url(${task?.cover.scaled[0]?.url})` : 'none',
                                         backgroundSize: 'cover',
