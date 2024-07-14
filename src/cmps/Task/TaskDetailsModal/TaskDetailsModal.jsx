@@ -21,7 +21,7 @@ import { TaskDetailsCheckList } from "./TaskDetailsCheckList";
 export function TaskDetailsModal({
   taskId,
   editTask,
-  editLabel,
+  labelActions,
   onCloseTask,
   addTask,
   board,
@@ -217,13 +217,8 @@ export function TaskDetailsModal({
             {hasMembers && (
               <TaskDetailsMembers currentTask={task} editTask={editTask} />
             )}
-            {task.labels.length > 0 && (
-              <TaskDetailsLabels
-                task={task}
-                editTask={editTask}
-                editLabel={editLabel}
-              />
-            )}
+            {task.labels.length > 0 && <TaskDetailsLabels task={task} editTask={editTask} editLabel={editLabel} />}
+
           </article>
           <TaskDetailsMarkdown editTask={editTask} task={task} />
           {task.checkLists.length > 0 &&
@@ -252,7 +247,7 @@ export function TaskDetailsModal({
             task={task}
             editTask={editTask}
             editLabel={editLabel}
-            editBoard={editBoard}
+            
           />
           <TaskDetailsActions
             task={task}

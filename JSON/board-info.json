@@ -76,8 +76,10 @@
             "idMembersVoted": [],
             "idShort": 6,
             "idAttachmentCover": null,
-            "labels": [],
-            "idLabels": [],
+            "idLabels": [
+              "51bcee7",
+              "66756c"
+            ],
             "manualCoverAttachment": true,
             "name": "json",
             "pos": 65536,
@@ -401,70 +403,22 @@
       "canBePrivate": true,
       "canInvite": true
     },
-    "labelNames": [
+    "labels": [
       {
+        "id": "66756c",
+        "name": "label A",
         "color": "green",
-        "label": "Ok"
+        "darkFontColor": "#BAF3DB",
+        "lightFontColor": "#164B35"
       },
       {
+        "id": "51bcee7",
+        "name": "Label B",
         "color": "yellow",
-        "label": ""
-      },
-      {
-        "color": "orange",
-        "label": ""
-      },
-      {
-        "color": "red",
-        "label": "Urgent"
-      },
-      {
-        "color": "purple",
-        "label": ""
-      },
-      {
-        "color": "blue",
-        "label": ""
-      },
-      {
-        "color": "sky",
-        "label": ""
-      },
-      {
-        "color": "lime",
-        "label": ""
-      },
-      {
-        "color": "pink",
-        "label": "Im Pinkalicious"
-      },
-      {
-        "color": "black",
-        "label": ""
+        "darkFontColor": "#F8E6A0",
+        "lightFontColor": "#533F04"
       }
     ],
-    "noInUseLabels": {
-      "green_dark": "",
-      "yellow_dark": "",
-      "orange_dark": "",
-      "red_dark": "",
-      "purple_dark": "",
-      "blue_dark": "",
-      "sky_dark": "",
-      "lime_dark": "",
-      "pink_dark": "",
-      "black_dark": "",
-      "green_light": "",
-      "yellow_light": "",
-      "orange_light": "",
-      "red_light": "",
-      "purple_light": "",
-      "blue_light": "",
-      "sky_light": "",
-      "lime_light": "",
-      "pink_light": "",
-      "black_light": ""
-    },
     "coverImgs": [
       {
         "bg": "#f2a912",
@@ -1104,8 +1058,10 @@
             "idMembersVoted": [],
             "idShort": 6,
             "idAttachmentCover": null,
-            "labels": [],
-            "idLabels": [],
+            "idLabels": [
+              "51bcee7",
+              "66756c"
+            ],
             "manualCoverAttachment": true,
             "name": "json",
             "pos": 65536,
@@ -1294,34 +1250,7 @@
             "idMembersVoted": [],
             "idShort": 7,
             "idAttachmentCover": null,
-            "labels": [
-              {
-                "color": "blue"
-              },
-              {
-                "color": "pink"
-              },
-              {
-                "color": "red"
-              },
-              {
-                "color": "purple"
-              },
-              {
-                "color": "orange"
-              },
-              {
-                "color": "green"
-              }
-            ],
-            "idLabels": [
-              "66756a351dc51400eb1968ee",
-              "66793c8367673bb5384b068f",
-              "66756a351dc51400eb1968ed",
-              "66756a351dc51400eb1968f3",
-              "66756a351dc51400eb1968e8",
-              "66756a351dc51400eb1968e2"
-            ],
+            "idLabels": [],
             "manualCoverAttachment": true,
             "name": "custom-hooks.js",
             "pos": 131072,
@@ -1386,7 +1315,6 @@
             "idMembersVoted": [],
             "idShort": 10,
             "idAttachmentCover": null,
-            "labels": [],
             "idLabels": [],
             "manualCoverAttachment": true,
             "name": "event.bus.js",
@@ -1463,7 +1391,6 @@
             "idMembersVoted": [],
             "idShort": 25,
             "idAttachmentCover": null,
-            "labels": [],
             "idLabels": [],
             "manualCoverAttachment": true,
             "name": "Some test",
@@ -1615,12 +1542,7 @@
             "idMembersVoted": [],
             "idShort": 8,
             "idAttachmentCover": null,
-            "labels": [
-              {
-                "color": "orange"
-              }
-            ],
-            "idLabels": ["66756a351dc51400eb1968e8"],
+            "idLabels": [],
             "manualCoverAttachment": false,
             "name": "store.js",
             "pos": 196608,
@@ -1685,7 +1607,6 @@
             "idMembersVoted": [],
             "idShort": 11,
             "idAttachmentCover": null,
-            "labels": [],
             "idLabels": [],
             "manualCoverAttachment": false,
             "name": "trello.reduccer.js",
@@ -1751,12 +1672,7 @@
             "idMembersVoted": [],
             "idShort": 12,
             "idAttachmentCover": null,
-            "labels": [
-              {
-                "color": "red"
-              }
-            ],
-            "idLabels": ["66756a351dc51400eb1968ed"],
+            "idLabels": [],
             "manualCoverAttachment": false,
             "name": "trello.actions.js",
             "pos": 327690,
@@ -1842,7 +1758,6 @@
             "idMembersVoted": [],
             "idShort": 5,
             "idAttachmentCover": null,
-            "labels": [],
             "idLabels": [],
             "manualCoverAttachment": false,
             "name": "TrelloIndex.jsx",
@@ -1908,7 +1823,6 @@
             "idMembersVoted": [],
             "idShort": 13,
             "idAttachmentCover": null,
-            "labels": [],
             "idLabels": [],
             "manualCoverAttachment": false,
             "name": "TrelloBoards.jsx",
@@ -1974,7 +1888,6 @@
             "idMembersVoted": [],
             "idShort": 19,
             "idAttachmentCover": null,
-            "labels": [],
             "idLabels": [],
             "manualCoverAttachment": false,
             "name": "App.js",
@@ -2051,7 +1964,6 @@
             "idMembersVoted": [],
             "idShort": 15,
             "idAttachmentCover": "66758cda9b6ddd6d9eb72b20",
-            "labels": [],
             "idLabels": [],
             "manualCoverAttachment": true,
             "name": "SideBar.jsx",
@@ -2117,7 +2029,6 @@
             "idMembersVoted": [],
             "idShort": 16,
             "idAttachmentCover": "66758d1fffc9a9d1a2cd085f",
-            "labels": [],
             "idLabels": [],
             "manualCoverAttachment": false,
             "name": "SettingsSideBar.jsx",
@@ -2183,7 +2094,6 @@
             "idMembersVoted": [],
             "idShort": 20,
             "idAttachmentCover": "66758cc12183e8943bcf98c4",
-            "labels": [],
             "idLabels": [],
             "manualCoverAttachment": false,
             "name": "UserMessage.jsx",
@@ -2319,70 +2229,22 @@
       "canBePrivate": true,
       "canInvite": true
     },
-    "labelNames": [
+    "labels": [
       {
+        "id": "66756c",
+        "name": "label A",
         "color": "green",
-        "label": "Ok"
+        "darkFontColor": "#BAF3DB",
+        "lightFontColor": "#164B35"
       },
       {
+        "id": "51bcee7",
+        "name": "Label B",
         "color": "yellow",
-        "label": ""
-      },
-      {
-        "color": "orange",
-        "label": ""
-      },
-      {
-        "color": "red",
-        "label": "Urgent"
-      },
-      {
-        "color": "purple",
-        "label": ""
-      },
-      {
-        "color": "blue",
-        "label": ""
-      },
-      {
-        "color": "sky",
-        "label": ""
-      },
-      {
-        "color": "lime",
-        "label": ""
-      },
-      {
-        "color": "pink",
-        "label": "Im Pinkalicious"
-      },
-      {
-        "color": "black",
-        "label": ""
+        "darkFontColor": "#F8E6A0",
+        "lightFontColor": "#533F04"
       }
     ],
-    "noInUseLabels": {
-      "green_dark": "",
-      "yellow_dark": "",
-      "orange_dark": "",
-      "red_dark": "",
-      "purple_dark": "",
-      "blue_dark": "",
-      "sky_dark": "",
-      "lime_dark": "",
-      "pink_dark": "",
-      "black_dark": "",
-      "green_light": "",
-      "yellow_light": "",
-      "orange_light": "",
-      "red_light": "",
-      "purple_light": "",
-      "blue_light": "",
-      "sky_light": "",
-      "lime_light": "",
-      "pink_light": "",
-      "black_light": ""
-    },
     "coverImgs": [
       {
         "bg": "#f2a912",
