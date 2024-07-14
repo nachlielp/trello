@@ -88,7 +88,7 @@ export function TaskDetailsModal({ taskId, editTask, labelActions, onCloseTask }
       <article className={`details-header-cover-actions-wrapper`}>
         <ManageCoverPopover
           anchorEl={
-            <SvgButton src={coverIcon} className="cover-btn" label="Cover" />
+            <SvgButton src={coverIcon} className={`cover-btn ${task?.cover?.brightness === "dark" ? "dark" : "light"}`} label="Cover" />
           }
           editTask={editTask}
           task={task}
@@ -103,7 +103,7 @@ export function TaskDetailsModal({ taskId, editTask, labelActions, onCloseTask }
       onCancel={onClose}
       loading={group == undefined}
       footer=""
-      className="task-details"
+      className={`task-details ${task?.cover?.brightness === "dark" ? "dark" : "light"}`}
     >
       {isColorCover && colorCoverHeader}
       {!!isImgCover && imgCoverHeader}

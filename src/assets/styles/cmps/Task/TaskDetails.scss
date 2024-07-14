@@ -11,6 +11,10 @@
   padding: 0;
   border-radius: 12px;
 
+  &.dark .anticon-close {
+    color: #fff;
+  }
+
   .anticon-close {
     color: var(--ds-text, #172b4d);
   }
@@ -129,6 +133,14 @@
 
           &:hover {
             background-color: var(--ds-background-neutral-hovered, #091e4224);
+          }
+
+          &.dark {
+            color: #fff;
+          }
+
+          &.dark:hover {
+            background-color: #A6C5E229;
           }
 
           .injected-svg {

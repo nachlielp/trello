@@ -8,11 +8,11 @@ const boardLabelColorOptions = [
   { color: "subtle red", bgColor: "#ffd5d2", darkFontColor: "#FFD5D2", lightFontColor: "#5D1F1A" },
   { color: "subtle purple", bgColor: "#dfd8fd", darkFontColor: "#DFD8FD", lightFontColor: "#352C63" },
 
-  { color: "green", bgColor: "#4bce97", isCover: true, darkFontColor: "#BAF3DB", lightFontColor: "#164B35" },
-  { color: "yellow", bgColor: "#f5cd47", isCover: true, darkFontColor: "#F8E6A0", lightFontColor: "#533F04" },
-  { color: "orange", bgColor: "#fea362", isCover: true, darkFontColor: "#FEDEC8", lightFontColor: "#702E00" },
-  { color: "red", bgColor: "#f87168", isCover: true, darkFontColor: "#FFD5D2", lightFontColor: "#5D1F1A" },
-  { color: "purple", bgColor: "#9f8fef", isCover: true, darkFontColor: "#DFD8FD", lightFontColor: "#352C63" },
+  { color: "green", bgColor: "#4bce97", isCover: true, darkFontColor: "#BAF3DB", lightFontColor: "#164B35", brightness: "light" },
+  { color: "yellow", bgColor: "#f5cd47", isCover: true, darkFontColor: "#F8E6A0", lightFontColor: "#533F04", brightness: "light" },
+  { color: "orange", bgColor: "#fea362", isCover: true, darkFontColor: "#FEDEC8", lightFontColor: "#702E00", brightness: "light" },
+  { color: "red", bgColor: "#f87168", isCover: true, darkFontColor: "#FFD5D2", lightFontColor: "#5D1F1A", brightness: "light" },
+  { color: "purple", bgColor: "#9f8fef", isCover: true, darkFontColor: "#DFD8FD", lightFontColor: "#352C63", brightness: "light" },
 
   { color: "bold green", bgColor: "#1f845a", darkFontColor: "#1D2125", lightFontColor: "#fff" },
   { color: "bold yellow", bgColor: "#946f01", darkFontColor: "#1D2125", lightFontColor: "#fff" },
@@ -28,11 +28,11 @@ const boardLabelColorOptions = [
   { color: "subtle pink", bgColor: "#fdd0ec", darkFontColor: "#FDD0EC", lightFontColor: "#50253F" },
   { color: "subtle black", bgColor: "#dcdfe4", darkFontColor: "#DEE4EA", lightFontColor: "#091E42" },
 
-  { color: "blue", bgColor: "#579dff", isCover: true, darkFontColor: "#CCE0FF", lightFontColor: "#091E42" },
-  { color: "sky", bgColor: "#6cc3e0", isCover: true, darkFontColor: "#C6EDFB", lightFontColor: "#164555" },
-  { color: "lime", bgColor: "#94c748", isCover: true, darkFontColor: "#D3F1A7", lightFontColor: "#37471F" },
-  { color: "pink", bgColor: "#e774bb", isCover: true, darkFontColor: "#FDD0EC", lightFontColor: "#50253F" },
-  { color: "black", bgColor: "#8590a2", isCover: true, darkFontColor: "#DEE4EA", lightFontColor: "#091E42" },
+  { color: "blue", bgColor: "#579dff", isCover: true, darkFontColor: "#CCE0FF", lightFontColor: "#091E42", brightness: "light" },
+  { color: "sky", bgColor: "#6cc3e0", isCover: true, darkFontColor: "#C6EDFB", lightFontColor: "#164555", brightness: "light" },
+  { color: "lime", bgColor: "#94c748", isCover: true, darkFontColor: "#D3F1A7", lightFontColor: "#37471F", brightness: "light" },
+  { color: "pink", bgColor: "#e774bb", isCover: true, darkFontColor: "#FDD0EC", lightFontColor: "#50253F", brightness: "light" },
+  { color: "black", bgColor: "#8590a2", isCover: true, darkFontColor: "#DEE4EA", lightFontColor: "#091E42", brightness: "light" },
 
   { color: "bold blue", bgColor: "#0c66e4", darkFontColor: "#1D2125", lightFontColor: "#fff" },
   { color: "bold sky", bgColor: "#227d9b", darkFontColor: "#1D2125", lightFontColor: "#fff" },
@@ -554,7 +554,7 @@ async function createNewBoard(board) {
             "height": 1707,
             "width": 2560
           }
-        ]
+        ], brightness: "light"
       },
       {
         "bg": "#a4d4e4",
@@ -652,7 +652,7 @@ async function createNewBoard(board) {
             "height": 1709,
             "width": 2560
           }
-        ]
+        ], brightness: "light"
       },
       {
         "bg": "#7e8d90",
@@ -741,7 +741,7 @@ async function createNewBoard(board) {
             "height": 2048,
             "width": 1365
           }
-        ]
+        ], brightness: "light"
       },
       {
         "bg": "#d9d3c3",
@@ -839,7 +839,7 @@ async function createNewBoard(board) {
             "height": 1707,
             "width": 2560
           }
-        ]
+        ], brightness: "light"
       },
       {
         "bg": "#e2e6e6",
@@ -928,7 +928,8 @@ async function createNewBoard(board) {
             "height": 1439,
             "width": 2560
           }
-        ]
+        ],
+        brightness: "light"
       },
       {
         "bg": "#f2f2fb",
@@ -1017,7 +1018,8 @@ async function createNewBoard(board) {
             "height": 2048,
             "width": 1365
           }
-        ]
+        ],
+        brightness: "light"
       }
     ]
   };
