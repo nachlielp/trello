@@ -107,19 +107,6 @@ export function BoardIndex() {
     editUser({ ...user, starredBoardIds: starredIds });
   }
 
-  // function onCreateLabel(task, label) {
-  //   createLabel(board.id, task, label);
-  // }
-
-  // function onDeleteLabel(labelId) {
-  //   deleteLabel(board.id, labelId);
-  // }
-
-  // async function onEditLabel(label) {
-  //   console.log(label);
-  //   const res = await editLabel(board.id, label);
-  // }
-
   async function onLabelAction(action, label, task) {
     if (action === "edit") {
       editLabel(board.id, label);
