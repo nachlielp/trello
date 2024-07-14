@@ -2,26 +2,20 @@ import { SvgButton } from "../../CustomCpms/SvgButton";
 import { ManageLabelsPopover } from "../ManageTaskPopovers/ManageLabelsPopover";
 import { useSelector } from "react-redux";
 import { utilService } from "../../../services/util.service";
-export function TaskDetailsLabels({ task, editTask, labelActions }) {
-    const boardLabels = useSelector((state) => state.boardModule.board.labels);
+export function TaskDetailsLabels({ task, editTask, editLabel }) {
+    const boardLabels = useSelector((state) => state.boardModule.board.labelNames);
     return (
         <section className="task-details-labels">
             <p className="sub-title">Labels</p>
             <article className="label-list">
-                {task.idLabels.map((tLabelId) => {
-                    const labelInfo = boardLabels?.find((bLabel) => bLabel.id === tLabelId)
+                {task.labels.map((tLabel) => {
+                    const labelInfo = boardLabels?.find((bLabel) => bLabel.color === tLabel.color)
                     return (
-                        <div
-                            className="task-details-label"
-                            key={labelInfo.id}
-                            style={{
-                                backgroundColor: utilService.getColorHashByName(labelInfo.color).bgColor,
-                                color: utilService.getColorHashByName(labelInfo.color).lightFontColor
-                            }}>
-                            {labelInfo.name}
+                        <div className="task-details-label" key={labelInfo.color} style={{ backgroundColor: utilService.getColorHashByName(labelInfo.color).bgColor }}>
+                            {labelInfo.label}
                         </div>)
                 })}
-                <ManageLabelsPopover editTask={editTask} labelActions={labelActions} task={task} anchorEl={popoverAncher} />
+                <ManageLabelsPopover editTask={editTask} editLabel={editLabel} task={task} anchorEl={popoverAncher} />
             </article>
         </section>
     )

@@ -7,8 +7,6 @@ export const SET_IS_EXPANDED = "SET_IS_EXPANDED";
 
 export const ADD_TASK = "ADD_TASK";
 export const EDIT_TASK = "EDIT_TASK";
-export const ADD_LABEL = "ADD_LABEL";
-export const DELETE_LABEL = "DELETE_LABEL";
 
 export const ADD_GROUP = "ADD_GROUP";
 export const EDIT_GROUP = "EDIT_GROUP";
@@ -139,18 +137,11 @@ export function boardReducer(state = initialState, action) {
         ...state,
         board: {
           ...state.board,
-          labels: state.board.labels.map((l) =>
-            l.id === action.label.id ? action.label : l
+          labelNames: state.board.labelNames.map((l) =>
+            l.color === action.label.color ? action.label : l
           ),
           apdatedAt: new Date().getTime(),
         },
-      };
-      break;
-
-    case ADD_LABEL:
-      newState = {
-        ...state,
-        board: { ...state.board, labels: [...state.board.labels, action.label] },
       };
       break;
 
@@ -172,25 +163,6 @@ export function boardReducer(state = initialState, action) {
         ...state,
         board: { ...state.board, viewedAt: Date.now() },
       };
-      break;
-
-    case DELETE_LABEL:
-      newState = {
-        ...state,
-        board: {
-          ...state.board,
-          labels: state.board.labels.filter((l) => l.id !== action.labelId),
-          groups: state.board.groups.map((g) => ({
-            ...g,
-            tasks: g.tasks.map((t) => ({
-              ...t,
-              idLabels: t.idLabels.filter((id) => id !== action.labelId),
-            })),
-          })),
-          apdatedAt: new Date().getTime(),
-        },
-      };
-      console.log("newState", newState);
       break;
 
     default:

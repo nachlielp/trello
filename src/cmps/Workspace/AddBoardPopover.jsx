@@ -59,7 +59,6 @@ export function AddBoardPopover({ onAddBoard, anchorEl }) {
   const [selectedBg, setSelectedBg] = useState(utilService.getBgImgs()[0]);
   const [selectedBgUrl, setSelectedBgUrl] = useState(utilService.getBgImgs()[0].backgroundImageScaled[2]?.url);
 
-  const popoverRef = useRef(null); // Add a ref for the Popover
 
   function onOpenChange(e) {
     setBoardName("");
@@ -93,7 +92,6 @@ export function AddBoardPopover({ onAddBoard, anchorEl }) {
 
   return (
     <Popover
-      ref={popoverRef}
       className="manage-labels-popover"
       trigger="click"
       placement="bottomRight"
@@ -147,6 +145,7 @@ export function AddBoardPopover({ onAddBoard, anchorEl }) {
           <CustomSelect
             className="board-visibility-select"
             options={options}
+            onSelect={() => { }}
             value="workspace"
           />
           <button className={`add-board-btn ${boardName === "" ? "disabled" : ""}`} onClick={onCreateBoard}>
@@ -157,6 +156,7 @@ export function AddBoardPopover({ onAddBoard, anchorEl }) {
       }
     >
       {anchorEl}
+      {/* <SvgButton className="board-add-btn" src="/img/workspace/pluseIcon.svg" /> */}
     </Popover>
   );
 }

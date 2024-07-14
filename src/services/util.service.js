@@ -1,47 +1,46 @@
 import usersJson from "../../JSON/user.json";
 import boardsJson from "../../JSON/board-info.json";
 
-const boardLabelColorOptions = [
-  { color: "subtle green", bgColor: "#baf3db", darkFontColor: "#BAF3DB", lightFontColor: "#164B35" },
-  { color: "subtle yellow", bgColor: "#f8e6a0", darkFontColor: "#F8E6A0", lightFontColor: "#533F04" },
-  { color: "subtle orange", bgColor: "#fedec8", darkFontColor: "#FEDEC8", lightFontColor: "#702E00" },
-  { color: "subtle red", bgColor: "#ffd5d2", darkFontColor: "#FFD5D2", lightFontColor: "#5D1F1A" },
-  { color: "subtle purple", bgColor: "#dfd8fd", darkFontColor: "#DFD8FD", lightFontColor: "#352C63" },
+const boardLabelsArray = [
+  // { color: "subtle green", bgColor: "#baf3db" },
+  { color: "green", bgColor: "#4bce97", isBase: true },
+  // { color: "bold green", bgColor: "#1f845a", },
 
-  { color: "green", bgColor: "#4bce97", isCover: true, darkFontColor: "#BAF3DB", lightFontColor: "#164B35" },
-  { color: "yellow", bgColor: "#f5cd47", isCover: true, darkFontColor: "#F8E6A0", lightFontColor: "#533F04" },
-  { color: "orange", bgColor: "#fea362", isCover: true, darkFontColor: "#FEDEC8", lightFontColor: "#702E00" },
-  { color: "red", bgColor: "#f87168", isCover: true, darkFontColor: "#FFD5D2", lightFontColor: "#5D1F1A" },
-  { color: "purple", bgColor: "#9f8fef", isCover: true, darkFontColor: "#DFD8FD", lightFontColor: "#352C63" },
+  // { color: "subtle yellow", bgColor: "#f8e6a0" },
+  { color: "yellow", bgColor: "#f5cd47", isBase: true },
+  // { color: "bold yellow", bgColor: "#946f01", },
 
-  { color: "bold green", bgColor: "#1f845a", darkFontColor: "#1D2125", lightFontColor: "#fff" },
-  { color: "bold yellow", bgColor: "#946f01", darkFontColor: "#1D2125", lightFontColor: "#fff" },
-  { color: "bold orange", bgColor: "#c25100", darkFontColor: "#1D2125", lightFontColor: "#fff" },
-  { color: "bold red", bgColor: "#c9372c", darkFontColor: "#1D2125", lightFontColor: "#fff" },
-  { color: "bold purple", bgColor: "#6e5dc6", darkFontColor: "#1D2125", lightFontColor: "#fff" },
+  // { color: "subtle orange", bgColor: "#fedec8" },
+  { color: "orange", bgColor: "#fea362", isBase: true },
+  // { color: "bold orange", bgColor: "#c25100", },
 
-  //
+  // { color: "subtle red", bgColor: "#ffd5d2" },
+  { color: "red", bgColor: "#f87168", isBase: true },
+  // { color: "bold red", bgColor: "#c9372c", },
 
-  { color: "subtle blue", bgColor: "#cce0ff", darkFontColor: "#CCE0FF", lightFontColor: "#09326C" },
-  { color: "subtle sky", bgColor: "#c6edfb", darkFontColor: "#C6EDFB", lightFontColor: "#164555" },
-  { color: "subtle lime", bgColor: "#d3f1a7", darkFontColor: "#D3F1A7", lightFontColor: "#37471F" },
-  { color: "subtle pink", bgColor: "#fdd0ec", darkFontColor: "#FDD0EC", lightFontColor: "#50253F" },
-  { color: "subtle black", bgColor: "#dcdfe4", darkFontColor: "#DEE4EA", lightFontColor: "#091E42" },
+  // { color: "subtle purple", bgColor: "#dfd8fd" },
+  { color: "purple", bgColor: "#9f8fef", isBase: true },
+  // { color: "bold purple", bgColor: "#6e5dc6", },
 
-  { color: "blue", bgColor: "#579dff", isCover: true, darkFontColor: "#CCE0FF", lightFontColor: "#091E42" },
-  { color: "sky", bgColor: "#6cc3e0", isCover: true, darkFontColor: "#C6EDFB", lightFontColor: "#164555" },
-  { color: "lime", bgColor: "#94c748", isCover: true, darkFontColor: "#D3F1A7", lightFontColor: "#37471F" },
-  { color: "pink", bgColor: "#e774bb", isCover: true, darkFontColor: "#FDD0EC", lightFontColor: "#50253F" },
-  { color: "black", bgColor: "#8590a2", isCover: true, darkFontColor: "#DEE4EA", lightFontColor: "#091E42" },
+  // { color: "subtle blue", bgColor: "#cce0ff" },
+  { color: "blue", bgColor: "#579dff", isBase: true },
+  // { color: "bold blue", bgColor: "#0c66e4", },
 
-  { color: "bold blue", bgColor: "#0c66e4", darkFontColor: "#1D2125", lightFontColor: "#fff" },
-  { color: "bold sky", bgColor: "#227d9b", darkFontColor: "#1D2125", lightFontColor: "#fff" },
-  { color: "bold lime", bgColor: "#5b7f24", darkFontColor: "#1D2125", lightFontColor: "#fff" },
-  { color: "bold pink", bgColor: "#ae4787", darkFontColor: "#1D2125", lightFontColor: "#fff" },
-  { color: "bold black", bgColor: "#626f86", darkFontColor: "#1D2125", lightFontColor: "#fff" },
+  // { color: "subtle sky", bgColor: "#c6edfb" },
+  { color: "sky", bgColor: "#6cc3e0", isBase: true },
+  // { color: "bold sky", bgColor: "#227d9b", },
 
-  //
-  { color: "none", bgColor: "#091e420f", darkFontColor: "#B6C2CF", lightFontColor: "#172B4D" },
+  // { color: "subtle lime", bgColor: "#d3f1a7" },
+  { color: "lime", bgColor: "#94c748", isBase: true },
+  // { color: "bold lime", bgColor: "#5b7f24", },
+
+  // { color: "subtle pink", bgColor: "#fdd0ec" },
+  { color: "pink", bgColor: "#e774bb", isBase: true },
+  // { color: "bold pink", bgColor: "#ae4787", },
+
+  // { color: "subtle black", bgColor: "#dcdfe4" },
+  { color: "black", bgColor: "#8590a2", isBase: true },
+  // { color: "bold black", bgColor: "#626f86", },
 ];
 
 export const utilService = {
@@ -58,12 +57,11 @@ export const utilService = {
   getRandomColor,
   createNewTask,
   createNewGroup,
-  boardLabelColorOptions,
+  boardLabelsArray,
   getBaseColors,
   createNewBoard,
   getBgImgs,
   getBgColors,
-  createNewLabel,
   createCheckListItem,
   createCheckList,
   getEmojis,
@@ -167,7 +165,7 @@ function loadFromStorage(key) {
 }
 
 function getColorHashByName(colorName) {
-  const color = boardLabelColorOptions.find((color) => color.color === colorName);
+  const color = boardLabelsArray.find((color) => color.color === colorName);
   return color;
 }
 
@@ -408,56 +406,46 @@ async function createNewBoard(board) {
       canBePrivate: true,
       canInvite: true,
     },
-    labels: [
+    labelNames: [
       {
-        id: utilService.makeId(),
         color: "green",
-        name: "",
+        label: "",
       },
       {
-        id: utilService.makeId(),
         color: "yellow",
-        name: "",
+        label: "",
       },
       {
-        id: utilService.makeId(),
         color: "orange",
-        name: "",
+        label: "",
       },
       {
-        id: utilService.makeId(),
         color: "red",
-        name: "",
+        label: "",
       },
       {
-        id: utilService.makeId(),
         color: "purple",
-        name: "",
+        label: "",
       },
       {
-        id: utilService.makeId(),
         color: "blue",
-        name: "",
+        label: "",
       },
       {
-        id: utilService.makeId(),
         color: "sky",
-        name: "",
+        label: "",
       },
       {
-        id: utilService.makeId(),
         color: "lime",
-        name: "",
+        label: "",
       },
       {
-        id: utilService.makeId(),
         color: "pink",
-        name: "",
+        label: "",
       },
       {
-        id: utilService.makeId(),
         color: "black",
-        name: "",
+        label: "",
       },
     ],
     noInUseLabels: {
@@ -1047,15 +1035,8 @@ async function createNewBoard(board) {
   };
 }
 
-function createNewLabel(name, color) {
-  return {
-    id: makeId(),
-    name: name,
-    color: color,
-  };
-}
 function getBaseColors() {
-  return boardLabelColorOptions.filter((color) => color.isCover);
+  return boardLabelsArray.filter((color) => color.isBase);
 }
 
 const bgImgs = [
