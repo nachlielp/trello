@@ -172,6 +172,16 @@ export function TaskDetailsCheckList({
                   />,
                 ]}
               />
+               <MoreActionsItemPopover
+                    key={item.id}
+                    anchorEl={
+                      <button className="btn btn-secondary options-btn hover-options">
+                        <EllipsisOutlined />
+                      </button>
+                    }
+                    onDeleteItem={() => onDeleteItem(item.id)}
+                    onConvertToTask={() => onConvertToTask(item.id, item.label)}
+                  />
             </li>
           ))}
         <section className="add-item">

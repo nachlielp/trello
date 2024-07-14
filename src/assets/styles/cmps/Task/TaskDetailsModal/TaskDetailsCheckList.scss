@@ -34,8 +34,8 @@
         background: var(--ds-background-success-bold, #1f845a);
       }
     }
-    .ant-progress-bg{
-        background: var(--ds-background-accent-blue-subtle, #579dff);
+    .ant-progress-bg {
+      background: var(--ds-background-accent-blue-subtle, #579dff);
     }
   }
   .task-details-list {
@@ -43,16 +43,38 @@
     .checkbox-item {
       display: flex;
       flex-direction: row;
+      .hover-options {
+        display: none;
+        border-radius: 0 12px 12px 0;
+        :hover {
+          display: flex;
+          
+        }
+      }
+      &:hover {
+        .hover-options {
+          display: flex;
+          background-color: var(--ds-background-neutral, #091e420f) !important;
+          
+        }
+      }
+      &:has(.hover-options:hover){
+        .checkbox-label{
+          background-color: var(--ds-background-neutral, #091e420f) !important;
+
+        }
+      }
       .custom-checkbox {
         margin: 6px 6px 6px 4px;
         align-self: start;
       }
       .checkbox-label {
-          font-size: 14px;
-          font-weight: 400;
-          width: 100%;
-          padding: 8px 8px 0 8px;
-          border-radius: 12px;
+        font-size: 14px;
+        font-weight: 400;
+        width: 100%;
+        padding: 8px 8px 0 8px;
+        border-radius: 12px 0 0 12px;
+       
         &.checked {
           .title {
             color: var(--ds-text-subtle, #44546f);
