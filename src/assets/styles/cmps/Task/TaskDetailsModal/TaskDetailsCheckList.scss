@@ -48,20 +48,17 @@
         border-radius: 0 12px 12px 0;
         :hover {
           display: flex;
-          
         }
       }
       &:hover {
         .hover-options {
           display: flex;
           background-color: var(--ds-background-neutral, #091e420f) !important;
-          
         }
       }
-      &:has(.hover-options:hover){
-        .checkbox-label{
+      &:hover {
+        .checkbox-label {
           background-color: var(--ds-background-neutral, #091e420f) !important;
-
         }
       }
       .custom-checkbox {
@@ -74,7 +71,7 @@
         width: 100%;
         padding: 8px 8px 0 8px;
         border-radius: 12px 0 0 12px;
-       
+
         &.checked {
           .title {
             color: var(--ds-text-subtle, #44546f);
@@ -88,9 +85,6 @@
         .title {
           align-self: center;
           width: 100%;
-        }
-        &:hover {
-          background-color: var(--ds-background-neutral, #091e420f) !important;
         }
       }
     }
