@@ -17,6 +17,7 @@ export function TaskPreview({ task, editTask, labelActions }) {
   const navigate = useNavigate();
 
   const taskCover = task.cover;
+  const coverSize = taskCover.size;
 
   useEffect(() => {
     const taskLabels = task.idLabels
@@ -35,12 +36,33 @@ export function TaskPreview({ task, editTask, labelActions }) {
     setIsOpenPreviewModal(value);
   }
 
+  const covorCardClass = (taskCover.color && coverSize === "full")
+    ? "task-bg-cover"
+    : taskCover.idUploadedBackground
+      ? "task-img-cover"
+      : "";
+
+  const taskColorCoverStyle = (taskCover.color && coverSize === "full")
+    ? {
+      backgroundColor: utilService.getColorHashByName(taskCover?.color)
+        .bgColor,
+    }
+    : {};
+
+  const taskBackgroundCoverImage = (taskCover.idUploadedBackground && coverSize === "full")
+    ? {
+      backgroundImage: `url(${taskCover.scaled[2].url})`,
+      backgroundSize: "cover",
+    }
+    : {};
+
   return (
     <Card
       ref={taskRef}
-      className={`group-task custom-card ${isOpenPreviewModal ? 'open-preview-modal' : ''}`}
+      className={`task-preview custom-card ${covorCardClass} ${isOpenPreviewModal ? 'open-preview-modal' : ''}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      style={{ ...taskColorCoverStyle, ...taskBackgroundCoverImage }}
     >
       <TaskPreviewEditModal
         task={task}
@@ -52,7 +74,7 @@ export function TaskPreview({ task, editTask, labelActions }) {
         taskWidth={taskWidth}
         labelActions={labelActions}
       />
-      {taskCover.color && (
+      {coverSize === "normal" && taskCover.color && (
         <div
           className="group-task-header"
           style={{
@@ -62,27 +84,34 @@ export function TaskPreview({ task, editTask, labelActions }) {
           onClick={() => navigate(`/c/${task.id}`, { replace: true })}
         ></div>
       )}
-      {taskCover.idUploadedBackground && (
+      {coverSize === "normal" && taskCover.idUploadedBackground && (
         <div
           className="group-task-header img-cover"
           style={{ backgroundImage: `url(${task?.cover?.scaled[2]?.url})` }}
           onClick={() => navigate(`/c/${task.id}`, { replace: true })}
         ></div>
       )}
-      <section
-        className={`group-task-content ${taskCover.idUploadedBackground || taskCover.color ? 'cover' : ''}`}
-        onClick={() => navigate(`/c/${task.id}`, { replace: true })}
-      >
-        <article className="group-task-content-labels">
-          {taskLabels.length > 0 && (
-            taskLabels.map((label) => (
-              <TaskPreviewLabel key={label?.id} label={label} isExpanded={true} />
-            ))
-          )}
-        </article>
-        <span className="group-task-content-title">{task.name}</span>
-        <TaskPreviewBadges task={task} />
-      </section>
+      {coverSize === "normal" &&
+        <section
+          className={`group-task-content ${taskCover.idUploadedBackground || taskCover.color ? 'cover' : ''}`}
+          onClick={() => navigate(`/c/${task.id}`, { replace: true })}
+        >
+          <article className="group-task-content-labels">
+            {taskLabels.length > 0 && (
+              taskLabels.map((label) => (
+                <TaskPreviewLabel key={label?.id} label={label} isExpanded={true} />
+              ))
+            )}
+          </article>
+          <span className="group-task-content-title">{task.name}</span>
+          <TaskPreviewBadges task={task} />
+        </section>
+      }
+      {coverSize === "full" &&
+        <section className={`group-task-content ${taskCover.idUploadedBackground && "image-cover"} ${taskCover.color && "color-cover"}`}>
+          <span className="group-task-content-title">{task.name}</span>
+        </section>
+      }
     </Card>
   );
 }

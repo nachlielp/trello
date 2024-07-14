@@ -4,7 +4,6 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { AddTaskInGroup } from "./AddTaskInGroup";
 import { BoardGroupHeader } from "./BoardGroupHeader";
 import { TaskPreview } from "../Task/TaskPreview";
-import { TaskPreviewCover } from "../Task/TaskPreviewCover";
 import { useClickOutside } from "../../customHooks/useClickOutside";
 
 //TODO put add new task in array of sorted tasks based on position
@@ -95,21 +94,12 @@ export function BoardGroup({
           {sortedTasks
             .filter((task) => !newTaskIds.includes(task.id))
             .map((task) =>
-              task.cover.size === "full" ? (
-                <TaskPreviewCover
-                  key={task.id}
-                  task={task}
-                  editTask={editTask}
-                  labelActions={labelActions}
-                />
-              ) : (
-                <TaskPreview
-                  key={task.id}
-                  task={task}
-                  editTask={editTask}
-                  labelActions={labelActions}
-                />
-              )
+              <TaskPreview
+                key={task.id}
+                task={task}
+                editTask={editTask}
+                labelActions={labelActions}
+              />
             )}
         </main>
         {!isAddTaskOpen && <GroupFooter groupId={group.id} addTask={addTask} />}

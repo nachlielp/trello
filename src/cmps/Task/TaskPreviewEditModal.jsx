@@ -77,7 +77,7 @@ export function TaskPreviewEditModal({
     openPreviewModal(false);
   }
 
-  const allModalActionButtons = [
+  const modalActionButtons = [
     // { label: 'Open card', icon: cardIcon, onClick: () => console.log('Add to X'), cover: false },
     {
       cover: false,
@@ -165,10 +165,10 @@ export function TaskPreviewEditModal({
     },
   ];
 
-  const modalActionButtons =
-    task.cover.size === "full"
-      ? allModalActionButtons.filter((btn) => btn.cover)
-      : allModalActionButtons;
+  // const modalActionButtons =
+  //   task.cover.size === "full"
+  //     ? allModalActionButtons.filter((btn) => btn.cover)
+  //     : allModalActionButtons;
 
   return (
     <div>
@@ -235,7 +235,7 @@ export function TaskPreviewEditModal({
             }`}
         >
           {modalActionButtons.map((btn, index) => (
-            <div key={index}>{btn.popover}</div>
+            <div key={index} style={{ display: (task.cover.size === "normal" || btn.cover) ? "block" : "none" }}>{btn.popover}</div>
           ))}
         </section>
       </Modal>
