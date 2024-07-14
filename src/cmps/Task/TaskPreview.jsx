@@ -16,11 +16,11 @@ export function TaskPreview({ task, editTask, editLabel }) {
   const [taskWidth, setTaskWidth] = useState(0);
   const navigate = useNavigate();
 
-  const taskCover = task.cover;
+  const taskCover = task?.cover;
 
   useEffect(() => {
-    setTaskLabels(task.labels.map((label) => boardLabels.find(boardLabel => boardLabel.color === label.color)));
-  }, [task.labels, boardLabels]);
+    setTaskLabels(task?.labels.map((label) => boardLabels?.find(boardLabel => boardLabel?.color === label?.color)));
+  }, [task?.labels, boardLabels]);
 
   useEffect(() => {
     if (taskRef.current) {
@@ -49,17 +49,17 @@ export function TaskPreview({ task, editTask, editLabel }) {
         editLabel={editLabel}
         taskWidth={taskWidth}
       />
-      {taskCover.color && (
+      {taskCover?.color && (
         <div
           className="group-task-header"
           style={{
             backgroundColor: utilService.getColorHashByName(task.cover.color)
               .bgColor,
           }}
-          onClick={() => navigate(`/c/${task.id}`, { replace: true })}
+          onClick={() => navigate(`/c/${task?.id}`, { replace: true })}
         ></div>
       )}
-      {taskCover.idUploadedBackground && (
+      {taskCover?.idUploadedBackground && (
         <div
           className="group-task-header img-cover"
           style={{ backgroundImage: `url(${task?.cover?.scaled[2]?.url})` }}
@@ -67,15 +67,15 @@ export function TaskPreview({ task, editTask, editLabel }) {
         ></div>
       )}
       <section
-        className={`group-task-content ${taskCover.idUploadedBackground || taskCover.color ? 'cover' : ''}`}
-        onClick={() => navigate(`/c/${task.id}`, { replace: true })}
+        className={`group-task-content ${taskCover?.idUploadedBackground || taskCover?.color ? 'cover' : ''}`}
+        onClick={() => navigate(`/c/${task?.id}`, { replace: true })}
       >
         <article className="group-task-content-labels">
           {taskLabels.map((label) => (
-            <TaskPreviewLabel key={label.color} label={label} isExpanded={true} />
+            <TaskPreviewLabel key={label?.color} label={label} isExpanded={true} />
           ))}
         </article>
-        <span className="group-task-content-title">{task.name}</span>
+        <span className="group-task-content-title">{task?.name}</span>
         <TaskPreviewBadges task={task} />
       </section>
     </Card>
