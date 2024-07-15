@@ -63,7 +63,8 @@ export function BoardGroup({
   };
 
   return (
-    <div className="board-group-container">
+    <section className="board-group-container">
+
       <Card className="board-group custom-card" ref={footerRef}>
         <BoardGroupHeader
           group={group}
@@ -104,6 +105,6 @@ export function BoardGroup({
         </main>
         {!isAddTaskOpen && <GroupFooter groupId={group.id} addTask={addTask} />}
       </Card>
-    </div>
+    </section>
   );
 }
