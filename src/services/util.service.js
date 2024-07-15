@@ -64,6 +64,9 @@ export const utilService = {
   getBgImgs,
   getBgColors,
   createNewLabel,
+  createCheckListItem,
+  createCheckList,
+  getEmojis,
 };
 
 export const USERS_KEY = "users";
@@ -231,6 +234,7 @@ function createNewTask(task) {
     id: utilService.makeId(),
     apdatedAt: new Date().toISOString(),
     members: [],
+    checkLists: [],
     badges: {
       attachmentsByType: {
         trello: {
@@ -287,7 +291,7 @@ function createNewTask(task) {
       idAttachment: null,
       color: null,
       idUploadedBackground: null,
-      size: "",
+      size: "normal",
       brightness: "",
       scaled: [],
       edgeColor: "",
@@ -1298,4 +1302,59 @@ function getBgImgs() {
 
 function getBgColors() {
   return bgColors
+}
+
+function createCheckListItem(changes) {
+  return {
+    id: utilService.makeId(24),
+    label: changes.label,
+    isChecked: false,
+    pos: 0,
+    ...changes,
+  };
+}
+function createCheckList(changes) {
+  return {
+    id: utilService.makeId(24),
+    label: changes.label,
+    pos: 0,
+    checkItems: [],
+    ...changes,
+  };
+}
+
+function getEmojis() {
+  return [
+    "😀",
+    "😃",
+    "😄",
+    "😁",
+    "😆",
+    "😅",
+    "😂",
+    "🤣",
+    "😊",
+    "😇",
+    "🙂",
+    "🙃",
+    "😉",
+    "😌",
+    "😍",
+    "🥰",
+    "😘",
+    "😗",
+    "😙",
+    "😚",
+    "😋",
+    "😛",
+    "😝",
+    "🤪",
+    "🤨",
+    "🧐",
+    "🤓",
+    "😎",
+    "🤩",
+    "🥳",
+
+  ];
 }

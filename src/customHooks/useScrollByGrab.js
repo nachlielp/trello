@@ -32,7 +32,7 @@ const useScrollByGrab = () => {
         e.preventDefault();
         const scrollContainer = scrollContainerRef.current;
         const x = e.pageX - scrollContainer.offsetLeft;
-        const walk = (x - startX) ; // The * 3 is to speed up the scroll
+        const walk = (x - startX);
         scrollContainer.scrollLeft = scrollLeft - walk;
     };
 
