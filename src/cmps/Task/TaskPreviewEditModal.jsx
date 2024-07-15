@@ -209,7 +209,7 @@ export function TaskPreviewEditModal({
           ></div>
         )}
         <main className="task-preview-edit-modal-content">
-          <article className="group-task-content-labels">
+          <article className="preview-labels">
             {taskLabels?.map((label) => (
               <TaskPreviewLabel
                 key={label.id}

@@ -100,7 +100,7 @@ export function TaskPreview({ task, editTask, labelActions }) {
         <section
           className={`group-task-content ${taskCover.idUploadedBackground || taskCover.color ? 'normal-cover' : ''}`}
         >
-          <article className="group-task-content-labels">
+          <article className="preview-labels">
             {taskLabels.length > 0 && (
               taskLabels.map((label) => (
                 <TaskPreviewLabel key={label?.id} label={label} isExpanded={true} />

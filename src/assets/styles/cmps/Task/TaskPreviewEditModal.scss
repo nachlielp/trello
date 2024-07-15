@@ -66,6 +66,12 @@
         background: var(--ds-surface-overlay);
 
     }
+
+    .preview-labels {
+        display: flex;
+        gap: 4px;
+        flex-wrap: wrap;
+    }
 }
 
 .floating-button.save-button {
