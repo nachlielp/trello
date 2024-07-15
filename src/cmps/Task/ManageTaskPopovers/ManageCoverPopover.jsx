@@ -15,10 +15,10 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
 
     function onSelectColor(e, color) {
         e.stopPropagation();
-        editTask({ ...task, cover: { ...task.cover, color, idUploadedBackground: null, scaled: null, brightness: "light" } });
+        const coverSize = task.cover.size === "full" ? "full" : "normal";
+        editTask({ ...task, cover: { ...task.cover, color, idUploadedBackground: null, scaled: null, brightness: "light", size: coverSize } });
     }
 
-    //BUG: when the size is changed, the popover closes
     function onChangeSize(e, size) {
         e.stopPropagation();
         if (task.cover.color || task.cover.idUploadedBackground) {
@@ -33,8 +33,9 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
 
     function onSelectPhoto(e, id) {
         e.stopPropagation();
+        const coverSize = task.cover.size === "full" ? "full" : "normal";
         const img = boardCoverImgs.find((img) => img.id === id);
-        editTask({ ...task, cover: { ...task.cover, scaled: img.scaledImgs, color: null, idUploadedBackground: img.id, bg: img.bg, brightness: img.brightness } });
+        editTask({ ...task, cover: { ...task.cover, scaled: img.scaledImgs, color: null, idUploadedBackground: img.id, bg: img.bg, brightness: img.brightness, size: coverSize } });
     }
 
     const isCover = task?.cover.color || task?.cover.scaled;
