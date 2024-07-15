@@ -22,7 +22,6 @@ export function TaskDetailsModal({
   taskId,
   editTask,
   editLabel,
-  onCloseTask,
   addTask,
   board,
   editBoard,
@@ -54,7 +53,7 @@ export function TaskDetailsModal({
 
   function onClose(e) {
     if (e.key === "Escape") return;
-    onCloseTask();
+
     navigate(`/b/${task.idBoard}`, { replace: true });
   }
 
@@ -118,7 +117,7 @@ export function TaskDetailsModal({
     };
     editTask(newTask);
   }
-  
+
   function changeItem(checkListId, itemId, changes) {
     const newTask = {
       ...task,
@@ -206,9 +205,8 @@ export function TaskDetailsModal({
           <span className="task-group">
             in list{" "}
             <MoveCardPopover
-              taskId={taskId}
+              task={task}
               anchorEl={<a className="group-link">{group?.name}</a>}
-              onCloseTask={onCloseTask}
             />
           </span>
         </span>
