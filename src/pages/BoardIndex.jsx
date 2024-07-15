@@ -153,7 +153,6 @@ export function BoardIndex() {
           taskId={selectedTaskId}
           editTask={onEditTask}
           editLabel={onEditLabel}
-          onCloseTask={() => setSelectedTaskId(null)}
           addTask={onAddTask}
           editBoard={editBoard}
           board={board}
