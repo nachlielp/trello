@@ -28,7 +28,6 @@ export function TaskDetailsModal({ taskId, editTask, labelActions, onCloseTask }
       ?.find((g) => g.tasks?.find((t) => t.id === taskId))
       ?.tasks.find((t) => t.id === taskId)
   );
-  console.log("cover brightness", task?.cover?.brightness);
 
   const user = useSelector((state) => state.userModule.user);
   const navigate = useNavigate();
