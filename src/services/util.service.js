@@ -287,7 +287,7 @@ function createNewTask(task) {
       idAttachment: null,
       color: null,
       idUploadedBackground: null,
-      size: "",
+      size: "normal",
       brightness: "",
       scaled: [],
       edgeColor: "",
