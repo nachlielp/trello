@@ -3,7 +3,7 @@ import { workspaceService } from "../services/workspace.service";
 import { setBoard } from "./board.actions";
 import { store } from "./store";
 import {
-  EDIT_BOARD,
+  EDIT_WORKSPACE,
   SET_BOARDS,
   ADD_BOARD,
   VIEW_BOARD,
@@ -71,12 +71,12 @@ export async function moveCard({
           : g
       ),
     };
-    store.dispatch({ type: EDIT_BOARD, board: updatedTargetBoard });
+    store.dispatch({ type: EDIT_WORKSPACE, board: updatedTargetBoard });
     if (targetBoardId === task.idBoard) {
       setBoard(updatedTargetBoard);
     } else {
       setBoard(updatedSourceBoard);
-      store.dispatch({ type: EDIT_BOARD, board: updatedSourceBoard });
+      store.dispatch({ type: EDIT_WORKSPACE, board: updatedSourceBoard });
       await boardService.save(updatedSourceBoard);
     }
     await boardService.save(updatedTargetBoard);
@@ -93,5 +93,5 @@ export async function createBoard(board) {
 
 //Notice, the board action updates the storage, this updates the workspace state
 export async function editWorkspaceBoardState(board) {
-  store.dispatch({ type: EDIT_BOARD, board: { ...board, closed: true } });
+  store.dispatch({ type: EDIT_WORKSPACE, board: { ...board, closed: true } });
 }
