@@ -155,6 +155,9 @@ export function BoardIndex() {
             editTask={onEditTask}
             onCloseTask={() => setSelectedTaskId(null)}
             labelActions={onLabelAction}
+            board={board}
+          // editBoard={onEditBoard}
+          // closeTask={onCloseTask}
           />
         )}
       </section>
