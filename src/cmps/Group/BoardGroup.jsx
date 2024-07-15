@@ -80,7 +80,7 @@ export function BoardGroup({
           {newTaskIds.map((taskId) => (
             <TaskPreview
               key={taskId}
-              task={group.tasks.find((task) => task.id === taskId)}
+              task={group?.tasks?.find((task) => task?.id === taskId)}
             />
           ))}
           {isAddTaskOpen && (
@@ -94,7 +94,7 @@ export function BoardGroup({
           {sortedTasks
             .filter((task) => !newTaskIds.includes(task.id))
             .map((task) =>
-              task.cover.size === "full" ? (
+              task?.cover?.size === "full" ? (
                 <TaskPreviewCover
                   key={task.id}
                   task={task}
