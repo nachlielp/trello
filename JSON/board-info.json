@@ -18,6 +18,7 @@
         "permissionStatus": "admin"
       }
     ],
+    "checkListTaskIds": [],
     "groups": [
       {
         "id": "64f721f169b14894fac36ce6",
@@ -30,6 +31,7 @@
         "tasks": [
           {
             "id": "66756e111dfc591fbd5518f1",
+            "checkLists": [],
             "badges": {
               "attachmentsByType": {
                 "trello": {
@@ -887,6 +889,7 @@
     "id": "66756a34def1a6d3b8cd179d",
     "apdatedAt": 1720234168827,
     "viewedAt": 1720234120123,
+    "checkListTaskIds": [],
     "members": [
       {
         "id": "666fe4efda8643029b6710f3",
@@ -913,6 +916,7 @@
         "tasks": [
           {
             "id": "66756e111dfc591fbd5518f9",
+            "checkLists": [],
             "badges": {
               "attachmentsByType": {
                 "trello": {
@@ -1079,6 +1083,7 @@
           },
           {
             "id": "66756e1d26d147ec3f62e2a0",
+            "checkLists": [],
             "badges": {
               "attachmentsByType": {
                 "trello": {
@@ -1147,6 +1152,7 @@
           },
           {
             "id": "66756eb4a7de8f40f2005930",
+            "checkLists": [],
             "badges": {
               "attachmentsByType": {
                 "trello": {
@@ -1223,6 +1229,7 @@
         "tasks": [
           {
             "id": "667ba946062cb054e9a1bbeb",
+            "checkLists": [],
             "badges": {
               "attachmentsByType": {
                 "trello": {
@@ -1374,6 +1381,7 @@
           },
           {
             "id": "66756e6e9c4ae2c7b3046b1c",
+            "checkLists": [],
             "badges": {
               "attachmentsByType": {
                 "trello": {
@@ -1439,6 +1447,7 @@
           },
           {
             "id": "66756f33b58d05c2fe06ab15",
+            "checkLists": [],
             "badges": {
               "attachmentsByType": {
                 "trello": {
@@ -1504,6 +1513,7 @@
           },
           {
             "id": "66756fae5d6d187ed3bcb956",
+            "checkLists": [],
             "badges": {
               "attachmentsByType": {
                 "trello": {
@@ -1580,6 +1590,7 @@
         "tasks": [
           {
             "id": "66756dbdf0e18ee44b79e9d8",
+            "checkLists": [],
             "badges": {
               "attachmentsByType": {
                 "trello": {
@@ -1656,6 +1667,7 @@
           },
           {
             "id": "66756fcdb4aa68fc565190af",
+            "checkLists": [],
             "badges": {
               "attachmentsByType": {
                 "trello": {
@@ -1723,6 +1735,7 @@
           },
           {
             "id": "66757beb9839d858e2fc69af",
+            "checkLists": [],
             "badges": {
               "attachmentsByType": {
                 "trello": {
@@ -1799,6 +1812,7 @@
         "tasks": [
           {
             "id": "66756fdbdfdce3305b75f751",
+            "checkLists": [],
             "badges": {
               "attachmentsByType": {
                 "trello": {
@@ -1864,6 +1878,7 @@
           },
           {
             "id": "66757099dbeaed543b4603b1",
+            "checkLists": [],
             "badges": {
               "attachmentsByType": {
                 "trello": {
@@ -1929,6 +1944,7 @@
           },
           {
             "id": "66758c6d3b868a6ca2bc0cef",
+            "checkLists": [],
             "badges": {
               "attachmentsByType": {
                 "trello": {
