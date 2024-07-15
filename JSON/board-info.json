@@ -1144,7 +1144,7 @@
               "color": "black",
               "idUploadedBackground": null,
               "size": "normal",
-              "brightness": "dark",
+              "brightness": "light",
               "idPlugin": null
             },
             "isTemplate": false,
@@ -1439,7 +1439,7 @@
               "color": null,
               "idUploadedBackground": null,
               "size": "normal",
-              "brightness": "dark",
+              "brightness": "light",
               "idPlugin": null
             },
             "isTemplate": false,
@@ -1505,7 +1505,7 @@
               "color": null,
               "idUploadedBackground": null,
               "size": "normal",
-              "brightness": "dark",
+              "brightness": "light",
               "idPlugin": null
             },
             "isTemplate": false,
@@ -1571,7 +1571,7 @@
               "color": null,
               "idUploadedBackground": null,
               "size": "normal",
-              "brightness": "dark",
+              "brightness": "light",
               "idPlugin": null
             },
             "isTemplate": false,
@@ -1659,7 +1659,7 @@
               "color": null,
               "idUploadedBackground": null,
               "size": "normal",
-              "brightness": "dark",
+              "brightness": "light",
               "idPlugin": null
             },
             "isTemplate": false,
@@ -1727,7 +1727,7 @@
               "color": null,
               "idUploadedBackground": null,
               "size": "normal",
-              "brightness": "dark",
+              "brightness": "light",
               "idPlugin": null
             },
             "isTemplate": false,
@@ -1793,7 +1793,7 @@
               "color": null,
               "idUploadedBackground": null,
               "size": "normal",
-              "brightness": "dark",
+              "brightness": "light",
               "idPlugin": null
             },
             "isTemplate": false,
@@ -1870,7 +1870,7 @@
               "color": null,
               "idUploadedBackground": null,
               "size": "full",
-              "brightness": "dark",
+              "brightness": "light",
               "idPlugin": null
             },
             "isTemplate": false,
@@ -1932,11 +1932,11 @@
             "subscribed": false,
             "url": "https://trello.com/c/yrH0jU9G/16-settingssidebarjsx",
             "cover": {
-              "idAttachment": "66758d1fffc9a9d1a2cd085f",
+              "idAttachment": null,
               "color": null,
               "idUploadedBackground": null,
               "size": "normal",
-              "brightness": "dark",
+              "brightness": "light",
               "idPlugin": null
             },
             "isTemplate": false,
@@ -1998,11 +1998,11 @@
             "subscribed": false,
             "url": "https://trello.com/c/zvC9rfJF/20-usermessagejsx",
             "cover": {
-              "idAttachment": "66758cc12183e8943bcf98c4",
+              "idAttachment": null,
               "color": null,
               "idUploadedBackground": null,
               "size": "full",
-              "brightness": "dark",
+              "brightness": "light",
               "idPlugin": null
             },
             "isTemplate": false,

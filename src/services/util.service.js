@@ -292,7 +292,7 @@ function createNewTask(task) {
       color: null,
       idUploadedBackground: null,
       size: "normal",
-      brightness: "",
+      brightness: "light",
       scaled: [],
       edgeColor: "",
       sharedSourceUrl: null,
