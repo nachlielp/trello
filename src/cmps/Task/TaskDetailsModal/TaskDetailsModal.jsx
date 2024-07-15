@@ -16,8 +16,17 @@ import { utilService } from "../../../services/util.service";
 import { TaskDetailsLabels } from "./TaskDetailsLabels";
 import { TaskDetailsMarkdown } from "./TaskDetailsMarkdown";
 import { NameInput } from "../../CustomCpms/NameInput";
+import { TaskDetailsCheckList } from "./TaskDetailsCheckList";
 
-export function TaskDetailsModal({ taskId, editTask, labelActions, onCloseTask }) {
+export function TaskDetailsModal({
+  taskId,
+  editTask,
+  labelActions,
+  onCloseTask,
+  addTask,
+  board,
+  editBoard,
+}) {
   const group = useSelector((state) =>
     state.boardModule.board.groups?.find((g) =>
       g.tasks?.find((t) => t.id === taskId)
@@ -44,7 +53,8 @@ export function TaskDetailsModal({ taskId, editTask, labelActions, onCloseTask }
     });
   }
 
-  function onClose() {
+  function onClose(e) {
+    if (e.key === "Escape") return;
     onCloseTask();
     navigate(`/b/${task.idBoard}`, { replace: true });
   }
@@ -97,6 +107,80 @@ export function TaskDetailsModal({ taskId, editTask, labelActions, onCloseTask }
     </section>
   );
 
+  // checkList functions
+  function changeCheckList(checkListId, changes) {
+    const newTask = {
+      ...task,
+      checkLists: task.checkLists.map((c) =>
+        c.id === checkListId ? { ...c, ...changes } : c
+      ),
+    };
+    editTask(newTask);
+  }
+
+  function changeItem(checkListId, itemId, changes) {
+    const newTask = {
+      ...task,
+      checkLists: task.checkLists.map((c) =>
+        c.id === checkListId
+          ? {
+            ...c,
+            checkItems: c.checkItems.map((i) =>
+              i.id === itemId ? { ...i, ...changes } : i
+            ),
+          }
+          : c
+      ),
+    };
+    editTask(newTask);
+  }
+
+  async function deleteList(checkListId) {
+    const newTask = {
+      ...task,
+      checkLists: task.checkLists.filter((c) => c.id !== checkListId),
+    };
+
+    if (!newTask.checkLists.length) {
+      const newCheckListTaskIds = board.checkListTaskIds.filter(
+        (i) => i !== task.id
+      );
+
+      await editBoard({ checkListTaskIds: newCheckListTaskIds });
+    }
+    await editTask(newTask);
+  }
+
+  function deleteItem(listId, itemId) {
+    const newTask = {
+      ...task,
+      checkLists: task.checkLists.map((c) =>
+        c.id === listId
+          ? {
+            ...c,
+            checkItems: c.checkItems.filter((i) => i.id !== itemId),
+          }
+          : c
+      ),
+    };
+    editTask(newTask);
+  }
+
+  async function createAsTask(name) {
+    let maxPos = group.tasks.reduce(
+      (max, item) => (item.pos > max ? item.pos : max),
+      0
+    );
+    maxPos;
+    const newTask = {
+      name,
+      pos: maxPos + 1000,
+      groupId: task.idGroup,
+    };
+
+    await addTask(newTask);
+  }
+
   return (
     <Modal
       open
@@ -135,10 +219,23 @@ export function TaskDetailsModal({ taskId, editTask, labelActions, onCloseTask }
             {hasMembers && (
               <TaskDetailsMembers currentTask={task} editTask={editTask} />
             )}
-            {task.idLabels.length > 0 && <TaskDetailsLabels task={task} editTask={editTask} labelActions={labelActions} />}
+            {task?.idLabels?.length > 0 && <TaskDetailsLabels task={task} editTask={editTask} labelActions={labelActions} />}
           </article>
           <TaskDetailsMarkdown editTask={editTask} task={task} />
-
+          {task?.checkLists?.length > 0 &&
+            task?.checkLists
+              ?.sort((a, b) => a.pos - b.pos)
+              .map((checkList) => (
+                <TaskDetailsCheckList
+                  checkList={checkList}
+                  key={checkList.id}
+                  changeCheckList={changeCheckList}
+                  changeItem={changeItem}
+                  deleteList={deleteList}
+                  deleteItem={deleteItem}
+                  createAsTask={createAsTask}
+                />
+              ))}
         </section>
         <section className="details-body__right">
           {!isMember && (
@@ -151,6 +248,7 @@ export function TaskDetailsModal({ taskId, editTask, labelActions, onCloseTask }
             task={task}
             editTask={editTask}
             labelActions={labelActions}
+            editBoard={editBoard}
           />
           <TaskDetailsActions
             task={task}

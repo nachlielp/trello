@@ -21,7 +21,7 @@ export function TaskPreview({ task, editTask, labelActions }) {
 
   useEffect(() => {
     const taskLabels = task.idLabels
-      .filter((labelId) => boardLabels.some(boardLabel => boardLabel.id === labelId)) // Filter out non-existing labels
+      .filter((labelId) => boardLabels?.some(boardLabel => boardLabel.id === labelId)) // Filter out non-existing labels
       .map((labelId) => boardLabels.find(boardLabel => boardLabel.id === labelId)) || [];
     setTaskLabels(taskLabels);
   }, [task.idLabels, boardLabels]);

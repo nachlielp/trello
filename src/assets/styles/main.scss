@@ -51,18 +51,24 @@
 //Task
 @import "cmps/Task/TaskPreview";
 @import "cmps/Task/TaskPreviewEditModal";
+@import "cmps/Task/TaskPreviewBadges";
+
+//Task popovers
 @import "cmps/Task/ManageTaskPopovers/ManageMembersPopover";
 @import "cmps/Task/ManageTaskPopovers/MemberOption";
 @import "cmps/Task/ManageTaskPopovers/ManageTaskPopoverHeader";
 @import "cmps/Task/ManageTaskPopovers/ManageLabelsPopover";
 @import "cmps/Task/ManageTaskPopovers/ManageCoverPopover";
 @import "cmps/Task/ManageTaskPopovers/MoveCardPopover";
-@import "cmps/Task/TaskPreviewBadges";
+@import "cmps/Task/ManageTaskPopovers/AddCheckListPopover";
+@import "cmps/Task/ManageTaskPopovers/EmojiPopover";
+
 
 //Task details
 @import "cmps/Task/TaskDetailsModal/TaskDetailsLabels.scss";
 @import "cmps/Task/TaskDetailsModal/TaskDetailsMarkdown.scss";
 @import "cmps/Task/TaskDetailsModal/TaskDetailsSectionHeader.scss";
+@import "cmps/Task/TaskDetailsModal/TaskDetailsCheckList.scss";
 
 //Custom Cpms
 @import "cmps/CustomCpms/StarBoardBtn";

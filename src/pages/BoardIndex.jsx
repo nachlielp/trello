@@ -17,6 +17,7 @@ import {
   loadBoardByTaskId,
   createLabel,
   deleteLabel,
+  updateBoard,
 } from "../store/board.actions";
 import { editUser } from "../store/user.actions";
 
@@ -120,6 +121,10 @@ export function BoardIndex() {
     }
   }
 
+  async function editBoard(changes) {
+    await updateBoard({ ...board, ...changes });
+  }
+
   const sortedGroups = board?.groups
     ?.filter((l) => !l.closed)
     .sort((a, b) => a.pos - b.pos);
@@ -155,6 +160,9 @@ export function BoardIndex() {
             editTask={onEditTask}
             onCloseTask={() => setSelectedTaskId(null)}
             labelActions={onLabelAction}
+            board={board}
+            editBoard={editBoard}
+            closeTask={() => setSelectedTaskId(null)}
           />
         )}
       </section>

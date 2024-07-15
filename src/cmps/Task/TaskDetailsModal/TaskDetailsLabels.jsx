@@ -14,13 +14,14 @@ export function TaskDetailsLabels({ task, editTask, labelActions }) {
             <ManageLabelsPopover editTask={editTask} labelActions={labelActions} task={task} anchorEl={<article className="label-list">
                 {task.idLabels.map((tLabelId) => {
                     const labelInfo = boardLabels?.find((bLabel) => bLabel.id === tLabelId)
+                    if (!labelInfo) return null
                     return (
                         <div
                             className="task-details-label"
                             key={labelInfo.id}
                             style={{
-                                backgroundColor: hoveredLabelId === labelInfo.id ? utilService.getColorHashByName(labelInfo.color).hoverdBgColor : utilService.getColorHashByName(labelInfo.color).bgColor,
-                                color: utilService.getColorHashByName(labelInfo.color).lightFontColor
+                                backgroundColor: hoveredLabelId === labelInfo?.id ? utilService.getColorHashByName(labelInfo.color).hoverdBgColor : utilService.getColorHashByName(labelInfo.color).bgColor,
+                                color: utilService.getColorHashByName(labelInfo?.color).lightFontColor
                             }}
                             onMouseEnter={() => setHoveredLabelId(labelInfo.id)}
                             onMouseLeave={() => setHoveredLabelId(null)}

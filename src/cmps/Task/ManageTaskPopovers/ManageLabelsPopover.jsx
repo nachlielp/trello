@@ -25,6 +25,8 @@ export function ManageLabelsPopover({ anchorEl, editTask, task, labelActions }) 
 
     const popoverRef = useRef(null);
 
+
+
     useEffect(() => {
         if (task?.idLabels) {
             const arr = boardLabels.map(boardLabel => {
@@ -44,7 +46,7 @@ export function ManageLabelsPopover({ anchorEl, editTask, task, labelActions }) 
         } else {
             setFilteredLabels(boardTaskLabels);
         }
-    }, [inputSearch, boardTaskLabels, boardLabels]);
+    }, [inputSearch, boardTaskLabels]);
 
     function onClose() {
         setIsOpen(false);

@@ -14,6 +14,8 @@ export function UserAvatar({
   offTitle = false,
   ...other
 }) {
+  const ratio = 120 / 250;
+  // const ratio = 1;
   const dynamicStyles = member
     ? { backgroundColor: utilService.stringToColor(member.id) }
     : {};
@@ -23,7 +25,7 @@ export function UserAvatar({
       <Avatar
         key={member?.id}
         src={member?.avatarHash}
-        style={{ ...dynamicStyles, ...style }}
+        style={{ ...dynamicStyles,fontSize: `${size * ratio}px`, ...style }}
         size={size}
         {...other}
       >

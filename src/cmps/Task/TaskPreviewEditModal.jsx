@@ -46,7 +46,7 @@ export function TaskPreviewEditModal({
 
   useEffect(() => {
     const labels = task.idLabels
-      .filter((labelId) => boardLabels.some(boardLabel => boardLabel.id === labelId))
+      .filter((labelId) => boardLabels?.some(boardLabel => boardLabel.id === labelId))
       .map((labelId) =>
         boardLabels.find((boardLabel) => boardLabel.id === labelId)
       );
@@ -73,7 +73,6 @@ export function TaskPreviewEditModal({
   }
 
   function handleCancel(e) {
-    e.stopPropagation();
     openPreviewModal(false);
   }
 
