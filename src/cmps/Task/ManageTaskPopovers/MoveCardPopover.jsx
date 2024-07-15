@@ -54,8 +54,8 @@ export function MoveCardPopover({
   const navigate = useNavigate();
 
   useEffect(() => {
-    setBoards();
-    loadBoard(selectedBoardId);
+    // setBoards();
+    // loadBoard(selectedBoardId);
   }, []);
 
   // useEffect position
@@ -144,7 +144,7 @@ export function MoveCardPopover({
       navigate(`/b/${task.idBoard}`, { replace: true });
       onCloseTask();
     } else {
-      loadBoard(task?.idBoard);
+      // loadBoard(task?.idBoard);
     }
     if (closeAfter) {
       onCloseTask();
