@@ -36,7 +36,6 @@ export function ManageLabelsPopover({ anchorEl, editTask, task, labelActions }) 
                 }
                 return { ...boardLabel, isTask: false };
             });
-            console.log('arr', arr);
             setBoardTaskLabels(arr);
         }
     }, [task?.idLabels, boardLabels]);
