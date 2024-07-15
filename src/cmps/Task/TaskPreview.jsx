@@ -41,11 +41,12 @@ export function TaskPreview({ task, editTask, labelActions }) {
     navigate(`/c/${task.id}`, { replace: true });
   }
 
-  const covorCardClass = (taskCover.color && coverSize === "full")
-    ? "task-bg-cover"
-    : taskCover.idUploadedBackground
-      ? "task-img-cover"
-      : "";
+  const covorCardClass = (coverSize === "full")
+    ? taskCover.color ? "task-bg-cover"
+      : taskCover.idUploadedBackground
+        ? "task-img-full-cover"
+        : ""
+    : "";
 
   const taskColorCoverStyle = (taskCover.color && coverSize === "full")
     ? {
@@ -54,7 +55,7 @@ export function TaskPreview({ task, editTask, labelActions }) {
     }
     : {};
 
-  const taskBackgroundCoverImage = (taskCover.idUploadedBackground && coverSize === "full")
+  const taskBackgroundCoverImageStyle = (taskCover.idUploadedBackground && coverSize === "full")
     ? {
       backgroundImage: `url(${taskCover.scaled[2].url})`,
       backgroundSize: "cover",
@@ -67,7 +68,7 @@ export function TaskPreview({ task, editTask, labelActions }) {
       className={`task-preview custom-card ${covorCardClass} ${isOpenPreviewModal ? 'open-preview-modal' : ''}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      style={{ ...taskColorCoverStyle, ...taskBackgroundCoverImage }}
+      style={{ ...taskColorCoverStyle, ...taskBackgroundCoverImageStyle }}
       onClick={onClickTask}
     >
       <TaskPreviewEditModal
@@ -97,7 +98,7 @@ export function TaskPreview({ task, editTask, labelActions }) {
       )}
       {coverSize === "normal" &&
         <section
-          className={`group-task-content ${taskCover.idUploadedBackground || taskCover.color ? 'cover' : ''}`}
+          className={`group-task-content ${taskCover.idUploadedBackground || taskCover.color ? 'normal-cover' : ''}`}
         >
           <article className="group-task-content-labels">
             {taskLabels.length > 0 && (
@@ -111,7 +112,7 @@ export function TaskPreview({ task, editTask, labelActions }) {
         </section>
       }
       {coverSize === "full" &&
-        <section className={`group-task-content ${taskCover.idUploadedBackground && "image-cover"} ${taskCover.color && "color-cover"}`}>
+        <section className={`group-task-content ${taskCover.idUploadedBackground && "image-cover-content"} ${taskCover.color && "color-cover-content"}`}>
           <span className="group-task-content-title">{task.name}</span>
         </section>
       }
