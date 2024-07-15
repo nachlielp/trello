@@ -136,9 +136,8 @@ export function TaskPreviewEditModal({
       cover: true,
       popover: (
         <MoveCardPopover
-          taskId={task?.id}
-          onCloseTask={handleCancel}
-          closeAfter={true}
+          task={task}
+          onUpdateTask={handleCancel}
           anchorEl={
             <SvgButton
               src={moveIcon}
