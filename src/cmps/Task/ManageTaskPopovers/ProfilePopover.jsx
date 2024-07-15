@@ -2,7 +2,6 @@ import { CloseOutlined } from "@ant-design/icons";
 import { UserAvatar } from "../../UserAvatar";
 import { Link } from "react-router-dom";
 import { Popover } from "antd";
-import { ManageTaskPopoverHeader } from "./ManageTaskPopoverHeader";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -24,7 +23,7 @@ export function ProfilePopover({
       trigger="click"
       placement={placement}
       open={isOpen}
-      close={() => {}}
+      close={onClose}
       onOpenChange={setIsOpen}
       arrow={false}
       content={
