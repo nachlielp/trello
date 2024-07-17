@@ -15,6 +15,8 @@ import {
   sortGroup,
   loadBoard,
   loadBoardByTaskId,
+  createLabel,
+  deleteLabel,
   updateBoard,
 } from "../store/board.actions";
 import { editUser } from "../store/user.actions";
@@ -34,6 +36,7 @@ export function BoardIndex() {
   const params = useParams();
 
   useEffect(() => {
+
     async function load() {
       if (params.boardId) {
         const res = await loadBoard(params.boardId);
@@ -60,7 +63,6 @@ export function BoardIndex() {
       ...task,
       idBoard: board.id,
     };
-    console.log(newTask);
     try {
       await addTask(newTask, groupId);
     } catch (error) {
@@ -93,9 +95,6 @@ export function BoardIndex() {
     const res = await editTask(task);
   }
 
-  async function onEditLabel(label) {
-    const res = await editLabel(board.id, label);
-  }
 
   async function onCopyGroup(group) {
     const res = await copyGroup(board.id, group);
@@ -109,8 +108,20 @@ export function BoardIndex() {
     editUser({ ...user, starredBoardIds: starredIds });
   }
 
+  async function onLabelAction(action, label, task) {
+    if (action === "edit") {
+      editLabel(board.id, label);
+    }
+    if (action === "delete") {
+      console.log("delete label", label);
+      deleteLabel(board.id, label.id);
+    }
+    if (action === "create") {
+      createLabel(board.id, task, label);
+    }
+  }
+
   async function editBoard(changes) {
-    console.log({ ...board, ...changes });
     await updateBoard({ ...board, ...changes });
   }
 
@@ -118,48 +129,44 @@ export function BoardIndex() {
     ?.filter((l) => !l.closed)
     .sort((a, b) => a.pos - b.pos);
 
-  return board ? (
-    <section className="board-index">
-      <div className="bg">
-        {board && (
-          <BoardHeader
+  return (
+    board ? (
+      <section className="board-index">
+        <div className="bg">
+          {board && <BoardHeader board={board} starToggle={onStarToggle} starredBoardIds={user?.starredBoardIds} />}
+          <main className="board-groups" ref={scrollContainerRef} {...handlers}>
+            {sortedGroups &&
+              sortedGroups.map((group) => (
+                <BoardGroup
+                  key={group.id}
+                  group={group}
+                  addTask={onAddTask}
+                  archiveGroup={() => onArchiveGroup(board.id, group.id)}
+                  editGroup={onEditGroup}
+                  editTask={onEditTask}
+                  copyGroup={onCopyGroup}
+                  moveAllCards={moveAllCards}
+                  archiveAllCards={archiveAllCards}
+                  sortGroup={onSortGroup}
+                  labelActions={onLabelAction}
+                />
+              ))}
+            <AddGroupBtn addGroup={onAddGroup} />
+          </main>
+        </div>
+        {selectedTaskId && (
+          <TaskDetailsModal
+            taskId={selectedTaskId}
+            editTask={onEditTask}
+            onCloseTask={() => setSelectedTaskId(null)}
+            labelActions={onLabelAction}
             board={board}
-            starToggle={onStarToggle}
-            starredBoardIds={user?.starredBoardIds}
+            editBoard={editBoard}
+            closeTask={() => setSelectedTaskId(null)}
           />
         )}
-        <main className="board-groups" ref={scrollContainerRef} {...handlers}>
-          {sortedGroups &&
-            sortedGroups.map((group) => (
-              <BoardGroup
-                key={group.id}
-                group={group}
-                addTask={onAddTask}
-                archiveGroup={() => onArchiveGroup(board.id, group.id)}
-                editGroup={onEditGroup}
-                editTask={onEditTask}
-                editLabel={onEditLabel}
-                copyGroup={onCopyGroup}
-                moveAllCards={moveAllCards}
-                archiveAllCards={archiveAllCards}
-                sortGroup={onSortGroup}
-              />
-            ))}
-          <AddGroupBtn addGroup={onAddGroup} />
-        </main>
-      </div>
-      {selectedTaskId && (
-        <TaskDetailsModal
-          taskId={selectedTaskId}
-          editTask={onEditTask}
-          editLabel={onEditLabel}
-          addTask={onAddTask}
-          editBoard={editBoard}
-          board={board}
-        />
-      )}
-    </section>
-  ) : (
-    <h1>Loading...</h1>
-  );
+      </section>
+    ) : (
+      <h1>Loading...</h1>
+    ));
 }

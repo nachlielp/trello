@@ -21,8 +21,8 @@ export function TaskDetailsActions({ task, editTask, onClose }) {
     {
       popover: (
         <MoveCardPopover
-          task={task}
-          onUpdateTask={onClose}
+          taskId={task.id}
+          onCloseTask={onClose}
           anchorEl={
             <SvgButton
               src={moveIcon}

@@ -20,7 +20,6 @@
 @import "views/BoardIndex";
 @import "views/BoardDetails";
 @import "views/UserBoards";
-@import "views/UserProfile";
 
 //Workspace
 @import "cmps/Workspace/Workspace";
@@ -52,6 +51,9 @@
 //Task
 @import "cmps/Task/TaskPreview";
 @import "cmps/Task/TaskPreviewEditModal";
+@import "cmps/Task/TaskPreviewBadges";
+
+//Task popovers
 @import "cmps/Task/ManageTaskPopovers/ManageMembersPopover";
 @import "cmps/Task/ManageTaskPopovers/MemberOption";
 @import "cmps/Task/ManageTaskPopovers/ManageTaskPopoverHeader";
@@ -59,7 +61,6 @@
 @import "cmps/Task/ManageTaskPopovers/ManageCoverPopover";
 @import "cmps/Task/ManageTaskPopovers/MoveCardPopover";
 @import "cmps/Task/ManageTaskPopovers/AddCheckListPopover";
-@import "cmps/Task/ManageTaskPopovers/MoreActionsItemPopover";
 @import "cmps/Task/ManageTaskPopovers/EmojiPopover";
 
 
@@ -67,7 +68,7 @@
 @import "cmps/Task/TaskDetailsModal/TaskDetailsLabels.scss";
 @import "cmps/Task/TaskDetailsModal/TaskDetailsMarkdown.scss";
 @import "cmps/Task/TaskDetailsModal/TaskDetailsSectionHeader.scss";
-@import "cmps/Task/TaskDetailsModal/TaskDetailsCheckList";
+@import "cmps/Task/TaskDetailsModal/TaskDetailsCheckList.scss";
 
 //Custom Cpms
 @import "cmps/CustomCpms/StarBoardBtn";
@@ -76,94 +77,75 @@
 @import "cmps/CustomCpms/CheckBox.scss";
 
 :root.dark {
-  --board-header-background-color: #0000003d;
-  --ds-background-accent-gray-subtler: #454f59;
-  --ds-background-brand-bold: #579dff;
-  --ds-background-brand-bold-hovered: #85b8ff;
-  --ds-background-disabled: #bcd6f00a;
-  --ds-background-input: #22272b;
-  --ds-background-input-hovered: #282e33;
-  --ds-background-neutral: #a1bdd914;
-  --ds-background-neutral-hovered: #a6c5e229;
-  --ds-background-neutral-subtle-hovered: #091e420f;
-  --ds-background-selected-hovered: #09326c;
-  --ds-border: #a6c5e229;
-  --ds-border-disabled: #a1bdd914;
-  --ds-border-input: #738496;
-  --ds-icon: #9fadbc;
-  --ds-icon-disabled: #bfdbf847;
-  --ds-icon-subtle: #8c9bab;
-  --ds-shadow-overlay: 0px 0px 0px 1px #39424a, 0px 8px 12px #0304045c,
-    0px 0px 1px 1px #03040480;
-  --ds-surface: #1d2125;
   --ds-surface-overlay: #282e33;
-  --ds-surface-raised: #22272b;
-  --ds-text: rgb(182, 194, 207);
-  --ds-text-disabled: #bfdbf847;
-  --ds-text-inverse: #1d2125;
   --ds-text-subtle: #9fadbc;
-  --ds-text-subtlest: #8c9bab;
-  --dynamic-header-text: #ffffff;
+  --ds-text: rgb(182, 194, 207);
+  --ds-text-inverse: #1d2125;
+  --ds-text-disabled: #bfdbf847;
+  --tr-background-list: #101204;
+  --ds-surface-raised: #22272b;
+  --ds-icon-subtle: #8c9bab;
+  --ds-icon: #9fadbc;
+  --ds-background-neutral-hovered: #a6c5e229;
   --dynamic-icon: #ffffff;
   --dynamic-text: #ffffff;
-  --dynamic-text-transparent: hsla(211, 18%, 68%, 0.16);
-  --tr-background-list: #101204;
-  --dynamic-background-transparent: hsla(206, 13.7%, 10%, 0.9);
-  --ds-border-selected: #579dff;
-  --ds-link: #579dff;
-  --ds-background-selected-bold: #579dff;
-  --ds-background-selected-bold-hovered: #85b8ff;
-  --ds-border-selected: #579dff;
-  --ds-background-success-bold: #4bce97;
-  --ds-background-accent-blue-subtle: #0055cc;
+  --dynamic-header-text: #ffffff;
+  --board-header-background-color: #0000003d;
+  --ds-background-neutral-subtle-hovered: #091e420f;
+  --ds-icon-disabled: #bfdbf847;
+  --ds-background-input: #22272b;
+  --ds-border-input: #738496;
+  --ds-background-input-hovered: #282e33;
+  --ds-border-disabled: #a1bdd914;
+  --ds-background-neutral: #a1bdd914;
+  --ds-background-accent-gray-subtler: #454f59;
+  --ds-background-brand-bold: #579dff;
+  --ds-border: #a6c5e229;
+  --ds-background-neutral-subtle-hovered: #a1bdd914;
+  --ds-background-selected-hovered: #09326c;
+  --ds-text-subtlest: #8c9bab;
+  --ds-background-brand-bold-hovered: #85b8ff;
+  --ds-shadow-overlay: 0px 0px 0px 1px #39424a, 0px 8px 12px #0304045C, 0px 0px 1px 1px #03040480;
 }
 
 :root {
-  --board-header-background-color: #0000003d;
-  --create-menu-button-background: rgba(255, 255, 255, 0.2);
-  --create-menu-button-background-active: rgba(255, 255, 255, 0.3);
-  --create-menu-button-background-hovered: rgba(255, 255, 255, 0.3);
-  --ds-background-accent-gray-subtler: #dcdfe4;
-  --ds-background-brand-bold: #0c66e4;
-  --ds-background-brand-bold-hovered: #0055cc;
-  --ds-background-disabled: #091e4208;
-  --ds-background-input: #ffffff;
-  --ds-background-input-hovered: #f7f8f9;
-  --ds-background-neutral: #091e420f;
-  --ds-background-neutral-hovered: #091e4224;
-  --ds-background-neutral-subtle-hovered: #091e420f;
-  --ds-background-selected-hovered: #cce0ff;
-  --ds-border: #091e4224;
-  --ds-border-disabled: #091e420f;
-  --ds-border-input: #8590a2;
-  --ds-icon: #44546f;
-  --ds-icon-disabled: #091e424f;
-  --ds-icon-subtle: #626f86;
-  --ds-shadow-overlay: 0px 8px 12px #091e4226, 0px 0px 1px #091e424f;
-  --ds-surface-overlay: #ffffff;
-  --ds-surface-raised: #ffffff;
-  --ds-surface: #ffffff;
-  --ds-text: #172b4d;
-  --ds-text-disabled: #091e424f;
-  --ds-text-inverse: #ffffff;
-  --ds-text-subtle: #44546f;
-  --ds-text-subtlest: #626f86;
-  --dynamic-background-transparent: hsla(40, 89.6%, 26.2%, 0.9);
-  --dynamic-header-text: #ffffff;
+  --tr-background-list: #f1f2f4;
   --dynamic-icon: #ffffff;
   --dynamic-text: #ffffff;
-  --dynamic-text-transparent: hsla(0, 0%, 100%, 0.16);
+  --dynamic-header-text: #ffffff;
+  --board-header-background-color: #0000003d;
+  --header-button-hovered: var(--dynamic-button-hovered, rgba(255, 255, 255, 0.3));
   --header-button-color: var(--ds-text-subtle, #44546f);
-  --header-button-hovered: var(
-    --dynamic-button-hovered,
-    rgba(255, 255, 255, 0.3)
-  );
-  --tr-background-list: #f1f2f4;
-  --ds-border-selected: #0c66e4;
-  --ds-link: #0c66e4;
-  --ds-background-selected-bold: #0c66e4;
-  --ds-background-selected-bold-hovered: #0055cc;
-  --ds-border-selected: #0c66e4;
-  --ds-background-success-bold: #1f845a;
-  --ds-background-accent-blue-subtle: #579dff;
+  --create-menu-button-background: rgba(255, 255, 255, 0.2);
+  --create-menu-button-background-hovered: rgba(255, 255, 255, 0.3);
+  --create-menu-button-background-active: rgba(255, 255, 255, 0.3);
+  --ds-surface-overlay: #ffffff;
+  --ds-text-subtle: #44546f;
+  --ds-text: #172b4d;
+  --ds-text-inverse: #ffffff;
+  --ds-text-disabled: #091e424f;
+  --ds-surface-raised: #ffffff;
+  --ds-icon-subtle: #626f86;
+  --ds-icon: #44546f;
+  --ds-background-neutral-hovered: #091e4224;
+  --ds-icon-disabled: #091e424f;
+  --ds-background-disabled: #bcd6f00a;
+  --ds-background-input: #ffffff;
+  --ds-border-input: #8590a2;
+  --ds-background-input-hovered: #f7f8f9;
+  --ds-background-neutral-subtle-hovered: #091e420f;
+  --ds-background-disabled: #091e4208;
+  --ds-background-neutral: #091e420f;
+  --ds-background-accent-gray-subtler: #dcdfe4;
+  --ds-background-brand-bold: #0c66e4;
+  --ds-border: #091e4224;
+  --ds-background-neutral-subtle-hovered: #091e420f;
+  --ds-background-selected-hovered: #cce0ff;
+  --ds-text-subtlest: #626f86;
+  --ds-background-brand-bold-hovered: #0055cc;
+  --ds-shadow-overlay: 0px 8px 12px #091E4226, 0px 0px 1px #091E424F;
+
+  --dynamic-text-transparent: hsla(0, 0%, 100%, 0.16);
+  --dynamic-background-transparent: hsla(40, 89.6%, 26.2%, 0.9);
+
 }

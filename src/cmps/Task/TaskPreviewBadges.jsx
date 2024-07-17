@@ -8,7 +8,7 @@ export function TaskPreviewBadges({ task }) {
   const members = useSelector((state) => state.boardModule.board.members);
 
   const taskMembers =
-    members?.filter((member) => task?.idMembers?.includes(member?.id)) || [];
+    members?.filter((member) => task?.idMembers.includes(member?.id)) || [];
 
   const taskIcons = [];
 
@@ -76,7 +76,7 @@ export function TaskPreviewBadges({ task }) {
   }
 
   return (
-    <div className="group-task-content-icons">
+    <div className="task-preview-badges">
       <aside className="aside-task-icons">
         <section className="task-preview-icons"> {taskIcons}</section>
       </aside>

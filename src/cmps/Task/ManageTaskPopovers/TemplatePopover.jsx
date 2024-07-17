@@ -1,49 +1,44 @@
-import { Popover, Input } from "antd";
+import { Popover, Input } from "antd"
 import { useState, useEffect } from "react";
 import { ManageTaskPopoverHeader } from "../ManageTaskPopovers/ManageTaskPopoverHeader";
 
 export function TNAME({ anchorEl, editTask, task }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [backToList, setBackToList] = useState(null);
+    const [isOpen, setIsOpen] = useState(false);
+    const [backToList, setBackToList] = useState(null);
 
-  const cardTitle = "ADD TITLE";
+    const cardTitle = "ADD TITLE";
 
-  function onClose(e) {
-    e.stopPrapagation();
-    setIsOpen(false);
-  }
+    function onClose() {
+        setIsOpen(false);
+    }
 
-  function onNextPage(_) {
-    //
-    setBackToList(() => onBackToList);
-  }
+    function onNextPage(_) {
+        //
+        setBackToList(() => onBackToList);
+    }
 
-  function onBackToList() {
-    //
-    setBackToList(null);
-  }
+    function onBackToList() {
+        //
+        setBackToList(null);
+    }
 
-  return (
-    <Popover
-      className="manage-labels-popover"
-      trigger="click"
-      placement="bottomRight"
-      open={isOpen}
-      close={() => {}}
-      onOpenChange={setIsOpen}
-      arrow={false}
-      content={
-        <section className="manage-labels-content">
-          <ManageTaskPopoverHeader
-            title="cardTitle"
-            close={onClose}
-            back={backToList}
-          />
-          {/* ADD BODY */}
-        </section>
-      }
-    >
-      {anchorEl}
-    </Popover>
-  );
+    return (
+        <Popover
+            className="manage-labels-popover"
+            trigger="click"
+            placement="bottomRight"
+            open={isOpen}
+            close={() => { }}
+            onOpenChange={setIsOpen}
+            arrow={false}
+            content={
+                <section className="manage-labels-content">
+                    <ManageTaskPopoverHeader title="cardTitle" close={onClose} back={backToList} />
+                    {/* ADD BODY */}
+                </section>
+            }
+        >
+            {anchorEl}
+        </Popover>
+    );
 }

@@ -17,9 +17,10 @@ import {
   ARCHIVE_ALL_CARDS,
   SORT_GROUP,
   VIEW_BOARD,
+  ADD_LABEL,
+  DELETE_LABEL,
 } from "./board.reducer";
 import { setBoards, viewWorkspaceBoard } from "./workspace.actions";
-import { EDIT_WORKSPACE } from "./workspace.reducer";
 
 // export async function loadTrelloDataFromSource() {
 //   try {
@@ -77,7 +78,7 @@ export async function viewBoard(boardId) {
   viewWorkspaceBoard(boardId);
 }
 
-export function setBoard(board) {
+export async function setBoard(board) {
   store.dispatch({
     type: SET_BOARD,
     board: { ...board, apdatedAt: new Date().getTime() },
@@ -106,7 +107,6 @@ export async function addTask(task) {
       }),
       apdatedAt: new Date().getTime(),
     };
-    store.dispatch({ type: EDIT_WORKSPACE, board: newBoard });
     await boardService.save(newBoard);
     return newTask;
   } catch (err) {
@@ -126,7 +126,6 @@ export async function addGroup(group, boardId) {
       groups: [...board.groups, newGroup],
       apdatedAt: new Date().getTime(),
     };
-    store.dispatch({ type: EDIT_WORKSPACE, board: newBoard });
     await boardService.save(newBoard);
     return newGroup;
   } catch (err) {
@@ -154,24 +153,22 @@ export async function archiveGroup(boardId, groupId) {
     }),
     apdatedAt: new Date().getTime(),
   };
-  store.dispatch({ type: EDIT_WORKSPACE, board: newBoard });
   await boardService.save(newBoard);
   return newBoard;
 }
 
 export async function copyGroup(boardId, group) {
   const board = await boardService.getById(boardId);
+  const groupTasks = group.tasks.map((t) => ({
+    ...t,
+    id: utilService.makeId(),
+  }));
   const newGroup = {
     ...group,
     id: utilService.makeId(),
     pos: group.pos + 1,
     tasks: groupTasks,
   };
-  const groupTasks = group.tasks.map((t) => ({
-    ...t,
-    id: utilService.makeId(),
-    idGroup: newGroup.id,
-  }));
 
   const updatedGroups = board.groups.map((g) => {
     if (g.pos >= newGroup.pos) {
@@ -189,7 +186,6 @@ export async function copyGroup(boardId, group) {
     groups: updatedGroups,
     apdatedAt: new Date().getTime(),
   };
-  store.dispatch({ type: EDIT_WORKSPACE, board: newBoard });
   await boardService.save(newBoard);
 }
 
@@ -225,7 +221,6 @@ export async function moveAllCards(boardId, sourceGroupId, targetGroupId) {
     sourceGroup: { ...sourceGroup, tasks: [] },
     targetGroup: newTargetGroup,
   });
-  store.dispatch({ type: EDIT_WORKSPACE, board: newBoard });
   await boardService.save(newBoard);
 }
 
@@ -316,11 +311,8 @@ export async function updateBoard(newBoard) {
       board: { ...newBoard, apdatedAt: new Date().getTime() },
     });
     editWorkspaceBoardState({ ...newBoard, apdatedAt: new Date().getTime() });
-    store.dispatch({
-      type: EDIT_WORKSPACE,
-      board: { ...newBoard, apdatedAt: new Date().getTime() },
-    });
     await boardService.save({ ...newBoard, apdatedAt: new Date().getTime() });
+    setBoards() //TODO need something Better to update workspace boards after change in board
   } catch (err) {
     console.error("Cannot update board", err);
     throw err;
@@ -339,7 +331,7 @@ export async function getItemById(boardId, taskId) {
 
 export async function getBoardLabels(boardId) {
   const board = await boardService.getById(boardId);
-  return board.labelNames;
+  return board.labels;
 }
 
 export async function editLabel(boardId, label) {
@@ -347,11 +339,50 @@ export async function editLabel(boardId, label) {
   const board = await boardService.getById(boardId);
   const newBoard = {
     ...board,
-    labelNames: board.labelNames.map((l) =>
-      l.color === label.color ? label : l
+    labels: board.labels.map((l) =>
+      l.id === label.id ? label : l
     ),
     apdatedAt: new Date().getTime(),
   };
+  await boardService.save(newBoard);
+  return newBoard;
+}
+
+export async function createLabel(boardId, task, label) {
+  const newLabel = utilService.createNewLabel(label.name, label.color);
+  console.log('newLabel', newLabel);
+  store.dispatch({ type: ADD_LABEL, label: newLabel });
+  store.dispatch({ type: EDIT_TASK, task: { ...task, idLabels: [...task.idLabels, newLabel.id] } });
+  const board = await boardService.getById(boardId);
+  const newBoard = {
+    ...board,
+    labels: [...board.labels, newLabel],
+    groups: board.groups.map((g) =>
+      g.id === task.idGroup
+        ? { ...g, tasks: g.tasks.map((t) => (t.id === task.id ? { ...task, idLabels: [...task.idLabels, newLabel.id] } : t)) }
+        : g
+    ),
+    apdatedAt: new Date().getTime(),
+  };
+  await boardService.save(newBoard);
+  return newBoard;
+}
+
+export async function deleteLabel(boardId, labelId) {
+  const board = await boardService.getById(boardId);
+  const newBoard = {
+    ...board,
+    labels: board.labels.filter((l) => l.id !== labelId),
+    groups: board.groups.map((g) => ({
+      ...g,
+      tasks: g.tasks.map((t) => ({
+        ...t,
+        idLabels: t.idLabels.filter((id) => id !== labelId),
+      })),
+    })),
+    apdatedAt: new Date().getTime(),
+  };
+  store.dispatch({ type: DELETE_LABEL, labelId: labelId });
   await boardService.save(newBoard);
   return newBoard;
 }

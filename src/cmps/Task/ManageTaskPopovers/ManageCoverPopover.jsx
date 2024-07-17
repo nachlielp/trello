@@ -15,10 +15,10 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
 
     function onSelectColor(e, color) {
         e.stopPropagation();
-        editTask({ ...task, cover: { ...task.cover, color, idUploadedBackground: null, scaled: null } });
+        const coverSize = task.cover.size === "full" ? "full" : "normal";
+        editTask({ ...task, cover: { ...task.cover, color, idUploadedBackground: null, scaled: null, brightness: "light", size: coverSize } });
     }
 
-    //BUG: when the size is changed, the popover closes
     function onChangeSize(e, size) {
         e.stopPropagation();
         if (task.cover.color || task.cover.idUploadedBackground) {
@@ -28,13 +28,14 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
 
     function onRemoveCover(e) {
         e.stopPropagation();
-        editTask({ ...task, cover: { ...task.cover, color: null, scaled: null, idUploadedBackground: null } });
+        editTask({ ...task, cover: { ...task.cover, color: null, scaled: null, idUploadedBackground: null, size: "normal", brightness: "light" } });
     }
 
     function onSelectPhoto(e, id) {
         e.stopPropagation();
+        const coverSize = task.cover.size === "full" ? "full" : "normal";
         const img = boardCoverImgs.find((img) => img.id === id);
-        editTask({ ...task, cover: { ...task.cover, scaled: img.scaledImgs, color: null, idUploadedBackground: img.id, bg: img.bg } });
+        editTask({ ...task, cover: { ...task.cover, scaled: img.scaledImgs, color: null, idUploadedBackground: img.id, bg: img.bg, brightness: img.brightness, size: coverSize } });
     }
 
     const isCover = task?.cover.color || task?.cover.scaled;
@@ -89,7 +90,7 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
                                 </div>
                             </div>
                             <div className={`full-size-wrapper ${isCover && task.cover.size === "full" ? "active" : "non-active"}`}>
-                                <div className={`full-size-btn ${task?.cover.idUploadedBackground ? "has-image" : "no-image"}`} onClick={() => onChangeSize("full")}
+                                <div className={`full-size-btn ${task?.cover.idUploadedBackground ? "has-image" : "no-image"}`} onClick={(e) => onChangeSize(e, "full")}
                                     style={{
                                         backgroundImage: task?.cover.scaled ? `url(${task?.cover.scaled[0]?.url})` : 'none',
                                         backgroundSize: 'cover',

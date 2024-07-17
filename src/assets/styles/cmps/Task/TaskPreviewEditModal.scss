@@ -18,12 +18,14 @@
 
         color: var(--ds-text-primary);
 
+        background: #fff;
+
         &:hover {
-            background: var(--tr-background-list);
+            background: #F1F2F4;
         }
 
         span {
-           font-size: 16px;
+            font-size: 16px;
         }
     }
 }
@@ -32,7 +34,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 300px;
+    width: 246px;
 
     .ant-modal-content {
         padding: 0;
@@ -64,6 +66,12 @@
         background: var(--ds-surface-overlay);
 
     }
+
+    .preview-labels {
+        display: flex;
+        gap: 4px;
+        flex-wrap: wrap;
+    }
 }
 
 .floating-button.save-button {
@@ -94,11 +102,11 @@
         flex-direction: column;
         align-items: flex-start;
         gap: 8px;
-        right: -164px;
+        right: -163px;
         top: 0;
 
         &.full-cover {
-            right: -140px;
+            right: -139px;
         }
 
         .floating-button {

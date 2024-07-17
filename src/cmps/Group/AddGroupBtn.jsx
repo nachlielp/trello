@@ -17,11 +17,20 @@ export function AddGroupBtn({ addGroup }) {
 
     function onAddGroup() {
         if (groupName.trim() === '') {
-            return;
+            setIsAddGroupOpen(false)
+        } else {
+            addGroup(groupName)
         }
-        addGroup(groupName)
-        setIsAddGroupOpen(false)
         setGroupName('')
+    }
+
+    function onKeyDown(e) {
+        if (e.key === 'Enter') {
+            onAddGroup()
+        } else if (e.key === 'Escape') {
+            setIsAddGroupOpen(false)
+            setGroupName('')
+        }
     }
     return (
         <div className="add-group-btn-wrapper">
@@ -40,9 +49,10 @@ export function AddGroupBtn({ addGroup }) {
                         placeholder="Enter list title..."
                         value={groupName}
                         onChange={(e) => setGroupName(e.target.value)}
+                        onKeyDown={onKeyDown}
                     />
                     <article className="footer-actions">
-                        <button type="primary" onClick={() => onAddGroup()} className="add-card-btn">Add card</button>
+                        <button type="primary" onClick={() => onAddGroup()} className="add-card-btn">Add list</button>
                         <button type="secondary" onClick={() => setIsAddGroupOpen(false)} className="close-add-card-btn"><CloseOutlined /></button>
                     </article>
                 </Card>}

@@ -25,6 +25,7 @@
             border-radius: 3px;
             width: 32px;
             height: 32px;
+            background-color: var(--ds-background-neutral, #091e420f);
 
             &:hover {
                 background-color: var(--ds-background-neutral-hovered, #091e4224);

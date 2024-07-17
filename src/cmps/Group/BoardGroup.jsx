@@ -4,7 +4,6 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { AddTaskInGroup } from "./AddTaskInGroup";
 import { BoardGroupHeader } from "./BoardGroupHeader";
 import { TaskPreview } from "../Task/TaskPreview";
-import { TaskPreviewCover } from "../Task/TaskPreviewCover";
 import { useClickOutside } from "../../customHooks/useClickOutside";
 
 //TODO put add new task in array of sorted tasks based on position
@@ -14,11 +13,11 @@ export function BoardGroup({
   archiveGroup,
   editGroup,
   editTask,
-  editLabel,
   copyGroup,
   moveAllCards,
   archiveAllCards,
   sortGroup,
+  labelActions
 }) {
   const [newTaskIds, setNewTaskIds] = useState([]);
   const [firstTaskPos, setFirstTaskPos] = useState(null);
@@ -64,7 +63,8 @@ export function BoardGroup({
   };
 
   return (
-    <div className="board-group-container">
+    <section className="board-group-container">
+
       <Card className="board-group custom-card" ref={footerRef}>
         <BoardGroupHeader
           group={group}
@@ -80,7 +80,8 @@ export function BoardGroup({
           {newTaskIds.map((taskId) => (
             <TaskPreview
               key={taskId}
-              task={group?.tasks?.find((task) => task?.id === taskId)}
+              task={group.tasks.find((task) => task.id === taskId)}
+              labelActions={labelActions}
             />
           ))}
           {isAddTaskOpen && (
@@ -94,25 +95,16 @@ export function BoardGroup({
           {sortedTasks
             .filter((task) => !newTaskIds.includes(task.id))
             .map((task) =>
-              task?.cover?.size === "full" ? (
-                <TaskPreviewCover
-                  key={task.id}
-                  task={task}
-                  editTask={editTask}
-                  editLabel={editLabel}
-                />
-              ) : (
-                <TaskPreview
-                  key={task.id}
-                  task={task}
-                  editTask={editTask}
-                  editLabel={editLabel}
-                />
-              )
+              <TaskPreview
+                key={task.id}
+                task={task}
+                editTask={editTask}
+                labelActions={labelActions}
+              />
             )}
         </main>
         {!isAddTaskOpen && <GroupFooter groupId={group.id} addTask={addTask} />}
       </Card>
-    </div>
+    </section>
   );
 }

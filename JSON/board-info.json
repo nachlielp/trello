@@ -4,7 +4,6 @@
     "id": "64f721f169b14894fac36cdf",
     "name": "Trello Build",
     "apdatedAt": 1720234120009,
-    "checkListTaskIds": [],
     "members": [
       {
         "id": "666fe4efda8643029b6710f3",
@@ -19,6 +18,7 @@
         "permissionStatus": "admin"
       }
     ],
+    "checkListTaskIds": [],
     "groups": [
       {
         "id": "64f721f169b14894fac36ce6",
@@ -31,6 +31,7 @@
         "tasks": [
           {
             "id": "66756e111dfc591fbd5518f1",
+            "checkLists": [],
             "badges": {
               "attachmentsByType": {
                 "trello": {
@@ -68,6 +69,7 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "64f721f169b14894fac36cdf",
+            "idChecklists": [],
             "idGroup": "64f721f169b14894fac36ce6",
             "idMembers": [
               "666fe4efda8643029b6710f3",
@@ -76,8 +78,10 @@
             "idMembersVoted": [],
             "idShort": 6,
             "idAttachmentCover": null,
-            "labels": [],
-            "idLabels": [],
+            "idLabels": [
+              "51bcee7",
+              "66756c"
+            ],
             "manualCoverAttachment": true,
             "name": "json",
             "pos": 65536,
@@ -190,114 +194,9 @@
               "idPlugin": null
             },
             "isTemplate": false,
-            "cardRole": null,
-            "checkLists": []
-          },
-          {
-            "id": "66756e1d26d147ec3f62e2a1",
-            "badges": {
-              "attachmentsByType": {
-                "trello": {
-                  "board": 0,
-                  "card": 0
-                }
-              },
-              "externalSource": null,
-              "location": false,
-              "votes": 0,
-              "viewingMemberVoted": false,
-              "subscribed": false,
-              "attachments": 0,
-              "fogbugz": "",
-              "checkItems": 0,
-              "checkItemsChecked": 0,
-              "checkItemsEarliestDue": null,
-              "comments": 0,
-              "description": false,
-              "due": null,
-              "dueComplete": false,
-              "lastUpdatedByAi": false,
-              "start": null
-            },
-            "checkItemStates": [],
-            "closed": false,
-            "dueComplete": false,
-            "createdAt": "2024-06-25T13:33:53.860Z",
-            "dateLastActivity": "2024-06-25T13:33:53.860Z",
-            "desc": "",
-            "descData": {
-              "emoji": {}
-            },
-            "due": null,
-            "dueReminder": null,
-            "email": null,
-            "idBoard": "64f721f169b14894fac36cdf",
-            "idGroup": "64f721f169b14894fac36ce6",
-            "idMembers": [
-              "666fe4efda8643029b6710f3",
-              "64f721dfe7ac348348a02895"
-            ],
-            "idMembersVoted": [],
-            "idShort": 7,
-            "idAttachmentCover": null,
-            "labels": [
-              {
-                "color": "blue"
-              },
-              {
-                "color": "pink"
-              },
-              {
-                "color": "red"
-              },
-              {
-                "color": "purple"
-              },
-              {
-                "color": "orange"
-              },
-              {
-                "color": "green"
-              }
-            ],
-            "idLabels": [
-              "66756a351dc51400eb1968el",
-              "66793c8367673bb5384b068h",
-              "66756a351dc51400eb1968ec",
-              "66756a351dc51400eb1968f4",
-              "66756a351dc51400eb1968e3",
-              "66756a351dc51400eb1968e1"
-            ],
-            "manualCoverAttachment": true,
-            "name": "custom-hooks.js",
-            "pos": 131072,
-            "shortLink": "R9PKNvmN",
-            "shortUrl": "https://trello.com/c/R9PKNvmN",
-            "start": null,
-            "subscribed": false,
-            "url": "https://trello.com/c/R9PKNvmN/7-custom-hooksjs",
-            "cover": {
-              "idAttachment": null,
-              "color": "black",
-              "idUploadedBackground": null,
-              "size": "normal",
-              "brightness": "dark",
-              "idPlugin": null
-            },
-            "isTemplate": false,
-            "cardRole": null,
-            "checkLists": []
+            "cardRole": null
           }
         ]
-      },
-      {
-        "id": "64f721f169b14894fac36ce7",
-        "name": "Backlog-Client",
-        "closed": false,
-        "color": null,
-        "pos": 2,
-        "subscribed": false,
-        "softLimit": null
       }
     ],
     "desc": "",
@@ -401,70 +300,22 @@
       "canBePrivate": true,
       "canInvite": true
     },
-    "labelNames": [
+    "labels": [
       {
+        "id": "66756c",
+        "name": "label A",
         "color": "green",
-        "label": "Ok"
+        "darkFontColor": "#BAF3DB",
+        "lightFontColor": "#164B35"
       },
       {
+        "id": "51bcee7",
+        "name": "Label B",
         "color": "yellow",
-        "label": ""
-      },
-      {
-        "color": "orange",
-        "label": ""
-      },
-      {
-        "color": "red",
-        "label": "Urgent"
-      },
-      {
-        "color": "purple",
-        "label": ""
-      },
-      {
-        "color": "blue",
-        "label": ""
-      },
-      {
-        "color": "sky",
-        "label": ""
-      },
-      {
-        "color": "lime",
-        "label": ""
-      },
-      {
-        "color": "pink",
-        "label": "Im Pinkalicious"
-      },
-      {
-        "color": "black",
-        "label": ""
+        "darkFontColor": "#F8E6A0",
+        "lightFontColor": "#533F04"
       }
     ],
-    "noInUseLabels": {
-      "green_dark": "",
-      "yellow_dark": "",
-      "orange_dark": "",
-      "red_dark": "",
-      "purple_dark": "",
-      "blue_dark": "",
-      "sky_dark": "",
-      "lime_dark": "",
-      "pink_dark": "",
-      "black_dark": "",
-      "green_light": "",
-      "yellow_light": "",
-      "orange_light": "",
-      "red_light": "",
-      "purple_light": "",
-      "blue_light": "",
-      "sky_light": "",
-      "lime_light": "",
-      "pink_light": "",
-      "black_light": ""
-    },
     "coverImgs": [
       {
         "bg": "#f2a912",
@@ -561,7 +412,8 @@
             "height": 1707,
             "width": 2560
           }
-        ]
+        ],
+        "brightness": "light"
       },
       {
         "bg": "#a4d4e4",
@@ -659,7 +511,8 @@
             "height": 1709,
             "width": 2560
           }
-        ]
+        ],
+        "brightness": "light"
       },
       {
         "bg": "#7e8d90",
@@ -748,7 +601,8 @@
             "height": 2048,
             "width": 1365
           }
-        ]
+        ],
+        "brightness": "light"
       },
       {
         "bg": "#d9d3c3",
@@ -846,7 +700,8 @@
             "height": 1707,
             "width": 2560
           }
-        ]
+        ],
+        "brightness": "light"
       },
       {
         "bg": "#e2e6e6",
@@ -935,7 +790,8 @@
             "height": 1439,
             "width": 2560
           }
-        ]
+        ],
+        "brightness": "light"
       },
       {
         "bg": "#f2f2fb",
@@ -1024,15 +880,16 @@
             "height": 2048,
             "width": 1365
           }
-        ]
+        ],
+        "brightness": "light"
       }
     ]
   },
   {
     "id": "66756a34def1a6d3b8cd179d",
-    "apdatedAt": 1720234168827,
-    "checkListTaskIds": ["66756e111dfc591fbd5518f9"],
-    "viewedAt": 1720234120123,
+    "apdatedAt": 1721051204720,
+    "viewedAt": 1721050978722,
+    "checkListTaskIds": [],
     "members": [
       {
         "id": "666fe4efda8643029b6710f3",
@@ -1050,7 +907,7 @@
     "groups": [
       {
         "id": "66756b3a4a97ac163d32e9e2",
-        "name": "js",
+        "name": "Labels and badges",
         "closed": false,
         "color": null,
         "pos": 1,
@@ -1059,6 +916,7 @@
         "tasks": [
           {
             "id": "66756e111dfc591fbd5518f9",
+            "checkLists": [],
             "badges": {
               "attachmentsByType": {
                 "trello": {
@@ -1096,6 +954,7 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
+            "idChecklists": [],
             "idGroup": "66756b3a4a97ac163d32e9e2",
             "idMembers": [
               "666fe4efda8643029b6710f3",
@@ -1104,10 +963,17 @@
             "idMembersVoted": [],
             "idShort": 6,
             "idAttachmentCover": null,
-            "labels": [],
-            "idLabels": [],
+            "idLabels": [
+              "51bcee7",
+              "66756c",
+              "xPTxRJ",
+              "fX0rB4",
+              "zqOYW3",
+              "LCdXdk",
+              "J9XQuw"
+            ],
             "manualCoverAttachment": true,
-            "name": "json",
+            "name": "Labels and Users",
             "pos": 65536,
             "shortLink": "lFi0QOae",
             "shortUrl": "https://trello.com/c/lFi0QOae",
@@ -1218,37 +1084,11 @@
               "idPlugin": null
             },
             "isTemplate": false,
-            "cardRole": null,
-            "checkLists": [
-              {
-                "id": "RSGBQbE74HO41SmVJiquIXJr",
-                "label": "Todo",
-                "pos":12222,
-                "checkItems": [
-                  {
-                    "id": "7jNnRxeTBymg2XxcS4DMSndE",
-                    "label": "query",
-                    "isChecked": false,
-                    "pos":12222
-                  },
-                  {
-                    "id": "KOmiNaCH17k1REK6BTwTivx5",
-                    "label": "getId",
-                    "isChecked": false,
-                    "pos":14425
-                  },
-                  {
-                    "id": "LmfqdqAUmgNmqeJUrkHSvCsz",
-                    "label": "Have fun",
-                    "isChecked": false,
-                    "pos":15123
-                  }
-                ]
-              }
-            ]
+            "cardRole": null
           },
           {
             "id": "66756e1d26d147ec3f62e2a0",
+            "checkLists": [],
             "badges": {
               "attachmentsByType": {
                 "trello": {
@@ -1286,6 +1126,7 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
+            "idChecklists": [],
             "idGroup": "66756b3a4a97ac163d32e9e2",
             "idMembers": [
               "666fe4efda8643029b6710f3",
@@ -1294,34 +1135,7 @@
             "idMembersVoted": [],
             "idShort": 7,
             "idAttachmentCover": null,
-            "labels": [
-              {
-                "color": "blue"
-              },
-              {
-                "color": "pink"
-              },
-              {
-                "color": "red"
-              },
-              {
-                "color": "purple"
-              },
-              {
-                "color": "orange"
-              },
-              {
-                "color": "green"
-              }
-            ],
-            "idLabels": [
-              "66756a351dc51400eb1968ee",
-              "66793c8367673bb5384b068f",
-              "66756a351dc51400eb1968ed",
-              "66756a351dc51400eb1968f3",
-              "66756a351dc51400eb1968e8",
-              "66756a351dc51400eb1968e2"
-            ],
+            "idLabels": [],
             "manualCoverAttachment": true,
             "name": "custom-hooks.js",
             "pos": 131072,
@@ -1335,15 +1149,15 @@
               "color": "black",
               "idUploadedBackground": null,
               "size": "normal",
-              "brightness": "dark",
+              "brightness": "light",
               "idPlugin": null
             },
             "isTemplate": false,
-            "cardRole": null,
-            "checkLists": []
+            "cardRole": null
           },
           {
             "id": "66756eb4a7de8f40f2005930",
+            "checkLists": [],
             "badges": {
               "attachmentsByType": {
                 "trello": {
@@ -1381,12 +1195,12 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
+            "idChecklists": [],
             "idGroup": "66756b3a4a97ac163d32e9e2",
             "idMembers": [],
             "idMembersVoted": [],
             "idShort": 10,
             "idAttachmentCover": null,
-            "labels": [],
             "idLabels": [],
             "manualCoverAttachment": true,
             "name": "event.bus.js",
@@ -1405,14 +1219,13 @@
               "idPlugin": null
             },
             "isTemplate": false,
-            "cardRole": null,
-            "checkLists": []
+            "cardRole": null
           }
         ]
       },
       {
         "id": "66756e74ebad01c3a662aea7",
-        "name": "Redux",
+        "name": "Group length and covers",
         "closed": false,
         "color": null,
         "pos": 2,
@@ -1420,7 +1233,455 @@
         "softLimit": null,
         "tasks": [
           {
+            "id": "66756e6e9c4ae2c7b3046b1c",
+            "checkLists": [],
+            "badges": {
+              "attachmentsByType": {
+                "trello": {
+                  "board": 0,
+                  "card": 0
+                }
+              },
+              "externalSource": null,
+              "location": false,
+              "votes": 0,
+              "viewingMemberVoted": false,
+              "subscribed": false,
+              "attachments": 0,
+              "fogbugz": "",
+              "checkItems": 0,
+              "checkItemsChecked": 0,
+              "checkItemsEarliestDue": null,
+              "comments": 0,
+              "description": false,
+              "due": null,
+              "dueComplete": false,
+              "lastUpdatedByAi": false,
+              "start": null
+            },
+            "checkItemStates": [],
+            "closed": false,
+            "dueComplete": false,
+            "createdAt": "2024-06-22T08:15:30.466Z",
+            "dateLastActivity": "2024-06-22T08:15:30.466Z",
+            "desc": "",
+            "descData": {
+              "emoji": {}
+            },
+            "due": null,
+            "dueReminder": null,
+            "email": null,
+            "idBoard": "66756a34def1a6d3b8cd179d",
+            "idChecklists": [],
+            "idGroup": "66756e74ebad01c3a662aea7",
+            "idMembers": [],
+            "idMembersVoted": [],
+            "idShort": 8,
+            "idAttachmentCover": null,
+            "idLabels": [],
+            "manualCoverAttachment": false,
+            "name": "Full image",
+            "pos": 196608,
+            "shortLink": "Lur9XW2H",
+            "shortUrl": "https://trello.com/c/Lur9XW2H",
+            "start": null,
+            "subscribed": false,
+            "url": "https://trello.com/c/Lur9XW2H/8-storejs",
+            "cover": {
+              "idAttachment": null,
+              "color": null,
+              "idUploadedBackground": "PsFBt",
+              "size": "full",
+              "brightness": "light",
+              "idPlugin": null,
+              "scaled": [
+                {
+                  "id": "6684dd435af9199cb6283700",
+                  "_id": "6684dd435af9199cb6283700",
+                  "scaled": true,
+                  "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/67x100/753af4c32d1d87db146413e85ab15ece/photo-1719844841024-3c7166816fc7.webp",
+                  "bytes": 1104,
+                  "height": 100,
+                  "width": 67
+                },
+                {
+                  "id": "6684dd435af9199cb6283701",
+                  "_id": "6684dd435af9199cb6283701",
+                  "scaled": true,
+                  "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/128x192/753af4c32d1d87db146413e85ab15ece/photo-1719844841024-3c7166816fc7.webp",
+                  "bytes": 2946,
+                  "height": 192,
+                  "width": 128
+                },
+                {
+                  "id": "6684dd435af9199cb6283702",
+                  "_id": "6684dd435af9199cb6283702",
+                  "scaled": true,
+                  "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/320x480/753af4c32d1d87db146413e85ab15ece/photo-1719844841024-3c7166816fc7.webp",
+                  "bytes": 13346,
+                  "height": 480,
+                  "width": 320
+                },
+                {
+                  "id": "6684dd435af9199cb6283703",
+                  "_id": "6684dd435af9199cb6283703",
+                  "scaled": true,
+                  "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/640x960/753af4c32d1d87db146413e85ab15ece/photo-1719844841024-3c7166816fc7.webp",
+                  "bytes": 46460,
+                  "height": 960,
+                  "width": 640
+                },
+                {
+                  "id": "6684dd435af9199cb6283704",
+                  "_id": "6684dd435af9199cb6283704",
+                  "scaled": true,
+                  "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/683x1024/753af4c32d1d87db146413e85ab15ece/photo-1719844841024-3c7166816fc7.webp",
+                  "bytes": 52706,
+                  "height": 1024,
+                  "width": 683
+                },
+                {
+                  "id": "6684dd435af9199cb6283705",
+                  "_id": "6684dd435af9199cb6283705",
+                  "scaled": true,
+                  "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/853x1280/753af4c32d1d87db146413e85ab15ece/photo-1719844841024-3c7166816fc7.webp",
+                  "bytes": 79564,
+                  "height": 1280,
+                  "width": 853
+                },
+                {
+                  "id": "6684dd435af9199cb6283707",
+                  "_id": "6684dd435af9199cb6283707",
+                  "scaled": true,
+                  "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1066x1600/753af4c32d1d87db146413e85ab15ece/photo-1719844841024-3c7166816fc7.webp",
+                  "bytes": 120586,
+                  "height": 1600,
+                  "width": 1066
+                },
+                {
+                  "id": "6684dd435af9199cb6283706",
+                  "_id": "6684dd435af9199cb6283706",
+                  "scaled": true,
+                  "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1280x1920/753af4c32d1d87db146413e85ab15ece/photo-1719844841024-3c7166816fc7.webp",
+                  "bytes": 167332,
+                  "height": 1920,
+                  "width": 1280
+                },
+                {
+                  "id": "6684dd435af9199cb6283708",
+                  "_id": "6684dd435af9199cb6283708",
+                  "scaled": true,
+                  "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1365x2048/753af4c32d1d87db146413e85ab15ece/photo-1719844841024-3c7166816fc7.webp",
+                  "bytes": 190862,
+                  "height": 2048,
+                  "width": 1365
+                }
+              ],
+              "bg": "#7e8d90"
+            },
+            "isTemplate": false,
+            "cardRole": null
+          },
+          {
+            "id": "66756f33b58d05c2fe06ab15",
+            "checkLists": [],
+            "badges": {
+              "attachmentsByType": {
+                "trello": {
+                  "board": 0,
+                  "card": 0
+                }
+              },
+              "externalSource": null,
+              "location": false,
+              "votes": 0,
+              "viewingMemberVoted": false,
+              "subscribed": false,
+              "attachments": 0,
+              "fogbugz": "",
+              "checkItems": 0,
+              "checkItemsChecked": 0,
+              "checkItemsEarliestDue": null,
+              "comments": 0,
+              "description": false,
+              "due": null,
+              "dueComplete": false,
+              "lastUpdatedByAi": false,
+              "start": null
+            },
+            "checkItemStates": [],
+            "closed": false,
+            "dueComplete": false,
+            "createdAt": "2024-06-22T08:33:00.870Z",
+            "dateLastActivity": "2024-06-22T08:33:00.870Z",
+            "desc": "",
+            "descData": {
+              "emoji": {}
+            },
+            "due": null,
+            "dueReminder": null,
+            "email": null,
+            "idBoard": "66756a34def1a6d3b8cd179d",
+            "idChecklists": [],
+            "idGroup": "66756e74ebad01c3a662aea7",
+            "idMembers": [],
+            "idMembersVoted": [],
+            "idShort": 11,
+            "idAttachmentCover": null,
+            "idLabels": [],
+            "manualCoverAttachment": false,
+            "name": "Half Image\n\n",
+            "pos": 262144,
+            "shortLink": "gTh6Z4Cd",
+            "shortUrl": "https://trello.com/c/gTh6Z4Cd",
+            "start": null,
+            "subscribed": false,
+            "url": "https://trello.com/c/gTh6Z4Cd/11-trelloreduccerjs",
+            "cover": {
+              "idAttachment": null,
+              "color": null,
+              "idUploadedBackground": "LrFmk",
+              "size": "normal",
+              "brightness": "light",
+              "idPlugin": null,
+              "scaled": [
+                {
+                  "id": "6684dcc62182ea43e6103e60",
+                  "_id": "6684dcc62182ea43e6103e60",
+                  "scaled": true,
+                  "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/140x93/0f86a0bbb044d2bfc21f224456f2044a/photo-1719328555718-90eb4fac3e31.webp",
+                  "bytes": 2470,
+                  "height": 93,
+                  "width": 140
+                },
+                {
+                  "id": "6684dcc62182ea43e6103e61",
+                  "_id": "6684dcc62182ea43e6103e61",
+                  "scaled": true,
+                  "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/256x171/0f86a0bbb044d2bfc21f224456f2044a/photo-1719328555718-90eb4fac3e31.webp",
+                  "bytes": 6980,
+                  "height": 171,
+                  "width": 256
+                },
+                {
+                  "id": "6684dcc62182ea43e6103e62",
+                  "_id": "6684dcc62182ea43e6103e62",
+                  "scaled": true,
+                  "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/480x320/0f86a0bbb044d2bfc21f224456f2044a/photo-1719328555718-90eb4fac3e31.webp",
+                  "bytes": 21922,
+                  "height": 320,
+                  "width": 480
+                },
+                {
+                  "id": "6684dcc62182ea43e6103e63",
+                  "_id": "6684dcc62182ea43e6103e63",
+                  "scaled": true,
+                  "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/960x641/0f86a0bbb044d2bfc21f224456f2044a/photo-1719328555718-90eb4fac3e31.webp",
+                  "bytes": 79890,
+                  "height": 641,
+                  "width": 960
+                },
+                {
+                  "id": "6684dcc62182ea43e6103e64",
+                  "_id": "6684dcc62182ea43e6103e64",
+                  "scaled": true,
+                  "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1024x684/0f86a0bbb044d2bfc21f224456f2044a/photo-1719328555718-90eb4fac3e31.webp",
+                  "bytes": 90084,
+                  "height": 684,
+                  "width": 1024
+                },
+                {
+                  "id": "6684dcc62182ea43e6103e66",
+                  "_id": "6684dcc62182ea43e6103e66",
+                  "scaled": true,
+                  "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1280x855/0f86a0bbb044d2bfc21f224456f2044a/photo-1719328555718-90eb4fac3e31.webp",
+                  "bytes": 136164,
+                  "height": 855,
+                  "width": 1280
+                },
+                {
+                  "id": "6684dcc62182ea43e6103e67",
+                  "_id": "6684dcc62182ea43e6103e67",
+                  "scaled": true,
+                  "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1920x1282/0f86a0bbb044d2bfc21f224456f2044a/photo-1719328555718-90eb4fac3e31.webp",
+                  "bytes": 276964,
+                  "height": 1282,
+                  "width": 1920
+                },
+                {
+                  "id": "6684dcc62182ea43e6103e65",
+                  "_id": "6684dcc62182ea43e6103e65",
+                  "scaled": true,
+                  "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2048x1367/0f86a0bbb044d2bfc21f224456f2044a/photo-1719328555718-90eb4fac3e31.webp",
+                  "bytes": 306050,
+                  "height": 1367,
+                  "width": 2048
+                },
+                {
+                  "id": "6684dcc62182ea43e6103e68",
+                  "_id": "6684dcc62182ea43e6103e68",
+                  "scaled": true,
+                  "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2397x1600/0f86a0bbb044d2bfc21f224456f2044a/photo-1719328555718-90eb4fac3e31.webp",
+                  "bytes": 395844,
+                  "height": 1600,
+                  "width": 2397
+                },
+                {
+                  "id": "6684dcc62182ea43e6103e69",
+                  "_id": "6684dcc62182ea43e6103e69",
+                  "scaled": true,
+                  "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2560x1709/0f86a0bbb044d2bfc21f224456f2044a/photo-1719328555718-90eb4fac3e31.webp",
+                  "bytes": 443686,
+                  "height": 1709,
+                  "width": 2560
+                }
+              ],
+              "bg": "#a4d4e4"
+            },
+            "isTemplate": false,
+            "cardRole": null
+          },
+          {
+            "id": "66756fae5d6d187ed3bcb956",
+            "checkLists": [],
+            "badges": {
+              "attachmentsByType": {
+                "trello": {
+                  "board": 0,
+                  "card": 0
+                }
+              },
+              "externalSource": null,
+              "location": false,
+              "votes": 0,
+              "viewingMemberVoted": false,
+              "subscribed": false,
+              "attachments": 0,
+              "fogbugz": "",
+              "checkItems": 0,
+              "checkItemsChecked": 0,
+              "checkItemsEarliestDue": null,
+              "comments": 0,
+              "description": false,
+              "due": null,
+              "dueComplete": false,
+              "lastUpdatedByAi": false,
+              "start": null
+            },
+            "checkItemStates": [],
+            "closed": false,
+            "dueComplete": false,
+            "createdAt": "2024-06-22T08:16:12.518Z",
+            "dateLastActivity": "2024-06-22T08:16:12.518Z",
+            "desc": "",
+            "descData": {
+              "emoji": {}
+            },
+            "due": null,
+            "dueReminder": null,
+            "email": null,
+            "idBoard": "66756a34def1a6d3b8cd179d",
+            "idChecklists": [],
+            "idGroup": "66756e74ebad01c3a662aea7",
+            "idMembers": [],
+            "idMembersVoted": [],
+            "idShort": 12,
+            "idAttachmentCover": null,
+            "idLabels": [],
+            "manualCoverAttachment": false,
+            "name": "Full color\n",
+            "pos": 327690,
+            "shortLink": "gXELnffO",
+            "shortUrl": "https://trello.com/c/gXELnffO",
+            "start": null,
+            "subscribed": false,
+            "url": "https://trello.com/c/gXELnffO/12-trelloactionsjs",
+            "cover": {
+              "idAttachment": null,
+              "color": "purple",
+              "idUploadedBackground": null,
+              "size": "full",
+              "brightness": "light",
+              "idPlugin": null,
+              "scaled": null
+            },
+            "isTemplate": false,
+            "cardRole": null
+          },
+          {
+            "id": "DKLM0Q",
+            "apdatedAt": "2024-07-15T13:40:58.627Z",
+            "members": [],
+            "checkLists": [],
+            "badges": {
+              "attachmentsByType": {
+                "trello": {
+                  "board": 0,
+                  "card": 0
+                }
+              },
+              "externalSource": null,
+              "location": false,
+              "votes": 0,
+              "viewingMemberVoted": false,
+              "subscribed": false,
+              "attachments": 0,
+              "fogbugz": "",
+              "checkItems": 0,
+              "checkItemsChecked": 0,
+              "checkItemsEarliestDue": null,
+              "comments": 0,
+              "description": false,
+              "due": null,
+              "dueComplete": false,
+              "lastUpdatedByAi": false,
+              "start": null
+            },
+            "checkItemStates": [],
+            "closed": false,
+            "dueComplete": false,
+            "dateLastActivity": "2024-07-15T13:40:58.628Z",
+            "desc": "",
+            "descData": {
+              "emoji": {}
+            },
+            "due": null,
+            "dueReminder": null,
+            "email": null,
+            "idBoard": "66756a34def1a6d3b8cd179d",
+            "idChecklists": [],
+            "idGroup": "66756e74ebad01c3a662aea7",
+            "idMembers": [],
+            "idMembersVoted": [],
+            "idShort": "",
+            "idAttachmentCover": null,
+            "labels": [],
+            "idLabels": [],
+            "manualCoverAttachment": true,
+            "name": "Half color",
+            "pos": 328924,
+            "shortLink": "",
+            "shortUrl": "",
+            "start": null,
+            "subscribed": false,
+            "url": "",
+            "cover": {
+              "idAttachment": null,
+              "color": "sky",
+              "idUploadedBackground": null,
+              "size": "normal",
+              "brightness": "light",
+              "scaled": null,
+              "edgeColor": "",
+              "sharedSourceUrl": null,
+              "idPlugin": null
+            },
+            "isTemplate": false,
+            "cardRole": null
+          },
+          {
             "id": "667ba946062cb054e9a1bbeb",
+            "checkLists": [],
             "badges": {
               "attachmentsByType": {
                 "trello": {
@@ -1458,16 +1719,16 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
+            "idChecklists": [],
             "idGroup": "66756e74ebad01c3a662aea7",
             "idMembers": [],
             "idMembersVoted": [],
             "idShort": 25,
             "idAttachmentCover": null,
-            "labels": [],
             "idLabels": [],
             "manualCoverAttachment": true,
             "name": "Some test",
-            "pos": 327680,
+            "pos": 339801,
             "shortLink": "mw4titEI",
             "shortUrl": "https://trello.com/c/mw4titEI",
             "start": null,
@@ -1568,11 +1829,13 @@
               "idPlugin": null
             },
             "isTemplate": false,
-            "cardRole": null,
-            "checkLists": []
+            "cardRole": null
           },
           {
-            "id": "66756e6e9c4ae2c7b3046b1c",
+            "id": "2zaY6H",
+            "apdatedAt": "2024-07-15T13:41:31.633Z",
+            "members": [],
+            "checkLists": [],
             "badges": {
               "attachmentsByType": {
                 "trello": {
@@ -1600,8 +1863,7 @@
             "checkItemStates": [],
             "closed": false,
             "dueComplete": false,
-            "createdAt": "2024-06-22T08:15:30.466Z",
-            "dateLastActivity": "2024-06-22T08:15:30.466Z",
+            "dateLastActivity": "2024-07-15T13:41:31.633Z",
             "desc": "",
             "descData": {
               "emoji": {}
@@ -1610,105 +1872,124 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
+            "idChecklists": [],
             "idGroup": "66756e74ebad01c3a662aea7",
             "idMembers": [],
             "idMembersVoted": [],
-            "idShort": 8,
-            "idAttachmentCover": null,
-            "labels": [
-              {
-                "color": "orange"
-              }
-            ],
-            "idLabels": ["66756a351dc51400eb1968e8"],
-            "manualCoverAttachment": false,
-            "name": "store.js",
-            "pos": 196608,
-            "shortLink": "Lur9XW2H",
-            "shortUrl": "https://trello.com/c/Lur9XW2H",
-            "start": null,
-            "subscribed": false,
-            "url": "https://trello.com/c/Lur9XW2H/8-storejs",
-            "cover": {
-              "idAttachment": null,
-              "color": null,
-              "idUploadedBackground": null,
-              "size": "normal",
-              "brightness": "dark",
-              "idPlugin": null
-            },
-            "isTemplate": false,
-            "cardRole": null,
-            "checkLists": []
-          },
-          {
-            "id": "66756f33b58d05c2fe06ab15",
-            "badges": {
-              "attachmentsByType": {
-                "trello": {
-                  "board": 0,
-                  "card": 0
-                }
-              },
-              "externalSource": null,
-              "location": false,
-              "votes": 0,
-              "viewingMemberVoted": false,
-              "subscribed": false,
-              "attachments": 0,
-              "fogbugz": "",
-              "checkItems": 0,
-              "checkItemsChecked": 0,
-              "checkItemsEarliestDue": null,
-              "comments": 0,
-              "description": false,
-              "due": null,
-              "dueComplete": false,
-              "lastUpdatedByAi": false,
-              "start": null
-            },
-            "checkItemStates": [],
-            "closed": false,
-            "dueComplete": false,
-            "createdAt": "2024-06-22T08:33:00.870Z",
-            "dateLastActivity": "2024-06-22T08:33:00.870Z",
-            "desc": "",
-            "descData": {
-              "emoji": {}
-            },
-            "due": null,
-            "dueReminder": null,
-            "email": null,
-            "idBoard": "66756a34def1a6d3b8cd179d",
-            "idGroup": "66756e74ebad01c3a662aea7",
-            "idMembers": [],
-            "idMembersVoted": [],
-            "idShort": 11,
+            "idShort": "",
             "idAttachmentCover": null,
             "labels": [],
             "idLabels": [],
-            "manualCoverAttachment": false,
-            "name": "trello.reduccer.js",
-            "pos": 262144,
-            "shortLink": "gTh6Z4Cd",
-            "shortUrl": "https://trello.com/c/gTh6Z4Cd",
+            "manualCoverAttachment": true,
+            "name": "Filler Task",
+            "pos": 341035,
+            "shortLink": "",
+            "shortUrl": "",
             "start": null,
             "subscribed": false,
-            "url": "https://trello.com/c/gTh6Z4Cd/11-trelloreduccerjs",
+            "url": "",
             "cover": {
               "idAttachment": null,
               "color": null,
-              "idUploadedBackground": null,
-              "size": "normal",
-              "brightness": "dark",
-              "idPlugin": null
+              "idUploadedBackground": "PsFBt",
+              "size": "full",
+              "brightness": "light",
+              "scaled": [
+                {
+                  "id": "6684dd435af9199cb6283700",
+                  "_id": "6684dd435af9199cb6283700",
+                  "scaled": true,
+                  "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/67x100/753af4c32d1d87db146413e85ab15ece/photo-1719844841024-3c7166816fc7.webp",
+                  "bytes": 1104,
+                  "height": 100,
+                  "width": 67
+                },
+                {
+                  "id": "6684dd435af9199cb6283701",
+                  "_id": "6684dd435af9199cb6283701",
+                  "scaled": true,
+                  "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/128x192/753af4c32d1d87db146413e85ab15ece/photo-1719844841024-3c7166816fc7.webp",
+                  "bytes": 2946,
+                  "height": 192,
+                  "width": 128
+                },
+                {
+                  "id": "6684dd435af9199cb6283702",
+                  "_id": "6684dd435af9199cb6283702",
+                  "scaled": true,
+                  "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/320x480/753af4c32d1d87db146413e85ab15ece/photo-1719844841024-3c7166816fc7.webp",
+                  "bytes": 13346,
+                  "height": 480,
+                  "width": 320
+                },
+                {
+                  "id": "6684dd435af9199cb6283703",
+                  "_id": "6684dd435af9199cb6283703",
+                  "scaled": true,
+                  "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/640x960/753af4c32d1d87db146413e85ab15ece/photo-1719844841024-3c7166816fc7.webp",
+                  "bytes": 46460,
+                  "height": 960,
+                  "width": 640
+                },
+                {
+                  "id": "6684dd435af9199cb6283704",
+                  "_id": "6684dd435af9199cb6283704",
+                  "scaled": true,
+                  "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/683x1024/753af4c32d1d87db146413e85ab15ece/photo-1719844841024-3c7166816fc7.webp",
+                  "bytes": 52706,
+                  "height": 1024,
+                  "width": 683
+                },
+                {
+                  "id": "6684dd435af9199cb6283705",
+                  "_id": "6684dd435af9199cb6283705",
+                  "scaled": true,
+                  "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/853x1280/753af4c32d1d87db146413e85ab15ece/photo-1719844841024-3c7166816fc7.webp",
+                  "bytes": 79564,
+                  "height": 1280,
+                  "width": 853
+                },
+                {
+                  "id": "6684dd435af9199cb6283707",
+                  "_id": "6684dd435af9199cb6283707",
+                  "scaled": true,
+                  "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1066x1600/753af4c32d1d87db146413e85ab15ece/photo-1719844841024-3c7166816fc7.webp",
+                  "bytes": 120586,
+                  "height": 1600,
+                  "width": 1066
+                },
+                {
+                  "id": "6684dd435af9199cb6283706",
+                  "_id": "6684dd435af9199cb6283706",
+                  "scaled": true,
+                  "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1280x1920/753af4c32d1d87db146413e85ab15ece/photo-1719844841024-3c7166816fc7.webp",
+                  "bytes": 167332,
+                  "height": 1920,
+                  "width": 1280
+                },
+                {
+                  "id": "6684dd435af9199cb6283708",
+                  "_id": "6684dd435af9199cb6283708",
+                  "scaled": true,
+                  "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1365x2048/753af4c32d1d87db146413e85ab15ece/photo-1719844841024-3c7166816fc7.webp",
+                  "bytes": 190862,
+                  "height": 2048,
+                  "width": 1365
+                }
+              ],
+              "edgeColor": "",
+              "sharedSourceUrl": null,
+              "idPlugin": null,
+              "bg": "#7e8d90"
             },
             "isTemplate": false,
-            "cardRole": null,
-            "checkLists": []
+            "cardRole": null
           },
           {
-            "id": "66756fae5d6d187ed3bcb956",
+            "id": "7VfnCB",
+            "apdatedAt": "2024-07-15T13:41:38.260Z",
+            "members": [],
+            "checkLists": [],
             "badges": {
               "attachmentsByType": {
                 "trello": {
@@ -1736,8 +2017,7 @@
             "checkItemStates": [],
             "closed": false,
             "dueComplete": false,
-            "createdAt": "2024-06-22T08:16:12.518Z",
-            "dateLastActivity": "2024-06-22T08:16:12.518Z",
+            "dateLastActivity": "2024-07-15T13:41:38.260Z",
             "desc": "",
             "descData": {
               "emoji": {}
@@ -1746,36 +2026,35 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
+            "idChecklists": [],
             "idGroup": "66756e74ebad01c3a662aea7",
             "idMembers": [],
             "idMembersVoted": [],
-            "idShort": 12,
+            "idShort": "",
             "idAttachmentCover": null,
-            "labels": [
-              {
-                "color": "red"
-              }
-            ],
-            "idLabels": ["66756a351dc51400eb1968ed"],
-            "manualCoverAttachment": false,
-            "name": "trello.actions.js",
-            "pos": 327690,
-            "shortLink": "gXELnffO",
-            "shortUrl": "https://trello.com/c/gXELnffO",
+            "labels": [],
+            "idLabels": [],
+            "manualCoverAttachment": true,
+            "name": "Filler Task",
+            "pos": 342269,
+            "shortLink": "",
+            "shortUrl": "",
             "start": null,
             "subscribed": false,
-            "url": "https://trello.com/c/gXELnffO/12-trelloactionsjs",
+            "url": "",
             "cover": {
               "idAttachment": null,
               "color": null,
               "idUploadedBackground": null,
               "size": "normal",
-              "brightness": "dark",
+              "brightness": "light",
+              "scaled": [],
+              "edgeColor": "",
+              "sharedSourceUrl": null,
               "idPlugin": null
             },
             "isTemplate": false,
-            "cardRole": null,
-            "checkLists": []
+            "cardRole": null
           }
         ]
       },
@@ -1790,6 +2069,7 @@
         "tasks": [
           {
             "id": "66756dbdf0e18ee44b79e9d8",
+            "checkLists": [],
             "badges": {
               "attachmentsByType": {
                 "trello": {
@@ -1836,13 +2116,14 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
-
+            "idChecklists": [
+              "667686e9352dcdb311b45003"
+            ],
             "idGroup": "66756b31250742f334ce4cf0",
             "idMembers": [],
             "idMembersVoted": [],
             "idShort": 5,
             "idAttachmentCover": null,
-            "labels": [],
             "idLabels": [],
             "manualCoverAttachment": false,
             "name": "TrelloIndex.jsx",
@@ -1857,15 +2138,15 @@
               "color": null,
               "idUploadedBackground": null,
               "size": "normal",
-              "brightness": "dark",
+              "brightness": "light",
               "idPlugin": null
             },
             "isTemplate": false,
-            "cardRole": null,
-            "checkLists": []
+            "cardRole": null
           },
           {
             "id": "66756fcdb4aa68fc565190af",
+            "checkLists": [],
             "badges": {
               "attachmentsByType": {
                 "trello": {
@@ -1903,12 +2184,14 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
+            "idChecklists": [],
             "idGroup": "66756b31250742f334ce4cf0",
-            "idMembers": ["666fe4efda8643029b6710f3"],
+            "idMembers": [
+              "666fe4efda8643029b6710f3"
+            ],
             "idMembersVoted": [],
             "idShort": 13,
             "idAttachmentCover": null,
-            "labels": [],
             "idLabels": [],
             "manualCoverAttachment": false,
             "name": "TrelloBoards.jsx",
@@ -1923,15 +2206,15 @@
               "color": null,
               "idUploadedBackground": null,
               "size": "normal",
-              "brightness": "dark",
+              "brightness": "light",
               "idPlugin": null
             },
             "isTemplate": false,
-            "cardRole": null,
-            "checkLists": []
+            "cardRole": null
           },
           {
             "id": "66757beb9839d858e2fc69af",
+            "checkLists": [],
             "badges": {
               "attachmentsByType": {
                 "trello": {
@@ -1969,12 +2252,12 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
+            "idChecklists": [],
             "idGroup": "66756b31250742f334ce4cf0",
             "idMembers": [],
             "idMembersVoted": [],
             "idShort": 19,
             "idAttachmentCover": null,
-            "labels": [],
             "idLabels": [],
             "manualCoverAttachment": false,
             "name": "App.js",
@@ -1989,12 +2272,11 @@
               "color": null,
               "idUploadedBackground": null,
               "size": "normal",
-              "brightness": "dark",
+              "brightness": "light",
               "idPlugin": null
             },
             "isTemplate": false,
-            "cardRole": null,
-            "checkLists": []
+            "cardRole": null
           }
         ]
       },
@@ -2009,6 +2291,7 @@
         "tasks": [
           {
             "id": "66756fdbdfdce3305b75f751",
+            "checkLists": [],
             "badges": {
               "attachmentsByType": {
                 "trello": {
@@ -2046,12 +2329,12 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
+            "idChecklists": [],
             "idGroup": "66756c51bcee71bff3ee6112",
             "idMembers": [],
             "idMembersVoted": [],
             "idShort": 15,
             "idAttachmentCover": "66758cda9b6ddd6d9eb72b20",
-            "labels": [],
             "idLabels": [],
             "manualCoverAttachment": true,
             "name": "SideBar.jsx",
@@ -2066,15 +2349,15 @@
               "color": null,
               "idUploadedBackground": null,
               "size": "full",
-              "brightness": "dark",
+              "brightness": "light",
               "idPlugin": null
             },
             "isTemplate": false,
-            "cardRole": null,
-            "checkLists": []
+            "cardRole": null
           },
           {
             "id": "66757099dbeaed543b4603b1",
+            "checkLists": [],
             "badges": {
               "attachmentsByType": {
                 "trello": {
@@ -2112,12 +2395,12 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
+            "idChecklists": [],
             "idGroup": "66756c51bcee71bff3ee6112",
             "idMembers": [],
             "idMembersVoted": [],
             "idShort": 16,
             "idAttachmentCover": "66758d1fffc9a9d1a2cd085f",
-            "labels": [],
             "idLabels": [],
             "manualCoverAttachment": false,
             "name": "SettingsSideBar.jsx",
@@ -2128,19 +2411,19 @@
             "subscribed": false,
             "url": "https://trello.com/c/yrH0jU9G/16-settingssidebarjsx",
             "cover": {
-              "idAttachment": "66758d1fffc9a9d1a2cd085f",
+              "idAttachment": null,
               "color": null,
               "idUploadedBackground": null,
               "size": "normal",
-              "brightness": "dark",
+              "brightness": "light",
               "idPlugin": null
             },
             "isTemplate": false,
-            "cardRole": null,
-            "checkLists": []
+            "cardRole": null
           },
           {
             "id": "66758c6d3b868a6ca2bc0cef",
+            "checkLists": [],
             "badges": {
               "attachmentsByType": {
                 "trello": {
@@ -2178,12 +2461,12 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
+            "idChecklists": [],
             "idGroup": "66756c51bcee71bff3ee6112",
             "idMembers": [],
             "idMembersVoted": [],
             "idShort": 20,
             "idAttachmentCover": "66758cc12183e8943bcf98c4",
-            "labels": [],
             "idLabels": [],
             "manualCoverAttachment": false,
             "name": "UserMessage.jsx",
@@ -2194,16 +2477,15 @@
             "subscribed": false,
             "url": "https://trello.com/c/zvC9rfJF/20-usermessagejsx",
             "cover": {
-              "idAttachment": "66758cc12183e8943bcf98c4",
+              "idAttachment": null,
               "color": null,
               "idUploadedBackground": null,
               "size": "full",
-              "brightness": "dark",
+              "brightness": "light",
               "idPlugin": null
             },
             "isTemplate": false,
-            "cardRole": null,
-            "checkLists": []
+            "cardRole": null
           }
         ]
       }
@@ -2319,70 +2601,47 @@
       "canBePrivate": true,
       "canInvite": true
     },
-    "labelNames": [
+    "labels": [
       {
+        "id": "66756c",
+        "name": "label A",
         "color": "green",
-        "label": "Ok"
+        "darkFontColor": "#BAF3DB",
+        "lightFontColor": "#164B35"
       },
       {
+        "id": "51bcee7",
+        "name": "Label B",
         "color": "yellow",
-        "label": ""
+        "darkFontColor": "#F8E6A0",
+        "lightFontColor": "#533F04"
       },
       {
-        "color": "orange",
-        "label": ""
+        "id": "xPTxRJ",
+        "name": "Label C",
+        "color": "red"
       },
       {
-        "color": "red",
-        "label": "Urgent"
+        "id": "fX0rB4",
+        "name": "Label D",
+        "color": "pink"
       },
       {
-        "color": "purple",
-        "label": ""
+        "id": "zqOYW3",
+        "name": "Label E",
+        "color": "purple"
       },
       {
-        "color": "blue",
-        "label": ""
+        "id": "LCdXdk",
+        "name": "Label D",
+        "color": "subtle purple"
       },
       {
-        "color": "sky",
-        "label": ""
-      },
-      {
-        "color": "lime",
-        "label": ""
-      },
-      {
-        "color": "pink",
-        "label": "Im Pinkalicious"
-      },
-      {
-        "color": "black",
-        "label": ""
+        "id": "J9XQuw",
+        "name": "Label F",
+        "color": "none"
       }
     ],
-    "noInUseLabels": {
-      "green_dark": "",
-      "yellow_dark": "",
-      "orange_dark": "",
-      "red_dark": "",
-      "purple_dark": "",
-      "blue_dark": "",
-      "sky_dark": "",
-      "lime_dark": "",
-      "pink_dark": "",
-      "black_dark": "",
-      "green_light": "",
-      "yellow_light": "",
-      "orange_light": "",
-      "red_light": "",
-      "purple_light": "",
-      "blue_light": "",
-      "sky_light": "",
-      "lime_light": "",
-      "pink_light": "",
-      "black_light": ""
-    },
     "coverImgs": [
       {
         "bg": "#f2a912",
@@ -2479,7 +2738,8 @@
             "height": 1707,
             "width": 2560
           }
-        ]
+        ],
+        "brightness": "light"
       },
       {
         "bg": "#a4d4e4",
@@ -2577,7 +2837,8 @@
             "height": 1709,
             "width": 2560
           }
-        ]
+        ],
+        "brightness": "light"
       },
       {
         "bg": "#7e8d90",
@@ -2666,7 +2927,8 @@
             "height": 2048,
             "width": 1365
           }
-        ]
+        ],
+        "brightness": "light"
       },
       {
         "bg": "#d9d3c3",
@@ -2764,7 +3026,8 @@
             "height": 1707,
             "width": 2560
           }
-        ]
+        ],
+        "brightness": "light"
       },
       {
         "bg": "#e2e6e6",
@@ -2853,7 +3116,8 @@
             "height": 1439,
             "width": 2560
           }
-        ]
+        ],
+        "brightness": "light"
       },
       {
         "bg": "#f2f2fb",
@@ -2942,7 +3206,8 @@
             "height": 2048,
             "width": 1365
           }
-        ]
+        ],
+        "brightness": "light"
       }
     ]
   }

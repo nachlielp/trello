@@ -27,16 +27,16 @@ export function TaskPreviewEditModal({
   editTask,
   isOpen,
   openPreviewModal,
-  editLabel,
   taskWidth,
+  labelActions,
 }) {
   const boardLabels = useSelector(
-    (state) => state.boardModule.board.labelNames
+    (state) => state.boardModule.board.labels
   );
   const [taskLabels, setTaskLabels] = useState([]);
 
   const [modalStyle, setModalStyle] = useState({});
-  const [taskName, setTaskName] = useState(task?.name || "");
+  const [taskName, setTaskName] = useState(task.name || "");
   const [showEditModalBtn, setShowEditModalBtn] = useState(false);
   const containerRef = useRef(null);
 
@@ -45,12 +45,13 @@ export function TaskPreviewEditModal({
   }, [isHovered, isOpen]);
 
   useEffect(() => {
-    setTaskLabels(
-      task?.labels.map((label) =>
-        boardLabels.find((boardLabel) => boardLabel?.color === label?.color)
-      )
-    );
-  }, [task?.labels, boardLabels]);
+    const labels = task.idLabels
+      .filter((labelId) => boardLabels?.some(boardLabel => boardLabel.id === labelId))
+      .map((labelId) =>
+        boardLabels.find((boardLabel) => boardLabel.id === labelId)
+      );
+    setTaskLabels(labels || []);
+  }, [task.idLabels, boardLabels]);
 
   function showModal(e) {
     e.stopPropagation();
@@ -71,11 +72,11 @@ export function TaskPreviewEditModal({
     openPreviewModal(false);
   }
 
-  function handleCancel() {
+  function handleCancel(e) {
     openPreviewModal(false);
   }
 
-  const allModalActionButtons = [
+  const modalActionButtons = [
     // { label: 'Open card', icon: cardIcon, onClick: () => console.log('Add to X'), cover: false },
     {
       cover: false,
@@ -88,10 +89,9 @@ export function TaskPreviewEditModal({
               label="Edit labels"
             />
           }
-          taskLabels={task?.labels}
           editTask={editTask}
           task={task}
-          editLabel={editLabel}
+          labelActions={labelActions}
           onClick={(e) => e.stopPropagation()}
         />
       ),
@@ -136,8 +136,9 @@ export function TaskPreviewEditModal({
       cover: true,
       popover: (
         <MoveCardPopover
-          task={task}
-          onUpdateTask={handleCancel}
+          taskId={task.id}
+          onCloseTask={handleCancel}
+          closeAfter={true}
           anchorEl={
             <SvgButton
               src={moveIcon}
@@ -163,10 +164,10 @@ export function TaskPreviewEditModal({
     },
   ];
 
-  const modalActionButtons =
-    task?.cover?.size === "full"
-      ? allModalActionButtons.filter((btn) => btn?.cover)
-      : allModalActionButtons;
+  // const modalActionButtons =
+  //   task.cover.size === "full"
+  //     ? allModalActionButtons.filter((btn) => btn.cover)
+  //     : allModalActionButtons;
 
   return (
     <div>
@@ -184,7 +185,7 @@ export function TaskPreviewEditModal({
         open={isOpen}
         onOk={handleOk}
         onCancel={handleCancel}
-        getContainer={() => containerRef?.current}
+        getContainer={() => containerRef.current}
         style={modalStyle}
         width={taskWidth}
         closable={false}
@@ -192,7 +193,7 @@ export function TaskPreviewEditModal({
         transitionName="" // Disable modal open animation
         maskTransitionName=""
       >
-        {task?.cover?.color && (
+        {task.cover.color && (
           <div
             className="group-task-header"
             style={{
@@ -201,17 +202,17 @@ export function TaskPreviewEditModal({
             }}
           ></div>
         )}
-        {task?.cover?.idUploadedBackground && (
+        {task.cover.idUploadedBackground && (
           <div
             className="group-task-header img-cover"
-            style={{ backgroundImage: `url(${task?.cover?.scaled[2]?.url})` }}
+            style={{ backgroundImage: `url(${task.cover.scaled[2].url})` }}
           ></div>
         )}
         <main className="task-preview-edit-modal-content">
-          <article className="group-task-content-labels">
+          <article className="preview-labels">
             {taskLabels?.map((label) => (
               <TaskPreviewLabel
-                key={label.color}
+                key={label.id}
                 label={label}
                 isExpanded={true}
               />
@@ -229,12 +230,11 @@ export function TaskPreviewEditModal({
           Save
         </button>
         <section
-          className={`floating-buttons ${
-            task?.cover?.size === "full" ? "full-cover" : ""
-          }`}
+          className={`floating-buttons ${task.cover.size === "full" ? "full-cover" : ""
+            }`}
         >
           {modalActionButtons.map((btn, index) => (
-            <div key={index}>{btn.popover}</div>
+            <div key={index} style={{ display: (task.cover.size === "normal" || btn.cover) ? "block" : "none" }}>{btn.popover}</div>
           ))}
         </section>
       </Modal>
