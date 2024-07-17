@@ -273,6 +273,7 @@ export const utilService = {
   createCheckListItem,
   createCheckList,
   getEmojis,
+  getBadges,
 };
 
 export const USERS_KEY = "users";
@@ -523,6 +524,37 @@ function createNewGroup(group) {
     pos: group.pos,
     tasks: [],
   };
+}
+
+function getBadges(task) {
+  if (!task) return;
+  const badges = {
+    checkLists: {
+      count: null,
+      allChecked: false,
+    },
+    desc: task.desc.length > 0,
+  };
+
+  if (task.checkLists) {
+    const taskCheckedItemsCount = task.checkLists.reduce(
+      (sum, obj) => sum + obj.checkItems.length,
+      0
+    );
+    const totalCheckdItemsLength = task.checkLists.reduce((sum, obj) => {
+      const localItemsCount = obj.checkItems.filter(
+        (item) => item.isChecked === true
+      ).length;
+      return sum + localItemsCount;
+    }, 0);
+    if (taskCheckedItemsCount / totalCheckdItemsLength === 1) {
+      badges.checkLists.allChecked = true;
+    }
+    if (taskCheckedItemsCount) {
+      badges.checkLists.count = `${totalCheckdItemsLength} / ${taskCheckedItemsCount}`;
+    }
+  }
+  return badges;
 }
 
 async function createNewBoard(board) {

@@ -63,7 +63,6 @@
 @import "cmps/Task/ManageTaskPopovers/AddCheckListPopover";
 @import "cmps/Task/ManageTaskPopovers/EmojiPopover";
 
-
 //Task details
 @import "cmps/Task/TaskDetailsModal/TaskDetailsLabels.scss";
 @import "cmps/Task/TaskDetailsModal/TaskDetailsMarkdown.scss";
@@ -105,7 +104,9 @@
   --ds-background-selected-hovered: #09326c;
   --ds-text-subtlest: #8c9bab;
   --ds-background-brand-bold-hovered: #85b8ff;
-  --ds-shadow-overlay: 0px 0px 0px 1px #39424a, 0px 8px 12px #0304045C, 0px 0px 1px 1px #03040480;
+  --ds-shadow-overlay: 0px 0px 0px 1px #39424a, 0px 8px 12px #0304045c,
+    0px 0px 1px 1px #03040480;
+  --ds-background-success-bold: #4bce97;
 }
 
 :root {
@@ -114,7 +115,10 @@
   --dynamic-text: #ffffff;
   --dynamic-header-text: #ffffff;
   --board-header-background-color: #0000003d;
-  --header-button-hovered: var(--dynamic-button-hovered, rgba(255, 255, 255, 0.3));
+  --header-button-hovered: var(
+    --dynamic-button-hovered,
+    rgba(255, 255, 255, 0.3)
+  );
   --header-button-color: var(--ds-text-subtle, #44546f);
   --create-menu-button-background: rgba(255, 255, 255, 0.2);
   --create-menu-button-background-hovered: rgba(255, 255, 255, 0.3);
@@ -143,9 +147,8 @@
   --ds-background-selected-hovered: #cce0ff;
   --ds-text-subtlest: #626f86;
   --ds-background-brand-bold-hovered: #0055cc;
-  --ds-shadow-overlay: 0px 8px 12px #091E4226, 0px 0px 1px #091E424F;
-
+  --ds-shadow-overlay: 0px 8px 12px #091e4226, 0px 0px 1px #091e424f;
   --dynamic-text-transparent: hsla(0, 0%, 100%, 0.16);
   --dynamic-background-transparent: hsla(40, 89.6%, 26.2%, 0.9);
-
+  --ds-background-success-bold: #1f845a;
 }

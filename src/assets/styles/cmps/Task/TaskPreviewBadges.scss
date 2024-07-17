@@ -1,46 +1,55 @@
 .task-preview-badges {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-weight: 400;
+  margin-top: 5px;
+  .task-bg-cover,
+  .task-img-cover {
+    display: none;
+  }
+
+  .aside-task-users {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    font-weight: 300;
+    gap: 4px;
+  }
 
-    .task-bg-cover,
-    .task-img-cover {
-        display: none;
-    }
+  .aside-task-icons {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+  }
 
-    .aside-task-users {
-        display: flex;
-        flex-direction: row;
-        gap: 4px;
-    }
+  .aside-task-icons .task-preview-icons {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+  }
 
-    .aside-task-icons {
-        display: flex;
-        flex-direction: row;
-        gap: 6px;
+  .task-icon-wrapper {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    padding: 2px 4px 2px 2px;
+    border-radius: 3px;
+    &.checklist.all-checked {
+      background-color: var(--ds-background-success-bold, #1f845a);
+      color: var(--ds-text-inverse, #ffffff);
+      span {
+        color: var(--ds-text-inverse, #ffffff);
+      }
     }
+  }
 
-    .aside-task-icons .task-preview-icons {
-        display: flex;
-        flex-direction: row;
-        gap: 6px;
-    }
+  .task-icon {
+    height: 16px;
+    width: 16px;
+    color: var(--ds-text-subtle);
+  }
 
-    .task-icon-wrapper {
-        display: flex;
-        align-items: center;
-        margin-right: 10px;
-    }
-
-    .task-icon {
-        height: 16px;
-        width: 16px;
-        color: var(--ds-text-subtle);
-    }
-
-    .task-icon-count {
-        font-size: 12px;
-        margin-left: 4px;
-    }
+  .task-icon-count {
+    font-size: 12px;
+    margin-left: 4px;
+  }
 }
