@@ -7,109 +7,109 @@ import { moveCard, setBoards } from "../../../store/workspace.actions";
 import { loadBoard } from "../../../store/board.actions";
 import { useNavigate } from "react-router";
 
-export function MoveCardPopover({
-  anchorEl,
-  taskId,
-  onCloseTask,
-  closeAfter = false,
-}) {
+export function MoveCardPopover({ anchorEl, task, onUpdateTask }) {
   //selectors
   const boards = useSelector((state) => state.workspaceModule.boards);
-  const board = useSelector((state) => state.boardModule.board);
-  const group = useSelector((state) =>
-    state.boardModule.board.groups?.find((g) =>
-      g.tasks?.find((t) => t.id === taskId)
-    )
+  const board = useSelector((state) =>
+    state.workspaceModule.boards.filter(b=>!b.closed).find((b) => b.id === task?.idBoard)
   );
-  const task = useSelector((state) =>
-    state.boardModule.board.groups
-      ?.find((g) => g?.tasks?.find((t) => t?.id === taskId))
-      ?.tasks.find((t) => t?.id === taskId)
+  const group = useSelector((state) =>
+    state.workspaceModule.boards
+      ?.find((b) => b.id === task?.idBoard)
+      ?.groups?.find((g) => g.tasks?.filter(g=>!g.closed).find((t) => t.id === task?.idGroup))
   );
 
   // states
   const [isOpen, setIsOpen] = useState(false);
-  const [isDisable, setIsDisable] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
   const [selectedBoardId, setSelectedBoardId] = useState(board?.id);
   const [selectedGroupId, setSelectedGroupId] = useState(group?.id);
-  const [selectedGroups, setSelectedGroups] = useState(
-    board.groups.map((group) => {
-      return { name: group.name, id: group.id };
+  const [boardGroupOptions, setBoardGroupOptions] = useState(
+    board?.groups?.filter(g=>!g.closed).map((group) => {
+      return { name: group?.name, id: group?.id };
     })
   );
-  const [positions, setPositions] = useState(
+  const [selectedGroupTaskPositions, setSelectedGroupTaskPositions] = useState(
     group?.tasks.map((g) => g.pos).sort((a, b) => a - b)
   );
   const [selectedPosition, setSelectedPosition] = useState(task?.pos);
 
-  ///memo
-  const newPositions = useMemo(() => {
-    const selectedBoard = boards.find((b) => b.id === selectedBoardId);
-    const selectedGroup = selectedBoard?.groups?.find(
-      (g) => g.id === selectedGroupId
-    );
+ 
 
-    return selectedGroup?.tasks?.map((t) => t.pos).sort((a, b) => a - b) || [];
-  }, [selectedBoardId, selectedGroupId, boards]);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    // setBoards();
-    // loadBoard(selectedBoardId);
-  }, []);
 
   // useEffect position
   useEffect(() => {
-    if (selectedBoardId && boards.length > 0 && newPositions.length > 0) {
+    if (!boards.length) return;
+    const newPositions =
+      boards
+        .find((b) => b.id === selectedBoardId)
+        ?.groups?.filter(g=>!g.closed).find((g) => g.id === selectedGroupId)
+        ?.tasks?.filter(t=>!t.closed).map((t) => t.pos)
+        .sort((a, b) => a - b) || [];
+
+    if (selectedBoardId && newPositions.length > 0) {
       if (
         selectedBoardId !== task?.idBoard ||
         selectedGroupId !== task?.idGroup
       ) {
-        setPositions([...newPositions, Math.max(...newPositions) + 12111]);
+        setSelectedGroupTaskPositions([
+          ...newPositions,
+          Math.max(...newPositions) + 34333,
+        ]);
       } else {
-        setPositions(newPositions);
+        setSelectedGroupTaskPositions(newPositions);
       }
+
       if (task?.idGroup === selectedGroupId) {
         setSelectedPosition(task?.pos);
-      } else if (newPositions.length > 0) {
-        setSelectedPosition(newPositions[0]);
       } else {
-        setPositions([65536]);
-        setSelectedPosition(newPositions[0] || 65536); // Default position if no tasks
+        setSelectedPosition(newPositions[0]);
       }
+    } else {
+      const DEFAULT_FIRST_POSITION = 65536;
+      setSelectedGroupTaskPositions([DEFAULT_FIRST_POSITION]);
+      setSelectedPosition(DEFAULT_FIRST_POSITION);
     }
   }, [
     selectedBoardId,
     selectedGroupId,
     boards,
-    newPositions,
+    group,
+    board,
     task?.idGroup,
     task?.pos,
   ]);
 
+ 
+
   // use effect board & groups
   useEffect(() => {
-    const selectedBoard = boards.find((b) => b.id === selectedBoardId);
-    if (selectedBoard && selectedBoard.groups.length > 0) {
-      setIsDisable(false);
-      setSelectedGroups(
-        selectedBoard.groups.map((group) => ({
+    if (!boards.length) return;
+    const selectedBoard = boards.filter(b=>!b.closed).find((b) => b.id === selectedBoardId);
+    if (selectedBoard && selectedBoard.groups.filter(g=>!g.closed).length > 0) {
+      setIsDisabled(false);
+
+      setBoardGroupOptions(
+        selectedBoard.groups.filter(b=>!b.closed).map((group) => ({
           name: group.name,
           id: group.id,
         }))
       );
-      if (selectedBoard.id !== task.idBoard) {
+
+      if (selectedBoard.id !== task?.idBoard) {
         setSelectedGroupId(selectedBoard.groups[0].id);
       } else {
-        setSelectedGroupId(task.idGroup);
+        setSelectedGroupId(task?.idGroup);
       }
     } else {
-      setIsDisable(true);
+      setIsDisabled(true);
     }
   }, [selectedBoardId, boards]);
 
   function generatePositionOptions(array) {
-    return array.map((item, i) => ({
+    if (!array) return;
+    return array?.map((item, i) => ({
       name: i + 1,
       id: item,
     }));
@@ -123,31 +123,27 @@ export function MoveCardPopover({
     group && setSelectedGroupId(group.id);
   }
 
-  function onSelectPosition(item) {
-    item && setSelectedPosition(item.id);
+  function onSelectPosition(pos) {
+    pos && setSelectedPosition(pos.id);
   }
 
-  async function onMoveClick() {
+  async function onMoveTask() {
     let newPosDetails = {
-      idBoard: selectedBoardId,
-      idGroup: selectedGroupId,
-      pos: selectedPosition + 12111,
+      targetBoardId: selectedBoardId,
+      targetGroupId: selectedGroupId,
+      targetPos: selectedPosition,
       task,
     };
 
-    if (task.pos > selectedPosition) {
-      newPosDetails = { ...newPosDetails, pos: selectedPosition - 12111 };
-    }
-    await moveCard(newPosDetails);
     setIsOpen(false);
-    if (newPosDetails.task.idBoard !== newPosDetails.idBoard) {
-      navigate(`/b/${task.idBoard}`, { replace: true });
-      onCloseTask();
-    } else {
-      // loadBoard(task?.idBoard);
+
+    await moveCard(newPosDetails);
+
+    if (selectedBoardId !== task.idBoard) {
+      navigate(`/b/${task.idBoard}`);
     }
-    if (closeAfter) {
-      onCloseTask();
+    if (onUpdateTask) {
+      onUpdateTask();
     }
   }
 
@@ -160,7 +156,7 @@ export function MoveCardPopover({
       onOpenChange={setIsOpen}
       arrow={false}
       content={
-        <div className="move-card-popover">
+        <div className="move-card-popover" onClick={e=>e.stopPropagation()}>
           <header>
             <span>Move Card</span>
             <button onClick={() => setIsOpen(!isOpen)}>
@@ -172,7 +168,7 @@ export function MoveCardPopover({
             <section className="board-select">
               <p>Board</p>
               <CustomSelect
-                options={boards.map((board) => ({
+                options={boards.filter(b=>!b.closed).map((board) => ({
                   name: board.name,
                   id: board.id,
                 }))}
@@ -184,23 +180,27 @@ export function MoveCardPopover({
               <span>
                 <p>List</p>
                 <CustomSelect
-                  options={selectedGroups}
+                  options={boardGroupOptions}
                   onSelect={onSelectGroup}
                   value={selectedGroupId}
-                  disabled={isDisable}
+                  disabled={isDisabled}
                 />
               </span>
               <span>
                 <p>Position</p>
                 <CustomSelect
-                  options={generatePositionOptions(positions)}
+                  options={generatePositionOptions(selectedGroupTaskPositions)}
                   value={selectedPosition}
                   onSelect={onSelectPosition}
-                  disabled={isDisable}
+                  disabled={isDisabled}
                 />
               </span>
             </section>
-            <button className="move-btn" onClick={onMoveClick} disabled={isDisable}>
+            <button
+              className="move-btn"
+              onClick={onMoveTask}
+              disabled={isDisabled}
+            >
               Move
             </button>
           </div>
