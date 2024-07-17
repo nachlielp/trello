@@ -44,9 +44,7 @@ export function ManageLabelsPopover({
       });
       setBoardTaskLabels(arr);
     }
-  }, [task?.idLabels]);
-
-  // }, [task?.idLabels, boardLabels]);
+  }, [task?.idLabels, boardLabels]);
 
   useEffect(() => {
     if (inputSearch !== "") {
