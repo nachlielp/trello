@@ -21,6 +21,7 @@ import {
   DELETE_LABEL,
 } from "./board.reducer";
 import { setBoards, viewWorkspaceBoard } from "./workspace.actions";
+import { EDIT_WORKSPACE } from "./workspace.reducer";
 
 // export async function loadTrelloDataFromSource() {
 //   try {
@@ -78,7 +79,7 @@ export async function viewBoard(boardId) {
   viewWorkspaceBoard(boardId);
 }
 
-export async function setBoard(board) {
+export function setBoard(board) {
   store.dispatch({
     type: SET_BOARD,
     board: { ...board, apdatedAt: new Date().getTime() },
@@ -107,6 +108,7 @@ export async function addTask(task) {
       }),
       apdatedAt: new Date().getTime(),
     };
+    store.dispatch({ type: EDIT_WORKSPACE, board: newBoard });
     await boardService.save(newBoard);
     return newTask;
   } catch (err) {
@@ -126,6 +128,7 @@ export async function addGroup(group, boardId) {
       groups: [...board.groups, newGroup],
       apdatedAt: new Date().getTime(),
     };
+    store.dispatch({ type: EDIT_WORKSPACE, board: newBoard });
     await boardService.save(newBoard);
     return newGroup;
   } catch (err) {
@@ -153,22 +156,24 @@ export async function archiveGroup(boardId, groupId) {
     }),
     apdatedAt: new Date().getTime(),
   };
+  store.dispatch({ type: EDIT_WORKSPACE, board: newBoard });
   await boardService.save(newBoard);
   return newBoard;
 }
 
 export async function copyGroup(boardId, group) {
   const board = await boardService.getById(boardId);
-  const groupTasks = group.tasks.map((t) => ({
-    ...t,
-    id: utilService.makeId(),
-  }));
   const newGroup = {
     ...group,
     id: utilService.makeId(),
     pos: group.pos + 1,
     tasks: groupTasks,
   };
+  const groupTasks = group.tasks.map((t) => ({
+    ...t,
+    id: utilService.makeId(),
+    idGroup: newGroup.id,
+  }));
 
   const updatedGroups = board.groups.map((g) => {
     if (g.pos >= newGroup.pos) {
@@ -186,6 +191,7 @@ export async function copyGroup(boardId, group) {
     groups: updatedGroups,
     apdatedAt: new Date().getTime(),
   };
+  store.dispatch({ type: EDIT_WORKSPACE, board: newBoard });
   await boardService.save(newBoard);
 }
 
@@ -221,6 +227,7 @@ export async function moveAllCards(boardId, sourceGroupId, targetGroupId) {
     sourceGroup: { ...sourceGroup, tasks: [] },
     targetGroup: newTargetGroup,
   });
+  store.dispatch({ type: EDIT_WORKSPACE, board: newBoard });
   await boardService.save(newBoard);
 }
 
@@ -311,8 +318,11 @@ export async function updateBoard(newBoard) {
       board: { ...newBoard, apdatedAt: new Date().getTime() },
     });
     editWorkspaceBoardState({ ...newBoard, apdatedAt: new Date().getTime() });
+    store.dispatch({
+      type: EDIT_WORKSPACE,
+      board: { ...newBoard, apdatedAt: new Date().getTime() },
+    });
     await boardService.save({ ...newBoard, apdatedAt: new Date().getTime() });
-    setBoards() //TODO need something Better to update workspace boards after change in board
   } catch (err) {
     console.error("Cannot update board", err);
     throw err;
