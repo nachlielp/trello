@@ -136,7 +136,7 @@ export function TaskPreviewEditModal({
       cover: true,
       popover: (
         <MoveCardPopover
-          taskId={task.id}
+          task={task}
           onCloseTask={handleCancel}
           closeAfter={true}
           anchorEl={

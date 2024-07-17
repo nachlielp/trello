@@ -205,7 +205,7 @@ export function TaskDetailsModal({
           <span className="task-group">
             in list{" "}
             <MoveCardPopover
-              taskId={taskId}
+              task={task}
               anchorEl={<a className="group-link">{group?.name}</a>}
               onCloseTask={onCloseTask}
             />

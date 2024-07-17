@@ -1,5 +1,5 @@
 export const SET_BOARDS = "SET_BOARDS";
-export const EDIT_BOARD = "EDIT_BOARD";
+export const EDIT_WORKSPACE = "EDIT_WORKSPACE";
 export const ADD_BOARD = "ADD_BOARD";
 export const SET_BOARD = "SET_BOARD";
 export const EDIT_LABEL = "EDIT_LABEL";
@@ -28,7 +28,7 @@ export function workspaceReducer(state = initialState, action) {
       newState = { ...state, boards: action.boards };
       break;
 
-    case EDIT_BOARD:
+    case EDIT_WORKSPACE:
       newState = {
         ...state,
         boards: state.boards.map((board) =>
