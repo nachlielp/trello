@@ -69,7 +69,6 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "64f721f169b14894fac36cdf",
-            "idChecklists": [],
             "idGroup": "64f721f169b14894fac36ce6",
             "idMembers": [
               "666fe4efda8643029b6710f3",
@@ -78,10 +77,7 @@
             "idMembersVoted": [],
             "idShort": 6,
             "idAttachmentCover": null,
-            "idLabels": [
-              "51bcee7",
-              "66756c"
-            ],
+            "idLabels": ["51bcee7", "66756c"],
             "manualCoverAttachment": true,
             "name": "json",
             "pos": 65536,
@@ -916,7 +912,33 @@
         "tasks": [
           {
             "id": "66756e111dfc591fbd5518f9",
-            "checkLists": [],
+            "checkLists": [
+              {
+                "id": "fRLL1uzUgKDixaqvT8UlFDA7",
+                "label": "Todo",
+                "pos": 11222,
+                "checkItems": [
+                  {
+                    "id": "vdx7MKyLqHtCJgfX1qV8KRiB",
+                    "label": "query",
+                    "isChecked": false,
+                    "pos": 12222
+                  },
+                  {
+                    "id": "i6PQiF5Kkg0STc0XOEfmrfwL",
+                    "label": "getId",
+                    "isChecked": false,
+                    "pos": 22333
+                  },
+                  {
+                    "id": "PSSdx4NaNXpxoEKGkuUqLUPc",
+                    "label": "Have fun😀",
+                    "isChecked": false,
+                    "pos": 32444
+                  }
+                ]
+              }
+            ],
             "badges": {
               "attachmentsByType": {
                 "trello": {
@@ -954,7 +976,6 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
-            "idChecklists": [],
             "idGroup": "66756b3a4a97ac163d32e9e2",
             "idMembers": [
               "666fe4efda8643029b6710f3",
@@ -1126,7 +1147,6 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
-            "idChecklists": [],
             "idGroup": "66756b3a4a97ac163d32e9e2",
             "idMembers": [
               "666fe4efda8643029b6710f3",
@@ -1195,7 +1215,6 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
-            "idChecklists": [],
             "idGroup": "66756b3a4a97ac163d32e9e2",
             "idMembers": [],
             "idMembersVoted": [],
@@ -1272,7 +1291,6 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
-            "idChecklists": [],
             "idGroup": "66756e74ebad01c3a662aea7",
             "idMembers": [],
             "idMembersVoted": [],
@@ -1422,7 +1440,6 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
-            "idChecklists": [],
             "idGroup": "66756e74ebad01c3a662aea7",
             "idMembers": [],
             "idMembersVoted": [],
@@ -1581,7 +1598,6 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
-            "idChecklists": [],
             "idGroup": "66756e74ebad01c3a662aea7",
             "idMembers": [],
             "idMembersVoted": [],
@@ -1649,7 +1665,6 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
-            "idChecklists": [],
             "idGroup": "66756e74ebad01c3a662aea7",
             "idMembers": [],
             "idMembersVoted": [],
@@ -1719,7 +1734,6 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
-            "idChecklists": [],
             "idGroup": "66756e74ebad01c3a662aea7",
             "idMembers": [],
             "idMembersVoted": [],
@@ -1872,7 +1886,6 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
-            "idChecklists": [],
             "idGroup": "66756e74ebad01c3a662aea7",
             "idMembers": [],
             "idMembersVoted": [],
@@ -2026,7 +2039,6 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
-            "idChecklists": [],
             "idGroup": "66756e74ebad01c3a662aea7",
             "idMembers": [],
             "idMembersVoted": [],
@@ -2116,9 +2128,7 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
-            "idChecklists": [
-              "667686e9352dcdb311b45003"
-            ],
+
             "idGroup": "66756b31250742f334ce4cf0",
             "idMembers": [],
             "idMembersVoted": [],
@@ -2184,11 +2194,8 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
-            "idChecklists": [],
             "idGroup": "66756b31250742f334ce4cf0",
-            "idMembers": [
-              "666fe4efda8643029b6710f3"
-            ],
+            "idMembers": ["666fe4efda8643029b6710f3"],
             "idMembersVoted": [],
             "idShort": 13,
             "idAttachmentCover": null,
@@ -2252,7 +2259,6 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
-            "idChecklists": [],
             "idGroup": "66756b31250742f334ce4cf0",
             "idMembers": [],
             "idMembersVoted": [],
@@ -2329,7 +2335,6 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
-            "idChecklists": [],
             "idGroup": "66756c51bcee71bff3ee6112",
             "idMembers": [],
             "idMembersVoted": [],
@@ -2395,7 +2400,6 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
-            "idChecklists": [],
             "idGroup": "66756c51bcee71bff3ee6112",
             "idMembers": [],
             "idMembersVoted": [],
@@ -2461,7 +2465,6 @@
             "dueReminder": null,
             "email": null,
             "idBoard": "66756a34def1a6d3b8cd179d",
-            "idChecklists": [],
             "idGroup": "66756c51bcee71bff3ee6112",
             "idMembers": [],
             "idMembersVoted": [],
