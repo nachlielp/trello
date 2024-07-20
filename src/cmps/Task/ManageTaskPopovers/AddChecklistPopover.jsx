@@ -29,7 +29,7 @@ export function AddChecklistPopover({ anchorEl, task, editTask, editBoard }) {
   }
   async function onSubmit() {
     var minPos = 12222;
-//add taskId to checkListTaskIds
+    //add taskId to checkListTaskIds
     if (
       !board.checkListTaskIds.length ||
       !board.checkListTaskIds.includes(task.id)
@@ -51,6 +51,8 @@ export function AddChecklistPopover({ anchorEl, task, editTask, editBoard }) {
       pos: minPos - 1000,
     });
     const newTask = { ...task, checkLists: [...task.checkLists, newCheckList] };
+    setText("Checklist")
+    setIsOpen(!isOpen);
     await editTask(newTask);
   }
 

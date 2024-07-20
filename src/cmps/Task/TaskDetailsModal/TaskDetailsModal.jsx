@@ -37,6 +37,7 @@ export function TaskDetailsModal({
       ?.find((g) => g.tasks?.find((t) => t.id === taskId))
       ?.tasks.find((t) => t.id === taskId)
   );
+  const [openedInputId, setOpenedInputId] = useState(null);
 
   const user = useSelector((state) => state.userModule.user);
   const navigate = useNavigate();
@@ -180,6 +181,9 @@ export function TaskDetailsModal({
 
     await addTask(newTask);
   }
+  function onSetOpenId(id){
+    setOpenedInputId(id)
+  }
 
   return (
     <Modal
@@ -234,6 +238,8 @@ export function TaskDetailsModal({
                   deleteList={deleteList}
                   deleteItem={deleteItem}
                   createAsTask={createAsTask}
+                  openedInputId={openedInputId}
+                  setOpenedInputId={onSetOpenId}
                 />
               ))}
         </section>

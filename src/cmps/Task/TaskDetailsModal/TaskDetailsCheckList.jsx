@@ -16,6 +16,8 @@ export function TaskDetailsCheckList({
   deleteList,
   deleteItem,
   createAsTask,
+  setOpenedInputId,
+  openedInputId,
 }) {
   const [checkedCount, setCheckedCount] = useState({
     checked: 0,
@@ -25,8 +27,7 @@ export function TaskDetailsCheckList({
   const [hideChecked, setHideCHecked] = useState(false);
   const [checkItems, setCheckItems] = useState([]);
   const [isChangingTitle, setIsChangingTitle] = useState(false);
-  const [openedInputId, setOpenedInputId] = useState(null);
-
+ 
   useEffect(() => {
     if (hideChecked) {
       setCheckItems(
@@ -55,6 +56,12 @@ export function TaskDetailsCheckList({
     }
   }, [checkList]);
 
+  useEffect(() => {
+    if (openedInputId !== checkList.label && onAdd) {
+      setOnAdd(false);
+    }
+  }, [onAdd, openedInputId]);
+
   function onChangeCheckListLabel(newName) {
     changeCheckList(checkList.id, { label: newName });
   }
@@ -62,8 +69,8 @@ export function TaskDetailsCheckList({
     changeItem(checkList.id, itemId, changes);
   }
   function onAddNewItem(label) {
-    if ( label.trim() === "") {
-      setOnAdd(false)
+    if (label.trim() === "") {
+      setOnAdd(false);
       return;
     }
     var maxPos = 2111;
@@ -82,6 +89,7 @@ export function TaskDetailsCheckList({
     const checkItems = [...checkList.checkItems, newItem];
     changeCheckList(checkList.id, { checkItems });
   }
+
   function onDeleteList() {
     deleteList(checkList.id);
   }
@@ -105,8 +113,13 @@ export function TaskDetailsCheckList({
           minRows={2}
           withButtons={true}
           onSubmit={onChangeCheckListLabel}
-          inputStatus={s=>{setIsChangingTitle(s),setOpenedInputId(null)}}
-          inputIsOpen={isChangingTitle&&!openedInputId}
+          inputStatus={(s) => {
+            setIsChangingTitle(s);
+            if (s) {
+              setOpenedInputId(checkList.id);
+            }
+          }}
+          inputIsOpen={isChangingTitle && openedInputId === checkList.id}
         />
         {!isChangingTitle && (
           <>
@@ -172,21 +185,27 @@ export function TaskDetailsCheckList({
                   />,
                 ]}
               />
-               <MoreActionsItemPopover
-                    key={item.id}
-                    anchorEl={
-                      <button className="btn btn-secondary options-btn hover-options">
-                        <EllipsisOutlined />
-                      </button>
-                    }
-                    onDeleteItem={() => onDeleteItem(item.id)}
-                    onConvertToTask={() => onConvertToTask(item.id, item.label)}
-                  />
+              <MoreActionsItemPopover
+                key={item.id}
+                anchorEl={
+                  <button className="btn btn-secondary options-btn hover-options">
+                    <EllipsisOutlined />
+                  </button>
+                }
+                onDeleteItem={() => onDeleteItem(item.id)}
+                onConvertToTask={() => onConvertToTask(item.id, item.label)}
+              />
             </li>
           ))}
         <section className="add-item">
           {!onAdd ? (
-            <button className="btn add-btn" onClick={() => setOnAdd(true)}>
+            <button
+              className="btn add-btn"
+              onClick={() => {
+                setOnAdd(true);
+                setOpenedInputId(checkList.label);
+              }}
+            >
               Add an item
             </button>
           ) : (
