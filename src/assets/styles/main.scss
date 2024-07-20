@@ -16,10 +16,13 @@
 // @import "views/HomePage";
 // @import "views/CarIndex";
 // @import "views/ReviewIndex";
-// @import "views/UserDetails";
 @import "views/BoardIndex";
 @import "views/BoardDetails";
 @import "views/UserBoards";
+
+//User
+@import "views/UserProfile";
+@import "cmps/UserProf/UserSettings.scss";
 
 //Workspace
 @import "cmps/Workspace/Workspace";
@@ -107,6 +110,10 @@
   --ds-shadow-overlay: 0px 0px 0px 1px #39424a, 0px 8px 12px #0304045c,
     0px 0px 1px 1px #03040480;
   --ds-background-success-bold: #4bce97;
+  --ds-surface: #1d2125;
+  *:-webkit-autofill {
+    color-scheme: dark !important;
+  }
 }
 
 :root {
@@ -119,6 +126,7 @@
     --dynamic-button-hovered,
     rgba(255, 255, 255, 0.3)
   );
+  --ds-surface: #ffffff;
   --header-button-color: var(--ds-text-subtle, #44546f);
   --create-menu-button-background: rgba(255, 255, 255, 0.2);
   --create-menu-button-background-hovered: rgba(255, 255, 255, 0.3);

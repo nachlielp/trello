@@ -50,9 +50,16 @@
         white-space: nowrap;
       }
       .profile-username {
-        overflow: hidden;
         color: var(--ds-text-inverse, #ffffff);
         font-size: 12px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .profile-bio{
+        margin-top: 16px;
+        color: var(--ds-text, #172b4d);
+        overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
       }

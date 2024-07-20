@@ -19,7 +19,7 @@ export function userReducer(state = initialState, action) {
       break;
 
     case EDIT_USERS:
-      newState = { ...state, users: [...state.users, action.user], undoUsers: [...state.users] }
+      newState = { ...state, users: state.users.map(u=>u.id===action.user.id?action.user:u), undoUsers: [...state.users] }
       break;
 
     case EDIT_USER:

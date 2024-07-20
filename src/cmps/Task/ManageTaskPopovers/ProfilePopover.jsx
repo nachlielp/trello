@@ -14,6 +14,7 @@ export function ProfilePopover({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const user = useSelector((state) => state.userModule.user);
+  const currentMember = useSelector((state) => state.userModule.users.find(user=>user.id===member.id))
 
   function onClose(e) {
     e.stopPrapagation();
@@ -24,7 +25,7 @@ export function ProfilePopover({
       trigger="click"
       placement={placement}
       open={isOpen}
-      close={() => {}}
+      close={onClose}
       onOpenChange={setIsOpen}
       arrow={false}
       content={
@@ -37,27 +38,30 @@ export function ProfilePopover({
           </div>
           <header className="profile-header">
             <UserAvatar
-              member={member}
+              member={currentMember}
               size={88}
               offTitle={true}
-              title={`${member.fullName} (${member.username})`}
+              title={`${currentMember?.fullName} (${currentMember?.username})`}
             />
             <div className="profile-info">
-              <span className="profile-name" title={member.fullName}>
-                {member.fullName}
+              <span className="profile-name" title={currentMember?.fullName}>
+                {currentMember?.fullName}
               </span>
-              <span className="profile-username" title={member.username}>
-                @{member.username}
+              <span className="profile-username" title={currentMember?.username}>
+                @{currentMember?.username}
+              </span>
+              <span className="profile-bio" title={currentMember?.bio}>
+                {currentMember?.bio}
               </span>
             </div>
           </header>
           <ul>
             <Link
-              to={`/u/${member?.username}`}
+              to={`/u/${currentMember?.username}`}
               onClick={(e) => e.stopPropagation()}
               className="profile-link"
             >
-              {user?.id === member?.id ? "Edit" : "View"} profile info
+              {user?.id === currentMember?.id ? "Edit" : "View"} profile info
             </Link>
           </ul>
           {anchorLinks && (
