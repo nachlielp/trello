@@ -281,7 +281,7 @@ function LabelsOption({ taskLabel, selectLabel, editColor }) {
     <div className="popover-labels-option">
       <CheckBox
         type="checkbox"
-        className="checkbox"
+        className="label-checkbox"
         checked={taskLabel.isTask}
         onChange={(e) => {
           selectLabel(taskLabel, e.target.checked);
