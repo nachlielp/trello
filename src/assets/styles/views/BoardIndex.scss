@@ -33,7 +33,7 @@
   .bg {
     background-size: cover;
     background-position: center;
-    padding-bottom: 10px;
+    padding-bottom: 0px;
     height: 100%;
 
   }
@@ -53,7 +53,7 @@
     gap: 10px;
     overflow-x: auto;
     padding: 2px 6px 8px 6px;
-    height: calc(100% - 80px);
+    height: calc(100% - 65px);
 
     &::-webkit-scrollbar {
       height: 12px;
