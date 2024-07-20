@@ -57,7 +57,7 @@ export function TaskDetailsCheckList({
   }, [checkList]);
 
   useEffect(() => {
-    if (openedInputId !== checkList.label && onAdd) {
+    if (openedInputId !== checkList.label+checkList.label && onAdd) {
       setOnAdd(false);
     }
   }, [onAdd, openedInputId]);
@@ -203,7 +203,7 @@ export function TaskDetailsCheckList({
               className="btn add-btn"
               onClick={() => {
                 setOnAdd(true);
-                setOpenedInputId(checkList.label);
+                setOpenedInputId(checkList.label+checkList.label);
               }}
             >
               Add an item
