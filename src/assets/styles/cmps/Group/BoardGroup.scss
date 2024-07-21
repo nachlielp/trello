@@ -38,26 +38,11 @@
         overflow-x: hidden;
         padding: 2px 0 6px 0;
         margin: 0 3px 0 3px;
-
-        &::-webkit-scrollbar {
-          height: 12px;
-          width: 12px;
-        }
-
-        &::-webkit-scrollbar-thumb {
-          background-color: #666;
-          border-radius: 10px;
-        }
-
-        &::-webkit-scrollbar-track-piece {
-          background: #00000026;
-        }
-
-        &::-webkit-scrollbar-button {
-          display: block;
-          height: 4px;
-          width: 4px;
-        }
+        -webkit-overflow-scrolling: touch;
+        -webkit-transform: translate3d(0, 0, 0);
+        scrollbar-color: var(--ds-background-neutral-hovered, #091e4224) var(--ds-background-neutral, #091e420f);
+        scrollbar-width: thin;
+       
       }
     }
   }

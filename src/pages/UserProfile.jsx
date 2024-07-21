@@ -52,12 +52,7 @@ export function UserProfile() {
                 if (!li.visible) return;
                 return (
                   <li key={li.label}>
-                    <NavLink
-                      to={li.to}
-                      activeClassName="active"
-                      className="nav-item"
-                      end
-                    >
+                    <NavLink to={li.to} className="nav-item" end>
                       {li.label}
                     </NavLink>
                   </li>

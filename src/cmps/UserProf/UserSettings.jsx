@@ -20,25 +20,30 @@ export function UserSettings() {
     editUser({ ...user, ...inputs }).then(navigate(`/u/${inputs.username}`));
   }
   useEffect(() => {
-    console.log(users);
     if (users.length > 0) {
       const currentUser = users.find(
         (user) => user.username === params.userName
       );
       setUser(currentUser);
-    }
-    console.log(user);
-    if (user) {
       setInputs({
-        username: user.username,
-        bio: user.bio,
+        username: currentUser.username,
+        bio: currentUser.bio,
       });
     }
-  }, [users, user]);
+  }, [users, params.userName]);
+
+  useEffect(() => {
+    if (user) {
+      setInputs({
+        username: user.username || "",
+        bio: user.bio || "",
+      });
+    }
+  }, [user]);
 
   return (
     <section className="user-settings">
-      {logginedUser.id === user.id && (
+      {logginedUser.id === user?.id && (
         <>
           <h3 className="about-label">About</h3>
           <hr></hr>
