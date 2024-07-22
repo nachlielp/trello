@@ -65,6 +65,7 @@
 @import "cmps/Task/ManageTaskPopovers/MoveCardPopover";
 @import "cmps/Task/ManageTaskPopovers/AddCheckListPopover";
 @import "cmps/Task/ManageTaskPopovers/EmojiPopover";
+@import "cmps/Task/ManageTaskPopovers/ManageDatesPopover";
 
 //Task details
 @import "cmps/Task/TaskDetailsModal/TaskDetailsLabels.scss";
@@ -111,6 +112,7 @@
     0px 0px 1px 1px #03040480;
   --ds-background-success-bold: #4bce97;
   --ds-surface: #1d2125;
+
   *:-webkit-autofill {
     color-scheme: dark !important;
   }
@@ -122,10 +124,8 @@
   --dynamic-text: #ffffff;
   --dynamic-header-text: #ffffff;
   --board-header-background-color: #0000003d;
-  --header-button-hovered: var(
-    --dynamic-button-hovered,
-    rgba(255, 255, 255, 0.3)
-  );
+  --header-button-hovered: var(--dynamic-button-hovered,
+      rgba(255, 255, 255, 0.3));
   --ds-surface: #ffffff;
   --header-button-color: var(--ds-text-subtle, #44546f);
   --create-menu-button-background: rgba(255, 255, 255, 0.2);

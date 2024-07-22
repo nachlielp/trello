@@ -1,0 +1,110 @@
+.manage-dates-popover-content {
+    width: 300px;
+
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+
+    .calendar-controller {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .btn {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            border-radius: 3px;
+
+            .injected-svg {
+                width: 18px;
+                height: 18px;
+            }
+
+            &:hover {
+                background: var(--ds-background-neutral-subtle-hovered, #091e4214);
+                color: var(--ds-text, #42526E);
+            }
+
+            &:active {
+                background: var(--ds-background-neutral-subtle-pressed, #B3D4FF);
+                color: var(--ds-text, #42526E);
+            }
+        }
+
+        .next-btn {
+            transform: rotate(180deg);
+            margin-bottom: 2px;
+        }
+
+        .back-btn {
+            padding-top: 4px;
+            padding-bottom: 0;
+        }
+
+        .label {
+            letter-spacing: normal;
+            margin-block: 0px;
+            text-transform: none;
+            font: var(--ds-font-heading-xsmall, normal 600 14px / 16px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Ubuntu, system-ui, "Helvetica Neue", sans-serif);
+            color: var(--ds-text, #172B4D);
+        }
+    }
+
+    .ant-picker-content th {
+        font-size: 12px;
+        font-weight: 600;
+        color: #44546f;
+    }
+
+    .ant-picker-panel {
+        border-top: none;
+    }
+
+    .ant-picker-content {
+        height: 100%;
+    }
+
+    .ant-picker-cell {
+        padding: 0;
+    }
+
+    .calendar-view__day-cell {
+        width: 36px;
+        height: 36px;
+        border-radius: 2px;
+
+        >span {
+            display: block;
+            width: 100%;
+            height: 100%;
+            padding-top: 7px;
+        }
+
+        &:hover {
+            background-color: #e9f2ff;
+        }
+
+        &.selected {
+            background-color: #e9f2ff;
+            color: #0C66E4;
+
+            &:hover {
+                background-color: #DEEBFF;
+            }
+        }
+    }
+
+    .section-label {
+        color: var(--ds-text-subtle, #44546f);
+        display: block;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px;
+        margin-bottom: 4px;
+
+        &.selected {
+            color: #0c66e4;
+        }
+    }
+}
