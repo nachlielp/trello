@@ -1,6 +1,6 @@
-import { Popover, Calendar, Card } from "antd";
+import { Popover, Calendar, Card, Input } from "antd";
 import dayjs from "dayjs";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 // import 'dayjs/locale/en';
 import { SvgButton } from "../../CustomCpms/SvgButton";
 import { CheckBox } from "../../CustomCpms/CheckBox";
@@ -33,23 +33,34 @@ function ManageDatesPopoverContent() {
     const [value, setValue] = useState(dayjs());
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(dayjs());
+    const startDateRef = useRef(null);
+    const endDateRef = useRef(null);
+    const endTimeRef = useRef(null);
 
-    const onChange = (value) => {
-        console.log("value", value);
+    useEffect(() => {
+        startDate && (startDateRef.current.value = startDate.format('M/D/YYYY'));
+    }, [startDate]);
+
+    useEffect(() => {
+        endDate && (endDateRef.current.value = endDate.format('M/D/YYYY'));
+        endDate && (endTimeRef.current.value = endDate.format('hA'));
+    }, [endDate]);
+
+    function onChange(value) {
         setValue(value);
     }
 
-    const prevMonth = () => {
+    function prevMonth() {
         const newValue = value.subtract(1, 'month');
         setValue(newValue);
     };
 
-    const nextMonth = () => {
+    function nextMonth() {
         const newValue = value.add(1, 'month');
         setValue(newValue);
     };
 
-    const dateCellRender = (current) => {
+    function dateCellRender(current) {
         const isToday = current.isSame(dayjs(), 'day');
         const isSelected = current.isSame(value, 'day');
 
@@ -60,10 +71,27 @@ function ManageDatesPopoverContent() {
         );
     };
 
-    const cellRender = (day, info) => {
+    function cellRender(day, info) {
         if (info.type === "date") return dateCellRender(day);
         return info.originNode;
     };
+
+    function onStartDateCheck(e) {
+        if (e.target.checked) {
+            endDate ? setStartDate(dayjs(endDate).subtract(1, 'day')) : setStartDate(dayjs());
+        } else {
+            setStartDate(null);
+        }
+    }
+
+    function onEndDateCheck(e) {
+        if (e.target.checked) {
+            startDate ? setEndDate(dayjs(startDate).add(1, 'day')) : setEndDate(dayjs());
+        } else {
+            setEndDate(null);
+        }
+    }
+
     return (
         <Card className="manage-dates-popover-content">
             <header className="calendar-controller">
@@ -82,17 +110,30 @@ function ManageDatesPopoverContent() {
             />
             <article className="start-date">
                 <label className="section-label">Start Date</label>
-                <CheckBox />
-                {!startDate &&
-                    <span className="empty-date">M/D/YYYY</span>
-                }
-                {startDate &&
-                    <span className="date">{startDate.format('M/D/YYYY')}</span>
-                }
+                <div className="input-wrapper">
+                    <CheckBox onChange={onStartDateCheck} className="checkbox" />
+                    {!startDate &&
+                        <span className="empty-date">M/D/YYYY</span>
+                    }
+                    {startDate &&
+                        <Input ref={startDateRef} className="date-input" />
+                    }
+                </div>
             </article>
             <article className="end-date ">
                 <label className="section-label selected">End Date</label>
-                <CheckBox />
+                <div className="input-wrapper">
+                    <CheckBox onChange={onEndDateCheck} defaultChecked={true} className="checkbox" />
+                    {!endDate &&
+                        <span className="empty-date">M/D/YYYY</span>
+                    }
+                    {endDate &&
+                        <>
+                            <Input ref={endDateRef} className="date-input" />
+                            <Input ref={endTimeRef} className="time-input" />
+                        </>
+                    }
+                </div>
             </article>
         </Card>
     )

@@ -107,4 +107,27 @@
             color: #0c66e4;
         }
     }
+
+    .start-date,
+    .end-date {
+        .input-wrapper {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            .checkbox {
+                width: 20px;
+                margin-right: 8px;
+            }
+
+            .empty-date {
+                color: #acb5c1;
+                width: 84px;
+
+                border-radius: 2px;
+                padding: 6px;
+                background-color: #f7f8f9;
+            }
+        }
+    }
 }
