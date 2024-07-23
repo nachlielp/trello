@@ -27,7 +27,7 @@
             }
 
             &:active {
-                background: var(--ds-background-neutral-subtle-pressed, #B3D4FF);
+                background: var(--ds-background-neutral-subtle-pressed, #091E4224);
                 color: var(--ds-text, #42526E);
             }
         }
@@ -114,6 +114,7 @@
             display: flex;
             flex-direction: row;
             align-items: center;
+            margin-bottom: 16px;
 
             .checkbox {
                 width: 20px;
@@ -125,7 +126,7 @@
                 width: 84px;
 
                 border-radius: 2px;
-                padding: 6px;
+                padding: 5px 6px;
                 background-color: #f7f8f9;
             }
         }

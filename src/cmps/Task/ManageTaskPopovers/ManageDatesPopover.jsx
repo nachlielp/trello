@@ -32,13 +32,17 @@ export function ManageDatesPopover({ anchorEl }) {
 function ManageDatesPopoverContent() {
     const [value, setValue] = useState(dayjs());
     const [startDate, setStartDate] = useState(null);
+    const [startDateInputValue, setStartDateInputValue] = useState('');
     const [endDate, setEndDate] = useState(dayjs());
     const startDateRef = useRef(null);
     const endDateRef = useRef(null);
     const endTimeRef = useRef(null);
 
+
     useEffect(() => {
-        startDate && (startDateRef.current.value = startDate.format('M/D/YYYY'));
+        if (startDate) {
+            setStartDateInputValue(startDate.format('M/D/YYYY'));
+        }
     }, [startDate]);
 
     useEffect(() => {
@@ -92,6 +96,10 @@ function ManageDatesPopoverContent() {
         }
     }
 
+    function onStartDateBlur() {
+        console.log("Start date blurred");
+    }
+
     return (
         <Card className="manage-dates-popover-content">
             <header className="calendar-controller">
@@ -116,7 +124,7 @@ function ManageDatesPopoverContent() {
                         <span className="empty-date">M/D/YYYY</span>
                     }
                     {startDate &&
-                        <Input ref={startDateRef} className="date-input" />
+                        <Input ref={startDateRef} value={startDateInputValue} onChange={(e) => setStartDateInputValue(e.target.value)} className="date-input" onBlur={onStartDateBlur} />
                     }
                 </div>
             </article>
@@ -129,12 +137,19 @@ function ManageDatesPopoverContent() {
                     }
                     {endDate &&
                         <>
-                            <Input ref={endDateRef} className="date-input" />
-                            <Input ref={endTimeRef} className="time-input" />
+                            <Input ref={endDateRef} defaultValue={formatDate(endDate)} className="date-input" />
+                            <Input ref={endTimeRef} defaultValue={formatTime(endDate)} className="time-input" />
                         </>
                     }
                 </div>
             </article>
         </Card>
     )
+}
+
+function formatDate(date) {
+    return date.format('M/D/YYYY');
+}
+function formatTime(date) {
+    return date.format('hh:mm') + " " + date.format('A');
 }
