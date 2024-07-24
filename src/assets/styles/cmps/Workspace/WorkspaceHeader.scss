@@ -1,135 +1,131 @@
 .workspace-header {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-direction: row;
+  min-height: 48px;
+  max-height: 48px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--ds-border, #13161d);
+  padding: 8px;
+  gap: 4px;
+  background-color: var(--background-color);
+
+
+  .svg-btn {
     display: flex;
     align-items: center;
-    justify-content: start;
-    flex-direction: row;
-    min-height: 48px;
-    max-height: 48px;
-    overflow: hidden;
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--dynamic-text-transparent, #13161d);
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin: 8px 0px 8px 8px;
+    border-radius: 3px;
+    padding: 6px;
+    color: var(--dynamic-header-text);
+    white-space: nowrap;
+    font-size: 14px;
+    font-weight: 400;
+
+    &:hover {
+      background-color: var(--header-button-hovered);
+    }
+
+    .injected-svg {
+      margin-left: 4px;
+      margin-top: 4px;
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  .create-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--create-menu-button-background);
+    border: none;
+    cursor: pointer;
+    margin: 15px 0px 16px 8px;
+    border-radius: 3px;
+    padding: 9px;
+    color: var(--dynamic-header-text);
+    white-space: nowrap;
+    font-size: 14px;
+    font-weight: 400;
+
+    &:hover {
+      background-color: var(--create-menu-button-background-hovered);
+      color: var(--header-button-color);
+    }
+
+    .injected-svg {
+      color: var(--dynamic-header-text);
+      margin-left: 4px;
+      margin-top: 4px;
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  .btn.main {
+    width: 32px;
+    height: 32px;
+    background-color: transparent;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+
+    color: var(--dynamic-header-text);
+
+    &:hover {
+      background-color: var(--header-button-hovered);
+      color: var(--header-button-color);
+    }
+
+    .injected-svg {
+      color: var(--dynamic-header-text);
+      margin: 3px 2px 0 2px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .gif-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin: 8px 0;
+    border-radius: 3px;
+
+    &:hover {
+      background-color: var(--header-button-hovered);
+      color: var(--header-button-color);
+    }
+  }
+
+  .gif-btn .gif {
+    width: 80px;
+    height: 16px;
+    margin: 8px 0;
     padding: 8px;
-    gap: 4px;
+    background-image: url("/img/workspace/non-animated-trello-home.gif");
+    background-size: cover;
+    background-repeat: no-repeat;
 
-    &.white-bg {
-        border-bottom: 1px solid #d7dce1;
+    &:hover {
+      background-image: url("/img/workspace/animated-trello-home.gif");
     }
-
-
-    .svg-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-        margin: 8px 0px 8px 8px;
-        border-radius: 3px;
-        padding: 6px;
-        color: var(--dynamic-header-text);
-        white-space: nowrap;
-        font-size: 14px;
-        font-weight: 400;
-
-
-        &:hover {
-            background-color: var(--header-button-hovered);
-        }
-
-        .injected-svg {
-            margin-left: 4px;
-            margin-top: 4px;
-            width: 16px;
-            height: 16px;
-        }
-    }
-
-    .create-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: var(--create-menu-button-background);
-        border: none;
-        cursor: pointer;
-        margin: 15px 0px 16px 8px;
-        border-radius: 3px;
-        padding: 9px;
-        color: var(--dynamic-header-text);
-        white-space: nowrap;
-        font-size: 14px;
-        font-weight: 400;
-
-        &:hover {
-            background-color: var(--create-menu-button-background-hovered);
-            color: var(--header-button-color);
-        }
-
-        .injected-svg {
-            color: var(--dynamic-header-text);
-            margin-left: 4px;
-            margin-top: 4px;
-            width: 16px;
-            height: 16px;
-        }
-    }
-
-    .btn.main {
-        width: 32px;
-        height: 32px;
-        background-color: transparent;
-        border-radius: 4px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: none;
-        cursor: pointer;
-
-        color: var(--dynamic-header-text);
-
-        &:hover {
-            background-color: var(--header-button-hovered);
-            color: var(--header-button-color);
-        }
-
-        .injected-svg {
-            color: var(--dynamic-header-text);
-            margin: 3px 2px 0 2px;
-            width: 20px;
-            height: 20px;
-        }
-    }
-
-    .gif-btn {
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-        margin: 8px 0;
-        border-radius: 3px;
-
-        &:hover {
-            background-color: var(--header-button-hovered);
-            color: var(--header-button-color);
-        }
-    }
-
-    .gif-btn .gif {
-        width: 80px;
-        height: 16px;
-        margin: 8px 0;
-        padding: 8px;
-        background-image: url('/img/workspace/non-animated-trello-home.gif');
-        background-size: cover;
-        background-repeat: no-repeat;
-
-        &:hover {
-            background-image: url('/img/workspace/animated-trello-home.gif');
-        }
-
-
-    }
-
-    .gif.gray-filter {
-        filter: brightness(0) saturate(100%) invert(30%) sepia(53%) saturate(323%) hue-rotate(179deg) brightness(91%) contrast(88%);
-
-    }
+  }
+  .gif.gray-filter {
+      filter: brightness(0) saturate(100%) invert(30%) sepia(53%) saturate(323%)
+      hue-rotate(179deg) brightness(91%) contrast(88%);
+      :root.dark &{
+          filter: brightness(0) saturate(100%) invert(66%) sepia(20%) saturate(225%) hue-rotate(170deg) brightness(101%) contrast(85%) !important;
+      }
+  }
 }

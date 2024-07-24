@@ -111,12 +111,15 @@
     0px 0px 1px 1px #03040480;
   --ds-background-success-bold: #4bce97;
   --ds-surface: #1d2125;
+  --ds-header-border:hsla(211, 18%, 68%, 0.16);
+  --dynamic-background: var(--ds-surface, #FFFFFF);
   *:-webkit-autofill {
     color-scheme: dark !important;
   }
 }
 
 :root {
+  --dynamic-background: var(--ds-surface, #FFFFFF);
   --tr-background-list: #f1f2f4;
   --dynamic-icon: #ffffff;
   --dynamic-text: #ffffff;

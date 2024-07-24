@@ -100,7 +100,7 @@ export function WorkspaceIndex() {
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
         }}>
-            <WorkspaceHeader bgColor={selectedBoardId && boardBgPrefs?.backgroundColor || "#fff"} userName={user?.username} />
+            <WorkspaceHeader bgColor={selectedBoardId && boardBgPrefs?.backgroundColor || ""} userName={user?.username} />
             {(user && starredBoardIds && selectedBoardId) ?(
                 <section className="workspace-content">
                     <WorkspaceMenu colorTheme={boardBgPrefs?.backgroundBrightness} boardsInfo={boardsInfo} selectedBoardId={selectedBoardId} starredBoardIds={starredBoardIds} onStarClick={onStarClick} onAddBoard={onAddBoard} closeBoard={onCloseBoard} leaveBoard={onLeaveBoard} />
