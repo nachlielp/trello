@@ -4,12 +4,11 @@ import { SvgButton } from "../CustomCpms/SvgButton";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { UserAvatar } from "../UserAvatar";
+import { WorkspaceProfileMenu } from "./WorkspaceProfileMenu";
 
-export function WorkspaceHeader({ bgColor, userName }) {
+export function WorkspaceHeader({ bgColor, userName, setDarkMode,darkMode }) {
   const navigate = useNavigate();
-const user = useSelector(state=>state.userModule.user)
-
-
+  const user = useSelector((state) => state.userModule.user);
 
   const dynamicHeaderText =
     bgColor === "" ? "var(--ds-text-subtle, #44546f)" : "#fff";
@@ -65,11 +64,16 @@ const user = useSelector(state=>state.userModule.user)
         <button className="create-btn">Create</button>
       </nav>
       <section>
-      <UserAvatar
-                  member={user}
-                  size={28}
-                  className="user-avatar"
-                />
+        <WorkspaceProfileMenu
+          user={user}
+          darkMode={darkMode}
+          setDarkMode={setDarkMode}
+          anchorEl={
+            <button className="user-avatar">
+              <UserAvatar member={user} size={28} />
+            </button>
+          }
+        />
       </section>
     </div>
   );
