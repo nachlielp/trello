@@ -1,4 +1,4 @@
-import { Tooltip } from "antd";
+import { Flex, Tooltip } from "antd";
 import { Avatar } from "antd";
 import { utilService } from "../services/util.service";
 
@@ -21,11 +21,22 @@ export function UserAvatar({
     : {};
 
   return (
-    <Tooltip placement="bottom" title={!!!offTitle&&`${member?.fullName} (${member?.username})`} arrow={false}>
+    <Tooltip
+      placement="bottom"
+      title={!!!offTitle && `${member?.fullName} (${member?.username})`}
+      arrow={false}
+    >
       <Avatar
         key={member?.id}
         src={member?.avatarHash}
-        style={{ ...dynamicStyles,fontSize: `${size * ratio}px`, ...style }}
+        style={{
+          ...dynamicStyles,
+          fontSize: `${size * ratio}px`,
+          lineHeight: `${size * ratio}px`,
+          alignItems: "center",
+          display: "flex",
+          ...style,
+        }}
         size={size}
         {...other}
       >
