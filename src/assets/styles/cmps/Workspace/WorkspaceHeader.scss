@@ -133,7 +133,15 @@
       }
     }
   }
-  .user-avatar{
+  .user-avatar {
     cursor: pointer;
+    border-radius: 50%;
+    padding: 4px;
+    border: none;
+    background: none;
+    &:hover{
+      background-color: var(--header-button-hovered);
+    color: var(--header-button-color);
+    }
   }
 }
