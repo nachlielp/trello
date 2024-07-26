@@ -71,6 +71,8 @@ export function TaskDetailsAddToCard({ task, editTask, labelActions, editBoard }
     {
       popover: (
         <ManageDatesPopover
+          task={task}
+          editTask={editTask}
           anchorEl={
             <SvgButton src={clockIcon} className="floating-button" label="Dates" />
           }

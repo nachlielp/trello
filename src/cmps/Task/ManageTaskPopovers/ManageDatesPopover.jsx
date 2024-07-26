@@ -12,10 +12,8 @@ const customLocale = {
     },
 };
 
-
-
-export function ManageDatesPopover({ anchorEl, task }) {
-    const [isOpen, setIsOpen] = useState(true);
+export function ManageDatesPopover({ anchorEl, task, editTask }) {
+    const [isOpen, setIsOpen] = useState(false);
 
     function onClose(e) {
         e.stopPropagation();
@@ -28,17 +26,17 @@ export function ManageDatesPopover({ anchorEl, task }) {
             anchorEl={anchorEl}
             anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
             transformOrigin={{ vertical: "top", horizontal: "left" }}
-            content={<ManageDatesPopoverContent task={task} onClose={onClose} />}
+            content={<ManageDatesPopoverContent task={task} editTask={editTask} onClose={onClose} />}
             placement="right"
         >
 
-            {anchorEl}
+            <div className="anchor-el" onClick={() => setIsOpen(true)}>{anchorEl}</div>
         </Popover>
     )
 }
 
-function ManageDatesPopoverContent({ task, onClose }) {
-    const defaultEndDate = dayjs().add(1, 'day');
+function ManageDatesPopoverContent({ task, editTask, onClose }) {
+    const defaultEndDate = task.due ? dayjs(task.due) : dayjs().add(1, 'day');
     const [value, setValue] = useState(defaultEndDate);
 
     const [startDate, setStartDate] = useState(null);
@@ -53,6 +51,8 @@ function ManageDatesPopoverContent({ task, onClose }) {
     const [lastSelectedEndDate, setLastSelectedEndDate] = useState(defaultEndDate);
 
     const [focusedInput, setFocusedInput] = useState("end");//end endTime or start or "none"
+
+    const [reminder, setReminder] = useState(task.dueReminder || "none");
 
     const startDateRef = useRef(null);
     const endDateRef = useRef(null);
@@ -71,13 +71,16 @@ function ManageDatesPopoverContent({ task, onClose }) {
     }, [selectedStartDate]);
 
     useEffect(() => {
-        if (!dayjs(selectedEndDate).isSame(endDate)) {
-            setEndDate(selectedEndDate);
+        const currentHour = endDate?.hour() || 0;
+        const currentMinute = endDate?.minute() || 0;
+        if (!isSameDay(selectedEndDate, endDate)) {
+            const newEndDate = selectedEndDate.set('hour', currentHour).set('minute', currentMinute);
+            setEndDate(newEndDate);
             if (selectedStartDate && dayjs(selectedEndDate).isBefore(selectedStartDate)) {
                 setSelectedStartDate(dayjs(selectedEndDate).subtract(1, 'day'));
             }
         }
-        if (selectedEndDate && !dayjs(selectedEndDate).isSame(lastSelectedEndDate)) {
+        if (selectedEndDate && !isSameDay(selectedEndDate, lastSelectedEndDate)) {
             setLastSelectedEndDate(selectedEndDate);
         }
     }, [selectedEndDate]);
@@ -92,7 +95,6 @@ function ManageDatesPopoverContent({ task, onClose }) {
     }, [startDate]);
 
     useEffect(() => {
-        console.log("endDate", endDate);
         if (endDate) {
             setEndDateInputValue(formatDate(endDate));
             setEndTimeInputValue(formatTime(endDate));
@@ -110,7 +112,6 @@ function ManageDatesPopoverContent({ task, onClose }) {
         if (focusedInput === "start") {
             setSelectedStartDate(value);
         } else {
-
             setSelectedEndDate(value);
         }
         setFocusedInput("end");
@@ -199,13 +200,17 @@ function ManageDatesPopoverContent({ task, onClose }) {
 
     function onEndDateBlur() {
         if (isValidDate(endDateInputValue)) {
-            if (!dayjs(endDate).isSame(dayjs(endDateInputValue))) {
-                setEndDate(dayjs(endDateInputValue));
+            if (!isSameDay(endDate, dayjs(endDateInputValue))) {
+                const currentHour = endDate?.hour() || 0;
+                const currentMinute = endDate?.minute() || 0;
+                const newEndDate = dayjs(endDateInputValue).set('hour', currentHour).set('minute', currentMinute);
+                setEndDate(newEndDate);
             }
         } else {
             setEndDateInputValue(formatDate(endDate));
         }
     }
+
     function onEndTimeBlur() {
         const time = endTimeInputValue.trim().toUpperCase();
         if (isValidTime(time)) {
@@ -219,18 +224,36 @@ function ManageDatesPopoverContent({ task, onClose }) {
             }
 
             const endTime = dayjs(endDate).set('hour', hour24).set('minute', parseInt(minute, 10));
-            if (!dayjs(endDate).isSame(endTime)) {
-                setEndDate(endTime);
+
+            if (!endTime.isSame(endDate)) {
+                console.log("endTime is not same as endDate");
+                const currentHour = endTime?.hour() || 0;
+                const currentMinute = endTime?.minute() || 0;
+                const newEndDate = endDate.set('hour', currentHour).set('minute', currentMinute);
+                setEndDate(newEndDate);
             }
         } else {
-            console.log("non valid time", endTimeInputValue);
             setEndTimeInputValue(formatTime(endDate));
         }
     }
 
+    function onSelectReminder(e) {
+        setReminder(e.id);
+    }
+
+    function onSave() {
+        editTask({ ...task, due: endDate, start: startDate, dueReminder: reminder });
+        onClose();
+    }
+
+    function onRemove() {
+        editTask({ ...task, due: null, start: null, dueReminder: null, dueComplete: false });
+        onClose();
+    }
+
     return (
         <section className="manage-dates-content">
-            <ManageTaskPopoverHeader title="Cover" close={onClose} />
+            <ManageTaskPopoverHeader title="Dates" close={onClose} />
             <main className="manage-dates-main">
                 <header className="calendar-controller">
                     <SvgButton src="/img/taskActionBtns/arrowLeftIcon.svg" className="btn back-btn" onClick={prevMonth} />
@@ -249,7 +272,7 @@ function ManageDatesPopoverContent({ task, onClose }) {
                 <article className="start-date">
                     <label className={`section-label ${focusedInput === "start" ? "selected" : ""}`}>Start Date</label>
                     <div className="input-wrapper">
-                        <Checkbox onChange={onStartDateCheck} value={!!startDate} className="date-checkbox" />
+                        <Checkbox onChange={onStartDateCheck} checked={!!startDate} className="date-checkbox" />
                         {!startDate &&
                             <span className="empty-date">M/D/YYYY</span>
                         }
@@ -299,12 +322,12 @@ function ManageDatesPopoverContent({ task, onClose }) {
                 </article>
                 <article className="set-due-date-reminder">
                     <label className={`section-label ${focusedInput === "start" ? "selected" : ""}`}>Set due date reminder</label>
-                    <CustomSelect options={getReminderOptions()} onSelect={() => { }} optionsClassName="custom-reminder-options" />
+                    <CustomSelect options={getReminderOptions()} value={reminder} onSelect={onSelectReminder} optionsClassName="custom-reminder-options" />
                     <p className="reminder-description">Reminders will be sent to all members and watchers of this card</p>
                 </article>
                 <article className="date-btns">
-                    <button className="btn save">Save</button>
-                    <button className="btn remove">Remove</button>
+                    <button className="btn save" onClick={onSave}>Save</button>
+                    <button className="btn remove" onClick={onRemove}>Remove</button>
                 </article>
             </main>
         </section>
@@ -323,17 +346,19 @@ function isValidDate(date) {
 function isValidTime(time) {
     return /^\d{1,2}:\d{1,2} [AP]M$/.test(time);
 }
-
+function isSameDay(date1, date2) {
+    return date1.isSame(date2, 'day') && date1.isSame(date2, 'month') && date1.isSame(date2, 'year');
+}
 function getReminderOptions() {
     return [
-        { name: "None", value: "none" },
-        { name: "At time due date", value: "at_time_due_date" },
-        { name: "5 Minutes before", value: "5_minutes_before" },
-        { name: "10 Minutes before", value: "10_minutes_before" },
-        { name: "15 Minutes before", value: "15_minutes_before" },
-        { name: "1 Hour before", value: "1_hour_before" },
-        { name: "2 Hours before", value: "2_hours_before" },
-        { name: "1 Day before", value: "1_day_before" },
-        { name: "2 Days before", value: "2_days_before" },
+        { name: "None", id: "none" },
+        { name: "At time due date", id: "at_time_due_date" },
+        { name: "5 Minutes before", id: "5_minutes_before" },
+        { name: "10 Minutes before", id: "10_minutes_before" },
+        { name: "15 Minutes before", id: "15_minutes_before" },
+        { name: "1 Hour before", id: "1_hour_before" },
+        { name: "2 Hours before", id: "2_hours_before" },
+        { name: "1 Day before", id: "1_day_before" },
+        { name: "2 Days before", id: "2_days_before" },
     ]
 }
