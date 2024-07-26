@@ -1,7 +1,9 @@
 import { Popover, Calendar, Card, Input, Checkbox } from "antd";
+import { ManageTaskPopoverHeader } from "./ManageTaskPopoverHeader";
 import dayjs from "dayjs";
 import { useState, useRef, useEffect } from "react";
 import { SvgButton } from "../../CustomCpms/SvgButton";
+import { CustomSelect } from "../../CustomCpms/CustomSelect";
 
 const customLocale = {
     lang: {
@@ -13,21 +15,29 @@ const customLocale = {
 
 
 export function ManageDatesPopover({ anchorEl, task }) {
+    const [isOpen, setIsOpen] = useState(true);
+
+    function onClose(e) {
+        e.stopPropagation();
+        setIsOpen(false);
+    }
     return (
         <Popover
-            open={true}
-            onClose={() => { }}
+            open={isOpen}
+            onClose={onClose}
             anchorEl={anchorEl}
             anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
             transformOrigin={{ vertical: "top", horizontal: "left" }}
-            content={<ManageDatesPopoverContent task={task} />}
+            content={<ManageDatesPopoverContent task={task} onClose={onClose} />}
+            placement="right"
         >
+
             {anchorEl}
         </Popover>
     )
 }
 
-function ManageDatesPopoverContent({ task }) {
+function ManageDatesPopoverContent({ task, onClose }) {
     const defaultEndDate = dayjs().add(1, 'day');
     const [value, setValue] = useState(defaultEndDate);
 
@@ -95,7 +105,6 @@ function ManageDatesPopoverContent({ task }) {
             setFocusedInput("none");
         }
     }, [endDate]);
-
 
     function onSelect(value) {
         if (focusedInput === "start") {
@@ -220,73 +229,85 @@ function ManageDatesPopoverContent({ task }) {
     }
 
     return (
-        <Card className="manage-dates-popover-content">
-            <header className="calendar-controller">
-                <SvgButton src="/img/taskActionBtns/arrowLeftIcon.svg" className="btn back-btn" onClick={prevMonth} />
-                <label className="label">{value.format('MMMM YYYY')}</label>
-                <SvgButton src="/img/taskActionBtns/arrowLeftIcon.svg" className="btn next-btn" onClick={nextMonth} />
-            </header>
-            <Calendar
-                mode="month"
-                value={value}
-                fullscreen={false}
-                onSelect={onSelect}
-                fullCellRender={cellRender}
-                headerRender={() => <div></div>}
-                locale={customLocale}
-            />
-            <article className="start-date">
-                <label className={`section-label ${focusedInput === "start" ? "selected" : ""}`}>Start Date</label>
-                <div className="input-wrapper">
-                    <Checkbox onChange={onStartDateCheck} value={!!startDate} className="date-checkbox" />
-                    {!startDate &&
-                        <span className="empty-date">M/D/YYYY</span>
-                    }
-                    {startDate &&
-                        <Input
-                            ref={startDateRef}
-                            className={`custom-input ${focusedInput === "start" ? "focused" : ""}`}
-                            value={startDateInputValue}
-                            onChange={(e) => setStartDateInputValue(e.target.value)}
-                            onBlur={onStartDateBlur}
-                            onFocus={() => setFocusedInput("start")}
-                        />
-                    }
-                </div>
-            </article>
-            <article className="end-date ">
-                <label className={`section-label ${focusedInput === "end" ? "selected" : ""}`}>End Date</label>
-                <div className="input-wrapper">
-                    <Checkbox onChange={onEndDateCheck} checked={!!endDate} className="date-checkbox" />
-                    {!endDate &&
-                        <>
+        <section className="manage-dates-content">
+            <ManageTaskPopoverHeader title="Cover" close={onClose} />
+            <main className="manage-dates-main">
+                <header className="calendar-controller">
+                    <SvgButton src="/img/taskActionBtns/arrowLeftIcon.svg" className="btn back-btn" onClick={prevMonth} />
+                    <label className="label">{value.format('MMMM YYYY')}</label>
+                    <SvgButton src="/img/taskActionBtns/arrowLeftIcon.svg" className="btn next-btn" onClick={nextMonth} />
+                </header>
+                <Calendar
+                    mode="month"
+                    value={value}
+                    fullscreen={false}
+                    onSelect={onSelect}
+                    fullCellRender={cellRender}
+                    headerRender={() => <div></div>}
+                    locale={customLocale}
+                />
+                <article className="start-date">
+                    <label className={`section-label ${focusedInput === "start" ? "selected" : ""}`}>Start Date</label>
+                    <div className="input-wrapper">
+                        <Checkbox onChange={onStartDateCheck} value={!!startDate} className="date-checkbox" />
+                        {!startDate &&
                             <span className="empty-date">M/D/YYYY</span>
-                            <span className="empty-date">hh:mm a</span>
-                        </>
-                    }
-                    {endDate &&
-                        <>
+                        }
+                        {startDate &&
                             <Input
-                                ref={endDateRef}
-                                className={`custom-input ${focusedInput === "end" ? "focused" : ""}`}
-                                value={endDateInputValue}
-                                onChange={(e) => setEndDateInputValue(e.target.value)}
-                                onBlur={onEndDateBlur}
-                                onFocus={() => setFocusedInput("end")}
+                                ref={startDateRef}
+                                className={`custom-input ${focusedInput === "start" ? "focused" : ""}`}
+                                value={startDateInputValue}
+                                onChange={(e) => setStartDateInputValue(e.target.value)}
+                                onBlur={onStartDateBlur}
+                                onFocus={() => setFocusedInput("start")}
                             />
-                            <Input
-                                ref={endTimeRef}
-                                className={`custom-input ${focusedInput === "endTime" ? "focused" : ""}`}
-                                value={endTimeInputValue}
-                                onChange={(e) => setEndTimeInputValue(e.target.value)}
-                                onBlur={onEndTimeBlur}
-                                onFocus={() => setFocusedInput("endTime")}
-                            />
-                        </>
-                    }
-                </div>
-            </article>
-        </Card>
+                        }
+                    </div>
+                </article>
+                <article className="end-date ">
+                    <label className={`section-label ${focusedInput === "end" ? "selected" : ""}`}>End Date</label>
+                    <div className="input-wrapper">
+                        <Checkbox onChange={onEndDateCheck} checked={!!endDate} className="date-checkbox" />
+                        {!endDate &&
+                            <>
+                                <span className="empty-date">M/D/YYYY</span>
+                                <span className="empty-date">hh:mm a</span>
+                            </>
+                        }
+                        {endDate &&
+                            <>
+                                <Input
+                                    ref={endDateRef}
+                                    className={`custom-input ${focusedInput === "end" ? "focused" : ""}`}
+                                    value={endDateInputValue}
+                                    onChange={(e) => setEndDateInputValue(e.target.value)}
+                                    onBlur={onEndDateBlur}
+                                    onFocus={() => setFocusedInput("end")}
+                                />
+                                <Input
+                                    ref={endTimeRef}
+                                    className={`custom-input ${focusedInput === "endTime" ? "focused" : ""}`}
+                                    value={endTimeInputValue}
+                                    onChange={(e) => setEndTimeInputValue(e.target.value)}
+                                    onBlur={onEndTimeBlur}
+                                    onFocus={() => setFocusedInput("endTime")}
+                                />
+                            </>
+                        }
+                    </div>
+                </article>
+                <article className="set-due-date-reminder">
+                    <label className={`section-label ${focusedInput === "start" ? "selected" : ""}`}>Set due date reminder</label>
+                    <CustomSelect options={getReminderOptions()} onSelect={() => { }} optionsClassName="custom-reminder-options" />
+                    <p className="reminder-description">Reminders will be sent to all members and watchers of this card</p>
+                </article>
+                <article className="date-btns">
+                    <button className="btn save">Save</button>
+                    <button className="btn remove">Remove</button>
+                </article>
+            </main>
+        </section>
     )
 }
 
@@ -301,4 +322,18 @@ function isValidDate(date) {
 }
 function isValidTime(time) {
     return /^\d{1,2}:\d{1,2} [AP]M$/.test(time);
+}
+
+function getReminderOptions() {
+    return [
+        { name: "None", value: "none" },
+        { name: "At time due date", value: "at_time_due_date" },
+        { name: "5 Minutes before", value: "5_minutes_before" },
+        { name: "10 Minutes before", value: "10_minutes_before" },
+        { name: "15 Minutes before", value: "15_minutes_before" },
+        { name: "1 Hour before", value: "1_hour_before" },
+        { name: "2 Hours before", value: "2_hours_before" },
+        { name: "1 Day before", value: "1_day_before" },
+        { name: "2 Days before", value: "2_days_before" },
+    ]
 }
