@@ -381,13 +381,7 @@ function getColorHashByName(colorName) {
 }
 
 function _createStartInfo() {
-  if (import.meta.env.VITE_TRELLO_DARKMODE) {
-    localStorage.setItem("dark", import.meta.env.VITE_TRELLO_DARKMODE);
-  }
-
-  if (localStorage.getItem("dark") === "true") {
-    document.querySelector("html").classList.add("dark");
-  }
+  
 
   //daily refresh
   if (+localStorage.getItem("date") !== new Date().getDate()) {
