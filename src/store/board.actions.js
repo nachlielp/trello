@@ -163,17 +163,18 @@ export async function archiveGroup(boardId, groupId) {
 
 export async function copyGroup(boardId, group) {
   const board = await boardService.getById(boardId);
-  const newGroup = {
-    ...group,
-    id: utilService.makeId(),
-    pos: group.pos + 1,
-    tasks: groupTasks,
-  };
+  const newGroupId = utilService.makeId()
   const groupTasks = group.tasks.map((t) => ({
     ...t,
     id: utilService.makeId(),
-    idGroup: newGroup.id,
+    idGroup: newGroupId
   }));
+  const newGroup = {
+    ...group,
+    id: newGroupId,
+    pos: group.pos + 1,
+    tasks: groupTasks,
+  };
 
   const updatedGroups = board.groups.map((g) => {
     if (g.pos >= newGroup.pos) {
