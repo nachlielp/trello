@@ -113,7 +113,6 @@ export function BoardIndex() {
       editLabel(board.id, label);
     }
     if (action === "delete") {
-      console.log("delete label", label);
       deleteLabel(board.id, label.id);
     }
     if (action === "create") {

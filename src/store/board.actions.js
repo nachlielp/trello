@@ -360,7 +360,6 @@ export async function editLabel(boardId, label) {
 
 export async function createLabel(boardId, task, label) {
   const newLabel = utilService.createNewLabel(label.name, label.color);
-  console.log('newLabel', newLabel);
   store.dispatch({ type: ADD_LABEL, label: newLabel });
   store.dispatch({ type: EDIT_TASK, task: { ...task, idLabels: [...task.idLabels, newLabel.id] } });
   const board = await boardService.getById(boardId);
