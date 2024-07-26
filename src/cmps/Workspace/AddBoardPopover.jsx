@@ -1,8 +1,6 @@
 import { Popover, Input } from "antd";
-import { useState, useEffect, useRef } from "react";
-import { SvgButton } from "../CustomCpms/SvgButton";
+import { useState, useRef } from "react";
 import { ManageTaskPopoverHeader } from "../Task/ManageTaskPopovers/ManageTaskPopoverHeader";
-import { Select } from "antd";
 import { utilService } from "../../services/util.service";
 import { CustomSelect } from "../CustomCpms/CustomSelect";
 import privateIcon from "/img/board-index/headerImgs/privateIcon.svg";
@@ -91,6 +89,7 @@ export function AddBoardPopover({ onAddBoard, anchorEl }) {
     onOpenChange(false);
   }
 
+  //TODO: add visibility options
   return (
     <Popover
       ref={popoverRef}
@@ -148,6 +147,7 @@ export function AddBoardPopover({ onAddBoard, anchorEl }) {
             className="board-visibility-select"
             options={options}
             value="workspace"
+            onSelect={() => { }}
           />
           <button className={`add-board-btn ${boardName === "" ? "disabled" : ""}`} onClick={onCreateBoard}>
             Create
