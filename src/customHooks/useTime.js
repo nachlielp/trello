@@ -1,46 +1,67 @@
 import { useState, useEffect } from 'react';
 
-const getFormattedTime = (timestamp) => {
-  const now = Date.now();
-  const diff = now - timestamp;
+const formatDate = (date) => {
+  const options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true };
+  return date.toLocaleDateString(undefined, options);
+};
 
-  const seconds = Math.floor(diff / 1000);
-  const minutes = Math.floor(seconds / 60);
-  const hours = Math.floor(minutes / 60);
-  const days = Math.floor(hours / 24);
+const getTimeString = (timestamp) => {
+  const now = new Date();
+  const time = new Date(timestamp);
+  const diffInSeconds = Math.floor((now - time) / 1000);
 
-  if (seconds < 60) return `${seconds} seconds ago`;
-  if (minutes < 60) return `${minutes} minutes ago`;
-  if (hours < 24) return `${hours} hours ago`;
+  if (diffInSeconds < 60) {
+    return `${diffInSeconds} seconds ago`;
+  }
 
-  return new Date(timestamp).toLocaleString();
+  const diffInMinutes = Math.floor(diffInSeconds / 60);
+  if (diffInMinutes < 60) {
+    return `${diffInMinutes} minutes ago`;
+  }
+
+  const diffInHours = Math.floor(diffInMinutes / 60);
+  if (diffInHours < 24) {
+    return `${diffInHours} hours ago`;
+  }
+
+  return formatDate(time);
 };
 
 const useTime = (timestamp) => {
-  const [time, setTime] = useState(() => getFormattedTime(timestamp));
+  const [timeString, setTimeString] = useState(getTimeString(timestamp));
 
   useEffect(() => {
     const updateInterval = () => {
-      const now = Date.now();
-      const diff = now - timestamp;
+      const now = new Date();
+      const time = new Date(timestamp);
+      const diffInSeconds = Math.floor((now - time) / 1000);
 
-      if (diff < 60000) return 10000; // Update every 10 seconds if less than a minute ago
-      if (diff < 3600000) return 60000; // Update every minute if less than an hour ago
-      if (diff < 86400000) return 3600000; // Update every hour if less than a day ago
+      if (diffInSeconds < 60) {
+        return 10000; // Refresh every 10 seconds
+      }
 
-      return null; // Do not update if more than a day ago
+      const diffInMinutes = Math.floor(diffInSeconds / 60);
+      if (diffInMinutes < 60) {
+        return 60000; // Refresh every minute
+      }
+
+      const diffInHours = Math.floor(diffInMinutes / 60);
+      if (diffInHours < 24) {
+        return 3600000; // Refresh every hour
+      }
+
+      return 86400000; // Refresh every day
     };
 
-    const interval = updateInterval();
-    if (interval !== null) {
-      const id = setInterval(() => {
-        setTime(getFormattedTime(timestamp));
-      }, interval);
-      return () => clearInterval(id);
-    }
+    const interval = setInterval(() => {
+      setTimeString(getTimeString(timestamp));
+    }, updateInterval());
+
+    // Clear the interval on component unmount or when timestamp changes
+    return () => clearInterval(interval);
   }, [timestamp]);
 
-  return time;
+  return timeString;
 };
 
 export default useTime;
