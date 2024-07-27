@@ -5,21 +5,14 @@ import { useSelector } from "react-redux";
 import { ProfilePopover } from "./ManageTaskPopovers/ProfilePopover";
 import { utilService } from "../../services/util.service";
 import { useEffect, useState } from "react";
-import completedIcon from "/img/board-index/detailsImgs/checkListIcon.svg";
-import clockIcon from "/img/board-index/headerImgs/filterBtn-imgs/clockIcon.svg";
 import dayjs from "dayjs";
 
 
-export function TaskPreviewBadges({ task }) {
+export function TaskPreviewBadges({ task, editTask }) {
   const members = useSelector((state) => state.boardModule.board.members);
   const [taskIcons, setTaskIcon] = useState([]);
-  const [isHover, setIsHover] = useState(false);
   const taskMembers =
     members?.filter((member) => task?.idMembers.includes(member?.id)) || [];
-
-  // useEffect(() => {
-  //   console.log(isHover);
-  // }, [isHover]);
 
   useEffect(() => {
     setTaskIcon([]);
@@ -44,27 +37,20 @@ export function TaskPreviewBadges({ task }) {
         >
           <span
             className={`task-icon-wrapper dates ${task.dueComplete && "completed"} ${dueStatus}`}
-            onMouseEnter={() => setIsHover(true)}
-            onMouseLeave={() => setIsHover(false)}
             onClick={onDateClick}
           >
-            < ReactSVG
-              key="hover-icon"
-              src={completedIcon}
-              alt="checklist"
-              className="task-icon hover-icon"
-              wrapper="span"
-              onError={(error) => console.error("Error loading checklist icon:", error)}
-            />
-            <div className="trello-icon icon-checkbox-unchecked task-icon hover-icon"></div>
-            <ReactSVG
-              key="default-icon"
-              src={clockIcon}
-              alt="clock"
-              className="task-icon default-icon"
-              wrapper="span"
-              onError={(error) => console.error("Error loading checklist icon:", error)}
-            />
+            {task.dueComplete ?
+              <>
+                <label className="trello-icon icon-clock task-icon default-icon"></label>
+                <label className="trello-icon icon-checklist task-icon hover-icon"></label>
+              </>
+              :
+              <>
+                <label className="trello-icon icon-clock task-icon default-icon"></label>
+                <label className="trello-icon icon-checkbox-unchecked task-icon hover-icon"></label>
+              </>
+            }
+
             <span className="task-icon-count">{dateLabel}</span>
           </span>
         </Tooltip>,
@@ -148,8 +134,9 @@ export function TaskPreviewBadges({ task }) {
 
   function onDateClick(e) {
     e.stopPropagation();
-    console.log('e', e);
+    editTask({ ...task, dueComplete: !task.dueComplete });
   }
+
   return (
     <div className="task-preview-badges">
       <aside className="aside-task-icons">

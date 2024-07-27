@@ -31,8 +31,10 @@
 
   .task-icon-wrapper {
     display: flex;
+    flex-direction: row;
     align-items: center;
-    padding: 2px 4px 2px 2px;
+    justify-content: center;
+    padding: 2px 6px 2px 4px;
     border-radius: 3px;
 
     &.checklist,
@@ -50,12 +52,18 @@
     &.dates {
       .hover-icon {
         display: none;
+        margin-bottom: 6px;
+      }
+
+      .task-icon {
+        margin-bottom: 6px;
       }
 
       &.overdue {
         background-color: var(--ds-background-accent-red-subtler, #ffd2cc);
         color: var(--ds-text-accent-red, #ae2a19);
 
+        .hover-icon,
         .task-icon {
           color: var(--ds-text-accent-red, #ae2a19);
         }
@@ -65,6 +73,7 @@
         background-color: var(--ds-background-danger-bold, #ca3521);
         color: var(--ds-text-inverse, #ffffff);
 
+        .hover-icon,
         .task-icon {
           color: var(--ds-text-inverse, #ffffff);
         }
@@ -74,6 +83,7 @@
         background-color: var(--ds-background-warning-bold, #e2b203);
         color: var(--ds-text-warning-inverse, #172b4d);
 
+        .hover-icon,
         .task-icon {
           color: var(--ds-text-warning-inverse, #172b4d);
         }
@@ -83,9 +93,8 @@
         cursor: pointer;
         filter: saturate(85%) brightness(85%);
 
-        .hover-icon {
+        .task-icon {
           display: block;
-          color: var(--ds-text-warning-inverse, #172b4d);
         }
 
         .default-icon {

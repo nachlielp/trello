@@ -224,7 +224,7 @@ export function TaskPreviewEditModal({
             value={taskName}
             onChange={(e) => setTaskName(e.target.value)}
           />
-          <TaskPreviewBadges task={task} />
+          <TaskPreviewBadges task={task} editTask={editTask} />
         </main>
         <button className="floating-button save-button" onClick={handleOk}>
           Save
