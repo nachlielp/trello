@@ -21,8 +21,7 @@ export function ProfilePopover({
     state.userModule.users.find((user) => user.id === member.id)
   );
 
-  function onClose(e) {
-    e.stopPrapagation();
+  function onClose() {
     setIsOpen(false);
   }
   return (
