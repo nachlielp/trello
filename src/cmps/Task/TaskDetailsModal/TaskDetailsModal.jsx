@@ -1,5 +1,5 @@
 import { Modal } from "antd";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { MoveCardPopover } from "../ManageTaskPopovers/MoveCardPopover";
@@ -17,6 +17,7 @@ import { TaskDetailsLabels } from "./TaskDetailsLabels";
 import { TaskDetailsMarkdown } from "./TaskDetailsMarkdown";
 import { NameInput } from "../../CustomCpms/NameInput";
 import { TaskDetailsCheckList } from "./TaskDetailsCheckList";
+import { TaskDetailsDates } from "./TaskDetailsDates";
 
 export function TaskDetailsModal({
   taskId,
@@ -181,7 +182,7 @@ export function TaskDetailsModal({
 
     await addTask(newTask);
   }
-  function onSetOpenId(id){
+  function onSetOpenId(id) {
     setOpenedInputId(id)
   }
 
@@ -219,11 +220,16 @@ export function TaskDetailsModal({
 
       <main className="details-body">
         <section className="details-body__left">
-          <article className="subsection">
+          <article className="subsection wrap-section">
             {hasMembers && (
               <TaskDetailsMembers currentTask={task} editTask={editTask} />
             )}
-            {task?.idLabels?.length > 0 && <TaskDetailsLabels task={task} editTask={editTask} labelActions={labelActions} />}
+            {task?.idLabels?.length > 0 &&
+              <TaskDetailsLabels task={task} editTask={editTask} labelActions={labelActions} />
+            }
+            {(task.start || task.due) &&
+              <TaskDetailsDates task={task} editTask={editTask} />
+            }
           </article>
           <TaskDetailsMarkdown editTask={editTask} task={task} />
           {task?.checkLists?.length > 0 &&

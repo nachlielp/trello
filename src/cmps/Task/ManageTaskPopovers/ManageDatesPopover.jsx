@@ -22,7 +22,8 @@ export function ManageDatesPopover({ anchorEl, task, editTask }) {
     return (
         <Popover
             open={isOpen}
-            onClose={onClose}
+            onOpenChange={setIsOpen}
+            trigger="click"
             anchorEl={anchorEl}
             anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
             transformOrigin={{ vertical: "top", horizontal: "left" }}
