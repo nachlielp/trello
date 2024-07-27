@@ -9,8 +9,12 @@
         font-size: 16px;
         line-height: 20px;
         font-weight: 600;
-        color: var(--color-text-primary);
+        // color: var(--color-text-primary);
         padding-bottom: 8px;
+
+        &.selected {
+            color: #0c66e4;
+        }
     }
 
     .injected-svg {

@@ -1,0 +1,283 @@
+.manage-dates-content {
+
+
+    .manage-dates-main {
+        width: 304px;
+        padding: 0 12px 16px;
+        background-color: #fff;
+        // border-radius: 10px;
+        // box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+
+        .calendar-controller {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .btn {
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                border-radius: 3px;
+
+                .injected-svg {
+                    width: 18px;
+                    height: 18px;
+                }
+
+                &:hover {
+                    background: var(--ds-background-neutral-subtle-hovered, #091e4214);
+                    color: var(--ds-text, #42526E);
+                }
+
+                &:active {
+                    background: var(--ds-background-neutral-subtle-pressed, #091E4224);
+                    color: var(--ds-text, #42526E);
+                }
+            }
+
+            .next-btn {
+                transform: rotate(180deg);
+                margin-bottom: 2px;
+            }
+
+            .back-btn {
+                padding-top: 4px;
+                padding-bottom: 0;
+            }
+
+            .label {
+                letter-spacing: normal;
+                margin-block: 0px;
+                text-transform: none;
+                font: var(--ds-font-heading-xsmall, normal 600 14px / 16px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Ubuntu, system-ui, "Helvetica Neue", sans-serif);
+                color: var(--ds-text, #172B4D);
+            }
+        }
+
+        .ant-picker-content th {
+            font-size: 12px;
+            font-weight: 600;
+            color: #44546f;
+        }
+
+        .ant-picker-panel {
+            border-top: none;
+        }
+
+        .ant-picker-content {
+            width: 280px;
+            height: 230px;
+        }
+
+        .ant-picker-cell {
+            padding: 0;
+        }
+
+        .calendar-view__day-cell {
+            width: 40px;
+            height: 36px;
+            border-radius: 4px;
+
+            .date-label {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+
+                width: 100%;
+                height: 100%;
+            }
+
+            &:hover {
+                background-color: #e9f2ff;
+            }
+
+            .today-indicator {
+                display: block;
+                width: 30px;
+                height: 2px;
+                background-color: transparent;
+            }
+
+            &.today {
+                color: #0C66E4;
+                font-weight: 700;
+
+                .today-indicator {
+                    background-color: #0C66E4;
+                }
+            }
+
+            &.selected,
+            &.in-range {
+                background-color: #e9f2ff;
+                color: #0C66E4;
+
+                &:hover {
+                    background-color: #DEEBFF;
+                }
+            }
+
+            &.in-range {
+                color: #44546F;
+
+                &.today {
+                    .today-indicator {
+                        background-color: #44546F;
+                    }
+                }
+            }
+
+        }
+
+        .section-label {
+            color: var(--ds-text-subtle, #44546f);
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 16px;
+            margin-bottom: 4px;
+
+            // &.selected {
+            //     color: #0c66e4;
+            // }
+        }
+
+        .start-date,
+        .end-date {
+            .input-wrapper {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                margin-bottom: 16px;
+
+                .date-checkbox {
+                    width: 20px;
+                    margin-right: 8px;
+
+                    .ant-checkbox {
+                        .ant-checkbox-inner {
+                            border: 1px solid #bec4ce;
+                            border-radius: 2px;
+                        }
+                    }
+
+                    .ant-checkbox-checked {
+                        .ant-checkbox-inner {
+                            border: 1px solid #2f77ff;
+                            border-radius: 2px;
+                        }
+                    }
+                }
+
+                .custom-input {
+                    width: 88px;
+                    margin-right: 8px;
+
+                    &.ant-input {
+                        border-radius: 3px;
+                        box-shadow: inset 0 0 0 1px var(--ds-border-input, #091e4224);
+                        border: none;
+                        padding: 4px 6px;
+
+                        &:focus {
+                            box-shadow: inset 0 0 0 2px var(--ds-border-focused, #388bff);
+                        }
+                    }
+                }
+
+                .empty-date {
+                    color: #acb5c1;
+                    width: 88px;
+
+                    border-radius: 2px;
+                    padding: 4px 9px;
+                    background-color: #f7f8f9;
+
+                    margin-right: 8px;
+                }
+            }
+        }
+
+        .set-due-date-reminder {
+            margin-bottom: 16px;
+        }
+
+        .ant-checkbox-input {
+            display: none;
+        }
+
+    }
+
+    .set-due-date-reminder {
+        .custom-select-item {
+            height: 40px;
+
+            &:has(input:focus) {
+                box-shadow: inset 0 0 0 1px var(--ds-border-focused, #388bff) !important;
+            }
+
+            .custom-input {
+                color: var(--ds-text-subtle, #44546f);
+                font-size: 12px;
+                font-weight: 700;
+                line-height: 16px;
+            }
+        }
+
+        .reminder-description {
+            margin: 8px 0 12px 0;
+            color: var(--ds-text-subtle, #44546f);
+        }
+    }
+
+    .date-btns {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 8px;
+
+        .btn {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 20px;
+            font-display: swap;
+            display: inline-flex;
+            box-sizing: border-box;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 12px;
+            border-radius: 3px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            box-shadow: none;
+
+            &.save {
+                background-color: var(--ds-background-brand-bold, #0c66e4);
+                color: var(--ds-text-inverse, #ffffff);
+
+                &:hover {
+                    background-color: var(--ds-background-brand-bold-hovered, #0055cc);
+                }
+            }
+
+            &.remove {
+                background-color: var(--ds-background-neutral, #091e420f);
+                color: var(--ds-text, #172b4d);
+
+                &:hover {
+                    background-color: var(--ds-background-neutral-hovered, #091e4224);
+                }
+            }
+        }
+
+    }
+
+}
+
+.custom-reminder-options {
+    .option {
+        padding: 6px 12px !important;
+    }
+}

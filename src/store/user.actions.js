@@ -40,7 +40,6 @@ export async function login() {
 
 export async function addBoardToUser(boardId) {
   const user = store.getState().userModule.user
-  console.log("addBoardToUser", user);
   const updatedUser = { ...user, idBoards: [...user.idBoards, boardId] }
   store.dispatch({ type: SET_USER, user: updatedUser })
 }

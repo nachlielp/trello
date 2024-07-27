@@ -8,6 +8,7 @@ export function CustomSelect({
   onSelect,
   value,
   disabled = false,
+  optionsClassName = "",
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(options[0]);
@@ -59,14 +60,14 @@ export function CustomSelect({
       content={
         !disabled && (
           <div
-            className="options"
+            className={`custom-select-options ${optionsClassName}`}
             style={{ width: `${divRef.current?.clientWidth}px` }}
           >
             {filteredItems.map((item) => (
               <button
                 key={item?.id}
                 onClick={() => onSelectOption(item)}
-                className={selectedItem?.name === item?.name ? "selected" : ""}
+                className={`option ${selectedItem?.name === item?.name ? "selected" : ""}`}
               >
                 {item?.element || item?.name}
               </button>
@@ -82,7 +83,7 @@ export function CustomSelect({
       >
         {
           <input
-          className="custom-input"
+            className="custom-input"
             ref={inputRef}
             placeholder={selectedItem?.name}
             value={searchValue}

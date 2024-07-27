@@ -190,7 +190,6 @@ export function boardReducer(state = initialState, action) {
           apdatedAt: new Date().getTime(),
         },
       };
-      console.log("newState", newState);
       break;
 
     default:

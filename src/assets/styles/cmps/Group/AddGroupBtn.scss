@@ -32,12 +32,14 @@
   border-radius: 8px;
   border: none;
   background-color: #f0f2f4;
-  margin: 8px 6px;
+  margin: 10px 0;
+
   .footer-actions {
     display: flex;
     justify-content: flex-start;
     gap: 6px;
     margin-left: 8px;
+
     .add-card-btn {
       padding: 6px 12px;
       border: none;
@@ -46,10 +48,12 @@
       font-size: 14px;
       font-weight: 600;
       border-radius: 4px;
+
       &:hover {
         background-color: var(--ds-background-brand-bold-hovered, #0055cc);
       }
     }
+
     .close-add-card-btn {
       cursor: pointer;
       border: none;
@@ -57,6 +61,7 @@
       background-color: transparent;
       color: var(--ds-text, #172b4d);
       font-size: 16px;
+
       &:hover {
         border: none;
         background-color: var(--ds-background-neutral-hovered, #091e4224);

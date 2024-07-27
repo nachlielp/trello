@@ -5,7 +5,7 @@ import coverIcon from "/img/board-index/detailsImgs/coverIcon.svg";
 import fieldsIcon from "/img/board-index/detailsImgs/fieldsIcon.svg";
 import labelIcon from "/img/board-index/headerImgs/filterBtn-imgs/labelIcon.svg";
 import clockIcon from "/img/board-index/headerImgs/filterBtn-imgs/clockIcon.svg";
-
+import { ManageDatesPopover } from "../ManageTaskPopovers/ManageDatesPopover";
 
 import { SvgButton } from "../../CustomCpms/SvgButton";
 import { ManageMembersPopover } from "../ManageTaskPopovers/ManageMembersPopover";
@@ -68,7 +68,17 @@ export function TaskDetailsAddToCard({ task, editTask, labelActions, editBoard }
         />
       ),
     },
-    { svg: clockIcon, text: "Dates" },
+    {
+      popover: (
+        <ManageDatesPopover
+          task={task}
+          editTask={editTask}
+          anchorEl={
+            <SvgButton src={clockIcon} className="floating-button" label="Dates" />
+          }
+        />
+      ),
+    },
     { svg: "/img/taskBadges/file.svg", text: "Attachment" },
     {
       popover: !isCover ? (
