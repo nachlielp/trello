@@ -40,6 +40,7 @@ export function UserAvatar({
           lineHeight: `${size * ratio}px`,
           alignItems: "center",
           display: "flex",
+          cursor:"pointer",
           ...style,
         }}
         size={size}
