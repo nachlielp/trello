@@ -11,17 +11,17 @@ const getTimeString = (timestamp) => {
   const diffInSeconds = Math.floor((now - time) / 1000);
 
   if (diffInSeconds < 60) {
-    return `${diffInSeconds} seconds ago`;
+    return `${diffInSeconds} ${diffInSeconds === 1 ? 'second' : 'seconds'} ago`;
   }
 
   const diffInMinutes = Math.floor(diffInSeconds / 60);
   if (diffInMinutes < 60) {
-    return `${diffInMinutes} minutes ago`;
+    return `${diffInMinutes} ${diffInMinutes === 1 ? 'minute' : 'minutes'} ago`;
   }
 
   const diffInHours = Math.floor(diffInMinutes / 60);
   if (diffInHours < 24) {
-    return `${diffInHours} hours ago`;
+    return `${diffInHours} ${diffInHours === 1 ? 'hour' : 'hours'} ago`;
   }
 
   return formatDate(time);
