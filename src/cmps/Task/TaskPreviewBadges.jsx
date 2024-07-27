@@ -1,27 +1,54 @@
 import { Tooltip } from "antd";
 import { ReactSVG } from "react-svg";
 import { UserAvatar } from "../UserAvatar";
-import { batch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { ProfilePopover } from "./ManageTaskPopovers/ProfilePopover";
 import { utilService } from "../../services/util.service";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 export function TaskPreviewBadges({ task }) {
   const members = useSelector((state) => state.boardModule.board.members);
-  const [badges, setBadges] = useState(utilService.getBadges(task));
   const [taskIcons, setTaskIcon] = useState([]);
-  useEffect(() => {
-    setBadges(utilService.getBadges(task));
-  }, [task]);
-
   const taskMembers =
     members?.filter((member) => task?.idMembers.includes(member?.id)) || [];
+
 
   //TODO refator to Batdg component list ...Eugene
 
   useEffect(() => {
     setTaskIcon([]);
-    if (badges.desc) {
+
+    let content = null;
+    if (task.start || task.due) {
+      if (task.start && !task.due) {
+      } else if (!task.start && task.due) {
+      } else {
+      }
+
+
+
+      setTaskIcon((prev) => [
+        ...prev,
+        <Tooltip
+          placement="bottom"
+          title="Attachments"
+          key="attachments"
+          arrow={false}
+        >
+          <span className="task-icon-wrapper">
+            <ReactSVG
+              src="/img/board-index/headerImgs/filterBtn-imgs/clockIcon.svg"
+              alt="file"
+              className="task-icon"
+              wrapper="span"
+            />
+            <span className="task-icon-count">{content}</span>
+          </span>
+        </Tooltip>,
+      ]);
+    }
+
+    if (task.desc.length > 0) {
       setTaskIcon((prev) => [
         ...prev,
         <Tooltip
@@ -41,6 +68,7 @@ export function TaskPreviewBadges({ task }) {
         </Tooltip>,
       ]);
     }
+
     if (task?.badges?.attachments > 0) {
       setTaskIcon((prev) => [
         ...prev,
@@ -62,7 +90,11 @@ export function TaskPreviewBadges({ task }) {
         </Tooltip>,
       ]);
     }
-    if (badges.checkLists.count) {
+
+    if (task.checkLists) {
+      const checklistBadge = utilService.getChecklistBadge(task);
+      if (!checklistBadge.checkLists.count) return;
+
       setTaskIcon((prev) => [
         ...prev,
         <Tooltip
@@ -72,9 +104,8 @@ export function TaskPreviewBadges({ task }) {
           arrow={false}
         >
           <span
-            className={`task-icon-wrapper checklist ${
-              badges.checkLists.allChecked ? "all-checked" : ""
-            }`}
+            className={`task-icon-wrapper checklist ${checklistBadge.checkLists.allChecked ? "all-checked" : ""
+              }`}
           >
             <ReactSVG
               src={"/img/board-index/detailsImgs/checkListIcon.svg"}
@@ -82,12 +113,14 @@ export function TaskPreviewBadges({ task }) {
               className="task-icon checklist-icon"
               wrapper="span"
             />
-            <span className="task-icon-count">{badges.checkLists.count}</span>
+            <span className="task-icon-count">{checklistBadge.checkLists.count}</span>
           </span>
         </Tooltip>,
       ]);
     }
-  }, [badges]);
+
+
+  }, [task]);
 
   return (
     <div className="task-preview-badges">
