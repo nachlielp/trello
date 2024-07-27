@@ -18,6 +18,7 @@ import { ManageLabelsPopover } from "./ManageTaskPopovers/ManageLabelsPopover";
 import { ManageCoverPopover } from "./ManageTaskPopovers/ManageCoverPopover";
 import { useSelector } from "react-redux";
 import { MoveCardPopover } from "./ManageTaskPopovers/MoveCardPopover";
+import { ManageDatesPopover } from "./ManageTaskPopovers/ManageDatesPopover";
 
 const { TextArea } = Input;
 
@@ -130,7 +131,23 @@ export function TaskPreviewEditModal({
         />
       ),
     },
-    // { label: 'Edit date', icon: timeIcon, onClick: () => console.log('Add to Y'), cover: false },
+    {
+      cover: false,
+      popover: (
+        <ManageDatesPopover
+          task={task}
+          editTask={editTask}
+          anchorEl={
+            <SvgButton
+              src={timeIcon}
+              className="floating-button"
+              label="Edit date"
+              onClick={(e) => e.stopPropagation()}
+            />
+          }
+        />
+      ),
+    },
     // { label: 'Move', icon: moveIcon, onClick: () => console.log('Add to Y'), cover: true },
     {
       cover: true,

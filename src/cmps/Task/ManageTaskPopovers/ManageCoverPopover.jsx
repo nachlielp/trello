@@ -125,6 +125,7 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
             }
         >
             {anchorEl}
+
         </Popover>
     );
 }

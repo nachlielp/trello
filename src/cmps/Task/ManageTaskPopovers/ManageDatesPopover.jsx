@@ -30,8 +30,7 @@ export function ManageDatesPopover({ anchorEl, task, editTask }) {
             content={<ManageDatesPopoverContent task={task} editTask={editTask} onClose={onClose} />}
             placement="right"
         >
-
-            <div className="anchor-el" onClick={() => setIsOpen(true)}>{anchorEl}</div>
+            {anchorEl}
         </Popover>
     )
 }
@@ -91,7 +90,6 @@ function ManageDatesPopoverContent({ task, editTask, onClose }) {
     }, []);
 
     useEffect(() => {
-        console.log("focusedInput", focusedInput);
     }, [focusedInput]);
 
     useEffect(() => {
@@ -153,7 +151,6 @@ function ManageDatesPopoverContent({ task, editTask, onClose }) {
     }, [endDate]);
 
     function onSelect(value) {
-        console.log("onSelect", focusedInput);
         if (focusedInput === "start") {
             setSelectedStartDate(value);
         } else {
@@ -226,7 +223,6 @@ function ManageDatesPopoverContent({ task, editTask, onClose }) {
                 setEndDate(startDate ? dayjs(startDate).add(1, 'day') : dayjs());
             }
         } else {
-            console.log("onEndDateCheck", focusedInput);
             setEndDate(null);
             setSelectedEndDate(null);
             setFocusedInput("start");
@@ -271,7 +267,6 @@ function ManageDatesPopoverContent({ task, editTask, onClose }) {
             const endTime = dayjs(endDate).set('hour', hour24).set('minute', parseInt(minute, 10));
 
             if (!endTime.isSame(endDate)) {
-                console.log("endTime is not same as endDate");
                 const currentHour = endTime?.hour() || 0;
                 const currentMinute = endTime?.minute() || 0;
                 const newEndDate = endDate.set('hour', currentHour).set('minute', currentMinute);
