@@ -4,8 +4,7 @@ import useTime from "../customHooks/useTime";
 import { ProfilePopover } from "./Task/ManageTaskPopovers/ProfilePopover";
 
 export function ActivityMsg({ activity, task = false }) {
-  const timeString = useTime(activity.timeStamp)
-
+  const timeString = useTime(activity.timeStamp);
 
   switch (activity.type) {
     case "movedTask":
@@ -15,6 +14,7 @@ export function ActivityMsg({ activity, task = false }) {
             memberId={activity.userId}
             anchorEl={
               <UserAvatar
+                size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
                 className="activity-msd"
@@ -44,6 +44,7 @@ export function ActivityMsg({ activity, task = false }) {
             memberId={activity.userId}
             anchorEl={
               <UserAvatar
+                size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
                 className="activity-msd"
@@ -74,6 +75,7 @@ export function ActivityMsg({ activity, task = false }) {
             memberId={activity.userId}
             anchorEl={
               <UserAvatar
+                size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
                 className="activity-msd"
@@ -105,6 +107,7 @@ export function ActivityMsg({ activity, task = false }) {
             memberId={activity.userId}
             anchorEl={
               <UserAvatar
+                size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
                 className="activity-msd"
@@ -133,6 +136,7 @@ export function ActivityMsg({ activity, task = false }) {
             memberId={activity.userId}
             anchorEl={
               <UserAvatar
+                size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
                 className="activity-msd"
@@ -155,6 +159,7 @@ export function ActivityMsg({ activity, task = false }) {
             memberId={activity.userId}
             anchorEl={
               <UserAvatar
+                size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
                 className="activity-msd"
@@ -184,6 +189,7 @@ export function ActivityMsg({ activity, task = false }) {
             memberId={activity.userId}
             anchorEl={
               <UserAvatar
+                size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
                 className="activity-msd"
@@ -212,6 +218,7 @@ export function ActivityMsg({ activity, task = false }) {
             memberId={activity.userId}
             anchorEl={
               <UserAvatar
+                size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
                 className="activity-msd"
@@ -234,6 +241,7 @@ export function ActivityMsg({ activity, task = false }) {
             memberId={activity.userId}
             anchorEl={
               <UserAvatar
+                size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
                 className="activity-msd"
@@ -263,6 +271,7 @@ export function ActivityMsg({ activity, task = false }) {
             memberId={activity.userId}
             anchorEl={
               <UserAvatar
+                size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
                 className="activity-msd"
@@ -292,6 +301,7 @@ export function ActivityMsg({ activity, task = false }) {
             memberId={activity.userId}
             anchorEl={
               <UserAvatar
+                size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
                 className="activity-msd"
@@ -314,6 +324,7 @@ export function ActivityMsg({ activity, task = false }) {
             memberId={activity.userId}
             anchorEl={
               <UserAvatar
+                size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
                 className="activity-msd"
@@ -349,6 +360,7 @@ export function ActivityMsg({ activity, task = false }) {
             memberId={activity.userId}
             anchorEl={
               <UserAvatar
+                size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
                 className="activity-msd"
@@ -384,6 +396,7 @@ export function ActivityMsg({ activity, task = false }) {
             memberId={activity.userId}
             anchorEl={
               <UserAvatar
+                size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
                 className="activity-msd"
@@ -422,6 +435,7 @@ export function ActivityMsg({ activity, task = false }) {
             memberId={activity.userId}
             anchorEl={
               <UserAvatar
+                size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
                 className="activity-msd"
@@ -460,6 +474,7 @@ export function ActivityMsg({ activity, task = false }) {
             memberId={activity.userId}
             anchorEl={
               <UserAvatar
+                size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
                 className="activity-msd"
@@ -499,6 +514,7 @@ export function ActivityMsg({ activity, task = false }) {
             memberId={activity.userId}
             anchorEl={
               <UserAvatar
+                size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
                 className="activity-msd"
@@ -521,6 +537,7 @@ export function ActivityMsg({ activity, task = false }) {
             memberId={activity.userId}
             anchorEl={
               <UserAvatar
+                size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
                 className="activity-msd"
@@ -543,6 +560,7 @@ export function ActivityMsg({ activity, task = false }) {
             memberId={activity.userId}
             anchorEl={
               <UserAvatar
+                size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
                 className="activity-msd"
@@ -565,6 +583,7 @@ export function ActivityMsg({ activity, task = false }) {
             memberId={activity.userId}
             anchorEl={
               <UserAvatar
+                size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
                 className="activity-msd"
@@ -599,6 +618,7 @@ export function ActivityMsg({ activity, task = false }) {
             memberId={activity.userId}
             anchorEl={
               <UserAvatar
+                size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
                 className="activity-msd"
@@ -621,6 +641,7 @@ export function ActivityMsg({ activity, task = false }) {
             memberId={activity.userId}
             anchorEl={
               <UserAvatar
+                size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
                 className="activity-msd"
@@ -656,6 +677,7 @@ export function ActivityMsg({ activity, task = false }) {
             memberId={activity.userId}
             anchorEl={
               <UserAvatar
+                size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
                 className="activity-msd"
@@ -692,6 +714,7 @@ export function ActivityMsg({ activity, task = false }) {
             memberId={activity.userId}
             anchorEl={
               <UserAvatar
+                size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
                 className="activity-msd"
