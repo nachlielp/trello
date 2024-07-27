@@ -4,6 +4,17 @@
 @import "setup/mixins";
 // @import "setup/typography";
 
+@font-face {
+  font-family: 'trello-icons';
+  src: url('./fonts/trello-icon-fonts.ttf');
+}
+
+@import "./fonts/icons.scss";
+
+.trello-icon {
+  font-family: 'trello-icons';
+}
+
 // Basics
 // @import "basics/helpers";
 // @import "basics/layout";

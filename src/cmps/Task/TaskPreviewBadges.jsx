@@ -5,44 +5,67 @@ import { useSelector } from "react-redux";
 import { ProfilePopover } from "./ManageTaskPopovers/ProfilePopover";
 import { utilService } from "../../services/util.service";
 import { useEffect, useState } from "react";
+import completedIcon from "/img/board-index/detailsImgs/checkListIcon.svg";
+import clockIcon from "/img/board-index/headerImgs/filterBtn-imgs/clockIcon.svg";
+import dayjs from "dayjs";
+
 
 export function TaskPreviewBadges({ task }) {
   const members = useSelector((state) => state.boardModule.board.members);
   const [taskIcons, setTaskIcon] = useState([]);
+  const [isHover, setIsHover] = useState(false);
   const taskMembers =
     members?.filter((member) => task?.idMembers.includes(member?.id)) || [];
 
-
-  //TODO refator to Batdg component list ...Eugene
+  // useEffect(() => {
+  //   console.log(isHover);
+  // }, [isHover]);
 
   useEffect(() => {
     setTaskIcon([]);
 
-    let content = null;
     if (task.start || task.due) {
-      if (task.start && !task.due) {
-      } else if (!task.start && task.due) {
+      let dateLabel = '';
+      if (task.start && task.due) {
+        dateLabel = getDateLabel(task.start) + " - " + getDateLabel(task.due);
       } else {
+        dateLabel = getDateLabel(task.start) + getDateLabel(task.due);
       }
 
-
+      const [dueStatus, dueTooltip] = taskDueStatus(task);
 
       setTaskIcon((prev) => [
         ...prev,
         <Tooltip
           placement="bottom"
-          title="Attachments"
-          key="attachments"
+          title={dueTooltip}
+          key="dates"
           arrow={false}
         >
-          <span className="task-icon-wrapper">
-            <ReactSVG
-              src="/img/board-index/headerImgs/filterBtn-imgs/clockIcon.svg"
-              alt="file"
-              className="task-icon"
+          <span
+            className={`task-icon-wrapper dates ${task.dueComplete && "completed"} ${dueStatus}`}
+            onMouseEnter={() => setIsHover(true)}
+            onMouseLeave={() => setIsHover(false)}
+            onClick={onDateClick}
+          >
+            < ReactSVG
+              key="hover-icon"
+              src={completedIcon}
+              alt="checklist"
+              className="task-icon hover-icon"
               wrapper="span"
+              onError={(error) => console.error("Error loading checklist icon:", error)}
             />
-            <span className="task-icon-count">{content}</span>
+            <div className="trello-icon icon-checkbox-unchecked task-icon hover-icon"></div>
+            <ReactSVG
+              key="default-icon"
+              src={clockIcon}
+              alt="clock"
+              className="task-icon default-icon"
+              wrapper="span"
+              onError={(error) => console.error("Error loading checklist icon:", error)}
+            />
+            <span className="task-icon-count">{dateLabel}</span>
           </span>
         </Tooltip>,
       ]);
@@ -104,7 +127,7 @@ export function TaskPreviewBadges({ task }) {
           arrow={false}
         >
           <span
-            className={`task-icon-wrapper checklist ${checklistBadge.checkLists.allChecked ? "all-checked" : ""
+            className={`task-icon-wrapper checklist ${checklistBadge.checkLists.allChecked ? "completed" : ""
               }`}
           >
             <ReactSVG
@@ -122,6 +145,11 @@ export function TaskPreviewBadges({ task }) {
 
   }, [task]);
 
+
+  function onDateClick(e) {
+    e.stopPropagation();
+    console.log('e', e);
+  }
   return (
     <div className="task-preview-badges">
       <aside className="aside-task-icons">
@@ -143,4 +171,29 @@ export function TaskPreviewBadges({ task }) {
       </aside>
     </div>
   );
+}
+
+
+function getDateLabel(date) {
+  if (!date) return "";
+
+  if (dayjs(date).isSame(dayjs(), 'year')) {
+    return dayjs(date).format('MMM D');
+  } else {
+    return dayjs(date).format('MMM D YYYY');
+  }
+}
+
+function taskDueStatus(task) {
+  if (task.dueComplete) return ["completed", "This card is completed"];
+
+  const dueDate = dayjs(task.due);
+  const now = dayjs();
+  const diff = dueDate.diff(now, 'hours');
+
+  if (diff < -24) return ["overdue", "This card is overdue"];
+  if (diff < 0) return ["recently-overdue", "This card is due in the next 24 hours"];
+  if (diff > 24) return ["due", "This card is due in the next 24 hours"];
+  if (diff > 0) return ["due-soon", "This card is due in the next 24 hours"];
+  return ["", ""];
 }

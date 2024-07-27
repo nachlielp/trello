@@ -4,6 +4,7 @@
   justify-content: space-between;
   font-weight: 400;
   margin-top: 5px;
+
   .task-bg-cover,
   .task-img-cover {
     display: none;
@@ -18,6 +19,7 @@
   .aside-task-icons {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 6px;
   }
 
@@ -32,13 +34,66 @@
     align-items: center;
     padding: 2px 4px 2px 2px;
     border-radius: 3px;
-    &.checklist.all-checked {
-      background-color: var(--ds-background-success-bold, #1f845a);
-      color: var(--ds-text-inverse, #ffffff);
-      span {
+
+    &.checklist,
+    &.dates {
+      &.completed {
+        background-color: var(--ds-background-success-bold, #1f845a);
         color: var(--ds-text-inverse, #ffffff);
+
+        .task-icon {
+          color: var(--ds-text-inverse, #ffffff);
+        }
       }
     }
+
+    &.dates {
+      .hover-icon {
+        display: none;
+      }
+
+      &.overdue {
+        background-color: var(--ds-background-accent-red-subtler, #ffd2cc);
+        color: var(--ds-text-accent-red, #ae2a19);
+
+        .task-icon {
+          color: var(--ds-text-accent-red, #ae2a19);
+        }
+      }
+
+      &.recently-overdue {
+        background-color: var(--ds-background-danger-bold, #ca3521);
+        color: var(--ds-text-inverse, #ffffff);
+
+        .task-icon {
+          color: var(--ds-text-inverse, #ffffff);
+        }
+      }
+
+      &.due-soon {
+        background-color: var(--ds-background-warning-bold, #e2b203);
+        color: var(--ds-text-warning-inverse, #172b4d);
+
+        .task-icon {
+          color: var(--ds-text-warning-inverse, #172b4d);
+        }
+      }
+
+      &:hover {
+        cursor: pointer;
+        filter: saturate(85%) brightness(85%);
+
+        .hover-icon {
+          display: block;
+          color: var(--ds-text-warning-inverse, #172b4d);
+        }
+
+        .default-icon {
+          display: none;
+        }
+      }
+    }
+
   }
 
   .task-icon {
