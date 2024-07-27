@@ -45,7 +45,7 @@ export function BoardHeader({ board, starredBoardIds, starToggle }) {
         <div className="members">
           {members?.slice(0, 3).map((member) => (
             <ProfilePopover
-              member={member}
+              memberId={member?.id}
               placement="bottom"
               key={member.id}
               anchorEl={

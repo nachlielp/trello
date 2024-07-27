@@ -97,7 +97,7 @@ export function TaskPreviewBadges({ task }) {
       <aside className="aside-task-users">
         {taskMembers.map((member) => (
           <ProfilePopover
-            member={member}
+            memberId={member?.id}
             key={member.id}
             anchorEl={
               <UserAvatar

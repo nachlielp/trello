@@ -7,11 +7,14 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 
 export function ProfilePopover({
-  member,
+  memberId,
   anchorLinks,
   anchorEl,
   placement = "bottomLeft",
 }) {
+  const member = useSelector((state) =>
+    state.userModule.users.find((u) => (u.id = memberId))
+  );
   const [isOpen, setIsOpen] = useState(false);
   const user = useSelector((state) => state.userModule.user);
   const currentMember = useSelector((state) =>

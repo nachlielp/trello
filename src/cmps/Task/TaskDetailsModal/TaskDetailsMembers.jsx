@@ -28,7 +28,7 @@ export function TaskDetailsMembers({ currentTask, editTask }) {
       <article className="members">
         {selectedMembers.map((member) => (
           <ProfilePopover
-            member={member}
+            memberId={member?.id}
             key={member.id}
             anchorEl={
               <UserAvatar memberId={member?.id} size={32} className="member" />
