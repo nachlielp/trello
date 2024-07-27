@@ -139,23 +139,25 @@ export function TaskPreviewBadges({ task, editTask }) {
 
   return (
     <div className="task-preview-badges">
-      <aside className="aside-task-icons">
-        <section className="task-preview-icons"> {taskIcons}</section>
-      </aside>
-      <aside className="aside-task-users">
-        {taskMembers.map((member) => (
-          <ProfilePopover
-            member={member}
-            key={member.id}
-            anchorEl={
-              <UserAvatar
-                member={member}
-                onClick={(e) => e.stopPropagation()}
-              />
-            }
-          />
-        ))}
-      </aside>
+      <div className="task-badges-content">
+        <aside className="aside-task-icons">
+          <section className="task-preview-icons">{taskIcons}</section>
+        </aside>
+        <aside className="aside-task-users">
+          {taskMembers.map((member) => (
+            <ProfilePopover
+              member={member}
+              key={member.id}
+              anchorEl={
+                <UserAvatar
+                  member={member}
+                  onClick={(e) => e.stopPropagation()}
+                />
+              }
+            />
+          ))}
+        </aside>
+      </div>
     </div>
   );
 }

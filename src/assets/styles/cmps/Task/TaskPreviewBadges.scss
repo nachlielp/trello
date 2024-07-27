@@ -1,9 +1,17 @@
 .task-preview-badges {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
   font-weight: 400;
   margin-top: 5px;
+
+  .task-badges-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
 
   .task-bg-cover,
   .task-img-cover {
@@ -12,7 +20,11 @@
 
   .aside-task-users {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    margin-right: -4px;
+    margin-bottom: 4px;
+    float: right;
     gap: 4px;
   }
 
@@ -21,11 +33,14 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 6px;
+    align-self: flex-start;
+    margin-bottom: 4px;
   }
 
   .aside-task-icons .task-preview-icons {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 6px;
   }
 
