@@ -381,8 +381,6 @@ function getColorHashByName(colorName) {
 }
 
 function _createStartInfo() {
-  
-
   //daily refresh
   if (+localStorage.getItem("date") !== new Date().getDate()) {
     localStorage.clear();
@@ -503,6 +501,7 @@ function createNewTask(task) {
     isTemplate: false,
     cardRole: null,
     checkListTaskIds: [],
+    activities: [],
   };
 }
 
