@@ -50,8 +50,8 @@ export function BoardHeader({ board, starredBoardIds, starToggle }) {
               key={member.id}
               anchorEl={
                 <UserAvatar
-                  member={member}
-                  key={member.id}
+                  memberId={member?.id}
+                  key={member?.id}
                   size={28}
                   className="members-avatar"
                 />

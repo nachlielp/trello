@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { UserAvatar } from "../UserAvatar";
 import { WorkspaceProfileMenu } from "./WorkspaceProfileMenu";
 
-export function WorkspaceHeader({ bgColor, userName, setDarkMode,darkMode }) {
+export function WorkspaceHeader({ bgColor, userName, setDarkMode, darkMode }) {
   const navigate = useNavigate();
   const user = useSelector((state) => state.userModule.user);
 
@@ -70,7 +70,7 @@ export function WorkspaceHeader({ bgColor, userName, setDarkMode,darkMode }) {
           setDarkMode={setDarkMode}
           anchorEl={
             <button className="user-avatar">
-              <UserAvatar member={user} size={28} />
+              <UserAvatar memberId={user?.id} size={28} />
             </button>
           }
         />

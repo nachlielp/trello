@@ -101,7 +101,7 @@ export function FilterButton() {
                     />
                     <span className="choose">
                       <UserAvatar
-                        member={currentMember}
+                        memberId={currentMember?.id}
                         className="filter-icon"
                       />
                       <span title="Cards assigned to me">
@@ -273,12 +273,12 @@ export function FilterButton() {
                   ))}
                 <li>
                   <label className="select-label">
-                  <input type="checkbox" />
-                  <ReactSVG
-                    src={checkedIcon}
-                    className="checkbox"
-                    wrapper="span"
-                  />
+                    <input type="checkbox" />
+                    <ReactSVG
+                      src={checkedIcon}
+                      className="checkbox"
+                      wrapper="span"
+                    />
                   </label>
                   <ColorSelect />
                 </li>

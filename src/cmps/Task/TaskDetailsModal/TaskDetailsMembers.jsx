@@ -9,7 +9,6 @@ export function TaskDetailsMembers({ currentTask, editTask }) {
   const boardMembers = useSelector((state) => state.boardModule.board.members);
   const [selectedMembers, setSelectedMembers] = useState([]);
 
-
   useEffect(() => {
     setSelectedMembers(
       boardMembers.filter((member) => currentTask.idMembers.includes(member.id))
@@ -31,11 +30,17 @@ export function TaskDetailsMembers({ currentTask, editTask }) {
           <ProfilePopover
             member={member}
             key={member.id}
-            anchorEl={<UserAvatar member={member} size={32} className="member" />}
-            anchorLinks={
-              <button className="profile-remove" onClick={() => onEditTask(member.id)}>Remove from card</button>
+            anchorEl={
+              <UserAvatar memberId={member?.id} size={32} className="member" />
             }
-
+            anchorLinks={
+              <button
+                className="profile-remove"
+                onClick={() => onEditTask(member.id)}
+              >
+                Remove from card
+              </button>
+            }
           />
         ))}
         <ManageMembersPopover
@@ -47,7 +52,6 @@ export function TaskDetailsMembers({ currentTask, editTask }) {
           }
           task={currentTask}
           taskMemberIds={currentTask.idMembers}
-
         />
       </article>
     </section>

@@ -101,7 +101,7 @@ export function TaskPreviewBadges({ task }) {
             key={member.id}
             anchorEl={
               <UserAvatar
-                member={member}
+                memberId={member?.id}
                 onClick={(e) => e.stopPropagation()}
               />
             }
