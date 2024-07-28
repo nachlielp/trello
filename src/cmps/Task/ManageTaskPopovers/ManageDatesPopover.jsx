@@ -15,40 +15,40 @@ const customLocale = {
 export function ManageDatesPopover({ anchorEl, task, editTask }) {
     const [isOpen, setIsOpen] = useState(false);
 
-    function onClose(e) {
-        e.stopPropagation();
+    function onClose() {
         setIsOpen(false);
     }
+
     return (
         <Popover
             open={isOpen}
-            onClose={onClose}
+            onOpenChange={setIsOpen}
+            trigger="click"
             anchorEl={anchorEl}
             anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
             transformOrigin={{ vertical: "top", horizontal: "left" }}
             content={<ManageDatesPopoverContent task={task} editTask={editTask} onClose={onClose} />}
             placement="right"
         >
-
-            <div className="anchor-el" onClick={() => setIsOpen(true)}>{anchorEl}</div>
+            {anchorEl}
         </Popover>
     )
 }
 
 function ManageDatesPopoverContent({ task, editTask, onClose }) {
-    const defaultEndDate = task.due ? dayjs(task.due) : dayjs().add(1, 'day');
-    const [value, setValue] = useState(defaultEndDate);
+
+    const [value, setValue] = useState(dayjs());
 
     const [startDate, setStartDate] = useState(null);
     const [startDateInputValue, setStartDateInputValue] = useState('');
     const [selectedStartDate, setSelectedStartDate] = useState(null);
     const [lastSelectedStartDate, setLastSelectedStartDate] = useState(null);
 
-    const [endDate, setEndDate] = useState(defaultEndDate);
+    const [endDate, setEndDate] = useState(null);
     const [endDateInputValue, setEndDateInputValue] = useState('');
     const [endTimeInputValue, setEndTimeInputValue] = useState('');
-    const [selectedEndDate, setSelectedEndDate] = useState(defaultEndDate);
-    const [lastSelectedEndDate, setLastSelectedEndDate] = useState(defaultEndDate);
+    const [selectedEndDate, setSelectedEndDate] = useState(null);
+    const [lastSelectedEndDate, setLastSelectedEndDate] = useState(null);
 
     const [focusedInput, setFocusedInput] = useState("end");//end endTime or start or "none"
 
@@ -57,6 +57,39 @@ function ManageDatesPopoverContent({ task, editTask, onClose }) {
     const startDateRef = useRef(null);
     const endDateRef = useRef(null);
     const endTimeRef = useRef(null);
+
+    useEffect(() => {
+        const defaultEndDate = task.due ? dayjs(task.due) : dayjs().add(1, 'day');
+        console.log("defaultEndDate", defaultEndDate);
+        if (task.start && !task.due) {
+            setStartDate(dayjs(task.start));
+            setValue(dayjs(task.start));
+            setSelectedStartDate(dayjs(task.start));
+            setFocusedInput("start");
+        }
+        if (task.due && !task.start) {
+            setEndDate(dayjs(task.due));
+            setValue(dayjs(task.due));
+            setSelectedEndDate(dayjs(task.due));
+            setFocusedInput("end");
+        }
+        if (task.start && task.due) {
+            setStartDate(dayjs(task.start));
+            setEndDate(dayjs(task.due));
+            setSelectedStartDate(dayjs(task.start));
+            setSelectedEndDate(dayjs(task.due));
+            setFocusedInput("end");
+        }
+        if (!task.start && !task.due) {
+            setEndDate(dayjs().add(1, 'day'));
+            setSelectedEndDate(dayjs().add(1, 'day'));
+            setFocusedInput("end");
+        }
+    }, []);
+
+    useEffect(() => {
+        console.log("value", value);
+    }, [value]);
 
     useEffect(() => {
         if (!dayjs(selectedStartDate).isSame(startDate)) {
@@ -71,16 +104,19 @@ function ManageDatesPopoverContent({ task, editTask, onClose }) {
     }, [selectedStartDate]);
 
     useEffect(() => {
+        if (!selectedEndDate) return;
+
         const currentHour = endDate?.hour() || 0;
         const currentMinute = endDate?.minute() || 0;
-        if (!isSameDay(selectedEndDate, endDate)) {
+        if (!endDate || !isSameDay(selectedEndDate, endDate)) {
             const newEndDate = selectedEndDate.set('hour', currentHour).set('minute', currentMinute);
             setEndDate(newEndDate);
             if (selectedStartDate && dayjs(selectedEndDate).isBefore(selectedStartDate)) {
                 setSelectedStartDate(dayjs(selectedEndDate).subtract(1, 'day'));
             }
         }
-        if (selectedEndDate && !isSameDay(selectedEndDate, lastSelectedEndDate)) {
+
+        if (!isSameDay(selectedEndDate, lastSelectedEndDate)) {
             setLastSelectedEndDate(selectedEndDate);
         }
     }, [selectedEndDate]);
@@ -88,6 +124,7 @@ function ManageDatesPopoverContent({ task, editTask, onClose }) {
     useEffect(() => {
         if (startDate) {
             setStartDateInputValue(startDate.format('M/D/YYYY'));
+            setFocusedInput("start");
         } else {
             setStartDateInputValue('');
             setFocusedInput("none");
@@ -104,7 +141,11 @@ function ManageDatesPopoverContent({ task, editTask, onClose }) {
         } else {
             setEndDateInputValue('');
             setEndTimeInputValue('');
-            setFocusedInput("none");
+            if (startDate) {
+                setFocusedInput("start");
+            } else {
+                setFocusedInput("none");
+            }
         }
     }, [endDate]);
 
@@ -113,9 +154,8 @@ function ManageDatesPopoverContent({ task, editTask, onClose }) {
             setSelectedStartDate(value);
         } else {
             setSelectedEndDate(value);
+            setFocusedInput("end");
         }
-        setFocusedInput("end");
-        endDateRef.current.focus();
     }
 
     function prevMonth() {
@@ -182,9 +222,9 @@ function ManageDatesPopoverContent({ task, editTask, onClose }) {
                 setEndDate(startDate ? dayjs(startDate).add(1, 'day') : dayjs());
             }
         } else {
-            setFocusedInput("none");
             setEndDate(null);
             setSelectedEndDate(null);
+            setFocusedInput("start");
         }
     }
 
@@ -226,7 +266,6 @@ function ManageDatesPopoverContent({ task, editTask, onClose }) {
             const endTime = dayjs(endDate).set('hour', hour24).set('minute', parseInt(minute, 10));
 
             if (!endTime.isSame(endDate)) {
-                console.log("endTime is not same as endDate");
                 const currentHour = endTime?.hour() || 0;
                 const currentMinute = endTime?.minute() || 0;
                 const newEndDate = endDate.set('hour', currentHour).set('minute', currentMinute);

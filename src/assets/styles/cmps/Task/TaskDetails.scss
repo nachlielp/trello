@@ -318,6 +318,10 @@
           display: flex;
           padding-left: 34px;
 
+          &.wrap-section {
+            flex-wrap: wrap;
+          }
+
           >section {
             max-width: 100%;
             margin: 0 16px 16px 0;
