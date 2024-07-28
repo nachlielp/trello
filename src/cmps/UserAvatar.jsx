@@ -16,7 +16,7 @@ export function UserAvatar({
   ...other
 }) {
   const member = useSelector((state) =>
-    state.userModule.users.find((u) => (u.id = memberId))
+    state.userModule.users.find((u) => (u.id === memberId))
   );
 
   const ratio = 120 / 250;
