@@ -10,8 +10,7 @@ export function AddChecklistPopover({ anchorEl, task, editTask, editBoard }) {
   const [isOpen, setIsOpen] = useState(false);
   const inputRef = useRef(null);
   const [text, setText] = useState("Checklist");
-  function onClose(e) {
-    e.stopPrapagation();
+  function onClose() {
     setIsOpen(false);
   }
 
@@ -51,7 +50,7 @@ export function AddChecklistPopover({ anchorEl, task, editTask, editBoard }) {
       pos: minPos - 1000,
     });
     const newTask = { ...task, checkLists: [...task.checkLists, newCheckList] };
-    setText("Checklist")
+    setText("Checklist");
     setIsOpen(!isOpen);
     await editTask(newTask);
   }

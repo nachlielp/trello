@@ -40,7 +40,7 @@ export function UserProfile() {
       {currentUser.id && (
         <section className="user-profile">
           <header className="header-members-details">
-            <UserAvatar size={48} member={currentUser} />
+            <UserAvatar size={48} memberId={currentUser?.id} />
             <div className="member-name">
               <h1 className="full-name">{currentUser?.fullName}</h1>
               <p className="user-name">@{currentUser?.username}</p>

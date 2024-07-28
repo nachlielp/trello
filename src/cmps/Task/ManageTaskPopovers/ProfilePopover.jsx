@@ -7,17 +7,21 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 
 export function ProfilePopover({
-  member,
+  memberId,
   anchorLinks,
   anchorEl,
   placement = "bottomLeft",
 }) {
+  const member = useSelector((state) =>
+    state.userModule.users.find((u) => (u.id = memberId))
+  );
   const [isOpen, setIsOpen] = useState(false);
   const user = useSelector((state) => state.userModule.user);
-  const currentMember = useSelector((state) => state.userModule.users.find(user=>user.id===member.id))
+  const currentMember = useSelector((state) =>
+    state.userModule.users.find((user) => user.id === member.id)
+  );
 
-  function onClose(e) {
-    e.stopPrapagation();
+  function onClose() {
     setIsOpen(false);
   }
   return (
@@ -38,7 +42,7 @@ export function ProfilePopover({
           </div>
           <header className="profile-header">
             <UserAvatar
-              member={currentMember}
+              memberId={currentMember?.id}
               size={88}
               offTitle={true}
               title={`${currentMember?.fullName} (${currentMember?.username})`}
@@ -47,7 +51,10 @@ export function ProfilePopover({
               <span className="profile-name" title={currentMember?.fullName}>
                 {currentMember?.fullName}
               </span>
-              <span className="profile-username" title={currentMember?.username}>
+              <span
+                className="profile-username"
+                title={currentMember?.username}
+              >
                 @{currentMember?.username}
               </span>
               <span className="profile-bio" title={currentMember?.bio}>

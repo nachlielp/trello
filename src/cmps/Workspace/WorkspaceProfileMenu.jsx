@@ -6,7 +6,12 @@ import { Link } from "react-router-dom";
 import more from "/img/workspace/more.svg";
 import { ReactSVG } from "react-svg";
 import { WorkspaceThemePopover } from "./WorkspaceThemePopover";
-export function WorkspaceProfileMenu({ anchorEl, user,setDarkMode,darkMode }) {
+export function WorkspaceProfileMenu({
+  anchorEl,
+  user,
+  setDarkMode,
+  darkMode,
+}) {
   const [isOpen, setIsOpen] = useState(false);
 
   function onClose() {
@@ -17,8 +22,8 @@ export function WorkspaceProfileMenu({ anchorEl, user,setDarkMode,darkMode }) {
       Profile
     </Link>,
     <WorkspaceThemePopover
-    setDarkMode={setDarkMode}
-    darkMode={darkMode}
+      setDarkMode={setDarkMode}
+      darkMode={darkMode}
       anchorEl={
         <button className="theme-btn">
           <span>Theme</span>
@@ -41,7 +46,7 @@ export function WorkspaceProfileMenu({ anchorEl, user,setDarkMode,darkMode }) {
           <header className="about">
             <h2 className="workspace-menu-title">Account</h2>
             <section className="profile">
-              <UserAvatar className="user-avatar" member={user} size={40} />
+              <UserAvatar className="user-avatar" memberId={user?.id} size={40} />
               <div className="names">
                 <span className="full-name">{user?.fullName}</span>
                 <span className="user-email">{user?.email}</span>
@@ -52,8 +57,10 @@ export function WorkspaceProfileMenu({ anchorEl, user,setDarkMode,darkMode }) {
           <section className="settings">
             <h2 className="workspace-menu-title">TRELLO</h2>
             <ul className="items">
-              {settings.map((i,idx) => (
-                <li key={idx} className="setting-btn">{i}</li>
+              {settings.map((i, idx) => (
+                <li key={idx} className="setting-btn">
+                  {i}
+                </li>
               ))}
             </ul>
           </section>

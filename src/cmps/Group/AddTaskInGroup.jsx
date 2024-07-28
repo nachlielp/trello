@@ -27,7 +27,6 @@ export function AddTaskInGroup({ groupId, closeAddTask, addTask, addToTop }) {
         }
         return () => {
             lastAddedPos.current = null;
-            console.log("Unmount AddTaskInGroup")
         };
     }, []);
 

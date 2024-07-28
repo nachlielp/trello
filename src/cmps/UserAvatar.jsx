@@ -4,9 +4,10 @@ import { utilService } from "../services/util.service";
 
 import { ReactSVG } from "react-svg";
 import defaultProfile from "/img/defaultProfile.svg";
+import { useSelector } from "react-redux";
 
 export function UserAvatar({
-  member,
+  memberId,
   size = 24,
   src = defaultProfile,
   img,
@@ -14,6 +15,10 @@ export function UserAvatar({
   offTitle = false,
   ...other
 }) {
+  const member = useSelector((state) =>
+    state.userModule.users.find((u) => (u.id = memberId))
+  );
+
   const ratio = 120 / 250;
   // const ratio = 1;
   const dynamicStyles = member
@@ -35,6 +40,7 @@ export function UserAvatar({
           lineHeight: `${size * ratio}px`,
           alignItems: "center",
           display: "flex",
+          cursor:"pointer",
           ...style,
         }}
         size={size}

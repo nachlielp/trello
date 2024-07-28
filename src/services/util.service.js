@@ -503,6 +503,7 @@ function createNewTask(task) {
     isTemplate: false,
     cardRole: null,
     checkListTaskIds: [],
+    activities: [],
   };
 }
 

@@ -146,11 +146,11 @@ export function TaskPreviewBadges({ task, editTask }) {
         <aside className="aside-task-users">
           {taskMembers.map((member) => (
             <ProfilePopover
-              member={member}
+              memberId={member?.id}
               key={member.id}
               anchorEl={
                 <UserAvatar
-                  member={member}
+                  memberId={member?.id}
                   onClick={(e) => e.stopPropagation()}
                 />
               }

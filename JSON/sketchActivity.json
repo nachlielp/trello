@@ -1,0 +1,230 @@
+{
+  "activities": [
+    {
+      "id": "activityId",
+      "type": "movedTask(inBoard)",
+      "userFullName": "fullName",
+      "userId": "id",
+      "targetId": "taskId",
+      "targetName": "taskName",
+      "from": "groupName",
+      "to": "groupName",
+      "timeStamp": 1722015726446
+    },
+    {
+      "id": "activityId",
+      "type": "transferTask(betweenBoards)",
+      "userFullName": "fullName",
+      "userId": "id",
+      "targetId": "taskId",
+      "targetName": "taskName",
+      "boardId": "boardId",
+      "boardName": "boardName",
+      "timeStamp": 1722015726446
+    },
+    {
+      "id": "activityId",
+      "type": "receiveTask(betweenBoards)",
+      "userFullName": "fullName",
+      "userId": "id",
+      "targetId": "taskId",
+      "targetName": "taskName",
+      "boardId": "boardId",
+      "boardName": "boardName",
+      "timeStamp": 1722015726446
+    },
+    {
+      "id": "activityId",
+      "type": "joinTask",
+      "userFullName": "fullName",
+      "userId": "id",
+      "targetId": "taskId",
+      "targetName": "taskName",
+      "timeStamp": 1722015726446
+    },
+    {
+      "id": "activityId",
+      "type": "addGroup",
+      "userFullName": "fullName",
+      "userId": "id",
+      "targetName": "groupName",
+      "timeStamp": 1722015726446
+    },
+    {
+      "id": "activityId",
+      "type": "addTask",
+      "userFullName": "fullName",
+      "userId": "id",
+      "targetId": "taskId",
+      "targetName": "taskName",
+      "groupName": "groupName",
+      "timeStamp": 1722015726446
+    },
+    {
+      "id": "activityId",
+      "type": "archiveTask",
+      "userFullName": "fullName",
+      "userId": "id",
+      "targetId": "taskId",
+      "targetName": "taskName",
+      "timeStamp": 1722015726446
+    },
+    {
+      "id": "activityId",
+      "type": "deleteTask",
+      "userFullName": "fullName",
+      "userId": "id",
+      "targetName": "taskName",
+      "groupName": "groupName",
+      "timeStamp": 1722015726446
+    },
+    {
+      "id": "activityId",
+      "type": "addCheckList",
+      "userFullName": "fullName",
+      "userId": "id",
+      "targetId": "taskId",
+      "targetName": "taskName",
+      "checklistName": "name",
+      "timeStamp": 1722015726446
+    },
+    {
+      "id": "activityId",
+      "type": "removeCheckList",
+      "userFullName": "fullName",
+      "userId": "id",
+      "targetId": "taskId",
+      "targetName": "taskName",
+      "checklistName": "name",
+      "timeStamp": 1722015726446
+    },
+    {
+      "id": "activityId",
+      "type": "renameCheckList(onlyForTask + board need to rename previous addCheckList)",
+      "userFullName": "fullName",
+      "userId": "id",
+      "targetId": "taskId",
+      "targetName": "taskName",
+      "checklistName": "name",
+      "previousName": "name",
+      "timeStamp": 1722015726446
+    },
+    {
+      "id": "activityId",
+      "type": "checkedItemInCheckList",
+      "userFullName": "fullName",
+      "userId": "id",
+      "targetId": "taskId",
+      "targetName": "taskName",
+      "itemName": "name",
+      "timeStamp": 1722015726446
+    },
+    {
+      "id": "activityId",
+      "type": "incompleteItemInCheckList",
+      "userFullName": "fullName",
+      "userId": "id",
+      "targetId": "taskId",
+      "targetName": "taskName",
+      "itemName": "name",
+      "timeStamp": 1722015726446
+    },
+    {
+      "id": "activityId",
+      "type": "addComment",
+      "userFullName": "fullName",
+      "userId": "id",
+      "targetId": "taskId",
+      "targetName": "taskName",
+      "comment": "comment",
+      "timeStamp": 1722015726446
+    },
+    {
+      "id": "activityId",
+      "type": "addAttachment",
+      "userFullName": "fullName",
+      "userId": "id",
+      "targetId": "taskId",
+      "targetName": "taskName",
+      "attachmentLink": "attachmentLink",
+      "attachmentName": "attachmentName",
+      "timeStamp": 1722015726446
+    },
+    {
+      "id": "activityId",
+      "type": "removeAttachment",
+      "userFullName": "fullName",
+      "userId": "id",
+      "targetId": "taskId",
+      "targetName": "taskName",
+      "attachment": "attachmentLink",
+      "attachmentName": "attachmentName",
+      "timeStamp": 1722015726446
+    },
+    {
+      "id": "activityId",
+      "type": "renameBoard",
+      "userFullName": "fullName",
+      "userId": "id",
+      "previousName": "boardName",
+      "timeStamp": 1722015726446
+    },
+    {
+      "id": "activityId",
+      "type": "closeBoard",
+      "userFullName": "fullName",
+      "userId": "id",
+      "timeStamp": 1722015726446
+    },
+    {
+      "id": "activityId",
+      "type": "reopenBoard",
+      "userFullName": "fullName",
+      "userId": "id",
+      "timeStamp": 1722015726446
+    },
+    {
+      "id": "activityId",
+      "type": "changeBackGround",
+      "userFullName": "fullName",
+      "userId": "id",
+      "timeStamp": 1722015726446
+    },
+    {
+      "id": "activityId",
+      "type": "changeVisibility",
+      "userFullName": "fullName",
+      "userId": "id",
+      "visibility": "visibility",
+      "timeStamp": 1722015726446
+    },
+    {
+      "id": "activityId",
+      "type": "addDate",
+      "userFullName": "fullName",
+      "userId": "id",
+      "targetId": "taskId",
+      "targetName": "taskName",
+      "doDate": 1722015726446,
+      "timeStamp": 1722015726446
+    },
+    {
+      "id": "activityId",
+      "type": "completeDate",
+      "userFullName": "fullName",
+      "userId": "id",
+      "targetId": "taskId",
+      "targetName": "taskName",
+      "timeStamp": 1722015726446
+    },
+    {
+      "id": "activityId",
+      "type": "incompleteDate",
+      "userFullName": "fullName",
+      "userId": "id",
+      "targetId": "taskId",
+      "targetName": "taskName()",
+      "timeStamp": 1722015726446
+    }
+  ]
+}
