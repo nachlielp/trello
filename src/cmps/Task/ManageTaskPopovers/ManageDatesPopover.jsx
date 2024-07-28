@@ -60,7 +60,7 @@ function ManageDatesPopoverContent({ task, editTask, onClose }) {
 
     useEffect(() => {
         const defaultEndDate = task.due ? dayjs(task.due) : dayjs().add(1, 'day');
-
+        console.log("defaultEndDate", defaultEndDate);
         if (task.start && !task.due) {
             setStartDate(dayjs(task.start));
             setValue(dayjs(task.start));
@@ -81,16 +81,15 @@ function ManageDatesPopoverContent({ task, editTask, onClose }) {
             setFocusedInput("end");
         }
         if (!task.start && !task.due) {
-            setStartDate(null);
-            setEndDate(defaultEndDate);
-            setSelectedStartDate(dayjs(task.start));
-            setSelectedEndDate(dayjs(task.due));
+            setEndDate(dayjs().add(1, 'day'));
+            setSelectedEndDate(dayjs().add(1, 'day'));
             setFocusedInput("end");
         }
     }, []);
 
     useEffect(() => {
-    }, [focusedInput]);
+        console.log("value", value);
+    }, [value]);
 
     useEffect(() => {
         if (!dayjs(selectedStartDate).isSame(startDate)) {

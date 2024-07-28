@@ -48,7 +48,11 @@ function getDateLabel(date) {
 
 function getDateTimeLabel(date) {
     if (!date) return "";
-    return dayjs(date).format('MMM D YYYY HH:mm');
+    if (dayjs(date).isSame(dayjs(), 'year')) {
+        return dayjs(date).format('MMM D HH:mm');
+    } else {
+        return dayjs(date).format('MMM D YYYY HH:mm');
+    }
 }
 
 function taskDueStatus(task) {
