@@ -273,7 +273,7 @@ export const utilService = {
   createCheckListItem,
   createCheckList,
   getEmojis,
-  getBadges,
+  getChecklistBadge,
 };
 
 export const USERS_KEY = "users";
@@ -381,6 +381,8 @@ function getColorHashByName(colorName) {
 }
 
 function _createStartInfo() {
+
+
   //daily refresh
   if (+localStorage.getItem("date") !== new Date().getDate()) {
     localStorage.clear();
@@ -519,14 +521,14 @@ function createNewGroup(group) {
   };
 }
 
-function getBadges(task) {
+function getChecklistBadge(task) {
   if (!task) return;
+
   const badges = {
     checkLists: {
       count: null,
       allChecked: false,
     },
-    desc: task.desc.length > 0,
   };
 
   if (task.checkLists) {
@@ -547,6 +549,7 @@ function getBadges(task) {
       badges.checkLists.count = `${totalCheckdItemsLength} / ${taskCheckedItemsCount}`;
     }
   }
+
   return badges;
 }
 

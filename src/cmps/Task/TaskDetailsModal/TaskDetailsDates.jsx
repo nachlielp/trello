@@ -1,0 +1,77 @@
+import { Checkbox } from "antd";
+import dayjs from "dayjs";
+import { ManageDatesPopover } from "../ManageTaskPopovers/ManageDatesPopover";
+
+export function TaskDetailsDates({ task, editTask }) {
+
+    function handleDueChange(e) {
+        editTask({ ...task, dueComplete: e.target.checked });
+    }
+
+    const [dueStatus, dueLabel] = taskDueStatus(task);
+
+    return (
+        <section className="task-details-dates">
+            <p className="sub-title">{getTitle(task)}</p>
+            <main className="task-details-dates-main">
+                {task.due &&
+                    <Checkbox checked={task.dueComplete} onChange={handleDueChange} className="due-checkbox" />
+                }
+                <ManageDatesPopover task={task} editTask={editTask} anchorEl={
+                    <article className="dates-info">
+                        <label className="date-label">{getDateLabel(task.start)}</label>
+                        {task.due && task.start &&
+                            <label className="date-label"> - </label>
+                        }
+                        <label className="date-label">{getDateTimeLabel(task.due)}</label>
+                        {task.due &&
+                            <label className={`date-alert ${dueStatus}`}>{dueLabel}</label>
+                        }
+                        <label className="trello-icon icon-down open-popover"></label>
+                    </article>
+                } />
+
+            </main>
+        </section>
+    );
+}
+
+function getDateLabel(date) {
+    if (!date) return "";
+
+    if (dayjs(date).isSame(dayjs(), 'year')) {
+        return dayjs(date).format('MMM D');
+    } else {
+        return dayjs(date).format('MMM D YYYY');
+    }
+}
+
+function getDateTimeLabel(date) {
+    if (!date) return "";
+    if (dayjs(date).isSame(dayjs(), 'year')) {
+        return dayjs(date).format('MMM D HH:mm');
+    } else {
+        return dayjs(date).format('MMM D YYYY HH:mm');
+    }
+}
+
+function taskDueStatus(task) {
+    if (task.dueComplete) return ["completed", "Complete"];
+
+    const dueDate = dayjs(task.due);
+    const now = dayjs();
+    const diff = dueDate.diff(now, 'hours');
+
+    if (diff < -24) return ["overdue", "Overdue"];
+    if (diff < 0) return ["recently-overdue", "Overdue"];
+    if (diff > 24) return ["due", ""];
+    if (diff > 0) return ["due-soon", "Due soon"];
+    return ["", ""];
+}
+
+function getTitle(task) {
+    if (task.start && task.due) return "Dates";
+    if (task.start) return "Start date";
+    if (task.due) return "Due date";
+    return "Dates";
+}
