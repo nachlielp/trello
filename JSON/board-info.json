@@ -19,7 +19,7 @@
       }
     ],
     "checkListTaskIds": [],
-    "activities":[],
+    "activities": [],
     "groups": [
       {
         "id": "64f721f169b14894fac36ce6",
@@ -241,56 +241,56 @@
           "enabled": false
         }
       ],
-      "background": "668946a613fbf45a2101e3aa",
-      "title": "Viktoriya",
-      "backgroundColor": "#1e3b20",
-      "backgroundImage": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/original/583b7e8d8e177ce7a33da9c49ff89a75/photo-1719825718360-7de63c92135f",
+      "background": "6689477fee7b57e70a601b46",
+      "title": "Ashford Marx",
+      "backgroundColor": "#637270",
+      "backgroundImage": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/original/445dea137da3ef754471fc4dd6dc74be/photo-1719996510843-25348b436dcc",
       "backgroundBrightness": "dark",
       "backgroundImageScaled": [
         {
-          "width": 73,
+          "width": 67,
           "height": 100,
-          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/73x100/3e847eff31d4e7a927836e07fba3e3fe/photo-1719825718360-7de63c92135f.webp"
+          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/67x100/6fc8d04b515bb9d2f3edc07bcc55e9e7/photo-1719996510843-25348b436dcc.webp"
         },
         {
-          "width": 139,
+          "width": 128,
           "height": 192,
-          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/139x192/3e847eff31d4e7a927836e07fba3e3fe/photo-1719825718360-7de63c92135f.webp"
+          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/128x192/6fc8d04b515bb9d2f3edc07bcc55e9e7/photo-1719996510843-25348b436dcc.webp"
         },
         {
-          "width": 348,
+          "width": 320,
           "height": 480,
-          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/348x480/3e847eff31d4e7a927836e07fba3e3fe/photo-1719825718360-7de63c92135f.webp"
+          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/320x480/6fc8d04b515bb9d2f3edc07bcc55e9e7/photo-1719996510843-25348b436dcc.webp"
         },
         {
-          "width": 697,
+          "width": 640,
           "height": 960,
-          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/697x960/3e847eff31d4e7a927836e07fba3e3fe/photo-1719825718360-7de63c92135f.webp"
+          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/640x960/6fc8d04b515bb9d2f3edc07bcc55e9e7/photo-1719996510843-25348b436dcc.webp"
         },
         {
-          "width": 743,
+          "width": 683,
           "height": 1024,
-          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/743x1024/3e847eff31d4e7a927836e07fba3e3fe/photo-1719825718360-7de63c92135f.webp"
+          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/683x1024/6fc8d04b515bb9d2f3edc07bcc55e9e7/photo-1719996510843-25348b436dcc.webp"
         },
         {
-          "width": 929,
+          "width": 853,
           "height": 1280,
-          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/929x1280/3e847eff31d4e7a927836e07fba3e3fe/photo-1719825718360-7de63c92135f.webp"
+          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/853x1280/6fc8d04b515bb9d2f3edc07bcc55e9e7/photo-1719996510843-25348b436dcc.webp"
         },
         {
-          "width": 1161,
+          "width": 1066,
           "height": 1600,
-          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1161x1600/3e847eff31d4e7a927836e07fba3e3fe/photo-1719825718360-7de63c92135f.webp"
+          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1066x1600/6fc8d04b515bb9d2f3edc07bcc55e9e7/photo-1719996510843-25348b436dcc.webp"
         },
         {
-          "width": 1393,
+          "width": 1280,
           "height": 1920,
-          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1393x1920/3e847eff31d4e7a927836e07fba3e3fe/photo-1719825718360-7de63c92135f.webp"
+          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1280x1920/6fc8d04b515bb9d2f3edc07bcc55e9e7/photo-1719996510843-25348b436dcc.webp"
         },
         {
-          "width": 1486,
+          "width": 1365,
           "height": 2048,
-          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1486x2048/3e847eff31d4e7a927836e07fba3e3fe/photo-1719825718360-7de63c92135f.webp"
+          "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1365x2048/6fc8d04b515bb9d2f3edc07bcc55e9e7/photo-1719996510843-25348b436dcc.webp"
         }
       ],
       "canBePublic": true,
@@ -887,7 +887,7 @@
     "apdatedAt": 1721051204720,
     "viewedAt": 1721050978722,
     "checkListTaskIds": [],
-    "activities":[],
+    "activities": [],
     "members": [
       {
         "id": "666fe4efda8643029b6710f3",
