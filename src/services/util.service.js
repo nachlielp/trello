@@ -274,6 +274,7 @@ export const utilService = {
   createCheckList,
   getEmojis,
   getChecklistBadge,
+  createActivity,
 };
 
 export const USERS_KEY = "users";
@@ -381,8 +382,6 @@ function getColorHashByName(colorName) {
 }
 
 function _createStartInfo() {
-
-
   //daily refresh
   if (+localStorage.getItem("date") !== new Date().getDate()) {
     localStorage.clear();
@@ -418,6 +417,15 @@ function capitalizeInitials(string) {
     .map((word) => word.charAt(0))
     .join("")
     .toUpperCase();
+}
+function createActivity(activity, user) {
+  return {
+    id: utilService.makeId(24),
+    userFullName: user.fullName,
+    userId: user.id,
+    timeStamp: Date.now(),
+    ...activity,
+  };
 }
 
 export function stringToColor(str) {

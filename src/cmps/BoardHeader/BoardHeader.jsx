@@ -10,9 +10,12 @@ import { NameInput } from "../CustomCpms/NameInput";
 import { updateBoard } from "../../store/board.actions";
 import { setBoards } from "../../store/workspace.actions";
 import { useEffect } from "react";
+import { utilService } from "../../services/util.service";
+import { ActivityMsg } from "../ActivityMsg";
 
 export function BoardHeader({ board, starredBoardIds, starToggle }) {
   const members = useSelector((state) => state.boardModule.board.members);
+  const user = useSelector((state) => state.userModule.user);
 
   function onToggleStar(boardId) {
     const starredIds = starredBoardIds.includes(boardId)
@@ -22,7 +25,19 @@ export function BoardHeader({ board, starredBoardIds, starToggle }) {
   }
 
   function onBoardNameChange(name) {
-    updateBoard({ ...board, name });
+    const newActivity = utilService.createActivity(
+      {
+        type: "renameBoard",
+        previousName: board.name,
+      },
+      user
+    );
+
+    updateBoard({
+      ...board,
+      name,
+      activities: [...board.activities, newActivity],
+    });
   }
   return (
     <div className="board-header">

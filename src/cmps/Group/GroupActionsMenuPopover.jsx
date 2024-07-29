@@ -15,6 +15,7 @@ export function GroupActionsMenuPopover({
   sortGroup,
 }) {
   const board = useSelector((state) => state.boardModule.board);
+  const user = useSelector((state) => state.userModule.user);
   const [openGroupMenu, setOpenGroupMenu] = useState(false);
   const [backToList, setBackToList] = useState(null);
   const [action, setAction] = useState(null);
@@ -76,7 +77,7 @@ export function GroupActionsMenuPopover({
     setAction(null);
     setBackToList(null);
     setOpenGroupMenu(false);
-    moveAllCards(board.id, group.id, targetGroupId);
+    moveAllCards(board.id, group.id, targetGroupId, user);
   }
 
   function onSelectArchiveAllCards() {

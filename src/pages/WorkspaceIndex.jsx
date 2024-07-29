@@ -17,7 +17,7 @@ import {
 } from "../store/user.actions";
 import { createBoard } from "../store/workspace.actions";
 import { useSelector } from "react-redux";
-import { setBoards, editWorkspaceBoardState } from "../store/workspace.actions";
+import { setBoards } from "../store/workspace.actions";
 import { updateBoard } from "../store/board.actions";
 import { UserBoards } from "./UserBoards";
 
@@ -121,8 +121,18 @@ export function WorkspaceIndex() {
   function onCloseBoard(boardId) {
     console.log("onCloseBoard", boardId);
     const board = boards.find((b) => b.id === boardId);
+    const newActivity = utilService.createActivity(
+      {
+        type: "closeBoard",
+      },
+      user
+    );
     if (board) {
-      updateBoard({ ...board, closed: true });
+      updateBoard({
+        ...board,
+        closed: true,
+        activities: [...board.activities, newActivity],
+      });
     }
   }
 

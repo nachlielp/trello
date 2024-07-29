@@ -19,6 +19,10 @@ export async function viewWorkspaceBoard(boardId) {
   const board = boards.find((b) => b.id === boardId);
   store.dispatch({ type: VIEW_BOARD, boardId: board.id });
 }
+export async function editWorkspaceBoard(board) {
+  store.dispatch({ type: EDIT_WORKSPACE, board: board });
+  await boardService.save(board);
+}
 
 export async function moveCard({
   targetBoardId,
@@ -91,7 +95,4 @@ export async function createBoard(board) {
   return newBoard.id;
 }
 
-//Notice, the board action updates the storage, this updates the workspace state
-export async function editWorkspaceBoardState(board) {
-  store.dispatch({ type: EDIT_WORKSPACE, board: { ...board, closed: true } });
-}
+

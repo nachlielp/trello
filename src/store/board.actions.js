@@ -2,7 +2,10 @@ import { boardService } from "../services/board.service.local";
 import { utilService } from "../services/util.service";
 import { memberService } from "../services/members.service.local";
 import { store } from "./store";
-import { editWorkspaceBoardState } from "./workspace.actions";
+import {
+  editWorkspaceBoard,
+
+} from "./workspace.actions";
 import {
   SET_MEMBERS,
   SET_BOARD,
@@ -93,11 +96,20 @@ export function toggleIsExpanded() {
   });
 }
 
-export async function addTask(task) {
+export async function addTask(task, user, group) {
   try {
     const newTask = utilService.createNewTask(task);
     store.dispatch({ type: ADD_TASK, task: newTask });
     const board = await boardService.getById(task.idBoard);
+    const newActivity = utilService.createActivity(
+      {
+        type: "addTask",
+        targetId: newTask.id,
+        targetName: newTask.name,
+        groupName: group.name,
+      },
+      user
+    );
     const newBoard = {
       ...board,
       groups: board.groups.map((g) => {
@@ -106,10 +118,10 @@ export async function addTask(task) {
         }
         return g;
       }),
+      activities: [...board.activities, newActivity],
       apdatedAt: new Date().getTime(),
     };
-    store.dispatch({ type: EDIT_WORKSPACE, board: newBoard });
-    await boardService.save(newBoard);
+    await editWorkspaceBoard(newBoard);
     return newTask;
   } catch (err) {
     console.log("Cannot add task", err);
@@ -128,8 +140,7 @@ export async function addGroup(group, boardId) {
       groups: [...board.groups, newGroup],
       apdatedAt: new Date().getTime(),
     };
-    store.dispatch({ type: EDIT_WORKSPACE, board: newBoard });
-    await boardService.save(newBoard);
+    await editWorkspaceBoard(newBoard);
     return newGroup;
   } catch (err) {
     console.log("Cannot add group", err);
@@ -137,13 +148,20 @@ export async function addGroup(group, boardId) {
   }
 }
 
-export async function archiveGroup(boardId, groupId) {
+export async function archiveGroup(boardId, groupId, user) {
   const board = await boardService.getById(boardId);
   const group = board.groups.find((g) => g.id === groupId);
   store.dispatch({
     type: EDIT_GROUP,
     group: { ...group, closed: true, pos: null },
   });
+  const newActivity = utilService.createActivity(
+    {
+      type: "archiveGroup",
+      targetName: group.name,
+    },
+    user
+  );
   const newBoard = {
     ...board,
     groups: board.groups.map((g) => {
@@ -154,28 +172,51 @@ export async function archiveGroup(boardId, groupId) {
       }
       return g;
     }),
+    activities: [...board.activities, newActivity],
     apdatedAt: new Date().getTime(),
   };
-  store.dispatch({ type: EDIT_WORKSPACE, board: newBoard });
-  await boardService.save(newBoard);
+  await editWorkspaceBoard(newBoard);
   return newBoard;
 }
 
-export async function copyGroup(boardId, group) {
+export async function copyGroup(boardId, group, user) {
   const board = await boardService.getById(boardId);
-  const newGroupId = utilService.makeId()
-  const groupTasks = group.tasks.map((t) => ({
-    ...t,
-    id: utilService.makeId(),
-    idGroup: newGroupId
-  }));
+  const newGroupId = utilService.makeId();
+  const taskActivitiesParams = [];
+  const groupTasks = group.tasks.map((t) => {
+    const newTask = {
+      ...t,
+      id: utilService.makeId(),
+      idGroup: newGroupId,
+    };
+    taskActivitiesParams.push({ taskName: newTask.name, taskId: newTask.id });
+    return newTask;
+  });
+
   const newGroup = {
     ...group,
     id: newGroupId,
     pos: group.pos + 1,
     tasks: groupTasks,
   };
-
+  const newGroupActivities = utilService.createActivity(
+    {
+      type: "archiveGroup",
+      targetName: newGroup.name,
+    },
+    user
+  );
+  const newTaskActivities = taskActivitiesParams.map((t) => {
+    return utilService.createActivity(
+      {
+        type: "addTask",
+        targetId: t.taskId,
+        targetName: t.taskName,
+        groupName: newGroup.name,
+      },
+      user
+    );
+  });
   const updatedGroups = board.groups.map((g) => {
     if (g.pos >= newGroup.pos) {
       return { ...g, pos: g.pos + 1 };
@@ -190,25 +231,45 @@ export async function copyGroup(boardId, group) {
   const newBoard = {
     ...board,
     groups: updatedGroups,
+    activities: [...board.activities, ...newTaskActivities, newGroupActivities],
     apdatedAt: new Date().getTime(),
   };
-  store.dispatch({ type: EDIT_WORKSPACE, board: newBoard });
-  await boardService.save(newBoard);
+  await editWorkspaceBoard(newBoard);
 }
 
-export async function moveAllCards(boardId, sourceGroupId, targetGroupId) {
+export async function moveAllCards(
+  boardId,
+  sourceGroupId,
+  targetGroupId,
+  user
+) {
   const board = await boardService.getById(boardId);
   const sourceGroup = board.groups.find((g) => g.id === sourceGroupId);
   const targetGroup = board.groups.find((g) => g.id === targetGroupId);
-
+  const taskActivitiesInfo = [];
   const newTargetGroup = {
     ...targetGroup,
     tasks: [
       ...(targetGroup?.tasks || []),
-      ...(sourceGroup?.tasks?.map((t) => ({ ...t, idGroup: targetGroupId })) ||
-        []),
+      ...(sourceGroup?.tasks?.map((t) => {
+        const newTasks = { ...t, idGroup: targetGroupId };
+        taskActivitiesInfo.push(
+          utilService.createActivity(
+            {
+              type: "movedTask",
+              targetId: t.id,
+              targetName: t.name,
+              from: sortGroup.name,
+              to: targetGroup.name,
+            },
+            user
+          )
+        );
+        return newTasks;
+      }) || []),
     ],
   };
+
   const updatedGroups = board.groups.map((g) => {
     if (g.id === sourceGroupId) {
       return { ...g, tasks: [] };
@@ -221,6 +282,7 @@ export async function moveAllCards(boardId, sourceGroupId, targetGroupId) {
   const newBoard = {
     ...board,
     groups: updatedGroups,
+    activities: [...board.activities, ...taskActivitiesInfo],
     apdatedAt: new Date().getTime(),
   };
   store.dispatch({
@@ -228,8 +290,7 @@ export async function moveAllCards(boardId, sourceGroupId, targetGroupId) {
     sourceGroup: { ...sourceGroup, tasks: [] },
     targetGroup: newTargetGroup,
   });
-  store.dispatch({ type: EDIT_WORKSPACE, board: newBoard });
-  await boardService.save(newBoard);
+  await editWorkspaceBoard(newBoard);
 }
 
 export async function archiveAllCards(boardId, groupId) {
@@ -318,12 +379,9 @@ export async function updateBoard(newBoard) {
       type: SET_BOARD,
       board: { ...newBoard, apdatedAt: new Date().getTime() },
     });
-    editWorkspaceBoardState({ ...newBoard, apdatedAt: new Date().getTime() });
-    store.dispatch({
-      type: EDIT_WORKSPACE,
-      board: { ...newBoard, apdatedAt: new Date().getTime() },
-    });
-    await boardService.save({ ...newBoard, apdatedAt: new Date().getTime() });
+
+    newBoard.apdatedAt = Date.now();
+    await editWorkspaceBoard(newBoard);
   } catch (err) {
     console.error("Cannot update board", err);
     throw err;
@@ -350,9 +408,7 @@ export async function editLabel(boardId, label) {
   const board = await boardService.getById(boardId);
   const newBoard = {
     ...board,
-    labels: board.labels.map((l) =>
-      l.id === label.id ? label : l
-    ),
+    labels: board.labels.map((l) => (l.id === label.id ? label : l)),
     apdatedAt: new Date().getTime(),
   };
   await boardService.save(newBoard);
@@ -362,14 +418,24 @@ export async function editLabel(boardId, label) {
 export async function createLabel(boardId, task, label) {
   const newLabel = utilService.createNewLabel(label.name, label.color);
   store.dispatch({ type: ADD_LABEL, label: newLabel });
-  store.dispatch({ type: EDIT_TASK, task: { ...task, idLabels: [...task.idLabels, newLabel.id] } });
+  store.dispatch({
+    type: EDIT_TASK,
+    task: { ...task, idLabels: [...task.idLabels, newLabel.id] },
+  });
   const board = await boardService.getById(boardId);
   const newBoard = {
     ...board,
     labels: [...board.labels, newLabel],
     groups: board.groups.map((g) =>
       g.id === task.idGroup
-        ? { ...g, tasks: g.tasks.map((t) => (t.id === task.id ? { ...task, idLabels: [...task.idLabels, newLabel.id] } : t)) }
+        ? {
+            ...g,
+            tasks: g.tasks.map((t) =>
+              t.id === task.id
+                ? { ...task, idLabels: [...task.idLabels, newLabel.id] }
+                : t
+            ),
+          }
         : g
     ),
     apdatedAt: new Date().getTime(),

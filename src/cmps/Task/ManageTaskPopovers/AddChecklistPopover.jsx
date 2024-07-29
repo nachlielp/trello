@@ -7,9 +7,10 @@ import { useSelector } from "react-redux";
 
 export function AddChecklistPopover({ anchorEl, task, editTask, editBoard }) {
   const board = useSelector((state) => state.boardModule.board);
+  const user = useSelector((state) => state.userModule.user);
   const [isOpen, setIsOpen] = useState(false);
   const inputRef = useRef(null);
-  const [text, setText] = useState("Checklist");
+  const [checklistName, setChecklistName] = useState("Checklist");
   function onClose() {
     setIsOpen(false);
   }
@@ -24,11 +25,20 @@ export function AddChecklistPopover({ anchorEl, task, editTask, editBoard }) {
     }
   }, [isOpen]);
   function onChange(e) {
-    setText(e.target.value);
+    setChecklistName(e.target.value);
   }
   async function onSubmit() {
     var minPos = 12222;
     //add taskId to checkListTaskIds
+    const newActivity = utilService.createActivity(
+      {
+        type: "addCheckList",
+        targetId: task.id,
+        targetName: task.name,
+        checklistName: checklistName,
+      },
+      user
+    );
     if (
       !board.checkListTaskIds.length ||
       !board.checkListTaskIds.includes(task.id)
@@ -36,6 +46,7 @@ export function AddChecklistPopover({ anchorEl, task, editTask, editBoard }) {
       await editBoard({
         ...board,
         checkListTaskIds: [...board.checkListTaskIds, task.id],
+        activities: [...board.activities, newActivity],
       });
     }
     if (task.checkLists.length > 0) {
@@ -43,14 +54,13 @@ export function AddChecklistPopover({ anchorEl, task, editTask, editBoard }) {
         (min, item) => (item.pos > min ? item.pos : min),
         task.checkLists[0].pos
       );
-      minPos;
     }
     const newCheckList = utilService.createCheckList({
-      label: text,
+      label: checklistName,
       pos: minPos - 1000,
     });
     const newTask = { ...task, checkLists: [...task.checkLists, newCheckList] };
-    setText("Checklist");
+    setChecklistName("Checklist");
     setIsOpen(!isOpen);
     await editTask(newTask);
   }
@@ -80,7 +90,7 @@ export function AddChecklistPopover({ anchorEl, task, editTask, editBoard }) {
               <TextArea
                 ref={inputRef}
                 className="checklist-title-input"
-                value={text}
+                value={checklistName}
                 autoSize={{ minRows: 1 }}
                 onChange={onChange}
               />

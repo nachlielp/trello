@@ -18,6 +18,7 @@ import { TaskDetailsMarkdown } from "./TaskDetailsMarkdown";
 import { NameInput } from "../../CustomCpms/NameInput";
 import { TaskDetailsCheckList } from "./TaskDetailsCheckList";
 import { TaskDetailsDates } from "./TaskDetailsDates";
+import { updateBoard } from "../../../store/board.actions";
 
 export function TaskDetailsModal({
   taskId,
@@ -49,9 +50,22 @@ export function TaskDetailsModal({
   const isColorCover = task?.cover?.color;
 
   function onJoin() {
+    const newActivity = utilService.createActivity(
+      {
+        type: "joinTask",
+        targetId: task.id,
+        targetName: task.name,
+      },
+      user
+    );
+
     editTask({
       ...task,
       idMembers: [...task.idMembers, user.id],
+    });
+    updateBoard({
+      ...board,
+      activities: [...board.activities, newActivity],
     });
   }
 
@@ -100,7 +114,11 @@ export function TaskDetailsModal({
       <article className={`details-header-cover-actions-wrapper`}>
         <ManageCoverPopover
           anchorEl={
-            <SvgButton src={coverIcon} className={`cover-btn ${task?.cover?.brightness}`} label="Cover" />
+            <SvgButton
+              src={coverIcon}
+              className={`cover-btn ${task?.cover?.brightness}`}
+              label="Cover"
+            />
           }
           editTask={editTask}
           task={task}
@@ -126,21 +144,30 @@ export function TaskDetailsModal({
       checkLists: task.checkLists.map((c) =>
         c.id === checkListId
           ? {
-            ...c,
-            checkItems: c.checkItems.map((i) =>
-              i.id === itemId ? { ...i, ...changes } : i
-            ),
-          }
+              ...c,
+              checkItems: c.checkItems.map((i) =>
+                i.id === itemId ? { ...i, ...changes } : i
+              ),
+            }
           : c
       ),
     };
     editTask(newTask);
   }
 
-  async function deleteList(checkListId) {
+  async function deleteList(checkList) {
+    const newActivity = utilService.createActivity(
+      {
+        type: "removeCheckList",
+        targetId: task.id,
+        targetName: task.name,
+        checklistName: checkList.name,
+      },
+      user
+    );
     const newTask = {
       ...task,
-      checkLists: task.checkLists.filter((c) => c.id !== checkListId),
+      checkLists: task.checkLists.filter((c) => c.id !== checkList.id),
     };
 
     if (!newTask.checkLists.length) {
@@ -148,7 +175,11 @@ export function TaskDetailsModal({
         (i) => i !== task.id
       );
 
-      await editBoard({ checkListTaskIds: newCheckListTaskIds });
+      await editBoard({
+        ...board,
+        checkListTaskIds: newCheckListTaskIds,
+        activities: [...board.activities, newActivity],
+      });
     }
     await editTask(newTask);
   }
@@ -159,9 +190,9 @@ export function TaskDetailsModal({
       checkLists: task.checkLists.map((c) =>
         c.id === listId
           ? {
-            ...c,
-            checkItems: c.checkItems.filter((i) => i.id !== itemId),
-          }
+              ...c,
+              checkItems: c.checkItems.filter((i) => i.id !== itemId),
+            }
           : c
       ),
     };
@@ -183,7 +214,7 @@ export function TaskDetailsModal({
     await addTask(newTask);
   }
   function onSetOpenId(id) {
-    setOpenedInputId(id)
+    setOpenedInputId(id);
   }
 
   return (
@@ -224,12 +255,20 @@ export function TaskDetailsModal({
             {hasMembers && (
               <TaskDetailsMembers currentTask={task} editTask={editTask} />
             )}
-            {task?.idLabels?.length > 0 &&
-              <TaskDetailsLabels task={task} editTask={editTask} labelActions={labelActions} />
-            }
-            {(task.start || task.due) &&
-              <TaskDetailsDates task={task} editTask={editTask} />
-            }
+            {task?.idLabels?.length > 0 && (
+              <TaskDetailsLabels
+                task={task}
+                editTask={editTask}
+                labelActions={labelActions}
+              />
+            )}
+            {(task.start || task.due) && (
+              <TaskDetailsDates
+                task={task}
+                editTask={editTask}
+                editBoard={editBoard}
+              />
+            )}
           </article>
           <TaskDetailsMarkdown editTask={editTask} task={task} />
           {task?.checkLists?.length > 0 &&
@@ -237,6 +276,7 @@ export function TaskDetailsModal({
               ?.sort((a, b) => a.pos - b.pos)
               .map((checkList) => (
                 <TaskDetailsCheckList
+                  task={task}
                   checkList={checkList}
                   key={checkList.id}
                   changeCheckList={changeCheckList}

@@ -9,6 +9,7 @@ import { utilService } from "../../../services/util.service";
 import { EllipsisOutlined } from "@ant-design/icons";
 import { MoreActionsItemPopover } from "../ManageTaskPopovers/MoreActionsItemPopover";
 import { EmojiPopover } from "../ManageTaskPopovers/EmojiPopover";
+import { useSelector } from "react-redux";
 export function TaskDetailsCheckList({
   checkList,
   changeCheckList,
@@ -18,6 +19,7 @@ export function TaskDetailsCheckList({
   createAsTask,
   setOpenedInputId,
   openedInputId,
+  task,
 }) {
   const [checkedCount, setCheckedCount] = useState({
     checked: 0,
@@ -27,7 +29,9 @@ export function TaskDetailsCheckList({
   const [hideChecked, setHideCHecked] = useState(false);
   const [checkItems, setCheckItems] = useState([]);
   const [isChangingTitle, setIsChangingTitle] = useState(false);
- 
+  const board = useSelector((state) => state.boardModule.board);
+  const user = useSelector((state) => state.userModule.user);
+
   useEffect(() => {
     if (hideChecked) {
       setCheckItems(
@@ -62,12 +66,43 @@ export function TaskDetailsCheckList({
     }
   }, [onAdd, openedInputId]);
 
-  function onChangeCheckListLabel(newName) {
+  async function onChangeCheckListLabel(newName) {
+    const newActivity = utilService.createActivity(
+      {
+        targetId: task.id,
+        targetName: task.name,
+        checklistName: newName,
+        previousName: checkList.label,
+      },
+      user
+    );
     changeCheckList(checkList.id, { label: newName });
+    await editBoard({
+      ...board,
+      activities: [...board.activities, newActivity],
+    });
   }
-  function onChangeItem(itemId, changes) {
-    changeItem(checkList.id, itemId, changes);
+  async function onChangeItem(item, changes) {
+    const newActivity = utilService.createActivity(
+      {
+        targetId: task.id,
+        targetName: task.name,
+        itemName: item.label,
+      },
+      user
+    );
+    if (changes.isChecked) {
+      newActivity.type = "checkedItemInCheckList";
+    } else {
+      newActivity.type = "incompleteItemInCheckList";
+    }
+    await editBoard({
+      ...board,
+      activities: [...board.activities, newActivity],
+    });
+    changeItem(checkList.id, item.id, changes);
   }
+
   function onAddNewItem(label) {
     if (label.trim() === "") {
       setOnAdd(false);
@@ -91,7 +126,7 @@ export function TaskDetailsCheckList({
   }
 
   function onDeleteList() {
-    deleteList(checkList.id);
+    deleteList(checkList);
   }
   function onDeleteItem(itemId) {
     deleteItem(checkList.id, itemId);
@@ -159,7 +194,7 @@ export function TaskDetailsCheckList({
               <CheckBox
                 checked={item.isChecked}
                 onChange={() =>
-                  onChangeItem(item.id, { isChecked: !item.isChecked })
+                  onChangeItem(item, { isChecked: !item.isChecked })
                 }
               />
               <NameInput

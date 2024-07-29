@@ -6,9 +6,11 @@ import publicIcon from "/img/board-index/headerImgs/publicIcon.svg";
 import peopleIcon from "/img/board-index/headerImgs/peopleIcon.svg";
 import permissionIcon from "/img/board-index/headerImgs/permissionIcon.svg";
 import { updateBoard } from "../../store/board.actions";
+import { utilService } from "../../services/util.service";
 
 export function VisibilityOptions({ setOpenListMenu, setPermission }) {
   const [hasAcces, setHasAcces] = useState(false);
+  const user = useSelector((state) => state.userModule.user);
   const currentMember = useSelector((state) =>
     state.boardModule.board.members.find(
       (member) => member.id === "666fe4efda8643029b6710f3"
@@ -37,8 +39,16 @@ export function VisibilityOptions({ setOpenListMenu, setPermission }) {
   }
 
   function onPermissionClick(value) {
-    const newBoard = board;
+    const newActivity = utilService.createActivity(
+      {
+        type: "changeVisibility",
+        visibility: value,
+      },
+      user
+    );
     board.prefs.permissionLevel = value;
+    board.activities.push(newActivity);
+    const newBoard = board;
     updateBoard(newBoard);
     setOpenListMenu(false);
   }

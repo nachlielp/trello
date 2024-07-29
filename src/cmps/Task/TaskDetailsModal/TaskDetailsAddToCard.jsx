@@ -71,6 +71,7 @@ export function TaskDetailsAddToCard({ task, editTask, labelActions, editBoard }
     {
       popover: (
         <ManageDatesPopover
+        editBoard={editBoard}
           task={task}
           editTask={editTask}
           anchorEl={

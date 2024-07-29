@@ -152,6 +152,29 @@ export function ActivityMsg({ activity, task = false }) {
           </div>
         </section>
       );
+    case "archiveGroup":
+      return (
+        <section>
+          <ProfilePopover
+            memberId={activity.userId}
+            anchorEl={
+              <UserAvatar
+                size={32}
+                memberId={activity.userId}
+                onClick={(e) => e.stopPropagation()}
+                className="activity-msd"
+              />
+            }
+          />
+          <div>
+            <p>
+              <span className="username">{activity.userFullName}</span> archived{" "}
+              list {targetName}
+            </p>
+            <p className="time">{timeString}</p>
+          </div>
+        </section>
+      );
     case "addTask":
       return (
         <section>
@@ -608,7 +631,7 @@ export function ActivityMsg({ activity, task = false }) {
         case "private":
           msg = " made this board visible to its member";
           break;
-        case "workspace":
+        case "org":
           msg = " made this board visible to members of its Workspace";
           break;
       }
@@ -659,6 +682,42 @@ export function ActivityMsg({ activity, task = false }) {
                 </Link>
               )}
               set to be due at {activity.doDate}
+            </p>
+            {task ? (
+              <p className="time">{timeString}</p>
+            ) : (
+              <Link className="time" to={`/c/${activity.targetId}`}>
+                {timeString}
+              </Link>
+            )}
+          </div>
+        </section>
+      );
+    case "removeDate":
+      return (
+        <section>
+          <ProfilePopover
+            memberId={activity.userId}
+            anchorEl={
+              <UserAvatar
+                size={32}
+                memberId={activity.userId}
+                onClick={(e) => e.stopPropagation()}
+                className="activity-msd"
+              />
+            }
+          />
+          <div>
+            <p>
+              <span className="username">{activity.userFullName}</span> removed{" "}
+              the due date from{" "}
+              {task ? (
+                "this card"
+              ) : (
+                <Link to={`/c/${activity.targetId}`}>
+                  {activity.targetName}
+                </Link>
+              )}
             </p>
             {task ? (
               <p className="time">{timeString}</p>

@@ -24,7 +24,7 @@
         margin-bottom: -2px;
         text-wrap: nowrap;
         line-height: 20px;
-        color: rgb(182, 194, 207);
+        color: var(--ds-text, #172b4d);
         padding: 7px 10px;
       }
     }

@@ -58,13 +58,13 @@ export function BoardIndex() {
 
   const { scrollContainerRef, handlers } = useScrollByGrab();
 
-  async function onAddTask(task, groupId) {
+  async function onAddTask(task,group) {
     const newTask = {
       ...task,
       idBoard: board.id,
     };
     try {
-      await addTask(newTask, groupId);
+      await addTask(newTask,user,group);
     } catch (error) {
       console.log("onAddCard", error);
     }
@@ -79,8 +79,7 @@ export function BoardIndex() {
   }
 
   async function onArchiveGroup(boardId, groupId) {
-    const res = await archiveGroup(boardId, groupId);
-    // console.log("onArchiveGroup", res);
+    const res = await archiveGroup(boardId, groupId,user);
   }
 
   async function onEditGroup(group) {
@@ -97,7 +96,7 @@ export function BoardIndex() {
 
 
   async function onCopyGroup(group) {
-    const res = await copyGroup(board.id, group);
+    const res = await copyGroup(board.id, group,user);
   }
 
   async function onSortGroup(groupId, sortBy, sortOrder) {
