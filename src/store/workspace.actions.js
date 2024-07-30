@@ -1,4 +1,5 @@
 import { boardService } from "../services/board.service.local";
+import { utilService } from "../services/util.service";
 import { workspaceService } from "../services/workspace.service";
 import { setBoard } from "./board.actions";
 import { store } from "./store";
@@ -29,6 +30,7 @@ export async function moveCard({
   targetGroupId,
   targetPos,
   task,
+  user,
 }) {
   try {
     const newTask = {
@@ -77,8 +79,41 @@ export async function moveCard({
     };
     store.dispatch({ type: EDIT_WORKSPACE, board: updatedTargetBoard });
     if (targetBoardId === task.idBoard) {
+      const newActivity = utilService.createActivity(
+        {
+          type: "movedTask",
+          targetId: task.id,
+          targetName: task.name,
+          from: sourceBoard.groups.find((g) => g.id === task.idGroup).name,
+          to: sourceBoard.groups.find((g) => g.id === targetGroupId).name,
+        },
+        user
+      );
+      updatedTargetBoard.activities.push(newActivity);
       setBoard(updatedTargetBoard);
     } else {
+      const sourceActivity = utilService.createActivity(
+        {
+          type: "transferTask",
+          targetId: task.id,
+          targetName: task.name,
+          boardId: targetBoard.id,
+          boardName: targetBoard.name,
+        },
+        user
+      );
+      const targetActivity = utilService.createActivity(
+        {
+          type: "receiveTask",
+          targetId: task.id,
+          targetName: task.name,
+          boardId: sourceBoard.id,
+          boardName: sourceBoard.name,
+        },
+        user
+      );
+      sourceBoard.activities.push(sourceActivity);
+      targetBoard.activities.push(targetActivity);
       setBoard(updatedSourceBoard);
       store.dispatch({ type: EDIT_WORKSPACE, board: updatedSourceBoard });
       await boardService.save(updatedSourceBoard);
@@ -94,5 +129,3 @@ export async function createBoard(board) {
   store.dispatch({ type: ADD_BOARD, board: newBoard });
   return newBoard.id;
 }
-
-
