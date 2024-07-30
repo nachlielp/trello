@@ -10,6 +10,8 @@ import { useNavigate } from "react-router";
 export function MoveCardPopover({ anchorEl, task, onUpdateTask }) {
   //selectors
   const boards = useSelector((state) => state.workspaceModule.boards);
+  const user = useSelector((state) => state.userModule.user);
+
   const board = useSelector((state) =>
     state.workspaceModule.boards
       .filter((b) => !b.closed)
@@ -94,7 +96,7 @@ export function MoveCardPopover({ anchorEl, task, onUpdateTask }) {
     const selectedBoard = boards
       .filter((b) => !b.closed)
       .find((b) => b.id === selectedBoardId);
-      
+
     if (
       selectedBoard &&
       selectedBoard.groups.filter((g) => !g.closed).length > 0
@@ -146,6 +148,7 @@ export function MoveCardPopover({ anchorEl, task, onUpdateTask }) {
       targetGroupId: selectedGroupId,
       targetPos: selectedPosition,
       task,
+      user,
     };
 
     setIsOpen(false);
