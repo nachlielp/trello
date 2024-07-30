@@ -36,7 +36,6 @@ export function BoardIndex() {
   const params = useParams();
 
   useEffect(() => {
-
     async function load() {
       if (params.boardId) {
         const res = await loadBoard(params.boardId);
@@ -58,13 +57,13 @@ export function BoardIndex() {
 
   const { scrollContainerRef, handlers } = useScrollByGrab();
 
-  async function onAddTask(task,group) {
+  async function onAddTask(task, group) {
     const newTask = {
       ...task,
       idBoard: board.id,
     };
     try {
-      await addTask(newTask,user,group);
+      await addTask(newTask, user, group);
     } catch (error) {
       console.log("onAddCard", error);
     }
@@ -79,7 +78,7 @@ export function BoardIndex() {
   }
 
   async function onArchiveGroup(boardId, groupId) {
-    const res = await archiveGroup(boardId, groupId,user);
+    const res = await archiveGroup(boardId, groupId, user);
   }
 
   async function onEditGroup(group) {
@@ -87,16 +86,14 @@ export function BoardIndex() {
   }
 
   async function onEditTask(task) {
+    const res = await editTask(task);
     if (task.closed) {
       navigate(`/b/${board.id}`, { replace: true });
     }
-
-    const res = await editTask(task);
   }
 
-
   async function onCopyGroup(group) {
-    const res = await copyGroup(board.id, group,user);
+    const res = await copyGroup(board.id, group, user);
   }
 
   async function onSortGroup(groupId, sortBy, sortOrder) {
@@ -127,44 +124,49 @@ export function BoardIndex() {
     ?.filter((l) => !l.closed)
     .sort((a, b) => a.pos - b.pos);
 
-  return (
-    board ? (
-      <section className="board-index">
-        <div className="bg">
-          {board && <BoardHeader board={board} starToggle={onStarToggle} starredBoardIds={user?.starredBoardIds} />}
-          <main className="board-groups" ref={scrollContainerRef} {...handlers}>
-            {sortedGroups &&
-              sortedGroups.map((group) => (
-                <BoardGroup
-                  key={group.id}
-                  group={group}
-                  addTask={onAddTask}
-                  archiveGroup={() => onArchiveGroup(board.id, group.id)}
-                  editGroup={onEditGroup}
-                  editTask={onEditTask}
-                  copyGroup={onCopyGroup}
-                  moveAllCards={moveAllCards}
-                  archiveAllCards={archiveAllCards}
-                  sortGroup={onSortGroup}
-                  labelActions={onLabelAction}
-                />
-              ))}
-            <AddGroupBtn addGroup={onAddGroup} />
-          </main>
-        </div>
-        {selectedTaskId && (
-          <TaskDetailsModal
-            taskId={selectedTaskId}
-            editTask={onEditTask}
-            onCloseTask={() => setSelectedTaskId(null)}
-            labelActions={onLabelAction}
+  return board ? (
+    <section className="board-index">
+      <div className="bg">
+        {board && (
+          <BoardHeader
             board={board}
-            editBoard={editBoard}
-            closeTask={() => setSelectedTaskId(null)}
+            starToggle={onStarToggle}
+            starredBoardIds={user?.starredBoardIds}
           />
         )}
-      </section>
-    ) : (
-      <h1>Loading...</h1>
-    ));
+        <main className="board-groups" ref={scrollContainerRef} {...handlers}>
+          {sortedGroups &&
+            sortedGroups.map((group) => (
+              <BoardGroup
+                key={group.id}
+                group={group}
+                addTask={onAddTask}
+                archiveGroup={() => onArchiveGroup(board.id, group.id)}
+                editGroup={onEditGroup}
+                editTask={onEditTask}
+                copyGroup={onCopyGroup}
+                moveAllCards={moveAllCards}
+                archiveAllCards={archiveAllCards}
+                sortGroup={onSortGroup}
+                labelActions={onLabelAction}
+              />
+            ))}
+          <AddGroupBtn addGroup={onAddGroup} />
+        </main>
+      </div>
+      {selectedTaskId && (
+        <TaskDetailsModal
+          taskId={selectedTaskId}
+          editTask={onEditTask}
+          onCloseTask={() => setSelectedTaskId(null)}
+          labelActions={onLabelAction}
+          board={board}
+          editBoard={editBoard}
+          closeTask={() => setSelectedTaskId(null)}
+        />
+      )}
+    </section>
+  ) : (
+    <h1>Loading...</h1>
+  );
 }
