@@ -59,13 +59,13 @@ export function TaskDetailsModal({
       user
     );
 
-    editTask({
-      ...task,
-      idMembers: [...task.idMembers, user.id],
-    });
     updateBoard({
       ...board,
       activities: [...board?.activities, newActivity],
+    });
+    editTask({
+      ...task,
+      idMembers: [...task.idMembers, user.id],
     });
   }
 
