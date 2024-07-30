@@ -121,7 +121,7 @@ export async function addTask(task, user, group) {
       activities: [...board.activities, newActivity],
       apdatedAt: new Date().getTime(),
     };
-    await editWorkspaceBoard(newBoard);
+    await updateBoard(newBoard);
     return newTask;
   } catch (err) {
     console.log("Cannot add task", err);
@@ -140,7 +140,7 @@ export async function addGroup(group, boardId) {
       groups: [...board.groups, newGroup],
       apdatedAt: new Date().getTime(),
     };
-    await editWorkspaceBoard(newBoard);
+    await updateBoard(newBoard);
     return newGroup;
   } catch (err) {
     console.log("Cannot add group", err);
@@ -175,7 +175,7 @@ export async function archiveGroup(boardId, groupId, user) {
     activities: [...board.activities, newActivity],
     apdatedAt: new Date().getTime(),
   };
-  await editWorkspaceBoard(newBoard);
+  await updateBoard(newBoard);
   return newBoard;
 }
 
@@ -234,7 +234,7 @@ export async function copyGroup(boardId, group, user) {
     activities: [...board.activities, ...newTaskActivities, newGroupActivities],
     apdatedAt: new Date().getTime(),
   };
-  await editWorkspaceBoard(newBoard);
+  await updateBoard(newBoard);
 }
 
 export async function moveAllCards(
@@ -290,7 +290,7 @@ export async function moveAllCards(
     sourceGroup: { ...sourceGroup, tasks: [] },
     targetGroup: newTargetGroup,
   });
-  await editWorkspaceBoard(newBoard);
+  await updateBoard(newBoard);
 }
 
 export async function archiveAllCards(boardId, groupId) {
