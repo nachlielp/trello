@@ -31,7 +31,7 @@ export function AddGroupBtn({ addGroup }) {
       addGroup(groupName);
       updateBoard({
         ...board,
-        activities: [...board.activities, newActivity],
+        activities: [...board?.activities, newActivity],
       });
     }
     setGroupName("");

@@ -65,7 +65,7 @@ export function TaskDetailsModal({
     });
     updateBoard({
       ...board,
-      activities: [...board.activities, newActivity],
+      activities: [...board?.activities, newActivity],
     });
   }
 
@@ -178,7 +178,7 @@ export function TaskDetailsModal({
       await editBoard({
         ...board,
         checkListTaskIds: newCheckListTaskIds,
-        activities: [...board.activities, newActivity],
+        activities: [...board?.activities, newActivity],
       });
     }
     await editTask(newTask);

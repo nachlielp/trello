@@ -2,10 +2,7 @@ import { boardService } from "../services/board.service.local";
 import { utilService } from "../services/util.service";
 import { memberService } from "../services/members.service.local";
 import { store } from "./store";
-import {
-  editWorkspaceBoard,
-
-} from "./workspace.actions";
+import { editWorkspaceBoard } from "./workspace.actions";
 import {
   SET_MEMBERS,
   SET_BOARD,
@@ -118,7 +115,7 @@ export async function addTask(task, user, group) {
         }
         return g;
       }),
-      activities: [...board.activities, newActivity],
+      activities: [...board?.activities, newActivity],
       apdatedAt: new Date().getTime(),
     };
     await updateBoard(newBoard);
@@ -172,7 +169,7 @@ export async function archiveGroup(boardId, groupId, user) {
       }
       return g;
     }),
-    activities: [...board.activities, newActivity],
+    activities: [...board?.activities, newActivity],
     apdatedAt: new Date().getTime(),
   };
   await updateBoard(newBoard);
@@ -231,7 +228,11 @@ export async function copyGroup(boardId, group, user) {
   const newBoard = {
     ...board,
     groups: updatedGroups,
-    activities: [...board.activities, ...newTaskActivities, newGroupActivities],
+    activities: [
+      ...board?.activities,
+      ...newTaskActivities,
+      newGroupActivities,
+    ],
     apdatedAt: new Date().getTime(),
   };
   await updateBoard(newBoard);
@@ -282,7 +283,7 @@ export async function moveAllCards(
   const newBoard = {
     ...board,
     groups: updatedGroups,
-    activities: [...board.activities, ...taskActivitiesInfo],
+    activities: [...board?.activities, ...taskActivitiesInfo],
     apdatedAt: new Date().getTime(),
   };
   store.dispatch({

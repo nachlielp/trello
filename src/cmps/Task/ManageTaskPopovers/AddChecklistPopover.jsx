@@ -46,7 +46,7 @@ export function AddChecklistPopover({ anchorEl, task, editTask, editBoard }) {
       await editBoard({
         ...board,
         checkListTaskIds: [...board.checkListTaskIds, task.id],
-        activities: [...board.activities, newActivity],
+        activities: [...board?.activities, newActivity],
       });
     }
     if (task.checkLists.length > 0) {

@@ -36,7 +36,7 @@ export function BoardHeader({ board, starredBoardIds, starToggle }) {
     updateBoard({
       ...board,
       name,
-      activities: [...board.activities, newActivity],
+      activities: [...board?.activities, newActivity],
     });
   }
   return (

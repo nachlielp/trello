@@ -337,7 +337,7 @@ function ManageDatesPopoverContent({ task, editTask, onClose, editBoard }) {
 
     await editBoard({
       ...board,
-      activities: [...board.activities, newActivity],
+      activities: [...board?.activities, newActivity],
     });
     editTask({
       ...task,
@@ -359,7 +359,7 @@ function ManageDatesPopoverContent({ task, editTask, onClose, editBoard }) {
     );
     await editBoard({
       ...board,
-      activities: [...board.activities, newActivity],
+      activities: [...board?.activities, newActivity],
     });
     editTask({
       ...task,

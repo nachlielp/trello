@@ -23,7 +23,7 @@ export function TaskDetailsDates({ task, editTask, editBoard }) {
     }
     await editBoard({
       ...board,
-      activities: [...board.activities, newActivity],
+      activities: [...board?.activities, newActivity],
     });
 
     editTask({ ...task, dueComplete: e.target.checked });

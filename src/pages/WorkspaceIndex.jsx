@@ -131,7 +131,7 @@ export function WorkspaceIndex() {
       updateBoard({
         ...board,
         closed: true,
-        activities: [...board.activities, newActivity],
+        activities: [...board?.activities, newActivity],
       });
     }
   }

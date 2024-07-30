@@ -79,7 +79,7 @@ export function TaskDetailsCheckList({
     changeCheckList(checkList.id, { label: newName });
     await editBoard({
       ...board,
-      activities: [...board.activities, newActivity],
+      activities: [...board?.activities, newActivity],
     });
   }
   async function onChangeItem(item, changes) {
@@ -98,7 +98,7 @@ export function TaskDetailsCheckList({
     }
     await editBoard({
       ...board,
-      activities: [...board.activities, newActivity],
+      activities: [...board?.activities, newActivity],
     });
     changeItem(checkList.id, item.id, changes);
   }

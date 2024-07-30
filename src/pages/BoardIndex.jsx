@@ -97,7 +97,10 @@ export function BoardIndex() {
         },
         user
       );
-      updateBoard({ ...board, activities: [...board.activities, newActivity] });
+      updateBoard({
+        ...board,
+        activities: [...board?.activities, newActivity],
+      });
       navigate(`/b/${board.id}`, { replace: true });
     }
   }
