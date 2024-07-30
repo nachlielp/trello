@@ -294,9 +294,19 @@ export async function moveAllCards(
   await updateBoard(newBoard);
 }
 
-export async function archiveAllCards(boardId, groupId) {
+export async function archiveAllCards(boardId, groupId, user) {
   const board = await boardService.getById(boardId);
   const group = board.groups.find((g) => g.id === groupId);
+  const newActivities = group.tasks.map((t) => {
+    return utilService.createActivity(
+      {
+        type: "archiveTask",
+        targetId: t.id,
+        targetName: t.name,
+      },
+      user
+    );
+  });
   const newGroup = {
     ...group,
     tasks: group.tasks.map((t) => ({ ...t, closed: true })),
@@ -306,6 +316,7 @@ export async function archiveAllCards(boardId, groupId) {
   const newBoard = {
     ...board,
     groups: board.groups.map((g) => (g.id === groupId ? newGroup : g)),
+    activities: [...board?.activities, ...newActivities],
     apdatedAt: new Date().getTime(),
   };
   await boardService.save(newBoard);

@@ -88,7 +88,7 @@ export function GroupActionsMenuPopover({
     setAction(null);
     setBackToList(null);
     setOpenGroupMenu(false);
-    archiveAllCards(board.id, group.id);
+    archiveAllCards(board.id, group.id, user);
   }
 
   function onSelectSortBy() {
