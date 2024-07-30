@@ -13,7 +13,7 @@
     },
     {
       "id": "activityId",
-      "type": "transferTask(betweenBoards)",
+      "type": "transferTask(betweenBoards(to))",
       "userFullName": "fullName",
       "userId": "id",
       "targetId": "taskId",
@@ -24,7 +24,7 @@
     },
     {
       "id": "activityId",
-      "type": "receiveTask(betweenBoards)",
+      "type": "receiveTask(betweenBoards(from))",
       "userFullName": "fullName",
       "userId": "id",
       "targetId": "taskId",
