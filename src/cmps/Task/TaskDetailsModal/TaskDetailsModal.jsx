@@ -286,6 +286,7 @@ export function TaskDetailsModal({
                   createAsTask={createAsTask}
                   openedInputId={openedInputId}
                   setOpenedInputId={onSetOpenId}
+                  editBoard={editBoard}
                 />
               ))}
         </section>

@@ -176,6 +176,7 @@ export function BoardIndex() {
           board={board}
           editBoard={editBoard}
           closeTask={() => setSelectedTaskId(null)}
+          addTask={addTask}
         />
       )}
     </section>

@@ -20,6 +20,7 @@ export function TaskDetailsCheckList({
   setOpenedInputId,
   openedInputId,
   task,
+  editBoard,
 }) {
   const [checkedCount, setCheckedCount] = useState({
     checked: 0,
@@ -131,10 +132,9 @@ export function TaskDetailsCheckList({
   function onDeleteItem(itemId) {
     deleteItem(checkList.id, itemId);
   }
-  //TODO 1 action
   async function onConvertToTask(itemId, itemName) {
-    await createAsTask(itemName);
     deleteItem(checkList.id, itemId);
+    await createAsTask(itemName);
   }
 
   return (
