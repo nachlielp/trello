@@ -31,13 +31,11 @@ export function TaskPreviewEditModal({
   taskWidth,
   labelActions,
 }) {
-  const boardLabels = useSelector(
-    (state) => state.boardModule.board.labels
-  );
+  const boardLabels = useSelector((state) => state.boardModule.board.labels);
   const [taskLabels, setTaskLabels] = useState([]);
 
   const [modalStyle, setModalStyle] = useState({});
-  const [taskName, setTaskName] = useState(task.name || "");
+  const [taskName, setTaskName] = useState(task?.name || "");
   const [showEditModalBtn, setShowEditModalBtn] = useState(false);
   const containerRef = useRef(null);
 
@@ -46,13 +44,15 @@ export function TaskPreviewEditModal({
   }, [isHovered, isOpen]);
 
   useEffect(() => {
-    const labels = task.idLabels
-      .filter((labelId) => boardLabels?.some(boardLabel => boardLabel.id === labelId))
+    const labels = task?.idLabels
+      .filter((labelId) =>
+        boardLabels?.some((boardLabel) => boardLabel.id === labelId)
+      )
       .map((labelId) =>
         boardLabels.find((boardLabel) => boardLabel.id === labelId)
       );
     setTaskLabels(labels || []);
-  }, [task.idLabels, boardLabels]);
+  }, [task?.idLabels, boardLabels]);
 
   function showModal(e) {
     e.stopPropagation();
@@ -67,7 +67,7 @@ export function TaskPreviewEditModal({
 
   function handleOk(e) {
     e.stopPropagation();
-    if (taskName !== task.name) {
+    if (taskName !== task?.name) {
       editTask({ ...task, name: taskName });
     }
     openPreviewModal(false);
@@ -210,19 +210,19 @@ export function TaskPreviewEditModal({
         transitionName="" // Disable modal open animation
         maskTransitionName=""
       >
-        {task.cover.color && (
+        {task?.cover.color && (
           <div
             className="group-task-header"
             style={{
-              backgroundColor: utilService.getColorHashByName(task.cover.color)
+              backgroundColor: utilService.getColorHashByName(task?.cover.color)
                 .bgColor,
             }}
           ></div>
         )}
-        {task.cover.idUploadedBackground && (
+        {task?.cover.idUploadedBackground && (
           <div
             className="group-task-header img-cover"
-            style={{ backgroundImage: `url(${task.cover.scaled[2].url})` }}
+            style={{ backgroundImage: `url(${task?.cover.scaled[2].url})` }}
           ></div>
         )}
         <main className="task-preview-edit-modal-content">
@@ -247,11 +247,20 @@ export function TaskPreviewEditModal({
           Save
         </button>
         <section
-          className={`floating-buttons ${task.cover.size === "full" ? "full-cover" : ""
-            }`}
+          className={`floating-buttons ${
+            task?.cover.size === "full" ? "full-cover" : ""
+          }`}
         >
           {modalActionButtons.map((btn, index) => (
-            <div key={index} style={{ display: (task.cover.size === "normal" || btn.cover) ? "block" : "none" }}>{btn.popover}</div>
+            <div
+              key={index}
+              style={{
+                display:
+                  task?.cover.size === "normal" || btn.cover ? "block" : "none",
+              }}
+            >
+              {btn.popover}
+            </div>
           ))}
         </section>
       </Modal>
