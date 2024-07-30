@@ -26,6 +26,7 @@ import { TaskDetailsModal } from "../cmps/Task/TaskDetailsModal/TaskDetailsModal
 import { BoardHeader } from "../cmps/BoardHeader/BoardHeader.jsx";
 import useScrollByGrab from "../customHooks/useScrollByGrab.js";
 import { useParams, useNavigate } from "react-router-dom";
+import { utilService } from "../services/util.service.js";
 
 export function BoardIndex() {
   const [selectedTaskId, setSelectedTaskId] = useState(null);
@@ -88,6 +89,15 @@ export function BoardIndex() {
   async function onEditTask(task) {
     const res = await editTask(task);
     if (task.closed) {
+      const newActivity = utilService.createActivity(
+        {
+          type: "archiveTask",
+          targetId: task.id,
+          targetName: task.name,
+        },
+        user
+      );
+      updateBoard({ ...board, activities: [...board.activities, newActivity] });
       navigate(`/b/${board.id}`, { replace: true });
     }
   }
