@@ -133,8 +133,8 @@ export function TaskDetailsCheckList({
     deleteItem(checkList.id, itemId);
   }
   async function onConvertToTask(itemId, itemName) {
-    deleteItem(checkList.id, itemId);
     await createAsTask(itemName);
+    deleteItem(checkList.id, itemId);
   }
 
   return (

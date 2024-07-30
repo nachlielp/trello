@@ -209,9 +209,10 @@ export function TaskDetailsModal({
       name,
       pos: maxPos + 1000,
       groupId: task.idGroup,
+      idBoard: task.idBoard,
     };
 
-    await addTask(newTask);
+    await addTask(newTask, user, group);
   }
   function onSetOpenId(id) {
     setOpenedInputId(id);
