@@ -3,6 +3,7 @@ import { ManageTaskPopoverHeader } from "./ManageTaskPopoverHeader";
 import { useState, useRef, useEffect } from "react";
 import { Tooltip } from "antd";
 import { CloseCircleOutlined } from "@ant-design/icons";
+import CloudinaryUpload from "../../CloudinaryUpload";
 import { utilService } from "../../../services/util.service";
 export function ManageAttachmentsPopover({
   anchorEl,
@@ -45,6 +46,7 @@ function ManageAttachmentsPopoverContent({ task, editTask, onClose }) {
   const [invalidLink, setInvalidLink] = useState(false);
   const [focusedLink, setFocusedLink] = useState(false);
   const [focusedText, setFocusedText] = useState(false);
+  const [attachmentUrl, setAttachmentUrl] = useState(null);
 
   const linkRef = useRef(null);
   const textRef = useRef(null);
@@ -70,6 +72,10 @@ function ManageAttachmentsPopoverContent({ task, editTask, onClose }) {
     textRef.current.focus();
   }
 
+  function onAttachUrl(url) {
+    console.log("onAttachUrl: ", url);
+    setAttachmentUrl(url);
+  }
   return (
     <section className="manage-attachments-popover-content">
       <ManageTaskPopoverHeader
@@ -84,7 +90,11 @@ function ManageAttachmentsPopoverContent({ task, editTask, onClose }) {
         <label className="section-subtitle">
           You can also drag and drop files to upload them.
         </label>
-        <button className="btn upload-button">Upload</button>
+        <CloudinaryUpload
+          onAttachUrl={onAttachUrl}
+          anchorEl={<button className="btn upload-button">Upload</button>}
+        />
+
         <hr className="divider" />
         <label className="section-title">Search or paste a link</label>
         <div className="input-wrapper">

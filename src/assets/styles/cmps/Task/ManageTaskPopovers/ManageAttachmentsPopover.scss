@@ -69,7 +69,10 @@
         color: var(--ds-text, #172b4d);
 
         &:hover {
-          background-color: var(--ds-background-neutral-hovered, #091e4224);
+          background: var(
+            --ds-background-neutral-subtle-hovered,
+            rgba(9, 30, 66, 0.08)
+          );
         }
       }
     }
