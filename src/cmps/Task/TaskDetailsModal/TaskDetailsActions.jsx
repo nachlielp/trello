@@ -1,10 +1,6 @@
 import labelIcon from "/img/board-index/headerImgs/filterBtn-imgs/labelIcon.svg";
-import clockIcon from "/img/board-index/headerImgs/filterBtn-imgs/clockIcon.svg";
 import defaultProfile from "/img/defaultProfile.svg";
 import checkListIcon from "/img/board-index/detailsImgs/checkListIcon.svg";
-import moveIcon from "/img/taskActionBtns/moveIcon.svg";
-
-import { SvgButton } from "../../CustomCpms/SvgButton";
 
 import { useNavigate } from "react-router-dom";
 import { MoveCardPopover } from "../ManageTaskPopovers/MoveCardPopover";
@@ -24,11 +20,10 @@ export function TaskDetailsActions({ task, editTask, onClose }) {
           task={task}
           onCloseTask={onClose}
           anchorEl={
-            <SvgButton
-              src={moveIcon}
-              label="Move"
-              className="floating-button"
-            />
+            <button className="floating-font-button">
+              <label className="trello-icon icon-move " />
+              <label className="btn-label">Move</label>
+            </button>
           }
         />
       ),
@@ -37,7 +32,10 @@ export function TaskDetailsActions({ task, editTask, onClose }) {
     { svg: checkListIcon, text: "Make template" },
     {
       popover: (
-        <SvgButton src={clockIcon} label="Archive" onClick={onArchiveTask} />
+        <button className="floating-font-button" onClick={onArchiveTask}>
+          <label className="trello-icon icon-archive " />
+          <label className="btn-label">Archive</label>
+        </button>
       ),
     },
     { svg: "/img/taskBadges/file.svg", text: "Share" },

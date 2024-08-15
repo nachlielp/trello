@@ -295,7 +295,10 @@ export function TaskDetailsModal({
           {!isMember && (
             <article className="suggestions">
               <p className="sub-title">Suggested</p>
-              <SvgButton src={defaultProfile} label={"Join"} onClick={onJoin} />
+              <button className="floating-font-button" onClick={onJoin}>
+                <label className="trello-icon icon-member " />
+                <label className="btn-label">Join</label>
+              </button>
             </article>
           )}
           <TaskDetailsAddToCard

@@ -29,11 +29,10 @@ export function TaskDetailsAddToCard({
       popover: (
         <ManageMembersPopover
           anchorEl={
-            <SvgButton
-              src={defaultProfile}
-              className="floating-button"
-              label="Members"
-            />
+            <button className="floating-font-button">
+              <label className="trello-icon icon-member " />
+              <label className="btn-label">Members</label>
+            </button>
           }
           editTask={editTask}
           task={task}
@@ -44,11 +43,10 @@ export function TaskDetailsAddToCard({
       popover: (
         <ManageLabelsPopover
           anchorEl={
-            <SvgButton
-              src={labelIcon}
-              className="floating-button"
-              label="Labels"
-            />
+            <button className="floating-font-button">
+              <label className="trello-icon icon-label " />
+              <label className="btn-label">Labels</label>
+            </button>
           }
           taskLabels={task?.labels}
           editTask={editTask}
@@ -61,11 +59,10 @@ export function TaskDetailsAddToCard({
       popover: (
         <AddChecklistPopover
           anchorEl={
-            <SvgButton
-              src={checkListIcon}
-              className="floating-button"
-              label="Checklist"
-            />
+            <button className="floating-font-button">
+              <label className="trello-icon icon-checklist " />
+              <label className="btn-label">Checklists</label>
+            </button>
           }
           editBoard={editBoard}
           task={task}
@@ -80,11 +77,15 @@ export function TaskDetailsAddToCard({
           task={task}
           editTask={editTask}
           anchorEl={
-            <SvgButton
-              src={clockIcon}
-              className="floating-button"
-              label="Dates"
-            />
+            // <SvgButton
+            //   src={clockIcon}
+            //   className="floating-button"
+            //   label="Dates"
+            // />
+            <button className="floating-font-button">
+              <label className="trello-icon icon-clock " />
+              <label className="btn-label">Dates</label>
+            </button>
           }
         />
       ),
@@ -95,7 +96,10 @@ export function TaskDetailsAddToCard({
           task={task}
           editTask={editTask}
           anchorEl={
-            <button className="trello-icon icon-attachment floating-button"></button>
+            <button className="floating-font-button">
+              <label className="trello-icon icon-attachment " />
+              <label className="btn-label">Attachments</label>
+            </button>
           }
         />
       ),
@@ -104,11 +108,10 @@ export function TaskDetailsAddToCard({
       popover: !isCover ? (
         <ManageCoverPopover
           anchorEl={
-            <SvgButton
-              src={coverIcon}
-              className="floating-button"
-              label="Change cover"
-            />
+            <button className="floating-font-button">
+              <label className="trello-icon icon-card-cover " />
+              <label className="btn-label">Cover</label>
+            </button>
           }
           editTask={editTask}
           task={task}
