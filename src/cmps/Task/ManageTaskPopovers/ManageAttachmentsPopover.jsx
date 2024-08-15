@@ -61,6 +61,7 @@ function ManageAttachmentsPopoverContent({ task, editTask, onClose }) {
 
     // TODO: get attachment name form server
     const attachment = {
+      id: utilService.makeId(),
       link,
       text: text || link,
       createdAt: dayjs().toISOString(),
@@ -91,6 +92,7 @@ function ManageAttachmentsPopoverContent({ task, editTask, onClose }) {
   function onAttachUrl(data) {
     // console.log("onAttachUrl: ", data);
     const attachment = {
+      id: utilService.makeId(),
       link: data.secure_url,
       text: data.original_filename,
       createdAt: dayjs().toISOString(),

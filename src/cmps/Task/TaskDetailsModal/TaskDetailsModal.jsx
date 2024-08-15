@@ -290,6 +290,13 @@ export function TaskDetailsModal({
                   editBoard={editBoard}
                 />
               ))}
+          {task?.attachments?.map((attachment) => (
+            <TaskDetailsAttachment
+              key={attachment.id}
+              attachment={attachment}
+              editTask={editTask}
+            />
+          ))}
         </section>
         <section className="details-body__right">
           {!isMember && (
