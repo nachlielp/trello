@@ -192,11 +192,7 @@
             },
             "isTemplate": false,
             "cardRole": null,
-            "attachments": [{
-              "id": "6689477fee7b57e70a601b46",
-              "name": "photo-1719996510843-25348b436dcc.webp",
-              "url": "https://i.postimg.cc/657fn9Tt/Profile-3.png"
-            }]
+            "attachments": []
           }
         ]
       }

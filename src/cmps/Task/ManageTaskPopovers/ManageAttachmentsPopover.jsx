@@ -1,10 +1,11 @@
 import { Popover, Input } from "antd";
 import { ManageTaskPopoverHeader } from "./ManageTaskPopoverHeader";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { Tooltip } from "antd";
-import { CloseCircleOutlined } from "@ant-design/icons";
 import CloudinaryUpload from "../../CloudinaryUpload";
 import { utilService } from "../../../services/util.service";
+import dayjs from "dayjs";
+
 export function ManageAttachmentsPopover({
   anchorEl,
   task,
@@ -46,20 +47,35 @@ function ManageAttachmentsPopoverContent({ task, editTask, onClose }) {
   const [invalidLink, setInvalidLink] = useState(false);
   const [focusedLink, setFocusedLink] = useState(false);
   const [focusedText, setFocusedText] = useState(false);
-  const [attachmentUrl, setAttachmentUrl] = useState(null);
 
   const linkRef = useRef(null);
   const textRef = useRef(null);
+
+  // ... rest
 
   function onAddLink() {
     if (link === "" || !utilService.isValidUrl(link)) {
       setInvalidLink(true);
       return;
     }
+
+    // TODO: get attachment name form server
+    const attachment = {
+      link,
+      text: text || link,
+      createdAt: dayjs().toISOString(),
+      type: "link",
+    };
+
+    if (!Array.isArray(task.attachments)) {
+      task.attachments = [];
+    }
     editTask({
       ...task,
-      attachments: [...task.attachments, { link, text }],
+      attachments: [...task.attachments, attachment],
     });
+    setLink("");
+    setText("");
     onClose();
   }
   function onClearLink() {
@@ -72,9 +88,24 @@ function ManageAttachmentsPopoverContent({ task, editTask, onClose }) {
     textRef.current.focus();
   }
 
-  function onAttachUrl(url) {
-    console.log("onAttachUrl: ", url);
-    setAttachmentUrl(url);
+  function onAttachUrl(data) {
+    // console.log("onAttachUrl: ", data);
+    const attachment = {
+      link: data.secure_url,
+      text: data.original_filename,
+      createdAt: dayjs().toISOString(),
+      type: data.resource_type,
+    };
+
+    // TODO: romve in production
+    if (!Array.isArray(task.attachments)) {
+      task.attachments = [];
+    }
+    editTask({
+      ...task,
+      attachments: [...task.attachments, attachment],
+    });
+    onClose();
   }
   return (
     <section className="manage-attachments-popover-content">
@@ -109,7 +140,7 @@ function ManageAttachmentsPopoverContent({ task, editTask, onClose }) {
             }
             value={link}
             onChange={(e) => {
-              setLink(e.target.value);
+              setLink(e.target.value || "");
               setInvalidLink(false);
             }}
             onFocus={() => setFocusedLink(true)}
@@ -133,7 +164,7 @@ function ManageAttachmentsPopoverContent({ task, editTask, onClose }) {
               <ClearLinkIcon onClick={onClearText} display={text !== ""} />
             }
             value={text}
-            onChange={(e) => setText(e.target.value)}
+            onChange={(e) => setText(e.target.value || "")}
             onFocus={() => setFocusedText(true)}
             onBlur={() => setFocusedText(false)}
             ref={textRef}
