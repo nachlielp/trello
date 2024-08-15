@@ -20,7 +20,7 @@ export function TaskDetailsActions({ task, editTask, onClose }) {
           task={task}
           onCloseTask={onClose}
           anchorEl={
-            <button className="floating-font-button">
+            <button className="details-anchor-btn">
               <label className="trello-icon icon-move " />
               <label className="btn-label">Move</label>
             </button>
@@ -32,7 +32,7 @@ export function TaskDetailsActions({ task, editTask, onClose }) {
     { svg: checkListIcon, text: "Make template" },
     {
       popover: (
-        <button className="floating-font-button" onClick={onArchiveTask}>
+        <button className="details-anchor-btn" onClick={onArchiveTask}>
           <label className="trello-icon icon-archive " />
           <label className="btn-label">Archive</label>
         </button>

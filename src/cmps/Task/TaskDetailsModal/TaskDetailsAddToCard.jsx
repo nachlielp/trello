@@ -29,7 +29,7 @@ export function TaskDetailsAddToCard({
       popover: (
         <ManageMembersPopover
           anchorEl={
-            <button className="floating-font-button">
+            <button className="details-anchor-btn">
               <label className="trello-icon icon-member " />
               <label className="btn-label">Members</label>
             </button>
@@ -43,7 +43,7 @@ export function TaskDetailsAddToCard({
       popover: (
         <ManageLabelsPopover
           anchorEl={
-            <button className="floating-font-button">
+            <button className="details-anchor-btn">
               <label className="trello-icon icon-label " />
               <label className="btn-label">Labels</label>
             </button>
@@ -59,7 +59,7 @@ export function TaskDetailsAddToCard({
       popover: (
         <AddChecklistPopover
           anchorEl={
-            <button className="floating-font-button">
+            <button className="details-anchor-btn">
               <label className="trello-icon icon-checklist " />
               <label className="btn-label">Checklists</label>
             </button>
@@ -82,7 +82,7 @@ export function TaskDetailsAddToCard({
             //   className="floating-button"
             //   label="Dates"
             // />
-            <button className="floating-font-button">
+            <button className="details-anchor-btn">
               <label className="trello-icon icon-clock " />
               <label className="btn-label">Dates</label>
             </button>
@@ -96,7 +96,7 @@ export function TaskDetailsAddToCard({
           task={task}
           editTask={editTask}
           anchorEl={
-            <button className="floating-font-button">
+            <button className="details-anchor-btn">
               <label className="trello-icon icon-attachment " />
               <label className="btn-label">Attachments</label>
             </button>
@@ -108,7 +108,7 @@ export function TaskDetailsAddToCard({
       popover: !isCover ? (
         <ManageCoverPopover
           anchorEl={
-            <button className="floating-font-button">
+            <button className="details-anchor-btn">
               <label className="trello-icon icon-card-cover " />
               <label className="btn-label">Cover</label>
             </button>

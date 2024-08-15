@@ -295,7 +295,7 @@ export function TaskDetailsModal({
           {!isMember && (
             <article className="suggestions">
               <p className="sub-title">Suggested</p>
-              <button className="floating-font-button" onClick={onJoin}>
+              <button className="details-anchor-btn" onClick={onJoin}>
                 <label className="trello-icon icon-member " />
                 <label className="btn-label">Join</label>
               </button>
