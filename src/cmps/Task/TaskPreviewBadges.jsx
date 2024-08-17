@@ -82,7 +82,7 @@ export function TaskPreviewBadges({ task, editTask }) {
       ]);
     }
 
-    if (task?.badges?.attachments > 0) {
+    if (task?.attachments?.length > 0) {
       setTaskIcon((prev) => [
         ...prev,
         <Tooltip
@@ -98,7 +98,7 @@ export function TaskPreviewBadges({ task, editTask }) {
               className="task-icon"
               wrapper="span"
             />
-            <span className="task-icon-count">{task.badges.attachments}</span>
+            <span className="task-icon-count">{task?.attachments?.length}</span>
           </span>
         </Tooltip>,
       ]);
