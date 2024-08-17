@@ -38,6 +38,7 @@ export function TaskDetailsLabels({ task, editTask, labelActions }) {
                     borderRadius: "3px",
                     backgroundColor: "#42546f",
                   }}
+                  key={labelInfo.id}
                 >
                   <div
                     className="task-details-label"
