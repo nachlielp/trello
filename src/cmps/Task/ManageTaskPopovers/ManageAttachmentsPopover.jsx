@@ -5,6 +5,7 @@ import { Tooltip } from "antd";
 import CloudinaryUpload from "../../CloudinaryUpload";
 import { utilService } from "../../../services/util.service";
 import dayjs from "dayjs";
+import { showSuccessMsg } from "../../../services/event-bus.service";
 
 export function ManageAttachmentsPopover({
   anchorEl,
@@ -90,7 +91,6 @@ function ManageAttachmentsPopoverContent({ task, editTask, onClose }) {
   }
 
   function onAttachUrl(data) {
-    console.log("onAttachUrl: ", data);
     const attachment = {
       id: utilService.makeId(),
       link: data.secure_url,
@@ -108,6 +108,7 @@ function ManageAttachmentsPopoverContent({ task, editTask, onClose }) {
       attachments: [...task.attachments, attachment],
     });
     onClose();
+    showSuccessMsg("Success");
   }
 
   return (

@@ -1,10 +1,12 @@
 import { useCallback, useRef } from "react";
-
+import { showInfomationMsg } from "../services/event-bus.service";
 export default function CloudinaryUpload({ onAttachUrl, anchorEl }) {
   const fileInputRef = useRef(null);
 
   const handleFileChange = useCallback(
     async (event) => {
+      showInfomationMsg("Uploading file...");
+      console.log("CloudinaryUpload.handleFileChange");
       const file = event.target.files[0];
       if (!file) return;
 
@@ -32,7 +34,7 @@ export default function CloudinaryUpload({ onAttachUrl, anchorEl }) {
         }
 
         const data = await response.json();
-        console.log("CloudinaryUpload.result: ", data.secure_url);
+        // console.log("CloudinaryUpload.result: ", data.secure_url);
         onAttachUrl(data);
       } catch (error) {
         console.error("CloudinaryUpload.error: ", error);
@@ -44,8 +46,10 @@ export default function CloudinaryUpload({ onAttachUrl, anchorEl }) {
   );
 
   const handleClick = () => {
+    console.log("CloudinaryUpload.handleClick");
     fileInputRef.current.click();
   };
+
   return (
     <>
       <input

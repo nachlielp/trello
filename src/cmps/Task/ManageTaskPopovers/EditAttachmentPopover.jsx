@@ -3,7 +3,6 @@ import { Popover, Input } from "antd";
 import { ManageTaskPopoverHeader } from "./ManageTaskPopoverHeader";
 import { utilService } from "../../../services/util.service";
 export function EditAttachmentPopover({ anchorEl, onEdit, attachment }) {
-  console.log("EditAttachmentPopover", attachment);
   const [isOpen, setIsOpen] = useState(false);
   const [link, setLink] = useState(attachment.link);
   const [focusedLink, setFocusedLink] = useState(false);

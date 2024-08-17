@@ -2,8 +2,6 @@ import dayjs from "dayjs";
 import { DeleteAttachmentPopover } from "../ManageTaskPopovers/DeleteAttachmentPopover";
 import { EditAttachmentPopover } from "../ManageTaskPopovers/EditAttachmentPopover";
 export function TaskDetailsAttachment({ attachment, editTask, task }) {
-  console.log("attachment: ", attachment);
-
   const { link, text } = attachment;
 
   function onDownload(e) {
