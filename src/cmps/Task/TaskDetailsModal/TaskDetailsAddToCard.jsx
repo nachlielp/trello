@@ -1,13 +1,7 @@
-import defaultProfile from "/img/defaultProfile.svg";
-import checkListIcon from "/img/board-index/detailsImgs/checkListIcon.svg";
 import { useState, useEffect } from "react";
-import coverIcon from "/img/board-index/detailsImgs/coverIcon.svg";
 import fieldsIcon from "/img/board-index/detailsImgs/fieldsIcon.svg";
-import labelIcon from "/img/board-index/headerImgs/filterBtn-imgs/labelIcon.svg";
-import clockIcon from "/img/board-index/headerImgs/filterBtn-imgs/clockIcon.svg";
 import { ManageDatesPopover } from "../ManageTaskPopovers/ManageDatesPopover";
 import { ManageAttachmentsPopover } from "../ManageTaskPopovers/ManageAttachmentsPopover";
-import { SvgButton } from "../../CustomCpms/SvgButton";
 import { ManageMembersPopover } from "../ManageTaskPopovers/ManageMembersPopover";
 import { ManageLabelsPopover } from "../ManageTaskPopovers/ManageLabelsPopover";
 import { ManageCoverPopover } from "../ManageTaskPopovers/ManageCoverPopover";

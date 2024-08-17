@@ -11,7 +11,6 @@ import { ManageCoverPopover } from "../ManageTaskPopovers/ManageCoverPopover";
 import coverIcon from "/img/board-index/detailsImgs/coverIcon.svg";
 import { ReactSVG } from "react-svg";
 import detailsIcon from "/img/board-index/detailsImgs/detailsIcon.svg";
-import defaultProfile from "/img/defaultProfile.svg";
 import { utilService } from "../../../services/util.service";
 import { TaskDetailsLabels } from "./TaskDetailsLabels";
 import { TaskDetailsMarkdown } from "./TaskDetailsMarkdown";
@@ -19,6 +18,7 @@ import { NameInput } from "../../CustomCpms/NameInput";
 import { TaskDetailsCheckList } from "./TaskDetailsCheckList";
 import { TaskDetailsDates } from "./TaskDetailsDates";
 import { updateBoard } from "../../../store/board.actions";
+import { TaskDetailsAttachment } from "./TaskDetailsAttachment";
 
 export function TaskDetailsModal({
   taskId,
@@ -290,13 +290,26 @@ export function TaskDetailsModal({
                   editBoard={editBoard}
                 />
               ))}
-          {task?.attachments?.map((attachment) => (
-            <TaskDetailsAttachment
-              key={attachment.id}
-              attachment={attachment}
-              editTask={editTask}
-            />
-          ))}
+          {task?.attachments?.length > 0 && (
+            <section className="attachments-section">
+              <header className="task-details-section-header">
+                <ReactSVG
+                  src="/img/taskBadges/file.svg"
+                  wrapper="span"
+                  className="section-icon"
+                />
+                <h3 className="section-title">Attachments</h3>
+              </header>
+              {task?.attachments.map((attachment) => (
+                <TaskDetailsAttachment
+                  key={attachment.id}
+                  attachment={attachment}
+                  editTask={editTask}
+                  task={task}
+                />
+              ))}
+            </section>
+          )}
         </section>
         <section className="details-body__right">
           {!isMember && (

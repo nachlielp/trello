@@ -5,14 +5,14 @@
 // @import "setup/typography";
 
 @font-face {
-  font-family: 'trello-icons';
-  src: url('./fonts/trello-icon-fonts.ttf');
+  font-family: "trello-icons";
+  src: url("./fonts/trello-icon-fonts.ttf");
 }
 
 @import "./fonts/icons.scss";
 
 .trello-icon {
-  font-family: 'trello-icons';
+  font-family: "trello-icons";
 }
 
 // Basics
@@ -87,7 +87,7 @@
 @import "cmps/Task/TaskDetailsModal/TaskDetailsCheckList.scss";
 @import "cmps/Task/TaskDetailsModal/TaskDetailsDates.scss";
 @import "cmps/Task/ManageTaskPopovers/ManageAttachmentsPopover.scss";
-
+@import "cmps/Task/TaskDetailsModal/TaskDetailsAttachment.scss";
 //Custom Cpms
 @import "cmps/CustomCpms/StarBoardBtn";
 @import "cmps/CustomCpms/CustomSelect";
@@ -148,8 +148,10 @@
   --dynamic-text: #ffffff;
   --dynamic-header-text: #ffffff;
   --board-header-background-color: #0000003d;
-  --header-button-hovered: var(--dynamic-button-hovered,
-      rgba(255, 255, 255, 0.3));
+  --header-button-hovered: var(
+    --dynamic-button-hovered,
+    rgba(255, 255, 255, 0.3)
+  );
   --ds-surface: #ffffff;
   --header-button-color: var(--ds-text-subtle, #44546f);
   --create-menu-button-background: rgba(255, 255, 255, 0.2);

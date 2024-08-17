@@ -90,16 +90,16 @@ function ManageAttachmentsPopoverContent({ task, editTask, onClose }) {
   }
 
   function onAttachUrl(data) {
-    // console.log("onAttachUrl: ", data);
+    console.log("onAttachUrl: ", data);
     const attachment = {
       id: utilService.makeId(),
       link: data.secure_url,
-      text: data.original_filename,
+      text: `${data.original_filename}.${data.format}`,
+      format: data.format,
       createdAt: dayjs().toISOString(),
       type: data.resource_type,
     };
 
-    // TODO: romve in production
     if (!Array.isArray(task.attachments)) {
       task.attachments = [];
     }
@@ -109,6 +109,7 @@ function ManageAttachmentsPopoverContent({ task, editTask, onClose }) {
     });
     onClose();
   }
+
   return (
     <section className="manage-attachments-popover-content">
       <ManageTaskPopoverHeader
