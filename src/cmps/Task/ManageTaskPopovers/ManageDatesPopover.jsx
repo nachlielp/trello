@@ -6,6 +6,7 @@ import { SvgButton } from "../../CustomCpms/SvgButton";
 import { CustomSelect } from "../../CustomCpms/CustomSelect";
 import { utilService } from "../../../services/util.service";
 import { useSelector } from "react-redux";
+import { updateBoard } from "../../../store/board.actions";
 
 const customLocale = {
   lang: {
@@ -335,7 +336,7 @@ function ManageDatesPopoverContent({ task, editTask, onClose, editBoard }) {
       user
     );
 
-    await editBoard({
+    await updateBoard({
       ...board,
       activities: [...board?.activities, newActivity],
     });
