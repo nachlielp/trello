@@ -4,11 +4,14 @@ import { Input } from "antd";
 import { Card } from "antd";
 import { utilService } from "../../services/util.service";
 import { updateBoard } from "../../store/board.actions";
+import { useSelector } from "react-redux";
 
 export function AddGroupBtn({ addGroup }) {
   const [isAddGroupOpen, setIsAddGroupOpen] = useState(false);
   const [groupName, setGroupName] = useState("");
   const inputRef = useRef(null);
+  const user = useSelector((state) => state.userModule.user);
+  const board = useSelector((state) => state.boardModule.board);
 
   useEffect(() => {
     if (inputRef.current) {
