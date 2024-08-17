@@ -23,7 +23,6 @@ function createEventEmitter() {
 export const eventBus = createEventEmitter();
 
 export function showUserMsg(msg) {
-  console.log("Emitting show-msg event:", msg);
   eventBus.emit(SHOW_MSG, msg);
 }
 

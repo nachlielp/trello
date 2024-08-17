@@ -1,7 +1,10 @@
 import dayjs from "dayjs";
 import { DeleteAttachmentPopover } from "../ManageTaskPopovers/DeleteAttachmentPopover";
 import { EditAttachmentPopover } from "../ManageTaskPopovers/EditAttachmentPopover";
+import { Image } from "antd";
+import { useState } from "react";
 export function TaskDetailsAttachment({ attachment, editTask, task }) {
+  const [previewVisible, setPreviewVisible] = useState(false);
   const { link, text } = attachment;
 
   function onDownload(e) {
@@ -30,29 +33,48 @@ export function TaskDetailsAttachment({ attachment, editTask, task }) {
     });
   }
 
+  function onClickAttachment() {
+    if (attachment.type === "link") {
+      window.open(attachment.link, "_blank");
+    } else {
+      setPreviewVisible(true);
+    }
+  }
   const isLink = attachment.type === "link";
   //TODO check if img and supported image type
   const isImg = false;
   return (
-    <section className="task-details-attachment">
+    <section className="task-details-attachment" onClick={onClickAttachment}>
+      {previewVisible && (
+        <Image
+          preview={{
+            visible: previewVisible,
+            src: attachment.link,
+            onVisibleChange: (visible) => setPreviewVisible(visible),
+          }}
+          src={isImg ? attachment.link : ""}
+          alt={attachment.text}
+          style={{ display: "none" }}
+        />
+      )}
       <article className="attachment-preview">
         {isImg ? (
-          <img src={attachment.url} alt={attachment.name} />
+          <img src={attachment.link} alt={attachment.text} />
         ) : (
-          <lable className="attachment-icon-wrapper">
+          <label className="attachment-icon-wrapper">
             {attachment.format ? (
-              <lable className="attachment-format">{attachment.format}</lable>
+              <label className="attachment-format">{attachment.format}</label>
             ) : (
               <label className="trello-icon icon-attachment attachment-icon" />
             )}
-          </lable>
+          </label>
         )}
       </article>
       <article className="attachment-content">
-        <lable className="attachment-title">
+        <label className="attachment-title">
           {attachment.text}
           <label className="trello-icon icon-external-link title-icon" />
-        </lable>
+        </label>
         <div className="attachment-actions">
           <label className="attachment-created-at">
             {createdAtFormatter({ createdAt: attachment.createdAt })}

@@ -6,7 +6,6 @@ export default function CloudinaryUpload({ onAttachUrl, anchorEl }) {
   const handleFileChange = useCallback(
     async (event) => {
       showInfomationMsg("Uploading file...");
-      console.log("CloudinaryUpload.handleFileChange");
       const file = event.target.files[0];
       if (!file) return;
 

@@ -109,7 +109,7 @@ export async function addTask(task, user, group) {
     );
     const newBoard = {
       ...board,
-      groups: board.groups.map((g) => {
+      groups: board.groups?.map((g) => {
         if (g.id === newTask.idGroup) {
           return { ...g, tasks: [...(g.tasks || []), newTask] };
         }

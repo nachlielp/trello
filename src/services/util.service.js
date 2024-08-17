@@ -1286,6 +1286,7 @@ async function createNewBoard(board) {
         brightness: "light",
       },
     ],
+    activities: [],
   };
 }
 

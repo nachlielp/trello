@@ -20,9 +20,6 @@ export function UserMsg() {
       if (msg.type === "success") {
         timeoutIdRef.current = setTimeout(closeMsg, 3000);
       }
-      // if (msg.type === "info") {
-      //   timeoutIdRef.current = setTimeout(closeMsg, 30000);
-      // }
     });
 
     socketService.on(SOCKET_EVENT_REVIEW_ABOUT_YOU, (review) => {
