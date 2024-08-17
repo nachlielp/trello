@@ -369,6 +369,37 @@
         }
 
         .attachments-section {
+          .add-attachment-btn {
+            margin-right: 8px;
+            margin-left: auto;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+              "Noto Sans", "Ubuntu", "Droid Sans", "Helvetica Neue", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 20px;
+            font-display: swap;
+            display: inline-flex;
+            box-sizing: border-box;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 12px;
+            border-radius: 3px;
+            text-decoration: none;
+            white-space: normal;
+            cursor: pointer;
+            border: none;
+            background-color: var(--ds-background-neutral, #091e420f);
+            box-shadow: none;
+            color: var(--ds-text, #172b4d);
+            font-weight: 500;
+            transition-property: background-color, border-color, box-shadow;
+            transition-duration: 85ms;
+            transition-timing-function: ease;
+
+            &:hover {
+              background-color: var(--ds-background-neutral-hovered, #091e4224);
+            }
+          }
         }
       }
     }

@@ -19,6 +19,7 @@ import { TaskDetailsCheckList } from "./TaskDetailsCheckList";
 import { TaskDetailsDates } from "./TaskDetailsDates";
 import { updateBoard } from "../../../store/board.actions";
 import { TaskDetailsAttachment } from "./TaskDetailsAttachment";
+import { ManageAttachmentsPopover } from "../ManageTaskPopovers/ManageAttachmentsPopover";
 
 export function TaskDetailsModal({
   taskId,
@@ -299,6 +300,11 @@ export function TaskDetailsModal({
                   className="section-icon"
                 />
                 <h3 className="section-title">Attachments</h3>
+                <ManageAttachmentsPopover
+                  task={task}
+                  editTask={editTask}
+                  anchorEl={<button className="add-attachment-btn">Add</button>}
+                />
               </header>
               {task?.attachments.map((attachment) => (
                 <TaskDetailsAttachment
