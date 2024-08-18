@@ -38,15 +38,14 @@ export function WorkspaceIndex() {
   const [selectedBoardId, setSelectedBoardId] = useState(null);
   const [starredBoardIds, setStarredBoardIds] = useState([]);
   const [isUserBoards, setIsUserBoards] = useState(false);
-  const [darkMode, setDarkMode] = useState(() => {
-    // Initialize state based on localStorage or system preference
-    const savedMode = localStorage.getItem("dark");
-    if (savedMode !== null) {
-      return savedMode === "true";
+  const [darkMode, setDarkMode] = useState();
+
+  useEffect(() => {
+    if (user) {
+      console.log(user.darkMode);
+      setDarkMode(user.darkMode);
     }
-    // Default to system preference if no saved mode
-    return null;
-  });
+  }, [user]);
 
   const navigate = useNavigate();
   const params = useParams();
@@ -87,15 +86,12 @@ export function WorkspaceIndex() {
 
   useEffect(() => {
     // Update localStorage and <html> class based on darkMode state
-    if (darkMode === true) {
-      localStorage.setItem("dark", "true");
+    if (darkMode === "dark") {
       document.querySelector("html").classList.add("dark");
-    } else if (darkMode === false) {
-      localStorage.setItem("dark", "false");
+    } else if (darkMode === "light") {
       document.querySelector("html").classList.remove("dark");
     }
-    if (darkMode === null) {
-      localStorage.removeItem("dark");
+    if (darkMode === "default") {
       if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
         document.querySelector("html").classList.add("dark");
       } else if (!window.matchMedia("(prefers-color-scheme: dark)").matches) {
