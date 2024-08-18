@@ -1,0 +1,42 @@
+.activity {
+  display: flex;
+  padding: 8px 0;
+  height: 76px;
+  .activity-avatar {
+    min-width: 32px;
+  }
+  .main-activity {
+    margin-left: 8px;
+    .msg {
+        height: 40px;
+      margin: 0;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      color: var(--ds-text, #172b4d);
+      .username {
+        cursor: pointer;
+        font-weight: 700;
+      }
+      a {
+        text-decoration: none;
+        color: var(--ds-link, #0c66e4);
+      }
+    }
+    .time {
+      color: var(--ds-text-subtle, #44546f);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 20px;
+      margin: 0;
+    }
+    a {
+      &.time {
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
