@@ -20,6 +20,7 @@ import { useSelector } from "react-redux";
 import { setBoards } from "../store/workspace.actions";
 import { updateBoard } from "../store/board.actions";
 import { UserBoards } from "./UserBoards";
+import { BoardMenu } from "../cmps/BoardHeader/BoardMenu/BoardMenu";
 
 export function WorkspaceIndex() {
   const user = useSelector((state) => state.userModule.user);
@@ -39,10 +40,11 @@ export function WorkspaceIndex() {
   const [starredBoardIds, setStarredBoardIds] = useState([]);
   const [isUserBoards, setIsUserBoards] = useState(false);
   const [darkMode, setDarkMode] = useState();
+  const [openBoardMenu, setOpenBoardMenu] = useState(false);
+  const [showBtn, setShowBtn] = useState(false);
 
   useEffect(() => {
     if (user) {
-      console.log(user.darkMode);
       setDarkMode(user.darkMode);
     }
   }, [user]);
@@ -145,6 +147,12 @@ export function WorkspaceIndex() {
       });
     }
   }
+  const contextValues = {
+    setOpenBoardMenu,
+    openBoardMenu,
+    showBtn,
+    setShowBtn,
+  };
   return (
     <section
       className={`workspace ${isUserBoards ? "user-boards-bg" : ""}`}
@@ -176,7 +184,13 @@ export function WorkspaceIndex() {
             closeBoard={onCloseBoard}
             leaveBoard={onLeaveBoard}
           />
-          <Outlet />
+          <Outlet context={contextValues} />
+          {openBoardMenu && (
+            <BoardMenu
+              setOpenBoarMenu={setOpenBoardMenu}
+              setShowBtn={setShowBtn}
+            />
+          )}
         </section>
       ) : (
         <Outlet />
