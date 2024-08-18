@@ -57,6 +57,7 @@
 @import "cmps/ListFooter";
 @import "cmps/ProfilePopover.scss";
 @import "cmps/BoardHeader/BoardMenu/BoardMenu.scss";
+@import "cmps/ActivityMsg.scss";
 
 //Group
 @import "cmps/Group/BoardGroup";
@@ -94,7 +95,6 @@
 @import "cmps/CustomCpms/CustomSelect";
 @import "cmps/CustomCpms/NameInput.scss";
 @import "cmps/CustomCpms/CheckBox.scss";
-
 
 :root.dark {
   --ds-surface-overlay: #282e33;
