@@ -1,6 +1,6 @@
 [
   {
-    "viewedAt": "1720234120009",
+    "viewedAt": 1720234120009,
     "id": "64f721f169b14894fac36cdf",
     "name": "Trello Build",
     "apdatedAt": 1720234120009,
@@ -17,7 +17,15 @@
       }
     ],
     "checkListTaskIds": [],
-    "activities": [],
+    "activities": [
+      {
+        "id": "4lZLQFtXKsX80myKlTcXpGoZ",
+        "type": "createBoard",
+        "userFullName": "nachliel pokroy",
+        "userId": "64f721dfe7ac348348a02895",
+        "timeStamp": 1720234120009
+      }
+    ],
     "groups": [
       {
         "id": "64f721f169b14894fac36ce6",
@@ -886,7 +894,15 @@
     "apdatedAt": 1721051204720,
     "viewedAt": 1721050978722,
     "checkListTaskIds": [],
-    "activities": [],
+    "activities": [
+      {
+        "id": "4lZLQFtXKsX80myKlTcXpGoZ",
+        "type": "createBoard",
+        "userFullName": "nachliel pokroy",
+        "userId": "64f721dfe7ac348348a02895",
+        "timeStamp": 1721050978722
+      }
+    ],
     "members": [
       {
         "id": "666fe4efda8643029b6710f3",

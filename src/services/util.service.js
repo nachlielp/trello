@@ -1286,7 +1286,15 @@ async function createNewBoard(board) {
         brightness: "light",
       },
     ],
-    activities: [],
+    activities: [
+      {
+        id: utilService.makeId(24),
+        type: "createBoard",
+        userFullName: user.fullName,
+        userId: user.id,
+        timeStamp: 1722015726446,
+      },
+    ],
   };
 }
 
