@@ -70,6 +70,13 @@
     },
     {
       "id": "activityId",
+      "type": "createBoard",
+      "userFullName": "fullName",
+      "userId": "id",
+      "timeStamp": 1722015726446
+    },
+    {
+      "id": "activityId",
       "type": "archiveTask",
       "userFullName": "fullName",
       "userId": "id",
