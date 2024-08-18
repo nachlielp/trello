@@ -2,29 +2,52 @@ import { useState, useEffect } from 'react';
 
 const formatDate = (date) => {
   const options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true };
-  return date.toLocaleDateString(undefined, options);
+  return date.toLocaleDateString("en", options);
+};
+
+const formatTimeTodayOrTomorrow = (date, isTomorrow = false) => {
+  const options = { hour: 'numeric', minute: 'numeric', hour12: true };
+  const timeString = date.toLocaleTimeString('en', options);
+  return isTomorrow ? `tomorrow at ${timeString}` : `today at ${timeString}`;
 };
 
 const getTimeString = (timestamp) => {
   const now = new Date();
   const time = new Date(timestamp);
-  const diffInSeconds = Math.floor((now - time) / 1000);
+  const diffInSeconds = Math.floor((time - now) / 1000);
 
-  if (diffInSeconds < 60) {
-    return `${diffInSeconds} ${diffInSeconds === 1 ? 'second' : 'seconds'} ago`;
+  if (diffInSeconds < 0) {
+    // Handle past timestamps
+    const pastDiffInSeconds = Math.abs(diffInSeconds);
+
+    if (pastDiffInSeconds < 60) {
+      return `${pastDiffInSeconds} ${pastDiffInSeconds === 1 ? 'second' : 'seconds'} ago`;
+    }
+
+    const pastDiffInMinutes = Math.floor(pastDiffInSeconds / 60);
+    if (pastDiffInMinutes < 60) {
+      return `${pastDiffInMinutes} ${pastDiffInMinutes === 1 ? 'minute' : 'minutes'} ago`;
+    }
+
+    const pastDiffInHours = Math.floor(pastDiffInMinutes / 60);
+    if (pastDiffInHours < 24) {
+      return `${pastDiffInHours} ${pastDiffInHours === 1 ? 'hour' : 'hours'} ago`;
+    }
+
+    return formatDate(time);
+  } else {
+    // Handle future timestamps
+    const diffInMinutes = Math.floor(diffInSeconds / 60);
+    const diffInHours = Math.floor(diffInMinutes / 60);
+
+    if (diffInHours < 24) {
+      return formatTimeTodayOrTomorrow(time);
+    } else if (diffInHours < 48) {
+      return formatTimeTodayOrTomorrow(time, true);
+    } else {
+      return formatDate(time);
+    }
   }
-
-  const diffInMinutes = Math.floor(diffInSeconds / 60);
-  if (diffInMinutes < 60) {
-    return `${diffInMinutes} ${diffInMinutes === 1 ? 'minute' : 'minutes'} ago`;
-  }
-
-  const diffInHours = Math.floor(diffInMinutes / 60);
-  if (diffInHours < 24) {
-    return `${diffInHours} ${diffInHours === 1 ? 'hour' : 'hours'} ago`;
-  }
-
-  return formatDate(time);
 };
 
 const useTime = (timestamp) => {
@@ -34,13 +57,15 @@ const useTime = (timestamp) => {
     const updateInterval = () => {
       const now = new Date();
       const time = new Date(timestamp);
-      const diffInSeconds = Math.floor((now - time) / 1000);
+      const diffInSeconds = Math.floor((time - now) / 1000);
 
-      if (diffInSeconds < 60) {
-        return 10000; // Refresh every 10 seconds
+      if (diffInSeconds < 60 && diffInSeconds >= 0) {
+        return 10000; // Refresh every 10 seconds for future times
+      } else if (diffInSeconds >= -59 && diffInSeconds < 0) {
+        return 10000; // Refresh every 10 seconds for past times within 60 seconds
       }
 
-      const diffInMinutes = Math.floor(diffInSeconds / 60);
+      const diffInMinutes = Math.floor(Math.abs(diffInSeconds) / 60);
       if (diffInMinutes < 60) {
         return 60000; // Refresh every minute
       }
