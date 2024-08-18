@@ -3,20 +3,23 @@ import { UserAddOutlined, EllipsisOutlined } from "@ant-design/icons";
 import { UserAvatar } from "../UserAvatar";
 import { VisibilityButton } from ".//VisibilityButton";
 import { ViewsButton } from "./ViewsButton";
-import { FilterButton } from "./FilterButton";
 import { ProfilePopover } from "../Task/ManageTaskPopovers/ProfilePopover";
 import { StarBoardBtn } from "../CustomCpms/StarBoardBtn";
 import { NameInput } from "../CustomCpms/NameInput";
 import { updateBoard } from "../../store/board.actions";
-import { setBoards } from "../../store/workspace.actions";
-import { useEffect } from "react";
 import { utilService } from "../../services/util.service";
-import { ActivityMsg } from "../ActivityMsg";
 
-export function BoardHeader({ board, starredBoardIds, starToggle }) {
+export function BoardHeader({
+  board,
+  starredBoardIds,
+  starToggle,
+  openBoardMenu,
+  setOpenBoardMenu,
+  showBtn,
+  setShowBtn,
+}) {
   const members = useSelector((state) => state.boardModule.board.members);
   const user = useSelector((state) => state.userModule.user);
-
   function onToggleStar(boardId) {
     const starredIds = starredBoardIds.includes(boardId)
       ? starredBoardIds.filter((id) => id !== boardId)
@@ -38,6 +41,10 @@ export function BoardHeader({ board, starredBoardIds, starToggle }) {
       name,
       activities: [...board?.activities, newActivity],
     });
+  }
+  function openMenu() {
+    setOpenBoardMenu(true);
+    setShowBtn(false);
   }
   return (
     <div className="board-header">
@@ -78,9 +85,11 @@ export function BoardHeader({ board, starredBoardIds, starToggle }) {
           <UserAddOutlined className="share-icon" />
           <span className="txt">Share</span>
         </button>
-        <button className="dots">
-          <EllipsisOutlined />
-        </button>
+        {(!openBoardMenu || showBtn) && (
+          <button className="dots" onClick={openMenu}>
+            <EllipsisOutlined />
+          </button>
+        )}
       </div>
     </div>
   );
