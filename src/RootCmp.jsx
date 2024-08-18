@@ -7,9 +7,8 @@ import { WorkspaceSettings } from "./cmps/Workspace/WorkspaceSettings.jsx";
 import { ErrorPage } from "./pages/ErrorPage.jsx";
 import { UserBoards } from "./pages/UserBoards.jsx";
 import { UserSettings } from "./cmps/UserProf/UserSettings.jsx";
-
+import { UserMsg } from "./cmps/UserMsg.jsx";
 export function RootCmp() {
-
   return (
     <div>
       <main>
@@ -19,13 +18,14 @@ export function RootCmp() {
             <Route path="b/:boardId" element={<BoardIndex />} />
             <Route path="c/:cardId" element={<BoardIndex />} />
             <Route path="u/:userName/boards" element={<UserBoards />} />
-            <Route path="u/:userName" element={<UserProfile />} >
-            <Route path=":navigate" element={<UserBoards />} />
-            <Route path="" element={<UserSettings />} />
+            <Route path="u/:userName" element={<UserProfile />}>
+              <Route path=":navigate" element={<UserBoards />} />
+              <Route path="" element={<UserSettings />} />
             </Route>
           </Route>
           <Route path="*" element={<ErrorPage />} />
         </Routes>
+        <UserMsg />
       </main>
     </div>
   );

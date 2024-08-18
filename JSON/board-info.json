@@ -189,7 +189,8 @@
               "idPlugin": null
             },
             "isTemplate": false,
-            "cardRole": null
+            "cardRole": null,
+            "attachments": []
           }
         ]
       }
@@ -1103,10 +1104,12 @@
               "idPlugin": null
             },
             "isTemplate": false,
-            "cardRole": null
+            "cardRole": null,
+            "attachments": []
           },
           {
             "id": "66756e1d26d147ec3f62e2a0",
+            "attachments": [],
             "checkLists": [],
             "badges": {
               "attachmentsByType": {
@@ -1175,6 +1178,7 @@
           },
           {
             "id": "66756eb4a7de8f40f2005930",
+            "attachments": [],
             "checkLists": [],
             "badges": {
               "attachmentsByType": {
@@ -1251,6 +1255,7 @@
         "tasks": [
           {
             "id": "66756e6e9c4ae2c7b3046b1c",
+            "attachments": [],
             "checkLists": [],
             "badges": {
               "attachmentsByType": {
@@ -2070,6 +2075,7 @@
       },
       {
         "id": "66756b31250742f334ce4cf0",
+        "attachments": [],
         "name": "Web Pages",
         "closed": false,
         "color": null,
@@ -2286,6 +2292,7 @@
       },
       {
         "id": "66756c51bcee71bff3ee6112",
+        "attachments": [],
         "name": "Web Component",
         "closed": false,
         "color": null,

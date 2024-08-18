@@ -1,0 +1,171 @@
+.manage-attachments-popover-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .main {
+    width: 304px;
+    padding: 0 12px 12px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+
+    .section-title {
+      color: var(--ds-text-subtle, #44546f);
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 16px;
+      margin-bottom: 4px;
+
+      // &.selected {
+      //     color: #0c66e4;
+      // }
+    }
+
+    .section-subtitle {
+      margin: 8px 0 12px;
+      padding: 2px;
+      color: var(--ds-text-subtlest, #626f86);
+      font-size: 12px;
+    }
+
+    .btn {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      font-display: swap;
+      display: inline-flex;
+      box-sizing: border-box;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 12px;
+      border-radius: 3px;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      box-shadow: none;
+
+      &.upload-button {
+        width: 100%;
+        background-color: var(--ds-background-neutral, #091e420f);
+        color: var(--ds-text, #172b4d);
+        &:hover {
+          background-color: var(--ds-background-neutral-hovered, #091e4224);
+        }
+      }
+
+      &.insert {
+        background-color: var(--ds-background-brand-bold, #0c66e4);
+        color: var(--ds-text-inverse, #ffffff);
+
+        &:hover {
+          background-color: var(--ds-background-brand-bold-hovered, #0055cc);
+        }
+      }
+
+      &.cancel {
+        background-color: #fff;
+        color: var(--ds-text, #172b4d);
+
+        &:hover {
+          background: var(
+            --ds-background-neutral-subtle-hovered,
+            rgba(9, 30, 66, 0.08)
+          );
+        }
+      }
+    }
+
+    .divider {
+      background-color: var(--ds-border, #091e4224);
+      border: 0;
+      height: 1px;
+      margin: 16px 0;
+      padding: 0;
+      width: 100%;
+    }
+
+    .input-wrapper {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 16px;
+      .input {
+        width: 100%;
+        height: 36px;
+        border: 0px;
+        box-sizing: border-box;
+        border-radius: 3px;
+        box-shadow: inset 0 0 0 1px var(--ds-border-input, #091e4224);
+        border-radius: 3px;
+        padding: 8px 12px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+
+        &.invalid {
+          box-shadow: inset 0 0 0 2px var(--ds-border-input-invalid, #ff0000);
+        }
+        &.focused {
+          box-shadow: inset 0 0 0 2px var(--ds-border-input-focused, #0c66e4);
+        }
+      }
+    }
+    .close-icon-wrapper {
+      background: #44546f;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .close-icon {
+        width: 12px;
+        height: 12px;
+      }
+      .trello-icon {
+        color: #fff;
+      }
+    }
+    .invalid-link-message {
+      display: flex;
+      flex-direction: row;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 20px;
+      color: #ff0000;
+    }
+
+    .error-icon-wrapper {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .attachment-error-icon {
+        background-color: #ff0000;
+        transform: rotate(45deg);
+        width: 8px;
+        height: 8px;
+        border-radius: 1px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .attachment-error-icon-text {
+          transform: rotate(315deg);
+          font-size: 8px;
+          color: #fff;
+          //   padding-left: 8px;
+        }
+      }
+    }
+    .footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+  }
+}

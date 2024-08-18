@@ -275,6 +275,7 @@ export const utilService = {
   getEmojis,
   getChecklistBadge,
   createActivity,
+  isValidUrl,
 };
 
 export const USERS_KEY = "users";
@@ -295,6 +296,15 @@ function makeId(length = 6) {
   }
 
   return txt;
+}
+
+function isValidUrl(string) {
+  try {
+    new URL(string);
+    return true;
+  } catch (err) {
+    return false;
+  }
 }
 
 function makeLorem(size = 100) {
@@ -443,6 +453,7 @@ export function stringToColor(str) {
 function createNewTask(task) {
   return {
     id: utilService.makeId(),
+    attachments: [],
     apdatedAt: new Date().toISOString(),
     members: [],
     checkLists: [],
@@ -1275,6 +1286,7 @@ async function createNewBoard(board) {
         brightness: "light",
       },
     ],
+    activities: [],
   };
 }
 

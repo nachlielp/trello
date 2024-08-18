@@ -1,19 +1,18 @@
-import defaultProfile from "/img/defaultProfile.svg";
-import checkListIcon from "/img/board-index/detailsImgs/checkListIcon.svg";
 import { useState, useEffect } from "react";
-import coverIcon from "/img/board-index/detailsImgs/coverIcon.svg";
 import fieldsIcon from "/img/board-index/detailsImgs/fieldsIcon.svg";
-import labelIcon from "/img/board-index/headerImgs/filterBtn-imgs/labelIcon.svg";
-import clockIcon from "/img/board-index/headerImgs/filterBtn-imgs/clockIcon.svg";
 import { ManageDatesPopover } from "../ManageTaskPopovers/ManageDatesPopover";
-
-import { SvgButton } from "../../CustomCpms/SvgButton";
+import { ManageAttachmentsPopover } from "../ManageTaskPopovers/ManageAttachmentsPopover";
 import { ManageMembersPopover } from "../ManageTaskPopovers/ManageMembersPopover";
 import { ManageLabelsPopover } from "../ManageTaskPopovers/ManageLabelsPopover";
 import { ManageCoverPopover } from "../ManageTaskPopovers/ManageCoverPopover";
 import { AddChecklistPopover } from "../ManageTaskPopovers/AddChecklistPopover";
 
-export function TaskDetailsAddToCard({ task, editTask, labelActions, editBoard }) {
+export function TaskDetailsAddToCard({
+  task,
+  editTask,
+  labelActions,
+  editBoard,
+}) {
   const [isCover, setIsCover] = useState(false);
   useEffect(() => {
     setIsCover(task?.cover?.color || task?.cover?.idUploadedBackground);
@@ -24,11 +23,10 @@ export function TaskDetailsAddToCard({ task, editTask, labelActions, editBoard }
       popover: (
         <ManageMembersPopover
           anchorEl={
-            <SvgButton
-              src={defaultProfile}
-              className="floating-button"
-              label="Members"
-            />
+            <button className="details-anchor-btn">
+              <label className="trello-icon icon-member " />
+              <label className="btn-label">Members</label>
+            </button>
           }
           editTask={editTask}
           task={task}
@@ -39,11 +37,10 @@ export function TaskDetailsAddToCard({ task, editTask, labelActions, editBoard }
       popover: (
         <ManageLabelsPopover
           anchorEl={
-            <SvgButton
-              src={labelIcon}
-              className="floating-button"
-              label="Labels"
-            />
+            <button className="details-anchor-btn">
+              <label className="trello-icon icon-label " />
+              <label className="btn-label">Labels</label>
+            </button>
           }
           taskLabels={task?.labels}
           editTask={editTask}
@@ -56,11 +53,10 @@ export function TaskDetailsAddToCard({ task, editTask, labelActions, editBoard }
       popover: (
         <AddChecklistPopover
           anchorEl={
-            <SvgButton
-              src={checkListIcon}
-              className="floating-button"
-              label="Checklist"
-            />
+            <button className="details-anchor-btn">
+              <label className="trello-icon icon-checklist " />
+              <label className="btn-label">Checklists</label>
+            </button>
           }
           editBoard={editBoard}
           task={task}
@@ -71,25 +67,45 @@ export function TaskDetailsAddToCard({ task, editTask, labelActions, editBoard }
     {
       popover: (
         <ManageDatesPopover
-        editBoard={editBoard}
+          editBoard={editBoard}
           task={task}
           editTask={editTask}
           anchorEl={
-            <SvgButton src={clockIcon} className="floating-button" label="Dates" />
+            // <SvgButton
+            //   src={clockIcon}
+            //   className="floating-button"
+            //   label="Dates"
+            // />
+            <button className="details-anchor-btn">
+              <label className="trello-icon icon-clock " />
+              <label className="btn-label">Dates</label>
+            </button>
           }
         />
       ),
     },
-    { svg: "/img/taskBadges/file.svg", text: "Attachment" },
+    {
+      popover: (
+        <ManageAttachmentsPopover
+          task={task}
+          editTask={editTask}
+          anchorEl={
+            <button className="details-anchor-btn">
+              <label className="trello-icon icon-attachment " />
+              <label className="btn-label">Attachments</label>
+            </button>
+          }
+        />
+      ),
+    },
     {
       popover: !isCover ? (
         <ManageCoverPopover
           anchorEl={
-            <SvgButton
-              src={coverIcon}
-              className="floating-button"
-              label="Change cover"
-            />
+            <button className="details-anchor-btn">
+              <label className="trello-icon icon-card-cover " />
+              <label className="btn-label">Cover</label>
+            </button>
           }
           editTask={editTask}
           task={task}

@@ -86,8 +86,6 @@
       }
     }
 
-
-
     .color-picker-wrapper {
       display: flex;
       flex-direction: row;
@@ -101,8 +99,6 @@
         cursor: pointer;
       }
     }
-
-
 
     .label-hr {
       border-top: 1px solid #dcdfe4;
@@ -132,9 +128,12 @@
         border: none;
         background-color: #c8372c;
         color: #fff;
+
+        &:hover {
+          background-color: #ae2e24;
+        }
       }
     }
-
   }
 
   .full-delete-label-button {
@@ -156,7 +155,6 @@
 
   .label-checkbox {
     margin-right: 8px;
-
   }
 
   .label-block {
