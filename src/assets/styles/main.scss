@@ -5,14 +5,14 @@
 // @import "setup/typography";
 
 @font-face {
-  font-family: 'trello-icons';
-  src: url('./fonts/trello-icon-fonts.ttf');
+  font-family: "trello-icons";
+  src: url("./fonts/trello-icon-fonts.ttf");
 }
 
 @import "./fonts/icons.scss";
 
 .trello-icon {
-  font-family: 'trello-icons';
+  font-family: "trello-icons";
 }
 
 // Basics
@@ -21,7 +21,7 @@
 @import "basics/base";
 // @import "basics/links";
 // @import "basics/forms";
-
+@import "animations";
 // Views
 @import "views/AboutUs";
 // @import "views/HomePage";
@@ -56,6 +56,7 @@
 @import "cmps/Label";
 @import "cmps/ListFooter";
 @import "cmps/ProfilePopover.scss";
+@import "cmps/BoardHeader/BoardMenu/BoardMenu.scss";
 
 //Group
 @import "cmps/Group/BoardGroup";
@@ -92,6 +93,7 @@
 @import "cmps/CustomCpms/CustomSelect";
 @import "cmps/CustomCpms/NameInput.scss";
 @import "cmps/CustomCpms/CheckBox.scss";
+
 
 :root.dark {
   --ds-surface-overlay: #282e33;
@@ -147,8 +149,10 @@
   --dynamic-text: #ffffff;
   --dynamic-header-text: #ffffff;
   --board-header-background-color: #0000003d;
-  --header-button-hovered: var(--dynamic-button-hovered,
-      rgba(255, 255, 255, 0.3));
+  --header-button-hovered: var(
+    --dynamic-button-hovered,
+    rgba(255, 255, 255, 0.3)
+  );
   --ds-surface: #ffffff;
   --header-button-color: var(--ds-text-subtle, #44546f);
   --create-menu-button-background: rgba(255, 255, 255, 0.2);

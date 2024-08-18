@@ -1,0 +1,43 @@
+@keyframes fadeOutRight {
+  0% {
+    min-width: 339px;
+    margin-right: 0;
+    opacity: 1;
+    // margin-right: 0;
+  }
+  100% {
+    opacity: 0;
+    min-width: 0;
+    margin-right: -57px;
+    overflow: hidden;
+
+    /* Adjust the value as needed */
+  }
+}
+@keyframes fadeInRight {
+  0% {
+    min-width: 0;
+    margin-right: -57px; /* Start off-screen to the right */
+    opacity: 0;
+    overflow: hidden;
+  }
+  100% {
+    min-width: 339px; /* End with the element's full width */
+    margin-right: 0; /* Move to the final position */
+    opacity: 1;
+    overflow: visible;
+  }
+}
+@keyframes fadeInLeft {
+  0% {
+    margin-right: 57px; /* Start off-screen to the right */
+    opacity: 0;
+    overflow: hidden;
+  }
+  100% {
+    /* End with the element's full width */
+    margin-right: 0; /* Move to the final position */
+    opacity: 1;
+    overflow: visible;
+  }
+}
