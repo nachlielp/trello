@@ -7,14 +7,12 @@
     "members": [
       {
         "id": "666fe4efda8643029b6710f3",
-        "fullName": "Eugene Bondarev",
-        "username": "jeneea45",
+
         "permissionStatus": "admin"
       },
       {
         "id": "64f721dfe7ac348348a02895",
-        "fullName": "Nachliel Pokroy",
-        "username": "nachlielpokroy",
+
         "permissionStatus": "admin"
       }
     ],
@@ -891,14 +889,12 @@
     "members": [
       {
         "id": "666fe4efda8643029b6710f3",
-        "fullName": "Eugene Bondarev",
-        "username": "jeneea45",
+
         "permissionStatus": "admin"
       },
       {
         "id": "64f721dfe7ac348348a02895",
-        "fullName": "nachliel pokroy",
-        "username": "nachlielpokroy",
+
         "permissionStatus": "admin"
       }
     ],
