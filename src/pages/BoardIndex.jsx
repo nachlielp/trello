@@ -25,7 +25,7 @@ import { AddGroupBtn } from "../cmps/Group/AddGroupBtn";
 import { TaskDetailsModal } from "../cmps/Task/TaskDetailsModal/TaskDetailsModal.jsx";
 import { BoardHeader } from "../cmps/BoardHeader/BoardHeader.jsx";
 import useScrollByGrab from "../customHooks/useScrollByGrab.js";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useOutletContext } from "react-router-dom";
 import { utilService } from "../services/util.service.js";
 
 export function BoardIndex() {
@@ -33,7 +33,7 @@ export function BoardIndex() {
   const board = useSelector((state) => state.boardModule.board);
   const user = useSelector((state) => state.userModule.user);
   const navigate = useNavigate();
-
+  const outletProps = useOutletContext();
   const params = useParams();
 
   useEffect(() => {
@@ -142,9 +142,13 @@ export function BoardIndex() {
       <div className="bg">
         {board && (
           <BoardHeader
+            setOpenBoardMenu={outletProps?.setOpenBoardMenu}
+            openBoardMenu={outletProps?.openBoardMenu}
             board={board}
             starToggle={onStarToggle}
             starredBoardIds={user?.starredBoardIds}
+            showBtn={outletProps?.showBtn}
+            setShowBtn={outletProps?.setShowBtn}
           />
         )}
         <main className="board-groups" ref={scrollContainerRef} {...handlers}>
