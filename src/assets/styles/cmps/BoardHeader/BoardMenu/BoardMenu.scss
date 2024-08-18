@@ -1,0 +1,96 @@
+.board-menu {
+  padding: 0;
+  margin: 0;
+  min-width: 339px;
+  background: var(--ds-surface-overlay, #fff);
+  height: 100%;
+  box-shadow: var(--ds-shadow-overlay, 0 8px 12px #091e4226, 0 0 1px #091e424f);
+  z-index: 300;
+  animation: fadeInRight 200ms forwards;
+  &.fade-out {
+    animation: fadeOutRight 200ms forwards;
+  }
+  .header-menu {
+    padding: 0 8px 0 8px;
+    display: grid;
+    grid-template-columns: 32px 1fr 32px;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    h2 {
+      grid-column: 2;
+      font-size: 16px;
+      font-weight: 500;
+      margin-top: 18px;
+      color: var(--ds-text, #172b4d);
+      margin-bottom: 16px;
+    }
+    .btn {
+      cursor: pointer;
+      padding: 6px;
+      border: none;
+      border-radius: 8px;
+      color: var(--ds-icon, #44546f);
+      background-color: initial;
+      width: 32px;
+      height: 32px;
+      align-self: center;
+      &:hover {
+        background-color: var(
+          --ds-background-neutral-subtle-hovered,
+          #091e420f
+        );
+        color: var(--ds-icon, #44546f);
+        text-decoration: none;
+      }
+      &.back {
+        animation: fadeInLeft 200ms;
+      }
+    }
+    .border_bottom {
+      background-color: var(--ds-border, #091e4224);
+      border: 0;
+      height: 1px;
+      margin: 0 3px;
+      padding: 0;
+      // width: 100%;
+      grid-column: 1/-1;
+    }
+  }
+  .main-menu {
+    padding: 12px 12px 8px 12px;
+    .btn {
+      color: var(--ds-text, #172b4d);
+      font-weight: 400;
+      width: 100%;
+      text-align: start;
+      margin-bottom: 4px;
+      cursor: pointer;
+      background-color: initial;
+      border: none;
+      padding: 6px;
+      border-radius: 8px;
+      font-size: 14px;
+      display: flex;
+      span{
+        font-size: 20px;
+        padding-right: 10px;
+      }
+      &:hover {
+        background-color: var(
+          --ds-background-neutral-subtle-hovered,
+          #091e420f
+        );
+        color: var(--ds-text, #172b4d);
+      }
+    }
+  }
+  .activities{
+    padding: 12px 12px 8px 12px;
+    overflow-y: auto;
+    height: calc(100% - 56px);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-color: var(--ds-background-neutral-hovered, #091e4224) var(--ds-background-neutral, #091e420f);
+    scrollbar-width: thin;
+  }
+}
