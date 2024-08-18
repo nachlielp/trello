@@ -20,7 +20,7 @@ export function AddGroupBtn({ addGroup }) {
     }
   }, [isAddGroupOpen]);
 
-  function onAddGroup() {
+  async function onAddGroup() {
     if (groupName.trim() === "") {
       setIsAddGroupOpen(false);
     } else {
@@ -31,11 +31,12 @@ export function AddGroupBtn({ addGroup }) {
         },
         user
       );
-      addGroup(groupName);
-      updateBoard({
+      console.log(newActivity)
+      await updateBoard({
         ...board,
         activities: [...board?.activities, newActivity],
       });
+      addGroup(groupName);
     }
     setGroupName("");
   }
