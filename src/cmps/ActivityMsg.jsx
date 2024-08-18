@@ -2,14 +2,16 @@ import { Link } from "react-router-dom";
 import { UserAvatar } from "./UserAvatar";
 import useTime from "../customHooks/useTime";
 import { ProfilePopover } from "./Task/ManageTaskPopovers/ProfilePopover";
+import { useEffect } from "react";
 
 export function ActivityMsg({ activity, task = false }) {
   const timeString = useTime(activity.timeStamp);
+  const doDate = useTime(activity?.doDate);
 
   switch (activity.type) {
     case "movedTask":
       return (
-        <section>
+        <section className="activity">
           <ProfilePopover
             memberId={activity.userId}
             anchorEl={
@@ -17,12 +19,12 @@ export function ActivityMsg({ activity, task = false }) {
                 size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
-                className="activity-msd"
+                className="activity-avatar"
               />
             }
           />
-          <div>
-            <p>
+          <div className="main-activity">
+            <p className="msg">
               <span className="username">{activity.userFullName}</span> moved{" "}
               <Link to={`/c/${activity.targetId}`}>{activity.targetName}</Link>{" "}
               from {activity.from} to {activity.to}
@@ -39,7 +41,7 @@ export function ActivityMsg({ activity, task = false }) {
       );
     case "transferTask":
       return (
-        <section>
+        <section className="activity">
           <ProfilePopover
             memberId={activity.userId}
             anchorEl={
@@ -47,12 +49,12 @@ export function ActivityMsg({ activity, task = false }) {
                 size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
-                className="activity-msd"
+                className="activity-avatar"
               />
             }
           />
-          <div>
-            <p>
+          <div className="main-activity">
+            <p className="msg">
               <span className="username">{activity.userFullName}</span>{" "}
               transferred{" "}
               <Link to={`/c/${activity.targetId}`}>{activity.targetName}</Link>{" "}
@@ -70,7 +72,7 @@ export function ActivityMsg({ activity, task = false }) {
       );
     case "receiveTask":
       return (
-        <section>
+        <section className="activity">
           <ProfilePopover
             memberId={activity.userId}
             anchorEl={
@@ -78,12 +80,12 @@ export function ActivityMsg({ activity, task = false }) {
                 size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
-                className="activity-msd"
+                className="activity-avatar"
               />
             }
           />
-          <div>
-            <p>
+          <div className="main-activity">
+            <p className="msg">
               <span className="username">{activity.userFullName}</span>{" "}
               transferred{" "}
               <Link to={`/c/${activity.targetId}`}>{activity.targetName}</Link>{" "}
@@ -102,7 +104,7 @@ export function ActivityMsg({ activity, task = false }) {
       );
     case "joinTask":
       return (
-        <section>
+        <section className="activity">
           <ProfilePopover
             memberId={activity.userId}
             anchorEl={
@@ -110,12 +112,12 @@ export function ActivityMsg({ activity, task = false }) {
                 size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
-                className="activity-msd"
+                className="activity-avatar"
               />
             }
           />
-          <div>
-            <p>
+          <div className="main-activity">
+            <p className="msg">
               <span className="username">{activity.userFullName}</span> joined{" "}
               <Link to={`/c/${activity.targetId}`}>{activity.targetName}</Link>
             </p>
@@ -131,7 +133,7 @@ export function ActivityMsg({ activity, task = false }) {
       );
     case "addGroup":
       return (
-        <section>
+        <section className="activity">
           <ProfilePopover
             memberId={activity.userId}
             anchorEl={
@@ -139,14 +141,14 @@ export function ActivityMsg({ activity, task = false }) {
                 size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
-                className="activity-msd"
+                className="activity-avatar"
               />
             }
           />
-          <div>
-            <p>
+          <div className="main-activity">
+            <p className="msg">
               <span className="username">{activity.userFullName}</span> added{" "}
-              {targetName} to this board
+              {activity.targetName} to this board
             </p>
             <p className="time">{timeString}</p>
           </div>
@@ -154,7 +156,7 @@ export function ActivityMsg({ activity, task = false }) {
       );
     case "archiveGroup":
       return (
-        <section>
+        <section className="activity">
           <ProfilePopover
             memberId={activity.userId}
             anchorEl={
@@ -162,12 +164,12 @@ export function ActivityMsg({ activity, task = false }) {
                 size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
-                className="activity-msd"
+                className="activity-avatar"
               />
             }
           />
-          <div>
-            <p>
+          <div className="main-activity">
+            <p className="msg">
               <span className="username">{activity.userFullName}</span> archived{" "}
               list {targetName}
             </p>
@@ -177,7 +179,7 @@ export function ActivityMsg({ activity, task = false }) {
       );
     case "addTask":
       return (
-        <section>
+        <section className="activity">
           <ProfilePopover
             memberId={activity.userId}
             anchorEl={
@@ -185,12 +187,12 @@ export function ActivityMsg({ activity, task = false }) {
                 size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
-                className="activity-msd"
+                className="activity-avatar"
               />
             }
           />
-          <div>
-            <p>
+          <div className="main-activity">
+            <p className="msg">
               <span className="username">{activity.userFullName}</span> added{" "}
               <Link to={`/c/${activity.targetId}`}>{activity.targetName}</Link>{" "}
               to {activity.groupName}
@@ -207,7 +209,7 @@ export function ActivityMsg({ activity, task = false }) {
       );
     case "archiveTask":
       return (
-        <section>
+        <section className="activity">
           <ProfilePopover
             memberId={activity.userId}
             anchorEl={
@@ -215,12 +217,12 @@ export function ActivityMsg({ activity, task = false }) {
                 size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
-                className="activity-msd"
+                className="activity-avatar"
               />
             }
           />
-          <div>
-            <p>
+          <div className="main-activity">
+            <p className="msg">
               <span className="username">{activity.userFullName}</span> archived{" "}
               <Link to={`/c/${activity.targetId}`}>{activity.targetName}</Link>{" "}
             </p>
@@ -236,7 +238,7 @@ export function ActivityMsg({ activity, task = false }) {
       );
     case "deleteTask":
       return (
-        <section>
+        <section className="activity">
           <ProfilePopover
             memberId={activity.userId}
             anchorEl={
@@ -244,12 +246,12 @@ export function ActivityMsg({ activity, task = false }) {
                 size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
-                className="activity-msd"
+                className="activity-avatar"
               />
             }
           />
-          <div>
-            <p>
+          <div className="main-activity">
+            <p className="msg">
               <span className="username">{activity.userFullName}</span> deleted{" "}
               card {activity.targetName} from {activity.groupName}
             </p>
@@ -259,7 +261,7 @@ export function ActivityMsg({ activity, task = false }) {
       );
     case "addCheckList":
       return (
-        <section>
+        <section className="activity">
           <ProfilePopover
             memberId={activity.userId}
             anchorEl={
@@ -267,12 +269,12 @@ export function ActivityMsg({ activity, task = false }) {
                 size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
-                className="activity-msd"
+                className="activity-avatar"
               />
             }
           />
-          <div>
-            <p>
+          <div className="main-activity">
+            <p className="msg">
               <span className="username">{activity.userFullName}</span> added{" "}
               {activity.checklistName} to{" "}
               <Link to={`/c/${activity.targetId}`}>{activity.targetName}</Link>
@@ -289,7 +291,7 @@ export function ActivityMsg({ activity, task = false }) {
       );
     case "removeCheckList":
       return (
-        <section>
+        <section className="activity">
           <ProfilePopover
             memberId={activity.userId}
             anchorEl={
@@ -297,12 +299,12 @@ export function ActivityMsg({ activity, task = false }) {
                 size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
-                className="activity-msd"
+                className="activity-avatar"
               />
             }
           />
-          <div>
-            <p>
+          <div className="main-activity">
+            <p className="msg">
               <span className="username">{activity.userFullName}</span> removed{" "}
               {activity.checklistName} to{" "}
               <Link to={`/c/${activity.targetId}`}>{activity.targetName}</Link>
@@ -319,7 +321,7 @@ export function ActivityMsg({ activity, task = false }) {
       );
     case "renameCheckList":
       return (
-        <section>
+        <section className="activity">
           <ProfilePopover
             memberId={activity.userId}
             anchorEl={
@@ -327,12 +329,12 @@ export function ActivityMsg({ activity, task = false }) {
                 size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
-                className="activity-msd"
+                className="activity-avatar"
               />
             }
           />
-          <div>
-            <p>
+          <div className="main-activity">
+            <p className="msg">
               <span className="username">{activity.userFullName}</span> renamed{" "}
               {activity.checklistName} {` (from ${activity.previousName})`}
             </p>
@@ -342,7 +344,7 @@ export function ActivityMsg({ activity, task = false }) {
       );
     case "checkedItemInCheckList":
       return (
-        <section>
+        <section className="activity">
           <ProfilePopover
             memberId={activity.userId}
             anchorEl={
@@ -350,16 +352,16 @@ export function ActivityMsg({ activity, task = false }) {
                 size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
-                className="activity-msd"
+                className="activity-avatar"
               />
             }
           />
-          <div>
-            <p>
+          <div className="main-activity">
+            <p className="msg">
               <span className="username">{activity.userFullName}</span>{" "}
               completed {activity.itemName} on{" "}
               {task ? (
-                <p>this card</p>
+                <span>this card</span>
               ) : (
                 <Link to={`/c/${activity.targetId}`}>
                   {activity.targetName}
@@ -378,7 +380,7 @@ export function ActivityMsg({ activity, task = false }) {
       );
     case "incompleteItemInCheckList":
       return (
-        <section>
+        <section className="activity">
           <ProfilePopover
             memberId={activity.userId}
             anchorEl={
@@ -386,16 +388,16 @@ export function ActivityMsg({ activity, task = false }) {
                 size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
-                className="activity-msd"
+                className="activity-avatar"
               />
             }
           />
-          <div>
-            <p>
+          <div className="main-activity">
+            <p className="msg">
               <span className="username">{activity.userFullName}</span> marked{" "}
               {activity.itemName} incomplete on{" "}
               {task ? (
-                <p>this card</p>
+                <span>this card</span>
               ) : (
                 <Link to={`/c/${activity.targetId}`}>
                   {activity.targetName}
@@ -414,7 +416,7 @@ export function ActivityMsg({ activity, task = false }) {
       );
     case "addComment":
       return (
-        <section>
+        <section className="activity">
           <ProfilePopover
             memberId={activity.userId}
             anchorEl={
@@ -422,12 +424,12 @@ export function ActivityMsg({ activity, task = false }) {
                 size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
-                className="activity-msd"
+                className="activity-avatar"
               />
             }
           />
-          <div>
-            <p>
+          <div className="main-activity">
+            <p className="msg">
               <span className="username">{activity.userFullName}</span>{" "}
               {task ? (
                 ""
@@ -453,7 +455,7 @@ export function ActivityMsg({ activity, task = false }) {
       );
     case "addAttachment":
       return (
-        <section>
+        <section className="activity">
           <ProfilePopover
             memberId={activity.userId}
             anchorEl={
@@ -461,12 +463,12 @@ export function ActivityMsg({ activity, task = false }) {
                 size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
-                className="activity-msd"
+                className="activity-avatar"
               />
             }
           />
-          <div>
-            <p>
+          <div className="main-activity">
+            <p className="msg">
               <span className="username">{activity.userFullName}</span> attached{" "}
               <Link to={activity.attachmentLink}>
                 {activity.attachmentName}
@@ -492,7 +494,7 @@ export function ActivityMsg({ activity, task = false }) {
       );
     case "removeAttachment":
       return (
-        <section>
+        <section className="activity">
           <ProfilePopover
             memberId={activity.userId}
             anchorEl={
@@ -500,12 +502,12 @@ export function ActivityMsg({ activity, task = false }) {
                 size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
-                className="activity-msd"
+                className="activity-avatar"
               />
             }
           />
-          <div>
-            <p>
+          <div className="main-activity">
+            <p className="msg">
               <span className="username">{activity.userFullName}</span> deleted
               the
               <Link to={activity.attachmentLink}>
@@ -532,7 +534,7 @@ export function ActivityMsg({ activity, task = false }) {
       );
     case "renameBoard":
       return (
-        <section>
+        <section className="activity">
           <ProfilePopover
             memberId={activity.userId}
             anchorEl={
@@ -540,12 +542,12 @@ export function ActivityMsg({ activity, task = false }) {
                 size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
-                className="activity-msd"
+                className="activity-avatar"
               />
             }
           />
-          <div>
-            <p>
+          <div className="main-activity">
+            <p className="msg">
               <span className="username">{activity.userFullName}</span> renamed{" "}
               this board {`(from ${activity.previousName})`}
             </p>
@@ -555,7 +557,7 @@ export function ActivityMsg({ activity, task = false }) {
       );
     case "closeBoard":
       return (
-        <section>
+        <section className="activity">
           <ProfilePopover
             memberId={activity.userId}
             anchorEl={
@@ -563,12 +565,12 @@ export function ActivityMsg({ activity, task = false }) {
                 size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
-                className="activity-msd"
+                className="activity-avatar"
               />
             }
           />
-          <div>
-            <p>
+          <div className="main-activity">
+            <p className="msg">
               <span className="username">{activity.userFullName}</span> closed{" "}
               this board
             </p>
@@ -578,7 +580,7 @@ export function ActivityMsg({ activity, task = false }) {
       );
     case "reopenBoard":
       return (
-        <section>
+        <section className="activity">
           <ProfilePopover
             memberId={activity.userId}
             anchorEl={
@@ -586,12 +588,12 @@ export function ActivityMsg({ activity, task = false }) {
                 size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
-                className="activity-msd"
+                className="activity-avatar"
               />
             }
           />
-          <div>
-            <p>
+          <div className="main-activity">
+            <p className="msg">
               <span className="username">{activity.userFullName}</span> re-open{" "}
               this board
             </p>
@@ -601,7 +603,7 @@ export function ActivityMsg({ activity, task = false }) {
       );
     case "changeBackGround":
       return (
-        <section>
+        <section className="activity">
           <ProfilePopover
             memberId={activity.userId}
             anchorEl={
@@ -609,12 +611,12 @@ export function ActivityMsg({ activity, task = false }) {
                 size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
-                className="activity-msd"
+                className="activity-avatar"
               />
             }
           />
-          <div>
-            <p>
+          <div className="main-activity">
+            <p className="msg">
               <span className="username">{activity.userFullName}</span> changed{" "}
               the background of this board
             </p>
@@ -636,7 +638,7 @@ export function ActivityMsg({ activity, task = false }) {
           break;
       }
       return (
-        <section>
+        <section className="activity">
           <ProfilePopover
             memberId={activity.userId}
             anchorEl={
@@ -644,12 +646,12 @@ export function ActivityMsg({ activity, task = false }) {
                 size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
-                className="activity-msd"
+                className="activity-avatar"
               />
             }
           />
-          <div>
-            <p>
+          <div className="main-activity">
+            <p className="msg">
               <span className="username">{activity.userFullName}</span>
               {msg}
             </p>
@@ -659,7 +661,7 @@ export function ActivityMsg({ activity, task = false }) {
       );
     case "addDate":
       return (
-        <section>
+        <section className="activity">
           <ProfilePopover
             memberId={activity.userId}
             anchorEl={
@@ -667,12 +669,12 @@ export function ActivityMsg({ activity, task = false }) {
                 size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
-                className="activity-msd"
+                className="activity-avatar"
               />
             }
           />
-          <div>
-            <p>
+          <div className="main-activity">
+            <p className="msg">
               <span className="username">{activity.userFullName}</span> set{" "}
               {task ? (
                 "this card"
@@ -680,8 +682,8 @@ export function ActivityMsg({ activity, task = false }) {
                 <Link to={`/c/${activity.targetId}`}>
                   {activity.targetName}
                 </Link>
-              )}
-              set to be due at {activity.doDate}
+              )}{" "}
+              to be due at {doDate}
             </p>
             {task ? (
               <p className="time">{timeString}</p>
@@ -695,7 +697,7 @@ export function ActivityMsg({ activity, task = false }) {
       );
     case "removeDate":
       return (
-        <section>
+        <section className="activity">
           <ProfilePopover
             memberId={activity.userId}
             anchorEl={
@@ -703,12 +705,12 @@ export function ActivityMsg({ activity, task = false }) {
                 size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
-                className="activity-msd"
+                className="activity-avatar"
               />
             }
           />
-          <div>
-            <p>
+          <div className="main-activity">
+            <p className="msg">
               <span className="username">{activity.userFullName}</span> removed{" "}
               the due date from{" "}
               {task ? (
@@ -731,7 +733,7 @@ export function ActivityMsg({ activity, task = false }) {
       );
     case "completeDate":
       return (
-        <section>
+        <section className="activity">
           <ProfilePopover
             memberId={activity.userId}
             anchorEl={
@@ -739,12 +741,12 @@ export function ActivityMsg({ activity, task = false }) {
                 size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
-                className="activity-msd"
+                className="activity-avatar"
               />
             }
           />
-          <div>
-            <p>
+          <div className="main-activity">
+            <p className="msg">
               <span className="username">{activity.userFullName}</span> marked
               the due date{" "}
               {task
@@ -768,7 +770,7 @@ export function ActivityMsg({ activity, task = false }) {
       );
     case "incompleteDate":
       return (
-        <section>
+        <section className="activity">
           <ProfilePopover
             memberId={activity.userId}
             anchorEl={
@@ -776,12 +778,12 @@ export function ActivityMsg({ activity, task = false }) {
                 size={32}
                 memberId={activity.userId}
                 onClick={(e) => e.stopPropagation()}
-                className="activity-msd"
+                className="activity-avatar"
               />
             }
           />
-          <div>
-            <p>
+          <div className="main-activity">
+            <p className="msg">
               <span className="username">{activity.userFullName}</span> marked
               the due date{" "}
               {task
@@ -800,6 +802,29 @@ export function ActivityMsg({ activity, task = false }) {
                 {timeString}
               </Link>
             )}
+          </div>
+        </section>
+      );
+    case "createBoard":
+      return (
+        <section className="activity">
+          <ProfilePopover
+            memberId={activity.userId}
+            anchorEl={
+              <UserAvatar
+                size={32}
+                memberId={activity.userId}
+                onClick={(e) => e.stopPropagation()}
+                className="activity-avatar"
+              />
+            }
+          />
+          <div className="main-activity">
+            <p className="msg">
+              <span className="username">{activity.userFullName}</span> created{" "}
+              this board
+            </p>
+            <p className="time">{timeString}</p>
           </div>
         </section>
       );
