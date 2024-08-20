@@ -9,12 +9,26 @@ export function TaskDetailsAttachment({ attachment, editTask, task }) {
 
   function onDownload(e) {
     e.preventDefault();
+    e.stopPropagation();
+
     const downloadLink = document.createElement("a");
     downloadLink.href = link;
     downloadLink.download = text || "download";
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
+    downloadLink.target = "_blank";
+    downloadLink.rel = "noopener noreferrer";
+
+    fetch(link)
+      .then((response) => response.blob())
+      .then((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        downloadLink.href = url;
+        downloadLink.click();
+        window.URL.revokeObjectURL(url);
+      })
+      .catch((error) => {
+        console.error("Download failed:", error);
+        window.open(link, "_blank");
+      });
   }
 
   function onDelete() {
@@ -33,7 +47,13 @@ export function TaskDetailsAttachment({ attachment, editTask, task }) {
     });
   }
 
-  function onClickAttachment() {
+  function onClickAttachment(e) {
+    e.stopPropagation();
+
+    if (e.target.classList.contains("attachment-action")) {
+      return;
+    }
+
     if (attachment.type === "link") {
       window.open(attachment.link, "_blank");
     } else {

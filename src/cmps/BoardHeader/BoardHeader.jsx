@@ -3,15 +3,11 @@ import { UserAddOutlined, EllipsisOutlined } from "@ant-design/icons";
 import { UserAvatar } from "../UserAvatar";
 import { VisibilityButton } from ".//VisibilityButton";
 import { ViewsButton } from "./ViewsButton";
-import { FilterButton } from "./FilterButton";
 import { ProfilePopover } from "../Task/ManageTaskPopovers/ProfilePopover";
 import { StarBoardBtn } from "../CustomCpms/StarBoardBtn";
 import { NameInput } from "../CustomCpms/NameInput";
 import { updateBoard } from "../../store/board.actions";
-import { setBoards } from "../../store/workspace.actions";
-import { useEffect } from "react";
 import { utilService } from "../../services/util.service";
-import { ActivityMsg } from "../ActivityMsg";
 
 export function BoardHeader({ board, starredBoardIds, starToggle }) {
   const members = useSelector((state) => state.boardModule.board.members);

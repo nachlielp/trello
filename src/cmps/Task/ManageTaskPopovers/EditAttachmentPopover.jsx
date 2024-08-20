@@ -52,7 +52,10 @@ export function EditAttachmentPopover({ anchorEl, onEdit, attachment }) {
   }
 
   const content = (
-    <div className="edit-attachment-popover">
+    <div
+      className="edit-attachment-popover"
+      onClick={(e) => e.stopPropagation()}
+    >
       <ManageTaskPopoverHeader
         title="Edit attachment"
         close={() => setIsOpen(false)}
