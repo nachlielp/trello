@@ -117,7 +117,6 @@ export function MoveCardPopover({ anchorEl, task, onUpdateTask }) {
             isCurrent: task.idGroup === g.id,
           }))
       );
-      console.log(boardGroupOptions);
       if (selectedBoard.id !== task?.idBoard) {
         setSelectedGroupId(selectedBoard.groups[0].id);
       } else {
