@@ -33,7 +33,6 @@ export default function CloudinaryUpload({ onAttachUrl, anchorEl }) {
         }
 
         const data = await response.json();
-        console.log("CloudinaryUpload.result: ", data);
         onAttachUrl(data);
       } catch (error) {
         console.error("CloudinaryUpload.error: ", error);
