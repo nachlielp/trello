@@ -67,7 +67,9 @@ export function CustomSelect({
               <button
                 key={item?.id}
                 onClick={() => onSelectOption(item)}
-                className={`option ${selectedItem?.name === item?.name ? "selected" : ""}`}
+                className={`option ${
+                  selectedItem?.name === item?.name ? "selected" : ""
+                } ${item.isCurrent ? "current" : ""}`}
               >
                 {item?.element || item?.name}
               </button>

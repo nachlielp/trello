@@ -66,24 +66,36 @@
   display: flex;
   flex-direction: column;
   background-color: var(--ds-surface-overlay, white);
-  box-shadow: var(--ds-shadow-overlay,
-      0 0 0 1px hsl(0deg 0% 0% / 10%),
-      0 4px 11px hsl(0deg 0% 0% / 10%));
+  box-shadow: var(
+    --ds-shadow-overlay,
+    0 0 0 1px hsl(0deg 0% 0% / 10%),
+    0 4px 11px hsl(0deg 0% 0% / 10%)
+  );
   border-radius: 4px;
 
   .option {
+    position: relative;
     background: none;
     border: none;
     color: var(--ds-text, #172b4d);
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
-    padding: 12px 24px;
+    padding: 10px 24px 18px 12px;
     text-align: left;
 
     &:hover {
       box-shadow: inset 2px 0px 0px var(--ds-border-selected, #0052cc);
       background-color: var(--ds-background-neutral-subtle-hovered, #f4f5f7);
+    }
+    &.current::before {
+      content: "(current)";
+      position: absolute;
+      bottom: 0;
+      color: var(--ds-text-subtle, #44546f);
+    }
+    &.selected.current::before {
+      color: var(--ds-text-selected, #0052cc);
     }
 
     &.selected {
