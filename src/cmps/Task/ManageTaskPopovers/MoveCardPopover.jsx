@@ -193,7 +193,7 @@ export function MoveCardPopover({ anchorEl, task, onUpdateTask }) {
                 options={boards
                   .filter((b) => !b.closed)
                   .sort((a, b) => {
-                    return a.name.localeCompare(b.name);
+                    return a.name?.localeCompare(b.name);
                   })
                   .map((b) => ({
                     name: b.name,
