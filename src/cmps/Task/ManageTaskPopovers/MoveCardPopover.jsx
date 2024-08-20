@@ -212,7 +212,7 @@ export function MoveCardPopover({ anchorEl, task, onUpdateTask }) {
                   options={boardGroupOptions}
                   onSelect={onSelectGroup}
                   value={selectedGroupId}
-                  disabled={isDisabled}
+                  disabled={isDisabled || boardGroupOptions?.length < 2}
                 />
               </span>
               <span>
@@ -221,7 +221,9 @@ export function MoveCardPopover({ anchorEl, task, onUpdateTask }) {
                   options={generatePositionOptions(selectedGroupTaskPositions)}
                   value={selectedPosition}
                   onSelect={onSelectPosition}
-                  disabled={isDisabled}
+                  disabled={
+                    isDisabled || selectedGroupTaskPositions?.length < 2
+                  }
                 />
               </span>
             </section>
