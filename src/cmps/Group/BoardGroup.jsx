@@ -24,6 +24,7 @@ export function BoardGroup({
   const [lastTaskPos, setLastTaskPos] = useState(null);
   const [sortedTasks, setSortedTasks] = useState([]);
   const [footerRef, isAddTaskOpen, setIsAddTaskOpen] = useClickOutside(false);
+  const groupRef = useRef()
 
   useEffect(() => {
     const filteredTasks = group.tasks?.filter((task) => !task.closed) || [];
@@ -76,7 +77,7 @@ export function BoardGroup({
           archiveAllCards={archiveAllCards}
           sortGroup={sortGroup}
         />
-        <main className="board-group-main">
+        <main className="board-group-main" ref={groupRef}>
           {newTaskIds.map((taskId) => (
             <TaskPreview
               key={taskId}
@@ -103,7 +104,7 @@ export function BoardGroup({
               />
             )}
         </main>
-        {!isAddTaskOpen && <GroupFooter groupId={group.id} addTask={addTask} />}
+        {!isAddTaskOpen && <GroupFooter groupId={group.id} addTask={addTask} groupRef={groupRef}/>}
       </Card>
     </section>
   );
