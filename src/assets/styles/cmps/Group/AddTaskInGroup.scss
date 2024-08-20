@@ -12,7 +12,7 @@
     border-color: transparent;
     background-color: var(--ds-surface-raised, #ffffff);
     box-shadow: var(--ds-shadow-raised, 0px 1px 1px #091e4240, 0px 0px 1px #091e424f);
-
+    color: var(--ds-text, #172b4d);
     &::placeholder {
       color: var(--ds-text-subtlest, #626f86);
     }
