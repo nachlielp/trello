@@ -17,9 +17,8 @@ export const boardService = {
   // addBoardMsg,
   // updateTask,
   // getTaskEditCmps
-}
-window.boardSer = boardService
-
+};
+window.boardSer = boardService;
 
 // async function query(filterBy = { title: '' }) {
 //     var boards = await storageService.query(STORAGE_KEY)
@@ -33,11 +32,15 @@ window.boardSer = boardService
 // }
 async function getByTaskId(taskId) {
   const boards = await storageService.query(STORAGE_KEY);
-  const board = boards?.find(board => board.groups?.some(group => group.tasks?.some(task => task.id === taskId)));
+  const board = boards?.find((board) =>
+    board.groups?.some((group) =>
+      group.tasks?.some((task) => task.id === taskId)
+    )
+  );
   if (!board) {
     return {
       error: `Get failed, cannot find board with task id: ${taskId}`,
-      status: 404
+      status: 404,
     };
   }
   return board;
@@ -46,6 +49,9 @@ async function getByTaskId(taskId) {
 async function getById(boardId) {
   try {
     const board = await storageService.get(STORAGE_KEY, boardId);
+    if (!board) {
+      throw `Cannot found board with id ${boardId}`;
+    }
     return board;
   } catch (error) {
     console.error("Error getting board by id", error);
@@ -173,5 +179,3 @@ function _toMiniTask(task) {
 
 // TEST DATA
 // storageService.post(STORAGE_KEY, board).then(savedBoard => console.log('Added board', savedBoard))
-
-

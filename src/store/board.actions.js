@@ -45,12 +45,24 @@ import { EDIT_WORKSPACE } from "./workspace.reducer";
 // }
 
 export async function loadBoard(boardId) {
-  const boardData = await boardService.getById(boardId);
-  store.dispatch({
-    type: SET_BOARD,
-    board: { ...boardData, apdatedAt: new Date().getTime() },
-  });
-  return boardData;
+  try {
+    const boardData = await boardService.getById(boardId);
+    if (boardData) {
+      store.dispatch({
+        type: SET_BOARD,
+        board: { ...boardData, apdatedAt: new Date().getTime() },
+      });
+      return boardData;
+    } else {
+      store.dispatch({
+        type: SET_BOARD,
+        board: {},
+      });
+      throw `Cannot found board with id ${boardId}`;
+    }
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 export async function loadBoardByTaskId(taskId) {
@@ -66,24 +78,31 @@ export async function loadBoardByTaskId(taskId) {
 }
 
 export async function viewBoard(boardId) {
-  const board = await boardService.getById(boardId);
-  const newBoard = {
-    ...board,
-    viewedAt: Date.now(),
-  };
-  await boardService.save(newBoard);
-  store.dispatch({
-    type: VIEW_BOARD,
-    board: newBoard,
-  });
-  viewWorkspaceBoard(boardId);
+  try {
+    const board = await boardService.getById(boardId);
+    if (!board) return;
+    const newBoard = {
+      ...board,
+      viewedAt: Date.now(),
+    };
+    await boardService.save(newBoard);
+    store.dispatch({
+      type: VIEW_BOARD,
+      board: newBoard,
+    });
+    viewWorkspaceBoard(boardId);
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 export function setBoard(board) {
-  store.dispatch({
-    type: SET_BOARD,
-    board: { ...board, apdatedAt: new Date().getTime() },
-  });
+  if (board) {
+    store.dispatch({
+      type: SET_BOARD,
+      board: { ...board, apdatedAt: new Date().getTime() },
+    });
+  }
 }
 
 export function toggleIsExpanded() {

@@ -20,6 +20,7 @@ import { setBoards } from "../store/workspace.actions";
 import { updateBoard } from "../store/board.actions";
 import { BoardMenu } from "../cmps/BoardHeader/BoardMenu/BoardMenu";
 import { utilService } from "../services/util.service";
+import { ErrorPage } from "./ErrorPage";
 
 export function WorkspaceIndex() {
   const user = useSelector((state) => state.userModule.user);
@@ -33,6 +34,7 @@ export function WorkspaceIndex() {
       coverImg: b.prefs.backgroundImage,
     }));
   const boards = useSelector((state) => state.workspaceModule.boards);
+  const board = useSelector((state) => state.boardModule.board);
   const boardBgPrefs = useSelector((state) => state.boardModule.board)?.prefs;
 
   const [selectedBoardId, setSelectedBoardId] = useState(null);
@@ -185,17 +187,23 @@ export function WorkspaceIndex() {
       />
       {user && starredBoardIds && selectedBoardId ? (
         <section className="workspace-content">
-          <WorkspaceMenu
-            colorTheme={boardBgPrefs?.backgroundBrightness}
-            boardsInfo={boardsInfo}
-            selectedBoardId={selectedBoardId}
-            starredBoardIds={starredBoardIds}
-            onStarClick={onStarClick}
-            onAddBoard={onAddBoard}
-            closeBoard={onCloseBoard}
-            leaveBoard={onLeaveBoard}
-          />
-          <Outlet context={contextValues} />
+          {board.id ? (
+            <>
+              <WorkspaceMenu
+                colorTheme={boardBgPrefs?.backgroundBrightness}
+                boardsInfo={boardsInfo}
+                selectedBoardId={selectedBoardId}
+                starredBoardIds={starredBoardIds}
+                onStarClick={onStarClick}
+                onAddBoard={onAddBoard}
+                closeBoard={onCloseBoard}
+                leaveBoard={onLeaveBoard}
+              />
+              <Outlet context={contextValues} />
+            </>
+          ) : (
+            <ErrorPage />
+          )}
           {openBoardMenu && (
             <BoardMenu
               setOpenBoarMenu={setOpenBoardMenu}

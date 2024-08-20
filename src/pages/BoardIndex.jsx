@@ -35,6 +35,7 @@ export function BoardIndex() {
   const navigate = useNavigate();
   const outletProps = useOutletContext();
   const params = useParams();
+  
 
   useEffect(() => {
     async function load() {
@@ -137,7 +138,7 @@ export function BoardIndex() {
     ?.filter((l) => !l.closed)
     .sort((a, b) => a.pos - b.pos);
 
-  return board ? (
+  return board.id ? (
     <section className="board-index">
       <div className="bg">
         {board && (
