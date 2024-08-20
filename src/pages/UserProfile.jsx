@@ -2,26 +2,32 @@ import { useSelector } from "react-redux";
 import { UserAvatar } from "../cmps/UserAvatar";
 import { NavLink, Outlet, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { ErrorPage } from "./ErrorPage";
 
 export function UserProfile() {
   const params = useParams();
   const user = useSelector((state) => state.userModule.user);
   const users = useSelector((state) => state.userModule.users);
-  const [currentUser, setCurentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (params.all) {
+      navigate(`/u/${params.userName}`);
+    }
+  }, [params]);
+  useEffect(() => {
     if (params.userName && user && users) {
       if (params.userName === user.username) {
-        setCurentUser(user);
+        setCurrentUser(user);
       } else {
         const currentUser = users.find(
           (user) => user.username === params.userName
         );
         if (currentUser) {
-          setCurentUser(currentUser);
+          setCurrentUser(currentUser);
         } else {
-          navigate(`/u/${user.username}`);
+          setCurrentUser(null);
         }
       }
     }
@@ -37,7 +43,7 @@ export function UserProfile() {
   ];
   return (
     <>
-      {currentUser.id && (
+      {currentUser.id ? (
         <section className="user-profile">
           <header className="header-members-details">
             <UserAvatar size={48} memberId={currentUser?.id} />
@@ -65,6 +71,8 @@ export function UserProfile() {
             <Outlet />
           </main>
         </section>
+      ) : (
+        <ErrorPage />
       )}
     </>
   );

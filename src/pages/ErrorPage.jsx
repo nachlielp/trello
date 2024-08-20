@@ -1,9 +1,7 @@
 import { useSelector } from "react-redux";
-import { Outlet } from "react-router";
 
-export function ErrorPage() {
+export function ErrorPage({ wrongUrl = false }) {
   const user = useSelector((state) => state.userModule.user);
-  console.log(user);
   return (
     <div
       style={{
@@ -11,18 +9,31 @@ export function ErrorPage() {
         height: "100vh",
         width: "100vw",
         display: "flex",
-        justifyContent: "center",
+        justifyContent: "top",
         alignItems: "center",
         flexDirection: "column",
       }}
     >
-      <h1>Malformed URL</h1>
+      {wrongUrl ? (
+        <>
+          <h1>Malformed URL</h1>
+          <p>
+            The link you entered does not look like a valid Trello link. If
+            someone gave you this link, you may need to ask them to check that
+            it's correct.
+          </p>
+        </>
+      ) : (
+        <>
+          <h1>Page not found.</h1>
+          <p>
+            This page may be private. If someone gave you this link, you may
+            need to be a board or Workspace member to access it.
+          </p>
+        </>
+      )}
       <p>
-        The link you entered does not look like a valid Trello link. If someone
-        gave you this link, you may need to ask them to check that it's correct.
-      </p>
-      <p>
-        Not <b>{user.fullName}</b>? <a href="">Logout</a>
+        Not <b>{user?.fullName}</b>? <a href="">Logout</a>
       </p>
     </div>
   );

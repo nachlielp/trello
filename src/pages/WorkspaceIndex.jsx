@@ -202,7 +202,7 @@ export function WorkspaceIndex() {
               <Outlet context={contextValues} />
             </>
           ) : (
-            <ErrorPage />
+            <ErrorPage wrongUrl={true}/>
           )}
           {openBoardMenu && (
             <BoardMenu

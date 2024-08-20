@@ -14,16 +14,17 @@ export function RootCmp() {
       <main>
         <Routes>
           <Route path="/" element={<WorkspaceIndex />}>
+            <Route path="*" element={<ErrorPage />} />
             {/* <Route path="/" element={<UserBoards />} /> */}
             <Route path="b/:boardId" element={<BoardIndex />} />
             <Route path="c/:cardId" element={<BoardIndex />} />
             <Route path="u/:userName/boards" element={<UserBoards />} />
             <Route path="u/:userName" element={<UserProfile />}>
-              <Route path=":navigate" element={<UserBoards />} />
+              <Route path="boards" element={<UserBoards />} />
               <Route path="" element={<UserSettings />} />
+              <Route path=":all" element={<UserProfile />}></Route>
             </Route>
           </Route>
-          <Route path="*" element={<ErrorPage />} />
         </Routes>
         <UserMsg />
       </main>
