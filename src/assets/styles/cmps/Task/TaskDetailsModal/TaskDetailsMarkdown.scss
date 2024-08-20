@@ -20,7 +20,7 @@
         }
 
         .empty-description {
-            background-color: #e3e6ea;
+            background-color: var(--ds-background-neutral, #091e420f);
             padding: 10px;
             border-radius: 3px;
             height: 60px;

@@ -1,4 +1,4 @@
-import { Popover, Calendar, Card, Input, Checkbox } from "antd";
+import { Popover, Calendar, Card, Input } from "antd";
 import { ManageTaskPopoverHeader } from "./ManageTaskPopoverHeader";
 import dayjs from "dayjs";
 import { useState, useRef, useEffect } from "react";
@@ -7,6 +7,7 @@ import { CustomSelect } from "../../CustomCpms/CustomSelect";
 import { utilService } from "../../../services/util.service";
 import { useSelector } from "react-redux";
 import { updateBoard } from "../../../store/board.actions";
+import { CheckBox } from "../../CustomCpms/CheckBox";
 
 const customLocale = {
   lang: {
@@ -407,7 +408,7 @@ function ManageDatesPopoverContent({ task, editTask, onClose, editBoard }) {
             Start Date
           </label>
           <div className="input-wrapper">
-            <Checkbox
+            <CheckBox
               onChange={onStartDateCheck}
               checked={!!startDate}
               className="date-checkbox"
@@ -436,7 +437,7 @@ function ManageDatesPopoverContent({ task, editTask, onClose, editBoard }) {
             End Date
           </label>
           <div className="input-wrapper">
-            <Checkbox
+            <CheckBox
               onChange={onEndDateCheck}
               checked={!!endDate}
               className="date-checkbox"

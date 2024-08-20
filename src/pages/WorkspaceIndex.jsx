@@ -1,10 +1,9 @@
-import { useLocation, Outlet, useSearchParams } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { WorkspaceHeader } from "../cmps/Workspace/WorkspaceHeader";
 import { WorkspaceMenu } from "../cmps/Workspace/WorkspaceMenu";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
-  setBoard,
   loadBoard,
   loadBoardByTaskId,
   viewBoard,
@@ -19,7 +18,6 @@ import { createBoard } from "../store/workspace.actions";
 import { useSelector } from "react-redux";
 import { setBoards } from "../store/workspace.actions";
 import { updateBoard } from "../store/board.actions";
-import { UserBoards } from "./UserBoards";
 import { BoardMenu } from "../cmps/BoardHeader/BoardMenu/BoardMenu";
 import { utilService } from "../services/util.service";
 
