@@ -6,6 +6,7 @@ import CloudinaryUpload from "../../CloudinaryUpload";
 import { utilService } from "../../../services/util.service";
 import dayjs from "dayjs";
 import { showSuccessMsg } from "../../../services/event-bus.service";
+import { useSelector } from "react-redux";
 
 export function ManageAttachmentsPopover({
   anchorEl,
@@ -33,6 +34,7 @@ export function ManageAttachmentsPopover({
           task={task}
           editTask={editTask}
           onClose={onClose}
+          editBoard={editBoard}
         />
       }
       placement="right"
@@ -42,19 +44,25 @@ export function ManageAttachmentsPopover({
   );
 }
 
-function ManageAttachmentsPopoverContent({ task, editTask, onClose }) {
+function ManageAttachmentsPopoverContent({
+  task,
+  editTask,
+  onClose,
+  editBoard,
+}) {
   const [link, setLink] = useState("");
   const [text, setText] = useState("");
   const [invalidLink, setInvalidLink] = useState(false);
   const [focusedLink, setFocusedLink] = useState(false);
   const [focusedText, setFocusedText] = useState(false);
-
+  const user = useSelector((state) => state.userModule.user);
+  const board = useSelector((state) => state.boardModule.board);
   const linkRef = useRef(null);
   const textRef = useRef(null);
 
   // ... rest
 
-  function onAddLink() {
+  async function onAddLink() {
     if (link === "" || !utilService.isValidUrl(link)) {
       setInvalidLink(true);
       return;
@@ -72,6 +80,20 @@ function ManageAttachmentsPopoverContent({ task, editTask, onClose }) {
     if (!Array.isArray(task.attachments)) {
       task.attachments = [];
     }
+    const newActivity = utilService.createActivity(
+      {
+        type: "addAttachment",
+        targetId: task.id,
+        targetName: task.name,
+        attachmentLink: attachment.link,
+        attachmentName: attachment.text,
+      },
+      user
+    );
+    await editBoard({
+      ...board,
+      activities: [...board?.activities, newActivity],
+    });
     editTask({
       ...task,
       attachments: [...task.attachments, attachment],
@@ -90,7 +112,7 @@ function ManageAttachmentsPopoverContent({ task, editTask, onClose }) {
     textRef.current.focus();
   }
 
-  function onAttachUrl(data) {
+  async function onAddAttachment(data) {
     const attachment = {
       id: utilService.makeId(),
       link: data.secure_url,
@@ -103,10 +125,25 @@ function ManageAttachmentsPopoverContent({ task, editTask, onClose }) {
     if (!Array.isArray(task.attachments)) {
       task.attachments = [];
     }
+    const newActivity = utilService.createActivity(
+      {
+        type: "addAttachment",
+        targetId: task.id,
+        targetName: task.name,
+        attachmentLink: attachment.link,
+        attachmentName: attachment.text,
+      },
+      user
+    );
+    await editBoard({
+      ...board,
+      activities: [...board?.activities, newActivity],
+    });
     editTask({
       ...task,
       attachments: [...task.attachments, attachment],
     });
+
     onClose();
     showSuccessMsg("Success");
   }
@@ -126,7 +163,7 @@ function ManageAttachmentsPopoverContent({ task, editTask, onClose }) {
           You can also drag and drop files to upload them.
         </label>
         <CloudinaryUpload
-          onAttachUrl={onAttachUrl}
+          onAttachUrl={onAddAttachment}
           anchorEl={<button className="btn upload-button">Upload</button>}
         />
 

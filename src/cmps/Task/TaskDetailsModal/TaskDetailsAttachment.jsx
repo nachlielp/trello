@@ -3,8 +3,18 @@ import { DeleteAttachmentPopover } from "../ManageTaskPopovers/DeleteAttachmentP
 import { EditAttachmentPopover } from "../ManageTaskPopovers/EditAttachmentPopover";
 import { Image } from "antd";
 import { useState } from "react";
-export function TaskDetailsAttachment({ attachment, editTask, task }) {
+import { utilService } from "../../../services/util.service";
+import { useSelector } from "react-redux";
+
+export function TaskDetailsAttachment({
+  attachment,
+  editTask,
+  task,
+  editBoard,
+}) {
   const [previewVisible, setPreviewVisible] = useState(false);
+  const user = useSelector((state) => state.userModule.user);
+  const board = useSelector((state) => state.boardModule.board);
   const { link, text } = attachment;
 
   function onDownload(e) {
@@ -31,7 +41,21 @@ export function TaskDetailsAttachment({ attachment, editTask, task }) {
       });
   }
 
-  function onDelete() {
+  async function onDelete() {
+    const newActivity = utilService.createActivity(
+      {
+        type: "removeAttachment",
+        targetId: task.id,
+        targetName: task.name,
+        attachmentLink: link,
+        attachmentName: text,
+      },
+      user
+    );
+    await editBoard({
+      ...board,
+      activities: [...board?.activities, newActivity],
+    });
     editTask({
       ...task,
       attachments: task?.attachments?.filter((att) => att.id !== attachment.id),
