@@ -26,7 +26,7 @@ export function UserBoards({ starClick, onAddBoard }) {
                         <h3 className="section-title">Starred Boards</h3>
                     </header>
                     <article className="section-content">
-                        {boards.filter((board) => user.starredBoardIds.includes(board.id)).map((board) => (
+                        {boards.filter((board) => user?.starredBoardIds.includes(board.id)).map((board) => (
                             <BoardTab key={board.id} board={board} starredBoardIds={user.starredBoardIds} starClick={starClick} />
                         ))}
                     </article>
@@ -70,7 +70,7 @@ export function UserBoards({ starClick, onAddBoard }) {
 const BoardTab = ({ board, starredBoardIds, starClick }) => {
     const navigate = useNavigate();
     const [isHover, setIsHover] = useState(false);
-    const isStarred = starredBoardIds.includes(board.id);
+    const isStarred = starredBoardIds?.includes(board.id);
     return (
         <article
             className="board-tab"

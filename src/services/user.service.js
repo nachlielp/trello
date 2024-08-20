@@ -10,7 +10,7 @@ export const userService = {
   signup,
   getLoggedinUser,
   saveLocalUser,
-  getUsers,
+  getWorkspaceUsers,
   getById,
   remove,
   updateUser,
@@ -19,15 +19,19 @@ export const userService = {
 
 window.userService = userService;
 
-function getUsers() {
+function getWorkspaceUsers() {
   return storageService.query(USERS_KEY);
   // return httpService.get(`user`)
 }
 
 async function getById(userId) {
-  const user = await storageService.get(USERS_KEY, userId);
+  try {
+    const user = await storageService.get(USERS_KEY, userId);
+    return user;
+  } catch (err) {
+    console.error(err);
+  }
   // const user = await httpService.get(`user/${userId}`)
-  return user;
 }
 
 function remove(userId) {
@@ -44,7 +48,7 @@ async function updateUser({ id, ...updatedUser }) {
 }
 
 async function login(userCred) {
-  const userId = import.meta.env.VITE_TRELLO_USER_ID
+  const userId = import.meta.env.VITE_TRELLO_USER_ID;
   const users = await storageService.query(USERS_KEY);
   const user = users.find((user) => user.id === userId);
   // const user = await httpService.post('auth/login', userCred)

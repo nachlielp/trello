@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useSearchParams } from "react-router-dom";
 import { WorkspaceHeader } from "../cmps/Workspace/WorkspaceHeader";
 import { WorkspaceMenu } from "../cmps/Workspace/WorkspaceMenu";
 import { useEffect, useState } from "react";
@@ -12,7 +12,7 @@ import {
   login,
   editUser,
   addBoardToUser,
-  loadUsers,
+  loadWorkspaceUsers,
 } from "../store/user.actions";
 import { createBoard } from "../store/workspace.actions";
 import { useSelector } from "react-redux";
@@ -42,20 +42,20 @@ export function WorkspaceIndex() {
   const [openBoardMenu, setOpenBoardMenu] = useState(false);
   const [showBtn, setShowBtn] = useState(false);
 
-  useEffect(() => {
-    if (user) {
-      setDarkMode(user.darkMode);
-    }
-  }, [user]);
-
   const navigate = useNavigate();
   const params = useParams();
 
   useEffect(() => {
     setBoards();
-    login();
-    loadUsers();
+    getUser();
+    loadWorkspaceUsers();
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      setDarkMode(user.darkMode);
+    }
+  }, [user]);
 
   useEffect(() => {
     if (params.boardId) {
@@ -80,6 +80,18 @@ export function WorkspaceIndex() {
       setSelectedBoardId(null);
     }
   }, [params, user, isUserBoards]);
+
+  async function getUser() {
+    //TODO login (eugene)
+    const user = await login();
+    if (!user) {
+      navigate("/");
+    } else {
+      if (JSON.stringify(params) === "{}") {
+        navigate(`/u/${user.username}/boards`);
+      }
+    }
+  }
 
   useEffect(() => {
     setStarredBoardIds(user?.starredBoardIds);
