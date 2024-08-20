@@ -35,22 +35,10 @@ export function BoardIndex() {
   const navigate = useNavigate();
   const outletProps = useOutletContext();
   const params = useParams();
-  
 
   useEffect(() => {
     async function load() {
-      if (params.boardId) {
-        const res = await loadBoard(params.boardId);
-        if (res?.status === 404) {
-          navigate("/");
-        }
-        setSelectedTaskId(null);
-      }
       if (params.cardId) {
-        const res = await loadBoardByTaskId(params.cardId);
-        if (res?.status === 404) {
-          navigate("/");
-        }
         setSelectedTaskId(params.cardId);
       }
     }
