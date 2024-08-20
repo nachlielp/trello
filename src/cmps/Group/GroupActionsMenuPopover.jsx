@@ -137,9 +137,11 @@ export function GroupActionsMenuPopover({
               <p className="menu-action" onClick={onArchiveGroup}>
                 Archive this list
               </p>
-              <p className="menu-action" onClick={onSelectArchiveAllCards}>
-                Archive all cards in the list
-              </p>
+              {group.tasks.filter((t) => !t.closed).length > 0 && (
+                <p className="menu-action" onClick={onSelectArchiveAllCards}>
+                  Archive all cards in the list
+                </p>
+              )}
             </article>
           )}
           {action === "Copy list" && (
