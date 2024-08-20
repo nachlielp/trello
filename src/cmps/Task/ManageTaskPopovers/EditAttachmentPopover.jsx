@@ -2,12 +2,18 @@ import React, { useState, useRef, useEffect } from "react";
 import { Popover, Input } from "antd";
 import { ManageTaskPopoverHeader } from "./ManageTaskPopoverHeader";
 import { utilService } from "../../../services/util.service";
+import { useSelector } from "react-redux";
+
 export function EditAttachmentPopover({ anchorEl, onEdit, attachment }) {
   const [isOpen, setIsOpen] = useState(false);
   const [link, setLink] = useState(attachment.link);
   const [focusedLink, setFocusedLink] = useState(false);
   const [text, setText] = useState(attachment.text || "");
   const [focusedText, setFocusedText] = useState(false);
+
+  const user = useSelector((state) => state.userModule.user);
+  const board = useSelector((state) => state.boardModule.board);
+
   const textRef = useRef(null);
   const linkRef = useRef(null);
 
@@ -52,7 +58,10 @@ export function EditAttachmentPopover({ anchorEl, onEdit, attachment }) {
   }
 
   const content = (
-    <div className="edit-attachment-popover">
+    <div
+      className="edit-attachment-popover"
+      onClick={(e) => e.stopPropagation()}
+    >
       <ManageTaskPopoverHeader
         title="Edit attachment"
         close={() => setIsOpen(false)}

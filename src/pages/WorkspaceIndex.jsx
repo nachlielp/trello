@@ -21,6 +21,7 @@ import { setBoards } from "../store/workspace.actions";
 import { updateBoard } from "../store/board.actions";
 import { UserBoards } from "./UserBoards";
 import { BoardMenu } from "../cmps/BoardHeader/BoardMenu/BoardMenu";
+import { utilService } from "../services/util.service";
 
 export function WorkspaceIndex() {
   const user = useSelector((state) => state.userModule.user);

@@ -304,6 +304,7 @@ export function TaskDetailsModal({
                   task={task}
                   editTask={editTask}
                   anchorEl={<button className="add-attachment-btn">Add</button>}
+                  editBoard={editBoard}
                 />
               </header>
               {task?.attachments.map((attachment) => (
@@ -312,6 +313,7 @@ export function TaskDetailsModal({
                   attachment={attachment}
                   editTask={editTask}
                   task={task}
+                  editBoard={editBoard}
                 />
               ))}
             </section>

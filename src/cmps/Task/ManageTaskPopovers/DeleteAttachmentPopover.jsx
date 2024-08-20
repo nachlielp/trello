@@ -21,7 +21,10 @@ export function DeleteAttachmentPopover({
   };
 
   const content = (
-    <div className="delete-attachment-popover">
+    <div
+      className="delete-attachment-popover"
+      onClick={(e) => e.stopPropagation()}
+    >
       <ManageTaskPopoverHeader
         title={popoverTitle}
         close={() => setIsOpen(false)}

@@ -83,6 +83,7 @@ export function TaskDetailsCheckList({
       activities: [...board?.activities, newActivity],
     });
   }
+
   async function onChangeItem(item, changes) {
     const newActivity = utilService.createActivity(
       {

@@ -89,6 +89,7 @@ export function TaskDetailsAddToCard({
         <ManageAttachmentsPopover
           task={task}
           editTask={editTask}
+          editBoard={editBoard}
           anchorEl={
             <button className="details-anchor-btn">
               <label className="trello-icon icon-attachment " />
