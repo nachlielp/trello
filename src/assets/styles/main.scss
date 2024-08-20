@@ -133,8 +133,9 @@
   --dynamic-background: var(--ds-surface, #ffffff);
   --ds-background-selected: #1c2b41;
   --ds-icon-inverse: #1d2125;
-  --ds-text-selected: #579DFF;
-  --ds-background-disabled: #BCD6F00A;
+  --ds-text-selected: #579dff;
+  --ds-background-disabled: #bcd6f00a;
+  --ds-surface-sunken: #161a1d;
 
   *:-webkit-autofill {
     color-scheme: dark !important;
@@ -191,6 +192,7 @@
   --ds-background-success-bold: #1f845a;
   --ds-background-selected: #e9f2ff;
   --ds-icon-inverse: #ffffff;
-  --ds-text-selected: #0C66E4;
-  --ds-background-disabled: #091E4208;
+  --ds-text-selected: #0c66e4;
+  --ds-background-disabled: #091e4208;
+  --ds-surface-sunken: #f7f8f9;
 }
