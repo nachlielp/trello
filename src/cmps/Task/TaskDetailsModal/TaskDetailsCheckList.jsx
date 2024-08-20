@@ -98,9 +98,10 @@ export function TaskDetailsCheckList({
     } else {
       newActivity.type = "incompleteItemInCheckList";
     }
+
     await editBoard({
       ...board,
-      activities: [...board?.activities, newActivity],
+      activities: [...board.activities, newActivity],
     });
     changeItem(checkList.id, item.id, changes);
   }
@@ -206,7 +207,7 @@ export function TaskDetailsCheckList({
                 withButtons={true}
                 inputStatus={(s) => (s ? setOpenedInputId(item.id) : null)}
                 inputIsOpen={openedInputId === item.id}
-                onSubmit={(label) => onChangeItem(item.id, { label })}
+                onSubmit={(label) => onChangeItem(item, { label })}
                 emojiButton={true}
                 addButtons={[
                   <MoreActionsItemPopover
