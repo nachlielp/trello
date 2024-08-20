@@ -44,7 +44,7 @@ export default function CloudinaryUpload({ onAttachUrl, anchorEl }) {
   );
 
   const handleClick = () => {
-    console.log("CloudinaryUpload.handleClick");
+    // console.log("CloudinaryUpload.handleClick");
     fileInputRef.current.click();
   };
 
