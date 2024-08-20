@@ -43,7 +43,7 @@ export function UserProfile() {
   ];
   return (
     <>
-      {currentUser.id ? (
+      {currentUser?.id ? (
         <section className="user-profile">
           <header className="header-members-details">
             <UserAvatar size={48} memberId={currentUser?.id} />
