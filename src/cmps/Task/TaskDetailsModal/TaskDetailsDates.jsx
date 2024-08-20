@@ -7,6 +7,11 @@ import { CheckBox } from "../../CustomCpms/CheckBox";
 export function TaskDetailsDates({ task, editTask, editBoard }) {
   const board = useSelector((state) => state.boardModule.board);
   const user = useSelector((state) => state.userModule.user);
+  const currentTask = useSelector((state) =>
+    state.boardModule.board.groups
+      .find((g) => g.id === task.idGroup)
+      .tasks.find((t) => t.id === task.id)
+  );
 
   async function handleDueChange(e) {
     const newActivity = utilService.createActivity(
@@ -26,7 +31,7 @@ export function TaskDetailsDates({ task, editTask, editBoard }) {
       activities: [...board?.activities, newActivity],
     });
 
-    editTask({ ...task, dueComplete: e.target.checked });
+    editTask({ ...task, dueComplete: !e.target.checked });
   }
 
   const [dueStatus, dueLabel] = taskDueStatus(task);
@@ -37,7 +42,7 @@ export function TaskDetailsDates({ task, editTask, editBoard }) {
       <main className="task-details-dates-main">
         {task.due && (
           <CheckBox
-            checked={task.dueComplete}
+            checked={currentTask.dueComplete}
             onChange={handleDueChange}
             className="due-checkbox"
           />
