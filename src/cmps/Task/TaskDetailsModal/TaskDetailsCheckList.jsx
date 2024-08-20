@@ -189,6 +189,7 @@ export function TaskDetailsCheckList({
         format={(percent, successPercent) => (successPercent = `${percent}%`)}
       />
       <ul className="task-details-list">
+        <MoreActionsItemPopover />
         {checkItems.length > 0 &&
           checkItems.map((item) => (
             <li className="checkbox-item" key={item.id}>
@@ -205,6 +206,7 @@ export function TaskDetailsCheckList({
                 minRows={2}
                 withButtons={true}
                 inputStatus={(s) => (s ? setOpenedInputId(item.id) : null)}
+                onCloseInput={() => setOpenedInputId(null)}
                 inputIsOpen={openedInputId === item.id}
                 onSubmit={(label) => onChangeItem(item, { label })}
                 emojiButton={true}
@@ -221,16 +223,18 @@ export function TaskDetailsCheckList({
                   />,
                 ]}
               />
-              <MoreActionsItemPopover
-                key={item.id}
-                anchorEl={
-                  <button className="btn btn-secondary options-btn hover-options">
-                    <EllipsisOutlined />
-                  </button>
-                }
-                onDeleteItem={() => onDeleteItem(item.id)}
-                onConvertToTask={() => onConvertToTask(item.id, item.label)}
-              />
+              {item.id !== openedInputId && (
+                <MoreActionsItemPopover
+                  key={item.id}
+                  anchorEl={
+                    <button className="btn btn-secondary options-btn hover-options">
+                      <EllipsisOutlined />
+                    </button>
+                  }
+                  onDeleteItem={() => onDeleteItem(item.id)}
+                  onConvertToTask={() => onConvertToTask(item.id, item.label)}
+                />
+              )}
             </li>
           ))}
         <section className="add-item">

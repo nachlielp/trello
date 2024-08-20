@@ -22,6 +22,7 @@ export function NameInput({
   withButtons = false,
   addButtons = [],
   emojiButton = false,
+  onCloseInput = null,
   ...other
 }) {
   const [sectionRef, isChangeable, setIsChangeable] = useClickOutside(false);
@@ -101,8 +102,14 @@ export function NameInput({
       onChange(value);
     }
   }
-  function addEmojy(emojy){
-    setNewName(prev=>prev+emojy)
+  function addEmojy(emojy) {
+    setNewName((prev) => prev + emojy);
+  }
+  function closeInput(){
+    if(onCloseInput){
+      onCloseInput()
+    }
+    setIsChangeable(false)
   }
 
   return (
@@ -138,7 +145,7 @@ export function NameInput({
                   </button>
                   <button
                     className="btn btn-secondary"
-                    onClick={() => setIsChangeable(false)}
+                    onClick={closeInput}
                   >
                     <CloseOutlined />
                   </button>
@@ -148,7 +155,12 @@ export function NameInput({
               {(addButtons.length > 0 || emojiButton) && (
                 <span className="left-buttons">
                   {emojiButton && (
-                    <EmojiPopover onAddEmojy={addEmojy} anchorEl={<button className="btn btn-secondary">😀</button>} />
+                    <EmojiPopover
+                      onAddEmojy={addEmojy}
+                      anchorEl={
+                        <button className="btn btn-secondary">😀</button>
+                      }
+                    />
                   )}
                   {addButtons}
                 </span>

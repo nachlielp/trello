@@ -44,7 +44,6 @@
 @import "cmps/Workspace/WorkspaceProfileMenu.scss";
 @import "cmps/Workspace/WorkspaceThemePopover.scss";
 
-// Components
 @import "cmps/BoardHeader/VisibilityButton.scss";
 @import "cmps/BoardHeader/ViewsButton.scss";
 @import "cmps/BoardHeader/FilterButton.scss";
@@ -81,6 +80,7 @@
 @import "cmps/Task/ManageTaskPopovers/AddCheckListPopover";
 @import "cmps/Task/ManageTaskPopovers/EmojiPopover";
 @import "cmps/Task/ManageTaskPopovers/ManageDatesPopover";
+@import "cmps/Task/ManageTaskPopovers/MoreActionsItemPopover";
 
 //Task details
 @import "cmps/Task/TaskDetailsModal/TaskDetailsLabels.scss";

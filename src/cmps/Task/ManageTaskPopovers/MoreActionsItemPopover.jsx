@@ -1,6 +1,6 @@
 import { CloseOutlined } from "@ant-design/icons";
-import { Popover, Input } from "antd";
-import { useState, useEffect } from "react";
+import { Popover } from "antd";
+import { useState } from "react";
 
 export function MoreActionsItemPopover({
   anchorEl,
@@ -15,9 +15,8 @@ export function MoreActionsItemPopover({
 
   return (
     <Popover
-      className="manage-labels-popover"
       trigger="click"
-      placement="bottomRight"
+      placement="bottomLeft"
       open={isOpen}
       close={onClose}
       onOpenChange={setIsOpen}
