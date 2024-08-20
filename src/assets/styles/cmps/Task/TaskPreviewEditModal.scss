@@ -18,7 +18,8 @@
 
         color: var(--ds-text-primary);
 
-        background: #fff;
+        background: var(--ds-surface-overlay, #fff);
+
 
         &:hover {
             background: #F1F2F4;
