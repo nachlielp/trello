@@ -171,7 +171,7 @@ export function ActivityMsg({ activity, task = false }) {
           <div className="main-activity">
             <p className="msg">
               <span className="username">{activity.userFullName}</span> archived{" "}
-              list {targetName}
+              list {activity.targetName}
             </p>
             <p className="time">{timeString}</p>
           </div>
@@ -392,6 +392,7 @@ export function ActivityMsg({ activity, task = false }) {
               />
             }
           />
+
           <div className="main-activity">
             <p className="msg">
               <span className="username">{activity.userFullName}</span> marked{" "}
@@ -399,9 +400,11 @@ export function ActivityMsg({ activity, task = false }) {
               {task ? (
                 <span>this card</span>
               ) : (
-                <Link to={`/c/${activity.targetId}`}>
-                  {activity.targetName}
-                </Link>
+                <>
+                  <Link to={`/c/${activity.targetId}`}>
+                    {activity.targetName}
+                  </Link>
+                </>
               )}
             </p>
             {task ? (
@@ -749,13 +752,16 @@ export function ActivityMsg({ activity, task = false }) {
             <p className="msg">
               <span className="username">{activity.userFullName}</span> marked
               the due date{" "}
-              {task
-                ? ""
-                : `on ${(
-                    <Link to={`/c/${activity.targetId}`}>
-                      {activity.targetName}
-                    </Link>
-                  )}`}{" "}
+              {task ? (
+                ""
+              ) : (
+                <>
+                  <>on </>
+                  <Link to={`/c/${activity.targetId}`}>
+                    {activity.targetName}
+                  </Link>
+                </>
+              )}{" "}
               complete
             </p>
             {task ? (
@@ -786,13 +792,16 @@ export function ActivityMsg({ activity, task = false }) {
             <p className="msg">
               <span className="username">{activity.userFullName}</span> marked
               the due date{" "}
-              {task
-                ? ""
-                : `on ${(
-                    <Link to={`/c/${activity.targetId}`}>
-                      {activity.targetName}
-                    </Link>
-                  )}`}{" "}
+              {task ? (
+                ""
+              ) : (
+                <>
+                  <>on </>
+                  <Link to={`/c/${activity.targetId}`}>
+                    {activity.targetName}
+                  </Link>
+                </>
+              )}{" "}
               incomplete
             </p>
             {task ? (
