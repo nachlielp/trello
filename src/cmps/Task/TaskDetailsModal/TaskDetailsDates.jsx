@@ -1,8 +1,8 @@
-import { Checkbox } from "antd";
 import dayjs from "dayjs";
 import { ManageDatesPopover } from "../ManageTaskPopovers/ManageDatesPopover";
 import { useSelector } from "react-redux";
 import { utilService } from "../../../services/util.service";
+import { CheckBox } from "../../CustomCpms/CheckBox";
 
 export function TaskDetailsDates({ task, editTask, editBoard }) {
   const board = useSelector((state) => state.boardModule.board);
@@ -36,7 +36,7 @@ export function TaskDetailsDates({ task, editTask, editBoard }) {
       <p className="sub-title">{getTitle(task)}</p>
       <main className="task-details-dates-main">
         {task.due && (
-          <Checkbox
+          <CheckBox
             checked={task.dueComplete}
             onChange={handleDueChange}
             className="due-checkbox"
