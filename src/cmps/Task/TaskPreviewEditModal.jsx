@@ -200,7 +200,7 @@ export function TaskPreviewEditModal({
         open={isOpen}
         onOk={handleOk}
         onCancel={handleCancel}
-        getContainer={() => containerRef.current}
+        getContainer={() => containerRef?.current}
         style={modalStyle}
         width={taskWidth}
         closable={false}
