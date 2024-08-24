@@ -8,11 +8,17 @@ import { ErrorPage } from "./pages/ErrorPage.jsx";
 import { UserBoards } from "./pages/UserBoards.jsx";
 import { UserSettings } from "./cmps/UserProf/UserSettings.jsx";
 import { UserMsg } from "./cmps/UserMsg.jsx";
+import { HomePage } from "./pages/HomePage.jsx";
+import { AuthPage } from "./pages/AuthPage.jsx";
 export function RootCmp() {
   return (
     <div>
       <main>
         <Routes>
+        <Route path="/login" element={<AuthPage isLogin />}/>
+        <Route path="/signup" element={<AuthPage />}/>
+
+          <Route path="/home" element={<HomePage />}/>
           <Route path="/" element={<WorkspaceIndex />}>
             <Route path="*" element={<ErrorPage />} />
             {/* <Route path="/" element={<UserBoards />} /> */}
