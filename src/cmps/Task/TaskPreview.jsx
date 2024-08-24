@@ -6,7 +6,7 @@ import { TaskPreviewBadges } from "./TaskPreviewBadges";
 import { TaskPreviewEditModal } from "./TaskPreviewEditModal";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
-import { Draggable } from "react-beautiful-dnd";
+// import { Draggable } from "react-beautiful-dnd";
 
 export function TaskPreview({ task, editTask, labelActions }) {
   const boardLabels = useSelector((state) => state.boardModule.board.labels);
@@ -73,86 +73,89 @@ export function TaskPreview({ task, editTask, labelActions }) {
       : {};
 
   return (
-    <Draggable draggableId={task.id} index={task.pos}>
-      {(provided, snapshot) => (
+    // <Draggable draggableId={task.id} index={task.pos}>
+    //   {(provided, snapshot) => (
+    //     <div
+    //       className={`task ${snapshot.isDragging ? "dragging" : ""}`}
+    //       {...provided.draggableProps}
+    //       {...provided.dragHandleProps}
+    //       ref={provided.innerRef}
+    //       style={{
+    //         ...provided.draggableProps.style,
+    //         opacity: snapshot.isDragging ? 0.5 : 1,
+    //       }}
+    //     >
+    <Card
+      ref={taskRef}
+      className={`task-preview custom-card ${covorCardClass} ${
+        isOpenPreviewModal ? "open-preview-modal" : ""
+      }`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      style={{ ...taskColorCoverStyle, ...taskBackgroundCoverImageStyle }}
+      onClick={onClickTask}
+    >
+      <TaskPreviewEditModal
+        task={task}
+        isHovered={isHovered}
+        editTask={editTask}
+        isOpen={isOpenPreviewModal}
+        openPreviewModal={onOpenPreviewModal}
+        taskLabels={taskLabels}
+        taskWidth={taskWidth}
+        labelActions={labelActions}
+      />
+      {coverSize === "normal" && taskCover.color && (
         <div
-          className={`task ${snapshot.isDragging ? "dragging" : ""}`}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-          ref={provided.innerRef}
-        >
-          <Card
-            ref={taskRef}
-            className={`task-preview custom-card ${covorCardClass} ${
-              isOpenPreviewModal ? "open-preview-modal" : ""
-            }`}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            style={{ ...taskColorCoverStyle, ...taskBackgroundCoverImageStyle }}
-            onClick={onClickTask}
-          >
-            <TaskPreviewEditModal
-              task={task}
-              isHovered={isHovered}
-              editTask={editTask}
-              isOpen={isOpenPreviewModal}
-              openPreviewModal={onOpenPreviewModal}
-              taskLabels={taskLabels}
-              taskWidth={taskWidth}
-              labelActions={labelActions}
-            />
-            {coverSize === "normal" && taskCover.color && (
-              <div
-                className="group-task-header"
-                style={{
-                  backgroundColor: utilService.getColorHashByName(
-                    task?.cover.color
-                  ).bgColor,
-                }}
-              ></div>
-            )}
-            {coverSize === "normal" && taskCover.idUploadedBackground && (
-              <div
-                className="group-task-header img-cover"
-                style={{
-                  backgroundImage: `url(${task?.cover?.scaled[2]?.url})`,
-                }}
-              ></div>
-            )}
-            {coverSize === "normal" && (
-              <section
-                className={`group-task-content ${
-                  taskCover?.idUploadedBackground || taskCover?.color
-                    ? "normal-cover"
-                    : ""
-                }`}
-              >
-                <article className="preview-labels">
-                  {taskLabels.length > 0 &&
-                    taskLabels.map((label) => (
-                      <TaskPreviewLabel
-                        key={label?.id}
-                        label={label}
-                        isExpanded={true}
-                      />
-                    ))}
-                </article>
-                <span className="group-task-content-title">{task?.name}</span>
-                <TaskPreviewBadges task={task} editTask={editTask} />
-              </section>
-            )}
-            {coverSize === "full" && (
-              <section
-                className={`group-task-content ${
-                  taskCover?.idUploadedBackground && "image-cover-content"
-                } ${taskCover?.color && "color-cover-content"}`}
-              >
-                <span className="group-task-content-title">{task?.name}</span>
-              </section>
-            )}
-          </Card>
-        </div>
+          className="group-task-header"
+          style={{
+            backgroundColor: utilService.getColorHashByName(task?.cover.color)
+              .bgColor,
+          }}
+        ></div>
       )}
-    </Draggable>
+      {coverSize === "normal" && taskCover.idUploadedBackground && (
+        <div
+          className="group-task-header img-cover"
+          style={{
+            backgroundImage: `url(${task?.cover?.scaled[2]?.url})`,
+          }}
+        ></div>
+      )}
+      {coverSize === "normal" && (
+        <section
+          className={`group-task-content ${
+            taskCover?.idUploadedBackground || taskCover?.color
+              ? "normal-cover"
+              : ""
+          }`}
+        >
+          <article className="preview-labels">
+            {taskLabels.length > 0 &&
+              taskLabels.map((label) => (
+                <TaskPreviewLabel
+                  key={label?.id}
+                  label={label}
+                  isExpanded={true}
+                />
+              ))}
+          </article>
+          <span className="group-task-content-title">{task?.name}</span>
+          <TaskPreviewBadges task={task} editTask={editTask} />
+        </section>
+      )}
+      {coverSize === "full" && (
+        <section
+          className={`group-task-content ${
+            taskCover?.idUploadedBackground && "image-cover-content"
+          } ${taskCover?.color && "color-cover-content"}`}
+        >
+          <span className="group-task-content-title">{task?.name}</span>
+        </section>
+      )}
+    </Card>
+    //     </div>
+    //   )}
+    // </Draggable>
   );
 }

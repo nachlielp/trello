@@ -118,7 +118,6 @@ export async function addTask(task, user, group, tasksToSkip) {
     const newGroup = { ...group };
     const newTask = utilService.createNewTask(task);
     if (task.addToTop) {
-      console.log("tasksToSkip", tasksToSkip);
       newTask.pos = tasksToSkip;
       newGroup.tasks.map((t) => {
         if (t.pos >= tasksToSkip) {
@@ -131,10 +130,7 @@ export async function addTask(task, user, group, tasksToSkip) {
       newTask.pos = newGroup.tasks.length;
       newGroup.tasks.push(newTask);
     }
-    console.log(
-      "newGroup",
-      newGroup.tasks.map((t) => ({ pos: t.pos, name: t.name }))
-    );
+
     const newActivity = utilService.createActivity(
       {
         type: "addTask",
@@ -515,13 +511,9 @@ export async function deleteLabel(boardId, labelId) {
   return newBoard;
 }
 
-export async function dragGroup({
-  boardId,
-  groupId,
-  sourceIndex,
-  destinationIndex,
-}) {
-  const board = await boardService.getById(boardId);
+export async function dragGroup(dragGroupEvent, board) {
+  const { boardId, groupId, sourceIndex, destinationIndex } = dragGroupEvent;
+
   const updatedGroups = Array.from(board.groups);
   const [reorderedGroup] = updatedGroups.splice(sourceIndex, 1);
   updatedGroups.splice(destinationIndex, 0, reorderedGroup);
@@ -542,6 +534,83 @@ export async function dragGroup({
   return newBoard;
 }
 
+export async function moveTask(moveTaskEvent, board) {
+  console.log("moveTask.board: ", board);
+  const {
+    boardId,
+    sourceGroupId,
+    destinationGroupId,
+    taskId,
+    sourceIndex,
+    destinationIndex,
+  } = moveTaskEvent;
+
+  const task = board.groups
+    .find((g) => g.id === sourceGroupId)
+    .tasks.find((t) => t.id === taskId);
+
+  if (!task) return;
+
+  const newTask = {
+    ...task,
+    idGroup: destinationGroupId,
+    pos: destinationIndex,
+  };
+
+  const newBoard = {
+    ...board,
+  };
+
+  if (sourceGroupId === destinationGroupId) {
+    const group = board.groups.find((g) => g.id === sourceGroupId);
+    let newGroupTasks = group.tasks.filter((t) => t.id !== taskId);
+
+    if (destinationIndex > sourceIndex) {
+      newGroupTasks = newGroupTasks.map((t) => {
+        if (t.pos > sourceIndex && t.pos <= destinationIndex)
+          return { ...t, pos: t.pos - 1 };
+        return t;
+      });
+    } else {
+      newGroupTasks = newGroupTasks.map((t) => {
+        if (t.pos >= destinationIndex && t.pos < sourceIndex)
+          return { ...t, pos: t.pos + 1 };
+        return t;
+      });
+    }
+    newGroupTasks.splice(destinationIndex, 0, newTask);
+    newBoard.groups.find((g) => g.id === sourceGroupId).tasks = newGroupTasks;
+  } else {
+    const sourceGroup = board.groups.find((g) => g.id === sourceGroupId);
+
+    const newSourceGroupTasks = sourceGroup.tasks
+      .filter((t) => t.id !== taskId)
+      .map((t) => {
+        if (t.pos > sourceIndex) return { ...t, pos: t.pos - 1 };
+        return t;
+      });
+
+    const destinationGroup = board.groups.find(
+      (g) => g.id === destinationGroupId
+    );
+
+    const newDestinationGroupTasks = destinationGroup.tasks
+      .sort((a, b) => a.pos - b.pos)
+      .map((t) => {
+        if (t.pos >= destinationIndex) return { ...t, pos: t.pos + 1 };
+        return t;
+      });
+    newDestinationGroupTasks.splice(destinationIndex, 0, newTask);
+
+    newBoard.groups.find((g) => g.id === sourceGroupId).tasks =
+      newSourceGroupTasks;
+    newBoard.groups.find((g) => g.id === destinationGroupId).tasks =
+      newDestinationGroupTasks;
+  }
+
+  store.dispatch({ type: SET_BOARD, board: newBoard });
+  await boardService.save(newBoard);
+}
 // export async function addCards(boardId, cards) {
 //     try {
 //         store.dispatch(getCmdAddCards(cards))

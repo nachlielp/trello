@@ -25,6 +25,8 @@ export function BoardGroup({
   const [footerRef, isAddTaskOpen, setIsAddTaskOpen] = useClickOutside(false);
   const groupRef = useRef();
 
+  const taskPositions = group.tasks?.map((task) => task.pos).join(",") || "";
+
   useEffect(() => {
     const filteredTasks = group.tasks?.filter((task) => !task.closed) || [];
     const updatedTaskIds = filteredTasks.map((task) => task.id);
@@ -41,7 +43,7 @@ export function BoardGroup({
       setSortedTasks(filteredTasks.sort((a, b) => a.pos - b.pos) || []);
       setNewTasksAboveInput([]);
     }
-  }, [group.tasks?.length]);
+  }, [group.tasks?.length, taskPositions]);
 
   const openAddTask = () => {
     setIsAddTaskOpen(true);
@@ -50,6 +52,7 @@ export function BoardGroup({
   function addTaskToTop(task, group) {
     addTask(task, group, newTasksAboveInput.length);
   }
+
   return (
     <Draggable draggableId={group.id} index={group.pos}>
       {(draggableProvided) => (
@@ -79,7 +82,6 @@ export function BoardGroup({
                     />
                     <main
                       className="board-group-main"
-                      // ref={groupRef}
                       ref={droppableProvided.innerRef}
                       {...droppableProvided.droppableProps}
                     >
@@ -103,13 +105,32 @@ export function BoardGroup({
                       {sortedTasks
                         .filter((task) => !newTasksAboveInput.includes(task.id))
                         .map((task) => (
-                          <TaskPreview
+                          <Draggable
                             key={task.id}
-                            task={task}
-                            editTask={editTask}
-                            labelActions={labelActions}
-                          />
+                            draggableId={task.id}
+                            index={task.pos}
+                          >
+                            {(provided, dragSnapshot) => (
+                              <div
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                style={{
+                                  ...provided.draggableProps.style,
+                                  opacity: dragSnapshot.isDragging ? 0.5 : 1,
+                                }}
+                              >
+                                <TaskPreview
+                                  key={task.id}
+                                  task={task}
+                                  editTask={editTask}
+                                  labelActions={labelActions}
+                                />
+                              </div>
+                            )}
+                          </Draggable>
                         ))}
+                      {droppableProvided.placeholder}
                     </main>
                     {!isAddTaskOpen && (
                       <GroupFooter

@@ -17,6 +17,7 @@ import {
   createLabel,
   deleteLabel,
   updateBoard,
+  moveTask,
 } from "../store/board.actions";
 import { editUser } from "../store/user.actions";
 
@@ -131,7 +132,6 @@ export function BoardIndex() {
   function onDragUpdate() {}
 
   async function onDragEnd(result) {
-    console.log("onDragEnd", result);
     const { destination, source, draggableId, type } = result;
     if (!destination) {
       return;
@@ -144,22 +144,23 @@ export function BoardIndex() {
     }
 
     if (type === "group") {
-      console.log(
-        `onDragEnd Event log: ${draggableId}, source: ${source.index}, destination: ${destination.index}`
-      );
       const dragGroupEvent = {
         boardId: board.id,
         groupId: draggableId,
         sourceIndex: source.index,
         destinationIndex: destination.index,
       };
-      await dragGroup(dragGroupEvent);
-      // const newData = boardService.moveGroup(
-      //   draggableId,
-      //   source.index,
-      //   destination.index
-      // );
-      // setData(newData);
+      await dragGroup(dragGroupEvent, board);
+    } else if (type === "task") {
+      const dragTaskEvent = {
+        boardId: board.id,
+        sourceGroupId: source.droppableId,
+        destinationGroupId: destination.droppableId,
+        taskId: draggableId,
+        sourceIndex: source.index,
+        destinationIndex: destination.index,
+      };
+      await moveTask(dragTaskEvent, board);
     }
   }
 
