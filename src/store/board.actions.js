@@ -149,7 +149,7 @@ export async function addGroup(group, boardId) {
   try {
     const board = await boardService.getById(boardId);
     const newGroup = utilService.createNewGroup(group);
-    newGroup.pos = board.groups.length + 1;
+    newGroup.pos = board.groups.length;
     store.dispatch({ type: ADD_GROUP, group: newGroup });
     const newBoard = {
       ...board,
@@ -491,6 +491,39 @@ export async function deleteLabel(boardId, labelId) {
   };
   store.dispatch({ type: DELETE_LABEL, labelId: labelId });
   await boardService.save(newBoard);
+  return newBoard;
+}
+
+export async function dragGroup({
+  boardId,
+  groupId,
+  sourceIndex,
+  destinationIndex,
+}) {
+  console.log(
+    `boardId: ${boardId}, groupId: ${groupId}, sourceIndex: ${sourceIndex}, destinationIndex: ${destinationIndex}`
+  );
+  const board = await boardService.getById(boardId);
+  console.log(board);
+  // Remove the group from its original position and insert it at the new position
+  const updatedGroups = Array.from(board.groups);
+  const [reorderedGroup] = updatedGroups.splice(sourceIndex, 1);
+  updatedGroups.splice(destinationIndex, 0, reorderedGroup);
+
+  // Update the pos property for all groups
+  const newGroups = updatedGroups.map((group, index) => ({
+    ...group,
+    pos: index + 1,
+  }));
+
+  const newBoard = {
+    ...board,
+    groups: newGroups,
+    updatedAt: new Date().getTime(),
+  };
+
+  store.dispatch({ type: SET_BOARD, board: newBoard });
+  // await boardService.save(newBoard);
   return newBoard;
 }
 

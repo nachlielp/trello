@@ -5,6 +5,7 @@
   align-items: center;
   margin: 4px 6px;
   color: var(--ds-text);
+  width: 250px;
 }
 
 .board-group-header .group-more-btn {
@@ -37,7 +38,7 @@
   color: var(--ds-text, #42526e);
   display: flex;
   align-items: center;
-  width: 204px;
+
   height: 26px;
   font-size: 14px;
   font-weight: 600;

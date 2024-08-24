@@ -24,18 +24,21 @@
 //     }
 // }
 
-
 .board-index {
   width: 100vw;
   height: 100%;
   overflow-x: auto;
 
+  .droppable-board {
+    background-color: red;
+    height: 100%;
+    width: 100%;
+  }
   .bg {
     background-size: cover;
     background-position: center;
     padding-bottom: 0px;
     height: 100%;
-
   }
 
   //   padding: 10px;
@@ -48,6 +51,7 @@
   }
 
   .board-groups {
+    height: 100%;
     display: flex;
     flex-direction: row;
     gap: 10px;

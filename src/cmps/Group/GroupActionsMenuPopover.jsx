@@ -137,7 +137,7 @@ export function GroupActionsMenuPopover({
               <p className="menu-action" onClick={onArchiveGroup}>
                 Archive this list
               </p>
-              {group.tasks.filter((t) => !t.closed).length > 0 && (
+              {group.tasks?.filter((t) => !t.closed).length > 0 && (
                 <p className="menu-action" onClick={onSelectArchiveAllCards}>
                   Archive all cards in the list
                 </p>

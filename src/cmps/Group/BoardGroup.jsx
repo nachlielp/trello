@@ -5,6 +5,7 @@ import { AddTaskInGroup } from "./AddTaskInGroup";
 import { BoardGroupHeader } from "./BoardGroupHeader";
 import { TaskPreview } from "../Task/TaskPreview";
 import { useClickOutside } from "../../customHooks/useClickOutside";
+import { Droppable, Draggable } from "react-beautiful-dnd";
 
 //TODO put add new task in array of sorted tasks based on position
 export function BoardGroup({
@@ -17,14 +18,15 @@ export function BoardGroup({
   moveAllCards,
   archiveAllCards,
   sortGroup,
-  labelActions
+  labelActions,
+  index,
 }) {
   const [newTaskIds, setNewTaskIds] = useState([]);
   const [firstTaskPos, setFirstTaskPos] = useState(null);
   const [lastTaskPos, setLastTaskPos] = useState(null);
   const [sortedTasks, setSortedTasks] = useState([]);
   const [footerRef, isAddTaskOpen, setIsAddTaskOpen] = useClickOutside(false);
-  const groupRef = useRef()
+  const groupRef = useRef();
 
   useEffect(() => {
     const filteredTasks = group.tasks?.filter((task) => !task.closed) || [];
@@ -64,48 +66,73 @@ export function BoardGroup({
   };
 
   return (
-    <section className="board-group-container">
-
-      <Card className="board-group custom-card" ref={footerRef}>
-        <BoardGroupHeader
-          group={group}
-          editGroup={editGroup}
-          openAddTask={openAddTask}
-          archiveGroup={archiveGroup}
-          copyGroup={copyGroup}
-          moveAllCards={moveAllCards}
-          archiveAllCards={archiveAllCards}
-          sortGroup={sortGroup}
-        />
-        <main className="board-group-main" ref={groupRef}>
-          {newTaskIds.map((taskId) => (
-            <TaskPreview
-              key={taskId}
-              task={group.tasks.find((task) => task.id === taskId)}
-              labelActions={labelActions}
-            />
-          ))}
-          {isAddTaskOpen && (
-            <AddTaskInGroup
-              groupId={group.id}
-              closeAddTask={() => setIsAddTaskOpen(false)}
-              addTask={addTask}
-              addToTop={true}
-            />
-          )}
-          {sortedTasks
-            .filter((task) => !newTaskIds.includes(task.id))
-            .map((task) =>
-              <TaskPreview
-                key={task.id}
-                task={task}
-                editTask={editTask}
-                labelActions={labelActions}
-              />
+    <Draggable draggableId={group.id} index={group.pos}>
+      {(draggableProvided) => (
+        <div
+          {...draggableProvided.draggableProps}
+          ref={draggableProvided.innerRef}
+        >
+          <Droppable droppableId={group.id} type="task">
+            {(droppableProvided, snapshot) => (
+              <div
+                className={`group ${
+                  snapshot.isDraggingOver ? "dragging-over" : ""
+                }`}
+              >
+                <section className="board-group-container">
+                  <Card className="board-group custom-card" ref={footerRef}>
+                    <BoardGroupHeader
+                      draggableProvided={draggableProvided}
+                      group={group}
+                      editGroup={editGroup}
+                      openAddTask={openAddTask}
+                      archiveGroup={archiveGroup}
+                      copyGroup={copyGroup}
+                      moveAllCards={moveAllCards}
+                      archiveAllCards={archiveAllCards}
+                      sortGroup={sortGroup}
+                    />
+                    <main className="board-group-main" ref={groupRef}>
+                      {newTaskIds.map((taskId) => (
+                        <TaskPreview
+                          key={taskId}
+                          task={group.tasks.find((task) => task.id === taskId)}
+                          labelActions={labelActions}
+                        />
+                      ))}
+                      {isAddTaskOpen && (
+                        <AddTaskInGroup
+                          groupId={group.id}
+                          closeAddTask={() => setIsAddTaskOpen(false)}
+                          addTask={addTask}
+                          addToTop={true}
+                        />
+                      )}
+                      {sortedTasks
+                        .filter((task) => !newTaskIds.includes(task.id))
+                        .map((task) => (
+                          <TaskPreview
+                            key={task.id}
+                            task={task}
+                            editTask={editTask}
+                            labelActions={labelActions}
+                          />
+                        ))}
+                    </main>
+                    {!isAddTaskOpen && (
+                      <GroupFooter
+                        groupId={group.id}
+                        addTask={addTask}
+                        groupRef={groupRef}
+                      />
+                    )}
+                  </Card>
+                </section>
+              </div>
             )}
-        </main>
-        {!isAddTaskOpen && <GroupFooter groupId={group.id} addTask={addTask} groupRef={groupRef}/>}
-      </Card>
-    </section>
+          </Droppable>
+        </div>
+      )}
+    </Draggable>
   );
 }

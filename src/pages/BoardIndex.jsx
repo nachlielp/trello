@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { BoardGroup } from "../cmps/Group/BoardGroup";
 import {
   addTask,
@@ -13,8 +13,7 @@ import {
   moveAllCards,
   archiveAllCards,
   sortGroup,
-  loadBoard,
-  loadBoardByTaskId,
+  dragGroup,
   createLabel,
   deleteLabel,
   updateBoard,
@@ -27,6 +26,7 @@ import { BoardHeader } from "../cmps/BoardHeader/BoardHeader.jsx";
 import useScrollByGrab from "../customHooks/useScrollByGrab.js";
 import { useParams, useNavigate, useOutletContext } from "react-router-dom";
 import { utilService } from "../services/util.service.js";
+import { background } from "@cloudinary/url-gen/qualifiers/focusOn";
 
 export function BoardIndex() {
   const [selectedTaskId, setSelectedTaskId] = useState(null);
@@ -126,6 +126,43 @@ export function BoardIndex() {
     ?.filter((l) => !l.closed)
     .sort((a, b) => a.pos - b.pos);
 
+  function onDragStart() {}
+
+  function onDragUpdate() {}
+
+  async function onDragEnd(result) {
+    console.log("onDragEnd", result);
+    const { destination, source, draggableId, type } = result;
+    if (!destination) {
+      return;
+    }
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+
+    if (type === "group") {
+      console.log(
+        `onDragEnd group,draggableId: ${draggableId}, source: ${source.index}, destination: ${destination.index}`
+      );
+      const dragGroupEvent = {
+        boardId: board.id,
+        groupId: draggableId,
+        sourceIndex: source.index,
+        destinationIndex: destination.index,
+      };
+      await dragGroup(dragGroupEvent);
+      // const newData = boardService.moveGroup(
+      //   draggableId,
+      //   source.index,
+      //   destination.index
+      // );
+      // setData(newData);
+    }
+  }
+
   return board.id ? (
     <section className="board-index">
       <div className="bg">
@@ -140,25 +177,48 @@ export function BoardIndex() {
             setShowBtn={outletProps?.setShowBtn}
           />
         )}
-        <main className="board-groups" ref={scrollContainerRef} {...handlers}>
-          {sortedGroups &&
-            sortedGroups.map((group) => (
-              <BoardGroup
-                key={group.id}
-                group={group}
-                addTask={onAddTask}
-                archiveGroup={() => onArchiveGroup(board.id, group.id)}
-                editGroup={onEditGroup}
-                editTask={onEditTask}
-                copyGroup={onCopyGroup}
-                moveAllCards={moveAllCards}
-                archiveAllCards={archiveAllCards}
-                sortGroup={onSortGroup}
-                labelActions={onLabelAction}
-              />
-            ))}
-          <AddGroupBtn addGroup={onAddGroup} />
-        </main>
+        <DragDropContext
+          onDragStart={onDragStart}
+          onDragUpdate={onDragUpdate}
+          onDragEnd={onDragEnd}
+        >
+          <Droppable
+            droppableId="board"
+            direction="horizontal"
+            type="group"
+            className="droppable-board"
+          >
+            {(provided) => (
+              <div {...provided.droppableProps} ref={provided.innerRef}>
+                <main
+                  className="board-groups"
+                  ref={scrollContainerRef}
+                  {...handlers}
+                >
+                  {sortedGroups &&
+                    sortedGroups.map((group, index) => (
+                      <BoardGroup
+                        index={index}
+                        key={group.id}
+                        group={group}
+                        addTask={onAddTask}
+                        archiveGroup={() => onArchiveGroup(board.id, group.id)}
+                        editGroup={onEditGroup}
+                        editTask={onEditTask}
+                        copyGroup={onCopyGroup}
+                        moveAllCards={moveAllCards}
+                        archiveAllCards={archiveAllCards}
+                        sortGroup={onSortGroup}
+                        labelActions={onLabelAction}
+                      />
+                    ))}
+                  <AddGroupBtn addGroup={onAddGroup} />
+                </main>
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
       </div>
       {selectedTaskId && (
         <TaskDetailsModal
