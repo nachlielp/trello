@@ -19,52 +19,37 @@ export function BoardGroup({
   archiveAllCards,
   sortGroup,
   labelActions,
-  index,
 }) {
-  const [newTaskIds, setNewTaskIds] = useState([]);
-  const [firstTaskPos, setFirstTaskPos] = useState(null);
-  const [lastTaskPos, setLastTaskPos] = useState(null);
+  const [newTasksAboveInput, setNewTasksAboveInput] = useState([]);
   const [sortedTasks, setSortedTasks] = useState([]);
   const [footerRef, isAddTaskOpen, setIsAddTaskOpen] = useClickOutside(false);
   const groupRef = useRef();
 
   useEffect(() => {
     const filteredTasks = group.tasks?.filter((task) => !task.closed) || [];
-    setSortedTasks(filteredTasks.sort((a, b) => a.pos - b.pos) || []);
-    setNewTaskIds(
-      filteredTasks
-        .filter((task) => task.pos < firstTaskPos)
-        .map((task) => task.id) || []
+    const updatedTaskIds = filteredTasks.map((task) => task.id);
+    const currentTaskIds = sortedTasks.map((task) => task.id);
+    const newTaskIds = updatedTaskIds.filter(
+      (taskId) => !currentTaskIds.includes(taskId)
     );
-  }, [group.tasks]);
-
-  useEffect(() => {
-    const filteredTasks = group.tasks?.filter((task) => !task.closed) || [];
-    const sortedTasks = filteredTasks.sort((a, b) => a.pos - b.pos) || [];
-    if (sortedTasks.length > 0) {
-      setFirstTaskPos(sortedTasks[0].pos);
-      setLastTaskPos(sortedTasks[sortedTasks.length - 1].pos);
-    }
-  }, []);
-
-  useEffect(() => {
-    const filteredTasks = group.tasks?.filter((task) => !task.closed) || [];
-    const sortedTasks = filteredTasks.sort((a, b) => a.pos - b.pos) || [];
-    if (sortedTasks.length > 0) {
-      setFirstTaskPos(sortedTasks[0].pos);
-      setLastTaskPos(sortedTasks[sortedTasks.length - 1].pos);
-    }
-    setNewTaskIds(
-      filteredTasks
-        .filter((task) => task.pos < firstTaskPos)
-        .map((task) => task.id) || []
+    const newTasks = filteredTasks.filter((task) =>
+      newTaskIds.includes(task.id)
     );
-  }, [isAddTaskOpen]);
+    if (isAddTaskOpen) {
+      setNewTasksAboveInput(newTasks);
+    } else {
+      setSortedTasks(filteredTasks.sort((a, b) => a.pos - b.pos) || []);
+      setNewTasksAboveInput([]);
+    }
+  }, [group.tasks?.length]);
 
   const openAddTask = () => {
     setIsAddTaskOpen(true);
   };
 
+  function addTaskToTop(task, group) {
+    addTask(task, group, newTasksAboveInput.length);
+  }
   return (
     <Draggable draggableId={group.id} index={group.pos}>
       {(draggableProvided) => (
@@ -94,14 +79,15 @@ export function BoardGroup({
                     />
                     <main
                       className="board-group-main"
-                      ref={groupRef}
-                      // ref={droppableProvided.innerRef}
+                      // ref={groupRef}
+                      ref={droppableProvided.innerRef}
                       {...droppableProvided.droppableProps}
                     >
-                      {newTaskIds.map((taskId) => (
+                      {newTasksAboveInput.map((task) => (
                         <TaskPreview
-                          key={taskId}
-                          task={group.tasks.find((task) => task.id === taskId)}
+                          key={task.id}
+                          task={task}
+                          editTask={editTask}
                           labelActions={labelActions}
                         />
                       ))}
@@ -109,13 +95,13 @@ export function BoardGroup({
                         <AddTaskInGroup
                           groupId={group.id}
                           closeAddTask={() => setIsAddTaskOpen(false)}
-                          addTask={addTask}
+                          addTask={addTaskToTop}
                           addToTop={true}
                         />
                       )}
 
                       {sortedTasks
-                        .filter((task) => !newTaskIds.includes(task.id))
+                        .filter((task) => !newTasksAboveInput.includes(task.id))
                         .map((task) => (
                           <TaskPreview
                             key={task.id}

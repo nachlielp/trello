@@ -112,11 +112,29 @@ export function toggleIsExpanded() {
   });
 }
 
-export async function addTask(task, user, group) {
+export async function addTask(task, user, group, tasksToSkip) {
   try {
-    const newTask = utilService.createNewTask(task);
-    store.dispatch({ type: ADD_TASK, task: newTask });
     const board = await boardService.getById(task.idBoard);
+    const newGroup = { ...group };
+    const newTask = utilService.createNewTask(task);
+    if (task.addToTop) {
+      console.log("tasksToSkip", tasksToSkip);
+      newTask.pos = tasksToSkip;
+      newGroup.tasks.map((t) => {
+        if (t.pos >= tasksToSkip) {
+          t.pos = t.pos + 1;
+        }
+        return t;
+      });
+      newGroup.tasks.splice(tasksToSkip, 0, newTask);
+    } else {
+      newTask.pos = newGroup.tasks.length;
+      newGroup.tasks.push(newTask);
+    }
+    console.log(
+      "newGroup",
+      newGroup.tasks.map((t) => ({ pos: t.pos, name: t.name }))
+    );
     const newActivity = utilService.createActivity(
       {
         type: "addTask",
@@ -126,18 +144,21 @@ export async function addTask(task, user, group) {
       },
       user
     );
+
     const newBoard = {
       ...board,
       groups: board.groups?.map((g) => {
         if (g.id === newTask.idGroup) {
-          return { ...g, tasks: [...(g.tasks || []), newTask] };
+          return { ...g, tasks: newGroup.tasks };
         }
         return g;
       }),
       activities: [...board?.activities, newActivity],
-      apdatedAt: new Date().getTime(),
+      updatedAt: new Date().getTime(),
     };
-    await updateBoard(newBoard);
+    console.log("newBoard", newBoard);
+    await boardService.save(newBoard);
+    store.dispatch({ type: SET_BOARD, board: newBoard });
     return newTask;
   } catch (err) {
     console.log("Cannot add task", err);

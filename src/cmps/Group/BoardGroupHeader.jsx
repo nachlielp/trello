@@ -41,14 +41,6 @@ export function BoardGroupHeader({
     editGroup({ ...group, name: newGroupName });
   }
 
-  const dragHandle = (
-    <div className="drag-handle">
-      <p className="group-title" onClick={() => setIsEditGroupName(true)}>
-        {group.name}
-      </p>
-    </div>
-  );
-
   return (
     <header
       className="board-group-header"

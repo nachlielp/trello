@@ -450,6 +450,7 @@ export function stringToColor(str) {
   }
   return color;
 }
+
 function createNewTask(task) {
   return {
     id: utilService.makeId(),
@@ -502,7 +503,7 @@ function createNewTask(task) {
     idLabels: [],
     manualCoverAttachment: true,
     name: task.name,
-    pos: task.pos, // Default position, can be adjusted
+    pos: -1, // Default position, can be adjusted
     shortLink: "", // generateShortLink(), // Function to generate a short link
     shortUrl: "", // `https://trello.com/c/${generateShortLink()}`,
     start: null,

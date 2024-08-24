@@ -47,13 +47,13 @@ export function BoardIndex() {
 
   const { scrollContainerRef, handlers } = useScrollByGrab();
 
-  async function onAddTask(task, group) {
+  async function onAddTask(task, group, tasksToSkip) {
     const newTask = {
       ...task,
       idBoard: board.id,
     };
     try {
-      await addTask(newTask, user, group);
+      await addTask(newTask, user, group, tasksToSkip);
     } catch (error) {
       console.log("onAddCard", error);
     }
@@ -199,9 +199,8 @@ export function BoardIndex() {
                 {...handlers}
               >
                 {sortedGroups &&
-                  sortedGroups.map((group, index) => (
+                  sortedGroups.map((group) => (
                     <BoardGroup
-                      index={index}
                       key={group.id}
                       group={group}
                       addTask={onAddTask}
