@@ -92,7 +92,12 @@ export function BoardGroup({
                       archiveAllCards={archiveAllCards}
                       sortGroup={sortGroup}
                     />
-                    <main className="board-group-main" ref={groupRef}>
+                    <main
+                      className="board-group-main"
+                      ref={groupRef}
+                      // ref={droppableProvided.innerRef}
+                      {...droppableProvided.droppableProps}
+                    >
                       {newTaskIds.map((taskId) => (
                         <TaskPreview
                           key={taskId}
@@ -108,6 +113,7 @@ export function BoardGroup({
                           addToTop={true}
                         />
                       )}
+
                       {sortedTasks
                         .filter((task) => !newTaskIds.includes(task.id))
                         .map((task) => (
