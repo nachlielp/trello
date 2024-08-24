@@ -500,20 +500,14 @@ export async function dragGroup({
   sourceIndex,
   destinationIndex,
 }) {
-  console.log(
-    `boardId: ${boardId}, groupId: ${groupId}, sourceIndex: ${sourceIndex}, destinationIndex: ${destinationIndex}`
-  );
   const board = await boardService.getById(boardId);
-  console.log(board);
-  // Remove the group from its original position and insert it at the new position
   const updatedGroups = Array.from(board.groups);
   const [reorderedGroup] = updatedGroups.splice(sourceIndex, 1);
   updatedGroups.splice(destinationIndex, 0, reorderedGroup);
 
-  // Update the pos property for all groups
   const newGroups = updatedGroups.map((group, index) => ({
     ...group,
-    pos: index + 1,
+    pos: index,
   }));
 
   const newBoard = {
@@ -523,7 +517,7 @@ export async function dragGroup({
   };
 
   store.dispatch({ type: SET_BOARD, board: newBoard });
-  // await boardService.save(newBoard);
+  await boardService.save(newBoard);
   return newBoard;
 }
 

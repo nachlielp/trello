@@ -145,7 +145,7 @@ export function BoardIndex() {
 
     if (type === "group") {
       console.log(
-        `onDragEnd group,draggableId: ${draggableId}, source: ${source.index}, destination: ${destination.index}`
+        `onDragEnd Event log: ${draggableId}, source: ${source.index}, destination: ${destination.index}`
       );
       const dragGroupEvent = {
         boardId: board.id,
@@ -189,33 +189,35 @@ export function BoardIndex() {
             className="droppable-board"
           >
             {(provided) => (
-              <div {...provided.droppableProps} ref={provided.innerRef}>
-                <main
-                  className="board-groups"
-                  ref={scrollContainerRef}
-                  {...handlers}
-                >
-                  {sortedGroups &&
-                    sortedGroups.map((group, index) => (
-                      <BoardGroup
-                        index={index}
-                        key={group.id}
-                        group={group}
-                        addTask={onAddTask}
-                        archiveGroup={() => onArchiveGroup(board.id, group.id)}
-                        editGroup={onEditGroup}
-                        editTask={onEditTask}
-                        copyGroup={onCopyGroup}
-                        moveAllCards={moveAllCards}
-                        archiveAllCards={archiveAllCards}
-                        sortGroup={onSortGroup}
-                        labelActions={onLabelAction}
-                      />
-                    ))}
-                  <AddGroupBtn addGroup={onAddGroup} />
-                </main>
+              <main
+                className="board-groups"
+                ref={(el) => {
+                  provided.innerRef(el);
+                  scrollContainerRef.current = el;
+                }}
+                {...provided.droppableProps}
+                {...handlers}
+              >
+                {sortedGroups &&
+                  sortedGroups.map((group, index) => (
+                    <BoardGroup
+                      index={index}
+                      key={group.id}
+                      group={group}
+                      addTask={onAddTask}
+                      archiveGroup={() => onArchiveGroup(board.id, group.id)}
+                      editGroup={onEditGroup}
+                      editTask={onEditTask}
+                      copyGroup={onCopyGroup}
+                      moveAllCards={moveAllCards}
+                      archiveAllCards={archiveAllCards}
+                      sortGroup={onSortGroup}
+                      labelActions={onLabelAction}
+                    />
+                  ))}
                 {provided.placeholder}
-              </div>
+                <AddGroupBtn addGroup={onAddGroup} />
+              </main>
             )}
           </Droppable>
         </DragDropContext>
