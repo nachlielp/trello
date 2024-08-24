@@ -538,6 +538,7 @@ function createNewGroup(group) {
     softLimit: null,
     pos: group.pos,
     tasks: [],
+    updatedAt: null,
   };
 }
 

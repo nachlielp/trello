@@ -24,9 +24,15 @@ export function BoardGroup({
   const [sortedTasks, setSortedTasks] = useState([]);
   const [footerRef, isAddTaskOpen, setIsAddTaskOpen] = useClickOutside(false);
   const groupRef = useRef();
-
+  console.log(
+    "BoardGroup: ",
+    group.tasks.map((t) => ({ name: t.name, pos: t.pos }))
+  );
   const taskPositions = group.tasks?.map((task) => task.pos).join(",") || "";
-
+  console.log(
+    "taskPositions: ",
+    group.tasks?.map((task) => task.name).join(",") || ""
+  );
   useEffect(() => {
     const filteredTasks = group.tasks?.filter((task) => !task.closed) || [];
     const updatedTaskIds = filteredTasks.map((task) => task.id);
@@ -43,7 +49,7 @@ export function BoardGroup({
       setSortedTasks(filteredTasks.sort((a, b) => a.pos - b.pos) || []);
       setNewTasksAboveInput([]);
     }
-  }, [group.tasks?.length, taskPositions]);
+  }, [group.tasks?.length, group.updatedAt]);
 
   const openAddTask = () => {
     setIsAddTaskOpen(true);
@@ -60,90 +66,86 @@ export function BoardGroup({
           {...draggableProvided.draggableProps}
           ref={draggableProvided.innerRef}
         >
-          <Droppable droppableId={group.id} type="task">
-            {(droppableProvided, snapshot) => (
-              <div
-                className={`group ${
-                  snapshot.isDraggingOver ? "dragging-over" : ""
-                }`}
-              >
-                <section className="board-group-container">
-                  <Card className="board-group custom-card" ref={footerRef}>
-                    <BoardGroupHeader
-                      draggableProvided={draggableProvided}
-                      group={group}
-                      editGroup={editGroup}
-                      openAddTask={openAddTask}
-                      archiveGroup={archiveGroup}
-                      copyGroup={copyGroup}
-                      moveAllCards={moveAllCards}
-                      archiveAllCards={archiveAllCards}
-                      sortGroup={sortGroup}
-                    />
-                    <main
-                      className="board-group-main"
-                      ref={droppableProvided.innerRef}
-                      {...droppableProvided.droppableProps}
-                    >
-                      {newTasksAboveInput.map((task) => (
-                        <TaskPreview
-                          key={task.id}
-                          task={task}
-                          editTask={editTask}
-                          labelActions={labelActions}
-                        />
-                      ))}
-                      {isAddTaskOpen && (
-                        <AddTaskInGroup
-                          groupId={group.id}
-                          closeAddTask={() => setIsAddTaskOpen(false)}
-                          addTask={addTaskToTop}
-                          addToTop={true}
-                        />
-                      )}
-
-                      {sortedTasks
-                        .filter((task) => !newTasksAboveInput.includes(task.id))
-                        .map((task) => (
-                          <Draggable
-                            key={task.id}
-                            draggableId={task.id}
-                            index={task.pos}
-                          >
-                            {(provided, dragSnapshot) => (
-                              <div
-                                ref={provided.innerRef}
-                                {...provided.draggableProps}
-                                {...provided.dragHandleProps}
-                                style={{
-                                  ...provided.draggableProps.style,
-                                  opacity: dragSnapshot.isDragging ? 0.5 : 1,
-                                }}
-                              >
-                                <TaskPreview
-                                  key={task.id}
-                                  task={task}
-                                  editTask={editTask}
-                                  labelActions={labelActions}
-                                />
-                              </div>
-                            )}
-                          </Draggable>
-                        ))}
-                      {droppableProvided.placeholder}
-                    </main>
-                    {!isAddTaskOpen && (
-                      <GroupFooter
+          <div className="board-group-container">
+            <Card className="board-group custom-card" ref={footerRef}>
+              <BoardGroupHeader
+                draggableProvided={draggableProvided}
+                group={group}
+                editGroup={editGroup}
+                openAddTask={openAddTask}
+                archiveGroup={archiveGroup}
+                copyGroup={copyGroup}
+                moveAllCards={moveAllCards}
+                archiveAllCards={archiveAllCards}
+                sortGroup={sortGroup}
+              />
+              <Droppable droppableId={group.id} type="task">
+                {(droppableProvided, snapshot) => (
+                  <main
+                    className={`board-group-main ${
+                      snapshot.isDraggingOver ? "dragging-over" : ""
+                    }`}
+                    ref={droppableProvided.innerRef}
+                    {...droppableProvided.droppableProps}
+                  >
+                    {newTasksAboveInput.map((task) => (
+                      <TaskPreview
+                        key={task.id}
+                        task={task}
+                        editTask={editTask}
+                        labelActions={labelActions}
+                      />
+                    ))}
+                    {isAddTaskOpen && (
+                      <AddTaskInGroup
                         groupId={group.id}
-                        addTask={addTask}
-                        groupRef={groupRef}
+                        closeAddTask={() => setIsAddTaskOpen(false)}
+                        addTask={addTaskToTop}
+                        addToTop={true}
                       />
                     )}
-                  </Card>
-                </section>
-              </div>
-            )}
-          </Droppable>
+
+                    {sortedTasks
+                      .filter((task) => !newTasksAboveInput.includes(task.id))
+                      .map((task, index) => (
+                        <Draggable
+                          key={task.id}
+                          draggableId={task.id}
+                          index={index}
+                        >
+                          {(provided, dragSnapshot) => (
+                            <div
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              style={{
+                                ...provided.draggableProps.style,
+                                opacity: dragSnapshot.isDragging ? 0.5 : 1,
+                              }}
+                            >
+                              <TaskPreview
+                                key={task.id}
+                                task={task}
+                                editTask={editTask}
+                                labelActions={labelActions}
+                              />
+                            </div>
+                          )}
+                        </Draggable>
+                      ))}
+                    {droppableProvided.placeholder}
+                  </main>
+                )}
+              </Droppable>
+              {!isAddTaskOpen && (
+                <GroupFooter
+                  groupId={group.id}
+                  addTask={addTask}
+                  groupRef={groupRef}
+                />
+              )}
+            </Card>
+          </div>
         </div>
       )}
     </Draggable>

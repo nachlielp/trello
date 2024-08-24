@@ -28,6 +28,7 @@
     ],
     "groups": [
       {
+        "updatedAt": null,
         "id": "64f721f169b14894fac36ce6",
         "name": "Backlog-Server",
         "closed": false,
@@ -917,6 +918,7 @@
     ],
     "groups": [
       {
+        "updatedAt": null,
         "id": "66756b3a4a97ac163d32e9e2",
         "name": "Labels and badges",
         "closed": false,
@@ -1261,6 +1263,7 @@
         ]
       },
       {
+        "updatedAt": null,
         "id": "66756e74ebad01c3a662aea7",
         "name": "Group length and covers",
         "closed": false,
@@ -2090,6 +2093,7 @@
         ]
       },
       {
+        "updatedAt": null,
         "id": "66756b31250742f334ce4cf0",
         "attachments": [],
         "name": "Web Pages",
@@ -2307,6 +2311,7 @@
         ]
       },
       {
+        "updatedAt": null,
         "id": "66756c51bcee71bff3ee6112",
         "attachments": [],
         "name": "Web Component",

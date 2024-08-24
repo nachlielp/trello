@@ -545,11 +545,17 @@ export async function moveTask(moveTaskEvent, board) {
     destinationIndex,
   } = moveTaskEvent;
 
-  const task = board.groups
-    .find((g) => g.id === sourceGroupId)
-    .tasks.find((t) => t.id === taskId);
+  const sourceGroup = board.groups.find((g) => g.id === sourceGroupId);
+  if (!sourceGroup) {
+    console.error(`Source group ${sourceGroupId} not found`);
+    return board;
+  }
 
-  if (!task) return;
+  const task = sourceGroup.tasks.find((t) => t.id === taskId);
+  if (!task) {
+    console.error(`Task ${taskId} not found in group ${sourceGroupId}`);
+    return board;
+  }
 
   const newTask = {
     ...task,
@@ -557,196 +563,88 @@ export async function moveTask(moveTaskEvent, board) {
     pos: destinationIndex,
   };
 
-  const newBoard = {
+  let newBoard = {
     ...board,
+    groups: [...board.groups],
   };
 
   if (sourceGroupId === destinationGroupId) {
-    const group = board.groups.find((g) => g.id === sourceGroupId);
-    let newGroupTasks = group.tasks.filter((t) => t.id !== taskId);
+    console.log("same group");
+    newBoard.groups = newBoard.groups.map((g) => {
+      if (g.id === sourceGroupId) {
+        let newTasks = g.tasks.filter((t) => t.id !== taskId);
 
-    if (destinationIndex > sourceIndex) {
-      newGroupTasks = newGroupTasks.map((t) => {
-        if (t.pos > sourceIndex && t.pos <= destinationIndex)
-          return { ...t, pos: t.pos - 1 };
-        return t;
-      });
-    } else {
-      newGroupTasks = newGroupTasks.map((t) => {
-        if (t.pos >= destinationIndex && t.pos < sourceIndex)
-          return { ...t, pos: t.pos + 1 };
-        return t;
-      });
-    }
-    newGroupTasks.splice(destinationIndex, 0, newTask);
-    newBoard.groups.find((g) => g.id === sourceGroupId).tasks = newGroupTasks;
+        if (destinationIndex > sourceIndex) {
+          newTasks = newTasks.map((t) => {
+            if (t.pos > sourceIndex && t.pos <= destinationIndex)
+              return { ...t, pos: t.pos - 1 };
+            return t;
+          });
+        } else {
+          newTasks = newTasks.map((t) => {
+            if (t.pos >= destinationIndex && t.pos < sourceIndex)
+              return { ...t, pos: t.pos + 1 };
+            return t;
+          });
+        }
+        newTasks.splice(destinationIndex, 0, newTask);
+        return { ...g, tasks: newTasks, updatedAt: new Date().toISOString() };
+      }
+      return g;
+    });
   } else {
-    const sourceGroup = board.groups.find((g) => g.id === sourceGroupId);
-
-    const newSourceGroupTasks = sourceGroup.tasks
-      .filter((t) => t.id !== taskId)
-      .map((t) => {
-        if (t.pos > sourceIndex) return { ...t, pos: t.pos - 1 };
-        return t;
-      });
-
-    const destinationGroup = board.groups.find(
-      (g) => g.id === destinationGroupId
-    );
-
-    const newDestinationGroupTasks = destinationGroup.tasks
-      .sort((a, b) => a.pos - b.pos)
-      .map((t) => {
-        if (t.pos >= destinationIndex) return { ...t, pos: t.pos + 1 };
-        return t;
-      });
-    newDestinationGroupTasks.splice(destinationIndex, 0, newTask);
-
-    newBoard.groups.find((g) => g.id === sourceGroupId).tasks =
-      newSourceGroupTasks;
-    newBoard.groups.find((g) => g.id === destinationGroupId).tasks =
-      newDestinationGroupTasks;
+    newBoard.groups = newBoard.groups.map((g) => {
+      if (g.id === sourceGroupId) {
+        return {
+          ...g,
+          tasks: g.tasks
+            .filter((t) => t.id !== taskId)
+            .map((t) => {
+              if (t.pos > sourceIndex) return { ...t, pos: t.pos - 1 };
+              return t;
+            }),
+          updatedAt: new Date().toISOString(),
+        };
+      }
+      if (g.id === destinationGroupId) {
+        let newTasks = [...g.tasks]
+          .sort((a, b) => a.pos - b.pos)
+          .map((t) => {
+            if (t.pos >= destinationIndex) return { ...t, pos: t.pos + 1 };
+            return t;
+          });
+        newTasks.splice(destinationIndex, 0, newTask);
+        return { ...g, tasks: newTasks, updatedAt: new Date().toISOString() };
+      }
+      return g;
+    });
   }
 
-  store.dispatch({ type: SET_BOARD, board: newBoard });
   await boardService.save(newBoard);
-}
-// export async function addCards(boardId, cards) {
-//     try {
-//         store.dispatch(getCmdAddCards(cards))
-//     } catch (err) {
-//         console.log('Cannot add cards', err)
-//         throw err
-//     }
-// }
-// export async function removeCard(boardId, cardId) {
-//     try {
-//         await boardService.removeCard(boardId, cardId)
-//         store.dispatch(getCmdRemoveCard(cardId))
-//     } catch (err) {
-//         console.log('Cannot remove card', err)
-//         throw err
-//     }
-// }
-
-// export async function updateCard(boardId, card) {
-//     try {
-//         const savedCard = await boardService.updateCard(boardId, card)
-//         console.log('Updated card', savedCard)
-//         store.dispatch(getCmdUpdateCard(savedCard))
-//         return savedCard
-//     } catch (err) {
-//         console.log('Cannot update card', err)
-//         throw err
-//     }
-// }
-
-// export function addLists(lists) {
-//     try {
-//         store.dispatch({ type: SET_LISTS, lists })
-//     } catch (err) {
-//         console.log('Cannot add lists', err)
-//         throw err
-//     }
-// }
-// export function removeLists(lists) {
-//     try {
-//         store.dispatch(getCmdRemoveLists(lists))
-//     } catch (err) {
-//         console.log('Cannot remove lists', err)
-//         throw err
-//     }
-// }
-
-// export function updateList(list) {
-//     try {
-//         store.dispatch(getCmdUpdateList(list))
-//     } catch (err) {
-//         console.log('Cannot update list', err)
-//         throw err
-//     }
-// }
-
-// export function addMembers(members) {
-//     try {
-//         store.dispatch(getCmdAddMembers(members))
-//     } catch (err) {
-//         console.log('Cannot add members', err)
-//         throw err
-//     }
-// }
-
-// Command Creators:
-function getCmdRemoveBoard(boardId) {
-  try {
-    store.dispatch(getCmdRemoveBoard(boardId));
-  } catch (err) {
-    console.log("Cannot remove board", err);
-    throw err;
-  }
-}
-
-function getCmdAddBoard(board) {
-  try {
-    store.dispatch(getCmdAddBoard(board));
-  } catch (err) {
-    console.log("Cannot add board", err);
-    throw err;
-  }
-}
-
-function getCmdUpdateBoard(board) {
-  try {
-    store.dispatch(getCmdUpdateBoard(board));
-  } catch (err) {
-    console.log("Cannot update board", err);
-    throw err;
-  }
-}
-
-function getCmdSetBoards(boards) {
-  try {
-    store.dispatch(getCmdSetBoards(boards));
-  } catch (err) {
-    console.log("Cannot set boards", err);
-    throw err;
-  }
-}
-
-function getCmdSetBoard(board) {
-  try {
-    store.dispatch(getCmdSetBoard(board));
-  } catch (err) {
-    console.log("Cannot set board", err);
-    throw err;
-  }
-}
-
-function getCmdAddBoardMsg(msg) {
-  try {
-    store.dispatch(getCmdAddBoardMsg(msg));
-  } catch (err) {
-    console.log("Cannot add board msg", err);
-    throw err;
-  }
-}
-
-function getCmdUpdateTask(groupId, task, activity) {
-  try {
-    store.dispatch(getCmdUpdateTask(groupId, task, activity));
-  } catch (err) {
-    console.log("Cannot update task", err);
-    throw err;
-  }
-}
-
-// unitTestActions()
-async function unitTestActions() {
-  await loadBoards();
-  await addBoard(boardService.getEmptyBoard());
-  await updateBoard({
-    _id: "m1oC7",
-    title: "Board-Good",
+  store.dispatch({
+    type: SET_BOARD,
+    board: { ...newBoard, updatedAt: new Date().toISOString() },
   });
-  await removeBoard("m1oC7");
+}
+
+function _moveTasks(tasks, taskId, sourceIndex, destinationIndex) {
+  if (sourceIndex === null && destinationIndex === null) {
+    return tasks;
+  }
+
+  const newTasks = [...tasks];
+  const [movedTask] = newTasks.splice(sourceIndex, 1);
+
+  if (destinationIndex !== null) {
+    newTasks.splice(destinationIndex, 0, {
+      ...movedTask,
+      pos: destinationIndex,
+    });
+  }
+
+  // Update positions of other tasks
+  return newTasks.map((task, index) => ({
+    ...task,
+    pos: index,
+  }));
 }
