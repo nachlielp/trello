@@ -8,7 +8,7 @@ import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 // import { Draggable } from "react-beautiful-dnd";
 
-export function TaskPreview({ task, editTask, labelActions }) {
+export function TaskPreview({ task, editTask, labelActions, isDragging }) {
   const boardLabels = useSelector((state) => state.boardModule.board.labels);
   const [isHovered, setIsHovered] = useState(false);
   const [isOpenPreviewModal, setIsOpenPreviewModal] = useState(false);
@@ -89,7 +89,7 @@ export function TaskPreview({ task, editTask, labelActions }) {
       ref={taskRef}
       className={`task-preview custom-card ${covorCardClass} ${
         isOpenPreviewModal ? "open-preview-modal" : ""
-      }`}
+      } ${isDragging ? "dragging" : ""}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{ ...taskColorCoverStyle, ...taskBackgroundCoverImageStyle }}

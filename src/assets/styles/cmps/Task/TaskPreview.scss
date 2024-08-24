@@ -8,9 +8,16 @@
   background-color: var(--ds-surface-raised, #ffffff);
   color: var(--ds-text);
   border: none;
-  box-shadow: var(--ds-shadow-raised,
-      0px 1px 1px #091e4240,
-      0px 0px 1px #091e424f);
+  box-shadow: var(
+    --ds-shadow-raised,
+    0px 1px 1px #091e4240,
+    0px 0px 1px #091e424f
+  );
+
+  &.dragging {
+    transform: rotate(5deg);
+    opacity: 0.5;
+  }
 
   &.custom-card .ant-card-body {
     padding: 0 !important;
@@ -19,7 +26,6 @@
   &.open-preview-modal:hover {
     outline: none;
   }
-
 
   &.custom-card .ant-card {
     margin: 10px 0 0 0 !important;

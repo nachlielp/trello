@@ -535,9 +535,7 @@ export async function dragGroup(dragGroupEvent, board) {
 }
 
 export async function moveTask(moveTaskEvent, board) {
-  console.log("moveTask.board: ", board);
   const {
-    boardId,
     sourceGroupId,
     destinationGroupId,
     taskId,
@@ -625,26 +623,4 @@ export async function moveTask(moveTaskEvent, board) {
     type: SET_BOARD,
     board: { ...newBoard, updatedAt: new Date().toISOString() },
   });
-}
-
-function _moveTasks(tasks, taskId, sourceIndex, destinationIndex) {
-  if (sourceIndex === null && destinationIndex === null) {
-    return tasks;
-  }
-
-  const newTasks = [...tasks];
-  const [movedTask] = newTasks.splice(sourceIndex, 1);
-
-  if (destinationIndex !== null) {
-    newTasks.splice(destinationIndex, 0, {
-      ...movedTask,
-      pos: destinationIndex,
-    });
-  }
-
-  // Update positions of other tasks
-  return newTasks.map((task, index) => ({
-    ...task,
-    pos: index,
-  }));
 }

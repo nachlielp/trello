@@ -61,12 +61,16 @@ export function BoardGroup({
 
   return (
     <Draggable draggableId={group.id} index={group.pos}>
-      {(draggableProvided) => (
+      {(draggableProvided, snapshot) => (
         <div
           {...draggableProvided.draggableProps}
           ref={draggableProvided.innerRef}
         >
-          <div className="board-group-container">
+          <div
+            className={`board-group-container ${
+              snapshot.isDragging ? "dragging" : ""
+            }`}
+          >
             <Card className="board-group custom-card" ref={footerRef}>
               <BoardGroupHeader
                 draggableProvided={draggableProvided}
@@ -118,16 +122,20 @@ export function BoardGroup({
                               ref={provided.innerRef}
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
-                              style={{
-                                ...provided.draggableProps.style,
-                                opacity: dragSnapshot.isDragging ? 0.5 : 1,
-                              }}
+                              className={`task-preview-container ${
+                                dragSnapshot.isDragging ? "dragging" : ""
+                              }`}
+                              // style={{
+                              //   ...provided.draggableProps.style,
+                              //   opacity: dragSnapshot.isDragging ? 0.5 : 1,
+                              // }}
                             >
                               <TaskPreview
                                 key={task.id}
                                 task={task}
                                 editTask={editTask}
                                 labelActions={labelActions}
+                                isDragging={dragSnapshot.isDragging}
                               />
                             </div>
                           )}
