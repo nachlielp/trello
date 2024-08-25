@@ -10,8 +10,17 @@
   &.fade-out {
     animation: fadeOutRight 200ms forwards;
   }
+  .border_bottom {
+    background-color: var(--ds-border, #091e4224);
+    border: 0;
+    height: 1px;
+    margin: 0;
+    margin-top: 1px;
+    padding: 0;
+    grid-column: 1/-1;
+  }
   .header-menu {
-    padding: 0 8px 0 8px;
+    padding: 0 12px 0 12px;
     display: grid;
     grid-template-columns: 32px 1fr 32px;
     text-align: center;
@@ -23,9 +32,12 @@
       font-weight: 500;
       margin-top: 18px;
       color: var(--ds-text, #172b4d);
+      margin-top: 17px;
       margin-bottom: 16px;
     }
+    
     .btn {
+      margin-top: 1px;
       cursor: pointer;
       padding: 6px;
       border: none;
@@ -35,6 +47,14 @@
       width: 32px;
       height: 32px;
       align-self: center;
+      .trello-icon {
+        font-size: 20px;
+      }
+      .anticon{
+        margin-top: 1px;
+        font-size: 16px;
+        font-weight: 600;
+      }
       &:hover {
         background-color: var(
           --ds-background-neutral-subtle-hovered,
@@ -47,19 +67,11 @@
         animation: fadeInLeft 200ms;
       }
     }
-    .border_bottom {
-      background-color: var(--ds-border, #091e4224);
-      border: 0;
-      height: 1px;
-      margin: 0 3px;
-      padding: 0;
-      // width: 100%;
-      grid-column: 1/-1;
-    }
   }
   .main-menu {
     padding: 12px 12px 8px 12px;
     .btn {
+      
       color: var(--ds-text, #172b4d);
       font-weight: 400;
       width: 100%;
@@ -72,9 +84,26 @@
       border-radius: 8px;
       font-size: 14px;
       display: flex;
-      span{
+      &:has(.icon-activity){
+        margin-bottom: 10px;
+
+      }
+      &:has(.icon-remove){
+        margin-top: 10px;
+      }
+      .trello-icon {
         font-size: 20px;
         padding-right: 10px;
+      }
+      .desc {
+        display: flex;
+        flex-direction: column;
+        span {
+          font-size: 12px;
+          font-weight: 400;
+          line-height: 20px;
+          color: var(--ds-text-subtle, #44546f);
+        }
       }
       &:hover {
         background-color: var(
@@ -85,12 +114,13 @@
       }
     }
   }
-  .activities{
+  .navigation {
     padding: 12px 12px 8px 12px;
     overflow-y: auto;
     height: calc(100% - 56px);
     -webkit-overflow-scrolling: touch;
-    scrollbar-color: var(--ds-background-neutral-hovered, #091e4224) var(--ds-background-neutral, #091e420f);
+    scrollbar-color: var(--ds-background-neutral-hovered, #091e4224)
+      var(--ds-background-neutral, #091e420f);
     scrollbar-width: thin;
   }
 }
