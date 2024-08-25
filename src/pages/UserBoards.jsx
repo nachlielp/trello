@@ -70,6 +70,7 @@ export function UserBoards() {
           <article className="section-content">
             {boards
               .sort((a, b) => b.viewedAt - a.viewedAt)
+              .filter((b) => !b.closed)
               .slice(0, 3)
               .map((board) => (
                 <BoardTab
@@ -86,6 +87,7 @@ export function UserBoards() {
           <article className="section-content workspace-boards">
             {boards
               .sort((a, b) => b.apdatedAt - a.apdatedAt) // Sort boards by apdatedAt in descending order
+              .filter((b) => !b.closed)
               .map((board) => (
                 <BoardTab
                   key={board.id}
