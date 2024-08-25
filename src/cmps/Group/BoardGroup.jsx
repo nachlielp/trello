@@ -24,15 +24,8 @@ export function BoardGroup({
   const [sortedTasks, setSortedTasks] = useState([]);
   const [footerRef, isAddTaskOpen, setIsAddTaskOpen] = useClickOutside(false);
   const groupRef = useRef();
-  console.log(
-    "BoardGroup: ",
-    group.tasks.map((t) => ({ name: t.name, pos: t.pos }))
-  );
-  const taskPositions = group.tasks?.map((task) => task.pos).join(",") || "";
-  console.log(
-    "taskPositions: ",
-    group.tasks?.map((task) => task.name).join(",") || ""
-  );
+  const scrollRef = useRef();
+
   useEffect(() => {
     const filteredTasks = group.tasks?.filter((task) => !task.closed) || [];
     const updatedTaskIds = filteredTasks.map((task) => task.id);
