@@ -390,10 +390,10 @@ export async function sortGroup(boardId, groupId, sortBy, sortOrder) {
   if (sortOrder === "desc") {
     newGroup.tasks.reverse();
   }
-  const STARTING_POS = 87654;
   newGroup.tasks.forEach((task, index) => {
-    task.pos = STARTING_POS * (1 + index);
+    task.pos = index;
   });
+  newGroup.updatedAt = new Date().toISOString();
   const newBoard = {
     ...board,
     groups: board.groups.map((g) =>
