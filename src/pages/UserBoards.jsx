@@ -5,8 +5,10 @@ import { ReactSVG } from "react-svg";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AddBoardPopover } from "../cmps/Workspace/AddBoardPopover";
+import { createBoard } from "../store/workspace.actions";
+import { addBoardToUser, editUser } from "../store/user.actions";
 
-export function UserBoards({ starClick, onAddBoard }) {
+export function UserBoards() {
   const user = useSelector((state) => state.userModule.user);
   const boards = useSelector((state) => state.workspaceModule.boards);
   const params = useParams();
@@ -16,6 +18,20 @@ export function UserBoards({ starClick, onAddBoard }) {
       navigate(`/u/${user.username}/boards`);
     }
   }, [user, params]);
+
+  function onStarClick(boardId) {
+    const isStarred = user.starredBoardIds.includes(boardId);
+    const starredBoardIds = isStarred
+      ? user.starredBoardIds.filter((id) => id !== boardId)
+      : [...user.starredBoardIds, boardId];
+    editUser({ ...user, starredBoardIds });
+  }
+
+  async function onAddBoard(board) {
+    const boardId = await createBoard(board);
+    await addBoardToUser(boardId);
+    navigate(`/b/${boardId}`);
+  }
 
   if (!user) return null;
 
@@ -38,7 +54,7 @@ export function UserBoards({ starClick, onAddBoard }) {
                   key={board.id}
                   board={board}
                   starredBoardIds={user.starredBoardIds}
-                  starClick={starClick}
+                  starClick={onStarClick}
                 />
               ))}
           </article>
@@ -60,7 +76,7 @@ export function UserBoards({ starClick, onAddBoard }) {
                   key={board.id}
                   board={board}
                   starredBoardIds={user.starredBoardIds}
-                  starClick={starClick}
+                  starClick={onStarClick}
                 />
               ))}
           </article>
@@ -75,7 +91,7 @@ export function UserBoards({ starClick, onAddBoard }) {
                   key={board.id}
                   board={board}
                   starredBoardIds={user.starredBoardIds}
-                  starClick={starClick}
+                  starClick={onStarClick}
                 />
               ))}
             <AddBoardPopover

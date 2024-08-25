@@ -87,11 +87,7 @@ export function WorkspaceIndex() {
     //TODO login (eugene)
     const user = await login();
     if (!user) {
-      navigate("/");
-    } else {
-      if (JSON.stringify(params) === "{}") {
-        navigate(`/u/${user.username}/boards`);
-      }
+      navigate("/login");
     }
   }
 

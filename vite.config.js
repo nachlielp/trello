@@ -10,7 +10,7 @@ export default defineConfig({
   },
   server: {
     host: true,
-    open: true,
+    open: "/home",
   },
   base: "./",
   publicPath: "/assets/", // Add this line to specify the public path for your assets
