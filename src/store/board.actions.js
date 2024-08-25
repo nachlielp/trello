@@ -152,7 +152,6 @@ export async function addTask(task, user, group, tasksToSkip) {
       activities: [...board?.activities, newActivity],
       updatedAt: new Date().getTime(),
     };
-    console.log("newBoard", newBoard);
     await boardService.save(newBoard);
     store.dispatch({ type: SET_BOARD, board: newBoard });
     return newTask;
