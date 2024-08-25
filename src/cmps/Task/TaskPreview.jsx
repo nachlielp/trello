@@ -89,7 +89,9 @@ export function TaskPreview({ task, editTask, labelActions, isDragging }) {
       ref={taskRef}
       className={`task-preview custom-card ${covorCardClass} ${
         isOpenPreviewModal ? "open-preview-modal" : ""
-      } ${isDragging ? "dragging" : ""}`}
+      } ${isDragging ? "dragging" : ""} ${
+        isHovered && !isOpenPreviewModal ? "hovered" : ""
+      }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{ ...taskColorCoverStyle, ...taskBackgroundCoverImageStyle }}
@@ -104,6 +106,7 @@ export function TaskPreview({ task, editTask, labelActions, isDragging }) {
         taskLabels={taskLabels}
         taskWidth={taskWidth}
         labelActions={labelActions}
+        closePreviewModal={onOpenPreviewModal}
       />
       {coverSize === "normal" && taskCover.color && (
         <div

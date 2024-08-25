@@ -126,6 +126,7 @@ export function boardReducer(state = initialState, action) {
                   tasks: group.tasks.map((t) =>
                     t.id === action.task.id ? action.task : t
                   ),
+                  updatedAt: new Date().toISOString(),
                 }
               : group
           ),
