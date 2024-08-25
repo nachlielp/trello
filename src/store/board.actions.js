@@ -534,7 +534,7 @@ export async function dragGroup(dragGroupEvent, board) {
   return newBoard;
 }
 
-export async function moveTask(moveTaskEvent, board) {
+export async function moveTask(moveTaskEvent, board, user) {
   const {
     sourceGroupId,
     destinationGroupId,
@@ -617,10 +617,22 @@ export async function moveTask(moveTaskEvent, board) {
       return g;
     });
   }
+  const moveActivity = utilService.createActivity(
+    {
+      type: "movedTask",
+      targetId: task.id,
+      targetName: task.name,
+      from: sourceGroup.name,
+      to: board.groups.find((g) => g.id === destinationGroupId).name,
+    },
+    user
+  );
 
-  await boardService.save(newBoard);
+  newBoard.activities.push(moveActivity);
+  console.log("newBoard", newBoard);
   store.dispatch({
     type: SET_BOARD,
     board: { ...newBoard, updatedAt: new Date().toISOString() },
   });
+  await boardService.save(newBoard);
 }

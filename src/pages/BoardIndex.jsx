@@ -127,9 +127,11 @@ export function BoardIndex() {
     ?.filter((l) => !l.closed)
     .sort((a, b) => a.pos - b.pos);
 
-  function onDragStart() {}
+  function onDragStart(result) {
+    console.log("onDragStart", result);
+  }
 
-  function onDragUpdate() {}
+  function onDragUpdate(result) {}
 
   async function onDragEnd(result) {
     const { destination, source, draggableId, type } = result;
@@ -160,7 +162,7 @@ export function BoardIndex() {
         sourceIndex: source.index,
         destinationIndex: destination.index,
       };
-      await moveTask(dragTaskEvent, board);
+      await moveTask(dragTaskEvent, board, user);
     }
   }
 

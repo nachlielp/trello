@@ -3,11 +3,10 @@ import { Popover } from "antd";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { CustomSelect } from "../../CustomCpms/CustomSelect";
-import { moveCard } from "../../../store/workspace.actions";
+import { moveTaskBetweenBoards } from "../../../store/workspace.actions";
 import { useNavigate } from "react-router";
-
+import { moveTask } from "../../../store/board.actions";
 export function MoveCardPopover({ anchorEl, task, onUpdateTask }) {
-  //selectors
   const boards = useSelector((state) => state.workspaceModule.boards);
   const user = useSelector((state) => state.userModule.user);
 
@@ -16,6 +15,7 @@ export function MoveCardPopover({ anchorEl, task, onUpdateTask }) {
       .filter((b) => !b.closed)
       .find((b) => b.id === task?.idBoard)
   );
+
   const group = useSelector((state) =>
     state.workspaceModule.boards
       ?.find((b) => b.id === task?.idBoard)
@@ -24,7 +24,6 @@ export function MoveCardPopover({ anchorEl, task, onUpdateTask }) {
       )
   );
 
-  // states
   const [isOpen, setIsOpen] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
   const [selectedBoardId, setSelectedBoardId] = useState(board?.id);
@@ -149,17 +148,31 @@ export function MoveCardPopover({ anchorEl, task, onUpdateTask }) {
   }
 
   async function onMoveTask() {
-    let newPosDetails = {
-      targetBoardId: selectedBoardId,
-      targetGroupId: selectedGroupId,
-      targetPos: selectedPosition,
-      task,
+    setIsOpen(false);
+
+    if (selectedBoardId === task.idBoard) {
+      const moveTaskEvent = {
+        boardId: board.id,
+        sourceGroupId: task.idGroup,
+        destinationGroupId: selectedGroupId,
+        taskId: task.id,
+        sourceIndex: task.pos,
+        destinationIndex: selectedPosition,
+      };
+      await moveTask(moveTaskEvent, board, user);
+      return;
+    }
+    const moveTaskEvent = {
+      taskId: task.id,
+      sourceBoardId: task.idBoard,
+      sourceGroupId: task.idGroup,
+      destinationBoardId: selectedBoardId,
+      destinationGroupId: selectedGroupId,
+      destinationIndex: selectedPosition,
       user,
     };
 
-    setIsOpen(false);
-
-    await moveCard(newPosDetails);
+    await moveTaskBetweenBoards(moveTaskEvent);
 
     if (selectedBoardId !== task.idBoard) {
       navigate(`/b/${task.idBoard}`);
