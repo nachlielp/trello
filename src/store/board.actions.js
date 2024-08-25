@@ -629,7 +629,6 @@ export async function moveTask(moveTaskEvent, board, user) {
   );
 
   newBoard.activities.push(moveActivity);
-  console.log("newBoard", newBoard);
   store.dispatch({
     type: SET_BOARD,
     board: { ...newBoard, updatedAt: new Date().toISOString() },

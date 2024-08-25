@@ -19,12 +19,12 @@ export function BoardGroup({
   archiveAllCards,
   sortGroup,
   labelActions,
+  isDraggingOverId,
 }) {
   const [newTasksAboveInput, setNewTasksAboveInput] = useState([]);
   const [sortedTasks, setSortedTasks] = useState([]);
   const [footerRef, isAddTaskOpen, setIsAddTaskOpen] = useClickOutside(false);
   const groupRef = useRef();
-  const scrollRef = useRef();
 
   useEffect(() => {
     const filteredTasks = group.tasks?.filter((task) => !task.closed) || [];
@@ -81,7 +81,7 @@ export function BoardGroup({
                   <main
                     className={`board-group-main ${
                       snapshot.isDraggingOver ? "dragging-over" : ""
-                    }`}
+                    } `}
                     ref={droppableProvided.innerRef}
                     {...droppableProvided.droppableProps}
                   >
@@ -134,7 +134,8 @@ export function BoardGroup({
                           )}
                         </Draggable>
                       ))}
-                    {droppableProvided.placeholder}
+                    {isDraggingOverId === group.id &&
+                      droppableProvided.placeholder}
                   </main>
                 )}
               </Droppable>

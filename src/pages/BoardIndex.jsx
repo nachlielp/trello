@@ -31,6 +31,7 @@ import { background } from "@cloudinary/url-gen/qualifiers/focusOn";
 
 export function BoardIndex() {
   const [selectedTaskId, setSelectedTaskId] = useState(null);
+  const [isDraggingOverId, setIsDraggingOverId] = useState(null);
   const board = useSelector((state) => state.boardModule.board);
   const user = useSelector((state) => state.userModule.user);
   const navigate = useNavigate();
@@ -128,12 +129,17 @@ export function BoardIndex() {
     .sort((a, b) => a.pos - b.pos);
 
   function onDragStart(result) {
-    console.log("onDragStart", result);
+    setIsDraggingOverId(null);
   }
 
-  function onDragUpdate(result) {}
+  function onDragUpdate(result) {
+    if (result?.destination?.droppableId !== "board") {
+      setIsDraggingOverId(result?.destination?.droppableId);
+    }
+  }
 
   async function onDragEnd(result) {
+    setIsDraggingOverId(null);
     const { destination, source, draggableId, type } = result;
     if (!destination) {
       return;
@@ -215,6 +221,7 @@ export function BoardIndex() {
                       archiveAllCards={archiveAllCards}
                       sortGroup={onSortGroup}
                       labelActions={onLabelAction}
+                      isDraggingOverId={isDraggingOverId}
                     />
                   ))}
                 {provided.placeholder}
