@@ -567,7 +567,6 @@ export async function moveTask(moveTaskEvent, board, user) {
   };
 
   if (sourceGroupId === destinationGroupId) {
-    console.log("same group");
     newBoard.groups = newBoard.groups.map((g) => {
       if (g.id === sourceGroupId) {
         let newTasks = g.tasks.filter((t) => t.id !== taskId);

@@ -31,7 +31,6 @@ export function AddGroupBtn({ addGroup }) {
         },
         user
       );
-      console.log(newActivity)
       await updateBoard({
         ...board,
         activities: [...board?.activities, newActivity],

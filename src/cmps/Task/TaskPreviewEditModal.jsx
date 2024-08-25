@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { Modal, Input } from "antd";
 import editSvg from "../../assets/svgs/edit.svg";
+import cardIcon from "../../../public/img/taskActionBtns/cardIcon.svg";
 import { TaskPreviewBadges } from "./TaskPreviewBadges";
 import { TaskPreviewLabel } from "./TaskPreviewLabel";
 import { utilService } from "../../services/util.service";
@@ -17,7 +18,7 @@ import { ManageCoverPopover } from "./ManageTaskPopovers/ManageCoverPopover";
 import { useSelector } from "react-redux";
 import { MoveCardPopover } from "./ManageTaskPopovers/MoveCardPopover";
 import { ManageDatesPopover } from "./ManageTaskPopovers/ManageDatesPopover";
-
+import { useNavigate } from "react-router-dom";
 const { TextArea } = Input;
 
 export function TaskPreviewEditModal({
@@ -28,6 +29,7 @@ export function TaskPreviewEditModal({
   openPreviewModal,
   taskWidth,
   labelActions,
+  closePreviewModal,
 }) {
   const boardLabels = useSelector((state) => state.boardModule.board.labels);
   const [taskLabels, setTaskLabels] = useState([]);
@@ -36,6 +38,7 @@ export function TaskPreviewEditModal({
   const [taskName, setTaskName] = useState(task?.name || "");
   const [showEditModalBtn, setShowEditModalBtn] = useState(false);
   const containerRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setShowEditModalBtn(isHovered);
@@ -51,6 +54,10 @@ export function TaskPreviewEditModal({
       );
     setTaskLabels(labels || []);
   }, [task?.idLabels, boardLabels]);
+
+  useEffect(() => {
+    setTaskName(task?.name || "");
+  }, [task?.name]);
 
   function showModal(e) {
     e.stopPropagation();
@@ -75,8 +82,23 @@ export function TaskPreviewEditModal({
     openPreviewModal(false);
   }
 
+  function handleOpenCard() {
+    closePreviewModal();
+    navigate(`/c/${task?.id}`, { replace: true });
+  }
   const modalActionButtons = [
     // { label: 'Open card', icon: cardIcon, onClick: () => console.log('Add to X'), cover: false },
+    {
+      cover: false,
+      popover: (
+        <SvgButton
+          src={cardIcon}
+          className="floating-button"
+          label="Open card"
+          onClick={handleOpenCard}
+        />
+      ),
+    },
     {
       cover: false,
       popover: (
