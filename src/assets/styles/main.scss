@@ -56,9 +56,10 @@
 @import "cmps/UserMsg";
 @import "cmps/Label";
 @import "cmps/ListFooter";
-@import "cmps/ProfilePopover.scss";
-@import "cmps/BoardHeader/BoardMenu/BoardMenu.scss";
-@import "cmps/ActivityMsg.scss";
+@import "cmps/ProfilePopover";
+@import "cmps/BoardHeader/BoardMenu/BoardMenu";
+@import "cmps/BoardHeader/BoardMenu/BoardDescription";
+@import "cmps/ActivityMsg";
 
 //Group
 @import "cmps/Group/BoardGroup";
