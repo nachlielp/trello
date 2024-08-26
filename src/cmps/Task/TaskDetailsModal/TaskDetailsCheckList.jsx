@@ -32,6 +32,7 @@ export function TaskDetailsCheckList({
   const [isChangingTitle, setIsChangingTitle] = useState(false);
   const board = useSelector((state) => state.boardModule.board);
   const user = useSelector((state) => state.userModule.user);
+  const [inputIsOpen, setInputIsOpen] = useState(false);
 
   useEffect(() => {
     if (hideChecked) {
@@ -203,10 +204,19 @@ export function TaskDetailsCheckList({
               <NameInput
                 value={item.label}
                 expandInputWidth={false}
-                className={`checkbox-label ${item.isChecked ? "checked" : ""}`}
+                className={`checkbox-label ${item.isChecked ? "checked" : ""} ${
+                  inputIsOpen ? "open" : ""
+                }`}
                 minRows={2}
                 withButtons={true}
-                inputStatus={(s) => (s ? setOpenedInputId(item.id) : null)}
+                inputStatus={(s) => {
+                  if (s) {
+                    setOpenedInputId(item.id);
+                    setInputIsOpen(true);
+                  } else {
+                    setInputIsOpen(false);
+                  }
+                }}
                 onCloseInput={() => setOpenedInputId(null)}
                 inputIsOpen={openedInputId === item.id}
                 onSubmit={(label) => onChangeItem(item, { label })}
@@ -224,7 +234,7 @@ export function TaskDetailsCheckList({
                   />,
                 ]}
               />
-              {item.id !== openedInputId && (
+              {!inputIsOpen && (
                 <MoreActionsItemPopover
                   key={item.id}
                   anchorEl={
@@ -255,6 +265,7 @@ export function TaskDetailsCheckList({
               className="checkbox-label"
               expandInputWidth={false}
               withButtons={true}
+              cancelBtnName={"Cancel"}
               inputStatus={(e) => setOnAdd(e)}
               minRows={2}
               onPressEnter={(e) => onAddNewItem(e)}
