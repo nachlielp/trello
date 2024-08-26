@@ -18,6 +18,7 @@ import {
   deleteLabel,
   updateBoard,
   moveTask,
+  loadBoard,
 } from "../store/board.actions";
 import { editUser } from "../store/user.actions";
 
@@ -42,6 +43,22 @@ export function BoardIndex() {
     async function load() {
       if (params.cardId) {
         setSelectedTaskId(params.cardId);
+      }
+
+      if (params.link) {
+        if (
+          board.invLink !== "" &&
+          params.link === board.invLink &&
+          !board.members.some((m) => m.id === user.id)
+        ) {
+          updateBoard({
+            ...board,
+            members: [
+              ...board.members,
+              { id: user.id, permissionStatus: "member" },
+            ],
+          });
+        }
       }
     }
     load();
@@ -78,7 +95,6 @@ export function BoardIndex() {
   }
 
   async function onEditTask(task) {
-    const res = await editTask(task);
     if (task.closed) {
       const newActivity = utilService.createActivity(
         {
@@ -88,12 +104,21 @@ export function BoardIndex() {
         },
         user
       );
-      updateBoard({
+      await updateBoard({
         ...board,
+        groups: board.groups.map((g) =>
+          g.id === task.idGroup
+            ? { ...g, tasks: g.tasks.map((t) => (t.id === task.id ? task : t)) }
+            : g
+        ),
         activities: [...board?.activities, newActivity],
       });
-      navigate(`/b/${board.id}`, { replace: true });
+      setSelectedTaskId(null);
+      navigate(`/b/${task.idBoard}`);
+    } else {
+      const res = await editTask(task);
     }
+    loadBoard(board.id)
   }
 
   async function onCopyGroup(group) {

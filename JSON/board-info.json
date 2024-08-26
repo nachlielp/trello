@@ -1,6 +1,7 @@
 [
   {
     "viewedAt": 1720234120009,
+    "invLink": "",
     "id": "64f721f169b14894fac36cdf",
     "name": "Trello Build",
     "apdatedAt": 1720234120009,
@@ -719,6 +720,7 @@
     "id": "66756a34def1a6d3b8cd179d",
     "apdatedAt": 1721051204720,
     "viewedAt": 1721050978722,
+    "invLink": "",
     "checkListTaskIds": [],
     "activities": [
       {

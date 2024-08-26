@@ -579,12 +579,12 @@ async function createNewBoard(board) {
   const user = await userService.getById(import.meta.env.VITE_TRELLO_USER_ID);
   const member = {
     id: user.id,
-    fullName: user.fullName,
-    username: user.username,
     permissionStatus: "admin",
   };
   return {
     members: [member],
+    invLink: "",
+    checkListTaskIds: [],
     name: board.name,
     groups: [],
     desc: "",

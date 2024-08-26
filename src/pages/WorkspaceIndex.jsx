@@ -24,6 +24,7 @@ import { ErrorPage } from "./ErrorPage";
 
 export function WorkspaceIndex() {
   const user = useSelector((state) => state.userModule.user);
+
   const boardsInfo = useSelector((state) => state.workspaceModule.boards)
     ?.filter((b) => user && b?.members?.some((m) => m.id === user.id))
     .filter((b) => !b.closed)
@@ -39,6 +40,7 @@ export function WorkspaceIndex() {
 
   const [selectedBoardId, setSelectedBoardId] = useState(null);
   const [starredBoardIds, setStarredBoardIds] = useState([]);
+  const [wrongInviteLink, setWrongInviteLink] = useState(false);
   const [isUserBoards, setIsUserBoards] = useState(false);
   const [darkMode, setDarkMode] = useState();
   const [openBoardMenu, setOpenBoardMenu] = useState(false);
@@ -84,7 +86,6 @@ export function WorkspaceIndex() {
   }, [params, user, isUserBoards]);
 
   async function getUser() {
-    //TODO login (eugene)
     const user = await login();
     if (!user) {
       navigate("/login");
@@ -94,7 +95,13 @@ export function WorkspaceIndex() {
   useEffect(() => {
     setStarredBoardIds(user?.starredBoardIds);
   }, [user]);
-
+  useEffect(() => {
+    if (params.link && params.link !== board.invLink) {
+      setWrongInviteLink(true);
+    } else {
+      setWrongInviteLink(false);
+    }
+  }, [params, board]);
   useEffect(() => {
     // Update localStorage and <html> class based on darkMode state
     if (darkMode === "dark") {
@@ -176,42 +183,46 @@ export function WorkspaceIndex() {
       }}
     >
       <WorkspaceHeader
-        bgColor={(selectedBoardId && boardBgPrefs?.backgroundColor) || ""}
+        bgColor={(!wrongInviteLink&&selectedBoardId && boardBgPrefs?.backgroundColor) || ""}
         userName={user?.username}
         setDarkMode={setDarkMode}
         darkMode={darkMode}
       />
-      {user && starredBoardIds && selectedBoardId ? (
-        <section className="workspace-content">
-          {board.id ? (
-            <>
-              <WorkspaceMenu
-                colorTheme={boardBgPrefs?.backgroundBrightness}
-                boardsInfo={boardsInfo}
-                selectedBoardId={selectedBoardId}
-                starredBoardIds={starredBoardIds}
-                onStarClick={onStarClick}
-                onAddBoard={onAddBoard}
-                closeBoard={onCloseBoard}
-                leaveBoard={onLeaveBoard}
-              />
-              <Outlet context={contextValues} />
-            </>
+      {!wrongInviteLink ? (
+        <>
+          {user && starredBoardIds && selectedBoardId ? (
+            <section className="workspace-content">
+              {board.id ? (
+                <>
+                  <WorkspaceMenu
+                    colorTheme={boardBgPrefs?.backgroundBrightness}
+                    boardsInfo={boardsInfo}
+                    selectedBoardId={selectedBoardId}
+                    starredBoardIds={starredBoardIds}
+                    onStarClick={onStarClick}
+                    onAddBoard={onAddBoard}
+                    closeBoard={onCloseBoard}
+                    leaveBoard={onLeaveBoard}
+                  />
+                  <Outlet context={contextValues} />
+                </>
+              ) : (
+                <ErrorPage wrongUrl={true} />
+              )}
+              {openBoardMenu && (
+                <BoardMenu
+                  setOpenBoarMenu={setOpenBoardMenu}
+                  setShowBtn={setShowBtn}
+                />
+              )}
+            </section>
           ) : (
-            <ErrorPage wrongUrl={true}/>
+            <Outlet />
           )}
-          {openBoardMenu && (
-            <BoardMenu
-              setOpenBoarMenu={setOpenBoardMenu}
-              setShowBtn={setShowBtn}
-            />
-          )}
-        </section>
+        </>
       ) : (
-        <Outlet />
+        <ErrorPage wrongUrl={true} />
       )}
-
-      {!user && <div>Loading...</div>}
     </section>
   );
 }
