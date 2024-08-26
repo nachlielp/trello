@@ -143,7 +143,6 @@ export function TaskPreviewEditModal({
               src={coverIcon}
               className="floating-button"
               label="Change cover"
-              onClick={(e) => e.stopPropagation()}
             />
           }
           editTask={editTask}
