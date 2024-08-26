@@ -76,6 +76,7 @@ export function CustomSelect({
       onOpenChange={disabled ? null : setIsOpen}
       arrow={false}
       content={content}
+      zIndex={15000}
     >
       <div
         className="custom-select-item"
