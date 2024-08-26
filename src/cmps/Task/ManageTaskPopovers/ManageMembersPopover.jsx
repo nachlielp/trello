@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { MemberOption } from "./MemberOption";
 import { ManageTaskPopoverHeader } from "./ManageTaskPopoverHeader";
+import Popup from "@atlaskit/popup";
 
 export function ManageMembersPopover({ anchorEl, editTask, task }) {
   const members = useSelector((state) => state.boardModule.board.members);
@@ -40,61 +41,77 @@ export function ManageMembersPopover({ anchorEl, editTask, task }) {
   function onClose() {
     setIsOpen(false);
   }
-  return (
-    <Popover
-      className=""
-      trigger="click"
-      placement="bottomLeft"
-      open={isOpen}
-      close={onClose}
-      onOpenChange={setIsOpen}
-      arrow={false}
-      content={
-        <section className="change-members-popover">
-          <ManageTaskPopoverHeader title="Add members" close={onClose} />
-          <article className="change-members-content">
-            <Input
-              placeholder="Search members"
-              className="members-search-input"
-              value={inputSearch}
-              onChange={(e) => setInputSearch(e.target.value)}
-            />
-            {selectedMembers.length > 0 && (
-              <article className="selected-task-members">
-                <h3 className="members-sub-title">Card members</h3>
-                {selectedMembers.map((member, index) => (
-                  <MemberOption
-                    key={index}
-                    task={task}
-                    member={member}
-                    isSelected={true}
-                    editTask={editTask}
-                  />
-                ))}
-              </article>
-            )}
-            {unselectedMembers.length > 0 && (
-              <article className="unselected-members-list">
-                <h3 className="members-sub-title">Board members</h3>
-                {unselectedMembers.map((member, index) => (
-                  <MemberOption
-                    key={index}
-                    task={task}
-                    member={member}
-                    isSelected={false}
-                    editTask={editTask}
-                  />
-                ))}
-              </article>
-            )}
-            {unselectedMembers.length === 0 && selectedMembers.length === 0 && (
-              <article className="no-members-found">No results</article>
-            )}
+
+  const content = (
+    <section className="change-members-popover">
+      <ManageTaskPopoverHeader title="Add members" close={onClose} />
+      <article className="change-members-content">
+        <Input
+          placeholder="Search members"
+          className="members-search-input"
+          value={inputSearch}
+          onChange={(e) => setInputSearch(e.target.value)}
+        />
+        {selectedMembers.length > 0 && (
+          <article className="selected-task-members">
+            <h3 className="members-sub-title">Card members</h3>
+            {selectedMembers.map((member, index) => (
+              <MemberOption
+                key={index}
+                task={task}
+                member={member}
+                isSelected={true}
+                editTask={editTask}
+              />
+            ))}
           </article>
-        </section>
-      }
-    >
-      {anchorEl}
-    </Popover>
+        )}
+        {unselectedMembers.length > 0 && (
+          <article className="unselected-members-list">
+            <h3 className="members-sub-title">Board members</h3>
+            {unselectedMembers.map((member, index) => (
+              <MemberOption
+                key={index}
+                task={task}
+                member={member}
+                isSelected={false}
+                editTask={editTask}
+              />
+            ))}
+          </article>
+        )}
+        {unselectedMembers.length === 0 && selectedMembers.length === 0 && (
+          <article className="no-members-found">No results</article>
+        )}
+      </article>
+    </section>
+  );
+  const onTriggerClick = () => {
+    setIsOpen((prev) => !prev);
+  };
+
+  const trigger = (triggerProps) => {
+    return (
+      <label
+        {...triggerProps}
+        appearance="primary"
+        isSelected={isOpen}
+        onClick={onTriggerClick}
+      >
+        {anchorEl}
+      </label>
+    );
+  };
+
+  return (
+    <Popup
+      isOpen={isOpen}
+      onClose={() => setIsOpen(false)}
+      placement="bottom-start"
+      fallbackPlacements={["top-start", "auto"]}
+      content={() => content}
+      trigger={trigger}
+      zIndex={10000}
+    />
   );
 }

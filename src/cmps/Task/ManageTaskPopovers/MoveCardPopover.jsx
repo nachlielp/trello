@@ -6,6 +6,8 @@ import { CustomSelect } from "../../CustomCpms/CustomSelect";
 import { moveTaskBetweenBoards } from "../../../store/workspace.actions";
 import { useNavigate } from "react-router";
 import { moveTask } from "../../../store/board.actions";
+import Popup from "@atlaskit/popup";
+
 export function MoveCardPopover({ anchorEl, task, onUpdateTask }) {
   const boards = useSelector((state) => state.workspaceModule.boards);
   const user = useSelector((state) => state.userModule.user);
@@ -182,76 +184,86 @@ export function MoveCardPopover({ anchorEl, task, onUpdateTask }) {
     }
   }
 
+  const content = (
+    <div className="move-card-popover" onClick={(e) => e.stopPropagation()}>
+      <header>
+        <span>Move Card</span>
+        <button onClick={() => setIsOpen(!isOpen)}>
+          <CloseOutlined />
+        </button>
+      </header>
+      <div className="main">
+        <p>Select destination</p>
+        <section className="board-select">
+          <p className="move-card-popover-title">Board</p>
+          <CustomSelect
+            options={boards
+              .filter((b) => !b.closed)
+              .sort((a, b) => {
+                return a.name?.localeCompare(b.name);
+              })
+              .map((b) => ({
+                name: b.name,
+                id: b.id,
+                isCurrent: board?.id === b.id,
+              }))}
+            disabled={boards.length < 2}
+            onSelect={onSelectBoard}
+            value={selectedBoardId}
+          />
+        </section>
+        <section className="list-select">
+          <span>
+            <p className="move-card-popover-title">List</p>
+            <CustomSelect
+              options={boardGroupOptions}
+              onSelect={onSelectGroup}
+              value={selectedGroupId}
+              disabled={isDisabled || boardGroupOptions?.length < 2}
+            />
+          </span>
+          <span>
+            <p className="move-card-popover-title">Position</p>
+            <CustomSelect
+              options={generatePositionOptions(selectedGroupTaskPositions)}
+              value={selectedPosition}
+              onSelect={onSelectPosition}
+              disabled={isDisabled || selectedGroupTaskPositions?.length < 2}
+            />
+          </span>
+        </section>
+        <button className="move-btn" onClick={onMoveTask} disabled={isDisabled}>
+          Move
+        </button>
+      </div>
+    </div>
+  );
+  const onTriggerClick = () => {
+    setIsOpen((prev) => !prev);
+  };
+
+  const trigger = (triggerProps) => {
+    return (
+      <label
+        {...triggerProps}
+        appearance="primary"
+        isSelected={isOpen}
+        onClick={onTriggerClick}
+      >
+        {anchorEl}
+      </label>
+    );
+  };
+
   return (
-    <Popover
-      className="list-actions-menu-popover"
-      trigger="click"
-      placement="bottomLeft"
-      open={isOpen}
-      onOpenChange={setIsOpen}
-      arrow={false}
-      content={
-        <div className="move-card-popover" onClick={(e) => e.stopPropagation()}>
-          <header>
-            <span>Move Card</span>
-            <button onClick={() => setIsOpen(!isOpen)}>
-              <CloseOutlined />
-            </button>
-          </header>
-          <div className="main">
-            <p>Select destination</p>
-            <section className="board-select">
-              <p>Board</p>
-              <CustomSelect
-                options={boards
-                  .filter((b) => !b.closed)
-                  .sort((a, b) => {
-                    return a.name?.localeCompare(b.name);
-                  })
-                  .map((b) => ({
-                    name: b.name,
-                    id: b.id,
-                    isCurrent: board?.id === b.id,
-                  }))}
-                disabled={boards.length < 2}
-                onSelect={onSelectBoard}
-                value={selectedBoardId}
-              />
-            </section>
-            <section className="list-select">
-              <span>
-                <p>List</p>
-                <CustomSelect
-                  options={boardGroupOptions}
-                  onSelect={onSelectGroup}
-                  value={selectedGroupId}
-                  disabled={isDisabled || boardGroupOptions?.length < 2}
-                />
-              </span>
-              <span>
-                <p>Position</p>
-                <CustomSelect
-                  options={generatePositionOptions(selectedGroupTaskPositions)}
-                  value={selectedPosition}
-                  onSelect={onSelectPosition}
-                  disabled={
-                    isDisabled || selectedGroupTaskPositions?.length < 2
-                  }
-                />
-              </span>
-            </section>
-            <button
-              className="move-btn"
-              onClick={onMoveTask}
-              disabled={isDisabled}
-            >
-              Move
-            </button>
-          </div>
-        </div>
-      }
-    >
-      {anchorEl}
-    </Popover>
+    <Popup
+      isOpen={isOpen}
+      onClose={() => setIsOpen(false)}
+      placement="bottom-start"
+      fallbackPlacements={["top-start", "auto"]}
+      content={() => content}
+      trigger={trigger}
+      zIndex={10000}
+    />
   );
 }

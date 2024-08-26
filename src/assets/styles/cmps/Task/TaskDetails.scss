@@ -175,6 +175,37 @@
       }
     }
 
+    // .details-header-color-cover {
+    //   height: 116px;
+    //   width: calc(100% + 48px);
+    //   margin: -20px -20px 16px -24px;
+    //   border-radius: 8px 8px 0 0;
+    //   position: relative;
+
+    //   .cover-btn {
+    //     position: absolute;
+    //     background-color: transparent;
+    //     right: 12px;
+    //     bottom: 12px;
+    //     border-radius: 3px;
+    //     cursor: pointer;
+    //     border: none;
+    //     display: flex;
+    //     align-items: center;
+    //     justify-content: center;
+    //     padding: 4px 8px;
+
+    //     &:hover {
+    //       background-color: var(--ds-background-neutral-hovered, #091e4224);
+    //     }
+
+    //     .injected-svg {
+    //       width: 16px;
+    //       height: 16px;
+    //       margin: 4px 4px 0 0;
+    //     }
+    //   }
+    // }
     .details-header-color-cover {
       height: 116px;
       width: calc(100% + 48px);
@@ -182,31 +213,32 @@
       border-radius: 8px 8px 0 0;
       position: relative;
 
-      .cover-btn {
+      .details-header-cover-actions-wrapper {
         position: absolute;
-        background-color: transparent;
         right: 12px;
         bottom: 12px;
-        border-radius: 3px;
-        cursor: pointer;
-        border: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 4px 8px;
 
-        &:hover {
-          background-color: var(--ds-background-neutral-hovered, #091e4224);
-        }
+        .inner-cover-btn {
+          position: relative;
+          display: inline-block;
 
-        .injected-svg {
-          width: 16px;
-          height: 16px;
-          margin: 4px 4px 0 0;
+          .cover-btn {
+            background-color: transparent;
+            border-radius: 3px;
+            cursor: pointer;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 8px;
+
+            &:hover {
+              background-color: var(--ds-background-neutral-hovered, #091e4224);
+            }
+          }
         }
       }
     }
-
     .details-header {
       display: flex;
       color: var(--ds-text, #172b4d);

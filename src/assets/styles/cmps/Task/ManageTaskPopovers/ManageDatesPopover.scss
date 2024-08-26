@@ -215,6 +215,7 @@
         }
 
         .empty-date {
+          font-size: 14px;
           cursor: not-allowed;
           color: var(--ds-text-disabled, #091e424f);
           background-color: var(--ds-background-disabled, #091e4208);
@@ -254,6 +255,7 @@
     }
 
     .reminder-description {
+      font-size: 14px;
       margin: 8px 0 12px 0;
       color: var(--ds-text-subtle, #44546f);
     }

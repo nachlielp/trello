@@ -50,6 +50,24 @@ export function CustomSelect({
     setIsOpen(false);
   }
 
+  const content = !disabled && (
+    <div
+      className={`custom-select-options ${optionsClassName}`}
+      style={{ width: `${divRef.current?.clientWidth}px` }}
+    >
+      {filteredItems.map((item) => (
+        <button
+          key={item?.id}
+          onClick={() => onSelectOption(item)}
+          className={`option ${
+            selectedItem?.name === item?.name ? "selected" : ""
+          } ${item.isCurrent ? "current" : ""}`}
+        >
+          {item?.element || item?.name}
+        </button>
+      ))}
+    </div>
+  );
   return (
     <Popover
       trigger="click"
@@ -57,26 +75,7 @@ export function CustomSelect({
       open={isOpen}
       onOpenChange={disabled ? null : setIsOpen}
       arrow={false}
-      content={
-        !disabled && (
-          <div
-            className={`custom-select-options ${optionsClassName}`}
-            style={{ width: `${divRef.current?.clientWidth}px` }}
-          >
-            {filteredItems.map((item) => (
-              <button
-                key={item?.id}
-                onClick={() => onSelectOption(item)}
-                className={`option ${
-                  selectedItem?.name === item?.name ? "selected" : ""
-                } ${item.isCurrent ? "current" : ""}`}
-              >
-                {item?.element || item?.name}
-              </button>
-            ))}
-          </div>
-        )
-      }
+      content={content}
     >
       <div
         className="custom-select-item"

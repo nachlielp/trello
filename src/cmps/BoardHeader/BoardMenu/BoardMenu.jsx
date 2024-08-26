@@ -1,7 +1,5 @@
 import { CloseOutlined } from "@ant-design/icons";
-import { Popover } from "antd";
 import { useState } from "react";
-import { SvgButton } from "../../CustomCpms/SvgButton";
 import { BoardActivity } from "./BoardActivity";
 
 export function BoardMenu({ setOpenBoarMenu, setShowBtn }) {

@@ -83,7 +83,6 @@ export function TaskDetailsModal({
   if (!task) {
     return <></>;
   }
-
   const colorCoverHeader = (
     <section
       className={`details-header-color-cover`}
@@ -92,15 +91,46 @@ export function TaskDetailsModal({
           ?.bgColor,
       }}
     >
-      <ManageCoverPopover
-        anchorEl={
-          <SvgButton src={coverIcon} className="cover-btn" label="Cover" />
-        }
-        editTask={editTask}
-        task={task}
-      />
+      <article className={`details-header-cover-actions-wrapper`}>
+        <div style={{ position: "relative", display: "inline-block" }}>
+          <div className="inner-cover-btn">
+            <ManageCoverPopover
+              anchorEl={
+                <SvgButton
+                  src={coverIcon}
+                  className={`cover-btn ${task?.cover?.brightness}`}
+                  label="Cover"
+                />
+              }
+              editTask={editTask}
+              task={task}
+            />
+          </div>
+        </div>
+      </article>
     </section>
   );
+  // const colorCoverHeader = (
+  //   <section
+  //     className={`details-header-color-cover`}
+  //     style={{
+  //       backgroundColor: utilService.getColorHashByName(task.cover.color)
+  //         ?.bgColor,
+  //     }}
+  //   >
+  //     <article className={`details-header-cover-actions-wrapper`}>
+  //       <div style={{ position: "relative", display: "inline-block" }}>
+  //         <ManageCoverPopover
+  //           anchorEl={
+  //             <SvgButton src={coverIcon} className="cover-btn" label="Cover" />
+  //           }
+  //           editTask={editTask}
+  //           task={task}
+  //         />
+  //       </div>
+  //     </article>
+  //   </section>
+  // );
 
   const imgCoverHeader = (
     <section
@@ -113,17 +143,19 @@ export function TaskDetailsModal({
         <img src={task?.cover?.scaled[2].url} alt="task cover" />
       )}
       <article className={`details-header-cover-actions-wrapper`}>
-        <ManageCoverPopover
-          anchorEl={
-            <SvgButton
-              src={coverIcon}
-              className={`cover-btn ${task?.cover?.brightness}`}
-              label="Cover"
-            />
-          }
-          editTask={editTask}
-          task={task}
-        />
+        <div style={{ position: "relative", display: "inline-block" }}>
+          <ManageCoverPopover
+            anchorEl={
+              <SvgButton
+                src={coverIcon}
+                className={`cover-btn ${task?.cover?.brightness}`}
+                label="Cover"
+              />
+            }
+            editTask={editTask}
+            task={task}
+          />
+        </div>
       </article>
     </section>
   );

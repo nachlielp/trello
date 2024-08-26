@@ -7,7 +7,6 @@ import { SvgButton } from "../../CustomCpms/SvgButton";
 import { Tooltip } from "antd";
 import { CheckBox } from "../../CustomCpms/CheckBox";
 import Popup from "@atlaskit/popup";
-
 export function ManageLabelsPopover({
   anchorEl,
   editTask,
@@ -181,7 +180,7 @@ export function ManageLabelsPopover({
               }}
             >
               <span
-                className="label-color-name"
+                className="label-color-name manage-labels-color-name"
                 style={{
                   color:
                     utilService.getColorHashByName(editColor).lightFontColor,
@@ -253,7 +252,6 @@ export function ManageLabelsPopover({
       )}
     </section>
   );
-
   const onTriggerClick = () => {
     setIsOpen((prev) => !prev);
   };
@@ -282,20 +280,6 @@ export function ManageLabelsPopover({
       zIndex={10000}
     />
   );
-  // return (
-  //   <Popover
-  //     className="manage-labels-popover"
-  //     trigger="click"
-  //     placement={popoverPlacement}
-  //     open={isOpen}
-  //     close={() => {}}
-  //     onOpenChange={setIsOpen}
-  //     arrow={false}
-  //     content={content}
-  //   >
-  //     {anchorEl}
-  //   </Popover>
-  // );
 }
 
 function LabelsOption({ taskLabel, selectLabel, editColor }) {
@@ -330,7 +314,7 @@ function LabelsOption({ taskLabel, selectLabel, editColor }) {
           onMouseLeave={() => setHoveredLabelId(null)}
         >
           <span
-            className="label-color-name"
+            className="label-color-name manage-labels-color-name"
             style={{
               color: utilService.getColorHashByName(taskLabel.color)
                 .lightFontColor,

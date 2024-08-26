@@ -1,6 +1,15 @@
 .move-card-popover {
   width: 304px;
   background: var(--ds-surface-overlay, #fff);
+
+  .move-card-popover-title {
+    color: var(--ds-text, #172b4d);
+    font-size: 14px;
+    font-weight: 700;
+    padding: 0;
+    margin: 4px 0;
+    // line-height: 20px;
+  }
   > header {
     text-align: center;
     padding: 4px 8px;
@@ -38,7 +47,7 @@
   }
   .main {
     color: var(--ds-text, #172b4d);
-    padding: 12px 12px 12px 12px;
+    padding: 0 12px 12px 12px;
     > p {
       margin: 16px 0 8px 0;
       font-size: 12px;

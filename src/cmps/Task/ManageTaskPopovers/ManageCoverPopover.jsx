@@ -1,5 +1,5 @@
 import { Image, Tooltip } from "antd";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { ManageTaskPopoverHeader } from "../ManageTaskPopovers/ManageTaskPopoverHeader";
 import { utilService } from "../../../services/util.service";
 import { useSelector } from "react-redux";
@@ -10,6 +10,7 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
     (state) => state.boardModule.board.coverImgs
   );
   const [isOpen, setIsOpen] = useState(false);
+  const triggerRef = useRef(null);
 
   function onClose(e) {
     e.stopPropagation();
@@ -75,15 +76,6 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
   const isCover = task?.cover.color || task?.cover.scaled;
   const backgroundColor =
     utilService.getColorHashByName(task?.cover.color)?.bgColor || null;
-
-  function onOpenPopover(e) {
-    e.stopPropagation();
-    setIsOpen(true);
-  }
-
-  function onPopoverClick(e) {
-    e.stopPropagation();
-  }
 
   const content = (
     <section
@@ -205,14 +197,17 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
 
   const trigger = (triggerProps) => {
     return (
-      <label
+      <div
+        ref={triggerRef}
         {...triggerProps}
-        appearance="primary"
-        isSelected={isOpen}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={(e) => {
+          e.stopPropagation();
+          setIsOpen(!isOpen);
+        }}
+        style={{ display: "inline-block" }} // Ensure inline positioning
       >
         {anchorEl}
-      </label>
+      </div>
     );
   };
 
@@ -224,7 +219,8 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
       fallbackPlacements={["top-start", "auto"]}
       content={() => content}
       trigger={trigger}
-      zIndex={1000}
+      zIndex={10000}
+      triggerRef={triggerRef}
     />
   );
 }

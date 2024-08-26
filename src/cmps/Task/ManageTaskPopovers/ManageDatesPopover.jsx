@@ -59,27 +59,6 @@ export function ManageDatesPopover({ anchorEl, task, editTask, editBoard }) {
       zIndex={10000}
     />
   );
-  // return (
-  //   <Popover
-  //     open={isOpen}
-  //     onOpenChange={setIsOpen}
-  //     trigger="click"
-  //     anchorEl={anchorEl}
-  //     anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-  //     transformOrigin={{ vertical: "top", horizontal: "left" }}
-  //     content={
-  // <ManageDatesPopoverContent
-  //   editBoard={editBoard}
-  //   task={task}
-  //   editTask={editTask}
-  //   onClose={onClose}
-  // />
-  //     }
-  //     placement="right"
-  //   >
-  //     {anchorEl}
-  //   </Popover>
-  // );
 }
 
 function ManageDatesPopoverContent({ task, editTask, onClose, editBoard }) {

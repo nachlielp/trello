@@ -113,7 +113,6 @@ export function TaskPreviewEditModal({
           editTask={editTask}
           task={task}
           labelActions={labelActions}
-          onClick={(e) => e.stopPropagation()}
         />
       ),
     },
@@ -126,7 +125,6 @@ export function TaskPreviewEditModal({
               src={userIcon}
               className="floating-button"
               label="Change members"
-              onClick={(e) => e.stopPropagation()}
             />
           }
           editTask={editTask}
@@ -179,7 +177,6 @@ export function TaskPreviewEditModal({
               src={moveIcon}
               label="Move"
               className="floating-button"
-              onClick={(e) => e.stopPropagation()}
             />
           }
         />
