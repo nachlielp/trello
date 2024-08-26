@@ -1,4 +1,4 @@
-import { Popover, Calendar, Card, Input } from "antd";
+import { Calendar, Input } from "antd";
 import { ManageTaskPopoverHeader } from "./ManageTaskPopoverHeader";
 import dayjs from "dayjs";
 import { useState, useRef, useEffect } from "react";
@@ -8,6 +8,7 @@ import { utilService } from "../../../services/util.service";
 import { useSelector } from "react-redux";
 import { updateBoard } from "../../../store/board.actions";
 import { CheckBox } from "../../CustomCpms/CheckBox";
+import Popup from "@atlaskit/popup";
 
 const customLocale = {
   lang: {
@@ -23,27 +24,62 @@ export function ManageDatesPopover({ anchorEl, task, editTask, editBoard }) {
     setIsOpen(false);
   }
 
+  const onTriggerClick = () => {
+    setIsOpen((prev) => !prev);
+  };
+
+  const trigger = (triggerProps) => {
+    return (
+      <label
+        {...triggerProps}
+        appearance="primary"
+        isSelected={isOpen}
+        onClick={onTriggerClick}
+      >
+        {anchorEl}
+      </label>
+    );
+  };
+
   return (
-    <Popover
-      open={isOpen}
-      onOpenChange={setIsOpen}
-      trigger="click"
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-      transformOrigin={{ vertical: "top", horizontal: "left" }}
-      content={
+    <Popup
+      isOpen={isOpen}
+      onClose={() => setIsOpen(false)}
+      placement="bottom-start"
+      fallbackPlacements={["top-start", "auto"]}
+      content={() => (
         <ManageDatesPopoverContent
           editBoard={editBoard}
           task={task}
           editTask={editTask}
           onClose={onClose}
         />
-      }
-      placement="right"
-    >
-      {anchorEl}
-    </Popover>
+      )}
+      trigger={trigger}
+      zIndex={10000}
+    />
   );
+  // return (
+  //   <Popover
+  //     open={isOpen}
+  //     onOpenChange={setIsOpen}
+  //     trigger="click"
+  //     anchorEl={anchorEl}
+  //     anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+  //     transformOrigin={{ vertical: "top", horizontal: "left" }}
+  //     content={
+  // <ManageDatesPopoverContent
+  //   editBoard={editBoard}
+  //   task={task}
+  //   editTask={editTask}
+  //   onClose={onClose}
+  // />
+  //     }
+  //     placement="right"
+  //   >
+  //     {anchorEl}
+  //   </Popover>
+  // );
 }
 
 function ManageDatesPopoverContent({ task, editTask, onClose, editBoard }) {

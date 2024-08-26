@@ -1,4 +1,4 @@
-import { Popover, Input } from "antd";
+import { Input } from "antd";
 import { ManageTaskPopoverHeader } from "./ManageTaskPopoverHeader";
 import { useState, useRef } from "react";
 import { Tooltip } from "antd";
@@ -7,6 +7,7 @@ import { utilService } from "../../../services/util.service";
 import dayjs from "dayjs";
 import { showSuccessMsg } from "../../../services/event-bus.service";
 import { useSelector } from "react-redux";
+import Popup from "@atlaskit/popup";
 
 export function ManageAttachmentsPopover({
   anchorEl,
@@ -20,27 +21,40 @@ export function ManageAttachmentsPopover({
     setIsOpen(false);
   }
 
+  const onTriggerClick = () => {
+    setIsOpen((prev) => !prev);
+  };
+
+  const trigger = (triggerProps) => {
+    return (
+      <label
+        {...triggerProps}
+        appearance="primary"
+        isSelected={isOpen}
+        onClick={onTriggerClick}
+      >
+        {anchorEl}
+      </label>
+    );
+  };
+
   return (
-    <Popover
-      open={isOpen}
-      onClose={onClose}
-      onOpenChange={setIsOpen}
-      trigger="click"
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-      transformOrigin={{ vertical: "top", horizontal: "left" }}
-      content={
+    <Popup
+      isOpen={isOpen}
+      onClose={() => setIsOpen(false)}
+      placement="bottom-start"
+      fallbackPlacements={["top-start", "auto"]}
+      content={() => (
         <ManageAttachmentsPopoverContent
           task={task}
           editTask={editTask}
           onClose={onClose}
           editBoard={editBoard}
         />
-      }
-      placement="right"
-    >
-      {anchorEl}
-    </Popover>
+      )}
+      trigger={trigger}
+      zIndex={10000}
+    />
   );
 }
 

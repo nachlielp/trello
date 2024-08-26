@@ -1,11 +1,9 @@
-import { Popover, Image, Tooltip } from "antd";
+import { Image, Tooltip } from "antd";
 import { useState } from "react";
 import { ManageTaskPopoverHeader } from "../ManageTaskPopovers/ManageTaskPopoverHeader";
 import { utilService } from "../../../services/util.service";
 import { useSelector } from "react-redux";
 import Popup from "@atlaskit/popup";
-import { SvgButton } from "../../CustomCpms/SvgButton";
-import coverIcon from "../../../../public/img/taskActionBtns/coverIcon.svg";
 
 export function ManageCoverPopover({ anchorEl, editTask, task }) {
   const boardCoverImgs = useSelector(
@@ -205,12 +203,6 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
     </section>
   );
 
-  const openPopup = (e) => {
-    e.stopPropagation();
-    console.log("openPopup");
-    setIsOpen(true);
-  };
-
   const trigger = (triggerProps) => {
     return (
       <label
@@ -228,7 +220,8 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
     <Popup
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
-      placement="auto"
+      placement="bottom-start"
+      fallbackPlacements={["top-start", "auto"]}
       content={() => content}
       trigger={trigger}
       zIndex={1000}

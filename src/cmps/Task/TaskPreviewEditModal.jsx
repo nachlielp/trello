@@ -161,7 +161,6 @@ export function TaskPreviewEditModal({
               src={timeIcon}
               className="floating-button"
               label="Edit date"
-              onClick={(e) => e.stopPropagation()}
             />
           }
         />

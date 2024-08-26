@@ -1,5 +1,5 @@
 import { CloseOutlined } from "@ant-design/icons";
-import { Popover, Input } from "antd";
+import Popup from "@atlaskit/popup";
 import TextArea from "antd/es/input/TextArea";
 import { useState, useEffect, useRef } from "react";
 import { utilService } from "../../../services/util.service";
@@ -27,6 +27,7 @@ export function AddChecklistPopover({ anchorEl, task, editTask, editBoard }) {
   function onChange(e) {
     setChecklistName(e.target.value);
   }
+
   async function onSubmit() {
     var minPos = 12222;
     //add taskId to checkListTaskIds
@@ -65,45 +66,62 @@ export function AddChecklistPopover({ anchorEl, task, editTask, editBoard }) {
     await editTask(newTask);
   }
 
-  return (
-    <Popover
-      trigger="click"
-      placement="bottomLeft"
-      open={isOpen}
-      close={onClose}
-      onOpenChange={setIsOpen}
-      arrow={false}
-      content={
-        <section className="add-checklist-popover">
-          <header className="checklist-header">
-            <span>Add CheckList</span>
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="close-btn-popover"
-            >
-              <CloseOutlined />
-            </button>
-          </header>
-          <div className="checklist-main">
-            <h2>Title</h2>
-            {isOpen && (
-              <TextArea
-                ref={inputRef}
-                className="checklist-title-input"
-                value={checklistName}
-                autoSize={{ minRows: 1 }}
-                onChange={onChange}
-              />
-            )}
+  const content = (
+    <section className="add-checklist-popover">
+      <header className="checklist-header">
+        <span>Add CheckList</span>
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="close-btn-popover"
+        >
+          <CloseOutlined />
+        </button>
+      </header>
+      <div className="checklist-main">
+        <h2>Title</h2>
+        {isOpen && (
+          <TextArea
+            ref={inputRef}
+            className="checklist-title-input"
+            value={checklistName}
+            autoSize={{ minRows: 1 }}
+            onChange={onChange}
+          />
+        )}
 
-            <button className="add-btn" onClick={onSubmit}>
-              Add
-            </button>
-          </div>
-        </section>
-      }
-    >
-      {anchorEl}
-    </Popover>
+        <button className="add-btn" onClick={onSubmit}>
+          Add
+        </button>
+      </div>
+    </section>
+  );
+
+  const onTriggerClick = () => {
+    setIsOpen((prev) => !prev);
+  };
+
+  const trigger = (triggerProps) => {
+    return (
+      <label
+        {...triggerProps}
+        appearance="primary"
+        isSelected={isOpen}
+        onClick={onTriggerClick}
+      >
+        {anchorEl}
+      </label>
+    );
+  };
+
+  return (
+    <Popup
+      isOpen={isOpen}
+      onClose={() => setIsOpen(false)}
+      placement="bottom-start"
+      fallbackPlacements={["top-start", "auto"]}
+      content={() => content}
+      trigger={trigger}
+      zIndex={10000}
+    />
   );
 }

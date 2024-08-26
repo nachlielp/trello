@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Popover, Input } from "antd";
+import { Input } from "antd";
 import { ManageTaskPopoverHeader } from "./ManageTaskPopoverHeader";
 import { utilService } from "../../../services/util.service";
 import { useSelector } from "react-redux";
+import Popup from "@atlaskit/popup";
 
 export function EditAttachmentPopover({ anchorEl, onEdit, attachment }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -106,16 +107,32 @@ export function EditAttachmentPopover({ anchorEl, onEdit, attachment }) {
     </div>
   );
 
+  const onTriggerClick = () => {
+    setIsOpen((prev) => !prev);
+  };
+
+  const trigger = (triggerProps) => {
+    return (
+      <label
+        {...triggerProps}
+        appearance="primary"
+        isSelected={isOpen}
+        onClick={onTriggerClick}
+      >
+        {anchorEl}
+      </label>
+    );
+  };
+
   return (
-    <Popover
-      content={content}
-      title={null}
-      trigger="click"
-      open={isOpen}
-      onOpenChange={onOpenChange}
-      placement="right"
-    >
-      {anchorEl}
-    </Popover>
+    <Popup
+      isOpen={isOpen}
+      onClose={() => setIsOpen(false)}
+      placement="bottom-start"
+      fallbackPlacements={["top-start", "auto"]}
+      content={() => content}
+      trigger={trigger}
+      zIndex={10000}
+    />
   );
 }

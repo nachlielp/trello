@@ -1,4 +1,4 @@
-import { Popover } from "antd";
+import Popup from "@atlaskit/popup";
 
 import { useState } from "react";
 import { utilService } from "../../../services/util.service";
@@ -11,25 +11,41 @@ export function EmojiPopover({ anchorEl, onAddEmojy }) {
     setIsOpen(false);
   }
 
+  const content = (
+    <section className="emojy-popover">
+      {utilService.getEmojis().map((e) => (
+        <button className="btn" key={e} onClick={() => onAddEmojy(e)}>
+          {e}
+        </button>
+      ))}
+    </section>
+  );
+  const onTriggerClick = () => {
+    setIsOpen((prev) => !prev);
+  };
+
+  const trigger = (triggerProps) => {
+    return (
+      <label
+        {...triggerProps}
+        appearance="primary"
+        isSelected={isOpen}
+        onClick={onTriggerClick}
+      >
+        {anchorEl}
+      </label>
+    );
+  };
+
   return (
-    <Popover
-      trigger="click"
-      placement="topLeft"
-      open={isOpen}
-      close={onClose}
-      onOpenChange={setIsOpen}
-      arrow={false}
-      content={
-        <section className="emojy-popover">
-          {utilService.getEmojis().map((e) => (
-            <button className="btn" key={e} onClick={() => onAddEmojy(e)}>
-              {e}
-            </button>
-          ))}
-        </section>
-      }
-    >
-      {anchorEl}
-    </Popover>
+    <Popup
+      isOpen={isOpen}
+      onClose={() => setIsOpen(false)}
+      placement="bottom-start"
+      fallbackPlacements={["top-start", "auto"]}
+      content={() => content}
+      trigger={trigger}
+      zIndex={10000}
+    />
   );
 }

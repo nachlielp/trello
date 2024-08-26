@@ -53,10 +53,10 @@ export function TaskDetailsAddToCard({
       popover: (
         <AddChecklistPopover
           anchorEl={
-            <button className="details-anchor-btn">
+            <label className="details-anchor-btn">
               <label className="trello-icon icon-checklist " />
               <label className="btn-label">Checklists</label>
-            </button>
+            </label>
           }
           editBoard={editBoard}
           task={task}

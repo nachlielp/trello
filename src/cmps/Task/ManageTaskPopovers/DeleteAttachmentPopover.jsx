@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Popover, Button } from "antd";
+import Popup from "@atlaskit/popup";
 import { ManageTaskPopoverHeader } from "./ManageTaskPopoverHeader";
 
 export function DeleteAttachmentPopover({
@@ -42,16 +42,32 @@ export function DeleteAttachmentPopover({
     </div>
   );
 
+  const onTriggerClick = () => {
+    setIsOpen((prev) => !prev);
+  };
+
+  const trigger = (triggerProps) => {
+    return (
+      <label
+        {...triggerProps}
+        appearance="primary"
+        isSelected={isOpen}
+        onClick={onTriggerClick}
+      >
+        {anchorEl}
+      </label>
+    );
+  };
+
   return (
-    <Popover
-      content={content}
-      title={null}
-      trigger="click"
-      open={isOpen}
-      onOpenChange={handleOpenChange}
-      placement="right"
-    >
-      {anchorEl}
-    </Popover>
+    <Popup
+      isOpen={isOpen}
+      onClose={() => setIsOpen(false)}
+      placement="bottom-start"
+      fallbackPlacements={["top-start", "auto"]}
+      content={() => content}
+      trigger={trigger}
+      zIndex={10000}
+    />
   );
 }

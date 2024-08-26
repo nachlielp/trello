@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { SvgButton } from "../../CustomCpms/SvgButton";
 import { Tooltip } from "antd";
 import { CheckBox } from "../../CustomCpms/CheckBox";
+import Popup from "@atlaskit/popup";
 
 export function ManageLabelsPopover({
   anchorEl,
@@ -137,141 +138,164 @@ export function ManageLabelsPopover({
 
   const isEditPage = (selectedLabel || isCreateLabel) && !isDeleteLabel;
   const isSelectPage = !selectedLabel && !isCreateLabel && !isDeleteLabel;
-  return (
-    <Popover
-      className="manage-labels-popover"
-      trigger="click"
-      placement={popoverPlacement}
-      open={isOpen}
-      close={() => {}}
-      onOpenChange={setIsOpen}
-      arrow={false}
-      // getPopupContainer={triggerNode => triggerNode.parentNode}
-      // autoAdjustOverflow={true}
-      content={
-        <section className="manage-labels-content" ref={popoverRef}>
-          <ManageTaskPopoverHeader
-            title={popoverTitle}
-            close={onClose}
-            back={backToList}
+
+  const content = (
+    <section className="manage-labels-content" ref={popoverRef}>
+      <ManageTaskPopoverHeader
+        title={popoverTitle}
+        close={onClose}
+        back={backToList}
+      />
+      {isSelectPage && (
+        <section className="select-labels-page">
+          <Input
+            placeholder="Search labels..."
+            className="labels-search-input"
+            value={inputSearch}
+            onChange={(e) => setInputSearch(e.target.value)}
           />
-          {isSelectPage && (
-            <section className="select-labels-page">
-              <Input
-                placeholder="Search labels..."
-                className="labels-search-input"
-                value={inputSearch}
-                onChange={(e) => setInputSearch(e.target.value)}
+          <h3 className="labels-sub-title">Labels</h3>
+          <article className="labels-list">
+            {filteredLabels.map((taskLabel) => (
+              <LabelsOption
+                key={taskLabel.id}
+                taskLabel={taskLabel}
+                selectLabel={onSelectLabel}
+                editColor={openEditLabel}
               />
-              <h3 className="labels-sub-title">Labels</h3>
-              <article className="labels-list">
-                {filteredLabels.map((taskLabel) => (
-                  <LabelsOption
-                    key={taskLabel.id}
-                    taskLabel={taskLabel}
-                    selectLabel={onSelectLabel}
-                    editColor={openEditLabel}
-                  />
-                ))}
-              </article>
-              <button className="lebel-full-btn" onClick={openCreateLabel}>
-                Create label
-              </button>
-            </section>
-          )}
-          {isEditPage && (
-            <section className="edit-labels-page">
-              <article className="edit-label-block-wrapper">
+            ))}
+          </article>
+          <button className="lebel-full-btn" onClick={openCreateLabel}>
+            Create label
+          </button>
+        </section>
+      )}
+      {isEditPage && (
+        <section className="edit-labels-page">
+          <article className="edit-label-block-wrapper">
+            <div
+              className="disbly-label-block"
+              style={{
+                backgroundColor:
+                  utilService.getColorHashByName(editColor).bgColor,
+              }}
+            >
+              <span
+                className="label-color-name"
+                style={{
+                  color:
+                    utilService.getColorHashByName(editColor).lightFontColor,
+                }}
+              >
+                {editTitle}
+              </span>
+            </div>
+          </article>
+          <h3 className="labels-sub-title">Title</h3>
+          <Input
+            className="labels-search-input"
+            value={editTitle}
+            onChange={(e) => setEditTitle(e.target.value)}
+          />
+          <h3 className="labels-sub-title">Select a color</h3>
+          <article className="color-picker-wrapper">
+            {utilService.boardLabelColorOptions
+              .filter((color) => color.color !== "none")
+              .map((color) => (
                 <div
-                  className="disbly-label-block"
+                  className="color-picker-option"
+                  key={color.color}
                   style={{
                     backgroundColor:
-                      utilService.getColorHashByName(editColor).bgColor,
+                      hoveredColor === color.color
+                        ? color.hoverdBgColor
+                        : color.bgColor,
                   }}
-                >
-                  <span
-                    className="label-color-name"
-                    style={{
-                      color:
-                        utilService.getColorHashByName(editColor)
-                          .lightFontColor,
-                    }}
-                  >
-                    {editTitle}
-                  </span>
-                </div>
-              </article>
-              <h3 className="labels-sub-title">Title</h3>
-              <Input
-                className="labels-search-input"
-                value={editTitle}
-                onChange={(e) => setEditTitle(e.target.value)}
-              />
-              <h3 className="labels-sub-title">Select a color</h3>
-              <article className="color-picker-wrapper">
-                {utilService.boardLabelColorOptions
-                  .filter((color) => color.color !== "none")
-                  .map((color) => (
-                    <div
-                      className="color-picker-option"
-                      key={color.color}
-                      style={{
-                        backgroundColor:
-                          hoveredColor === color.color
-                            ? color.hoverdBgColor
-                            : color.bgColor,
-                      }}
-                      onClick={() => setEditColor(color.color)}
-                      onMouseEnter={() => setHoveredColor(color.color)}
-                      onMouseLeave={() => setHoveredColor(null)}
-                    ></div>
-                  ))}
-              </article>
-              <button
-                className="lebel-full-btn"
-                onClick={() => setEditColor("none")}
-              >
-                Remove color
+                  onClick={() => setEditColor(color.color)}
+                  onMouseEnter={() => setHoveredColor(color.color)}
+                  onMouseLeave={() => setHoveredColor(null)}
+                ></div>
+              ))}
+          </article>
+          <button
+            className="lebel-full-btn"
+            onClick={() => setEditColor("none")}
+          >
+            Remove color
+          </button>
+          <label className="label-hr" />
+          <article className="edit-label-buttons">
+            {isCreateLabel && (
+              <button className="save-button" onClick={onCreateLabel}>
+                Create
               </button>
-              <label className="label-hr" />
-              <article className="edit-label-buttons">
-                {isCreateLabel && (
-                  <button className="save-button" onClick={onCreateLabel}>
-                    Create
-                  </button>
-                )}
-                {!isCreateLabel && (
-                  <>
-                    <button className="save-button" onClick={onSaveLabel}>
-                      Save
-                    </button>
-                    <button className="delete-button" onClick={openDeleteLabel}>
-                      Delete
-                    </button>
-                  </>
-                )}
-              </article>
-            </section>
-          )}
-          {isDeleteLabel && (
-            <section className="delete-label-page">
-              <p>
-                This will remove this label from all cards. There is no undo.
-              </p>
-              <button
-                className="full-delete-label-button"
-                onClick={onDeleteLabel}
-              >
-                Delete
-              </button>
-            </section>
-          )}
+            )}
+            {!isCreateLabel && (
+              <>
+                <button className="save-button" onClick={onSaveLabel}>
+                  Save
+                </button>
+                <button className="delete-button" onClick={openDeleteLabel}>
+                  Delete
+                </button>
+              </>
+            )}
+          </article>
         </section>
-      }
-    >
-      {anchorEl}
-    </Popover>
+      )}
+      {isDeleteLabel && (
+        <section className="delete-label-page">
+          <p>This will remove this label from all cards. There is no undo.</p>
+          <button className="full-delete-label-button" onClick={onDeleteLabel}>
+            Delete
+          </button>
+        </section>
+      )}
+    </section>
   );
+
+  const onTriggerClick = () => {
+    setIsOpen((prev) => !prev);
+  };
+
+  const trigger = (triggerProps) => {
+    return (
+      <label
+        {...triggerProps}
+        appearance="primary"
+        isSelected={isOpen}
+        onClick={onTriggerClick}
+      >
+        {anchorEl}
+      </label>
+    );
+  };
+
+  return (
+    <Popup
+      isOpen={isOpen}
+      onClose={() => setIsOpen(false)}
+      placement="bottom-start"
+      fallbackPlacements={["top-start", "auto"]}
+      content={() => content}
+      trigger={trigger}
+      zIndex={10000}
+    />
+  );
+  // return (
+  //   <Popover
+  //     className="manage-labels-popover"
+  //     trigger="click"
+  //     placement={popoverPlacement}
+  //     open={isOpen}
+  //     close={() => {}}
+  //     onOpenChange={setIsOpen}
+  //     arrow={false}
+  //     content={content}
+  //   >
+  //     {anchorEl}
+  //   </Popover>
+  // );
 }
 
 function LabelsOption({ taskLabel, selectLabel, editColor }) {
