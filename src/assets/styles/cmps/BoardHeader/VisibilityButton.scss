@@ -78,14 +78,17 @@
               color: var(--ds-text-disabled, #091e424f);
               pointer-events: none;
               span {
-                color: rgba(191, 219, 248, 0.28);
+                color: var(--ds-text-disabled, #091e424f);
               }
             }
 
             &:hover {
               border: none;
               box-shadow: none;
-              background: var(--ds-background-neutral-subtle-hovered, #091e420f);
+              background: var(
+                --ds-background-neutral-subtle-hovered,
+                #091e420f
+              );
               color: var(--ds-text, #172b4d);
               text-decoration: none;
             }

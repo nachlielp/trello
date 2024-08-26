@@ -13,7 +13,7 @@ export function VisibilityOptions({ setOpenListMenu, setPermission }) {
   const user = useSelector((state) => state.userModule.user);
   const currentMember = useSelector((state) =>
     state.boardModule.board.members.find(
-      (member) => member.id === "666fe4efda8643029b6710f3"
+      (member) => member.id === user.id
     )
   );
   const board = useSelector((state) => state.boardModule.board);

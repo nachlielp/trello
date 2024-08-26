@@ -113,7 +113,7 @@
       }
     }
 
-    .share-btn {
+    .add-btn {
       cursor: pointer;
       line-height: 20px;
       border: none;
@@ -121,7 +121,7 @@
       color: rgb(23, 43, 77);
       background-color: rgb(220, 223, 228);
       border-radius: 3px;
-
+      margin-left: 10px;
       .txt {
         font-weight: 500;
         font-size: 14px;
@@ -139,10 +139,13 @@
       margin-left: 10px;
       padding-left: 5px;
       border-left: 1px solid #999;
-
+      flex-direction: row-reverse;
       .members-avatar {
         font-size: 12px !important;
         font-weight: 700;
+        &:not(:last-child) {
+          margin-left: -10px;
+        }
       }
     }
   }
