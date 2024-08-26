@@ -8,8 +8,7 @@ import useScrollPercentage from "../../customHooks/useScrollPercentage";
 
 export function GroupFooter({ groupId, addTask, groupRef }) {
   const [footerRef, isAddTaskOpen, setIsAddTaskOpen] = useClickOutside(false);
-  const [_, setScrollToPercentage] =
-    useScrollPercentage(groupRef);
+  const [_, setScrollToPercentage] = useScrollPercentage(groupRef);
   function closeAddTask() {
     setIsAddTaskOpen(false);
   }
@@ -44,6 +43,7 @@ export function GroupFooter({ groupId, addTask, groupRef }) {
           closeAddTask={closeAddTask}
           addTask={addTask}
           addToTop={false}
+          onBtnClick={onBtnClick}
         />
       )}
     </div>

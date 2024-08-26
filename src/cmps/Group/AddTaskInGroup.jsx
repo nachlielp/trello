@@ -4,7 +4,13 @@ import { CloseOutlined } from "@ant-design/icons";
 import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 
-export function AddTaskInGroup({ groupId, closeAddTask, addTask, addToTop }) {
+export function AddTaskInGroup({
+  groupId,
+  closeAddTask,
+  addTask,
+  addToTop,
+  onBtnClick,
+}) {
   const group = useSelector((state) =>
     state.boardModule.board.groups.find((group) => group.id === groupId)
   );
@@ -82,6 +88,9 @@ export function AddTaskInGroup({ groupId, closeAddTask, addTask, addToTop }) {
     // }
     setTaskName("");
     await addTask(newTask, group);
+    if (onBtnClick) {
+      onBtnClick();
+    }
   }
 
   return (

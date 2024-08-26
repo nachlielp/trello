@@ -82,7 +82,10 @@ export function BoardGroup({
                     className={`board-group-main ${
                       snapshot.isDraggingOver ? "dragging-over" : ""
                     } `}
-                    ref={droppableProvided.innerRef}
+                    ref={(el) => {
+                      droppableProvided.innerRef(el);
+                      groupRef.current = el;
+                    }}
                     {...droppableProvided.droppableProps}
                   >
                     {newTasksAboveInput.map((task) => (
