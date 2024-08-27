@@ -52,7 +52,7 @@ export function HomePage() {
             </button>
             <button className="home-btn">
               Resources
-              <span className="trello-icon icon-down" />wd
+              <span className="trello-icon icon-down" />
             </button>
           </div>
           <div className="nav-link">
@@ -62,8 +62,12 @@ export function HomePage() {
               </Link>
             ) : (
               <>
-                <Link className="home-login" to={'/login'}>Log in</Link>
-                <Link className="home-sign" to={"/signup"}>Get Trello for free</Link>
+                <Link className="home-login" to={"/login"}>
+                  Log in
+                </Link>
+                <Link className="home-sign" to={"/signup"}>
+                  Get Trello for free
+                </Link>
               </>
             )}
           </div>
