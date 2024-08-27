@@ -50,11 +50,7 @@ export function BoardHeader({
     setShowBtn(false);
   }
 
-  console.log(
-    board.members.some(
-      (m) => m.id === user.id && m.permissionStatus === "admin"
-    )
-  );
+  
   return (
     <div className="board-header">
       <div className="left-info">

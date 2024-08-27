@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { Modal, Input } from "antd";
 import editSvg from "../../assets/svgs/edit.svg";
-import cardIcon from "../../../public/img/taskActionBtns/cardIcon.svg";
+import cardIcon from "/img/taskActionBtns/cardIcon.svg";
 import { TaskPreviewBadges } from "./TaskPreviewBadges";
 import { TaskPreviewLabel } from "./TaskPreviewLabel";
 import { utilService } from "../../services/util.service";

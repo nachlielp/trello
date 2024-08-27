@@ -26,7 +26,12 @@ import { AddGroupBtn } from "../cmps/Group/AddGroupBtn";
 import { TaskDetailsModal } from "../cmps/Task/TaskDetailsModal/TaskDetailsModal.jsx";
 import { BoardHeader } from "../cmps/BoardHeader/BoardHeader.jsx";
 import useScrollByGrab from "../customHooks/useScrollByGrab.js";
-import { useParams, useNavigate, useOutletContext } from "react-router-dom";
+import {
+  useParams,
+  useNavigate,
+  useOutletContext,
+  Await,
+} from "react-router-dom";
 import { utilService } from "../services/util.service.js";
 import { background } from "@cloudinary/url-gen/qualifiers/focusOn";
 
@@ -51,7 +56,7 @@ export function BoardIndex() {
           params.link === board.invLink &&
           !board.members.some((m) => m.id === user.id)
         ) {
-          updateBoard({
+          await updateBoard({
             ...board,
             members: [
               ...board.members,
@@ -59,6 +64,7 @@ export function BoardIndex() {
             ],
           });
         }
+        history.replaceState(null, "", `/b/${board.id}`);
       }
     }
     load();

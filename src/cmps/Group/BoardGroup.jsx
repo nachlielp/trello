@@ -8,7 +8,7 @@ import { useClickOutside } from "../../customHooks/useClickOutside";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import useScrollPercentage from "../../customHooks/useScrollPercentage";
 import { useSelector } from "react-redux";
-import { useSelector } from "react-redux";
+
 //TODO put add new task in array of sorted tasks based on position
 export function BoardGroup({
   group,
