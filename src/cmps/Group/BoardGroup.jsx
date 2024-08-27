@@ -193,14 +193,15 @@ export function BoardGroup({
                   </main>
                 )}
               </Droppable>
-              {!isTopAddTaskOpen && !isBottomAddTaskOpen ? (
+              {!isTopAddTaskOpen && !isBottomAddTaskOpen && (
                 <GroupFooter
                   groupId={group.id}
                   addTask={addTask}
                   groupRef={groupRef}
                   openBottomAddTask={openBottomAddTask}
                 />
-              ) : (
+              )}
+              {!isBottomAddTaskOpen && isTopAddTaskOpen && (
                 <div className="group-footer-placeholder"></div>
               )}
             </Card>
