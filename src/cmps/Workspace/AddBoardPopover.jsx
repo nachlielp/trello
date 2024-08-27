@@ -213,8 +213,7 @@ export function AddBoardPopover({ onAddBoard, anchorEl }) {
     <Popup
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
-      placement="bottom-start"
-      fallbackPlacements={["top-start", "auto"]}
+      placement="right"
       content={() => content}
       trigger={trigger}
       zIndex={10000}
