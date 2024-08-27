@@ -342,20 +342,22 @@ function ManageDatesPopoverContent({ task, editTask, onClose, editBoard }) {
   }
 
   async function onSave() {
-    // const newActivity = utilService.createActivity(
-    //   {
-    //     type: "addDate",
-    //     targetId: task.id,
-    //     targetName: task.name,
-    //     doDate: new Date(endDate["$d"]).getTime(),
-    //   },
-    //   user
-    // );
+    if (endDate) {
+      const newActivity = utilService.createActivity(
+        {
+          type: "addDate",
+          targetId: task.id,
+          targetName: task.name,
+          doDate: new Date(endDate["$d"]).getTime(),
+        },
+        user
+      );
 
-    // await updateBoard({
-    //   ...board,
-    //   activities: [...board?.activities, newActivity],
-    // });
+      await updateBoard({
+        ...board,
+        activities: [...board?.activities, newActivity],
+      });
+    }
     editTask({
       ...task,
       due: endDate,
@@ -368,13 +370,13 @@ function ManageDatesPopoverContent({ task, editTask, onClose, editBoard }) {
   async function onRemove() {
     const newActivity = utilService.createActivity(
       {
-        type: "addDate",
+        type: "removeDate",
         targetId: task.id,
         targetName: task.name,
       },
       user
     );
-    await editBoard({
+    await updateBoard({
       ...board,
       activities: [...board?.activities, newActivity],
     });
