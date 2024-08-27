@@ -63,6 +63,9 @@
   }
   .description {
     margin-top: 8px;
+    &.disable * {
+      pointer-events: none;
+    }
     .description-header {
       display: flex;
       align-items: center;

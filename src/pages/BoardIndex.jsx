@@ -118,7 +118,7 @@ export function BoardIndex() {
     } else {
       const res = await editTask(task);
     }
-    loadBoard(board.id)
+    loadBoard(board.id);
   }
 
   async function onCopyGroup(group) {
@@ -204,7 +204,6 @@ export function BoardIndex() {
           <BoardHeader
             setOpenBoardMenu={outletProps?.setOpenBoardMenu}
             openBoardMenu={outletProps?.openBoardMenu}
-            board={board}
             starToggle={onStarToggle}
             starredBoardIds={user?.starredBoardIds}
             showBtn={outletProps?.showBtn}

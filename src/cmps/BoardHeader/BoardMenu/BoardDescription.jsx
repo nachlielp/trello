@@ -9,6 +9,7 @@ import { ProfilePopover } from "../../Task/ManageTaskPopovers/ProfilePopover";
 
 export function BoardDescription({ onSetPreventLoad }) {
   const board = useSelector((state) => state.boardModule.board);
+  const user = useSelector((state) => state.userModule.user);
   const admins = useSelector((state) =>
     state.boardModule.board.members.filter(
       (m) => m.permissionStatus === "admin"
@@ -96,11 +97,15 @@ export function BoardDescription({ onSetPreventLoad }) {
           </main>
         )}
       </div>
-      <div className="description">
+      <div
+        className={`description ${
+          !board.members.some((m) => m.id === user.id) ? "disable" : ""
+        }`}
+      >
         <header className="description-header">
           <span className="trello-icon icon-description" />
           <h3>Description</h3>
-          {!isOpen && (
+          {!isOpen && board.members.some((m) => m.id === user.id) && (
             <button className="edit-btn" onClick={() => setIsOpen(true)}>
               Edit
             </button>
@@ -109,7 +114,7 @@ export function BoardDescription({ onSetPreventLoad }) {
         <main
           className={`description-main ${isOpen ? "open" : ""} ${
             !board.desc ? "add-desc" : ""
-          }`}
+          } `}
           ref={areaDivRef}
         >
           <TextArea

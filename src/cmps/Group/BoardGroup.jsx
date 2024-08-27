@@ -7,6 +7,8 @@ import { TaskPreview } from "../Task/TaskPreview";
 import { useClickOutside } from "../../customHooks/useClickOutside";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import useScrollPercentage from "../../customHooks/useScrollPercentage";
+import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 //TODO put add new task in array of sorted tasks based on position
 export function BoardGroup({
   group,
@@ -27,7 +29,8 @@ export function BoardGroup({
   const [isBottomAddTaskOpen, setIsBottomAddTaskOpen] = useState(false);
   const [containerRef, isAnyAddTaskOpen, setIsAnyAddTaskOpen] =
     useClickOutside(false);
-
+  const board = useSelector((state) => state.boardModule.board);
+  const user = useSelector((state) => state.userModule.user);
   const groupRef = useRef();
   const [_, setScrollToPercentage] = useScrollPercentage(groupRef);
 
@@ -94,6 +97,9 @@ export function BoardGroup({
         <div
           {...draggableProvided.draggableProps}
           ref={draggableProvided.innerRef}
+          className={`${
+            !board.members.some((m) => m.id === user.id) ? "disable" : ""
+          }`}
         >
           <div
             className={`board-group-container ${

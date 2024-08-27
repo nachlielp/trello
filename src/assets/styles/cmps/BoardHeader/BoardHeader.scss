@@ -17,6 +17,9 @@
 
     .board-name {
       padding-left: 0.031;
+      .cursor {
+        cursor: default !important;
+      }
       .title {
         padding: 0 10px;
       }
@@ -127,7 +130,9 @@
         font-size: 14px;
         margin-left: 4px;
       }
-
+      &:disabled {
+        cursor: not-allowed;
+      }
       &:hover {
         background-color: white;
       }

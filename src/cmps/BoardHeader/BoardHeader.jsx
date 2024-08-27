@@ -8,9 +8,10 @@ import { StarBoardBtn } from "../CustomCpms/StarBoardBtn";
 import { NameInput } from "../CustomCpms/NameInput";
 import { updateBoard } from "../../store/board.actions";
 import { utilService } from "../../services/util.service";
+import { useState } from "react";
+import { AddModule } from "./AddModule";
 
 export function BoardHeader({
-  board,
   starredBoardIds,
   starToggle,
   openBoardMenu,
@@ -19,7 +20,9 @@ export function BoardHeader({
   setShowBtn,
 }) {
   const members = useSelector((state) => state.boardModule.board.members);
+  const board = useSelector((state) => state.boardModule.board);
   const user = useSelector((state) => state.userModule.user);
+  const [openAdd, setOpenAdd] = useState(false);
   function onToggleStar(boardId) {
     const starredIds = starredBoardIds.includes(boardId)
       ? starredBoardIds.filter((id) => id !== boardId)
@@ -46,15 +49,28 @@ export function BoardHeader({
     setOpenBoardMenu(true);
     setShowBtn(false);
   }
+
+  console.log(
+    board.members.some(
+      (m) => m.id === user.id && m.permissionStatus === "admin"
+    )
+  );
   return (
     <div className="board-header">
       <div className="left-info">
-        <NameInput
-          value={board.name}
-          className="board-name"
-          onSubmit={onBoardNameChange}
-        />
-        
+        {board.members.some(
+          (m) => m.id === user.id && m.permissionStatus === "admin"
+        ) ? (
+          <NameInput
+            value={board.name}
+            className="board-name"
+            onSubmit={onBoardNameChange}
+          />
+        ) : (
+          <section className="name-input board-name ">
+            <span className="cursor">{board.name}</span>
+          </section>
+        )}
         <StarBoardBtn
           starredBoardIds={starredBoardIds}
           boardId={board.id}
@@ -82,16 +98,23 @@ export function BoardHeader({
             />
           ))}
         </div>
-        <button className="share-btn">
+
+        <button
+          className="add-btn"
+          disabled={!board.members.some((m) => m.id === user.id)}
+          onClick={() => setOpenAdd(true)}
+        >
           <UserAddOutlined className="share-icon" />
           <span className="txt">Share</span>
         </button>
+
         {(!openBoardMenu || showBtn) && (
           <button className="dots" onClick={openMenu}>
             <EllipsisOutlined />
           </button>
         )}
       </div>
+      {openAdd && <AddModule onClose={() => setOpenAdd(false)} />}
     </div>
   );
 }

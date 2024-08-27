@@ -3,10 +3,9 @@
 //     user-select: none;
 // }
 
-.add-group-btn-wrapper {
-  user-select: none;
+.board-groups:has(> .disable) * {
+  pointer-events: none;
 }
-
 .board-group-container {
   display: flex;
   flex-direction: column;
@@ -51,6 +50,7 @@
         margin: 0 3px 0 3px;
         -webkit-overflow-scrolling: touch;
         scrollbar-color: var(--ds-background-neutral-hovered, #091e4224)
+         
           var(--ds-background-neutral, #091e420f);
         scrollbar-width: thin;
 
