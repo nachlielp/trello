@@ -59,6 +59,7 @@
 @import "cmps/ProfilePopover";
 @import "cmps/BoardHeader/BoardMenu/BoardMenu";
 @import "cmps/BoardHeader/BoardMenu/BoardDescription";
+@import "cmps/BoardHeader/AddModule";
 @import "cmps/ActivityMsg";
 
 //Group
@@ -140,6 +141,7 @@
   --ds-text-selected: #579dff;
   --ds-background-disabled: #bcd6f00a;
   --ds-surface-sunken: #161a1d;
+  --ds-link: #579DFF;
 
   *:-webkit-autofill {
     color-scheme: dark !important;
@@ -199,4 +201,5 @@
   --ds-text-selected: #0c66e4;
   --ds-background-disabled: #091e4208;
   --ds-surface-sunken: #f7f8f9;
+  --ds-link: #0c66e4;
 }
