@@ -50,7 +50,7 @@ export function TaskDetailsModal({
   const isImgCover = task?.cover?.idUploadedBackground;
   const isColorCover = task?.cover?.color;
 
-  function onJoin() {
+  async function onJoin() {
     const newActivity = utilService.createActivity(
       {
         type: "joinTask",
@@ -60,7 +60,7 @@ export function TaskDetailsModal({
       user
     );
 
-    updateBoard({
+    await updateBoard({
       ...board,
       activities: [...board?.activities, newActivity],
     });
