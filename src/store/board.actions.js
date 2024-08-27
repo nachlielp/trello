@@ -616,18 +616,20 @@ export async function moveTask(moveTaskEvent, board, user) {
       return g;
     });
   }
-  const moveActivity = utilService.createActivity(
-    {
-      type: "movedTask",
-      targetId: task.id,
-      targetName: task.name,
-      from: sourceGroup.name,
-      to: board.groups.find((g) => g.id === destinationGroupId).name,
-    },
-    user
-  );
+  if (sourceGroup.id !== destinationGroupId) {
+    const moveActivity = utilService.createActivity(
+      {
+        type: "movedTask",
+        targetId: task.id,
+        targetName: task.name,
+        from: sourceGroup.name,
+        to: board.groups.find((g) => g.id === destinationGroupId).name,
+      },
+      user
+    );
 
-  newBoard.activities.push(moveActivity);
+    newBoard.activities.push(moveActivity);
+  }
   store.dispatch({
     type: SET_BOARD,
     board: { ...newBoard, updatedAt: new Date().toISOString() },
