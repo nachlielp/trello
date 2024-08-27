@@ -103,13 +103,14 @@ export function TaskDetailsAddToCard({
       popover: !isCover ? (
         <ManageCoverPopover
           anchorEl={
-            <button className="details-anchor-btn">
+            <button className="details-anchor-btn" style={{ width: "100%" }}>
               <label className="trello-icon icon-card-cover " />
               <label className="btn-label">Cover</label>
             </button>
           }
           editTask={editTask}
           task={task}
+          isFullWidth={true}
         />
       ) : (
         <></>

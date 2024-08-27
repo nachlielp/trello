@@ -5,7 +5,7 @@ import { utilService } from "../../../services/util.service";
 import { useSelector } from "react-redux";
 import Popup from "@atlaskit/popup";
 
-export function ManageCoverPopover({ anchorEl, editTask, task }) {
+export function ManageCoverPopover({ anchorEl, editTask, task, isFullWidth }) {
   const boardCoverImgs = useSelector(
     (state) => state.boardModule.board.coverImgs
   );
@@ -204,7 +204,10 @@ export function ManageCoverPopover({ anchorEl, editTask, task }) {
           e.stopPropagation();
           setIsOpen(!isOpen);
         }}
-        style={{ display: "inline-block" }} // Ensure inline positioning
+        style={{
+          display: "inline-block",
+          width: isFullWidth ? "100%" : "auto",
+        }} // Ensure inline positioning
       >
         {anchorEl}
       </div>

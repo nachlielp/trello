@@ -244,7 +244,9 @@ export function ManageLabelsPopover({
       )}
       {isDeleteLabel && (
         <section className="delete-label-page">
-          <p>This will remove this label from all cards. There is no undo.</p>
+          <p style={{ fontSize: "14px" }}>
+            This will remove this label from all cards. There is no undo.
+          </p>
           <button className="full-delete-label-button" onClick={onDeleteLabel}>
             Delete
           </button>
