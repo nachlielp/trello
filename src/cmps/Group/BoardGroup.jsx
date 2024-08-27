@@ -100,7 +100,13 @@ export function BoardGroup({
               snapshot.isDragging ? "dragging" : ""
             }`}
           >
-            <Card className="board-group custom-card" ref={containerRef}>
+            {console.log(snapshot)}
+            <Card
+              className={`board-group custom-card ${
+                isDraggingOverId === group.id ? "draggOver" : ""
+              }`}
+              ref={containerRef}
+            >
               <BoardGroupHeader
                 draggableProvided={draggableProvided}
                 group={group}
