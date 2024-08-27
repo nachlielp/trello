@@ -20,6 +20,7 @@ import { MoveCardPopover } from "./ManageTaskPopovers/MoveCardPopover";
 import { ManageDatesPopover } from "./ManageTaskPopovers/ManageDatesPopover";
 import { useNavigate } from "react-router-dom";
 const { TextArea } = Input;
+import Popup from "@atlaskit/popup";
 
 export function TaskPreviewEditModal({
   task,
@@ -38,6 +39,8 @@ export function TaskPreviewEditModal({
   const [taskName, setTaskName] = useState(task?.name || "");
   const [showEditModalBtn, setShowEditModalBtn] = useState(false);
   const containerRef = useRef(null);
+  const triggerRef = useRef(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -201,30 +204,27 @@ export function TaskPreviewEditModal({
   //     ? allModalActionButtons.filter((btn) => btn.cover)
   //     : allModalActionButtons;
 
-  return (
-    <div>
-      {showEditModalBtn && (
-        <div ref={containerRef} className="task-preview-edit-modal-anchor">
-          <SvgButton
-            src={editSvg}
-            className="edit-button"
-            onClick={showModal}
-          />
-        </div>
-      )}
-      <Modal
-        className="task-preview-edit-modal"
-        open={isOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        getContainer={() => containerRef?.current}
-        style={modalStyle}
-        width={taskWidth}
-        closable={false}
-        footer={null}
-        transitionName="" // Disable modal open animation
-        maskTransitionName=""
-      >
+  const content = () => {
+    return (
+      <>
+        {modalActionButtons.map((btn, index) => (
+          <div
+            key={index}
+            style={{
+              display:
+                task?.cover.size === "normal" || btn.cover ? "block" : "none",
+            }}
+          >
+            {btn.popover}
+          </div>
+        ))}
+      </>
+    );
+  };
+
+  const trigger = () => {
+    return (
+      <div ref={triggerRef}>
         {task?.cover.color && (
           <div
             className="group-task-header"
@@ -265,19 +265,46 @@ export function TaskPreviewEditModal({
           className={`floating-buttons ${
             task?.cover.size === "full" ? "full-cover" : ""
           }`}
-        >
-          {modalActionButtons.map((btn, index) => (
-            <div
-              key={index}
-              style={{
-                display:
-                  task?.cover.size === "normal" || btn.cover ? "block" : "none",
-              }}
-            >
-              {btn.popover}
-            </div>
-          ))}
-        </section>
+        ></section>
+      </div>
+    );
+  };
+  return (
+    <div>
+      {showEditModalBtn && (
+        <div ref={containerRef} className="task-preview-edit-modal-anchor">
+          <SvgButton
+            src={editSvg}
+            className="edit-button"
+            onClick={showModal}
+          />
+        </div>
+      )}
+      <Modal
+        className="task-preview-edit-modal"
+        open={isOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        getContainer={() => containerRef?.current}
+        style={modalStyle}
+        width={taskWidth}
+        closable={false}
+        footer={null}
+        transitionName="" // Disable modal open animation
+        maskTransitionName=""
+      >
+        <>
+          <Popup
+            isOpen={isOpen}
+            onClose={() => {}}
+            placement="bottom-start"
+            fallbackPlacements={["top-start", "auto"]}
+            content={content}
+            trigger={trigger}
+            zIndex={10000}
+            triggerRef={triggerRef}
+          />
+        </>
       </Modal>
     </div>
   );
