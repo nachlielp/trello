@@ -6,7 +6,7 @@ import { BoardGroupHeader } from "./BoardGroupHeader";
 import { TaskPreview } from "../Task/TaskPreview";
 import { useClickOutside } from "../../customHooks/useClickOutside";
 import { Droppable, Draggable } from "react-beautiful-dnd";
-
+import useScrollPercentage from "../../customHooks/useScrollPercentage";
 //TODO put add new task in array of sorted tasks based on position
 export function BoardGroup({
   group,
@@ -23,8 +23,20 @@ export function BoardGroup({
 }) {
   const [newTasksAboveInput, setNewTasksAboveInput] = useState([]);
   const [sortedTasks, setSortedTasks] = useState([]);
-  const [footerRef, isAddTaskOpen, setIsAddTaskOpen] = useClickOutside(false);
+  const [isTopAddTaskOpen, setIsTopAddTaskOpen] = useState(false);
+  const [isBottomAddTaskOpen, setIsBottomAddTaskOpen] = useState(false);
+  const [containerRef, isAnyAddTaskOpen, setIsAnyAddTaskOpen] =
+    useClickOutside(false);
+
   const groupRef = useRef();
+  const [_, setScrollToPercentage] = useScrollPercentage(groupRef);
+
+  useEffect(() => {
+    if (!isAnyAddTaskOpen) {
+      setIsTopAddTaskOpen(false);
+      setIsBottomAddTaskOpen(false);
+    }
+  }, [isAnyAddTaskOpen]);
 
   useEffect(() => {
     const filteredTasks = group.tasks?.filter((task) => !task.closed) || [];
@@ -36,20 +48,44 @@ export function BoardGroup({
     const newTasks = filteredTasks.filter((task) =>
       newTaskIds.includes(task.id)
     );
-    if (isAddTaskOpen) {
+    if (isTopAddTaskOpen) {
       setNewTasksAboveInput(newTasks);
     } else {
       setSortedTasks(filteredTasks.sort((a, b) => a.pos - b.pos) || []);
       setNewTasksAboveInput([]);
     }
-  }, [group.tasks?.length, group.updatedAt]);
-
-  const openAddTask = () => {
-    setIsAddTaskOpen(true);
-  };
+  }, [group.tasks?.length, group.updatedAt, isAnyAddTaskOpen]);
 
   function addTaskToTop(task, group) {
     addTask(task, group, newTasksAboveInput.length);
+  }
+
+  const openTopAddTask = () => {
+    setIsTopAddTaskOpen(true);
+    setIsAnyAddTaskOpen(true);
+  };
+
+  const onCloseTopAddTask = () => {
+    setIsTopAddTaskOpen(false);
+    setIsAnyAddTaskOpen(false);
+    setNewTasksAboveInput([]);
+  };
+
+  const openBottomAddTask = () => {
+    setIsBottomAddTaskOpen(true);
+    setIsAnyAddTaskOpen(true);
+  };
+
+  function onCloseBottomAddTask() {
+    setIsBottomAddTaskOpen(false);
+    setIsAnyAddTaskOpen(false);
+  }
+
+  function onAddTaskBtnClick() {
+    openBottomAddTask();
+    setTimeout(() => {
+      setScrollToPercentage(200);
+    }, 0);
   }
 
   return (
@@ -64,12 +100,12 @@ export function BoardGroup({
               snapshot.isDragging ? "dragging" : ""
             }`}
           >
-            <Card className="board-group custom-card" ref={footerRef}>
+            <Card className="board-group custom-card" ref={containerRef}>
               <BoardGroupHeader
                 draggableProvided={draggableProvided}
                 group={group}
                 editGroup={editGroup}
-                openAddTask={openAddTask}
+                openAddTask={openTopAddTask}
                 archiveGroup={archiveGroup}
                 copyGroup={copyGroup}
                 moveAllCards={moveAllCards}
@@ -96,15 +132,14 @@ export function BoardGroup({
                         labelActions={labelActions}
                       />
                     ))}
-                    {isAddTaskOpen && (
+                    {isTopAddTaskOpen && (
                       <AddTaskInGroup
                         groupId={group.id}
-                        closeAddTask={() => setIsAddTaskOpen(false)}
+                        closeAddTask={onCloseTopAddTask}
                         addTask={addTaskToTop}
                         addToTop={true}
                       />
                     )}
-
                     {sortedTasks
                       .filter((task) => !newTasksAboveInput.includes(task.id))
                       .map((task, index) => (
@@ -137,17 +172,30 @@ export function BoardGroup({
                           )}
                         </Draggable>
                       ))}
+                    {isBottomAddTaskOpen && (
+                      <AddTaskInGroup
+                        groupId={group.id}
+                        closeAddTask={onCloseBottomAddTask}
+                        addTask={addTask}
+                        addToTop={false}
+                        onBtnClick={onAddTaskBtnClick}
+                        groupRef={groupRef}
+                      />
+                    )}
                     {isDraggingOverId === group.id &&
                       droppableProvided.placeholder}
                   </main>
                 )}
               </Droppable>
-              {!isAddTaskOpen && (
+              {!isTopAddTaskOpen && !isBottomAddTaskOpen ? (
                 <GroupFooter
                   groupId={group.id}
                   addTask={addTask}
                   groupRef={groupRef}
+                  openBottomAddTask={openBottomAddTask}
                 />
+              ) : (
+                <div className="group-footer-placeholder"></div>
               )}
             </Card>
           </div>

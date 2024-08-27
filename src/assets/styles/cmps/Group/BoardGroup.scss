@@ -28,6 +28,7 @@
     border: none;
     overflow: hidden;
     max-height: 100%;
+    // padding-bottom: 4px;
 
     .ant-card-body {
       max-height: 100%;
@@ -56,6 +57,10 @@
             opacity: 0.5;
           }
         }
+      }
+
+      .group-footer-placeholder {
+        height: 6px;
       }
     }
   }

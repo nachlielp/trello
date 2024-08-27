@@ -10,6 +10,7 @@ export function AddTaskInGroup({
   addTask,
   addToTop,
   onBtnClick,
+  groupRef,
 }) {
   const group = useSelector((state) =>
     state.boardModule.board.groups.find((group) => group.id === groupId)
@@ -60,32 +61,8 @@ export function AddTaskInGroup({
       name: taskName,
     };
 
-    //TODO find a better Strategy for when i add twice to the same column multiple cards
-    // if (addToTop) {
-    //   if (firstPos.current === null) {
-    //     newTask.pos = 0;
-    //     firstPos.current = 0;
-    //     lastAddedPos.current = 0;
-    //   } else if (firstPos.current !== null) {
-    //     if (lastAddedPos.current === null) {
-    //       lastAddedPos.current = firstPos.current - 123456;
-    //       newTask.pos = lastAddedPos.current;
-    //     } else {
-    //       lastAddedPos.current = lastAddedPos.current + 2345;
-    //       newTask.pos = lastAddedPos.current;
-    //     }
-    //   }
-    // }
-
-    // if (!addToTop) {
-    //   newTask.pos = lastPos.current ? lastPos.current + 1234 : 0;
-    // }
-
     newTask.groupId = groupId;
-    // if (typeof newTask.pos !== "number") {
-    //   console.error("newTask.pos is not a number");
-    // } else {
-    // }
+
     setTaskName("");
     await addTask(newTask, group);
     if (onBtnClick) {
@@ -98,6 +75,7 @@ export function AddTaskInGroup({
       className={`add-card-in-list-footer ${addToTop ? "first-task" : ""} ${
         !addToTop ? "last-task" : ""
       }`}
+      ref={groupRef}
     >
       <TextArea
         ref={textAreaRef}

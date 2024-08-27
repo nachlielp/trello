@@ -1,19 +1,17 @@
 import { PlusOutlined } from "@ant-design/icons";
-import { useCallback, useEffect, useRef, useState } from "react";
 import templateCard from "../../assets/svgs/template-card.svg";
-import { AddTaskInGroup } from "./AddTaskInGroup";
 import { ReactSVG } from "react-svg";
 import { useClickOutside } from "../../customHooks/useClickOutside";
 import useScrollPercentage from "../../customHooks/useScrollPercentage";
 
-export function GroupFooter({ groupId, addTask, groupRef }) {
+//TODO clean up
+export function GroupFooter({ groupRef, openBottomAddTask }) {
   const [footerRef, isAddTaskOpen, setIsAddTaskOpen] = useClickOutside(false);
   const [_, setScrollToPercentage] = useScrollPercentage(groupRef);
-  function closeAddTask() {
-    setIsAddTaskOpen(false);
-  }
+
   function onBtnClick() {
-    setIsAddTaskOpen(true);
+    // setIsAddTaskOpen(true);
+    openBottomAddTask();
     setTimeout(() => {
       setScrollToPercentage(200);
     }, 0);
@@ -36,15 +34,6 @@ export function GroupFooter({ groupId, addTask, groupRef }) {
             />
           </button>
         </>
-      )}
-      {isAddTaskOpen && (
-        <AddTaskInGroup
-          groupId={groupId}
-          closeAddTask={closeAddTask}
-          addTask={addTask}
-          addToTop={false}
-          onBtnClick={onBtnClick}
-        />
       )}
     </div>
   );
