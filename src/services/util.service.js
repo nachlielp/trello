@@ -276,6 +276,7 @@ export const utilService = {
   getChecklistBadge,
   createActivity,
   isValidUrl,
+  measureExecutionTime,
 };
 
 export const USERS_KEY = "users";
@@ -1644,4 +1645,12 @@ function getEmojis() {
     "🤩",
     "🥳",
   ];
+}
+
+function measureExecutionTime(functionToMeasure) {
+  const start = performance.now();
+  functionToMeasure();
+  const end = performance.now();
+  const executionTime = end - start;
+  console.log(`Execution time: ${executionTime} milliseconds`);
 }
