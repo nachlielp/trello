@@ -95,7 +95,7 @@ export function ManageMembersPopover({ anchorEl, editTask, task }) {
       <label
         {...triggerProps}
         appearance="primary"
-        isSelected={isOpen}
+        // isSelected={isOpen}
         onClick={onTriggerClick}
       >
         {anchorEl}

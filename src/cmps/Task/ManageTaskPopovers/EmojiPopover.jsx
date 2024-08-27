@@ -29,7 +29,7 @@ export function EmojiPopover({ anchorEl, onAddEmojy }) {
       <label
         {...triggerProps}
         appearance="primary"
-        isSelected={isOpen}
+        // isSelected={isOpen}
         onClick={onTriggerClick}
       >
         {anchorEl}

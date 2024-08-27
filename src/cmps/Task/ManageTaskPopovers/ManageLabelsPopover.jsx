@@ -261,7 +261,7 @@ export function ManageLabelsPopover({
       <label
         {...triggerProps}
         appearance="primary"
-        isSelected={isOpen}
+        // isSelected={isOpen}
         onClick={onTriggerClick}
       >
         {anchorEl}

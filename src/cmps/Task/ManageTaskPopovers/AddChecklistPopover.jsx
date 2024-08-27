@@ -105,7 +105,7 @@ export function AddChecklistPopover({ anchorEl, task, editTask, editBoard }) {
       <label
         {...triggerProps}
         appearance="primary"
-        isSelected={isOpen}
+        // isSelected={isOpen}
         onClick={onTriggerClick}
       >
         {anchorEl}

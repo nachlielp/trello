@@ -51,7 +51,7 @@ export function DeleteAttachmentPopover({
       <label
         {...triggerProps}
         appearance="primary"
-        isSelected={isOpen}
+        // isSelected={isOpen}
         onClick={onTriggerClick}
       >
         {anchorEl}

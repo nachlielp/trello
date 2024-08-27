@@ -100,7 +100,6 @@ export function BoardGroup({
               snapshot.isDragging ? "dragging" : ""
             }`}
           >
-            {console.log(snapshot)}
             <Card
               className={`board-group custom-card ${
                 isDraggingOverId === group.id ? "draggOver" : ""
