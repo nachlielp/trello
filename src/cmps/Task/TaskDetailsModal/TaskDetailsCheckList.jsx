@@ -167,7 +167,7 @@ export function TaskDetailsCheckList({
                   className="btn hide-btn"
                   onClick={() => setHideCHecked((prev) => !prev)}
                 >
-                  Hide checked items
+                  {hideChecked ? "Show " : "Hide "}checked items
                 </button>
               )}
             <button className="btn" onClick={onDeleteList}>
