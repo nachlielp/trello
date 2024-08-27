@@ -54,6 +54,7 @@ export function BoardHeader({
           className="board-name"
           onSubmit={onBoardNameChange}
         />
+        
         <StarBoardBtn
           starredBoardIds={starredBoardIds}
           boardId={board.id}
