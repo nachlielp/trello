@@ -295,7 +295,7 @@ export async function moveAllCards(
               type: "movedTask",
               targetId: t.id,
               targetName: t.name,
-              from: sortGroup.name,
+              from: sourceGroup.name,
               to: targetGroup.name,
             },
             user
