@@ -29,13 +29,14 @@ export function ManageCoverPopover({ anchorEl, editTask, task, isFullWidth }) {
         scaled: null,
         brightness: "light",
         size: coverSize,
+        attachment: null,
       },
     });
   }
 
   function onChangeSize(e, size) {
     e.stopPropagation();
-    if (task.cover.color || task.cover.idUploadedBackground) {
+    if (task.cover.color || task.cover.attachment) {
       editTask({ ...task, cover: { ...task.cover, size: size } });
     }
   }
@@ -47,8 +48,7 @@ export function ManageCoverPopover({ anchorEl, editTask, task, isFullWidth }) {
       cover: {
         ...task.cover,
         color: null,
-        scaled: null,
-        idUploadedBackground: null,
+        attachment: null,
         size: "normal",
         brightness: "light",
       },
@@ -57,23 +57,31 @@ export function ManageCoverPopover({ anchorEl, editTask, task, isFullWidth }) {
 
   function onSelectPhoto(e, id) {
     e.stopPropagation();
-    const coverSize = task.cover.size === "full" ? "full" : "normal";
     const img = boardCoverImgs.find((img) => img.id === id);
-    editTask({
+
+    const attachment = {
+      link: img.scaledImgs[2].url,
+      text: img.photographer,
+      avgBgColor: {
+        color: img.bg,
+        isDark: img.brightness === "dark",
+      },
+    };
+
+    const newTask = {
       ...task,
       cover: {
         ...task.cover,
         scaled: img.scaledImgs,
         color: null,
-        idUploadedBackground: img.id,
-        bg: img.bg,
-        brightness: img.brightness,
-        size: coverSize,
+        attachment,
       },
-    });
+    };
+
+    editTask(newTask);
   }
 
-  const isCover = task?.cover.color || task?.cover.scaled;
+  const isCover = task?.cover.color || task?.cover.attachment;
   const backgroundColor =
     utilService.getColorHashByName(task?.cover.color)?.bgColor || null;
 
@@ -108,8 +116,8 @@ export function ManageCoverPopover({ anchorEl, editTask, task, isFullWidth }) {
                   task?.cover.color ? "active" : "non-active"
                 }`}
                 style={{
-                  backgroundImage: task?.cover.scaled
-                    ? `url(${task?.cover?.scaled[0]?.url})`
+                  backgroundImage: task?.cover.attachment
+                    ? `url(${task?.cover?.attachment?.link})`
                     : "none",
                   backgroundSize: "cover",
                   backgroundPosition: "center",
@@ -133,12 +141,12 @@ export function ManageCoverPopover({ anchorEl, editTask, task, isFullWidth }) {
           >
             <div
               className={`full-size-btn ${
-                task?.cover.idUploadedBackground ? "has-image" : "no-image"
+                task?.cover.attachment ? "has-image" : "no-image"
               }`}
               onClick={(e) => onChangeSize(e, "full")}
               style={{
-                backgroundImage: task?.cover.scaled
-                  ? `url(${task?.cover.scaled[0]?.url})`
+                backgroundImage: task?.cover.attachment
+                  ? `url(${task?.cover?.attachment?.link})`
                   : "none",
                 backgroundSize: "cover",
                 backgroundPosition: "center",

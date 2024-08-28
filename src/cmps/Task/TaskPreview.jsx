@@ -51,7 +51,7 @@ export function TaskPreview({ task, editTask, labelActions, isDragging }) {
     coverSize === "full"
       ? taskCover.color
         ? "task-bg-cover"
-        : taskCover.idUploadedBackground
+        : taskCover.attachment
         ? "task-img-full-cover"
         : ""
       : "";
@@ -65,9 +65,9 @@ export function TaskPreview({ task, editTask, labelActions, isDragging }) {
       : {};
 
   const taskBackgroundCoverImageStyle =
-    taskCover?.idUploadedBackground && coverSize === "full"
+    taskCover?.attachment && coverSize === "full"
       ? {
-          backgroundImage: `url(${taskCover?.scaled[2].url})`,
+          backgroundImage: `url(${taskCover?.attachment?.link})`,
           backgroundSize: "cover",
         }
       : {};
@@ -107,11 +107,11 @@ export function TaskPreview({ task, editTask, labelActions, isDragging }) {
           }}
         ></div>
       )}
-      {coverSize === "normal" && taskCover.idUploadedBackground && (
+      {coverSize === "normal" && taskCover.attachment && (
         <div
           className="group-task-header img-cover"
           style={{
-            backgroundImage: `url(${task?.cover?.scaled[2]?.url})`,
+            backgroundImage: `url(${task?.cover?.attachment?.link})`,
           }}
         ></div>
       )}
@@ -140,7 +140,7 @@ export function TaskPreview({ task, editTask, labelActions, isDragging }) {
       {coverSize === "full" && (
         <section
           className={`group-task-content ${
-            taskCover?.idUploadedBackground && "image-cover-content"
+            taskCover?.attachment && "image-cover-content"
           } ${taskCover?.color && "color-cover-content"}`}
         >
           <span className="group-task-content-cover-title">{task?.name}</span>

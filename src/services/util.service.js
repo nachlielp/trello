@@ -1,5 +1,6 @@
 import usersJson from "../../JSON/user.json";
 import boardsJson from "../../JSON/board-info.json";
+import { attachment } from "@cloudinary/url-gen/qualifiers/flag";
 
 const boardLabelColorOptions = [
   {
@@ -277,6 +278,8 @@ export const utilService = {
   createActivity,
   isValidUrl,
   measureExecutionTime,
+  getAverageBorderColor,
+  isColorDark,
 };
 
 export const USERS_KEY = "users";
@@ -511,6 +514,7 @@ function createNewTask(task) {
     subscribed: false,
     url: "", // `https://trello.com/c/${generateShortLink()}`,
     cover: {
+      attachment: null,
       idAttachment: null,
       color: null,
       idUploadedBackground: null,
@@ -1653,4 +1657,75 @@ function measureExecutionTime(functionToMeasure) {
   const end = performance.now();
   const executionTime = end - start;
   console.log(`Execution time: ${executionTime} milliseconds`);
+}
+
+function isColorDark(r, g, b) {
+  // Calculate the perceived brightness using the formula:
+  // (0.299*R + 0.587*G + 0.114*B)
+  const brightness = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  return brightness < 0.5;
+}
+
+function getAverageBorderColor(imageSrc, borderWidth = 1) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = "Anonymous"; // This enables CORS
+    img.onload = function () {
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0, img.width, img.height);
+
+      let r = 0,
+        g = 0,
+        b = 0,
+        count = 0;
+
+      // Top and bottom borders
+      for (let x = 0; x < img.width; x++) {
+        for (let y = 0; y < borderWidth; y++) {
+          let data = ctx.getImageData(x, y, 1, 1).data;
+          r += data[0];
+          g += data[1];
+          b += data[2];
+          count++;
+
+          data = ctx.getImageData(x, img.height - 1 - y, 1, 1).data;
+          r += data[0];
+          g += data[1];
+          b += data[2];
+          count++;
+        }
+      }
+
+      // Left and right borders
+      for (let y = borderWidth; y < img.height - borderWidth; y++) {
+        for (let x = 0; x < borderWidth; x++) {
+          let data = ctx.getImageData(x, y, 1, 1).data;
+          r += data[0];
+          g += data[1];
+          b += data[2];
+          count++;
+
+          data = ctx.getImageData(img.width - 1 - x, y, 1, 1).data;
+          r += data[0];
+          g += data[1];
+          b += data[2];
+          count++;
+        }
+      }
+
+      r = Math.round(r / count);
+      g = Math.round(g / count);
+      b = Math.round(b / count);
+
+      const color = `rgb(${r},${g},${b})`;
+      const isDark = isColorDark(r, g, b);
+
+      resolve({ color, isDark });
+    };
+    img.onerror = reject;
+    img.src = imageSrc;
+  });
 }

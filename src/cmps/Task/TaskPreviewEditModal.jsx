@@ -242,10 +242,10 @@ export function TaskPreviewEditModal({
             }}
           ></div>
         )}
-        {task?.cover.idUploadedBackground && (
+        {task?.cover.attachment && (
           <div
             className="group-task-header img-cover"
-            style={{ backgroundImage: `url(${task?.cover.scaled[2].url})` }}
+            style={{ backgroundImage: `url(${task?.cover.attachment?.link})` }}
           ></div>
         )}
         <main className="task-preview-edit-modal-content">
