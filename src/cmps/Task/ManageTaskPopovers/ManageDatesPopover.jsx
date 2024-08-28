@@ -339,7 +339,7 @@ function ManageDatesPopoverContent({ task, editTask, onClose, editBoard }) {
   }
 
   function onSelectReminder(e) {
-    setReminder(e.id);
+    // setReminder(e.id);
   }
 
   async function onSave() {

@@ -42,7 +42,8 @@ export function CustomSelect({
     setSearchValue(e.target.value);
   }
 
-  function onSelectOption(item) {
+  function onSelectOption(item, e) {
+    e.stopPropagation();
     setSelectedItem(item);
     if (onSelect) {
       onSelect(item);
@@ -58,7 +59,7 @@ export function CustomSelect({
       {filteredItems.map((item) => (
         <button
           key={item?.id}
-          onClick={() => onSelectOption(item)}
+          onClick={(e) => onSelectOption(item, e)}
           className={`option ${
             selectedItem?.name === item?.name ? "selected" : ""
           } ${item.isCurrent ? "current" : ""}`}
