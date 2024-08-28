@@ -1,5 +1,5 @@
-import { useRef, useState, useEffect } from "react";
-import { Modal, Input } from "antd";
+import { useRef, useState, useEffect, forwardRef } from "react";
+import { Modal, Input, ConfigProvider } from "antd";
 import editSvg from "../../assets/svgs/edit.svg";
 import cardIcon from "/img/taskActionBtns/cardIcon.svg";
 import { TaskPreviewBadges } from "./TaskPreviewBadges";
@@ -22,6 +22,10 @@ import { useNavigate } from "react-router-dom";
 const { TextArea } = Input;
 import Popup from "@atlaskit/popup";
 
+const ForwardedPopup = forwardRef((props, ref) => (
+  <Popup {...props} ref={ref} />
+));
+
 export function TaskPreviewEditModal({
   task,
   isHovered,
@@ -34,13 +38,15 @@ export function TaskPreviewEditModal({
 }) {
   const boardLabels = useSelector((state) => state.boardModule.board.labels);
   const [taskLabels, setTaskLabels] = useState([]);
-
+  const [currentPlacement, setCurrentPlacement] = useState("right-start");
   const [modalStyle, setModalStyle] = useState({});
   const [taskName, setTaskName] = useState(task?.name || "");
   const [showEditModalBtn, setShowEditModalBtn] = useState(false);
+  const [popoverVisible, setPopoverVisible] = useState(false);
+
   const containerRef = useRef(null);
   const triggerRef = useRef(null);
-
+  const popupRef = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -206,7 +212,7 @@ export function TaskPreviewEditModal({
 
   const content = () => {
     return (
-      <>
+      <div className={`task-preview-floating-buttons ${currentPlacement}`}>
         {modalActionButtons.map((btn, index) => (
           <div
             key={index}
@@ -218,7 +224,7 @@ export function TaskPreviewEditModal({
             {btn.popover}
           </div>
         ))}
-      </>
+      </div>
     );
   };
 
@@ -269,6 +275,7 @@ export function TaskPreviewEditModal({
       </div>
     );
   };
+
   return (
     <div>
       {showEditModalBtn && (
@@ -280,32 +287,42 @@ export function TaskPreviewEditModal({
           />
         </div>
       )}
-      <Modal
-        className="task-preview-edit-modal"
-        open={isOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        getContainer={() => containerRef?.current}
-        style={modalStyle}
-        width={taskWidth}
-        closable={false}
-        footer={null}
-        transitionName="" // Disable modal open animation
-        maskTransitionName=""
+      <ConfigProvider
+        getPopupContainer={() => triggerRef.current || document.body}
       >
-        <>
-          <Popup
+        <Modal
+          className="task-preview-edit-modal"
+          open={isOpen}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          getContainer={() => containerRef?.current}
+          style={modalStyle}
+          width={taskWidth}
+          closable={false}
+          footer={null}
+          transitionName="" // Disable modal open animation
+          maskTransitionName=""
+          mask={false} // Disable the full-screen mask
+        >
+          <ForwardedPopup
+            id="task-preview-edit-modal-popup"
             isOpen={isOpen}
-            onClose={() => {}}
-            placement="bottom-start"
-            fallbackPlacements={["top-start", "auto"]}
+            onClose={() => setPopoverVisible(false)}
+            placement="right-start"
+            fallbackPlacements={["right", "left-start", "left"]}
             content={content}
-            trigger={trigger}
-            zIndex={10000}
+            trigger={(triggerProps) => (
+              <div {...triggerProps} onClick={() => setPopoverVisible(true)}>
+                {trigger()}
+              </div>
+            )}
+            zIndex={10001}
             triggerRef={triggerRef}
+            ref={popupRef}
+            onPlacementChanged={(placement) => setCurrentPlacement(placement)}
           />
-        </>
-      </Modal>
+        </Modal>
+      </ConfigProvider>
     </div>
   );
 }
