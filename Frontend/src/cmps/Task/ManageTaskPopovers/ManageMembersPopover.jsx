@@ -13,6 +13,7 @@ export function ManageMembersPopover({ anchorEl, editTask, task }) {
   const [unselectedMembers, setUnselectedMembers] = useState([]);
 
   useEffect(() => {
+    // TODO: members dont have fullName, add mini user
     if (inputSearch === "") {
       setSelectedMembers(
         members.filter((member) => task?.idMembers.includes(member?.id))
@@ -21,6 +22,7 @@ export function ManageMembersPopover({ anchorEl, editTask, task }) {
         members.filter((member) => !task?.idMembers.includes(member?.id))
       );
     } else {
+      return;
       setSelectedMembers(
         members
           .filter((member) => task?.idMembers.includes(member?.id))

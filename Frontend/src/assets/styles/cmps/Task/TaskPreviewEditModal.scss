@@ -7,21 +7,42 @@
   animation: none !important;
   opacity: 1 !important;
 
+  .preview-anchor-btn {
+    background: none;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    margin: 2px 2px 8px 0;
+    width: 32px;
+    height: 32px;
+
+    background: var(--ds-surface, #f1f2f4);
+
+    &:hover {
+      background-color: var(--ds-surface-raised-hovered, #f1f2f4);
+    }
+
+    .trello-icon {
+      font-size: 16px;
+      font-weight: 100;
+      color: #091e42;
+    }
+  }
   .edit-button {
     background: none;
     border-radius: 50%;
     border: none;
     cursor: pointer;
-    margin: 3px 3px 8px 0;
-    width: 28px;
-    height: 28px;
+    margin: 2px 2px 8px 0;
+    width: 30px;
+    height: 30px;
 
     color: var(--ds-text-primary);
 
     background: var(--ds-surface, #f1f2f4);
 
     &:hover {
-      background-color: var(--ds-surface-overlay, #fff);
+      background-color: var(--ds-surface-raised-hovered, #f1f2f4);
     }
 
     span {

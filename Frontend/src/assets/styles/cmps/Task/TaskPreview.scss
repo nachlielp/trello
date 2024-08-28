@@ -26,20 +26,27 @@
     opacity: 0.5;
   }
 
+  .group-task-content-title {
+    align-self: center;
+    font-size: 14px;
+    font-weight: 400;
+    min-height: 12px;
+    line-height: 1.2;
+    color: var(--ds-text);
+    padding-bottom: 4px;
+    margin-bottom: 2p;
+    overflow-wrap: break-word;
+  }
+
   .group-task-content-cover-title {
     margin-top: 2px;
     font-size: 14px;
     font-weight: 600;
-    line-height: 16px;
+    min-height: 16px;
+    line-height: 1.2;
     color: var(--ds-text);
-    // background: var(--ds-surface-overlay);
-  }
-  .group-task-content-title {
-    margin-top: 2px;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 16px;
-    color: var(--ds-text);
+    text-wrap: wrap;
+    overflow-wrap: break-word;
   }
   &.custom-card .ant-card-body {
     padding: 0 !important;

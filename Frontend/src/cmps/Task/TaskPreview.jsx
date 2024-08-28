@@ -20,6 +20,12 @@ export function TaskPreview({ task, editTask, labelActions, isDragging }) {
   const taskCover = task?.cover;
   const coverSize = taskCover?.size;
 
+  const isBadges =
+    task.attachments.lenght > 0 ||
+    task.desc.length > 0 ||
+    task.checkLists.length > 0 ||
+    task.due;
+
   useEffect(() => {
     const taskLabels =
       task?.idLabels
@@ -118,9 +124,7 @@ export function TaskPreview({ task, editTask, labelActions, isDragging }) {
       {coverSize === "normal" && (
         <section
           className={`group-task-content ${
-            taskCover?.idUploadedBackground || taskCover?.color
-              ? "normal-cover"
-              : ""
+            taskCover?.attachment || taskCover?.color ? "normal-cover" : ""
           }`}
         >
           <article className="preview-labels">
@@ -134,7 +138,7 @@ export function TaskPreview({ task, editTask, labelActions, isDragging }) {
               ))}
           </article>
           <span className="group-task-content-title">{task?.name}</span>
-          <TaskPreviewBadges task={task} editTask={editTask} />
+          {isBadges && <TaskPreviewBadges task={task} editTask={editTask} />}
         </section>
       )}
       {coverSize === "full" && (

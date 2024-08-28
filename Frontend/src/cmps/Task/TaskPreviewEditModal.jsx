@@ -282,11 +282,9 @@ export function TaskPreviewEditModal({
     <div>
       {showEditModalBtn && (
         <div ref={containerRef} className="task-preview-edit-modal-anchor">
-          <SvgButton
-            src={editSvg}
-            className="edit-button"
-            onClick={showModal}
-          />
+          <button className="preview-anchor-btn" onClick={showModal}>
+            <label className="trello-icon icon-edit"></label>
+          </button>
         </div>
       )}
       <ConfigProvider
