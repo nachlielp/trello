@@ -96,9 +96,11 @@ export function TaskPreview({ task, editTask, labelActions, isDragging }) {
         labelActions={labelActions}
         closePreviewModal={onOpenPreviewModal}
       />
-      {coverSize === "normal" && taskCover.color && (
+      {taskCover.color && (
         <div
-          className="group-task-header"
+          className={`group-task-header ${
+            coverSize === "normal" ? "normal-cover" : "full-cover"
+          }`}
           style={{
             backgroundColor: utilService.getColorHashByName(task?.cover.color)
               .bgColor,
@@ -141,7 +143,7 @@ export function TaskPreview({ task, editTask, labelActions, isDragging }) {
             taskCover?.idUploadedBackground && "image-cover-content"
           } ${taskCover?.color && "color-cover-content"}`}
         >
-          <span className="group-task-content-title">{task?.name}</span>
+          <span className="group-task-content-cover-title">{task?.name}</span>
         </section>
       )}
     </section>

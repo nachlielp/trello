@@ -10,8 +10,11 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-  }
 
+    &.no-checklist-badges {
+      display: none;
+    }
+  }
 
   .task-bg-cover,
   .task-img-cover {
@@ -117,7 +120,6 @@
         }
       }
     }
-
   }
 
   .task-icon {

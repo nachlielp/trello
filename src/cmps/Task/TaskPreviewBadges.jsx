@@ -158,7 +158,13 @@ export function TaskPreviewBadges({ task, editTask }) {
 
   return (
     <div className="task-preview-badges">
-      <div className="task-badges-content">
+      <div
+        className={`task-badges-content ${
+          task.checkLists.length === 0 || taskMembers.length === 0
+            ? "no-checklist-badges"
+            : ""
+        }`}
+      >
         <aside className="aside-task-icons">
           <section className="task-preview-icons">{taskIcons}</section>
         </aside>
