@@ -101,6 +101,7 @@ export function BoardIndex() {
   }
 
   async function onEditTask(task) {
+    console.log("onEditTask", task);
     if (task.closed) {
       const newActivity = utilService.createActivity(
         {
@@ -110,6 +111,7 @@ export function BoardIndex() {
         },
         user
       );
+      await editTask(task);
       await updateBoard({
         ...board,
         groups: board.groups.map((g) =>
