@@ -4,6 +4,7 @@ import TextArea from "antd/es/input/TextArea";
 import { useState, useEffect, useRef } from "react";
 import { utilService } from "../../../services/util.service";
 import { useSelector } from "react-redux";
+import TextField from "@atlaskit/textfield";
 
 export function AddChecklistPopover({ anchorEl, task, editTask, editBoard }) {
   const board = useSelector((state) => state.boardModule.board);
@@ -80,12 +81,18 @@ export function AddChecklistPopover({ anchorEl, task, editTask, editBoard }) {
       <div className="checklist-main">
         <h2>Title</h2>
         {isOpen && (
-          <TextArea
+          // <TextArea
+          //   ref={inputRef}
+          //   className="checklist-title-input"
+          //   value={checklistName}
+          //   autoSize={{ minRows: 1 }}
+          //   onChange={onChange}
+          // />
+
+          <TextField
             ref={inputRef}
             className="checklist-title-input"
             value={checklistName}
-            autoSize={{ minRows: 1 }}
-            onChange={onChange}
           />
         )}
 

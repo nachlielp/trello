@@ -17,6 +17,7 @@
     "@ant-design/icons": "^5.3.7",
     "@atlaskit/blanket": "^13.3.1",
     "@atlaskit/popup": "^1.23.0",
+    "@atlaskit/textfield": "^6.5.1",
     "@cloudinary/react": "^1.13.0",
     "@cloudinary/url-gen": "^1.20.0",
     "@mdxeditor/editor": "^3.8.0",
