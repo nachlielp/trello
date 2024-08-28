@@ -1,10 +1,10 @@
 import dayjs from "dayjs";
 import { DeleteAttachmentPopover } from "../ManageTaskPopovers/DeleteAttachmentPopover";
 import { EditAttachmentPopover } from "../ManageTaskPopovers/EditAttachmentPopover";
-import { Image } from "antd";
 import { useState } from "react";
 import { utilService } from "../../../services/util.service";
 import { useSelector } from "react-redux";
+import { Image } from "antd";
 
 export function TaskDetailsAttachment({
   attachment,
@@ -16,6 +16,8 @@ export function TaskDetailsAttachment({
   const user = useSelector((state) => state.userModule.user);
   const board = useSelector((state) => state.boardModule.board);
   const { link, text } = attachment;
+
+  const isCover = task?.cover?.attachment?.id === attachment.id;
 
   function onDownload(e) {
     e.preventDefault();
@@ -56,10 +58,17 @@ export function TaskDetailsAttachment({
       ...board,
       activities: [...board?.activities, newActivity],
     });
-    editTask({
+    const newTask = {
       ...task,
       attachments: task?.attachments?.filter((att) => att.id !== attachment.id),
-    });
+    };
+    if (isCover) {
+      newTask.cover = {
+        ...task.cover,
+        attachment: null,
+      };
+    }
+    editTask(newTask);
   }
 
   function onEdit(newAttachment) {
@@ -84,9 +93,41 @@ export function TaskDetailsAttachment({
       setPreviewVisible(true);
     }
   }
+
+  function onMakeCover(e) {
+    e.stopPropagation();
+
+    const coverSize = task?.cover?.size || "normal";
+    if (isCover) {
+      editTask({
+        ...task,
+        cover: {
+          ...task.cover,
+          attachment: null,
+          size: coverSize,
+        },
+        attachments: task?.attachments?.map((att) =>
+          att.id === attachment.id ? { ...att, isCover: false } : att
+        ),
+      });
+    } else {
+      editTask({
+        ...task,
+        cover: {
+          ...task.cover,
+          attachment: attachment,
+          color: null,
+          size: coverSize,
+        },
+        attachments: task?.attachments?.map((att) =>
+          att.id === attachment.id ? { ...att, isCover: true } : att
+        ),
+      });
+    }
+  }
   const isLink = attachment.type === "link";
   //TODO check if img and supported image type
-  const isImg = false;
+  const isImg = attachment.type === "image";
   return (
     <section className="task-details-attachment" onClick={onClickAttachment}>
       {previewVisible && (
@@ -101,9 +142,19 @@ export function TaskDetailsAttachment({
           style={{ display: "none" }}
         />
       )}
-      <article className="attachment-preview">
+      <article
+        className="attachment-preview"
+        style={{ backgroundColor: attachment.avgBgColor.color }}
+      >
         {isImg ? (
-          <img src={attachment.link} alt={attachment.text} />
+          // <img src={attachment.link} alt={attachment.text} />
+          <Image
+            width={112}
+            height={80}
+            src={attachment.link}
+            preview={false}
+            style={{ objectFit: "contain" }}
+          />
         ) : (
           <label className="attachment-icon-wrapper">
             {attachment.format ? (
@@ -160,6 +211,13 @@ export function TaskDetailsAttachment({
             onEdit={onEdit}
             anchorEl={<label className="attachment-action">Edit</label>}
           />
+        </div>
+        <div className="make-cover-btn" onClick={onMakeCover}>
+          <label className="trello-icon icon-card-cover" />
+          <label className="make-cover-btn-label">
+            &nbsp;
+            {isCover ? "Remove cover" : "Make cover"}
+          </label>
         </div>
       </article>
     </section>

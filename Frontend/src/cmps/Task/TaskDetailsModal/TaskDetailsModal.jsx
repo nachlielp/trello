@@ -47,7 +47,7 @@ export function TaskDetailsModal({
 
   const isMember = task?.idMembers?.includes(user?.id);
   const hasMembers = task?.idMembers?.length > 0;
-  const isImgCover = task?.cover?.idUploadedBackground;
+  const isImgCover = task?.cover?.attachment;
   const isColorCover = task?.cover?.color;
 
   async function onJoin() {
@@ -83,6 +83,15 @@ export function TaskDetailsModal({
   if (!task) {
     return <></>;
   }
+
+  const brightness = task?.cover?.attachment
+    ? task?.cover?.attachment?.avgBgColor.isDark
+      ? "dark"
+      : "light"
+    : task?.cover?.color
+    ? task?.cover?.brightness
+    : "light";
+
   const colorCoverHeader = (
     <section
       className={`details-header-color-cover`}
@@ -93,19 +102,17 @@ export function TaskDetailsModal({
     >
       <article className={`details-header-cover-actions-wrapper`}>
         <div style={{ position: "relative", display: "inline-block" }}>
-          <div className="inner-cover-btn">
-            <ManageCoverPopover
-              anchorEl={
-                <SvgButton
-                  src={coverIcon}
-                  className={`cover-btn ${task?.cover?.brightness}`}
-                  label="Cover"
-                />
-              }
-              editTask={editTask}
-              task={task}
-            />
-          </div>
+          <ManageCoverPopover
+            anchorEl={
+              <SvgButton
+                src={coverIcon}
+                className={`cover-btn ${brightness}`}
+                label="Cover"
+              />
+            }
+            editTask={editTask}
+            task={task}
+          />
         </div>
       </article>
     </section>
@@ -134,13 +141,13 @@ export function TaskDetailsModal({
 
   const imgCoverHeader = (
     <section
-      className={`details-header-img-cover ${task?.cover?.brightness}`}
+      className={`details-header-img-cover ${brightness}`}
       style={{
-        backgroundColor: task?.cover?.bg,
+        backgroundColor: task?.cover?.attachment?.avgBgColor?.color,
       }}
     >
-      {!!task?.cover?.scaled?.length > 0 && (
-        <img src={task?.cover?.scaled[2].url} alt="task cover" />
+      {task?.cover?.attachment && (
+        <img src={task?.cover?.attachment.link} alt="task cover" />
       )}
       <article className={`details-header-cover-actions-wrapper`}>
         <div style={{ position: "relative", display: "inline-block" }}>
@@ -148,7 +155,7 @@ export function TaskDetailsModal({
             anchorEl={
               <SvgButton
                 src={coverIcon}
-                className={`cover-btn ${task?.cover?.brightness}`}
+                className={`cover-btn ${brightness}`}
                 label="Cover"
               />
             }
@@ -257,7 +264,7 @@ export function TaskDetailsModal({
       onCancel={onClose}
       loading={group == undefined}
       footer=""
-      className={`task-details ${task?.cover?.brightness}`}
+      className={`task-details ${brightness}`}
     >
       {isColorCover && colorCoverHeader}
       {!!isImgCover && imgCoverHeader}

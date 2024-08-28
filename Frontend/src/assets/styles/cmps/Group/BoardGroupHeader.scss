@@ -3,9 +3,9 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin: 4px 6px;
+  margin: 4px 0 4px 6px;
   color: var(--ds-text);
-  width: 250px;
+  width: 255px;
 }
 
 .board-group-header .group-more-btn {
@@ -20,7 +20,7 @@
   box-shadow: none;
   background-color: var(--tr-background-list);
   color: var(--ds-icon);
-
+  margin-left: auto;
   span {
     font-size: 16px;
   }

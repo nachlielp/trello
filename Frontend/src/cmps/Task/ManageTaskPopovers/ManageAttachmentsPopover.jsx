@@ -77,6 +77,11 @@ function ManageAttachmentsPopoverContent({
 
   // ... rest
 
+  const makeCover =
+    !task.cover.attachment &&
+    !task.cover.color &&
+    task.attachments.length === 0;
+
   async function onAddLink() {
     if (link === "" || !utilService.isValidUrl(link)) {
       setInvalidLink(true);
@@ -128,6 +133,17 @@ function ManageAttachmentsPopoverContent({
   }
 
   async function onAddAttachment(data) {
+    const avgBgColor = await utilService.getAverageBorderColor(
+      data.secure_url,
+      10
+    );
+
+    const isDark = utilService.isColorDark(
+      avgBgColor.r,
+      avgBgColor.g,
+      avgBgColor.b
+    );
+
     const attachment = {
       id: utilService.makeId(),
       link: data.secure_url,
@@ -135,6 +151,8 @@ function ManageAttachmentsPopoverContent({
       format: data.format,
       createdAt: dayjs().toISOString(),
       type: data.resource_type,
+      avgBgColor,
+      isDark,
     };
 
     if (!Array.isArray(task.attachments)) {
@@ -154,11 +172,20 @@ function ManageAttachmentsPopoverContent({
       ...board,
       activities: [...board?.activities, newActivity],
     });
-    editTask({
+
+    const newTask = {
       ...task,
       attachments: [...task.attachments, attachment],
-    });
-
+    };
+    if (makeCover) {
+      newTask.cover = {
+        ...task.cover,
+        attachment: attachment,
+        color: null,
+        size: "normal",
+      };
+    }
+    editTask(newTask);
     onClose();
     showSuccessMsg("Success");
   }

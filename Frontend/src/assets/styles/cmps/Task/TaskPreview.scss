@@ -35,11 +35,15 @@
     // background: var(--ds-surface-overlay);
   }
   .group-task-content-title {
-    margin-top: 2px;
+    align-self: center;
+    height: 16px;
+    margin-top: 1px;
     font-size: 14px;
     font-weight: 400;
-    line-height: 16px;
+    line-height: 1;
     color: var(--ds-text);
+    margin-bottom: 4px;
+    display: block;
   }
   &.custom-card .ant-card-body {
     padding: 0 !important;
