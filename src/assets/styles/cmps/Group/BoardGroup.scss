@@ -6,7 +6,9 @@
 .board-groups:has(> .disable) * {
   pointer-events: none;
 }
+
 .board-group-container {
+  width: 272px;
   display: flex;
   flex-direction: column;
   height: 100%;

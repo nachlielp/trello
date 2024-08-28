@@ -73,19 +73,7 @@ export function TaskPreview({ task, editTask, labelActions, isDragging }) {
       : {};
 
   return (
-    // <Draggable draggableId={task.id} index={task.pos}>
-    //   {(provided, snapshot) => (
-    //     <div
-    //       className={`task ${snapshot.isDragging ? "dragging" : ""}`}
-    //       {...provided.draggableProps}
-    //       {...provided.dragHandleProps}
-    //       ref={provided.innerRef}
-    //       style={{
-    //         ...provided.draggableProps.style,
-    //         opacity: snapshot.isDragging ? 0.5 : 1,
-    //       }}
-    //     >
-    <Card
+    <section
       ref={taskRef}
       className={`task-preview custom-card ${covorCardClass} ${
         isOpenPreviewModal ? "open-preview-modal" : ""
@@ -156,9 +144,6 @@ export function TaskPreview({ task, editTask, labelActions, isDragging }) {
           <span className="group-task-content-title">{task?.name}</span>
         </section>
       )}
-    </Card>
-    //     </div>
-    //   )}
-    // </Draggable>
+    </section>
   );
 }

@@ -163,6 +163,9 @@ export function BoardIndex() {
 
   function onDragStart(result) {
     setIsDraggingOverId(null);
+    if (result?.source?.droppableId !== "board") {
+      setIsDraggingOverId(result?.source?.droppableId);
+    }
   }
 
   function onDragUpdate(result) {
@@ -201,6 +204,7 @@ export function BoardIndex() {
         sourceIndex: source.index,
         destinationIndex: destination.index,
       };
+
       await moveTask(dragTaskEvent, board, user);
     }
   }
@@ -239,8 +243,9 @@ export function BoardIndex() {
                 {...provided.droppableProps}
                 {...handlers}
               >
-                {sortedGroups &&
-                  sortedGroups.map((group) => (
+                {board.groups
+                  .filter((g) => !g.closed)
+                  .map((group) => (
                     <BoardGroup
                       key={group.id}
                       group={group}

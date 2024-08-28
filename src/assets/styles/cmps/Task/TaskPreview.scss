@@ -1,13 +1,15 @@
 .task-preview {
   max-height: 100%;
-  width: 246px;
+  // width: 100%;
   box-sizing: border-box;
   cursor: pointer;
   position: relative;
+  // padding: 0 5px;
   margin: 0 5px;
   background-color: var(--ds-surface-raised, #ffffff);
   color: var(--ds-text);
   border: none;
+  border-radius: 8px;
   box-shadow: var(
     --ds-shadow-raised,
     0px 1px 1px #091e4240,

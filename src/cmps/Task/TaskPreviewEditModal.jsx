@@ -22,10 +22,6 @@ import { useNavigate } from "react-router-dom";
 const { TextArea } = Input;
 import Popup from "@atlaskit/popup";
 
-const ForwardedPopup = forwardRef((props, ref) => (
-  <Popup {...props} ref={ref} />
-));
-
 export function TaskPreviewEditModal({
   task,
   isHovered,
@@ -38,11 +34,10 @@ export function TaskPreviewEditModal({
 }) {
   const boardLabels = useSelector((state) => state.boardModule.board.labels);
   const [taskLabels, setTaskLabels] = useState([]);
-  const [currentPlacement, setCurrentPlacement] = useState("right-start");
   const [modalStyle, setModalStyle] = useState({});
   const [taskName, setTaskName] = useState(task?.name || "");
+  const [removePopupButtons, setRemovePopupButtons] = useState(false);
   const [showEditModalBtn, setShowEditModalBtn] = useState(false);
-  const [popoverVisible, setPopoverVisible] = useState(false);
 
   const containerRef = useRef(null);
   const triggerRef = useRef(null);
@@ -92,6 +87,7 @@ export function TaskPreviewEditModal({
   }
 
   function handleOpenCard() {
+    setRemovePopupButtons(true);
     closePreviewModal();
     navigate(`/c/${task?.id}`, { replace: true });
   }
@@ -211,8 +207,13 @@ export function TaskPreviewEditModal({
   //     : allModalActionButtons;
 
   const content = () => {
+    if (!isOpen) return null;
     return (
-      <div className={`task-preview-floating-buttons ${currentPlacement}`}>
+      <div
+        className={`task-preview-floating-buttons ${
+          removePopupButtons ? "remove-popup-buttons" : ""
+        }`}
+      >
         {modalActionButtons.map((btn, index) => (
           <div
             key={index}
@@ -307,18 +308,14 @@ export function TaskPreviewEditModal({
           <Popup
             id="task-preview-edit-modal-popup"
             isOpen={isOpen}
-            onClose={() => setPopoverVisible(false)}
             placement="right-start"
             fallbackPlacements={["right", "left-start", "left"]}
             content={content}
-            trigger={(triggerProps) => (
-              <div {...triggerProps} onClick={() => setPopoverVisible(true)}>
-                {trigger()}
-              </div>
-            )}
-            zIndex={10001}
+            trigger={(triggerProps) => <div {...triggerProps}>{trigger()}</div>}
+            zIndex={9000}
             triggerRef={triggerRef}
             ref={popupRef}
+            closeOnClickOutside={true}
           />
         </Modal>
       </ConfigProvider>

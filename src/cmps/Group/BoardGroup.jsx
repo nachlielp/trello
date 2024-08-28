@@ -34,6 +34,19 @@ export function BoardGroup({
   const groupRef = useRef();
   const [_, setScrollToPercentage] = useScrollPercentage(groupRef);
 
+  const [showPlaceholder, setShowPlaceholder] = useState(false);
+
+  useEffect(() => {
+    if (isDraggingOverId === group.id || isDraggingOverId === null) {
+      setShowPlaceholder(true);
+    } else {
+      const timer = setTimeout(() => {
+        setShowPlaceholder(false);
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [isDraggingOverId, group.id]);
+
   useEffect(() => {
     if (!isAnyAddTaskOpen) {
       setIsTopAddTaskOpen(false);
@@ -41,6 +54,7 @@ export function BoardGroup({
     }
   }, [isAnyAddTaskOpen]);
 
+  //TODO cleanup
   useEffect(() => {
     const filteredTasks = group.tasks?.filter((task) => !task.closed) || [];
     const updatedTaskIds = filteredTasks.map((task) => task.id);
@@ -54,7 +68,8 @@ export function BoardGroup({
     if (isTopAddTaskOpen) {
       setNewTasksAboveInput(newTasks);
     } else {
-      setSortedTasks(filteredTasks.sort((a, b) => a.pos - b.pos) || []);
+      // setSortedTasks(filteredTasks.sort((a, b) => a.pos - b.pos) || []);
+      setSortedTasks(filteredTasks || []);
       setNewTasksAboveInput([]);
     }
   }, [group.tasks?.length, group.updatedAt, isAnyAddTaskOpen]);
@@ -151,8 +166,10 @@ export function BoardGroup({
                         addToTop={true}
                       />
                     )}
-                    {sortedTasks
+                    {group.tasks
+                      .sort((a, b) => a.pos - b.pos)
                       .filter((task) => !newTasksAboveInput.includes(task.id))
+                      .filter((task) => !task.closed)
                       .map((task, index) => (
                         <Draggable
                           key={task.id}
@@ -167,10 +184,6 @@ export function BoardGroup({
                               className={`task-preview-container ${
                                 dragSnapshot.isDragging ? "dragging" : ""
                               }`}
-                              // style={{
-                              //   ...provided.draggableProps.style,
-                              //   opacity: dragSnapshot.isDragging ? 0.5 : 1,
-                              // }}
                             >
                               <TaskPreview
                                 key={task.id}
@@ -193,8 +206,7 @@ export function BoardGroup({
                         groupRef={groupRef}
                       />
                     )}
-                    {isDraggingOverId === group.id &&
-                      droppableProvided.placeholder}
+                    {showPlaceholder && droppableProvided.placeholder}
                   </main>
                 )}
               </Droppable>
