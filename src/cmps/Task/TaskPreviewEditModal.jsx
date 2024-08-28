@@ -32,6 +32,7 @@ export function TaskPreviewEditModal({
   labelActions,
   closePreviewModal,
 }) {
+  console.log("taskWidth", taskWidth);
   const boardLabels = useSelector((state) => state.boardModule.board.labels);
   const [taskLabels, setTaskLabels] = useState([]);
   const [modalStyle, setModalStyle] = useState({});
@@ -70,6 +71,7 @@ export function TaskPreviewEditModal({
       position: "absolute",
       top: `${rect.top}px`,
       left: `${rect.right - taskWidth}px`,
+      width: `${taskWidth}px`,
     });
     openPreviewModal(true);
   }

@@ -36,7 +36,7 @@ export function TaskPreview({ task, editTask, labelActions, isDragging }) {
     if (taskRef?.current) {
       setTaskWidth(taskRef?.current.offsetWidth);
     }
-  }, [taskRef]);
+  }, [taskRef?.current]);
 
   function onOpenPreviewModal(value) {
     setIsOpenPreviewModal(value);

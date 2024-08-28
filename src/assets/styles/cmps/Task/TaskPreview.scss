@@ -26,6 +26,14 @@
     opacity: 0.5;
   }
 
+  .group-task-content-title {
+    margin-top: 2px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 16px;
+    color: var(--ds-text);
+    // background: var(--ds-surface-overlay);
+  }
   &.custom-card .ant-card-body {
     padding: 0 !important;
   }

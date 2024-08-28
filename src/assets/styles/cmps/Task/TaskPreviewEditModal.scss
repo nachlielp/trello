@@ -34,7 +34,6 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 246px;
 
   .ant-modal-content {
     padding: 0;
@@ -56,10 +55,18 @@
     box-shadow: none;
   }
 
+  .task-name-title {
+    margin-top: 2px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px;
+    color: var(--ds-text);
+    background: var(--ds-surface-overlay);
+  }
   .task-name-input {
     margin-top: 2px;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 500;
     line-height: 16px;
     color: var(--ds-text);
     background: var(--ds-surface-overlay);
