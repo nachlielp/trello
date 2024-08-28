@@ -302,9 +302,9 @@ export function TaskPreviewEditModal({
           footer={null}
           transitionName="" // Disable modal open animation
           maskTransitionName=""
-          mask={false} // Disable the full-screen mask
+          // Disable the full-screen mask
         >
-          <ForwardedPopup
+          <Popup
             id="task-preview-edit-modal-popup"
             isOpen={isOpen}
             onClose={() => setPopoverVisible(false)}
@@ -319,7 +319,6 @@ export function TaskPreviewEditModal({
             zIndex={10001}
             triggerRef={triggerRef}
             ref={popupRef}
-            onPlacementChanged={(placement) => setCurrentPlacement(placement)}
           />
         </Modal>
       </ConfigProvider>
