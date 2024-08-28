@@ -144,7 +144,7 @@ export function TaskDetailsAttachment({
       )}
       <article
         className="attachment-preview"
-        style={{ backgroundColor: attachment.avgBgColor.color }}
+        style={{ backgroundColor: attachment.avgBgColor?.color }}
       >
         {isImg ? (
           // <img src={attachment.link} alt={attachment.text} />
@@ -213,11 +213,15 @@ export function TaskDetailsAttachment({
           />
         </div>
         <div className="make-cover-btn" onClick={onMakeCover}>
-          <label className="trello-icon icon-card-cover" />
-          <label className="make-cover-btn-label">
-            &nbsp;
-            {isCover ? "Remove cover" : "Make cover"}
-          </label>
+          {attachment.type === "image" && (
+            <>
+              <label className="trello-icon icon-card-cover" />
+              <label className="make-cover-btn-label">
+                &nbsp;
+                {isCover ? "Remove cover" : "Make cover"}
+              </label>
+            </>
+          )}
         </div>
       </article>
     </section>

@@ -12,11 +12,16 @@
   border-radius: 12px;
 
   &.dark .anticon-close {
+    font-size: 20px;
     color: #fff;
   }
 
   .ant-modal-close {
     border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-top: -6px;
+    margin-right: -6px;
   }
 
   &.dark .ant-modal-close:hover {
@@ -24,6 +29,8 @@
   }
 
   &.light .anticon-close {
+    font-size: 20px;
+
     color: #000;
   }
 
