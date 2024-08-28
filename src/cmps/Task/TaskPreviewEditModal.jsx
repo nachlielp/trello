@@ -95,17 +95,17 @@ export function TaskPreviewEditModal({
   }
   const modalActionButtons = [
     // { label: 'Open card', icon: cardIcon, onClick: () => console.log('Add to X'), cover: false },
-    {
-      cover: false,
-      popover: (
-        <SvgButton
-          src={cardIcon}
-          className="floating-button"
-          label="Open card"
-          onClick={handleOpenCard}
-        />
-      ),
-    },
+    // {
+    //   cover: false,
+    //   popover: (
+    //     <SvgButton
+    //       src={cardIcon}
+    //       className="floating-button"
+    //       label="Open card"
+    //       onClick={handleOpenCard}
+    //     />
+    //   ),
+    // },
     {
       cover: false,
       popover: (
