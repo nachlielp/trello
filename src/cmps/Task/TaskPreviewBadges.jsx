@@ -160,7 +160,7 @@ export function TaskPreviewBadges({ task, editTask }) {
     <div className="task-preview-badges">
       <div
         className={`task-badges-content ${
-          task.checkLists.length === 0 || taskMembers.length === 0
+          task.checkLists.length === 0 && taskMembers.length === 0
             ? "no-checklist-badges"
             : ""
         }`}

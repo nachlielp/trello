@@ -32,7 +32,6 @@ export function TaskPreviewEditModal({
   labelActions,
   closePreviewModal,
 }) {
-  console.log("taskWidth", taskWidth);
   const boardLabels = useSelector((state) => state.boardModule.board.labels);
   const [taskLabels, setTaskLabels] = useState([]);
   const [modalStyle, setModalStyle] = useState({});
@@ -236,7 +235,7 @@ export function TaskPreviewEditModal({
       <div ref={triggerRef}>
         {task?.cover.color && (
           <div
-            className="group-task-header"
+            className="group-task-header normal-cover"
             style={{
               backgroundColor: utilService.getColorHashByName(task?.cover.color)
                 .bgColor,

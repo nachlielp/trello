@@ -101,7 +101,6 @@ export function BoardIndex() {
   }
 
   async function onEditTask(task) {
-    console.log("onEditTask", task);
     if (task.closed) {
       const newActivity = utilService.createActivity(
         {

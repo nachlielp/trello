@@ -1,7 +1,7 @@
 .board-menu {
   padding: 0;
   margin: 0;
-  min-width: 339px;
+  width: 339px;
   background: var(--ds-surface-overlay, #fff);
   height: 100%;
   box-shadow: var(--ds-shadow-overlay, 0 8px 12px #091e4226, 0 0 1px #091e424f);
@@ -35,7 +35,7 @@
       margin-top: 17px;
       margin-bottom: 16px;
     }
-    
+
     .btn {
       margin-top: 1px;
       cursor: pointer;
@@ -50,7 +50,7 @@
       .trello-icon {
         font-size: 20px;
       }
-      .anticon{
+      .anticon {
         margin-top: 1px;
         font-size: 16px;
         font-weight: 600;
@@ -71,7 +71,6 @@
   .main-menu {
     padding: 12px 12px 8px 12px;
     .btn {
-      
       color: var(--ds-text, #172b4d);
       font-weight: 400;
       width: 100%;
@@ -84,11 +83,10 @@
       border-radius: 8px;
       font-size: 14px;
       display: flex;
-      &:has(.icon-activity){
+      &:has(.icon-activity) {
         margin-bottom: 10px;
-
       }
-      &:has(.icon-remove){
+      &:has(.icon-remove) {
         margin-top: 10px;
       }
       .trello-icon {

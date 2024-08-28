@@ -16,6 +16,7 @@ export function BoardMenu({ setOpenBoarMenu, setShowBtn }) {
   const [preventLoad, setPreventLoad] = useState(false);
   const [animation, setAnimation] = useState("");
   const [navigation, setNavigation] = useState("Menu");
+
   const navigate = useNavigate();
   function onClose() {
     setAnimation("fade-out");
@@ -29,7 +30,7 @@ export function BoardMenu({ setOpenBoarMenu, setShowBtn }) {
     if (!preventLoad) {
       setNavigation("Menu");
     }
-  }, [board]);
+  }, []);
 
   function onSetPreventLoad(boolean) {
     setPreventLoad(boolean);
