@@ -211,6 +211,7 @@ export function AddBoardPopover({ onAddBoard, anchorEl }) {
 
   return (
     <Popup
+      id="add-board-popover-popup"
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
       placement="right"

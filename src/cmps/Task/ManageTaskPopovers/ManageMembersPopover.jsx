@@ -105,6 +105,7 @@ export function ManageMembersPopover({ anchorEl, editTask, task }) {
 
   return (
     <Popup
+      id="manage-members-popover-popup"
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
       placement="bottom-start"

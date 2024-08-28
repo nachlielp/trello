@@ -39,6 +39,7 @@ export function EmojiPopover({ anchorEl, onAddEmojy }) {
 
   return (
     <Popup
+      id="emoji-popover-popup"
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
       placement="bottom-start"

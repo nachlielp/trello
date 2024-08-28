@@ -43,6 +43,7 @@ export function ManageDatesPopover({ anchorEl, task, editTask, editBoard }) {
 
   return (
     <Popup
+      id="manage-dates-popover-popup"
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
       placement="bottom-start"

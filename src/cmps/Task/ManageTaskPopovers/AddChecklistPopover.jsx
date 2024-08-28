@@ -115,6 +115,7 @@ export function AddChecklistPopover({ anchorEl, task, editTask, editBoard }) {
 
   return (
     <Popup
+      id="add-checklist-popover-popup"
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
       placement="bottom-start"

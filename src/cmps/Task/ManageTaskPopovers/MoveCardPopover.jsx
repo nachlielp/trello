@@ -257,6 +257,7 @@ export function MoveCardPopover({ anchorEl, task, onUpdateTask }) {
 
   return (
     <Popup
+      id="move-card-popover-popup"
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
       placement="bottom-start"

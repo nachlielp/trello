@@ -126,6 +126,7 @@ export function EditAttachmentPopover({ anchorEl, onEdit, attachment }) {
 
   return (
     <Popup
+      id="edit-attachment-popover-popup"
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
       placement="bottom-start"

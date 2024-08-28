@@ -40,6 +40,7 @@ export function ManageAttachmentsPopover({
 
   return (
     <Popup
+      id="manage-attachments-popover-popup"
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
       placement="bottom-start"

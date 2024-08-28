@@ -273,6 +273,7 @@ export function ManageLabelsPopover({
 
   return (
     <Popup
+      id="manage-labels-popover-popup"
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
       placement="bottom-start"

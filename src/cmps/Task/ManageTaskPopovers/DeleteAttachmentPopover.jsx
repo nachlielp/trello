@@ -61,6 +61,7 @@ export function DeleteAttachmentPopover({
 
   return (
     <Popup
+      id="delete-attachment-popover-popup"
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
       placement="bottom-start"

@@ -216,6 +216,7 @@ export function ManageCoverPopover({ anchorEl, editTask, task, isFullWidth }) {
 
   return (
     <Popup
+      id="manage-cover-popover-popup"
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
       placement="bottom-start"
