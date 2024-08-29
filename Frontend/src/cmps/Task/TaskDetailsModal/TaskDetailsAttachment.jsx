@@ -174,8 +174,8 @@ export function TaskDetailsAttachment({
           <label className="attachment-created-at">
             {createdAtFormatter({ createdAt: attachment.createdAt })}
           </label>
-          <label className="attachment-content-spacer">•</label>
-          <label className="attachment-action">Comment</label>
+          {/* <label className="attachment-content-spacer">•</label>
+          <label className="attachment-action">Comment</label> */}
           <label className="attachment-content-spacer">•</label>
           {!isLink && (
             <>

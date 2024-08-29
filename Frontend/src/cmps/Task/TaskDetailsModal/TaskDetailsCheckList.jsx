@@ -143,7 +143,11 @@ export function TaskDetailsCheckList({
   return (
     <section className="task-details-checklist">
       <header className="task-details-header">
-        <ReactSVG src={checkListIcon} wrapper="span" />
+        <ReactSVG
+          className="checklist-checkbox"
+          src={checkListIcon}
+          wrapper="span"
+        />
         <NameInput
           value={checkList.label}
           expandInputWidth={false}
