@@ -123,16 +123,17 @@ export function TaskPreview({ task, editTask, labelActions, isDragging }) {
               : ""
           }`}
         >
-          <article className="preview-labels">
-            {taskLabels.length > 0 &&
-              taskLabels.map((label) => (
+          {taskLabels.length > 0 && (
+            <article className="preview-labels">
+              {taskLabels.map((label) => (
                 <TaskPreviewLabel
                   key={label?.id}
                   label={label}
                   isExpanded={true}
                 />
               ))}
-          </article>
+            </article>
+          )}
           <span className="group-task-content-title">{task?.name}</span>
           <TaskPreviewBadges task={task} editTask={editTask} />
         </section>

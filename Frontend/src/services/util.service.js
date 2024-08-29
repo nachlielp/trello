@@ -568,7 +568,7 @@ function getChecklistBadge(task) {
       badges.checkLists.allChecked = true;
     }
     if (taskCheckedItemsCount) {
-      badges.checkLists.count = `${totalCheckdItemsLength} / ${taskCheckedItemsCount}`;
+      badges.checkLists.count = `${totalCheckdItemsLength}/${taskCheckedItemsCount}`;
     }
   }
 

@@ -127,7 +127,7 @@ export function TaskPreviewBadges({ task, editTask }) {
               className="task-icon checklist-icon"
               wrapper="span"
             />
-            <span className="task-icon-count">
+            <span className="task-icon-count check-list">
               {checklistBadge.checkLists.count}
             </span>
           </span>
