@@ -473,7 +473,7 @@ export function ActivityMsg({ activity, task = false }) {
           <div className="main-activity">
             <p className="msg">
               <span className="username">{activity.userFullName}</span> attached{" "}
-              <Link to={activity.attachmentLink}>{activity.attachmentName}</Link> to{" "}
+              <Link to={activity.attachmentLink} target="_blank">{activity.attachmentName}</Link> to{" "}
               {task ? (
                 "this card"
               ) : (
