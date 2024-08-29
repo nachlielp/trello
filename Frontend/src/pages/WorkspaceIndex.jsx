@@ -183,7 +183,12 @@ export function WorkspaceIndex() {
       }}
     >
       <WorkspaceHeader
-        bgColor={(!wrongInviteLink&&selectedBoardId && boardBgPrefs?.backgroundColor) || ""}
+        bgColor={
+          (!wrongInviteLink &&
+            selectedBoardId &&
+            boardBgPrefs?.backgroundColor) ||
+          ""
+        }
         userName={user?.username}
         setDarkMode={setDarkMode}
         darkMode={darkMode}
