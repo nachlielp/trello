@@ -10,6 +10,7 @@ import { updateBoard } from "../../store/board.actions";
 import { utilService } from "../../services/util.service";
 import { useState } from "react";
 import { AddModule } from "./AddModule";
+import adminPng from "/img/admin.png";
 
 export function BoardHeader({
   starredBoardIds,
@@ -84,12 +85,17 @@ export function BoardHeader({
               placement="bottom"
               key={member.id}
               anchorEl={
-                <UserAvatar
-                  memberId={member?.id}
-                  key={member?.id}
-                  size={28}
-                  className="members-avatar"
-                />
+                <div className="member-wrapper">
+                  <UserAvatar
+                    memberId={member?.id}
+                    key={member?.id}
+                    size={28}
+                    className="members-avatar"
+                  />
+                  {member.permissionStatus === "admin" && (
+                    <img src={adminPng} className="admin-png"/>
+                  )}
+                </div>
               }
             />
           ))}

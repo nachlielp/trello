@@ -55,7 +55,7 @@ export function WorkspaceMenu({
             <aside className="aside-start">
               <img
                 className="workspace-cover-img"
-                src="/img/workspace/workspace-T.png"
+                src="/img/workspace/workspace-P.png"
                 alt="board cover"
               />
               <div className="workspace-title">
