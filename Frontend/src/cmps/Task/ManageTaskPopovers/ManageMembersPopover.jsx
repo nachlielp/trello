@@ -26,7 +26,6 @@ export function ManageMembersPopover({ anchorEl, editTask, task }) {
         members.filter((member) => !task?.idMembers.includes(member?.id))
       );
     } else {
-      return;
       setSelectedMembers(
         members
           .filter((member) => task?.idMembers.includes(member?.id))

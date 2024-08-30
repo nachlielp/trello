@@ -60,7 +60,11 @@ export function BoardIndex() {
             ...board,
             members: [
               ...board.members,
-              { id: user.id, permissionStatus: "member" },
+              {
+                id: user.id,
+                permissionStatus: "member",
+                fullName: user.fullName,
+              },
             ],
           });
         }

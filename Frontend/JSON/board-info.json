@@ -10,7 +10,8 @@
         "members": [
             {
                 "id": "64f721dfe7ac348348a02895",
-                "permissionStatus": "admin"
+                "permissionStatus": "admin",
+                "fullName": "nachliel pokroy"
             }
         ],
         "checkListTaskIds": [],
@@ -359,7 +360,8 @@
         "members": [
             {
                 "id": "64f721dfe7ac348348a02895",
-                "permissionStatus": "admin"
+                "permissionStatus": "admin",
+                "fullName": "nachliel pokroy"
             }
         ],
         "checkListTaskIds": [],
@@ -708,7 +710,8 @@
         "members": [
             {
                 "id": "64f721dfe7ac348348a02895",
-                "permissionStatus": "admin"
+                "permissionStatus": "admin",
+                "fullName": "nachliel pokroy"
             }
         ],
         "checkListTaskIds": [],
@@ -1057,22 +1060,29 @@
         "members": [
             {
                 "id": "64f721dfe7ac348348a02895",
-                "permissionStatus": "admin"
+                "permissionStatus": "admin",
+                "fullName": "nachliel pokroy"
             },
             {
                 "id": "666fe4efda8643029b6710f3",
+                "fullName": "Eugene Bondarev",
                 "permissionStatus": "member"
             },
             {
                 "id": "64f72210e7ac348348a02896",
-                "permissionStatus": "member"
+                "permissionStatus": "member",
+                "fullName": "Jane Doe"
             },
             {
                 "id": "64f72221e7ac348348a02897",
+                "fullName": "John Smith",
+
                 "permissionStatus": "member"
             },
             {
                 "id": "64f72231e7ac348348a02898",
+                "fullName": "Emily Brown",
+
                 "permissionStatus": "member"
             }
         ],
@@ -2506,6 +2516,7 @@
         "members": [
             {
                 "id": "64f721dfe7ac348348a02895",
+                "fullName": "nachliel pokroy",
                 "permissionStatus": "admin"
             }
         ],
@@ -2855,7 +2866,9 @@
         "members": [
             {
                 "id": "64f721dfe7ac348348a02895",
-                "permissionStatus": "admin"
+                "permissionStatus": "admin",
+                "fullName": "nachliel pokroy"
+
             }
         ],
         "checkListTaskIds": [],
