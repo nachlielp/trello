@@ -3,6 +3,8 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import path from "path";
+import { authRoutes } from "./api/auth/auth.routes.js";
+import { userRouter } from "./api/user/user.routes.js";
 
 const app = express();
 const server = http.createServer(app);
@@ -23,6 +25,8 @@ app.use(cookieParser());
 app.use(express.json());
 
 //Routes
+app.use("/api/auth", authRoutes);
+app.use("/api/user", userRouter);
 
 app.get("**", (req, res) => {
   res.sendFile(path.resolve("public/index.html"));

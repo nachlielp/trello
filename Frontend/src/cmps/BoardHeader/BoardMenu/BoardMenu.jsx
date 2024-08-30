@@ -58,10 +58,7 @@ export function BoardMenu({ setOpenBoarMenu, setShowBtn }) {
         ...board,
         members: board.members.filter((m) => m.id !== user.id),
       });
-      editUser({
-        ...user,
-        idBoards: user.idBoards.filter((id) => id !== board.id),
-      });
+      
     }
   }
 

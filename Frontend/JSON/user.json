@@ -1,115 +1,78 @@
 [
   {
       "id": "666fe4efda8643029b6710f3",
-      "avatarHash": "ce60a8e37efe9eb56e9dda26392070d0",
       "bio": "",
       "fullName": "Eugene Bondarev",
       "darkMode": "default",
-      "initials": "E",
-      "memberType": "normal",
-      "url": "https://trello.com/jeneea45",
       "username": "jeneea45",
       "status": "disconnected",
       "dateLastImpression": "2024-06-23T14:37:01.036Z",
       "dateLastActive": "2024-06-23T14:37:00.990Z",
       "email": "jeneea45@gmail.com",
-      "idBoards": [],
       "starredBoardIds": []
   },
   {
       "id": "64f721dfe7ac348348a02895",
-      "avatarHash": "8231923b9aa633966a8c86c27501031d",
       "bio": "",
       "fullName": "nachliel pokroy",
       "darkMode": "light",
-      "initials": "NP",
-      "memberType": "normal",
-      "url": "https://trello.com/nachlielpokroy",
       "username": "nachlielpokroy",
       "status": "disconnected",
       "dateLastImpression": "2024-06-23T14:41:37.288Z",
       "dateLastActive": "2024-06-22T08:10:15.105Z",
       "email": "nachpok@gmail.com",
-      "idBoards": [],
       "starredBoardIds": [
           "IJG3c"
       ]
   },
   {
       "id": "64f72210e7ac348348a02896",
-      "avatarHash": "a7b1c3d4e5f6378a9b6c1e2f3a4b5c6d",
       "bio": "",
       "fullName": "Jane Doe",
       "darkMode": "light",
-      "initials": "JD",
-      "memberType": "normal",
-      "url": "https://trello.com/janedoe",
       "username": "janedoe",
       "status": "disconnected",
       "dateLastImpression": "2024-06-24T12:22:47.355Z",
       "dateLastActive": "2024-06-23T09:15:12.555Z",
       "email": "janedoe@example.com",
-      "idBoards": [],
       "starredBoardIds": []
   },
   {
       "id": "64f72221e7ac348348a02897",
-      "avatarHash": "d6e5f4a3b2c1e6a8f9d7c4e3b5a2c1d4",
       "bio": "",
       "fullName": "John Smith",
       "darkMode": "dark",
-      "initials": "JS",
-      "memberType": "normal",
-      "url": "https://trello.com/johnsmith",
       "username": "johnsmith",
       "status": "active",
       "dateLastImpression": "2024-06-23T10:14:36.488Z",
       "dateLastActive": "2024-06-23T10:14:36.488Z",
       "email": "johnsmith@example.com",
-      "idBoards": [
-          "64f7a51fe7ac348348a02791"
-      ],
       "starredBoardIds": [
           "64f7a51fe7ac348348a02791"
       ]
   },
   {
       "id": "64f72231e7ac348348a02898",
-      "avatarHash": "c3d5e6f7a8b9c0d1e2f3b4a5c6d7e8f9",
       "bio": "",
       "fullName": "Emily Brown",
       "darkMode": "light",
-      "initials": "EB",
-      "memberType": "normal",
-      "url": "https://trello.com/emilybrown",
       "username": "emilybrown",
       "status": "disconnected",
       "dateLastImpression": "2024-06-24T15:35:42.187Z",
       "dateLastActive": "2024-06-23T12:20:32.187Z",
       "email": "emilybrown@example.com",
-      "idBoards": [
-          "64f7a520e7ac348348a02792"
-      ],
       "starredBoardIds": []
   },
   {
       "id": "64f72241e7ac348348a02899",
-      "avatarHash": "e6f7a8b9c0d1e2f3b4a5c6d7e8f9d6c3",
       "bio": "",
       "fullName": "Michael Lee",
       "darkMode": "dark",
-      "initials": "ML",
-      "memberType": "normal",
-      "url": "https://trello.com/michaellee",
       "username": "michaellee",
       "status": "active",
       "dateLastImpression": "2024-06-23T18:25:15.467Z",
       "dateLastActive": "2024-06-23T18:25:15.467Z",
       "email": "michaellee@example.com",
-      "idBoards": [
-          "64f7a521e7ac348348a02793",
-          "64f7a522e7ac348348a02794"
-      ],
       "starredBoardIds": [
           "64f7a521e7ac348348a02793"
       ]

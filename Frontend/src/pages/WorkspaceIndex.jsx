@@ -11,7 +11,6 @@ import {
 import {
   login,
   editUser,
-  addBoardToUser,
   loadWorkspaceUsers,
 } from "../store/user.actions";
 import { createBoard } from "../store/workspace.actions";
@@ -54,6 +53,12 @@ export function WorkspaceIndex() {
     getUser();
     loadWorkspaceUsers();
   }, []);
+
+  useEffect(() => {
+    if (window.location.pathname === "" || window.location.pathname === "/") {
+      navigate("/home");
+    }
+  }, [navigate]);
 
   useEffect(() => {
     if (user) {
@@ -128,7 +133,6 @@ export function WorkspaceIndex() {
 
   async function onAddBoard(board) {
     const boardId = await createBoard(board);
-    await addBoardToUser(boardId);
     navigate(`/b/${boardId}`);
   }
 
@@ -157,10 +161,7 @@ export function WorkspaceIndex() {
         ...board,
         members: board.members.filter((m) => m.id !== user.id),
       });
-      editUser({
-        ...user,
-        idBoards: user.idBoards.filter((id) => id !== boardId),
-      });
+      
     }
   }
   const contextValues = {

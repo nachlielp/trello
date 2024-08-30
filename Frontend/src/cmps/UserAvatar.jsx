@@ -38,7 +38,6 @@ export function UserAvatar({
     >
       <Avatar
         key={member?.id}
-        src={member?.avatarHash}
         style={{
           ...dynamicStyles,
           fontSize: `${size * ratio}px`,

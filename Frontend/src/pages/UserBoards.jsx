@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AddBoardPopover } from "../cmps/Workspace/AddBoardPopover";
 import { createBoard } from "../store/workspace.actions";
-import { addBoardToUser, editUser } from "../store/user.actions";
+import {  editUser } from "../store/user.actions";
 
 export function UserBoards() {
   const user = useSelector((state) => state.userModule.user);
@@ -29,8 +29,7 @@ export function UserBoards() {
 
   async function onAddBoard(board) {
     const boardId = await createBoard(board);
-    await addBoardToUser(boardId);
-    navigate(`/b/${boardId}`);
+      navigate(`/b/${boardId}`);
   }
 
   if (!user) return null;
