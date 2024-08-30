@@ -1,4 +1,3 @@
-import { Card } from "antd";
 import { useState, useEffect, useRef } from "react";
 import { utilService } from "../../services/util.service";
 import { TaskPreviewLabel } from "./TaskPreviewLabel";
@@ -6,14 +5,14 @@ import { TaskPreviewBadges } from "./TaskPreviewBadges";
 import { TaskPreviewEditModal } from "./TaskPreviewEditModal";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
-import { controlOrMeta } from "@mdxeditor/editor";
-// import { Draggable } from "react-beautiful-dnd";
 
 export function TaskPreview({ task, editTask, labelActions, isDragging }) {
   const boardLabels = useSelector((state) => state.boardModule.board.labels);
   const [isHovered, setIsHovered] = useState(false);
   const [isOpenPreviewModal, setIsOpenPreviewModal] = useState(false);
-  const [taskLabels, setTaskLabels] = useState([]);
+  const [taskLabels, setTaskLabels] = useState(
+    skelotonPreviewLables(task.idLabels.length)
+  );
   const taskRef = useRef(null);
   const [taskWidth, setTaskWidth] = useState(0);
   const navigate = useNavigate();
@@ -34,7 +33,7 @@ export function TaskPreview({ task, editTask, labelActions, isDragging }) {
       task?.idLabels
         .filter((labelId) =>
           boardLabels?.some((boardLabel) => boardLabel.id === labelId)
-        ) // Filter out non-existing labels
+        )
         .map((labelId) =>
           boardLabels.find((boardLabel) => boardLabel.id === labelId)
         ) || [];
@@ -156,4 +155,11 @@ export function TaskPreview({ task, editTask, labelActions, isDragging }) {
       )}
     </section>
   );
+}
+
+function skelotonPreviewLables(numOfLabels) {
+  return Array.from({ length: numOfLabels }).map((_, index) => ({
+    id: `skeleton-${index}`,
+    color: "skeleton",
+  }));
 }

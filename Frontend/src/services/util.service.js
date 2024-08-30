@@ -4,6 +4,13 @@ import { attachment } from "@cloudinary/url-gen/qualifiers/flag";
 
 const boardLabelColorOptions = [
   {
+    color: "skeleton",
+    bgColor: "#091e420f",
+    hoverdBgColor: "#091e4224",
+    darkFontColor: "#B6C2CF",
+    lightFontColor: "#172B4D",
+  },
+  {
     color: "subtle green",
     bgColor: "#baf3db",
     hoverdBgColor: "#7ee2b8",
