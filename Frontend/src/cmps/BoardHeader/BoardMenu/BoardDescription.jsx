@@ -10,11 +10,8 @@ import { ProfilePopover } from "../../Task/ManageTaskPopovers/ProfilePopover";
 export function BoardDescription({ onSetPreventLoad }) {
   const board = useSelector((state) => state.boardModule.board);
   const user = useSelector((state) => state.userModule.user);
-  const admins = useSelector((state) =>
-    state.boardModule.board.members.filter(
-      (m) => m.permissionStatus === "admin"
-    )
-  );
+  const members = useSelector((state) => state.boardModule.board.members);
+  const admins = members.filter((m) => m.permissionStatus === "admin");
   const [admin, setAdmin] = useState(null);
   const [areaDivRef, isOpen, setIsOpen] = useClickOutside(false);
   const areaRef = useRef(null);
