@@ -1,15 +1,14 @@
-import { Flex, Tooltip } from "antd";
+import { Tooltip } from "antd";
 import { Avatar } from "antd";
 import { utilService } from "../services/util.service";
 
 import { ReactSVG } from "react-svg";
 import defaultProfile from "/img/defaultProfile.svg";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
-import { loadWorkspaceUsers } from "../store/user.actions";
 
 export function UserAvatar({
   memberId,
+  memberProp,
   user,
   size = 24,
   src = defaultProfile,
@@ -18,7 +17,9 @@ export function UserAvatar({
   offTitle = false,
   ...other
 }) {
-  const member = user
+  const member = memberProp
+    ? memberProp
+    : user
     ? user
     : useSelector((state) =>
         state.userModule.users.find((u) => u.id === memberId)
@@ -32,7 +33,7 @@ export function UserAvatar({
   return (
     <Tooltip
       placement="bottom"
-      title={!!!offTitle && `${member?.fullName} (${member?.username})`}
+      title={!!!offTitle && `${member?.fullName} `}
       arrow={false}
     >
       <Avatar

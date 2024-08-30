@@ -22,7 +22,7 @@
 
   &.dragging {
     transform: rotate(5deg);
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    // transition: transform 0.3s ease, opacity 0.3s ease;
     opacity: 0.5;
   }
 
@@ -131,8 +131,8 @@
       display: flex;
       gap: 4px;
       flex-wrap: wrap;
-      margin-bottom: 2px;
-      padding-top: 10px;
+      margin-bottom: 3px;
+      padding-top: 4px;
     }
   }
 }
