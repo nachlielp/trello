@@ -280,6 +280,7 @@ export const utilService = {
   measureExecutionTime,
   getAverageBorderColor,
   isColorDark,
+  isNotEmpty,
 };
 
 export const USERS_KEY = "users";
@@ -526,7 +527,7 @@ function getChecklistBadge(task) {
       badges.checkLists.allChecked = true;
     }
     if (taskCheckedItemsCount) {
-      badges.checkLists.count = `${totalCheckdItemsLength} / ${taskCheckedItemsCount}`;
+      badges.checkLists.count = `${totalCheckdItemsLength}/${taskCheckedItemsCount}`;
     }
   }
 
@@ -1113,4 +1114,8 @@ function getAverageBorderColor(imageSrc, borderWidth = 1) {
     img.onerror = reject;
     img.src = imageSrc;
   });
+}
+
+function isNotEmpty(str) {
+  return (typeof str === "string" || str instanceof String) && !!str.trim();
 }

@@ -12,24 +12,31 @@ export function TaskPreviewBadges({ task, editTask }) {
   const members = useSelector((state) => state.boardModule.board.members);
   const board = useSelector((state) => state.boardModule.board);
   const user = useSelector((state) => state.userModule.user);
-  const [taskIcons, setTaskIcon] = useState([]);
+  const [taskIcons, setTaskIcons] = useState([]);
   const taskMembers =
     members?.filter((member) => task?.idMembers.includes(member?.id)) || [];
 
   useEffect(() => {
-    setTaskIcon([]);
+    setTaskIcons([]);
 
-    if (task.start || task.due) {
+    if (
+      utilService.isNotEmpty(task.start) ||
+      utilService.isNotEmpty(task.due)
+    ) {
       let dateLabel = "";
-      if (task.start && task.due) {
+      if (
+        utilService.isNotEmpty(task.start) &&
+        utilService.isNotEmpty(task.due)
+      ) {
         dateLabel = getDateLabel(task.start) + " - " + getDateLabel(task.due);
       } else {
         dateLabel = getDateLabel(task.start) + getDateLabel(task.due);
       }
+      console.log("dateLabel", dateLabel);
 
       const [dueStatus, dueTooltip] = taskDueStatus(task);
 
-      setTaskIcon((prev) => [
+      setTaskIcons((prev) => [
         ...prev,
         <Tooltip
           placement="bottom"
@@ -61,8 +68,8 @@ export function TaskPreviewBadges({ task, editTask }) {
       ]);
     }
 
-    if (task.desc.length > 0) {
-      setTaskIcon((prev) => [
+    if (utilService.isNotEmpty(task.desc)) {
+      setTaskIcons((prev) => [
         ...prev,
         <Tooltip
           placement="bottom"
@@ -83,7 +90,7 @@ export function TaskPreviewBadges({ task, editTask }) {
     }
 
     if (task?.attachments?.length > 0) {
-      setTaskIcon((prev) => [
+      setTaskIcons((prev) => [
         ...prev,
         <Tooltip
           placement="bottom"
@@ -104,11 +111,11 @@ export function TaskPreviewBadges({ task, editTask }) {
       ]);
     }
 
-    if (task.checkLists) {
+    if (task.checkLists.length > 0) {
       const checklistBadge = utilService.getChecklistBadge(task);
       if (!checklistBadge.checkLists.count) return;
 
-      setTaskIcon((prev) => [
+      setTaskIcons((prev) => [
         ...prev,
         <Tooltip
           placement="bottom"
@@ -160,13 +167,15 @@ export function TaskPreviewBadges({ task, editTask }) {
     <div className="task-preview-badges">
       <div
         className={`task-badges-content ${
-          task.checkLists.length === 0 && taskMembers.length === 0
+          taskIcons.length === 0 && taskMembers.length === 0
             ? "no-checklist-badges"
             : ""
         }`}
       >
         <aside className="aside-task-icons">
-          <section className="task-preview-icons">{taskIcons}</section>
+          {taskIcons.length > 0 && (
+            <section className="task-preview-icons">{taskIcons}</section>
+          )}
         </aside>
         <aside className="aside-task-users">
           {taskMembers.map((member) => (

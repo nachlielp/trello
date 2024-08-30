@@ -6,6 +6,7 @@ import { TaskPreviewBadges } from "./TaskPreviewBadges";
 import { TaskPreviewEditModal } from "./TaskPreviewEditModal";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
+import { controlOrMeta } from "@mdxeditor/editor";
 // import { Draggable } from "react-beautiful-dnd";
 
 export function TaskPreview({ task, editTask, labelActions, isDragging }) {
@@ -22,9 +23,11 @@ export function TaskPreview({ task, editTask, labelActions, isDragging }) {
 
   const isBadges =
     task.attachments?.length > 0 ||
-    task.desc?.length > 0 ||
+    utilService.isNotEmpty(task.desc) ||
     task.checkLists?.length > 0 ||
-    task.due;
+    utilService.isNotEmpty(task.due) ||
+    utilService.isNotEmpty(task.start) ||
+    task.idMembers?.length > 0;
 
   useEffect(() => {
     const taskLabels =

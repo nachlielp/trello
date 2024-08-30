@@ -93,7 +93,7 @@ export function TaskPreviewEditModal({
     navigate(`/c/${task?.id}`, { replace: true });
   }
   const modalActionButtons = [
-    // { label: 'Open card', icon: cardIcon, onClick: () => console.log('Add to X'), cover: false },
+    // TODO fix showing over task detias
     // {
     //   cover: false,
     //   popover: (
@@ -170,24 +170,24 @@ export function TaskPreviewEditModal({
         />
       ),
     },
-    // { label: 'Move', icon: moveIcon, onClick: () => console.log('Add to Y'), cover: true },
-    {
-      cover: true,
-      popover: (
-        <MoveCardPopover
-          task={task}
-          onCloseTask={handleCancel}
-          closeAfter={true}
-          anchorEl={
-            <SvgButton
-              src={moveIcon}
-              label="Move"
-              className="floating-button"
-            />
-          }
-        />
-      ),
-    },
+    // TODO fix dropdonw menu select options issue
+    // {
+    //   cover: true,
+    //   popover: (
+    //     <MoveCardPopover
+    //       task={task}
+    //       onCloseTask={handleCancel}
+    //       closeAfter={true}
+    //       anchorEl={
+    //         <SvgButton
+    //           src={moveIcon}
+    //           label="Move"
+    //           className="floating-button"
+    //         />
+    //       }
+    //     />
+    //   ),
+    // },
     // { label: 'Copy', icon: copyIcon, onClick: () => console.log('Add to Y'), cover: true },
     {
       popover: (
