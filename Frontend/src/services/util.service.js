@@ -509,8 +509,8 @@ function createNewGroup(group) {
   };
 }
 
-function getChecklistBadge(task) {
-  if (!task) return;
+function getChecklistBadge(checkLists) {
+  if (!checkLists) return;
 
   const badges = {
     checkLists: {
@@ -519,12 +519,12 @@ function getChecklistBadge(task) {
     },
   };
 
-  if (task.checkLists) {
-    const taskCheckedItemsCount = task.checkLists.reduce(
+  if (checkLists) {
+    const taskCheckedItemsCount = checkLists.reduce(
       (sum, obj) => sum + obj.checkItems.length,
       0
     );
-    const totalCheckdItemsLength = task.checkLists.reduce((sum, obj) => {
+    const totalCheckdItemsLength = checkLists.reduce((sum, obj) => {
       const localItemsCount = obj.checkItems.filter(
         (item) => item.isChecked === true
       ).length;

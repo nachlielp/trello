@@ -4,7 +4,7 @@ import { UserAvatar } from "../UserAvatar";
 import { useSelector } from "react-redux";
 import { ProfilePopover } from "./ManageTaskPopovers/ProfilePopover";
 import { utilService } from "../../services/util.service";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import dayjs from "dayjs";
 import { updateBoard } from "../../store/board.actions";
 
@@ -12,13 +12,13 @@ export function TaskPreviewBadges({ task, editTask }) {
   const members = useSelector((state) => state.boardModule.board.members);
   const board = useSelector((state) => state.boardModule.board);
   const user = useSelector((state) => state.userModule.user);
-  const [taskIcons, setTaskIcons] = useState([]);
   const taskMembers =
     members?.filter((member) => task?.idMembers.includes(member?.id)) || [];
 
-  useEffect(() => {
-    setTaskIcons([]);
+  const taskIcons = useMemo(() => {
+    const icons = [];
 
+    // Date badge
     if (
       utilService.isNotEmpty(task.start) ||
       utilService.isNotEmpty(task.due)
@@ -35,111 +35,36 @@ export function TaskPreviewBadges({ task, editTask }) {
 
       const [dueStatus, dueTooltip] = taskDueStatus(task);
 
-      setTaskIcons((prev) => [
-        ...prev,
-        <Tooltip
-          placement="bottom"
-          title={dueTooltip}
-          key="dates"
-          arrow={false}
-        >
-          <span
-            className={`task-icon-wrapper dates ${
-              task.dueComplete && "completed"
-            } ${dueStatus}`}
-            onClick={onDateClick}
-          >
-            {task.dueComplete ? (
-              <>
-                <label className="trello-icon icon-clock task-icon default-icon"></label>
-                <label className="trello-icon icon-checklist task-icon hover-icon"></label>
-              </>
-            ) : (
-              <>
-                <label className="trello-icon icon-clock task-icon default-icon"></label>
-                <label className="trello-icon icon-checkbox-unchecked task-icon hover-icon"></label>
-              </>
-            )}
-
-            <span className="task-icon-count">{dateLabel}</span>
-          </span>
-        </Tooltip>,
-      ]);
+      icons.push(
+        dateBadge({
+          dueTooltip,
+          dueComplete: task.dueComplete,
+          dateLabel,
+          dueStatus,
+          onDateClick: (e) => onDateClick(e, task),
+        })
+      );
     }
 
+    // Description badge
     if (utilService.isNotEmpty(task.desc)) {
-      setTaskIcons((prev) => [
-        ...prev,
-        <Tooltip
-          placement="bottom"
-          title="This card has a description"
-          key="description"
-          arrow={false}
-        >
-          <span className="task-icon-wrapper">
-            <ReactSVG
-              src="/img/taskBadges/description.svg"
-              alt="description"
-              className="task-icon"
-              wrapper="span"
-            />
-          </span>
-        </Tooltip>,
-      ]);
+      icons.push(descriptionBadge);
     }
 
+    // Attachments badge
     if (task?.attachments?.length > 0) {
-      setTaskIcons((prev) => [
-        ...prev,
-        <Tooltip
-          placement="bottom"
-          title="Attachments"
-          key="attachments"
-          arrow={false}
-        >
-          <span className="task-icon-wrapper">
-            <ReactSVG
-              src="/img/taskBadges/file.svg"
-              alt="file"
-              className="task-icon"
-              wrapper="span"
-            />
-            <span className="task-icon-count">{task?.attachments?.length}</span>
-          </span>
-        </Tooltip>,
-      ]);
+      console.log("task?.attachments?.length", task?.attachments?.length);
+      icons.push(attachmentsBadge(task?.attachments?.length));
     }
 
+    // Checklist badge
     if (task.checkLists.length > 0) {
-      const checklistBadge = utilService.getChecklistBadge(task);
-      if (!checklistBadge.checkLists.count) return;
-
-      setTaskIcons((prev) => [
-        ...prev,
-        <Tooltip
-          placement="bottom"
-          title="Checklist items"
-          key="checklist"
-          arrow={false}
-        >
-          <span
-            className={`task-icon-wrapper checklist ${
-              checklistBadge.checkLists.allChecked ? "completed" : ""
-            }`}
-          >
-            <ReactSVG
-              src={"/img/board-index/detailsImgs/checkListIcon.svg"}
-              alt="check"
-              className="task-icon checklist-icon"
-              wrapper="span"
-            />
-            <span className="task-icon-count check-list">
-              {checklistBadge.checkLists.count}
-            </span>
-          </span>
-        </Tooltip>,
-      ]);
+      const result = utilService.getChecklistBadge(task.checkLists);
+      console.log("result", result);
+      icons.push(checklistBadge(result));
     }
+
+    return icons;
   }, [task]);
 
   async function onDateClick(e) {
@@ -179,12 +104,13 @@ export function TaskPreviewBadges({ task, editTask }) {
         <aside className="aside-task-users">
           {taskMembers.map((member) => (
             <ProfilePopover
-              memberId={member?.id}
+              memberId={member.id}
               key={member.id}
               anchorEl={
                 <UserAvatar
-                  memberId={member?.id}
+                  memberId={member.id}
                   onClick={(e) => e.stopPropagation()}
+                  memberProp={member}
                 />
               }
             />
@@ -194,6 +120,96 @@ export function TaskPreviewBadges({ task, editTask }) {
     </div>
   );
 }
+
+const dateBadge = ({
+  dueTooltip,
+  dueComplete,
+  dateLabel,
+  dueStatus,
+  onDateClick,
+}) => (
+  <Tooltip placement="bottom" title={dueTooltip} key="dates" arrow={false}>
+    <span
+      className={`task-icon-wrapper dates ${
+        dueComplete && "completed"
+      } ${dueStatus}`}
+      onClick={onDateClick}
+    >
+      {dueComplete ? (
+        <>
+          <label className="trello-icon icon-clock task-icon default-icon"></label>
+          <label className="trello-icon icon-checklist task-icon hover-icon"></label>
+        </>
+      ) : (
+        <>
+          <label className="trello-icon icon-clock task-icon default-icon"></label>
+          <label className="trello-icon icon-checkbox-unchecked task-icon hover-icon"></label>
+        </>
+      )}
+
+      <span className="task-icon-count">{dateLabel}</span>
+    </span>
+  </Tooltip>
+);
+const descriptionBadge = (
+  <Tooltip
+    placement="bottom"
+    title="This card has a description"
+    key="description"
+    arrow={false}
+  >
+    <span className="task-icon-wrapper">
+      <ReactSVG
+        src="/img/taskBadges/description.svg"
+        alt="description"
+        className="task-icon"
+        wrapper="span"
+      />
+    </span>
+  </Tooltip>
+);
+
+const attachmentsBadge = (numOfAttachments) => (
+  <Tooltip
+    placement="bottom"
+    title="Attachments"
+    key="attachments"
+    arrow={false}
+  >
+    <span className="task-icon-wrapper">
+      <ReactSVG
+        src="/img/taskBadges/file.svg"
+        alt="file"
+        className="task-icon"
+        wrapper="span"
+      />
+      <span className="task-icon-count">{numOfAttachments}</span>
+    </span>
+  </Tooltip>
+);
+
+const checklistBadge = ({ checkLists }) => (
+  <Tooltip
+    placement="bottom"
+    title="Checklist items"
+    key="checklist"
+    arrow={false}
+  >
+    <span
+      className={`task-icon-wrapper checklist ${
+        checkLists.allChecked ? "completed" : ""
+      }`}
+    >
+      <ReactSVG
+        src={"/img/board-index/detailsImgs/checkListIcon.svg"}
+        alt="check"
+        className="task-icon checklist-icon"
+        wrapper="span"
+      />
+      <span className="task-icon-count check-list">{checkLists.count}</span>
+    </span>
+  </Tooltip>
+);
 
 function getDateLabel(date) {
   if (!date) return "";
