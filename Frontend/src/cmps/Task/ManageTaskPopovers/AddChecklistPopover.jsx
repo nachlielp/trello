@@ -81,19 +81,20 @@ export function AddChecklistPopover({ anchorEl, task, editTask, editBoard }) {
       <div className="checklist-main">
         <h2>Title</h2>
         {isOpen && (
-          // <TextArea
-          //   ref={inputRef}
-          //   className="checklist-title-input"
-          //   value={checklistName}
-          //   autoSize={{ minRows: 1 }}
-          //   onChange={onChange}
-          // />
-
-          <TextField
+          <TextArea
             ref={inputRef}
             className="checklist-title-input"
             value={checklistName}
+            autoSize={{ minRows: 1 }}
+            onChange={onChange}
           />
+
+          // <TextField
+          //   ref={inputRef}
+          //   className="checklist-title-input"
+          //   value={checklistName}
+          //   onChange={onChange}
+          // />
         )}
 
         <button className="add-btn" onClick={onSubmit}>

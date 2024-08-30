@@ -21,9 +21,9 @@ export function TaskPreview({ task, editTask, labelActions, isDragging }) {
   const coverSize = taskCover?.size;
 
   const isBadges =
-    task.attachments.lenght > 0 ||
-    task.desc.length > 0 ||
-    task.checkLists.length > 0 ||
+    task.attachments?.length > 0 ||
+    task.desc?.length > 0 ||
+    task.checkLists?.length > 0 ||
     task.due;
 
   useEffect(() => {
@@ -127,16 +127,17 @@ export function TaskPreview({ task, editTask, labelActions, isDragging }) {
             taskCover?.attachment || taskCover?.color ? "normal-cover" : ""
           }`}
         >
-          <article className="preview-labels">
-            {taskLabels.length > 0 &&
-              taskLabels.map((label) => (
+          {taskLabels.length > 0 && (
+            <article className="preview-labels">
+              {taskLabels.map((label) => (
                 <TaskPreviewLabel
                   key={label?.id}
                   label={label}
                   isExpanded={true}
                 />
               ))}
-          </article>
+            </article>
+          )}
           <span className="group-task-content-title">{task?.name}</span>
           {isBadges && <TaskPreviewBadges task={task} editTask={editTask} />}
         </section>

@@ -4,7 +4,6 @@
   flex-wrap: wrap;
   justify-content: space-between;
   font-weight: 400;
-  margin-top: 5px;
 
   .task-badges-content {
     display: flex;
@@ -44,7 +43,6 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 6px;
   }
 
   .task-icon-wrapper {
@@ -130,6 +128,9 @@
 
   .task-icon-count {
     font-size: 12px;
-    margin-left: 4px;
+    margin-left: 2px;
+  }
+  .check-list {
+    padding-top: 1px;
   }
 }

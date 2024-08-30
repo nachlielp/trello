@@ -6,7 +6,11 @@ import { ManageTaskPopoverHeader } from "./ManageTaskPopoverHeader";
 import Popup from "@atlaskit/popup";
 
 export function ManageMembersPopover({ anchorEl, editTask, task }) {
-  const members = useSelector((state) => state.boardModule.board.members);
+  const workspaceUsers = useSelector((state) => state.userModule.users);
+  const membersIds = useSelector((state) => state.boardModule.board.members);
+  const members = workspaceUsers.filter((user) =>
+    membersIds.some((member) => member.id === user.id)
+  );
   const [inputSearch, setInputSearch] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [selectedMembers, setSelectedMembers] = useState([]);

@@ -132,6 +132,7 @@ const BoardTab = ({ board, starredBoardIds, starClick }) => {
       onMouseLeave={() => setIsHover(false)}
       onClick={() => navigate(`/b/${board.id}`)}
     >
+      <span className="tab-bg" />
       <h2 className="board-title">{board.name}</h2>
       {(isHover || isStarred) && (
         <StarBoardBtn

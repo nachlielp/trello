@@ -140,7 +140,7 @@
     gap: 8px;
     border-radius: 3px;
     border: none;
-    background-color: #f1f2f4;
+    background-color: var(--ds-surface-raised, #ffffff);
     color: var(--ds-text-primary);
     padding: 6px 12px 6px 10px;
     white-space: nowrap;
