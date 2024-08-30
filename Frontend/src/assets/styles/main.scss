@@ -141,8 +141,8 @@
   --ds-text-selected: #579dff;
   --ds-background-disabled: #bcd6f00a;
   --ds-surface-sunken: #161a1d;
-  --ds-link: #579DFF;
-
+  --ds-link: #579dff;
+  --ds-surface-raised-hovered: #f1f2f4;
   *:-webkit-autofill {
     color-scheme: dark !important;
   }
@@ -164,6 +164,7 @@
     rgba(255, 255, 255, 0.3)
   );
   --ds-surface: #ffffff;
+  --ds-surface-raised-hovered: #f1f2f4;
   --header-button-color: var(--ds-text-subtle, #44546f);
   --create-menu-button-background: rgba(255, 255, 255, 0.2);
   --create-menu-button-background-hovered: rgba(255, 255, 255, 0.3);

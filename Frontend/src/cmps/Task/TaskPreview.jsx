@@ -20,6 +20,12 @@ export function TaskPreview({ task, editTask, labelActions, isDragging }) {
   const taskCover = task?.cover;
   const coverSize = taskCover?.size;
 
+  const isBadges =
+    task.attachments.lenght > 0 ||
+    task.desc.length > 0 ||
+    task.checkLists.length > 0 ||
+    task.due;
+
   useEffect(() => {
     const taskLabels =
       task?.idLabels
@@ -51,7 +57,7 @@ export function TaskPreview({ task, editTask, labelActions, isDragging }) {
     coverSize === "full"
       ? taskCover.color
         ? "task-bg-cover"
-        : taskCover.idUploadedBackground
+        : taskCover.attachment
         ? "task-img-full-cover"
         : ""
       : "";
@@ -65,9 +71,9 @@ export function TaskPreview({ task, editTask, labelActions, isDragging }) {
       : {};
 
   const taskBackgroundCoverImageStyle =
-    taskCover?.idUploadedBackground && coverSize === "full"
+    taskCover?.attachment && coverSize === "full"
       ? {
-          backgroundImage: `url(${taskCover?.scaled[2].url})`,
+          backgroundImage: `url(${taskCover?.attachment?.link})`,
           backgroundSize: "cover",
         }
       : {};
@@ -107,20 +113,18 @@ export function TaskPreview({ task, editTask, labelActions, isDragging }) {
           }}
         ></div>
       )}
-      {coverSize === "normal" && taskCover.idUploadedBackground && (
+      {coverSize === "normal" && taskCover.attachment && (
         <div
           className="group-task-header img-cover"
           style={{
-            backgroundImage: `url(${task?.cover?.scaled[2]?.url})`,
+            backgroundImage: `url(${task?.cover?.attachment?.link})`,
           }}
         ></div>
       )}
       {coverSize === "normal" && (
         <section
           className={`group-task-content ${
-            taskCover?.idUploadedBackground || taskCover?.color
-              ? "normal-cover"
-              : ""
+            taskCover?.attachment || taskCover?.color ? "normal-cover" : ""
           }`}
         >
           {taskLabels.length > 0 && (
@@ -135,13 +139,13 @@ export function TaskPreview({ task, editTask, labelActions, isDragging }) {
             </article>
           )}
           <span className="group-task-content-title">{task?.name}</span>
-          <TaskPreviewBadges task={task} editTask={editTask} />
+          {isBadges && <TaskPreviewBadges task={task} editTask={editTask} />}
         </section>
       )}
       {coverSize === "full" && (
         <section
           className={`group-task-content ${
-            taskCover?.idUploadedBackground && "image-cover-content"
+            taskCover?.attachment && "image-cover-content"
           } ${taskCover?.color && "color-cover-content"}`}
         >
           <span className="group-task-content-cover-title">{task?.name}</span>

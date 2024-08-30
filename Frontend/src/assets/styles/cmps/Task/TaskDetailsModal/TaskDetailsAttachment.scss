@@ -1,11 +1,12 @@
 .task-details-attachment {
   display: flex;
   flex-direction: row;
-  height: 80px;
+  height: 104px;
+  padding: 12px 0;
   margin-left: 32px;
   margin-bottom: 12px;
   cursor: pointer;
-
+  border-radius: 3px;
   &:hover {
     background-color: var(--ds-background-neutral, #091e420f);
   }
@@ -14,8 +15,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #091e420f;
 
-    background-color: var(--ds-background-neutral, #091e420f);
+    // background-color: var(--ds-background-neutral, #091e420f);
     color: var(--ds-text-subtle, #44546f);
     background-repeat: no-repeat;
     background-size: contain;
@@ -44,7 +46,7 @@
     display: flex;
     flex-direction: column;
     padding-left: 16px;
-    padding-top: 4px;
+    // padding-top: 4px;
     color: var(--ds-text-subtle, #44546f);
     font-size: 14px;
 
@@ -52,7 +54,8 @@
       font-weight: 700;
       word-wrap: break-word;
       cursor: pointer;
-
+      margin-bottom: auto;
+      line-height: 16px;
       .title-icon {
         font-size: 16px;
         color: var(--ds-icon, #44546f);
@@ -73,7 +76,6 @@
       .attachment-created-at {
         cursor: pointer;
       }
-
       .attachment-action {
         text-decoration: underline;
         cursor: pointer;
@@ -92,6 +94,39 @@
         &:focus {
           outline: none;
         }
+      }
+    }
+    .make-cover-btn {
+      display: flex;
+      align-items: center;
+      margin-top: auto;
+      cursor: pointer;
+      color: var(--ds-text-subtle, #44546f);
+      border: none;
+      background-color: transparent;
+      padding-left: 0;
+      &:a,
+      &:visited {
+        color: inherit;
+        text-decoration: underline;
+      }
+      .make-cover-btn-label {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      &:hover {
+        color: var(--ds-text-subtle, #44546f);
+      }
+
+      &:focus {
+        outline: none;
+      }
+      .trello-icon {
+        cursor: pointer;
+
+        line-height: 16px;
+        font-size: 16px;
       }
     }
   }
