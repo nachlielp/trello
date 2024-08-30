@@ -60,7 +60,6 @@ export function TaskPreviewBadges({ task, editTask }) {
     // Checklist badge
     if (task.checkLists.length > 0) {
       const result = utilService.getChecklistBadge(task.checkLists);
-      console.log("result", result);
       icons.push(checklistBadge(result));
     }
 
