@@ -21,9 +21,9 @@ export function TaskPreview({ task, editTask, labelActions, isDragging }) {
   const coverSize = taskCover?.size;
 
   const isBadges =
-    task.attachments.lenght > 0 ||
-    task.desc.length > 0 ||
-    task.checkLists.length > 0 ||
+    task.attachments?.length > 0 ||
+    task.desc?.length > 0 ||
+    task.checkLists?.length > 0 ||
     task.due;
 
   useEffect(() => {
