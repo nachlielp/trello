@@ -32,7 +32,6 @@ export function TaskPreviewBadges({ task, editTask }) {
       } else {
         dateLabel = getDateLabel(task.start) + getDateLabel(task.due);
       }
-      console.log("dateLabel", dateLabel);
 
       const [dueStatus, dueTooltip] = taskDueStatus(task);
 
