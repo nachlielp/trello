@@ -20,20 +20,14 @@ import {
   moveTask,
   loadBoard,
 } from "../store/board.actions";
-import { editUser } from "../store/user.actions";
+import { editUser, loadWorkspaceUsers } from "../store/user.actions";
 
 import { AddGroupBtn } from "../cmps/Group/AddGroupBtn";
 import { TaskDetailsModal } from "../cmps/Task/TaskDetailsModal/TaskDetailsModal.jsx";
 import { BoardHeader } from "../cmps/BoardHeader/BoardHeader.jsx";
 import useScrollByGrab from "../customHooks/useScrollByGrab.js";
-import {
-  useParams,
-  useNavigate,
-  useOutletContext,
-  Await,
-} from "react-router-dom";
+import { useParams, useNavigate, useOutletContext } from "react-router-dom";
 import { utilService } from "../services/util.service.js";
-import { background } from "@cloudinary/url-gen/qualifiers/focusOn";
 
 export function BoardIndex() {
   const [selectedTaskId, setSelectedTaskId] = useState(null);
@@ -50,7 +44,7 @@ export function BoardIndex() {
         setSelectedTaskId(params.cardId);
       }
 
-      if (params.link) {
+      if (params.link && user) {
         if (
           board.invLink !== "" &&
           params.link === board.invLink &&
@@ -59,20 +53,31 @@ export function BoardIndex() {
           await updateBoard({
             ...board,
             members: [
-              ...board.members,
               {
                 id: user.id,
                 permissionStatus: "member",
                 fullName: user.fullName,
               },
+              ...board.members,
             ],
           });
         }
         history.replaceState(null, "", `/b/${board.id}`);
+        // navigate(0,{replace:true})
       }
     }
     load();
-  }, [params]);
+  }, [params, user, board]);
+  useEffect(() => {
+    if (board && board?.members) {
+      const membersIds = board.members.map((u) => u.id);
+      loadUsers(membersIds);
+    }
+  }, [board]);
+
+  async function loadUsers(membersIds) {
+    await loadWorkspaceUsers(membersIds);
+  }
 
   const { scrollContainerRef, handlers } = useScrollByGrab();
 

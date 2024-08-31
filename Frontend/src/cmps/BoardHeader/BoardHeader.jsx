@@ -56,7 +56,7 @@ export function BoardHeader({
     <div className="board-header">
       <div className="left-info">
         {board.members.some(
-          (m) => m.id === user.id && m.permissionStatus === "admin"
+          (m) => m.id === user?.id && m.permissionStatus === "admin"
         ) ? (
           <NameInput
             value={board.name}
@@ -103,7 +103,7 @@ export function BoardHeader({
 
         <button
           className="add-btn"
-          disabled={!board.members.some((m) => m.id === user.id)}
+          disabled={!board.members.some((m) => m.id === user?.id)}
           onClick={() => setOpenAdd(true)}
         >
           <UserAddOutlined className="share-icon" />

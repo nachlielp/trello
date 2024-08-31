@@ -13,6 +13,7 @@ export function UserBoards() {
   const boards = useSelector((state) => state.workspaceModule.boards);
   const params = useParams();
   const navigate = useNavigate();
+  
   useEffect(() => {
     if (user && params.userName !== user.username) {
       navigate(`/u/${user.username}/boards`);

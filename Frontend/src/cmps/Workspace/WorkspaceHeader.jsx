@@ -70,7 +70,7 @@ export function WorkspaceHeader({ bgColor, userName, setDarkMode, darkMode }) {
           setDarkMode={setDarkMode}
           anchorEl={
             <button className="user-avatar">
-              <UserAvatar memberId={user?.id} size={28} />
+              <UserAvatar memberProp={user} size={28} />
             </button>
           }
         />

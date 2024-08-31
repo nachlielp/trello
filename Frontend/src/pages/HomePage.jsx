@@ -9,22 +9,30 @@ import homeImg from "/img/homeImg.png";
 export function HomePage() {
   const user = useSelector((state) => state.userModule.user);
   const [email, setEmail] = useState("");
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
-    login();
-    document.querySelector("html").classList.remove("dark");
+    onLogin()
+    // document.querySelector("html").classList.remove("dark");
   }, []);
 
   function onSignUp(e) {
     e.preventDefault();
     if (email) {
-      navigate(`/signup?login_hint=${email}`);
+      // navigate(`/signup?login_hint=${email}`);
     } else {
-      navigate("/signup");
+      // navigate("/signup");
     }
   }
-
+  async function onLogin() {
+    
+    try {
+      await login();
+      console.log("done");
+    } catch (err) {
+      throw err;
+    }
+  }
   return (
     <section className="home-page">
       <header className="home-header">

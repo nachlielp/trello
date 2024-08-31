@@ -27,7 +27,7 @@ export function UserAvatar({
   const ratio = 120 / 250;
   // const ratio = 1;
   const dynamicStyles = member
-    ? { backgroundColor: utilService.stringToColor(memberId) }
+    ? { backgroundColor: utilService.stringToColor(member.fullName) }
     : {};
 
   return (

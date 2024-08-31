@@ -23,7 +23,7 @@ export function FilterButton() {
   //selectors
   const currentMember = useSelector((state) =>
     state.boardModule.members?.find(
-      (member) => member.id === "666fe4efda8643029b6710f3"
+      (member) => member.id === "66d249c0b7b7f61c1cfeec46"
     )
   );
   const boardLabels = useSelector(

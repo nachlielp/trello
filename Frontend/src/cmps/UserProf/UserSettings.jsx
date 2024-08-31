@@ -7,7 +7,7 @@ import { editUser } from "../../store/user.actions";
 export function UserSettings() {
   const params = useParams();
   const logginedUser = useSelector((state) => state.userModule.user);
-  const users = useSelector((state) => state.userModule.users);
+
   const [user, setUser] = useState({});
   const [inputs, setInputs] = useState({
     username: "",
@@ -15,28 +15,30 @@ export function UserSettings() {
   });
   const navigate = useNavigate();
 
-  function onSubmitForm(e) {
+  async function onSubmitForm(e) {
     e.preventDefault();
-    editUser({ ...user, ...inputs }).then(navigate(`/u/${inputs.username}`));
+    const ans = await editUser({ ...user, ...inputs });
+    console.log(ans);
+    navigate(`/u/${inputs.username}`);
   }
   useEffect(() => {
-    if (users.length > 0) {
-      const currentUser = users.find(
-        (user) => user.username === params.userName
-      );
-      setUser(currentUser);
+    if (logginedUser) {
+      const isCurrentUser = logginedUser.username === params.userName;
+      if (isCurrentUser) {
+        setUser(logginedUser);
+      }
       setInputs({
-        username: currentUser.username,
-        bio: currentUser.bio,
+        username: user.username,
+        bio: user.bio,
       });
     }
-  }, [users, params.userName]);
+  }, [logginedUser, params.userName]);
 
   useEffect(() => {
     if (user) {
       setInputs({
-        username: user.username || "",
-        bio: user.bio || "",
+        username: user?.username || "",
+        bio: user?.bio || "",
       });
     }
   }, [user]);

@@ -22,6 +22,7 @@ import {
 } from "./board.reducer";
 import { setBoards, viewWorkspaceBoard } from "./workspace.actions";
 import { EDIT_WORKSPACE } from "./workspace.reducer";
+import { loadWorkspaceUsers } from "./user.actions";
 
 // export async function loadTrelloDataFromSource() {
 //   try {
@@ -80,11 +81,14 @@ export async function loadBoardByTaskId(taskId) {
 export async function viewBoard(boardId) {
   try {
     const board = await boardService.getById(boardId);
+
     if (!board) return;
     const newBoard = {
       ...board,
       viewedAt: Date.now(),
     };
+    const membersIds = board.members.map((m) => m.id);
+    loadWorkspaceUsers(membersIds);
     await boardService.save(newBoard);
     store.dispatch({
       type: VIEW_BOARD,

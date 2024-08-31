@@ -8,17 +8,21 @@ export async function checkUser(req, res) {
     const existUser = user ? await userService.getById(user.id) : null;
 
     if (!existUser) {
+      if (user || req.cookies?.loginToken) {
+        res.clearCookie("loginToken");
+      }
       res.send();
     } else {
-      res.status(200).send(user);
+      existUser.id = existUser._id;
+      delete existUser._id;
+      return res.status(200).send(existUser);
     }
-
-    res.send();
   } catch (err) {
     console.log(err);
     res.status(401).send({ err: "Failed to check" });
   }
 }
+
 export async function userById(req, res) {
   const { id } = req.params;
   try {
@@ -42,12 +46,25 @@ export async function userById(req, res) {
   }
 }
 export async function userByEmail(req, res) {
-  const { email } = req.params;
+  const { email } = req.query;
   try {
     const existUser = await userService.getByEmail(email);
-    if (!existUser) res.send({ exist: false });
+    if (!existUser) {
+      return res.send({ exist: false });
+    }
 
     res.send({ exist: true });
+  } catch (err) {
+    console.error("Couldn't get user", err);
+    res.status(400).send("Couldn't get user");
+  }
+}
+export async function userByUserName(req, res) {
+  const { username } = req.params;
+  try {
+    const existUser = await userService.getByUsername(username);
+    if (!existUser) return res.status(400).send("Couldn't get user");
+    res.send(existUser);
   } catch (err) {
     console.error("Couldn't get user", err);
     res.status(400).send("Couldn't get user");
@@ -84,4 +101,11 @@ export async function updateUser(req, res) {
     console.error("err:", err);
     res.status(400).send("Couldn't save user");
   }
+}
+
+export async function getUsersArr(req, res) {
+  const { userIds } = req.query;
+  if (!userIds) return res.status(400).send("Couldn't get users");
+  const users = await userService.getUsers(userIds);
+  res.send(users);
 }

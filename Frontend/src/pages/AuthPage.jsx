@@ -3,9 +3,10 @@ import logo from "/img/trelloAuthLogo.svg";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
-import { login } from "../store/user.actions";
+import { login, signup } from "../store/user.actions";
 import { UserAvatar } from "../cmps/UserAvatar";
 import { Link, useSearchParams } from "react-router-dom";
+import { userService } from "../services/user.service";
 
 export function AuthPage({ isLogin = false }) {
   const user = useSelector((state) => state.userModule.user);
@@ -22,7 +23,6 @@ export function AuthPage({ isLogin = false }) {
   }, []);
   useEffect(() => {
     if (searchParams.get("login_hint")) {
-      console.log(searchParams.get("login_hint"));
       setEmail(searchParams.get("login_hint"));
     }
   }, [searchParams]);
@@ -43,32 +43,38 @@ export function AuthPage({ isLogin = false }) {
       });
     }
     if (!verified && email) {
-      // const ans = await verify(email)
-      //if(ans.hasAcc && !login){navigate(`/login?login_hint=${email}`)}
-      setAlert(false);
-      setVerified(true);
-    } else {
-      if (isLogin) {
-        if (!pass) {
-          setAlert(true);
+      const ans = await userService.getByEmail(email);
+
+      if (ans.exist && !isLogin) {
+        navigate(`/login?login_hint=${email}`);
+      } else if (ans) {
+        if (!ans.exist && isLogin) {
+          navigate(`/signup?login_hint=${email}`);
         } else {
           setAlert(false);
-          // await login({email,password:pass})
+          setVerified(true);
         }
+      }
+    } else if (isLogin) {
+      if (!pass) {
+        setAlert(true);
       } else {
-        if (email && pass && fullName) {
-          setAlert(false);
-          //await registration({email,password:pass,fullName})
-        } else {
-          setAlert(true);
-        }
+        setAlert(false);
+        await login({ email, password: pass });
+      }
+    } else {
+      if (email && pass && fullName) {
+        setAlert(false);
+        await signup({ email, password: pass, fullName });
+      } else {
+        setAlert(true);
       }
     }
   }
   async function onLogout(e) {
     e.preventDefault();
-    //await logout()
-    navigate("/signup");
+    await userService.logout();
+    navigate(0, { replace: true });
   }
   return (
     <main className="auth-page">

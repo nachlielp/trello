@@ -5,7 +5,6 @@ import { USERS_KEY } from "./util.service";
 const STORAGE_KEY_LOGGEDIN_USER = "loggedinUser";
 
 export const userService = {
-  login,
   logout,
   signup,
   getLoggedinUser,
@@ -15,6 +14,8 @@ export const userService = {
   remove,
   updateUser,
   changeScore,
+  getByUserName,
+  getByEmail,
 };
 
 window.userService = userService;
@@ -22,6 +23,22 @@ window.userService = userService;
 function getWorkspaceUsers() {
   return storageService.query(USERS_KEY);
   // return httpService.get(`user`)
+}
+async function getByUserName(username) {
+  try {
+    const data = await httpService.get(`user/u/${username}`);
+    return data;
+  } catch {
+    console.log(err);
+  }
+}
+async function getByEmail(email) {
+  try {
+    const user = await httpService.get("user/e", { email });
+    return user;
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 async function getById(userId) {
@@ -39,35 +56,30 @@ function remove(userId) {
   // return httpService.delete(`user/${userId}`)
 }
 
-async function updateUser({ id, ...updatedUser }) {
-  let user = await storageService.get(USERS_KEY, id);
-  user = { ...updatedUser, id };
-  await storageService.put(USERS_KEY, user);
+async function updateUser(updatedUser) {
+  try {
+    const user = await httpService.put("user", updatedUser);
 
-  return user;
+    return user;
+  } catch (err) {
+    console.log(err);
+  }
 }
 
-async function login(userCred) {
-  const userId = import.meta.env.VITE_TRELLO_USER_ID;
-  const users = await storageService.query(USERS_KEY);
-  const user = users.find((user) => user.id === userId);
-  // const user = await httpService.post('auth/login', userCred)
-  if (user) return saveLocalUser(user);
-}
+// async function login(userCred) {
+//   const userId = import.meta.env.VITE_TRELLO_USER_ID;
+//   const users = await storageService.query(USERS_KEY);
+//   const user = users.find((user) => user.id === userId);
+//   // const user = await httpService.post('auth/login', userCred)
+//   if (user) return saveLocalUser(user);
+// }
 
 async function signup(userCred) {
-  if (!userCred.imgUrl)
-    userCred.imgUrl =
-      "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png";
-  userCred.score = 10000;
-  const user = await storageService.post(USERS_KEY, userCred);
-  // const user = await httpService.post('auth/signup', userCred)
-  return saveLocalUser(user);
+  return await httpService.post("/signup", userCred);
 }
 
 async function logout() {
-  sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER);
-  // return await httpService.post('auth/logout')
+  await httpService.post("auth/logout");
 }
 
 async function changeScore(by) {
@@ -93,5 +105,3 @@ function saveLocalUser(user) {
 function getLoggedinUser() {
   return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER));
 }
-
-

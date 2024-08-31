@@ -10,7 +10,6 @@ export async function login(req, res) {
     const user = await authService.login(email, password);
 
     const loginToken = authService.getLoginToken(user);
-    console.log("User login: ", user);
     res.cookie("loginToken", loginToken, {
       sameSite: "None",
       secure: true,

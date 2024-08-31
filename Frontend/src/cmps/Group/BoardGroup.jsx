@@ -113,7 +113,7 @@ export function BoardGroup({
           {...draggableProvided.draggableProps}
           ref={draggableProvided.innerRef}
           className={`${
-            !board.members.some((m) => m.id === user.id) ? "disable" : ""
+            !board.members.some((m) => m.id === user?.id) ? "disable" : ""
           }`}
         >
           <div

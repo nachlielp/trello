@@ -8,11 +8,7 @@ import {
   loadBoardByTaskId,
   viewBoard,
 } from "../store/board.actions";
-import {
-  login,
-  editUser,
-  loadWorkspaceUsers,
-} from "../store/user.actions";
+import { login, editUser, loadWorkspaceUsers } from "../store/user.actions";
 import { createBoard } from "../store/workspace.actions";
 import { useSelector } from "react-redux";
 import { setBoards } from "../store/workspace.actions";
@@ -51,7 +47,6 @@ export function WorkspaceIndex() {
   useEffect(() => {
     setBoards();
     getUser();
-    loadWorkspaceUsers();
   }, []);
 
   useEffect(() => {
@@ -124,7 +119,7 @@ export function WorkspaceIndex() {
   }, [darkMode]);
 
   function onStarClick(boardId) {
-    const isStarred = user.starredBoardIds.includes(boardId);
+    const isStarred = user?.starredBoardIds.includes(boardId);
     const starredBoardIds = isStarred
       ? user.starredBoardIds.filter((id) => id !== boardId)
       : [...user.starredBoardIds, boardId];
@@ -161,7 +156,6 @@ export function WorkspaceIndex() {
         ...board,
         members: board.members.filter((m) => m.id !== user.id),
       });
-      
     }
   }
   const contextValues = {

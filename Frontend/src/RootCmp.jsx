@@ -17,9 +17,8 @@ export function RootCmp() {
         <Routes>
           <Route path="/login" element={<AuthPage isLogin />} />
           <Route path="/signup" element={<AuthPage />} />
-
           <Route path="/home" element={<HomePage />} />
-          <Route path="/" element={<WorkspaceIndex />}>
+          <Route path="" element={<WorkspaceIndex />}>
             <Route path="*" element={<ErrorPage />} />
             <Route path="b/:boardId" element={<BoardIndex />}>
               <Route path=":link" element={<BoardIndex />} />
@@ -29,7 +28,7 @@ export function RootCmp() {
             <Route path="u/:userName" element={<UserProfile />}>
               <Route path="boards" element={<UserBoards />} />
               <Route path="" element={<UserSettings />} />
-              <Route path=":all" element={<UserProfile />}></Route>
+              <Route path=":all" element={<UserProfile />} />
             </Route>
           </Route>
         </Routes>

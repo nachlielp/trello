@@ -1,11 +1,20 @@
 import express from "express";
-import { checkUser, updateUser, userByEmail, userById } from "./user.controller.js";
+import {
+  checkUser,
+  getUsersArr,
+  updateUser,
+  userByEmail,
+  userById,
+  userByUserName,
+} from "./user.controller.js";
 import { requireAuth } from "../../middlewares/require-auth.middleware.js";
 
 const router = express.Router();
-router.put('/',requireAuth,updateUser)
+router.put("/", requireAuth, updateUser);
 router.post("/checkToken", checkUser);
-router.get("/id/:id", userById);
-router.get("/email/:email", userByEmail);
+router.get("/users", getUsersArr);
+router.get("/i/:id", userById);
+router.get("/e", userByEmail);
+router.get("/username/:username",requireAuth, userByUserName);
 
 export const userRouter = router;

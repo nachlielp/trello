@@ -13,12 +13,12 @@ export function ProfilePopover({
   placement = "bottomLeft",
 }) {
   const member = useSelector((state) =>
-    state.userModule.users.find((u) => (u.id === memberId))
+    state.userModule.users.find((u) => (u?.id === memberId))
   );
   const [isOpen, setIsOpen] = useState(false);
   const user = useSelector((state) => state.userModule.user);
   const currentMember = useSelector((state) =>
-    state.userModule.users.find((user) => user.id === member.id)
+    state.userModule.users?.find((user) => user?.id === member?.id)
   );
 
   function onClose() {

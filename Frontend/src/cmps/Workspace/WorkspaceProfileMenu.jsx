@@ -31,6 +31,9 @@ export function WorkspaceProfileMenu({
         </button>
       }
     />,
+    <Link to={`/login`} onClick={onClose}>
+      Logout
+    </Link>,
   ];
 
   return (
@@ -46,7 +49,7 @@ export function WorkspaceProfileMenu({
           <header className="about">
             <h2 className="workspace-menu-title">Account</h2>
             <section className="profile">
-              <UserAvatar className="user-avatar" memberId={user?.id} size={40} />
+              <UserAvatar className="user-avatar" memberProp={user} size={40} />
               <div className="names">
                 <span className="full-name">{user?.fullName}</span>
                 <span className="user-email">{user?.email}</span>

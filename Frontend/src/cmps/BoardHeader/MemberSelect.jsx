@@ -10,7 +10,7 @@ import { DownOutlined } from "@ant-design/icons";
 export function MemberSelect() {
   const [openListMenu, setOpenListMenu] = useState(false);
   const members = useSelector((state) => state.boardModule.members)?.filter(
-    (member) => member.id !== "666fe4efda8643029b6710f3"
+    (member) => member.id !== "66d249c0b7b7f61c1cfeec46"
   );
   return (
     <Popover
