@@ -24,8 +24,10 @@ async function getByUsername(username) {
   try {
     const users = await getCollection("users");
     const user = await users.findOne({ username });
-    user.id = user._id;
-    delete user._id;
+    if (user) {
+      user.id = user._id;
+      delete user._id;
+    }
     return user;
   } catch (err) {
     console.log(err);

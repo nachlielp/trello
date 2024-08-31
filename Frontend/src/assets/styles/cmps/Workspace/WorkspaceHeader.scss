@@ -113,15 +113,15 @@
 
     .gif-btn .gif {
       width: 80px;
-      height: 16px;
-      margin: 8px 0;
-      padding: 8px;
-      background-image: url("/img/workspace/non-animated-trello-home.gif");
+      height: 22px;
+      margin: 4px 0;
+      background-image: url("/img/workspace/non-animated-pyello-home.png");
       background-size: cover;
       background-repeat: no-repeat;
+      background-position: center;
 
       &:hover {
-        background-image: url("/img/workspace/animated-trello-home.gif");
+        background-image: url("/img/workspace/animated-pyello-home.gif");
       }
     }
     .gif.gray-filter {
