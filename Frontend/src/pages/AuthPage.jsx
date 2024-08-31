@@ -20,6 +20,7 @@ export function AuthPage({ isLogin = false }) {
 
   useEffect(() => {
     login();
+    document.querySelector("html").classList.remove("dark");
   }, []);
   useEffect(() => {
     if (searchParams.get("login_hint")) {

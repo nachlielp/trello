@@ -1,4 +1,4 @@
-import { boardService } from "../services/board.service.local";
+import { boardService } from "../services/board.service";
 import { utilService } from "../services/util.service";
 import { store } from "./store";
 import { editWorkspaceBoard } from "./workspace.actions";
@@ -27,7 +27,7 @@ export async function loadBoard(boardId) {
     if (boardData) {
       store.dispatch({
         type: SET_BOARD,
-        board: { ...boardData, apdatedAt: new Date().getTime() },
+        board: { ...boardData, updatedAt: new Date().getTime() },
       });
       return boardData;
     } else {
@@ -49,7 +49,7 @@ export async function loadBoardByTaskId(taskId) {
   }
   store.dispatch({
     type: SET_BOARD,
-    board: { ...board, apdatedAt: new Date().getTime() },
+    board: { ...board, updatedAt: new Date().getTime() },
   });
   return board.id;
 }
@@ -92,7 +92,7 @@ export function setBoard(board) {
   if (board) {
     store.dispatch({
       type: SET_BOARD,
-      board: { ...board, apdatedAt: new Date().getTime() },
+      board: { ...board, updatedAt: new Date().getTime() },
     });
   }
 }
@@ -162,7 +162,7 @@ export async function addGroup(group, boardId) {
     const newBoard = {
       ...board,
       groups: [...board.groups, newGroup],
-      apdatedAt: new Date().getTime(),
+      updatedAt: new Date().getTime(),
     };
     await updateBoard(newBoard);
     return newGroup;
@@ -197,7 +197,7 @@ export async function archiveGroup(boardId, groupId, user) {
       return g;
     }),
     activities: [...board?.activities, newActivity],
-    apdatedAt: new Date().getTime(),
+    updatedAt: new Date().getTime(),
   };
   await updateBoard(newBoard);
   return newBoard;
@@ -260,7 +260,7 @@ export async function copyGroup(boardId, group, user) {
       ...newTaskActivities,
       newGroupActivities,
     ],
-    apdatedAt: new Date().getTime(),
+    updatedAt: new Date().getTime(),
   };
   await updateBoard(newBoard);
 }
@@ -311,7 +311,7 @@ export async function moveAllCards(
     ...board,
     groups: updatedGroups,
     activities: [...board?.activities, ...taskActivitiesInfo],
-    apdatedAt: new Date().getTime(),
+    updatedAt: new Date().getTime(),
   };
   store.dispatch({
     type: MOVE_ALL_CARDS,
@@ -345,7 +345,7 @@ export async function archiveAllCards(boardId, groupId, user) {
     ...board,
     groups: board.groups.map((g) => (g.id === groupId ? newGroup : g)),
     activities: [...board?.activities, ...newActivities],
-    apdatedAt: new Date().getTime(),
+    updatedAt: new Date().getTime(),
   };
   await boardService.save(newBoard);
 }
@@ -356,7 +356,7 @@ export async function editGroup(boardId, group) {
   const newBoard = {
     ...board,
     groups: board.groups.map((g) => (g.id === group.id ? group : g)),
-    apdatedAt: new Date().getTime(),
+    updatedAt: new Date().getTime(),
   };
   await boardService.save(newBoard);
   return group;
@@ -391,7 +391,7 @@ export async function sortGroup(boardId, groupId, sortBy, sortOrder) {
     groups: board.groups.map((g) =>
       g.id === groupId ? { ...g, sortBy, sortOrder } : g
     ),
-    apdatedAt: new Date().getTime(),
+    updatedAt: new Date().getTime(),
   };
   store.dispatch({ type: SORT_GROUP, group: newGroup });
   await boardService.save(newBoard);
@@ -407,7 +407,7 @@ export async function editTask(task) {
         ? { ...g, tasks: g.tasks.map((t) => (t.id === task.id ? task : t)) }
         : g
     ),
-    apdatedAt: new Date().getTime(),
+    updatedAt: new Date().getTime(),
   };
   await boardService.save(newBoard);
   return task;
@@ -417,10 +417,10 @@ export async function updateBoard(newBoard) {
   try {
     store.dispatch({
       type: SET_BOARD,
-      board: { ...newBoard, apdatedAt: new Date().getTime() },
+      board: { ...newBoard, updatedAt: new Date().getTime() },
     });
 
-    newBoard.apdatedAt = Date.now();
+    newBoard.updatedAt = Date.now();
     await editWorkspaceBoard(newBoard);
   } catch (err) {
     console.error("Cannot update board", err);
@@ -449,7 +449,7 @@ export async function editLabel(boardId, label) {
   const newBoard = {
     ...board,
     labels: board.labels.map((l) => (l.id === label.id ? label : l)),
-    apdatedAt: new Date().getTime(),
+    updatedAt: new Date().getTime(),
   };
   await boardService.save(newBoard);
   return newBoard;
@@ -478,7 +478,7 @@ export async function createLabel(boardId, task, label) {
           }
         : g
     ),
-    apdatedAt: new Date().getTime(),
+    updatedAt: new Date().getTime(),
   };
   await boardService.save(newBoard);
   return newBoard;
@@ -496,7 +496,7 @@ export async function deleteLabel(boardId, labelId) {
         idLabels: t.idLabels.filter((id) => id !== labelId),
       })),
     })),
-    apdatedAt: new Date().getTime(),
+    updatedAt: new Date().getTime(),
   };
   store.dispatch({ type: DELETE_LABEL, labelId: labelId });
   await boardService.save(newBoard);

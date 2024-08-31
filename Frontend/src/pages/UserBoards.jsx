@@ -6,14 +6,14 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AddBoardPopover } from "../cmps/Workspace/AddBoardPopover";
 import { createBoard } from "../store/workspace.actions";
-import {  editUser } from "../store/user.actions";
+import { editUser } from "../store/user.actions";
 
 export function UserBoards() {
   const user = useSelector((state) => state.userModule.user);
   const boards = useSelector((state) => state.workspaceModule.boards);
   const params = useParams();
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     if (user && params.userName !== user.username) {
       navigate(`/u/${user.username}/boards`);
@@ -30,7 +30,7 @@ export function UserBoards() {
 
   async function onAddBoard(board) {
     const boardId = await createBoard(board);
-      navigate(`/b/${boardId}`);
+    navigate(`/b/${boardId}`);
   }
 
   if (!user) return null;
@@ -86,7 +86,7 @@ export function UserBoards() {
           <h1>YOUR WORKSPACE</h1>
           <article className="section-content workspace-boards">
             {boards
-              .sort((a, b) => b.apdatedAt - a.apdatedAt) // Sort boards by apdatedAt in descending order
+              .sort((a, b) => b.updatedAt - a.updatedAt) // Sort boards by updatedAt in descending order
               .filter((b) => !b.closed)
               .map((board) => (
                 <BoardTab

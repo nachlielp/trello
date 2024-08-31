@@ -13,7 +13,7 @@ export function HomePage() {
 
   useEffect(() => {
     onLogin()
-    // document.querySelector("html").classList.remove("dark");
+    document.querySelector("html").classList.remove("dark");
   }, []);
 
   function onSignUp(e) {

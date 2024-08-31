@@ -61,7 +61,7 @@ export function WorkspaceHeader({ bgColor, userName, setDarkMode, darkMode }) {
           src="/img/workspace/more.svg"
           preLabel="Template"
         />
-        <button className="create-btn">Create</button>
+        {/* <button className="create-btn">Create</button> */}
       </nav>
       <section>
         <WorkspaceProfileMenu

@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import path from "path";
 import { authRoutes } from "./api/auth/auth.routes.js";
 import { userRouter } from "./api/user/user.routes.js";
+import { boardRouter } from "./api/board/board.routes.js";
 
 const app = express();
 const server = http.createServer(app);
@@ -25,6 +26,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 //Routes
+app.use("/api/boards", boardRouter);
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRouter);
 

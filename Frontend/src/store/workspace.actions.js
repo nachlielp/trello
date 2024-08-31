@@ -1,4 +1,4 @@
-import { boardService } from "../services/board.service.local";
+import { boardService } from "../services/board.service";
 import { utilService } from "../services/util.service";
 import { workspaceService } from "../services/workspace.service";
 import { setBoard } from "./board.actions";
@@ -121,7 +121,7 @@ export async function moveTaskBetweenBoards(moveTaskEvent) {
 }
 
 export async function createBoard(board) {
-  const newBoard = await boardService.save({ ...board, apdatedAt: Date.now() });
+  const newBoard = await boardService.save({ ...board, updatedAt: Date.now() });
   store.dispatch({ type: ADD_BOARD, board: newBoard });
   return newBoard.id;
 }

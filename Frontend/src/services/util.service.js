@@ -284,8 +284,6 @@ export const utilService = {
 
 export const BOARDS_KEY = "boards";
 
-_createStartInfo();
-
 function makeId(length = 6) {
   var txt = "";
   var possible =
@@ -312,16 +310,6 @@ function getColorHashByName(colorName) {
     (color) => color.color === colorName
   );
   return color;
-}
-
-function _createStartInfo() {
-  // //new states to start with
-  // if (!localStorage.getItem(USERS_KEY)) {
-  //   localStorage.setItem(USERS_KEY, JSON.stringify(usersJson));
-  // }
-  if (!localStorage.getItem(BOARDS_KEY)) {
-    localStorage.setItem(BOARDS_KEY, JSON.stringify(boardsJson));
-  }
 }
 
 function capitalizeInitials(string) {
@@ -358,7 +346,7 @@ function createNewTask(task) {
   return {
     id: utilService.makeId(),
     attachments: [],
-    apdatedAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
     members: [],
     checkLists: [],
 

@@ -19,7 +19,7 @@ import { ErrorPage } from "./ErrorPage";
 
 export function WorkspaceIndex() {
   const user = useSelector((state) => state.userModule.user);
-
+  const [isLoaded, setIsLoaded] = useState(true);
   const boardsInfo = useSelector((state) => state.workspaceModule.boards)
     ?.filter((b) => user && b?.members?.some((m) => m.id === user.id))
     .filter((b) => !b.closed)
@@ -45,7 +45,7 @@ export function WorkspaceIndex() {
   const params = useParams();
 
   useEffect(() => {
-    setBoards();
+    setWorkSpaceBoards();
     getUser();
   }, []);
 
@@ -60,7 +60,11 @@ export function WorkspaceIndex() {
       setDarkMode(user.darkMode);
     }
   }, [user]);
-
+  async function setWorkSpaceBoards() {
+    setIsLoaded(false);
+    await setBoards();
+    setIsLoaded(true);
+  }
   useEffect(() => {
     if (params.boardId) {
       loadBoard(params.boardId);
@@ -192,22 +196,26 @@ export function WorkspaceIndex() {
         <>
           {user && starredBoardIds && selectedBoardId ? (
             <section className="workspace-content">
-              {board.id ? (
+              {isLoaded && (
                 <>
-                  <WorkspaceMenu
-                    colorTheme={boardBgPrefs?.backgroundBrightness}
-                    boardsInfo={boardsInfo}
-                    selectedBoardId={selectedBoardId}
-                    starredBoardIds={starredBoardIds}
-                    onStarClick={onStarClick}
-                    onAddBoard={onAddBoard}
-                    closeBoard={onCloseBoard}
-                    leaveBoard={onLeaveBoard}
-                  />
-                  <Outlet context={contextValues} />
+                  {board.id ? (
+                    <>
+                      <WorkspaceMenu
+                        colorTheme={boardBgPrefs?.backgroundBrightness}
+                        boardsInfo={boardsInfo}
+                        selectedBoardId={selectedBoardId}
+                        starredBoardIds={starredBoardIds}
+                        onStarClick={onStarClick}
+                        onAddBoard={onAddBoard}
+                        closeBoard={onCloseBoard}
+                        leaveBoard={onLeaveBoard}
+                      />
+                      <Outlet context={contextValues} />
+                    </>
+                  ) : (
+                    <ErrorPage wrongUrl={true} />
+                  )}
                 </>
-              ) : (
-                <ErrorPage wrongUrl={true} />
               )}
               {openBoardMenu && (
                 <BoardMenu
