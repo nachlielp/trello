@@ -86,8 +86,8 @@ export function AddModule({ onClose }) {
               {board.members.map((m) => {
                 const user = users.find((u) => u.id === m.id);
                 return (
-                  <section className="member-wraper">
-                    <section key={m.id} className="member">
+                  <section className="member-wraper" key={m.id}>
+                    <section className="member">
                       <UserAvatar
                         memberId={m.id}
                         size={32}
