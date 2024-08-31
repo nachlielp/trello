@@ -125,27 +125,47 @@
         scrollbar-color: var(--ds-background-neutral-hovered, #091e4224)
           var(--ds-background-neutral, #091e420f);
         scrollbar-width: thin;
-        .member {
+        .member-wraper {
           display: flex;
-          padding-top: 16px;
-          .ant-avatar {
-            cursor: default !important;
-          }
-          .info {
-            margin-left: 12px;
-            .full-name {
-              font-size: 14px;
-              font-weight: 400;
-              line-height: 20px;
-              margin: 0;
-              padding: 0;
+          align-items: center;
+          justify-content: space-between;
+          .make-admin{
+            cursor: pointer;
+            padding: 0;
+            margin: 0;
+            margin-right: 5px;
+            background: none;
+            border: none;
+            color: var(--ds-link, #0c66e4);
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 20px;
+            &:hover {
+              text-decoration: underline;
             }
-            .username {
-              font-size: 12px;
-              font-weight: 400;
-              line-height: 16px;
-              margin: 0;
-              color: var(--ds-text-subtle, #44546f);
+          }
+          .member {
+            display: flex;
+            padding-top: 16px;
+            .ant-avatar {
+              cursor: default !important;
+            }
+            .info {
+              margin-left: 12px;
+              .full-name {
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 20px;
+                margin: 0;
+                padding: 0;
+              }
+              .username {
+                font-size: 12px;
+                font-weight: 400;
+                line-height: 16px;
+                margin: 0;
+                color: var(--ds-text-subtle, #44546f);
+              }
             }
           }
         }

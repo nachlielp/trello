@@ -11,7 +11,9 @@ export function AddModule({ onClose }) {
   const users = useSelector((state) => state.userModule.users);
   const me = useSelector((state) => state.userModule.user);
   const [disableButtons, setDisableButtons] = useState(false);
-
+  const myStatus = useSelector((state) =>
+    state.boardModule.board.members.find((m) => m.id === me.id)
+  );
   async function createLink() {
     setDisableButtons(true);
     await updateBoard({ ...board, invLink: utilService.makeId() });
@@ -24,6 +26,24 @@ export function AddModule({ onClose }) {
     navigator.clipboard.writeText(
       `${window.location.origin}/b/${board.id}/${board.invLink}`
     );
+  }
+  async function onChangePermission(id) {
+    const user = board.members.find((u) => u.id === id);
+    if (user.permissionStatus === "member") {
+      await updateBoard({
+        ...board,
+        members: board.members.map((m) =>
+          m.id === user.id ? { ...m, permissionStatus: "admin" } : m
+        ),
+      });
+    } else if (user.permissionStatus === "admin") {
+      await updateBoard({
+        ...board,
+        members: board.members.map((m) =>
+          m.id === user.id ? { ...m, permissionStatus: "member" } : m
+        ),
+      });
+    }
   }
   return (
     <Modal open onCancel={onClose} footer="">
@@ -66,27 +86,38 @@ export function AddModule({ onClose }) {
               {board.members.map((m) => {
                 const user = users.find((u) => u.id === m.id);
                 return (
-                  <section key={m.id} className="member">
-                    <UserAvatar
-                      memberId={m.id}
-                      size={32}
-                      offTitle
-                      title={`${user.fullName} (${user.username})`}
-                    />
+                  <section className="member-wraper">
+                    <section key={m.id} className="member">
+                      <UserAvatar
+                        memberId={m.id}
+                        size={32}
+                        offTitle
+                        title={`${user.fullName} (${user.username})`}
+                      />
 
-                    <div className="info">
-                      <h1 className="full-name">
-                        {user.fullName}
-                        {user.id === me.id ? " (you)" : ""}
-                      </h1>
-                      <p className="username">
-                        @{user.username}
-                        <span className="permission">
-                          {" "}
-                          • Board {m.permissionStatus}
-                        </span>
-                      </p>
-                    </div>
+                      <div className="info">
+                        <h1 className="full-name">
+                          {user.fullName}
+                          {user.id === me.id ? " (you)" : ""}
+                        </h1>
+                        <p className="username">
+                          @{user.username}
+                          <span className="permission">
+                            {" "}
+                            • Board {m.permissionStatus}
+                          </span>
+                        </p>
+                      </div>
+                    </section>
+                    {user.id !== me.id &&
+                      myStatus.permissionStatus === "admin" && (
+                        <buttom
+                          onClick={() => onChangePermission(user.id)}
+                          className={"make-admin"}
+                        >
+                          Change permission
+                        </buttom>
+                      )}
                   </section>
                 );
               })}
