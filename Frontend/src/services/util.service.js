@@ -282,11 +282,7 @@ export const utilService = {
   isNotEmpty,
 };
 
-export const USERS_KEY = "users";
 export const BOARDS_KEY = "boards";
-export const LISTS_KEY = "lists";
-export const CARDS_KEY = "cards";
-export const MEMBERS_KEY = "members";
 
 _createStartInfo();
 

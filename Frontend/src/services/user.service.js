@@ -1,6 +1,4 @@
-import { storageService } from "./async-storage.service";
 import { httpService } from "./http.service";
-import { USERS_KEY } from "./util.service";
 
 const STORAGE_KEY_LOGGEDIN_USER = "loggedinUser";
 
@@ -8,8 +6,6 @@ export const userService = {
   logout,
   signup,
   getWorkspaceUsers,
-  getById,
-  remove,
   updateUser,
   getByUserName,
   getByEmail,
@@ -40,21 +36,6 @@ async function getByEmail(email) {
   } catch (err) {
     console.error(err);
   }
-}
-
-async function getById(userId) {
-  try {
-    const user = await storageService.get(USERS_KEY, userId);
-    return user;
-  } catch (err) {
-    console.error(err);
-  }
-  // const user = await httpService.get(`user/${userId}`)
-}
-
-function remove(userId) {
-  return storageService.remove(USERS_KEY, userId);
-  // return httpService.delete(`user/${userId}`)
 }
 
 async function updateUser(updatedUser) {

@@ -10,6 +10,7 @@ import { ProfilePopover } from "../../Task/ManageTaskPopovers/ProfilePopover";
 export function BoardDescription({ onSetPreventLoad }) {
   const board = useSelector((state) => state.boardModule.board);
   const user = useSelector((state) => state.userModule.user);
+  const users = useSelector((state) => state.userModule.users);
   const members = useSelector((state) => state.boardModule.board.members);
   const admins = members.filter((m) => m.permissionStatus === "admin");
   const [admin, setAdmin] = useState(null);
@@ -43,7 +44,8 @@ export function BoardDescription({ onSetPreventLoad }) {
     }
   }, [admins]);
   async function getAdmin() {
-    const user = await userService.getById(admins[0].id);
+    console.log(admins);
+    const user = users.find(u=>u.id === admins[0].id);
     setAdmin(user);
   }
   function onChangeDescription(e) {
@@ -69,6 +71,7 @@ export function BoardDescription({ onSetPreventLoad }) {
                 {admins.map((a) => {
                   return (
                     <ProfilePopover
+                    key={a.id}
                       anchorEl={
                         <UserAvatar
                           memberId={a.id}
