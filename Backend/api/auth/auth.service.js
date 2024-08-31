@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 
 import { userService } from "../user/user.service.js";
 
-const cryptr = new Cryptr(process.env.cryptr_pass);
+const cryptr = new Cryptr(process.env.CRYPTR_PASS);
 export const authService = {
   getLoginToken,
   validateToken,

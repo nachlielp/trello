@@ -2,9 +2,9 @@ import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
 dotenv.config();
 
-const url = process.env.mongo_url;
+const url = process.env.MONGO_URL;
 
-const dbName = process.env.mongo_name;
+const dbName = process.env.MONGO_DB_NAME;
 
 var dbConn;
 
