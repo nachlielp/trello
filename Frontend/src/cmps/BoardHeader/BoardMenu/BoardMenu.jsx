@@ -4,7 +4,7 @@ import { BoardActivity } from "./BoardActivity";
 import { BoardDescription } from "./BoardDescription";
 import { useSelector } from "react-redux";
 import { ActionPopover } from "./ActionPopover";
-import { updateBoard } from "../../../store/board.actions";
+import { removeBoard, updateBoard } from "../../../store/board.actions";
 import { editUser } from "../../../store/user.actions";
 import { utilService } from "../../../services/util.service";
 import { useNavigate } from "react-router";
@@ -35,19 +35,9 @@ export function BoardMenu({ setOpenBoarMenu, setShowBtn }) {
   function onSetPreventLoad(boolean) {
     setPreventLoad(boolean);
   }
-  async function onCloseBoard() {
-    const newActivity = utilService.createActivity(
-      {
-        type: "closeBoard",
-      },
-      user
-    );
+  async function deleteBoard() {
     if (board) {
-      await updateBoard({
-        ...board,
-        closed: true,
-        activities: [...board?.activities, newActivity],
-      });
+      await removeBoard(board.id);
       navigate(`/u/${user.username}/boards`);
     }
   }
@@ -58,7 +48,6 @@ export function BoardMenu({ setOpenBoarMenu, setShowBtn }) {
         ...board,
         members: board.members.filter((m) => m.id !== user.id),
       });
-      
     }
   }
 
@@ -99,16 +88,23 @@ export function BoardMenu({ setOpenBoarMenu, setShowBtn }) {
           {board.members.some((m) => m.id === user.id) && (
             <>
               <hr className="border_bottom" />
-              <ActionPopover
-                action={"Close board"}
-                closeBoard={onCloseBoard}
-                anchorEl={
-                  <button className="btn" onClick={() => setNavigation("Menu")}>
-                    <span className="trello-icon icon-remove btn-menu" />
-                    Close Board
-                  </button>
-                }
-              />
+              {board.members.some(
+                (m) => m.id === user.id && m.permissionStatus === "admin"
+              ) && (
+                <ActionPopover
+                  action={"Delete board"}
+                  deleteBoard={deleteBoard}
+                  anchorEl={
+                    <button
+                      className="btn"
+                      onClick={() => setNavigation("Menu")}
+                    >
+                      <span className="trello-icon icon-remove btn-menu" />
+                      Delete board
+                    </button>
+                  }
+                />
+              )}
               <ActionPopover
                 action={"Leave board?"}
                 leaveBoard={onLeaveBoard}

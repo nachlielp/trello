@@ -5,6 +5,8 @@ import { updateBoard } from "../../store/board.actions";
 import { utilService } from "../../services/util.service";
 import { UserAvatar } from "../UserAvatar";
 import { useState } from "react";
+import { CustomSelect } from "../CustomCpms/CustomSelect";
+import { ChangePermissionPopover } from "./ChangePermissionPopover";
 
 export function AddModule({ onClose }) {
   const board = useSelector((state) => state.boardModule.board);
@@ -27,22 +29,28 @@ export function AddModule({ onClose }) {
       `${window.location.origin}/b/${board.id}/${board.invLink}`
     );
   }
-  async function onChangePermission(id) {
-    const user = board.members.find((u) => u.id === id);
-    if (user.permissionStatus === "member") {
-      await updateBoard({
-        ...board,
-        members: board.members.map((m) =>
-          m.id === user.id ? { ...m, permissionStatus: "admin" } : m
-        ),
-      });
-    } else if (user.permissionStatus === "admin") {
-      await updateBoard({
-        ...board,
-        members: board.members.map((m) =>
-          m.id === user.id ? { ...m, permissionStatus: "member" } : m
-        ),
-      });
+  async function onChangePermission(action) {
+    const user = board.members.find((u) => u.id === action.id);
+    switch (action.option) {
+      case "admin":
+        await updateBoard({
+          ...board,
+          members: board.members.map((m) =>
+            m.id === user.id ? { ...m, permissionStatus: "admin" } : m
+          ),
+        });
+        break;
+      case "member":
+        await updateBoard({
+          ...board,
+          members: board.members.map((m) =>
+            m.id === user.id ? { ...m, permissionStatus: "member" } : m
+          ),
+        });
+        break;
+      case "kick":
+        console.log("kick");
+        break;
     }
   }
   return (
@@ -109,15 +117,20 @@ export function AddModule({ onClose }) {
                         </p>
                       </div>
                     </section>
-                    {user.id !== me.id &&
-                      myStatus.permissionStatus === "admin" && (
-                        <buttom
-                          onClick={() => onChangePermission(user.id)}
-                          className={"make-admin"}
-                        >
-                          Change permission
-                        </buttom>
-                      )}
+                    {myStatus.permissionStatus === "admin" && (
+                      <ChangePermissionPopover
+                        myOptions={user.id === me.id}
+                        currenOption={m.permissionStatus}
+                        memberId={m.id}
+                        onChange={onChangePermission}
+                        anchorEl={
+                          <>
+                            <span className="text">{m.permissionStatus}</span>
+                            <span className="trello-icon icon-down" />
+                          </>
+                        }
+                      />
+                    )}
                   </section>
                 );
               })}

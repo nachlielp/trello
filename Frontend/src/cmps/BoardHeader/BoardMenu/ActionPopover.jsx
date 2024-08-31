@@ -2,7 +2,7 @@ import { Popover, Button } from "antd";
 import { useState } from "react";
 import { ManageTaskPopoverHeader } from "../../Task/ManageTaskPopovers/ManageTaskPopoverHeader";
 
-export function ActionPopover({ closeBoard, leaveBoard, anchorEl, action }) {
+export function ActionPopover({ deleteBoard, leaveBoard, anchorEl, action }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const [backToList, setBackToList] = useState(null);
@@ -12,17 +12,14 @@ export function ActionPopover({ closeBoard, leaveBoard, anchorEl, action }) {
     setIsOpen(false);
   }
 
-  function onNextPage(_) {
-    setBackToList(() => onBackToList);
-  }
 
   function onBackToList() {
     setBackToList(null);
   }
 
-  function onCloseBoard(e) {
+  function onDeleteBoard(e) {
     e.stopPropagation();
-    closeBoard();
+    deleteBoard();
     setIsOpen(false);
   }
 
@@ -43,19 +40,19 @@ export function ActionPopover({ closeBoard, leaveBoard, anchorEl, action }) {
       content={
         <section className="close-board-popover-content">
           <ManageTaskPopoverHeader
-            title={action === "Close board" ? "Close board" : "Leave board?"}
+            title={action === "Delete board" ? "Delete board?" : "Leave board?"}
             close={onClose}
             back={backToList}
           />
 
-          {action === "Close board" && (
+          {action === "Delete board" && (
             <section className="close-board-popover-body">
               <p className="body-text">
                 You can find and reopen closed boards at the bottom of your
                 boards page.
               </p>
-              <Button className="close-btn" size="small" onClick={onCloseBoard}>
-                Close
+              <Button className="close-btn" size="small" onClick={onDeleteBoard}>
+                Delete
               </Button>
             </section>
           )}

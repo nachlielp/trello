@@ -129,19 +129,26 @@
           display: flex;
           align-items: center;
           justify-content: space-between;
-          .make-admin{
+          .permission-button {
             cursor: pointer;
-            padding: 0;
-            margin: 0;
-            margin-right: 5px;
-            background: none;
+            text-transform: capitalize;
+            height: 32px;
+            padding: 0 12px 0 12px;
+            background: var(--ds-background-neutral, rgba(9, 30, 66, 0.04));
             border: none;
-            color: var(--ds-link, #0c66e4);
-            font-size: 12px;
-            font-weight: 500;
-            line-height: 20px;
-            &:hover {
-              text-decoration: underline;
+            color: var(--ds-text, #42526e);
+            border-radius: 3px;
+            &:hover{
+              background: var(--ds-background-neutral-hovered, #091e4214);
+              color: var(--ds-text, #42526E);
+            }
+            .text {
+              line-height: 32px;
+              font-size: 14px;
+              font-weight: 500;
+            }
+            .trello-icon {
+              margin-left: 4px;
             }
           }
           .member {

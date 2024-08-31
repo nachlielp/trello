@@ -1,13 +1,10 @@
 import { boardService } from "../services/board.service.local";
 import { utilService } from "../services/util.service";
-import { memberService } from "../services/members.service.local";
 import { store } from "./store";
 import { editWorkspaceBoard } from "./workspace.actions";
 import {
-  SET_MEMBERS,
   SET_BOARD,
   SET_IS_EXPANDED,
-  ADD_TASK,
   ADD_GROUP,
   EDIT_GROUP,
   EDIT_TASK,
@@ -20,30 +17,9 @@ import {
   ADD_LABEL,
   DELETE_LABEL,
 } from "./board.reducer";
-import { setBoards, viewWorkspaceBoard } from "./workspace.actions";
-import { EDIT_WORKSPACE } from "./workspace.reducer";
+import { viewWorkspaceBoard } from "./workspace.actions";
+import { REMOVE_BOARD } from "./workspace.reducer";
 import { loadWorkspaceUsers } from "./user.actions";
-
-// export async function loadTrelloDataFromSource() {
-//   try {
-//     const listsData = await fetchListsFromTrello('dL2ehGo7');
-//     store.dispatch({ type: SET_LISTS, lists: listsData })
-//     const allCards = [];
-//     for (const list of listsData) {
-//       const cardsData = await fetchCardsFromTrello(list.id);
-//       if (cardsData.length > 0) {
-//         allCards.push(...cardsData);
-//       }
-//     }
-//     store.dispatch({ type: SET_CARDS, cards: allCards })
-//     const membersData = await fetchMembersFromTrello();
-//     store.dispatch({ type: SET_MEMBERS, members: membersData })
-//     const boardData = await fetchBoardFromTrello();
-//     store.dispatch({ type: SET_BOARD, board: boardData })
-//   } catch (err) {
-//     console.log('Error fetching listsData: ', err)
-//   }
-// }
 
 export async function loadBoard(boardId) {
   try {
@@ -76,6 +52,18 @@ export async function loadBoardByTaskId(taskId) {
     board: { ...board, apdatedAt: new Date().getTime() },
   });
   return board.id;
+}
+export async function removeBoard(boardId) {
+  try {
+    store.dispatch({
+      type: REMOVE_BOARD,
+      boardId: boardId,
+    });
+    await boardService.remove(boardId);
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
 }
 
 export async function viewBoard(boardId) {

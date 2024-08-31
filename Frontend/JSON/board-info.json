@@ -699,7 +699,7 @@
     "owner": null,
     "id": "9K4ce",
     "viewedAt": 1725005663831,
-    "invLink":""
+    "invLink": ""
   },
   {
     "prefs": {
@@ -1050,7 +1050,7 @@
     "owner": null,
     "id": "BplXM",
     "viewedAt": 1725005697681,
-    "invLink":""
+    "invLink": ""
   },
   {
     "prefs": {
@@ -1069,7 +1069,7 @@
       {
         "id": "66d249c0b7b7f61c1cfeec46",
         "fullName": "Eugene Bondarev",
-        "permissionStatus": "member"
+        "permissionStatus": "admin"
       },
       {
         "id": "66d249c0b7b7f61c1cfeec48",

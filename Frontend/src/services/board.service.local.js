@@ -8,25 +8,26 @@ export const boardService = {
   getById,
   save,
   remove,
-  create,
   getByTaskId,
 };
 window.boardSer = boardService;
 
 async function getByTaskId(taskId) {
-  const boards = await storageService.query(STORAGE_KEY);
-  const board = boards?.find((board) =>
-    board.groups?.some((group) =>
-      group.tasks?.some((task) => task.id === taskId)
-    )
-  );
-  if (!board) {
-    return {
-      error: `Get failed, cannot find board with task id: ${taskId}`,
-      status: 404,
-    };
+  try {
+    const boards = await storageService.query(STORAGE_KEY);
+    const board = boards?.find((board) =>
+      board.groups?.some((group) =>
+        group.tasks?.some((task) => task.id === taskId)
+      )
+    );
+    if (!board) {
+      throw `Get failed, cannot find board with task id: ${taskId}`;
+    }
+    return board;
+  } catch (err) {
+    console.log(err);
+    throw `Get failed, cannot find board by task id: ${err}`;
   }
-  return board;
 }
 
 async function getById(boardId) {
@@ -38,12 +39,11 @@ async function getById(boardId) {
     return board;
   } catch (error) {
     console.error("Error getting board by id", error);
-    return null;
+    throw `Cannot found board with id ${boardId}`;
   }
 }
 
 async function remove(boardId) {
-  // throw new Error('Nope')
   await storageService.remove(STORAGE_KEY, boardId);
 }
 
@@ -52,12 +52,9 @@ async function save(board) {
   if (board.id) {
     savedBoard = await storageService.put(STORAGE_KEY, board);
   } else {
+    console.log(board);
     // Later, owner is set by the backend
     savedBoard = await storageService.post(STORAGE_KEY, board);
   }
   return savedBoard;
-}
-
-async function create(board) {
-  return await storageService.post(STORAGE_KEY, board);
 }

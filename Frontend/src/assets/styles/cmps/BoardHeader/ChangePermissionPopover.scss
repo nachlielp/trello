@@ -1,0 +1,47 @@
+.permission-select {
+  width: 288px;
+  padding-bottom: 5px;
+  .warning {
+    display: block;
+    color: var(--ds-text-subtle, #44546f);
+    font-size: 12px;
+    line-height: 16px;
+    padding: 6px 16px;
+    text-wrap: wrap;
+    background-color: var(--ds-background-warning, #fff7d6);
+    margin-bottom: 6px;
+  }
+  .option {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    width: 100%;
+    min-height: 40px;
+    justify-items: center;
+    align-items: center;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    &.current {
+      color: var(--ds-text-selected, currentColor);
+      background-color: var(--ds-background-selected, #f4f5f7);
+      &:hover {
+        background-color: var(--ds-background-selected-hovered, #f4f5f7);
+        color: var(--ds-text-selected, currentColor);
+      }
+      &::before {
+        content: "";
+        width: 2px;
+        position: absolute;
+        background: #579dff;
+        inset-block: 0px;
+        inset-inline-start: 0px;
+      }
+    }
+    &:hover {
+      background-color: var(--ds-background-neutral-subtle-hovered, #f4f5f7);
+      color: currentcolor;
+    }
+  }
+}

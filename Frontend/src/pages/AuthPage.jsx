@@ -61,7 +61,7 @@ export function AuthPage({ isLogin = false }) {
       } else {
         setAlert(false);
         try {
-          setAlert(true);
+          setAlert(false);
           await login({ email, password: pass });
         } catch (err) {
           console.log(err);

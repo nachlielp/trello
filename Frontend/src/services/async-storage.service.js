@@ -65,7 +65,7 @@ function putSubEntity(entityType, updatedEntity, boardId) {
 }
 function remove(entityType, entityId) {
     return query(entityType).then(entities => {
-        const idx = entities.findIndex(entity => entity._id === entityId)
+        const idx = entities.findIndex(entity => entity.id === entityId)
         if (idx < 0) throw new Error(`Remove failed, cannot find entity with id: ${entityId} in: ${entityType}`)
         entities.splice(idx, 1)
         _save(entityType, entities)
