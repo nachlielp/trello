@@ -49,7 +49,13 @@ export function AddModule({ onClose }) {
         });
         break;
       case "kick":
-        console.log("kick");
+        updateBoard({
+          ...board,
+          members: board.members.filter((m) => m.id !== user.id),
+        });
+        if (user.id === me.id) {
+          onClose();
+        }
         break;
     }
   }
@@ -112,7 +118,7 @@ export function AddModule({ onClose }) {
                           @{user.username}
                           <span className="permission">
                             {" "}
-                            • Board {m.permissionStatus}
+                            • Board {m?.permissionStatus}
                           </span>
                         </p>
                       </div>
@@ -120,7 +126,7 @@ export function AddModule({ onClose }) {
                     {myStatus.permissionStatus === "admin" && (
                       <ChangePermissionPopover
                         myOptions={user.id === me.id}
-                        currenOption={m.permissionStatus}
+                        currenOption={m?.permissionStatus}
                         memberId={m.id}
                         onChange={onChangePermission}
                         anchorEl={
