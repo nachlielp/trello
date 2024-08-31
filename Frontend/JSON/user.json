@@ -1,80 +1,74 @@
 [
   {
-      "id": "666fe4efda8643029b6710f3",
-      "bio": "",
-      "fullName": "Eugene Bondarev",
-      "darkMode": "default",
-      "username": "jeneea45",
-      "status": "disconnected",
-      "dateLastImpression": "2024-06-23T14:37:01.036Z",
-      "dateLastActive": "2024-06-23T14:37:00.990Z",
-      "email": "jeneea45@gmail.com",
-      "starredBoardIds": []
+    "id": "66d249c0b7b7f61c1cfeec46",
+    "bio": "",
+    "fullName": "Eugene Bondarev",
+    "darkMode": "default",
+    "username": "jeneea45",
+    "status": "disconnected",
+    "dateLastImpression": "2024-06-23T14:37:01.036Z",
+    "dateLastActive": "2024-06-23T14:37:00.990Z",
+    "email": "jeneea45@gmail.com",
+    "starredBoardIds": []
   },
   {
-      "id": "64f721dfe7ac348348a02895",
-      "bio": "",
-      "fullName": "nachliel pokroy",
-      "darkMode": "light",
-      "username": "nachlielpokroy",
-      "status": "disconnected",
-      "dateLastImpression": "2024-06-23T14:41:37.288Z",
-      "dateLastActive": "2024-06-22T08:10:15.105Z",
-      "email": "nachpok@gmail.com",
-      "starredBoardIds": [
-          "IJG3c"
-      ]
+    "id": "66d249c0b7b7f61c1cfeec47",
+    "bio": "",
+    "fullName": "nachliel pokroy",
+    "darkMode": "light",
+    "username": "nachlielpokroy",
+    "status": "disconnected",
+    "dateLastImpression": "2024-06-23T14:41:37.288Z",
+    "dateLastActive": "2024-06-22T08:10:15.105Z",
+    "email": "nachpok@gmail.com",
+    "starredBoardIds": ["IJG3c"]
   },
   {
-      "id": "64f72210e7ac348348a02896",
-      "bio": "",
-      "fullName": "Jane Doe",
-      "darkMode": "light",
-      "username": "janedoe",
-      "status": "disconnected",
-      "dateLastImpression": "2024-06-24T12:22:47.355Z",
-      "dateLastActive": "2024-06-23T09:15:12.555Z",
-      "email": "janedoe@example.com",
-      "starredBoardIds": []
+    "id": "66d249c0b7b7f61c1cfeec48",
+    "bio": "",
+    "fullName": "Jane Doe",
+    "darkMode": "light",
+    "username": "janedoe",
+    "status": "disconnected",
+    "dateLastImpression": "2024-06-24T12:22:47.355Z",
+    "dateLastActive": "2024-06-23T09:15:12.555Z",
+    "email": "janedoe@example.com",
+    "starredBoardIds": []
   },
   {
-      "id": "64f72221e7ac348348a02897",
-      "bio": "",
-      "fullName": "John Smith",
-      "darkMode": "dark",
-      "username": "johnsmith",
-      "status": "active",
-      "dateLastImpression": "2024-06-23T10:14:36.488Z",
-      "dateLastActive": "2024-06-23T10:14:36.488Z",
-      "email": "johnsmith@example.com",
-      "starredBoardIds": [
-          "64f7a51fe7ac348348a02791"
-      ]
+    "id": "66d249c0b7b7f61c1cfeec49",
+    "bio": "",
+    "fullName": "John Smith",
+    "darkMode": "dark",
+    "username": "johnsmith",
+    "status": "active",
+    "dateLastImpression": "2024-06-23T10:14:36.488Z",
+    "dateLastActive": "2024-06-23T10:14:36.488Z",
+    "email": "johnsmith@example.com",
+    "starredBoardIds": ["64f7a51fe7ac348348a02791"]
   },
   {
-      "id": "64f72231e7ac348348a02898",
-      "bio": "",
-      "fullName": "Emily Brown",
-      "darkMode": "light",
-      "username": "emilybrown",
-      "status": "disconnected",
-      "dateLastImpression": "2024-06-24T15:35:42.187Z",
-      "dateLastActive": "2024-06-23T12:20:32.187Z",
-      "email": "emilybrown@example.com",
-      "starredBoardIds": []
+    "id": "66d249c0b7b7f61c1cfeec4a",
+    "bio": "",
+    "fullName": "Emily Brown",
+    "darkMode": "light",
+    "username": "emilybrown",
+    "status": "disconnected",
+    "dateLastImpression": "2024-06-24T15:35:42.187Z",
+    "dateLastActive": "2024-06-23T12:20:32.187Z",
+    "email": "emilybrown@example.com",
+    "starredBoardIds": []
   },
   {
-      "id": "64f72241e7ac348348a02899",
-      "bio": "",
-      "fullName": "Michael Lee",
-      "darkMode": "dark",
-      "username": "michaellee",
-      "status": "active",
-      "dateLastImpression": "2024-06-23T18:25:15.467Z",
-      "dateLastActive": "2024-06-23T18:25:15.467Z",
-      "email": "michaellee@example.com",
-      "starredBoardIds": [
-          "64f7a521e7ac348348a02793"
-      ]
+    "id": "66d249c0b7b7f61c1cfeec4b",
+    "bio": "",
+    "fullName": "Michael Lee",
+    "darkMode": "dark",
+    "username": "michaellee",
+    "status": "active",
+    "dateLastImpression": "2024-06-23T18:25:15.467Z",
+    "dateLastActive": "2024-06-23T18:25:15.467Z",
+    "email": "michaellee@example.com",
+    "starredBoardIds": ["64f7a521e7ac348348a02793"]
   }
 ]

@@ -31,9 +31,7 @@
             "uses": 1
           }
         ],
-        "idLabels": [
-          "64f721f1415ea65cb1e8890b"
-        ],
+        "idLabels": ["64f721f1415ea65cb1e8890b"],
         "manualCoverAttachment": false,
         "name": "back-log",
         "pos": 98304,
@@ -97,10 +95,7 @@
         "idBoard": "66756a34def1a6d3b8cd179d",
         "idChecklists": [],
         "idList": "66756b3a4a97ac163d32e9e2",
-        "idMembers": [
-          "666fe4efda8643029b6710f3",
-          "64f721dfe7ac348348a02895"
-        ],
+        "idMembers": ["66d249c0b7b7f61c1cfeec46", "66d249c0b7b7f61c1cfeec47"],
         "idMembersVoted": [],
         "idShort": 6,
         "idAttachmentCover": null,
@@ -259,10 +254,7 @@
         "idBoard": "66756a34def1a6d3b8cd179d",
         "idChecklists": [],
         "idList": "66756b3a4a97ac163d32e9e2",
-        "idMembers": [
-          "666fe4efda8643029b6710f3",
-          "64f721dfe7ac348348a02895"
-        ],
+        "idMembers": ["66d249c0b7b7f61c1cfeec46", "66d249c0b7b7f61c1cfeec47"],
         "idMembersVoted": [],
         "idShort": 7,
         "idAttachmentCover": null,
@@ -605,9 +597,7 @@
             "uses": 1
           }
         ],
-        "idLabels": [
-          "66756a351dc51400eb1968e8"
-        ],
+        "idLabels": ["66756a351dc51400eb1968e8"],
         "manualCoverAttachment": false,
         "name": "store.js",
         "pos": 196608,
@@ -745,9 +735,7 @@
             "uses": 1
           }
         ],
-        "idLabels": [
-          "66756a351dc51400eb1968ed"
-        ],
+        "idLabels": ["66756a351dc51400eb1968ed"],
         "manualCoverAttachment": false,
         "name": "trello.actions.js",
         "pos": 327680,
@@ -814,9 +802,7 @@
         "dueReminder": null,
         "email": null,
         "idBoard": "66756a34def1a6d3b8cd179d",
-        "idChecklists": [
-          "667686e9352dcdb311b45003"
-        ],
+        "idChecklists": ["667686e9352dcdb311b45003"],
         "idList": "66756b31250742f334ce4cf0",
         "idMembers": [],
         "idMembersVoted": [],
@@ -883,9 +869,7 @@
         "idBoard": "66756a34def1a6d3b8cd179d",
         "idChecklists": [],
         "idList": "66756b31250742f334ce4cf0",
-        "idMembers": [
-          "666fe4efda8643029b6710f3"
-        ],
+        "idMembers": ["66d249c0b7b7f61c1cfeec46"],
         "idMembersVoted": [],
         "idShort": 13,
         "idAttachmentCover": null,
