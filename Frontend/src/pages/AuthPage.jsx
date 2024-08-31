@@ -60,7 +60,13 @@ export function AuthPage({ isLogin = false }) {
         setAlert(true);
       } else {
         setAlert(false);
-        await login({ email, password: pass });
+        try {
+          setAlert(true);
+          await login({ email, password: pass });
+        } catch (err) {
+          console.log(err);
+          setAlert(true);
+        }
       }
     } else {
       if (email && pass && fullName) {

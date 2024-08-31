@@ -15,6 +15,6 @@ router.post("/checkToken", checkUser);
 router.get("/users", getUsersArr);
 router.get("/i/:id", userById);
 router.get("/e", userByEmail);
-router.get("/username/:username",requireAuth, userByUserName);
+router.get("/u/:username",requireAuth, userByUserName);
 
 export const userRouter = router;

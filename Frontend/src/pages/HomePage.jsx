@@ -28,7 +28,6 @@ export function HomePage() {
     
     try {
       await login();
-      console.log("done");
     } catch (err) {
       throw err;
     }

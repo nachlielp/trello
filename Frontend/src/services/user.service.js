@@ -7,22 +7,23 @@ const STORAGE_KEY_LOGGEDIN_USER = "loggedinUser";
 export const userService = {
   logout,
   signup,
-  getLoggedinUser,
-  saveLocalUser,
   getWorkspaceUsers,
   getById,
   remove,
   updateUser,
-  changeScore,
   getByUserName,
   getByEmail,
 };
 
 window.userService = userService;
 
-function getWorkspaceUsers() {
-  return storageService.query(USERS_KEY);
-  // return httpService.get(`user`)
+async function getWorkspaceUsers(usersIds) {
+  try {
+    const users = await httpService.get("user/users", usersIds);
+    return users;
+  } catch (err) {
+    throw err;
+  }
 }
 async function getByUserName(username) {
   try {
@@ -66,42 +67,15 @@ async function updateUser(updatedUser) {
   }
 }
 
-// async function login(userCred) {
-//   const userId = import.meta.env.VITE_TRELLO_USER_ID;
-//   const users = await storageService.query(USERS_KEY);
-//   const user = users.find((user) => user.id === userId);
-//   // const user = await httpService.post('auth/login', userCred)
-//   if (user) return saveLocalUser(user);
-// }
-
 async function signup(userCred) {
-  return await httpService.post("/signup", userCred);
+  try {
+    return await httpService.post("auth/signup", userCred);
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
 }
 
 async function logout() {
   await httpService.post("auth/logout");
-}
-
-async function changeScore(by) {
-  const user = getLoggedinUser();
-  if (!user) throw new Error("Not loggedin");
-  user.score = user.score + by || by;
-  await update(user);
-  return user.score;
-}
-
-function saveLocalUser(user) {
-  user = {
-    _id: user._id,
-    fullname: user.fullname,
-    imgUrl: user.imgUrl,
-    score: user.score,
-    isAdmin: user.isAdmin,
-  };
-  sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user));
-  return user;
-}
-
-function getLoggedinUser() {
-  return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER));
 }

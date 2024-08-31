@@ -33,7 +33,7 @@ export function UserProfile() {
     {
       label: "Profile and visibility",
       to: `/u/${user?.username}`,
-      visible: true,
+      visible: (params.userName === user?.username),
     },
     // { label: "Cards", to: `/u/${user?.username}/cards`, visible: true },
   ];

@@ -1,5 +1,6 @@
 import usersJson from "../../JSON/user.json";
 import boardsJson from "../../JSON/board-info.json";
+import { login } from "../store/user.actions";
 
 const boardLabelColorOptions = [
   {
@@ -318,16 +319,10 @@ function getColorHashByName(colorName) {
 }
 
 function _createStartInfo() {
-  //daily refresh
-  if (+localStorage.getItem("date") !== new Date().getDate()) {
-    localStorage.clear();
-    localStorage.setItem("date", new Date().getDate());
-  }
-
-  //new states to start with
-  if (!localStorage.getItem(USERS_KEY)) {
-    localStorage.setItem(USERS_KEY, JSON.stringify(usersJson));
-  }
+  // //new states to start with
+  // if (!localStorage.getItem(USERS_KEY)) {
+  //   localStorage.setItem(USERS_KEY, JSON.stringify(usersJson));
+  // }
   if (!localStorage.getItem(BOARDS_KEY)) {
     localStorage.setItem(BOARDS_KEY, JSON.stringify(boardsJson));
   }
@@ -442,10 +437,12 @@ function getChecklistBadge(checkLists) {
 }
 
 async function createNewBoard(board) {
-  const user = await userService.getById(import.meta.env.VITE_TRELLO_USER_ID);
+  const user = await login();
+
   const member = {
     id: user.id,
     permissionStatus: "admin",
+    fullName: user.fullName,
   };
   return {
     prefs: {

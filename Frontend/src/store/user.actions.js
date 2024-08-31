@@ -10,11 +10,10 @@ export async function loadWorkspaceUsers(userIds) {
   // console.log(userIds)
   try {
     store.dispatch({ type: LOADING_START });
-    // const users = await userService.getWorkspaceUsers();
-
-    const users = await httpService.get("user/users", {
+    const users = await userService.getWorkspaceUsers({
       userIds: [...userIds],
     });
+
     store.dispatch({ type: SET_USERS, users });
     return users;
   } catch (err) {
@@ -47,13 +46,13 @@ export async function login(credentials) {
     return user;
   } catch (err) {
     console.log("UserActions: err in login", err);
+    throw err;
   }
 }
 
 export async function signup(credentials) {
   try {
-    const user = await httpService.post("auth/signup", credentials);
-
+    const user = await userService.signup(credentials);
     store.dispatch({ type: SET_USER, user });
     return user;
   } catch (err) {

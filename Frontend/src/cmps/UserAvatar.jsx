@@ -25,9 +25,12 @@ export function UserAvatar({
         state.userModule.users.find((u) => u.id === memberId)
       );
   const ratio = 120 / 250;
-  // const ratio = 1;
   const dynamicStyles = member
-    ? { backgroundColor: utilService.stringToColor(member.fullName) }
+    ? {
+        backgroundColor: utilService.stringToColor(
+          member?.fullName || member?.id
+        ),
+      }
     : {};
 
   return (
