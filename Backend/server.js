@@ -30,7 +30,7 @@ app.use("/api/boards", boardRouter);
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRouter);
 
-app.get("**", (req, res) => {
+app.get("/**", (req, res) => {
   res.sendFile(path.resolve("public/index.html"));
 });
 

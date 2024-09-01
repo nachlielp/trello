@@ -13,7 +13,8 @@ window.boardSer = boardService;
 
 async function getByTaskId(taskId) {
   try {
-    const boards = await httpService.get("boards")
+    //TODO filter boards by taskId in the server!!!!
+    const boards = await httpService.get("boards");
     const board = boards?.find((board) =>
       board.groups?.some((group) =>
         group.tasks?.some((task) => task.id === taskId)

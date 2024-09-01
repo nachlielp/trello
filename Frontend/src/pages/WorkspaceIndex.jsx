@@ -60,13 +60,7 @@ export function WorkspaceIndex() {
       setDarkMode(user.darkMode);
     }
   }, [user]);
-  async function setWorkSpaceBoards() {
-    setIsLoaded(false);
-    await setBoards();
-    setTimeout(() => {
-      setIsLoaded(true);
-    }, 200);
-  }
+
   useEffect(() => {
     if (params.boardId) {
       setIsLoaded(false);
@@ -74,9 +68,7 @@ export function WorkspaceIndex() {
       setSelectedBoardId(params.boardId);
       setIsUserBoards(false);
       viewBoard(params.boardId);
-      setTimeout(() => {
-        setIsLoaded(true);
-      }, 200);
+      setIsLoaded(true);
     }
     if (params.cardId) {
       setIsLoaded(false);
@@ -84,9 +76,7 @@ export function WorkspaceIndex() {
         setSelectedBoardId(boardId);
         setIsUserBoards(false);
         viewBoard(boardId);
-        setTimeout(() => {
-          setIsLoaded(true);
-        }, 200);
+        setIsLoaded(true);
       });
     }
   }, [params]);
@@ -98,6 +88,14 @@ export function WorkspaceIndex() {
       setSelectedBoardId(null);
     }
   }, [params, user, isUserBoards]);
+
+  async function setWorkSpaceBoards() {
+    setIsLoaded(false);
+    await setBoards();
+    setTimeout(() => {
+      setIsLoaded(true);
+    }, 200);
+  }
 
   async function getUser() {
     setIsLoaded(false);

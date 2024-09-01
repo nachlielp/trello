@@ -23,6 +23,11 @@ import { loadWorkspaceUsers } from "./user.actions";
 
 export async function loadBoard(boardId) {
   try {
+    const currentBoard = store.getState().boardModule.board;
+    console.log("currentBoard", currentBoard);
+    if (currentBoard.id === boardId) {
+      return currentBoard;
+    }
     const boardData = await boardService.getById(boardId);
     if (boardData) {
       store.dispatch({
@@ -43,6 +48,15 @@ export async function loadBoard(boardId) {
 }
 
 export async function loadBoardByTaskId(taskId) {
+  const currentBoard = store.getState().boardModule.board;
+  if (
+    currentBoard.groups.some((group) =>
+      group.tasks.some((task) => task.id === taskId)
+    )
+  ) {
+    return currentBoard.id;
+  }
+
   const board = await boardService.getByTaskId(taskId);
   if (board.error) {
     return board;
