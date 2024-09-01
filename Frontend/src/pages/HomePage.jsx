@@ -19,9 +19,9 @@ export function HomePage() {
   function onSignUp(e) {
     e.preventDefault();
     if (email) {
-      // navigate(`/signup?login_hint=${email}`);
+      navigate(`/signup?login_hint=${email}`);
     } else {
-      // navigate("/signup");
+      navigate("/signup");
     }
   }
   async function onLogin() {
