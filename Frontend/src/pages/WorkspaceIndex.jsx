@@ -92,7 +92,7 @@ export function WorkspaceIndex() {
   async function getUser() {
     const user = await login();
     if (!user) {
-      navigate("/login");
+      navigate("/home");
     }
   }
 
