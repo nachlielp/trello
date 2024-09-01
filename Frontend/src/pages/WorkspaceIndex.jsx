@@ -63,7 +63,9 @@ export function WorkspaceIndex() {
   async function setWorkSpaceBoards() {
     setIsLoaded(false);
     await setBoards();
-    setIsLoaded(true);
+    setTimeout(() => {
+      setIsLoaded(true);
+    }, 30);
   }
   useEffect(() => {
     if (params.boardId) {
@@ -213,7 +215,8 @@ export function WorkspaceIndex() {
                       <Outlet context={contextValues} />
                     </>
                   ) : (
-                    <ErrorPage wrongUrl={true} />
+                    // <ErrorPage wrongUrl={true} />
+                    "lol"
                   )}
                 </>
               )}

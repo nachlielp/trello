@@ -1,6 +1,4 @@
-import { storageService } from "./async-storage.service";
-import { utilService } from "./util.service";
-import { userService } from "./user.service";
+// import { storageService } from "./async-storage.service";
 import { httpService } from "./http.service";
 
 const STORAGE_KEY = "boards";
@@ -15,7 +13,7 @@ window.boardSer = boardService;
 
 async function getByTaskId(taskId) {
   try {
-    const boards = await storageService.query(STORAGE_KEY);
+    const boards = await httpService.get("boards")
     const board = boards?.find((board) =>
       board.groups?.some((group) =>
         group.tasks?.some((task) => task.id === taskId)
@@ -32,6 +30,7 @@ async function getByTaskId(taskId) {
 }
 
 async function getById(boardId) {
+  console.log(boardId)
   try {
     const board = await httpService.get(`boards/${boardId}`);
     if (!board) {

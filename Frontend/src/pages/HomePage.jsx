@@ -9,7 +9,7 @@ import homeImg from "/img/homeImg.png";
 export function HomePage() {
   const user = useSelector((state) => state.userModule.user);
   const [email, setEmail] = useState("");
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     onLogin()

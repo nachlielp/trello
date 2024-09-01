@@ -1,5 +1,4 @@
-import usersJson from "../../JSON/user.json";
-import boardsJson from "../../JSON/board-info.json";
+
 import { login } from "../store/user.actions";
 
 const boardLabelColorOptions = [
