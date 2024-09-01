@@ -30,7 +30,6 @@ async function getByTaskId(taskId) {
 }
 
 async function getById(boardId) {
-  console.log(boardId)
   try {
     const board = await httpService.get(`boards/${boardId}`);
     if (!board) {

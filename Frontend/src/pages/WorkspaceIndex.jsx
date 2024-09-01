@@ -65,20 +65,28 @@ export function WorkspaceIndex() {
     await setBoards();
     setTimeout(() => {
       setIsLoaded(true);
-    }, 30);
+    }, 200);
   }
   useEffect(() => {
     if (params.boardId) {
+      setIsLoaded(false);
       loadBoard(params.boardId);
       setSelectedBoardId(params.boardId);
       setIsUserBoards(false);
       viewBoard(params.boardId);
+      setTimeout(() => {
+        setIsLoaded(true);
+      }, 200);
     }
     if (params.cardId) {
+      setIsLoaded(false);
       loadBoardByTaskId(params.cardId).then((boardId) => {
         setSelectedBoardId(boardId);
         setIsUserBoards(false);
         viewBoard(boardId);
+        setTimeout(() => {
+          setIsLoaded(true);
+        }, 200);
       });
     }
   }, [params]);
@@ -92,10 +100,14 @@ export function WorkspaceIndex() {
   }, [params, user, isUserBoards]);
 
   async function getUser() {
+    setIsLoaded(false);
     const user = await login();
     if (!user) {
       navigate("/home");
     }
+    setTimeout(() => {
+      setIsLoaded(true);
+    }, 200);
   }
 
   useEffect(() => {
@@ -108,8 +120,9 @@ export function WorkspaceIndex() {
       setWrongInviteLink(false);
     }
   }, [params, board]);
+
   useEffect(() => {
-    // Update localStorage and <html> class based on darkMode state
+    // Update <html> class based on darkMode state
     if (darkMode === "dark") {
       document.querySelector("html").classList.add("dark");
     } else if (darkMode === "light") {
@@ -215,8 +228,7 @@ export function WorkspaceIndex() {
                       <Outlet context={contextValues} />
                     </>
                   ) : (
-                    // <ErrorPage wrongUrl={true} />
-                    "lol"
+                    <>{isLoaded && <ErrorPage wrongUrl={true} />}</>
                   )}
                 </>
               )}
@@ -228,11 +240,11 @@ export function WorkspaceIndex() {
               )}
             </section>
           ) : (
-            <Outlet />
+            <>{isLoaded && <Outlet />}</>
           )}
         </>
       ) : (
-        <ErrorPage wrongUrl={true} />
+        <>{isLoaded && <ErrorPage wrongUrl={true} />}</>
       )}
     </section>
   );
