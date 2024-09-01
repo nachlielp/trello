@@ -44,7 +44,6 @@ export function BoardDescription({ onSetPreventLoad }) {
     }
   }, [admins]);
   async function getAdmin() {
-    console.log(admins);
     const user = users.find(u=>u.id === admins[0].id);
     setAdmin(user);
   }
