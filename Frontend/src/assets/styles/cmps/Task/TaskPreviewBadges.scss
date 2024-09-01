@@ -59,6 +59,8 @@
         color: var(--ds-text-inverse, #ffffff);
 
         .task-icon {
+          margin-bottom: 4px;
+
           color: var(--ds-text-inverse, #ffffff);
         }
       }
@@ -71,7 +73,7 @@
       }
 
       .task-icon {
-        margin-bottom: 6px;
+        margin-bottom: 4px;
       }
 
       &.overdue {
