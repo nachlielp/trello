@@ -67,8 +67,7 @@ export function BoardIndex() {
       }
     }
     load();
-    console.log(board)
-  }, [params, user, board]);
+    }, [params, user, board]);
   useEffect(() => {
     if (board && board?.members) {
       const membersIds = board.members.map((u) => u.id);
