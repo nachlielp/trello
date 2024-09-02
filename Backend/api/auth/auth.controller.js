@@ -30,7 +30,7 @@ export async function signup(req, res) {
       credentials.email,
       credentials.password
     );
-    console.log("User signup:", user);
+    // console.log("User signup:", user);
 
     const loginToken = authService.getLoginToken(user);
     res.cookie("loginToken", loginToken, {
