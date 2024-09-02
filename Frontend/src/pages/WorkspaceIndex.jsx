@@ -92,20 +92,20 @@ export function WorkspaceIndex() {
   async function setWorkSpaceBoards() {
     setIsLoaded(false);
     await setBoards();
-    setTimeout(() => {
-      setIsLoaded(true);
-    }, 200);
+    setIsLoaded(true);
+    // setTimeout(() => {
+    // }, 200);
   }
 
   async function getUser() {
     setIsLoaded(false);
     const user = await login();
+    setIsLoaded(true);
     if (!user) {
       navigate("/home");
     }
-    setTimeout(() => {
-      setIsLoaded(true);
-    }, 200);
+    // setTimeout(() => {
+    // }, 200);
   }
 
   useEffect(() => {
