@@ -67,6 +67,7 @@ export function BoardIndex() {
       }
     }
     load();
+    console.log(board)
   }, [params, user, board]);
   useEffect(() => {
     if (board && board?.members) {

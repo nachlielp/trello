@@ -24,42 +24,12 @@ export async function getBoard(req, res) {
 }
 
 export async function putBoard(req, res) {
-  const {
-    activities,
-    updatedAt,
-    checkListTaskIds,
-    coverImgs,
-    groups,
-    labels,
-    members,
-    name,
-    prefs,
-    id,
-  } = req.body;
-  if (
-    !activities ||
-    !updatedAt ||
-    !checkListTaskIds ||
-    !coverImgs ||
-    !groups ||
-    !labels ||
-    !members ||
-    !name ||
-    !prefs ||
-    !id
-  ) {
+  const { id } = req.body;
+  if (!id) {
     return res.status(400).send("Couldn't save board");
   }
   const boardToSave = {
-    activities,
-    updatedAt,
-    checkListTaskIds,
-    coverImgs,
-    groups,
-    labels,
-    members,
-    name,
-    prefs,
+    ...req.body,
     id,
   };
   try {
@@ -72,41 +42,15 @@ export async function putBoard(req, res) {
 }
 
 export async function postBoard(req, res) {
-  const {
-    activities,
-    updatedAt,
-    checkListTaskIds,
-    coverImgs,
-    groups,
-    labels,
-    members,
-    name,
-    prefs,
-  } = req.body;
+  const { members, name } = req.body;
 
-  if (
-    !activities ||
-    !updatedAt ||
-    !checkListTaskIds ||
-    !coverImgs ||
-    !groups ||
-    !labels ||
-    !members ||
-    !name ||
-    !prefs
-  ) {
+  if (!members || !name) {
     return res.status(400).send("Couldn't save board");
   }
   const boardToSave = {
-    activities,
-    updatedAt,
-    checkListTaskIds,
-    coverImgs,
-    groups,
-    labels,
+    ...req.body,
     members,
     name,
-    prefs,
   };
   try {
     const savedBoard = await boardService.save(boardToSave);
