@@ -1,5 +1,6 @@
 // import { storageService } from "./async-storage.service";
 import { httpService } from "./http.service";
+import { socketService } from "../services/socket.service";
 
 const STORAGE_KEY = "boards";
 
@@ -52,6 +53,7 @@ async function save(board) {
   try {
     if (board.id) {
       savedBoard = await httpService.put("boards", board);
+      socketService.emit("board-updated", { boardId: board.id });
     } else {
       savedBoard = await httpService.post("boards", board);
     }

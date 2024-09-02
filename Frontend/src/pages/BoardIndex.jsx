@@ -19,6 +19,7 @@ import {
   updateBoard,
   moveTask,
   loadBoard,
+  loadBoardBySocket,
 } from "../store/board.actions";
 import { editUser, loadWorkspaceUsers } from "../store/user.actions";
 
@@ -29,6 +30,8 @@ import useScrollByGrab from "../customHooks/useScrollByGrab.js";
 import { useParams, useNavigate, useOutletContext } from "react-router-dom";
 import { utilService } from "../services/util.service.js";
 
+import { socketService } from "../services/socket.service.js";
+
 export function BoardIndex() {
   const [selectedTaskId, setSelectedTaskId] = useState(null);
   const [isDraggingOverId, setIsDraggingOverId] = useState(null);
@@ -37,6 +40,19 @@ export function BoardIndex() {
   const navigate = useNavigate();
   const outletProps = useOutletContext();
   const params = useParams();
+
+  useEffect(() => {
+    if (board.id) {
+      socketService.subscribeToBoard(board.id);
+
+      socketService.on("board-updated", (boardId) => {
+        loadBoardBySocket(boardId);
+      });
+    }
+    return () => {
+      socketService.unsubscribeFromBoard(board.id);
+    };
+  }, [board.id]);
 
   useEffect(() => {
     async function load() {
@@ -67,7 +83,6 @@ export function BoardIndex() {
       }
     }
     load();
-    console.log(board)
   }, [params, user, board]);
   useEffect(() => {
     if (board && board?.members) {
@@ -163,6 +178,7 @@ export function BoardIndex() {
   }
 
   async function editBoard(changes) {
+    console.log("editBoard", changes);
     await updateBoard({ ...board, ...changes });
   }
 

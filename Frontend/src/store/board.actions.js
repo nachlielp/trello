@@ -47,6 +47,13 @@ export async function loadBoard(boardId) {
   }
 }
 
+export async function loadBoardBySocket({ boardId }) {
+  const board = await boardService.getById(boardId);
+  if (board) {
+    store.dispatch({ type: SET_BOARD, board: board });
+  }
+}
+
 export async function loadBoardByTaskId(taskId) {
   const currentBoard = store.getState().boardModule.board;
   if (
