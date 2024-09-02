@@ -72,7 +72,12 @@ export function AuthPage({ isLogin = false }) {
     } else {
       if (email && pass && fullName) {
         setAlert(false);
-        await signup({ email, password: pass, fullName });
+        try {
+          await signup({ email, password: pass, fullName });
+        } catch (err) {
+          console.log(err);
+          setVerified(false);
+        }
       } else {
         setAlert(true);
       }
