@@ -30,6 +30,11 @@ app.use("/api/boards", boardRouter);
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRouter);
 
+
+app.get("/service-worker.js", (req, res) => {
+  res.sendFile(path.resolve("public/service-worker.js"));
+});
+
 app.get("/**", (req, res) => {
   res.sendFile(path.resolve("public/index.html"));
 });
