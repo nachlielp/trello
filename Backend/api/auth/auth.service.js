@@ -51,24 +51,27 @@ function validateToken(token) {
 
 async function signup({ fullName, password, email }) {
   const saltRounds = 10;
+  try {
+    console.log(
+      `auth.service - signup with username: ${fullName}, email: ${email}`
+    );
+    if (!fullName || !password || !email)
+      throw "Missing required signup information";
 
-  console.log(
-    `auth.service - signup with username: ${fullName}, email: ${email}`
-  );
-  if (!fullName || !password || !email)
-    throw "Missing required signup information";
+    const userExist = await userService.getByEmail(email);
+    if (userExist) throw "email already exists";
 
-  const userExist = await userService.getByEmail(email);
-  if (userExist) throw "email already exists";
-
-  const hash = await bcrypt.hash(password, saltRounds);
-  return userService.save({
-    fullName,
-    password: hash,
-    email,
-    username: email.split("@")[0],
-    starredBoardIds: [],
-    bio: "",
-    darkMode: "default",
-  });
+    const hash = await bcrypt.hash(password, saltRounds);
+    return userService.save({
+      fullName,
+      password: hash,
+      email,
+      username: email.split("@")[0],
+      starredBoardIds: [],
+      bio: "",
+      darkMode: "default",
+    });
+  } catch (err) {
+    console.log(err);
+  }
 }
