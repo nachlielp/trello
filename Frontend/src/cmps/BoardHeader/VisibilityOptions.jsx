@@ -12,13 +12,11 @@ export function VisibilityOptions({ setOpenListMenu, setPermission }) {
   const [hasAcces, setHasAcces] = useState(false);
   const user = useSelector((state) => state.userModule.user);
   const currentMember = useSelector((state) =>
-    state.boardModule.board.members.find(
-      (member) => member.id === user.id
-    )
+    state.boardModule.board.members.find((member) => member.id === user.id)
   );
   const board = useSelector((state) => state.boardModule.board);
   useEffect(() => {
-    if (currentMember?.permissionStatus === "admin" || user.isAdmin) {
+    if (currentMember?.permissionStatus === "admin" || user?.isAdmin) {
       setHasAcces(true);
     } else {
       setHasAcces(false);

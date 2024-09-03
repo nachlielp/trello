@@ -66,7 +66,7 @@ export function ArchiveModal({ onClose }) {
                       className="btn reopen"
                       disabled={
                         !b.members.some((m) => m.id === user.id) &&
-                        !user.isAdmin
+                        !user?.isAdmin
                       }
                       onClick={() => onReopen(b.id)}
                     >
@@ -76,7 +76,7 @@ export function ArchiveModal({ onClose }) {
                       className="btn delete"
                       disabled={
                         !b.members.some((m) => m.id === user.id) &&
-                        !user.isAdmin
+                        !user?.isAdmin
                       }
                       onClick={() => onDelete(b.id)}
                     >

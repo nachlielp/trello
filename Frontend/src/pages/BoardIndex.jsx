@@ -67,7 +67,7 @@ export function BoardIndex() {
       }
     }
     load();
-    }, [params, user, board]);
+  }, [params, user, board]);
   useEffect(() => {
     if (board && board?.members) {
       const membersIds = board.members.map((u) => u.id);
@@ -119,7 +119,6 @@ export function BoardIndex() {
         },
         user
       );
-      await editTask(task);
       await updateBoard({
         ...board,
         groups: board.groups.map((g) =>
@@ -129,8 +128,6 @@ export function BoardIndex() {
         ),
         activities: [...board?.activities, newActivity],
       });
-      setSelectedTaskId(null);
-      navigate(`/b/${task.idBoard}`);
     } else {
       const res = await editTask(task);
     }

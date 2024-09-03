@@ -207,6 +207,36 @@ export function ActivityMsg({ activity, task = false }) {
           </div>
         </section>
       );
+    case "unArchive":
+      return (
+        <section className="activity">
+          <ProfilePopover
+            memberId={activity.userId}
+            anchorEl={
+              <UserAvatar
+                size={32}
+                memberId={activity.userId}
+                onClick={(e) => e.stopPropagation()}
+                className="activity-avatar"
+              />
+            }
+          />
+          <div className="main-activity">
+            <p className="msg">
+              <span className="username">{activity.userFullName}</span> sent{" "}
+              <Link to={`/c/${activity.targetId}`}>{activity.targetName}</Link>{" "}
+              to the board
+            </p>
+            {task ? (
+              <p className="time">{timeString}</p>
+            ) : (
+              <Link className="time" to={`/c/${activity.targetId}`}>
+                {timeString}
+              </Link>
+            )}
+          </div>
+        </section>
+      );
     case "archiveTask":
       return (
         <section className="activity">
@@ -253,7 +283,7 @@ export function ActivityMsg({ activity, task = false }) {
           <div className="main-activity">
             <p className="msg">
               <span className="username">{activity.userFullName}</span> deleted{" "}
-              card {activity.targetName} from {activity.groupName}
+              card <span className="card">{activity.targetName}</span> from {activity.groupName}
             </p>
             <p className="time">{timeString}</p>
           </div>
@@ -473,7 +503,10 @@ export function ActivityMsg({ activity, task = false }) {
           <div className="main-activity">
             <p className="msg">
               <span className="username">{activity.userFullName}</span> attached{" "}
-              <Link to={activity.attachmentLink} target="_blank">{activity.attachmentName}</Link> to{" "}
+              <Link to={activity.attachmentLink} target="_blank">
+                {activity.attachmentName}
+              </Link>{" "}
+              to{" "}
               {task ? (
                 "this card"
               ) : (

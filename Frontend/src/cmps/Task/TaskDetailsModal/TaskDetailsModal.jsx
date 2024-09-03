@@ -266,6 +266,7 @@ export function TaskDetailsModal({
       footer=""
       className={`task-details ${brightness}`}
     >
+      {task.closed && <section className="closed-task"><span className="trello-icon icon-archive"/><span className="text">This card is archived.</span></section>}
       {isColorCover && colorCoverHeader}
       {!!isImgCover && imgCoverHeader}
       <article className="details-header">

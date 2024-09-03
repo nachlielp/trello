@@ -44,7 +44,7 @@ export function BoardDescription({ onSetPreventLoad }) {
     }
   }, [admins]);
   async function getAdmin() {
-    const user = users.find(u=>u.id === admins[0].id);
+    const user = users.find((u) => u.id === admins[0].id);
     setAdmin(user);
   }
   function onChangeDescription(e) {
@@ -70,7 +70,7 @@ export function BoardDescription({ onSetPreventLoad }) {
                 {admins.map((a) => {
                   return (
                     <ProfilePopover
-                    key={a.id}
+                      key={a.id}
                       anchorEl={
                         <UserAvatar
                           memberId={a.id}
@@ -98,17 +98,20 @@ export function BoardDescription({ onSetPreventLoad }) {
       </div>
       <div
         className={`description ${
-          !board.members.some((m) => m.id === user.id) && !user.isAdmin ? "disable" : ""
+          !board.members.some((m) => m.id === user.id) && !user?.isAdmin
+            ? "disable"
+            : ""
         }`}
       >
         <header className="description-header">
           <span className="trello-icon icon-description" />
           <h3>Description</h3>
-          {!isOpen && (board.members.some((m) => m.id === user.id) || user.isAdmin) && (
-            <button className="edit-btn" onClick={() => setIsOpen(true)}>
-              Edit
-            </button>
-          )}
+          {!isOpen &&
+            (board.members.some((m) => m.id === user.id) || user?.isAdmin) && (
+              <button className="edit-btn" onClick={() => setIsOpen(true)}>
+                Edit
+              </button>
+            )}
         </header>
         <main
           className={`description-main ${isOpen ? "open" : ""} ${

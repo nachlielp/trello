@@ -54,9 +54,9 @@ export function BoardHeader({
   return (
     <div className="board-header">
       <div className="left-info">
-        {(board.members.some(
+        {board.members.some(
           (m) => m.id === user?.id && m.permissionStatus === "admin"
-        ) || user.isAdmin) ? (
+        ) || user?.isAdmin ? (
           <NameInput
             value={board.name}
             className="board-name"
@@ -103,7 +103,7 @@ export function BoardHeader({
         <button
           className="add-btn"
           disabled={
-            !board.members.some((m) => m.id === user?.id) && !user.isAdmin
+            !board.members.some((m) => m.id === user?.id) && !user?.isAdmin
           }
           onClick={() => setOpenAdd(true)}
         >

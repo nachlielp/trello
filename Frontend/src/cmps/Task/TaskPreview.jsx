@@ -6,7 +6,13 @@ import { TaskPreviewEditModal } from "./TaskPreviewEditModal";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 
-export function TaskPreview({ task, editTask, labelActions, isDragging }) {
+export function TaskPreview({
+  task,
+  editTask,
+  labelActions,
+  isDragging,
+  noHover = false,
+}) {
   const boardLabels = useSelector((state) => state.boardModule.board.labels);
   const [isHovered, setIsHovered] = useState(false);
   const [isOpenPreviewModal, setIsOpenPreviewModal] = useState(false);
@@ -88,8 +94,8 @@ export function TaskPreview({ task, editTask, labelActions, isDragging }) {
       } ${isDragging ? "dragging" : ""} ${
         isHovered && !isOpenPreviewModal ? "hovered" : ""
       }`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={() => !noHover && setIsHovered(true)}
+      onMouseLeave={() => !noHover && setIsHovered(false)}
       style={{ ...taskColorCoverStyle, ...taskBackgroundCoverImageStyle }}
       onClick={onClickTask}
     >

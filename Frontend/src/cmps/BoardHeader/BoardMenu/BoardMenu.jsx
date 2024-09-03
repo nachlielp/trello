@@ -8,6 +8,7 @@ import { removeBoard, updateBoard } from "../../../store/board.actions";
 import { editUser } from "../../../store/user.actions";
 import { utilService } from "../../../services/util.service";
 import { useNavigate } from "react-router";
+import { ArchivedItems } from "./ArchivedItems";
 
 export function BoardMenu({ setOpenBoarMenu, setShowBtn }) {
   const board = useSelector((state) => state.boardModule.board);
@@ -81,19 +82,19 @@ export function BoardMenu({ setOpenBoarMenu, setShowBtn }) {
             <span className="trello-icon icon-activity btn-menu" />
             Activity
           </button>
-          {/* <button className="btn" onClick={() => setNavigation("Menu")}>
+          <button className="btn" onClick={() => setNavigation("Archive")}>
             <span className="trello-icon icon-archive btn-menu" />
             Archived items
-          </button> */}
-          {(board.members.some((m) => m.id === user.id) || user.isAdmin) && (
+          </button>
+          {(board.members.some((m) => m.id === user.id) || user?.isAdmin) && (
             <>
               <hr className="border_bottom" />
               {(board.members.some(
                 (m) => m.id === user.id && m.permissionStatus === "admin"
               ) ||
-                user.isAdmin) && (
+                user?.isAdmin) && (
                 <ActionPopover
-                  action={"Delete board"}
+                  action={"Delete board?"}
                   deleteBoard={deleteBoard}
                   anchorEl={
                     <button
@@ -129,6 +130,7 @@ export function BoardMenu({ setOpenBoarMenu, setShowBtn }) {
       {navigation === "About this board" && (
         <BoardDescription onSetPreventLoad={onSetPreventLoad} />
       )}
+      {navigation === "Archive" && <ArchivedItems />}
     </section>
   );
 }

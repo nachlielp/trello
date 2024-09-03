@@ -244,6 +244,38 @@
     //     }
     //   }
     // }
+
+    .closed-task {
+      display: flex;
+      align-items: center;
+      padding: 20px 24px 20px 24px;
+      height: 64px;
+      margin: -20px -24px 20px -24px;
+      overflow: hidden;
+      border-radius: 12px 12px 0 0;
+      background-color: var(--ds-background-warning, #fff7d6);
+      background-image: linear-gradient(
+        to bottom right,
+        var(--ds-background-neutral, rgba(0, 0, 0, 0.05)) 25%,
+        transparent 25%,
+        transparent 50%,
+        var(--ds-background-neutral, rgba(0, 0, 0, 0.05)) 50%,
+        var(--ds-background-neutral, rgba(0, 0, 0, 0.05)) 75%,
+        transparent 75%,
+        transparent
+      );
+      background-size: 14px 14px;
+      .trello-icon {
+        font-size: 24px;
+        margin-right: 10px;
+      }
+      .text {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 32px;
+      }
+    }
+
     .details-header {
       display: flex;
       color: var(--ds-text, #172b4d);
@@ -340,7 +372,20 @@
           padding: 6px 10px;
           margin-top: 8px;
           align-items: center;
-
+          * {
+            cursor: pointer;
+          }
+          &.delete {
+            background-color: var(--ds-background-danger-bold, #ca3521);
+            color: var(--ds-text-inverse, #fff);
+            &:hover {
+              background-color: var(
+                --ds-background-danger-bold-hovered,
+                #ae2a19
+              );
+              color: var(--ds-text-inverse, #fff);
+            }
+          }
           &:hover {
             background-color: var(--ds-background-neutral-hovered, #091e4224);
             text-decoration: none;

@@ -77,6 +77,15 @@
     },
     {
       "id": "activityId",
+      "type": "unArchive",
+      "userFullName": "fullName",
+      "userId": "id",
+      "targetId": "taskId",
+      "targetName": "taskName",
+      "timeStamp": 1722015726446
+    },
+    {
+      "id": "activityId",
       "type": "archiveTask",
       "userFullName": "fullName",
       "userId": "id",

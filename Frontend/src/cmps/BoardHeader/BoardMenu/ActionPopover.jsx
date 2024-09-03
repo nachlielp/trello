@@ -2,7 +2,14 @@ import { Popover, Button } from "antd";
 import { useState } from "react";
 import { ManageTaskPopoverHeader } from "../../Task/ManageTaskPopovers/ManageTaskPopoverHeader";
 
-export function ActionPopover({ deleteBoard, leaveBoard, anchorEl, action }) {
+export function ActionPopover({
+  deleteBoard,
+  leaveBoard,
+  anchorEl,
+  action,
+  deleteTask,
+  position = null,
+}) {
   const [isOpen, setIsOpen] = useState(false);
 
   const [backToList, setBackToList] = useState(null);
@@ -12,7 +19,6 @@ export function ActionPopover({ deleteBoard, leaveBoard, anchorEl, action }) {
     setIsOpen(false);
   }
 
-
   function onBackToList() {
     setBackToList(null);
   }
@@ -20,6 +26,11 @@ export function ActionPopover({ deleteBoard, leaveBoard, anchorEl, action }) {
   function onDeleteBoard(e) {
     e.stopPropagation();
     deleteBoard();
+    setIsOpen(false);
+  }
+  function onDeleteTask(e) {
+    e.stopPropagation();
+    deleteTask();
     setIsOpen(false);
   }
 
@@ -32,7 +43,7 @@ export function ActionPopover({ deleteBoard, leaveBoard, anchorEl, action }) {
     <Popover
       className="close-board-popover"
       trigger="click"
-      placement="bottomRight"
+      placement={position ? position : "bottomRight"}
       close={onClose}
       open={isOpen}
       onOpenChange={setIsOpen}
@@ -40,18 +51,22 @@ export function ActionPopover({ deleteBoard, leaveBoard, anchorEl, action }) {
       content={
         <section className="close-board-popover-content">
           <ManageTaskPopoverHeader
-            title={action === "Delete board" ? "Delete board?" : "Leave board?"}
+            title={action}
             close={onClose}
             back={backToList}
           />
 
-          {action === "Delete board" && (
+          {action === "Delete board?" && (
             <section className="close-board-popover-body">
               <p className="body-text">
                 You can find and reopen closed boards at the bottom of your
                 boards page.
               </p>
-              <Button className="close-btn" size="small" onClick={onDeleteBoard}>
+              <Button
+                className="close-btn"
+                size="small"
+                onClick={onDeleteBoard}
+              >
                 Delete
               </Button>
             </section>
@@ -63,6 +78,16 @@ export function ActionPopover({ deleteBoard, leaveBoard, anchorEl, action }) {
               </p>
               <Button className="close-btn" size="small" onClick={onLeaveBoard}>
                 Leave
+              </Button>
+            </section>
+          )}
+          {action === "Delete card?" && (
+            <section className="close-board-popover-body">
+              <p className="body-text">
+                You won’t be able to re-open the card. There is no undo.
+              </p>
+              <Button className="close-btn" size="small" onClick={onDeleteTask}>
+                Delete
               </Button>
             </section>
           )}

@@ -60,6 +60,7 @@
 @import "cmps/ProfilePopover";
 @import "cmps/BoardHeader/BoardMenu/BoardMenu";
 @import "cmps/BoardHeader/BoardMenu/BoardDescription";
+@import "cmps/BoardHeader/BoardMenu/ArchivedItems";
 @import "cmps/BoardHeader/AddModule";
 @import "cmps/BoardHeader/ChangePermissionPopover";
 @import "cmps/ActivityMsg";
@@ -146,8 +147,9 @@
   --ds-link: #579dff;
   --ds-surface-raised-hovered: #f1f2f4;
   --ds-background-warning: #332e1b;
-  --ds-background-danger-bold: #F87168;
-  --ds-background-danger-bold-hovered: #FD9891;
+  --ds-background-danger-bold: #f87168;
+  --ds-background-danger-bold-hovered: #fd9891;
+  --ds-shadow-raised: 0px 0px 0px 1px #00000000, 0px 1px 1px #03040480, 0px 0px 1px #03040480;
   *:-webkit-autofill {
     color-scheme: dark !important;
   }
@@ -209,6 +211,7 @@
   --ds-surface-sunken: #f7f8f9;
   --ds-link: #0c66e4;
   --ds-background-warning: #fff7d6;
-  --ds-background-danger-bold: #C9372C;
-  --ds-background-danger-bold-hovered: #AE2E24;
+  --ds-background-danger-bold: #c9372c;
+  --ds-background-danger-bold-hovered: #ae2e24;
+  --ds-shadow-raised: 0px 1px 1px #091E4240, 0px 0px 1px #091E424F;
 }

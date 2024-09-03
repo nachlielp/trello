@@ -1,7 +1,7 @@
 .activity {
   display: flex;
   padding: 8px 0;
- min-height: 76px;
+  min-height: 76px;
   .activity-avatar {
     min-width: 32px;
   }
@@ -18,7 +18,9 @@
         cursor: pointer;
         font-weight: 700;
       }
-      a {
+      a,
+      .card {
+        cursor: pointer;
         text-decoration: none;
         color: var(--ds-link, #0c66e4);
       }

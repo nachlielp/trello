@@ -113,7 +113,7 @@ export function BoardGroup({
           {...draggableProvided.draggableProps}
           ref={draggableProvided.innerRef}
           className={`${
-            !board.members.some((m) => m.id === user?.id) && !user.isAdmin
+            !board.members.some((m) => m.id === user?.id) && !user?.isAdmin
               ? "disable"
               : ""
           }`}
