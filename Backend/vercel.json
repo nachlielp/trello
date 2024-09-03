@@ -28,8 +28,6 @@
             "src": "/(.*)",
             "dest": "/public/index.html"
         }
-    ],
-    "rewrites": [
-    { "source": "/socket.io/(.*)", "destination": "/api/socket.js" }
-  ]
+    ]
+  
 }
