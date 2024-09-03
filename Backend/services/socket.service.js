@@ -24,8 +24,9 @@ export function setupSocketAPI(httpServer) {
       console.log(`Client unsubscribed from board: ${boardId}`);
     });
 
-    socket.on("board-updated", ({ boardId }) => {
-      socket.to(boardId).emit("board-updated", { boardId });
+    socket.on("board-updated", (board) => {
+      socket.to(board.id).emit("board-updated", board);
+      socket.to("workspace").emit("workspace-updated", board);
     });
 
     socket.on("disconnect", () => {

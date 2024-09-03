@@ -45,6 +45,16 @@ function createSocketService() {
       socket.emit("unsubscribe", boardId);
     },
 
+    subscribeToWorkspace() {
+      if (!socket) this.setup();
+      socket.emit("subscribe", "workspace");
+    },
+
+    unsubscribeFromWorkspace() {
+      if (!socket) return;
+      socket.emit("unsubscribe", "workspace");
+    },
+
     // login(userId) {
     //   socket.emit(SOCKET_EMIT_LOGIN, userId);
     // },

@@ -53,10 +53,11 @@ async function save(board) {
   try {
     if (board.id) {
       savedBoard = await httpService.put("boards", board);
-      socketService.emit("board-updated", { boardId: board.id });
+      socketService.emit("board-updated", { board: board });
     } else {
       savedBoard = await httpService.post("boards", board);
     }
+
     return savedBoard;
   } catch (err) {
     console.log(err);

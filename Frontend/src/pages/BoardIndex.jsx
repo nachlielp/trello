@@ -42,19 +42,6 @@ export function BoardIndex() {
   const params = useParams();
 
   useEffect(() => {
-    if (board.id) {
-      socketService.subscribeToBoard(board.id);
-
-      socketService.on("board-updated", (boardId) => {
-        loadBoardBySocket(boardId);
-      });
-    }
-    return () => {
-      socketService.unsubscribeFromBoard(board.id);
-    };
-  }, [board.id]);
-
-  useEffect(() => {
     async function load() {
       if (params.cardId) {
         setSelectedTaskId(params.cardId);
