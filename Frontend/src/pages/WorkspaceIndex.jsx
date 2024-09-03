@@ -71,7 +71,7 @@ export function WorkspaceIndex() {
       await loadBoard(params.boardId);
       setSelectedBoardId(params.boardId);
       setIsUserBoards(false);
-      await viewBoard(params.boardId);
+      viewBoard(params.boardId);
       setIsLoaded(true);
     }
     if (params.cardId) {
@@ -79,7 +79,7 @@ export function WorkspaceIndex() {
       const boardId = await loadBoardByTaskId(params.cardId);
       setSelectedBoardId(boardId);
       setIsUserBoards(false);
-      await viewBoard(boardId);
+      viewBoard(boardId);
       setIsLoaded(true);
     }
   }
