@@ -18,7 +18,7 @@ export function VisibilityOptions({ setOpenListMenu, setPermission }) {
   );
   const board = useSelector((state) => state.boardModule.board);
   useEffect(() => {
-    if (currentMember?.permissionStatus === "admin") {
+    if (currentMember?.permissionStatus === "admin" || user.isAdmin) {
       setHasAcces(true);
     } else {
       setHasAcces(false);

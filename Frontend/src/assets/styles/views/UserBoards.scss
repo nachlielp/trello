@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  padding-top: 80px;
   width: 100%;
   background-color: var(--ds-surface, #fff);
   height: calc(100vh - 48px);
@@ -108,6 +108,30 @@
       font-size: 16px;
       font-weight: 700;
       margin: 10px 6px;
+    }
+  }
+  .bottom {
+    margin-top: 40px;
+    .btn {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 20px;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      background-color: var(--ds-background-neutral, #091e420f);
+      color: var(--ds-text, #172b4d);
+      transition-property: background-color;
+      transition-duration: 85ms;
+      transition-timing-function: ease;
+      &:hover {
+        background-color: var(--ds-background-neutral-hovered, #091e4224);
+        color: var(--ds-text, #172b4d);
+      }
+      &:disabled{
+        display: none;
+      }
     }
   }
 }

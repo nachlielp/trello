@@ -30,6 +30,7 @@
 @import "views/BoardIndex";
 @import "views/BoardDetails";
 @import "views/UserBoards";
+@import "cmps/UserBoards/ArchiveModal";
 @import "views/HomePage";
 @import "views/AuthPage";
 
@@ -145,6 +146,8 @@
   --ds-link: #579dff;
   --ds-surface-raised-hovered: #f1f2f4;
   --ds-background-warning: #332e1b;
+  --ds-background-danger-bold: #F87168;
+  --ds-background-danger-bold-hovered: #FD9891;
   *:-webkit-autofill {
     color-scheme: dark !important;
   }
@@ -206,4 +209,6 @@
   --ds-surface-sunken: #f7f8f9;
   --ds-link: #0c66e4;
   --ds-background-warning: #fff7d6;
+  --ds-background-danger-bold: #C9372C;
+  --ds-background-danger-bold-hovered: #AE2E24;
 }

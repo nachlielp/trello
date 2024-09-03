@@ -98,13 +98,13 @@ export function BoardDescription({ onSetPreventLoad }) {
       </div>
       <div
         className={`description ${
-          !board.members.some((m) => m.id === user.id) ? "disable" : ""
+          !board.members.some((m) => m.id === user.id) && !user.isAdmin ? "disable" : ""
         }`}
       >
         <header className="description-header">
           <span className="trello-icon icon-description" />
           <h3>Description</h3>
-          {!isOpen && board.members.some((m) => m.id === user.id) && (
+          {!isOpen && (board.members.some((m) => m.id === user.id) || user.isAdmin) && (
             <button className="edit-btn" onClick={() => setIsOpen(true)}>
               Edit
             </button>

@@ -62,9 +62,13 @@ export function WorkspaceIndex() {
   }, [user]);
 
   useEffect(() => {
+    setBoardByParams();
+  }, [params]);
+
+  async function setBoardByParams() {
     if (params.boardId) {
       setIsLoaded(false);
-      loadBoard(params.boardId);
+      await loadBoard(params.boardId);
       setSelectedBoardId(params.boardId);
       setIsUserBoards(false);
       viewBoard(params.boardId);
@@ -72,14 +76,13 @@ export function WorkspaceIndex() {
     }
     if (params.cardId) {
       setIsLoaded(false);
-      loadBoardByTaskId(params.cardId).then((boardId) => {
-        setSelectedBoardId(boardId);
-        setIsUserBoards(false);
-        viewBoard(boardId);
-        setIsLoaded(true);
-      });
+      const boardId = await loadBoardByTaskId(params.cardId);
+      setSelectedBoardId(boardId);
+      setIsUserBoards(false);
+      viewBoard(boardId);
+      setIsLoaded(true);
     }
-  }, [params]);
+  }
 
   //Notice any change in user page is through this
   //Make sure that changes dont break navigation
@@ -215,7 +218,18 @@ export function WorkspaceIndex() {
                     <>
                       <WorkspaceMenu
                         colorTheme={boardBgPrefs?.backgroundBrightness}
-                        boardsInfo={boardsInfo}
+                        boardsInfo={
+                          user?.isAdmin
+                            ? boards
+                                .filter((b) => !b.closed)
+                                .map((b) => ({
+                                  id: b.id,
+                                  name: b.name,
+                                  closed: b.closed,
+                                  coverImg: b.prefs.backgroundImage,
+                                }))
+                            : boardsInfo
+                        }
                         selectedBoardId={selectedBoardId}
                         starredBoardIds={starredBoardIds}
                         onStarClick={onStarClick}

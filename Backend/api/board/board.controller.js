@@ -19,7 +19,17 @@ export async function getBoard(req, res) {
     res.send(board);
   } catch (err) {
     console.error("err:", err);
-    res.status(400).send("Couldn't get bug");
+    res.status(400).send("Couldn't get board");
+  }
+}
+export async function getTask(req, res) {
+  const { taskId } = req.params;
+  try {
+    const board = await boardService.getBoarByTaskId(taskId);
+    res.send(board);
+  } catch (err) {
+    console.error("err:", err);
+    res.status(400).send("Couldn't get task");
   }
 }
 
@@ -37,7 +47,7 @@ export async function putBoard(req, res) {
     res.send(savedBoard);
   } catch (err) {
     console.log("err:", err);
-    res.status(400).send("Couldn't save bug");
+    res.status(400).send("Couldn't save board");
   }
 }
 
@@ -68,6 +78,6 @@ export async function deleteBoard(req, res) {
     res.send("Board Deleted");
   } catch (err) {
     console.error("err:", err);
-    res.status(400).send("Couldn't remove bug");
+    res.status(400).send("Couldn't remove board");
   }
 }
