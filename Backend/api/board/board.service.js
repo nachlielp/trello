@@ -6,6 +6,7 @@ export const boardService = {
   query,
   getById,
   remove,
+  getBoarByTaskId,
 };
 async function query() {
   try {
@@ -64,6 +65,25 @@ async function getById(boardId) {
     }
     board.id = board._id;
     delete board._id;
+    return board;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+}
+
+async function getBoarByTaskId(taskId) {
+  try {
+    const cursor = await getCollection("boards");
+
+    const board = await cursor.findOne({
+      "groups.tasks.id": taskId,
+    });
+    if (!board) {
+      throw `Couldn't find board with task id ${taskId}`;
+    }
+    board.id = board._id
+    delete board._id
     return board;
   } catch (err) {
     console.log(err);
