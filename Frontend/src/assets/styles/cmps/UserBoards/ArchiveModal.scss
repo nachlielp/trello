@@ -18,6 +18,11 @@
     }
   }
   .module-main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-height: 245;
+    overflow-y: auto;
     .board {
       display: flex;
       justify-content: space-between;
