@@ -62,24 +62,27 @@ export function WorkspaceIndex() {
   }, [user]);
 
   useEffect(() => {
+    setBoardByParams();
+  }, [params]);
+
+  async function setBoardByParams() {
     if (params.boardId) {
       setIsLoaded(false);
-      loadBoard(params.boardId);
+      await loadBoard(params.boardId);
       setSelectedBoardId(params.boardId);
       setIsUserBoards(false);
-      viewBoard(params.boardId);
+      await viewBoard(params.boardId);
       setIsLoaded(true);
     }
     if (params.cardId) {
       setIsLoaded(false);
-      loadBoardByTaskId(params.cardId).then((boardId) => {
-        setSelectedBoardId(boardId);
-        setIsUserBoards(false);
-        viewBoard(boardId);
-        setIsLoaded(true);
-      });
+      const boardId = await loadBoardByTaskId(params.cardId);
+      setSelectedBoardId(boardId);
+      setIsUserBoards(false);
+      await viewBoard(boardId);
+      setIsLoaded(true);
     }
-  }, [params]);
+  }
 
   //Notice any change in user page is through this
   //Make sure that changes dont break navigation
