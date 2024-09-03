@@ -18,7 +18,7 @@ export function ErrorPage({ wrongUrl = false }) {
         <>
           <h1>Malformed URL</h1>
           <p>
-            The link you entered does not look like a valid Prello link. If
+            The link you entered does not look like a valid Pyello link. If
             someone gave you this link, you may need to ask them to check that
             it's correct.
           </p>

@@ -132,7 +132,7 @@ export function AddModule({ onClose }) {
                         anchorEl={
                           <>
                             <span className="text">{m.permissionStatus}</span>
-                            <span className="prello-icon icon-down" />
+                            <span className="pyello-icon icon-down" />
                           </>
                         }
                       />
