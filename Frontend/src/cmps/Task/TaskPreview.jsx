@@ -60,7 +60,10 @@ export function TaskPreview({
     if (isOpenPreviewModal) return;
     navigate(`/c/${task?.id}`, { replace: true });
   }
-
+function onClosePreviewModal(){
+  setIsHovered(false)
+  setIsOpenPreviewModal(false)
+}
   const covorCardClass =
     coverSize === "full"
       ? taskCover.color
@@ -108,7 +111,7 @@ export function TaskPreview({
         taskLabels={taskLabels}
         taskWidth={taskWidth}
         labelActions={labelActions}
-        closePreviewModal={onOpenPreviewModal}
+        closePreviewModal={onClosePreviewModal}
       />
       {taskCover.color && (
         <div

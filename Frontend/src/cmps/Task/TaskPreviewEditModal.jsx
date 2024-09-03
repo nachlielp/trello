@@ -88,23 +88,21 @@ export function TaskPreviewEditModal({
   }
 
   function handleOpenCard() {
-    setRemovePopupButtons(true);
     closePreviewModal();
     navigate(`/c/${task?.id}`, { replace: true });
   }
   const modalActionButtons = [
-    // TODO fix showing over task detias
-    // {
-    //   cover: false,
-    //   popover: (
-    //     <SvgButton
-    //       src={cardIcon}
-    //       className="floating-button"
-    //       label="Open card"
-    //       onClick={handleOpenCard}
-    //     />
-    //   ),
-    // },
+    {
+      cover: false,
+      popover: (
+        <SvgButton
+          src={cardIcon}
+          className="floating-button"
+          label="Open card"
+          onClick={handleOpenCard}
+        />
+      ),
+    },
     {
       cover: false,
       popover: (
