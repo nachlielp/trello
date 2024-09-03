@@ -11,11 +11,12 @@ import {
 import { login, editUser, loadWorkspaceUsers } from "../store/user.actions";
 import { createBoard } from "../store/workspace.actions";
 import { useSelector } from "react-redux";
-import { setBoards } from "../store/workspace.actions";
+import { setBoards, updateWorkspaceBoard } from "../store/workspace.actions";
 import { updateBoard } from "../store/board.actions";
 import { BoardMenu } from "../cmps/BoardHeader/BoardMenu/BoardMenu";
 import { utilService } from "../services/util.service";
 import { ErrorPage } from "./ErrorPage";
+import { socketService } from "../services/socket.service";
 
 export function WorkspaceIndex() {
   const user = useSelector((state) => state.userModule.user);
@@ -43,6 +44,14 @@ export function WorkspaceIndex() {
 
   const navigate = useNavigate();
   const params = useParams();
+
+  useEffect(() => {
+    socketService.subscribeToWorkspace();
+
+    socketService.on("workspace-updated", ({ board }) => {
+      updateWorkspaceBoard(board);
+    });
+  }, []);
 
   useEffect(() => {
     setWorkSpaceBoards();

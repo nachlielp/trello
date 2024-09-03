@@ -16,6 +16,18 @@ export async function setBoards() {
   store.dispatch({ type: SET_BOARDS, boards });
 }
 
+export async function updateWorkspaceBoard(board) {
+  store.dispatch({ type: EDIT_WORKSPACE, board: board });
+
+  if (board.id === store.getState().boardModule.board.id) {
+    store.dispatch({ type: SET_BOARD, board: board });
+  } else if (
+    !store.getState().workspaceModule.boards.find((b) => b.id === board.id)
+  ) {
+    store.dispatch({ type: ADD_BOARD, board: board });
+  }
+}
+
 export async function viewWorkspaceBoard(boardId) {
   const boards = await workspaceService.getAllBoards();
   const board = boards.find((b) => b.id === boardId);

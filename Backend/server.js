@@ -6,6 +6,7 @@ import path from "path";
 import { authRoutes } from "./api/auth/auth.routes.js";
 import { userRouter } from "./api/user/user.routes.js";
 import { boardRouter } from "./api/board/board.routes.js";
+import { setupSocketAPI } from "./services/socket.service.js";
 
 const app = express();
 const server = http.createServer(app);
@@ -33,6 +34,8 @@ app.use("/api/user", userRouter);
 app.get("/**", (req, res) => {
   res.sendFile(path.resolve("public/index.html"));
 });
+const io = setupSocketAPI(server);
+app.set("io", io);
 
 const port = 3030;
 server.listen(port, () => {

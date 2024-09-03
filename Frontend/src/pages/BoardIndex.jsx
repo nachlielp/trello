@@ -19,6 +19,7 @@ import {
   updateBoard,
   moveTask,
   loadBoard,
+  loadBoardBySocket,
 } from "../store/board.actions";
 import { editUser, loadWorkspaceUsers } from "../store/user.actions";
 
@@ -28,6 +29,8 @@ import { BoardHeader } from "../cmps/BoardHeader/BoardHeader.jsx";
 import useScrollByGrab from "../customHooks/useScrollByGrab.js";
 import { useParams, useNavigate, useOutletContext } from "react-router-dom";
 import { utilService } from "../services/util.service.js";
+
+import { socketService } from "../services/socket.service.js";
 
 export function BoardIndex() {
   const [selectedTaskId, setSelectedTaskId] = useState(null);
@@ -159,6 +162,7 @@ export function BoardIndex() {
   }
 
   async function editBoard(changes) {
+    console.log("editBoard", changes);
     await updateBoard({ ...board, ...changes });
   }
 
