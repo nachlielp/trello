@@ -7,10 +7,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AddBoardPopover } from "../cmps/Workspace/AddBoardPopover";
 import { createBoard } from "../store/workspace.actions";
 import { editUser } from "../store/user.actions";
+import { ArchiveModal } from "../cmps/UserBoards/ArchiveModal";
 
 export function UserBoards() {
   const user = useSelector((state) => state.userModule.user);
   const boards = useSelector((state) => state.workspaceModule.boards);
+  const [isOpenModal, setIsOpenModal] = useState(false);
   const params = useParams();
   const navigate = useNavigate();
 
@@ -37,14 +39,11 @@ export function UserBoards() {
 
   return (
     <section className="user-boards">
-      <menu className="user-boards-menu">
-        {/* TODO: Add user boards menu */}
-      </menu>
       <main className="user-boards-main">
         <section className="section starred-boards">
           <header className="section-header">
             <StarOutlined className="section-icon star-icon" />
-            <h3 className="section-title">Starred Boards</h3>
+            <h3 className="section-title">Starred boards</h3>
           </header>
           <article className="section-content">
             {boards
@@ -65,7 +64,7 @@ export function UserBoards() {
               src="/img/taskActionBtns/timeIcon.svg"
               className="section-icon"
             />
-            <h3 className="section-title">Recently Viewed</h3>
+            <h3 className="section-title">Recently viewed</h3>
           </header>
           <article className="section-content">
             {boards
@@ -109,7 +108,17 @@ export function UserBoards() {
             />
           </article>
         </section>
+        <section className="bottom">
+          <button
+            className="btn"
+            disabled={!boards.filter((b) => b.closed).length > 0}
+            onClick={() => setIsOpenModal(true)}
+          >
+            Veiw all closed boards
+          </button>
+        </section>
       </main>
+      {isOpenModal && <ArchiveModal onClose={() => setIsOpenModal(false)} />}
     </section>
   );
 }

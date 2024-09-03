@@ -1,6 +1,6 @@
 import { ReactSVG } from "react-svg";
 import logo from "/img/trelloAuthLogo.svg";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import { login, signup } from "../store/user.actions";
@@ -17,11 +17,31 @@ export function AuthPage({ isLogin = false }) {
   const [pass, setPass] = useState("");
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
+  const emailInput = useRef(null);
+  const nameInput = useRef(null);
+  const passInput = useRef(null);
 
   useEffect(() => {
     login();
     document.querySelector("html").classList.remove("dark");
   }, []);
+
+  useEffect(() => {
+    if (isLogin) {
+      if (!verified && emailInput.current) {
+        emailInput.current.focus();
+      } else if (verified && passInput.current) {
+        passInput.current.focus();
+      }
+    } else {
+      if (!verified && emailInput.current) {
+        emailInput.current.focus();
+      }else if(verified && nameInput.current){
+        nameInput.current.focus();
+      }
+    }
+  }, [verified, emailInput, passInput,nameInput]);
+
   useEffect(() => {
     if (searchParams.get("login_hint")) {
       setEmail(searchParams.get("login_hint"));
@@ -54,6 +74,7 @@ export function AuthPage({ isLogin = false }) {
         } else {
           setAlert(false);
           setVerified(true);
+         
         }
       }
     } else if (isLogin) {
@@ -78,7 +99,9 @@ export function AuthPage({ isLogin = false }) {
           console.log(err);
           setVerified(false);
         }
-      } else {
+      }else if(email && fullName && !pass && passInput.current && passInput.current !== document.activeElement){
+passInput.current.focus()
+      }else {
         setAlert(true);
       }
     }
@@ -100,6 +123,7 @@ export function AuthPage({ isLogin = false }) {
                 {!verified && (
                   <input
                     className={`email ${alert ? "alert" : ""}`}
+                    ref={emailInput}
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -126,6 +150,7 @@ export function AuthPage({ isLogin = false }) {
                     </span>
                     <input
                       className={`password ${alert ? "alert" : ""}`}
+                      ref={passInput}
                       placeholder="Enter your password"
                       type="password"
                       value={pass}
@@ -146,6 +171,7 @@ export function AuthPage({ isLogin = false }) {
                 {!verified && (
                   <input
                     className="email"
+                    ref={emailInput}
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -171,6 +197,7 @@ export function AuthPage({ isLogin = false }) {
                       className={`full-name ${
                         alert && !fullName ? "alert" : ""
                       } reg-alert`}
+                      ref={nameInput}
                       id="full-name"
                       type="text"
                       placeholder="Enter full name"
@@ -189,6 +216,7 @@ export function AuthPage({ isLogin = false }) {
                         alert && !pass ? "alert" : ""
                       } reg-alert`}
                       placeholder="Enter password"
+                      ref={passInput}
                       id="password"
                       type="password"
                       value={pass}
