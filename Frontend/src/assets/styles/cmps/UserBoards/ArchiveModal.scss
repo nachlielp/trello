@@ -54,6 +54,9 @@
           padding: 6px 12px;
           font-weight: 500;
           line-height: 20px;
+          &:disabled{
+            cursor: not-allowed;
+          }
           &.reopen {
             background-color: var(--ds-background-brand-bold, #0c66e4);
             color: var(--ds-text-inverse, #ffffff);

@@ -218,7 +218,18 @@ export function WorkspaceIndex() {
                     <>
                       <WorkspaceMenu
                         colorTheme={boardBgPrefs?.backgroundBrightness}
-                        boardsInfo={boardsInfo}
+                        boardsInfo={
+                          user?.isAdmin
+                            ? boards
+                                .filter((b) => !b.closed)
+                                .map((b) => ({
+                                  id: b.id,
+                                  name: b.name,
+                                  closed: b.closed,
+                                  coverImg: b.prefs.backgroundImage,
+                                }))
+                            : boardsInfo
+                        }
                         selectedBoardId={selectedBoardId}
                         starredBoardIds={starredBoardIds}
                         onStarClick={onStarClick}

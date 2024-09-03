@@ -104,7 +104,7 @@ async function remove(boardId, user) {
         },
       },
     });
-    if (!board) {
+    if (!board && !user.isAdmin) {
       throw `Couldn't remove board with id ${boardId}`;
     } else {
       cursor.deleteOne({

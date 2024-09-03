@@ -123,7 +123,7 @@ export function AddModule({ onClose }) {
                         </p>
                       </div>
                     </section>
-                    {myStatus.permissionStatus === "admin" && (
+                    {(myStatus?.permissionStatus === "admin" || me.isAdmin) && (
                       <ChangePermissionPopover
                         myOptions={user.id === me.id}
                         currenOption={m?.permissionStatus}

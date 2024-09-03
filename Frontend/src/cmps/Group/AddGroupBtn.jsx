@@ -50,7 +50,7 @@ export function AddGroupBtn({ addGroup }) {
   }
   return (
     <>
-      {board.members.some((m) => m.id === user?.id) && (
+      {(board.members.some((m) => m.id === user?.id) || user.isAdmin) && (
         <div className="add-group-btn-wrapper">
           {!isAddGroupOpen && (
             <button

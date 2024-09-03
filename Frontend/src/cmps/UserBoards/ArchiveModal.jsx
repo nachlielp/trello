@@ -64,12 +64,18 @@ export function ArchiveModal({ onClose }) {
                   <section className="btns">
                     <button
                       className="btn reopen"
+                      disabled={
+                        !b.members.some((m) => m.id === user.id) && !user.isAdmin
+                      }
                       onClick={() => onReopen(b.id)}
                     >
                       Reopen
                     </button>
                     <button
                       className="btn delete"
+                      disabled={
+                        !b.members.some((m) => m.id === user.id) && !user.isAdmin
+                      }
                       onClick={() => onDelete(b.id)}
                     >
                       <span className="trello-icon icon-trash" />

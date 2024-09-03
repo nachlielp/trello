@@ -20,10 +20,16 @@ export function AuthPage({ isLogin = false }) {
   const emailInput = useRef(null);
   const nameInput = useRef(null);
   const passInput = useRef(null);
+  useEffect(() => {
+    setAlert(false);
+    setVerified(false);
+  }, [isLogin]);
 
   useEffect(() => {
     login();
     document.querySelector("html").classList.remove("dark");
+    setAlert(false);
+    setVerified(false);
   }, []);
 
   useEffect(() => {
@@ -36,11 +42,11 @@ export function AuthPage({ isLogin = false }) {
     } else {
       if (!verified && emailInput.current) {
         emailInput.current.focus();
-      }else if(verified && nameInput.current){
+      } else if (verified && nameInput.current) {
         nameInput.current.focus();
       }
     }
-  }, [verified, emailInput, passInput,nameInput]);
+  }, [verified, emailInput, passInput, nameInput]);
 
   useEffect(() => {
     if (searchParams.get("login_hint")) {
@@ -74,7 +80,6 @@ export function AuthPage({ isLogin = false }) {
         } else {
           setAlert(false);
           setVerified(true);
-         
         }
       }
     } else if (isLogin) {
@@ -99,9 +104,15 @@ export function AuthPage({ isLogin = false }) {
           console.log(err);
           setVerified(false);
         }
-      }else if(email && fullName && !pass && passInput.current && passInput.current !== document.activeElement){
-passInput.current.focus()
-      }else {
+      } else if (
+        email &&
+        fullName &&
+        !pass &&
+        passInput.current &&
+        passInput.current !== document.activeElement
+      ) {
+        passInput.current.focus();
+      } else {
         setAlert(true);
       }
     }
