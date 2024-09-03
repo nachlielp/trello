@@ -20,11 +20,11 @@ import {
 import { viewWorkspaceBoard } from "./workspace.actions";
 import { REMOVE_BOARD } from "./workspace.reducer";
 import { loadWorkspaceUsers } from "./user.actions";
+import { httpService } from "../services/http.service";
 
 export async function loadBoard(boardId) {
   try {
     const currentBoard = store.getState().boardModule.board;
-    console.log("currentBoard", currentBoard);
     if (currentBoard.id === boardId) {
       return currentBoard;
     }
@@ -48,7 +48,14 @@ export async function loadBoard(boardId) {
 }
 
 export async function loadBoardByTaskId(taskId) {
-  const currentBoard = store.getState().boardModule.board;
+  let currentBoard = store.getState().boardModule.board;
+  if (!currentBoard.id) {
+    currentBoard = await httpService.get(`boards/t/${taskId}`);
+    store.dispatch({
+      type: SET_BOARD,
+      board: currentBoard,
+    });
+  }
   if (
     currentBoard.groups.some((group) =>
       group.tasks.some((task) => task.id === taskId)
@@ -92,10 +99,6 @@ export async function viewBoard(boardId) {
     const membersIds = board.members.map((m) => m.id);
     loadWorkspaceUsers(membersIds);
     await boardService.save(newBoard);
-    store.dispatch({
-      type: VIEW_BOARD,
-      board: newBoard,
-    });
     viewWorkspaceBoard(boardId);
   } catch (err) {
     console.error(err);
