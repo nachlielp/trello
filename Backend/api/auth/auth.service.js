@@ -25,6 +25,7 @@ async function login(email, password) {
     starredBoardIds: user.starredBoardIds,
     bio: user.bio,
     darkMode: user.darkMode,
+    isAdmin: user.isAdmin
   };
   return miniUser;
 }

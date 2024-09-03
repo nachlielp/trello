@@ -82,8 +82,8 @@ async function getBoarByTaskId(taskId) {
     if (!board) {
       throw `Couldn't find board with task id ${taskId}`;
     }
-    board.id = board._id
-    delete board._id
+    board.id = board._id;
+    delete board._id;
     return board;
   } catch (err) {
     console.log(err);
