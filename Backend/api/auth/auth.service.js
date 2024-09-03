@@ -43,9 +43,7 @@ function validateToken(token) {
       return loggedinUser;
     }
     return null;
-  } catch (err) {
-    console.log("Invalid login token");
-  }
+  } catch (err) {}
   return null;
 }
 
