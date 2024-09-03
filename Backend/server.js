@@ -41,7 +41,7 @@ app.get("/**", (req, res) => {
 
 const port = process.env.PORT || 3030;
 server.listen(port, () => {
-  console.log(`Server listening on port http://127.0.0.1:${port}`);
+  console.log(`Server  listening on port http://127.0.0.1:${port}`);
 });
 
 export default app;
