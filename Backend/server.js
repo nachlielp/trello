@@ -7,7 +7,7 @@ import { authRoutes } from "./api/auth/auth.routes.js";
 import { userRouter } from "./api/user/user.routes.js";
 import { boardRouter } from "./api/board/board.routes.js";
 import { setupSocketAPI } from "./services/socket.service.js";
-
+import { testRouter } from "./api/test/test.routes.js";
 const app = express();
 const server = http.createServer(app);
 
@@ -30,7 +30,7 @@ app.use(express.json());
 app.use("/api/boards", boardRouter);
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRouter);
-
+app.use("/api/test", testRouter);
 app.get("/**", (req, res) => {
   res.sendFile(path.resolve("public/index.html"));
 });
