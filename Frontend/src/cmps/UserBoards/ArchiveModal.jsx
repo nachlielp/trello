@@ -51,7 +51,7 @@ export function ArchiveModal({ onClose }) {
             .filter((b) => b.closed)
             .map((b) => {
               return (
-                <section className="board">
+                <section className="board" key={b.id}>
                   <section className="board-info">
                     <div
                       style={{
@@ -65,7 +65,8 @@ export function ArchiveModal({ onClose }) {
                     <button
                       className="btn reopen"
                       disabled={
-                        !b.members.some((m) => m.id === user.id) && !user.isAdmin
+                        !b.members.some((m) => m.id === user.id) &&
+                        !user.isAdmin
                       }
                       onClick={() => onReopen(b.id)}
                     >
@@ -74,7 +75,8 @@ export function ArchiveModal({ onClose }) {
                     <button
                       className="btn delete"
                       disabled={
-                        !b.members.some((m) => m.id === user.id) && !user.isAdmin
+                        !b.members.some((m) => m.id === user.id) &&
+                        !user.isAdmin
                       }
                       onClick={() => onDelete(b.id)}
                     >
