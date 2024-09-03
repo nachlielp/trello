@@ -162,7 +162,6 @@ export function BoardIndex() {
   }
 
   async function editBoard(changes) {
-    console.log("editBoard", changes);
     await updateBoard({ ...board, ...changes });
   }
 
