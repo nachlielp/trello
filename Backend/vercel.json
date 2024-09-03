@@ -11,6 +11,7 @@
         }
     ],
     "routes": [
+        { "src": "/socket.io/(.*)", "dest": "/api/socket.js" },
         {
             "src": "/api/(.*)",
             "dest": "server.js"
@@ -27,5 +28,8 @@
             "src": "/(.*)",
             "dest": "/public/index.html"
         }
-    ]
+    ],
+    "rewrites": [
+    { "source": "/socket.io/(.*)", "destination": "/api/socket.js" }
+  ]
 }
