@@ -136,13 +136,13 @@ const dateBadge = ({
     >
       {dueComplete ? (
         <>
-          <label className="trello-icon icon-clock task-icon default-icon"></label>
-          <label className="trello-icon icon-checklist task-icon hover-icon"></label>
+          <label className="prello-icon icon-clock task-icon default-icon"></label>
+          <label className="prello-icon icon-checklist task-icon hover-icon"></label>
         </>
       ) : (
         <>
-          <label className="trello-icon icon-clock task-icon default-icon"></label>
-          <label className="trello-icon icon-checkbox-unchecked task-icon hover-icon"></label>
+          <label className="prello-icon icon-clock task-icon default-icon"></label>
+          <label className="prello-icon icon-checkbox-unchecked task-icon hover-icon"></label>
         </>
       )}
 

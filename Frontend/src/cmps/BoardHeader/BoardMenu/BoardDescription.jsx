@@ -60,7 +60,7 @@ export function BoardDescription({ onSetPreventLoad }) {
     <section className="board-description navigation">
       <div className="board-admins">
         <header className="admins-header">
-          <span className="trello-icon icon-member" />
+          <span className="prello-icon icon-member" />
           <h3>Board admins</h3>
         </header>
         {!!admins.length && (
@@ -104,7 +104,7 @@ export function BoardDescription({ onSetPreventLoad }) {
         }`}
       >
         <header className="description-header">
-          <span className="trello-icon icon-description" />
+          <span className="prello-icon icon-description" />
           <h3>Description</h3>
           {!isOpen &&
             (board.members.some((m) => m.id === user.id) || user?.isAdmin) && (

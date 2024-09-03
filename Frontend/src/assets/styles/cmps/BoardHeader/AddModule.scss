@@ -138,16 +138,16 @@
             border: none;
             color: var(--ds-text, #42526e);
             border-radius: 3px;
-            &:hover{
+            &:hover {
               background: var(--ds-background-neutral-hovered, #091e4214);
-              color: var(--ds-text, #42526E);
+              color: var(--ds-text, #42526e);
             }
             .text {
               line-height: 32px;
               font-size: 14px;
               font-weight: 500;
             }
-            .trello-icon {
+            .prello-icon {
               margin-left: 4px;
             }
           }

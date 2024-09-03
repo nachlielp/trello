@@ -12,7 +12,7 @@ export function HomePage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    onLogin()
+    onLogin();
     document.querySelector("html").classList.remove("dark");
   }, []);
 
@@ -25,7 +25,6 @@ export function HomePage() {
     }
   }
   async function onLogin() {
-    
     try {
       await login();
     } catch (err) {
@@ -43,23 +42,23 @@ export function HomePage() {
           <div className="btns">
             <button className="home-btn">
               Features
-              <span className="trello-icon icon-down" />
+              <span className="prello-icon icon-down" />
             </button>
             <button className="home-btn">
               Solutions
-              <span className="trello-icon icon-down" />
+              <span className="prello-icon icon-down" />
             </button>
             <button className="home-btn">
               Plans
-              <span className="trello-icon icon-down" />
+              <span className="prello-icon icon-down" />
             </button>
             <button className="home-btn">
               Pricing
-              <span className="trello-icon icon-down" />
+              <span className="prello-icon icon-down" />
             </button>
             <button className="home-btn">
               Resources
-              <span className="trello-icon icon-down" />
+              <span className="prello-icon icon-down" />
             </button>
           </div>
           <div className="nav-link">
@@ -73,7 +72,7 @@ export function HomePage() {
                   Log in
                 </Link>
                 <Link className="home-sign" to={"/signup"}>
-                  Get Trello for free
+                  Get Prello for free
                 </Link>
               </>
             )}
@@ -85,7 +84,7 @@ export function HomePage() {
           <section className="content">
             <div className="left">
               <h1>
-                Trello brings all your tasks, teammates, and tools together
+                Prello brings all your tasks, teammates, and tools together
               </h1>
               <p>Keep everything in the same place—even if your team isn’t.</p>
               <form onSubmit={onSignUp} className="input">

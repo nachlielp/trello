@@ -160,7 +160,7 @@ export function TaskDetailsAttachment({
             {attachment.format ? (
               <label className="attachment-format">{attachment.format}</label>
             ) : (
-              <label className="trello-icon icon-attachment attachment-icon" />
+              <label className="prello-icon icon-attachment attachment-icon" />
             )}
           </label>
         )}
@@ -168,7 +168,7 @@ export function TaskDetailsAttachment({
       <article className="attachment-content">
         <label className="attachment-title">
           {attachment.text}
-          <label className="trello-icon icon-external-link title-icon" />
+          <label className="prello-icon icon-external-link title-icon" />
         </label>
         <div className="attachment-actions">
           <label className="attachment-created-at">
@@ -215,7 +215,7 @@ export function TaskDetailsAttachment({
         <div className="make-cover-btn" onClick={onMakeCover}>
           {attachment.type === "image" && (
             <>
-              <label className="trello-icon icon-card-cover" />
+              <label className="prello-icon icon-card-cover" />
               <label className="make-cover-btn-label">
                 &nbsp;
                 {isCover ? "Remove cover" : "Make cover"}

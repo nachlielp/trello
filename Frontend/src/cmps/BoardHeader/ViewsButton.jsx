@@ -74,11 +74,11 @@ export function ViewsButton() {
               <h2>See your work in new ways</h2>
               <p>
                 View key timelines, assignments, data, and more directly from
-                your Trello board with Trello Premium.
+                your Prello board with Prello Premium.
               </p>
               <button>Start Free Trial</button>
               <a target="_blank" href="https://trello.com/premium">
-                Learn more about Trello Premium
+                Learn more about Prello Premium
               </a>
             </div>
           </div>

@@ -57,7 +57,7 @@ export function BoardMenu({ setOpenBoarMenu, setShowBtn }) {
       <header className="header-menu">
         {navigation !== "Menu" && (
           <button className="btn back" onClick={() => setNavigation("Menu")}>
-            <span className="trello-icon icon-back" />
+            <span className="prello-icon icon-back" />
           </button>
         )}
         <h2>{navigation}</h2>
@@ -72,20 +72,20 @@ export function BoardMenu({ setOpenBoarMenu, setShowBtn }) {
             className="btn"
             onClick={() => setNavigation("About this board")}
           >
-            <span className="trello-icon icon-information btn-menu" />
+            <span className="prello-icon icon-information btn-menu" />
             <span className="desc">
               About this board
               <span>Add a description to your board</span>
             </span>
           </button>
           <button className="btn" onClick={() => setNavigation("Activity")}>
-            <span className="trello-icon icon-activity btn-menu" />
+            <span className="prello-icon icon-activity btn-menu" />
             Activity
           </button>
           {(board.members.some((m) => m.id === user.id) || user.isAdmin) && (
             <>
               <button className="btn" onClick={() => setNavigation("Archive")}>
-                <span className="trello-icon icon-archive btn-menu" />
+                <span className="prello-icon icon-archive btn-menu" />
                 Archived items
               </button>
               <hr className="border_bottom" />
@@ -101,7 +101,7 @@ export function BoardMenu({ setOpenBoarMenu, setShowBtn }) {
                       className="btn"
                       onClick={() => setNavigation("Menu")}
                     >
-                      <span className="trello-icon icon-remove btn-menu" />
+                      <span className="prello-icon icon-remove btn-menu" />
                       Delete board
                     </button>
                   }
@@ -112,7 +112,7 @@ export function BoardMenu({ setOpenBoarMenu, setShowBtn }) {
                 leaveBoard={onLeaveBoard}
                 anchorEl={
                   <button className="btn" onClick={() => setNavigation("Menu")}>
-                    <span className="trello-icon icon-leave-board btn-menu" />
+                    <span className="prello-icon icon-leave-board btn-menu" />
                     Leave Board
                   </button>
                 }

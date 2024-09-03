@@ -143,7 +143,7 @@ export function AuthPage({ isLogin = false }) {
                 )}
                 {!verified && alert && (
                   <span className="auth-alert">
-                    <span className="trello-icon icon-warning" /> Enter your
+                    <span className="prello-icon icon-warning" /> Enter your
                     email address
                   </span>
                 )}
@@ -157,7 +157,7 @@ export function AuthPage({ isLogin = false }) {
                       }}
                     >
                       {email}
-                      <span className="trello-icon icon-edit" />
+                      <span className="prello-icon icon-edit" />
                     </span>
                     <input
                       className={`password ${alert ? "alert" : ""}`}
@@ -169,7 +169,7 @@ export function AuthPage({ isLogin = false }) {
                     />
                     {alert && (
                       <span className="auth-alert">
-                        <span className="trello-icon icon-warning" /> Wrong
+                        <span className="prello-icon icon-warning" /> Wrong
                         login or password
                       </span>
                     )}
@@ -201,7 +201,7 @@ export function AuthPage({ isLogin = false }) {
                       }}
                     >
                       {email}
-                      <span className="trello-icon icon-edit" />
+                      <span className="prello-icon icon-edit" />
                     </span>
                     <label htmlFor="full-name">Full name</label>
                     <input
@@ -217,7 +217,7 @@ export function AuthPage({ isLogin = false }) {
                     />
                     {alert && !fullName && (
                       <span className="auth-alert">
-                        <span className="trello-icon icon-warning" /> Enter full
+                        <span className="prello-icon icon-warning" /> Enter full
                         name
                       </span>
                     )}
@@ -235,7 +235,7 @@ export function AuthPage({ isLogin = false }) {
                     />
                     {alert && !pass && (
                       <span className="auth-alert">
-                        <span className="trello-icon icon-warning" /> Enter
+                        <span className="prello-icon icon-warning" /> Enter
                         password
                       </span>
                     )}

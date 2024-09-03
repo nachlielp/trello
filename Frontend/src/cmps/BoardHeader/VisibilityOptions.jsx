@@ -61,7 +61,7 @@ export function VisibilityOptions({ setOpenListMenu, setPermission }) {
     {
       value: "org",
       label: "Workspace",
-      txt: "All members of the Trello Workspace Workspace can see and edit this board.",
+      txt: "All members of the Prello Workspace Workspace can see and edit this board.",
       svg: peopleIcon,
     },
     {

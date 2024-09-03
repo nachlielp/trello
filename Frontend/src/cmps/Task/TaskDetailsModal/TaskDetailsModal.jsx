@@ -266,7 +266,12 @@ export function TaskDetailsModal({
       footer=""
       className={`task-details ${brightness}`}
     >
-      {task.closed && <section className="closed-task"><span className="trello-icon icon-archive"/><span className="text">This card is archived.</span></section>}
+      {task.closed && (
+        <section className="closed-task">
+          <span className="prello-icon icon-archive" />
+          <span className="text">This card is archived.</span>
+        </section>
+      )}
       {isColorCover && colorCoverHeader}
       {!!isImgCover && imgCoverHeader}
       <article className="details-header">
@@ -364,7 +369,7 @@ export function TaskDetailsModal({
             <article className="suggestions">
               <p className="sub-title">Suggested</p>
               <button className="details-anchor-btn" onClick={onJoin}>
-                <label className="trello-icon icon-member " />
+                <label className="prello-icon icon-member " />
                 <label className="btn-label">Join</label>
               </button>
             </article>
