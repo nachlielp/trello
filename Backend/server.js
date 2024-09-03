@@ -31,6 +31,7 @@ app.use("/api/boards", boardRouter);
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRouter);
 app.use("/api/test", testRouter);
+
 app.get("/**", (req, res) => {
   res.sendFile(path.resolve("public/index.html"));
 });
@@ -39,7 +40,7 @@ app.set("io", io);
 
 const port = 3030;
 server.listen(port, () => {
-  console.log(`Server listening on port http://127.0.0.1:${port}`);
+  console.log(`Server  listening on port http://127.0.0.1:${port}`);
 });
 
 export default app;
