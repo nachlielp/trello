@@ -82,17 +82,17 @@ export function BoardMenu({ setOpenBoarMenu, setShowBtn }) {
             <span className="trello-icon icon-activity btn-menu" />
             Activity
           </button>
-          <button className="btn" onClick={() => setNavigation("Archive")}>
-            <span className="trello-icon icon-archive btn-menu" />
-            Archived items
-          </button>
-          {(board.members.some((m) => m.id === user.id) || user?.isAdmin) && (
+          {(board.members.some((m) => m.id === user.id) || user.isAdmin) && (
             <>
+              <button className="btn" onClick={() => setNavigation("Archive")}>
+                <span className="trello-icon icon-archive btn-menu" />
+                Archived items
+              </button>
               <hr className="border_bottom" />
               {(board.members.some(
                 (m) => m.id === user.id && m.permissionStatus === "admin"
               ) ||
-                user?.isAdmin) && (
+                user.isAdmin) && (
                 <ActionPopover
                   action={"Delete board?"}
                   deleteBoard={deleteBoard}
