@@ -58,7 +58,7 @@ export function TaskDetailsActions({ task, editTask, onClose }) {
           onCloseTask={onClose}
           anchorEl={
             <button className="details-anchor-btn">
-              <label className="prello-icon icon-move " />
+              <label className="pyello-icon icon-move " />
               <label className="btn-label">Move</label>
             </button>
           }
@@ -71,7 +71,7 @@ export function TaskDetailsActions({ task, editTask, onClose }) {
       popover: task.closed ? (
         <>
           <button className="details-anchor-btn" onClick={onSendBack}>
-            <label className="prello-icon icon-refresh " />
+            <label className="pyello-icon icon-refresh " />
             <label className="btn-label">Send to board</label>
           </button>
           <ActionPopover
@@ -79,7 +79,7 @@ export function TaskDetailsActions({ task, editTask, onClose }) {
             deleteTask={onDeleteTask}
             anchorEl={
               <button className="details-anchor-btn delete">
-                <label className="prello-icon icon-remove " />
+                <label className="pyello-icon icon-remove " />
                 <label className="btn-label">Delete</label>
               </button>
             }
@@ -87,7 +87,7 @@ export function TaskDetailsActions({ task, editTask, onClose }) {
         </>
       ) : (
         <button className="details-anchor-btn" onClick={onArchiveTask}>
-          <label className="prello-icon icon-archive " />
+          <label className="pyello-icon icon-archive " />
           <label className="btn-label">Archive</label>
         </button>
       ),

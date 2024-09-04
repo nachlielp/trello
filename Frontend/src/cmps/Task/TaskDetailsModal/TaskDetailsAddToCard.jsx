@@ -24,7 +24,7 @@ export function TaskDetailsAddToCard({
         <ManageMembersPopover
           anchorEl={
             <button className="details-anchor-btn">
-              <label className="prello-icon icon-member " />
+              <label className="pyello-icon icon-member " />
               <label className="btn-label">Members</label>
             </button>
           }
@@ -38,7 +38,7 @@ export function TaskDetailsAddToCard({
         <ManageLabelsPopover
           anchorEl={
             <button className="details-anchor-btn">
-              <label className="prello-icon icon-label " />
+              <label className="pyello-icon icon-label " />
               <label className="btn-label">Labels</label>
             </button>
           }
@@ -54,7 +54,7 @@ export function TaskDetailsAddToCard({
         <AddChecklistPopover
           anchorEl={
             <label className="details-anchor-btn">
-              <label className="prello-icon icon-checklist " />
+              <label className="pyello-icon icon-checklist " />
               <label className="btn-label">Checklists</label>
             </label>
           }
@@ -77,7 +77,7 @@ export function TaskDetailsAddToCard({
             //   label="Dates"
             // />
             <button className="details-anchor-btn">
-              <label className="prello-icon icon-clock " />
+              <label className="pyello-icon icon-clock " />
               <label className="btn-label">Dates</label>
             </button>
           }
@@ -92,7 +92,7 @@ export function TaskDetailsAddToCard({
           editBoard={editBoard}
           anchorEl={
             <button className="details-anchor-btn">
-              <label className="prello-icon icon-attachment " />
+              <label className="pyello-icon icon-attachment " />
               <label className="btn-label">Attachments</label>
             </button>
           }
@@ -104,7 +104,7 @@ export function TaskDetailsAddToCard({
         <ManageCoverPopover
           anchorEl={
             <button className="details-anchor-btn" style={{ width: "100%" }}>
-              <label className="prello-icon icon-card-cover " />
+              <label className="pyello-icon icon-card-cover " />
               <label className="btn-label">Cover</label>
             </button>
           }

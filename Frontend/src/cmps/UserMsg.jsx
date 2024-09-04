@@ -40,14 +40,14 @@ export function UserMsg() {
   return (
     <section className={`user-msg ${msg.type}`}>
       {msg.type === "info" && (
-        <label className="prello-icon icon-information user-msg-icon"></label>
+        <label className="pyello-icon icon-information user-msg-icon"></label>
       )}
       {msg.type === "success" && (
-        <label className="prello-icon icon-check-circle user-msg-icon"></label>
+        <label className="pyello-icon icon-check-circle user-msg-icon"></label>
       )}
       {msg.txt}
       <button onClick={closeMsg} className="close-btn">
-        <label className="prello-icon icon-close"></label>
+        <label className="pyello-icon icon-close"></label>
       </button>
     </section>
   );

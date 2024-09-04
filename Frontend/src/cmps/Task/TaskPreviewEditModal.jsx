@@ -281,7 +281,7 @@ export function TaskPreviewEditModal({
       {showEditModalBtn && (
         <div ref={containerRef} className="task-preview-edit-modal-anchor">
           <button className="preview-anchor-btn" onClick={showModal}>
-            <label className="prello-icon icon-edit"></label>
+            <label className="pyello-icon icon-edit"></label>
           </button>
         </div>
       )}

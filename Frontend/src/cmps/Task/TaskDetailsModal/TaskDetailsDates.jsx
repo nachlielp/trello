@@ -60,7 +60,7 @@ export function TaskDetailsDates({ task, editTask, editBoard }) {
               {task.due && (
                 <label className={`date-alert ${dueStatus}`}>{dueLabel}</label>
               )}
-              <label className="prello-icon icon-down open-popover"></label>
+              <label className="pyello-icon icon-down open-popover"></label>
             </article>
           }
         />

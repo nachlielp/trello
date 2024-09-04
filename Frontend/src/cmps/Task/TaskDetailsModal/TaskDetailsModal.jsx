@@ -268,7 +268,7 @@ export function TaskDetailsModal({
     >
       {task.closed && (
         <section className="closed-task">
-          <span className="prello-icon icon-archive" />
+          <span className="pyello-icon icon-archive" />
           <span className="text">This card is archived.</span>
         </section>
       )}
@@ -369,7 +369,7 @@ export function TaskDetailsModal({
             <article className="suggestions">
               <p className="sub-title">Suggested</p>
               <button className="details-anchor-btn" onClick={onJoin}>
-                <label className="prello-icon icon-member " />
+                <label className="pyello-icon icon-member " />
                 <label className="btn-label">Join</label>
               </button>
             </article>

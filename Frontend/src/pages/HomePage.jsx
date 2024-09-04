@@ -42,23 +42,23 @@ export function HomePage() {
           <div className="btns">
             <button className="home-btn">
               Features
-              <span className="prello-icon icon-down" />
+              <span className="pyello-icon icon-down" />
             </button>
             <button className="home-btn">
               Solutions
-              <span className="prello-icon icon-down" />
+              <span className="pyello-icon icon-down" />
             </button>
             <button className="home-btn">
               Plans
-              <span className="prello-icon icon-down" />
+              <span className="pyello-icon icon-down" />
             </button>
             <button className="home-btn">
               Pricing
-              <span className="prello-icon icon-down" />
+              <span className="pyello-icon icon-down" />
             </button>
             <button className="home-btn">
               Resources
-              <span className="prello-icon icon-down" />
+              <span className="pyello-icon icon-down" />
             </button>
           </div>
           <div className="nav-link">
@@ -72,7 +72,7 @@ export function HomePage() {
                   Log in
                 </Link>
                 <Link className="home-sign" to={"/signup"}>
-                  Get Prello for free
+                  Get Pyello for free
                 </Link>
               </>
             )}
@@ -84,7 +84,7 @@ export function HomePage() {
           <section className="content">
             <div className="left">
               <h1>
-                Prello brings all your tasks, teammates, and tools together
+                Pyello brings all your tasks, teammates, and tools together
               </h1>
               <p>Keep everything in the same place—even if your team isn’t.</p>
               <form onSubmit={onSignUp} className="input">
