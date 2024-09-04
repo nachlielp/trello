@@ -43,7 +43,7 @@ export function ArchiveModal({ onClose }) {
       <section className="archive-module">
         <header className="module-header">
           <h1>
-            <span className="prello-icon icon-archive" /> Closed boards
+            <span className="pyello-icon icon-archive" /> Closed boards
           </h1>
         </header>
         <main className="module-main">
@@ -80,7 +80,7 @@ export function ArchiveModal({ onClose }) {
                       }
                       onClick={() => onDelete(b.id)}
                     >
-                      <span className="prello-icon icon-trash" />
+                      <span className="pyello-icon icon-trash" />
                       <span className="text">Delete</span>
                     </button>
                   </section>

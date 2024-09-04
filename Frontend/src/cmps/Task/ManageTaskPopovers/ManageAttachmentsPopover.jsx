@@ -279,7 +279,7 @@ const ClearLinkIcon = ({ display, onClick }) => {
         }}
         onClick={onClick}
       >
-        <label className="prello-icon icon-close"></label>
+        <label className="pyello-icon icon-close"></label>
       </div>
     </Tooltip>
   );

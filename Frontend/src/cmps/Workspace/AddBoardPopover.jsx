@@ -35,7 +35,7 @@ const options = [
         <div className="element-content">
           <h3 className="element-title">Workspace</h3>
           <p className="element-txt">
-            All members of the Prello Workspace Workspace can see and edit this
+            All members of the Pyello Workspace Workspace can see and edit this
             board.
           </p>
         </div>
