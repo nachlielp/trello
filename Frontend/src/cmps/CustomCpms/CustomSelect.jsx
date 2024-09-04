@@ -2,6 +2,7 @@ import { DownOutlined } from "@ant-design/icons";
 import { Popover } from "antd";
 import { useState, useEffect, useRef } from "react";
 import { ReactSVG } from "react-svg";
+import Popup from "@atlaskit/popup";
 
 export function CustomSelect({
   options = [],
@@ -16,6 +17,8 @@ export function CustomSelect({
   const [filteredItems, setFilteredItems] = useState(options);
   const divRef = useRef(null);
   const inputRef = useRef(null);
+  const triggerRef = useRef(null);
+
   useEffect(() => {
     onSelect(options.find((o) => o.id === value));
   }, [value]);
@@ -54,7 +57,7 @@ export function CustomSelect({
   const content = !disabled && (
     <div
       className={`custom-select-options ${optionsClassName}`}
-      style={{ width: `${divRef.current?.clientWidth}px` }}
+      style={{ width: `${triggerRef.current?.clientWidth}px` }}
     >
       {filteredItems.map((item) => (
         <button
@@ -69,38 +72,53 @@ export function CustomSelect({
       ))}
     </div>
   );
-  return (
-    <Popover
-      trigger="click"
-      placement="bottomLeft"
-      open={isOpen}
-      onOpenChange={disabled ? null : setIsOpen}
-      arrow={false}
-      content={content}
-      zIndex={15000}
+
+  const trigger = () => (
+    <div
+      className="custom-select-item"
+      onClick={() => (disabled ? null : setIsOpen(!isOpen))}
+      ref={triggerRef}
     >
-      <div
-        className="custom-select-item"
-        onClick={() => (disabled ? null : setIsOpen(!isOpen))}
-        ref={divRef}
-      >
-        {
-          <input
-            className="custom-input"
-            ref={inputRef}
-            placeholder={selectedItem?.name}
-            value={searchValue}
-            onChange={onInput}
-            disabled={disabled}
-          />
-        }
-        {/* <DownOutlined className="arrow-down" /> */}
-        <ReactSVG
-          className="arrow-down"
-          src="/img/workspace/backIcon.svg"
-          wrapper="span"
-        />
-      </div>
-    </Popover>
+      <input
+        className="custom-input"
+        ref={inputRef}
+        placeholder={selectedItem?.name}
+        value={searchValue}
+        onChange={onInput}
+        disabled={disabled}
+      />
+
+      <ReactSVG
+        className="arrow-down"
+        src="/img/workspace/backIcon.svg"
+        wrapper="span"
+      />
+    </div>
+  );
+
+  return (
+    // <Popover
+    //   trigger="click"
+    //   placement="bottomLeft"
+    //   open={isOpen}
+    //   onOpenChange={disabled ? null : setIsOpen}
+    //   arrow={false}
+    //   content={content}
+    //   zIndex={15000}
+    // >
+    //   {anchor}
+    // </Popover>
+
+    <Popup
+      id="manage-cover-popover-popup"
+      isOpen={isOpen}
+      onClose={() => setIsOpen(false)}
+      placement="bottom-start"
+      fallbackPlacements={["top-start", "auto"]}
+      content={() => content}
+      trigger={(triggerProps) => <div {...triggerProps}>{trigger()}</div>}
+      zIndex={10000}
+      triggerRef={triggerRef}
+    />
   );
 }

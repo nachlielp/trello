@@ -169,23 +169,23 @@ export function TaskPreviewEditModal({
       ),
     },
     // TODO fix dropdonw menu select options issue
-    // {
-    //   cover: true,
-    //   popover: (
-    //     <MoveCardPopover
-    //       task={task}
-    //       onCloseTask={handleCancel}
-    //       closeAfter={true}
-    //       anchorEl={
-    //         <SvgButton
-    //           src={moveIcon}
-    //           label="Move"
-    //           className="floating-button"
-    //         />
-    //       }
-    //     />
-    //   ),
-    // },
+    {
+      cover: true,
+      popover: (
+        <MoveCardPopover
+          task={task}
+          onCloseTask={handleCancel}
+          closeAfter={true}
+          anchorEl={
+            <SvgButton
+              src={moveIcon}
+              label="Move"
+              className="floating-button"
+            />
+          }
+        />
+      ),
+    },
     // { label: 'Copy', icon: copyIcon, onClick: () => console.log('Add to Y'), cover: true },
     {
       popover: (
