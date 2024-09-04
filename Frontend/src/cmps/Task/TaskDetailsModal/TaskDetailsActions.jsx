@@ -46,7 +46,7 @@ export function TaskDetailsActions({ task, editTask, onClose }) {
       ),
     };
     await updateBoard(newBoard);
-    navigate(`/b?${board?.id}`);
+    navigate(`/b/${board?.id}`);
   }
   // /////////////////
   const actions = [
