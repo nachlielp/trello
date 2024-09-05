@@ -8,6 +8,7 @@ import { Skeleton } from "antd";
 import { MdAddAPhoto } from "react-icons/md";
 import CloudinaryUpload from "../cmps/CloudinaryUpload";
 import { editUser } from "../store/user.actions";
+import { showSuccessMsg } from "../services/event-bus.service";
 
 export function UserProfile() {
   const params = useParams();
@@ -59,6 +60,7 @@ export function UserProfile() {
   function uploadPhoto(data) {
     console.log(data.secure_url);
     editUser({ ...user, imgUrl: data.secure_url });
+    showSuccessMsg("Success");
   }
   return (
     <>

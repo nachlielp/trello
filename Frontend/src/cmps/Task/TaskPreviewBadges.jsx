@@ -108,7 +108,6 @@ export function TaskPreviewBadges({ task, editTask }) {
                 <UserAvatar
                   memberId={member.id}
                   onClick={(e) => e.stopPropagation()}
-                  memberProp={member}
                 />
               }
             />
