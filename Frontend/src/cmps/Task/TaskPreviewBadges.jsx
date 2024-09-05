@@ -53,7 +53,6 @@ export function TaskPreviewBadges({ task, editTask }) {
 
     // Attachments badge
     if (task?.attachments?.length > 0) {
-      console.log("task?.attachments?.length", task?.attachments?.length);
       icons.push(attachmentsBadge(task?.attachments?.length));
     }
 
