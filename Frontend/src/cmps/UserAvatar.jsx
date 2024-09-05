@@ -17,13 +17,14 @@ export function UserAvatar({
   offTitle = false,
   ...other
 }) {
+  const users = useSelector((state) => state.userModule.users);
+
   const member = memberProp
     ? memberProp
     : user
     ? user
-    : useSelector((state) =>
-        state.userModule.users.find((u) => u.id === memberId)
-      );
+    : users.find((u) => u.id === memberId);
+
   const ratio = 120 / 250;
   const dynamicStyles = member
     ? {
