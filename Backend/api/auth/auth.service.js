@@ -34,10 +34,7 @@ function validateToken(token) {
   try {
     const json = cryptr.decrypt(token);
     const loggedinUser = JSON.parse(json);
-    if (loggedinUser.id) {
-      return loggedinUser;
-    }
-    return null;
+    return loggedinUser;
   } catch (err) {}
   return null;
 }
