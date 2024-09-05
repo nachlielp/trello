@@ -5,6 +5,25 @@
     display: flex;
     align-items: center;
     padding: 46px 32px 46px 48px;
+    .change-img {
+      cursor: pointer;
+      position: relative;
+      &:hover {
+       .img{
+        opacity: .2;
+       }
+       .icon{
+        display: block;
+       }
+      }
+      .icon{
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
     .member-name {
       margin-left: 16px;
       .full-name,

@@ -32,31 +32,64 @@ export function UserAvatar({
         ),
       }
     : {};
-
   return (
     <Tooltip
       placement="bottom"
       title={!!!offTitle && `${member?.fullName} `}
       arrow={false}
     >
-      <Avatar
-        key={member?.id}
-        style={{
-          ...dynamicStyles,
-          fontSize: `${size * ratio}px`,
-          lineHeight: `${size * ratio}px`,
-          alignItems: "center",
-          display: "flex",
-          cursor: "pointer",
-          ...style,
-        }}
-        size={size}
-        {...other}
-      >
-        {member && utilService.capitalizeInitials(member?.fullName)}
-        {!member && <ReactSVG src={src} />}
-        {img}
-      </Avatar>
+      {member ? (
+        member?.imgUrl ? (
+          <div
+            style={{
+              width: `${size}px`,
+              height: `${size}px`,
+              backgroundImage: `url(${member.imgUrl})`,
+              backgroundPosition: "50%",
+              backgroundSize: "cover",
+              borderRadius: "50%",
+              ...style,
+            }}
+            {...other}
+            src={member?.imgUrl}
+          />
+        ) : (
+          <Avatar
+            key={member?.id}
+            style={{
+              ...dynamicStyles,
+              fontSize: `${size * ratio}px`,
+              lineHeight: `${size * ratio}px`,
+              alignItems: "center",
+              display: "flex",
+              cursor: "pointer",
+              ...style,
+            }}
+            size={size}
+            {...other}
+          >
+            {member && utilService.capitalizeInitials(member?.fullName)}
+          </Avatar>
+        )
+      ) : (
+        <Avatar
+          key={utilService.makeId()}
+          style={{
+            ...dynamicStyles,
+            fontSize: `${size * ratio}px`,
+            lineHeight: `${size * ratio}px`,
+            alignItems: "center",
+            display: "flex",
+            cursor: "pointer",
+            ...style,
+          }}
+          size={size}
+          {...other}
+        >
+          {!member && <ReactSVG src={src} />}
+          {img}
+        </Avatar>
+      )}
     </Tooltip>
   );
 }
