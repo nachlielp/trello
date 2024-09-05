@@ -4,8 +4,15 @@ import { updateBoard } from "../../../store/board.actions";
 
 export function ColorsBackgrounds() {
   const board = useSelector((state) => state.boardModule.board);
+  const user = useSelector((state) => state.userModule.user);
 
   function onPickGradient(bg) {
+    const newActivity = utilService.createActivity(
+      {
+        type: "changeBackGround",
+      },
+      user
+    );
     const prefs = {
       background: bg.background,
       backgroundColor: bg.backgroundColor,
@@ -13,18 +20,31 @@ export function ColorsBackgrounds() {
       backgroundBrightness: bg.backgroundBrightness,
     };
 
-    updateBoard({ ...board, prefs });
+    updateBoard({
+      ...board,
+      prefs,
+      activities: [...board?.activities, newActivity],
+    });
   }
 
   function onPickColor(bg) {
+    const newActivity = utilService.createActivity(
+      {
+        type: "changeBackGround",
+      },
+      user
+    );
     const prefs = {
       background: bg.background,
       backgroundColor: bg.backgroundColor,
       backgroundImage: bg.backgroundImage,
       backgroundBrightness: bg.backgroundBrightness,
     };
-
-    updateBoard({ ...board, prefs });
+    updateBoard({
+      ...board,
+      prefs,
+      activities: [...board?.activities, newActivity],
+    });
   }
 
   return (

@@ -3,8 +3,16 @@ import { utilService } from "../../../services/util.service";
 import { updateBoard } from "../../../store/board.actions";
 
 export function PhotosBackgrounds() {
-  const board = useSelector(state => state.boardModule.board)
+  const board = useSelector((state) => state.boardModule.board);
+  const user = useSelector((state) => state.userModule.user);
+
   function onPickPhoto(bg) {
+    const newActivity = utilService.createActivity(
+      {
+        type: "changeBackGround",
+      },
+      user
+    );
     const prefs = {
       background: bg.background,
       backgroundColor: bg.backgroundColor,
@@ -12,7 +20,11 @@ export function PhotosBackgrounds() {
       backgroundBrightness: bg.backgroundBrightness,
       backgroundImageScaled: bg.backgroundImageScaled,
     };
-   updateBoard({...board,prefs})
+    updateBoard({
+      ...board,
+      prefs,
+      activities: [...board?.activities, newActivity],
+    });
   }
 
   return (
