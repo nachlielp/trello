@@ -8,7 +8,7 @@ import { useMemo } from "react";
 import dayjs from "dayjs";
 import { updateBoard } from "../../store/board.actions";
 import { DateBadge } from "./TaskPreviewBadges/DateBadge";
-
+import { DescriptionBadge } from "./TaskPreviewBadges/DescriptionBadge";
 //TODO rename icons to badges
 //TODO move to new files and delegate logic to them
 export function TaskPreviewBadges({ task, editTask }) {
@@ -80,6 +80,7 @@ export function TaskPreviewBadges({ task, editTask }) {
           {
             <section className="task-preview-icons">
               <DateBadge task={task} editTask={editTask} />
+              <DescriptionBadge desc={task.desc} />
             </section>
           }
         </aside>
@@ -105,37 +106,6 @@ export function TaskPreviewBadges({ task, editTask }) {
     </div>
   );
 }
-
-const dateBadge = ({
-  dueTooltip,
-  dueComplete,
-  dateLabel,
-  dueStatus,
-  onDateClick,
-}) => (
-  <Tooltip placement="bottom" title={dueTooltip} key="dates" arrow={false}>
-    <span
-      className={`task-icon-wrapper dates ${
-        dueComplete && "completed"
-      } ${dueStatus}`}
-      onClick={onDateClick}
-    >
-      {dueComplete ? (
-        <>
-          <label className="pyello-icon icon-clock task-icon default-icon"></label>
-          <label className="pyello-icon icon-checklist task-icon hover-icon"></label>
-        </>
-      ) : (
-        <>
-          <label className="pyello-icon icon-clock task-icon default-icon"></label>
-          <label className="pyello-icon icon-checkbox-unchecked task-icon hover-icon"></label>
-        </>
-      )}
-
-      <span className="task-icon-count">{dateLabel}</span>
-    </span>
-  </Tooltip>
-);
 
 const descriptionBadge = (
   <Tooltip
