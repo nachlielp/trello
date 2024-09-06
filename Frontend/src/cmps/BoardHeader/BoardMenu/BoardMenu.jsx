@@ -9,10 +9,14 @@ import { editUser } from "../../../store/user.actions";
 import { utilService } from "../../../services/util.service";
 import { useNavigate } from "react-router";
 import { ArchivedItems } from "./ArchivedItems";
+import { Link } from "react-router-dom";
+import { PhotosBackgrounds } from "./PhotosBackgrounds";
+import { ColorsBackgrounds } from "./ColorsBackgrounds";
 
 export function BoardMenu({ setOpenBoarMenu, setShowBtn }) {
   const board = useSelector((state) => state.boardModule.board);
   const user = useSelector((state) => state.userModule.user);
+  const [isGoToBackground, setIsGoToBackground] = useState(false);
 
   const [preventLoad, setPreventLoad] = useState(false);
   const [animation, setAnimation] = useState("");
@@ -52,11 +56,33 @@ export function BoardMenu({ setOpenBoarMenu, setShowBtn }) {
     }
   }
 
+  function onGoBack() {
+    if (isGoToBackground) {
+      setNavigation("Change background");
+      setIsGoToBackground(false);
+    } else {
+      setNavigation("Menu");
+    }
+  }
+
+  function onGotoPhotos() {
+    setIsGoToBackground(true);
+    setNavigation(
+      <span>
+        Photos by <Link to={"https://unsplash.com/"}>Unsplash</Link>
+      </span>
+    );
+  }
+  function onGoToColors() {
+    setIsGoToBackground(true);
+    setNavigation("Colors");
+  }
+
   return (
     <section className={`board-menu ${animation}`}>
       <header className="header-menu">
         {navigation !== "Menu" && (
-          <button className="btn back" onClick={() => setNavigation("Menu")}>
+          <button className="btn back" onClick={onGoBack}>
             <span className="pyello-icon icon-back" />
           </button>
         )}
@@ -87,6 +113,18 @@ export function BoardMenu({ setOpenBoarMenu, setShowBtn }) {
               <button className="btn" onClick={() => setNavigation("Archive")}>
                 <span className="pyello-icon icon-archive btn-menu" />
                 Archived items
+              </button>{" "}
+              <button
+                className="btn"
+                onClick={() => setNavigation("Change background")}
+              >
+                <span
+                  className="bg"
+                  style={{
+                    backgroundImage: `url(${board.prefs.backgroundImage})`,
+                  }}
+                />
+                Change background
               </button>
               <hr className="border_bottom" />
               {(board.members.some(
@@ -131,6 +169,20 @@ export function BoardMenu({ setOpenBoarMenu, setShowBtn }) {
         <BoardDescription onSetPreventLoad={onSetPreventLoad} />
       )}
       {navigation === "Archive" && <ArchivedItems />}
+      {navigation === "Change background" && (
+        <section className="change-bg navigation">
+          <section onClick={onGotoPhotos} className="photos container">
+            <div className="bg photos"></div>
+            <p>Photos</p>
+          </section>
+          <section onClick={onGoToColors} className="colors container">
+            <div className="bg colors"></div>
+            <p>Colors</p>
+          </section>
+        </section>
+      )}
+      {(navigation !== "Colors" && isGoToBackground) && <PhotosBackgrounds />}
+      {(navigation === "Colors" && isGoToBackground) && <ColorsBackgrounds />}
     </section>
   );
 }

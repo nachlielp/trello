@@ -1,5 +1,5 @@
-
 import { login } from "../store/user.actions";
+import { bgColors, bgGradientColors, bgImgs } from "./Data";
 
 const boardLabelColorOptions = [
   {
@@ -268,7 +268,7 @@ export const utilService = {
   getBaseColors,
   createNewBoard,
   getBgImgs,
-  getBgColors,
+  getBgGradientColors,
   createNewLabel,
   createCheckListItem,
   createCheckList,
@@ -279,6 +279,7 @@ export const utilService = {
   getAverageBorderColor,
   isColorDark,
   isNotEmpty,
+  getBgColors,
 };
 
 export const BOARDS_KEY = "boards";
@@ -714,156 +715,16 @@ function getBaseColors() {
   return boardLabelColorOptions.filter((color) => color.isCover);
 }
 
-const bgImgs = [
-  {
-    background: "668946a613fbf45a2101e3aa",
-    title: "Viktoriya",
-    backgroundColor: "#1e3b20",
-    backgroundImage:
-      "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/original/583b7e8d8e177ce7a33da9c49ff89a75/photo-1719825718360-7de63c92135f",
-    backgroundBrightness: "dark",
-    backgroundImageScaled: [
-      {
-        width: 73,
-        height: 100,
-        url: "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/73x100/3e847eff31d4e7a927836e07fba3e3fe/photo-1719825718360-7de63c92135f.webp",
-      },
-      {
-        width: 139,
-        height: 192,
-        url: "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/139x192/3e847eff31d4e7a927836e07fba3e3fe/photo-1719825718360-7de63c92135f.webp",
-      },
-      {
-        width: 348,
-        height: 480,
-        url: "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/348x480/3e847eff31d4e7a927836e07fba3e3fe/photo-1719825718360-7de63c92135f.webp",
-      },
-    ],
-  },
-  {
-    background: "6689477fee7b57e70a601b46",
-    title: "Ashford Marx",
-    backgroundColor: "#637270",
-    backgroundImage:
-      "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/original/445dea137da3ef754471fc4dd6dc74be/photo-1719996510843-25348b436dcc",
-    backgroundBrightness: "dark",
-    backgroundImageScaled: [
-      {
-        width: 67,
-        height: 100,
-        url: "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/67x100/6fc8d04b515bb9d2f3edc07bcc55e9e7/photo-1719996510843-25348b436dcc.webp",
-      },
-      {
-        width: 128,
-        height: 192,
-        url: "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/128x192/6fc8d04b515bb9d2f3edc07bcc55e9e7/photo-1719996510843-25348b436dcc.webp",
-      },
-      {
-        width: 320,
-        height: 480,
-        url: "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/320x480/6fc8d04b515bb9d2f3edc07bcc55e9e7/photo-1719996510843-25348b436dcc.webp",
-      },
-    ],
-  },
-  {
-    background: "6689479b23f99fc8d05a696c",
-    backgroundColor: "#c9cdc2",
-    title: "Zo Razafindramamba",
-    backgroundImage:
-      "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/original/cd1b0e862504085ae903290e12238a8c/photo-1719822077838-b48bf2c7903d",
-    backgroundBrightness: "light",
-    backgroundImageScaled: [
-      {
-        width: 63,
-        height: 100,
-        url: "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/63x100/ab595d4ac47daf1ef87e362f824f1cec/photo-1719822077838-b48bf2c7903d.webp",
-      },
-      {
-        width: 121,
-        height: 192,
-        url: "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/121x192/ab595d4ac47daf1ef87e362f824f1cec/photo-1719822077838-b48bf2c7903d.webp",
-      },
-      {
-        width: 301,
-        height: 480,
-        url: "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/301x480/ab595d4ac47daf1ef87e362f824f1cec/photo-1719822077838-b48bf2c7903d.webp",
-      },
-    ],
-  },
-  {
-    background: "6689473085f1629ee989e316",
-    title: "eberhard 🖐 grossgasteiger",
-    backgroundColor: "#a46e12",
-    backgroundImage:
-      "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/original/1364339982f947553dc5c27eb900632f/photo-1719329411191-be2cda36a37c",
-    backgroundBrightness: "dark",
-    backgroundImageScaled: [
-      {
-        width: 140,
-        height: 93,
-        url: "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/140x93/c7d26e3a7f0576c62bd3e7cafe6f8d76/photo-1719329411191-be2cda36a37c.webp",
-      },
-      {
-        width: 256,
-        height: 171,
-        url: "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/256x171/c7d26e3a7f0576c62bd3e7cafe6f8d76/photo-1719329411191-be2cda36a37c.webp",
-      },
-      {
-        width: 480,
-        height: 320,
-        url: "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/480x320/c7d26e3a7f0576c62bd3e7cafe6f8d76/photo-1719329411191-be2cda36a37c.webp",
-      },
-    ],
-  },
-];
+function getBgImgs(slice = true) {
+  if (slice) {
+    return bgImgs.slice(0, 4);
+  } else {
+    return bgImgs;
+  }
+}
 
-const bgColors = [
-  {
-    background: "gradient-snow",
-    backgroundColor: "#228CD5",
-    backgroundImage:
-      "https://d2k1ftgv7pobq7.cloudfront.net/images/backgrounds/gradients/snow.svg",
-    backgroundBrightness: "dark",
-  },
-  {
-    background: "gradient-ocean",
-    backgroundColor: "#0B50AF",
-    backgroundImage:
-      "https://d2k1ftgv7pobq7.cloudfront.net/images/backgrounds/gradients/ocean.svg",
-    backgroundBrightness: "dark",
-  },
-  {
-    background: "gradient-crystal",
-    backgroundColor: "#674284",
-    backgroundImage:
-      "https://d2k1ftgv7pobq7.cloudfront.net/images/backgrounds/gradients/crystal.svg",
-    backgroundBrightness: "dark",
-  },
-  {
-    background: "gradient-rainbow",
-    backgroundColor: "#A869C1",
-    backgroundImage:
-      "https://d2k1ftgv7pobq7.cloudfront.net/images/backgrounds/gradients/rainbow.svg",
-    backgroundBrightness: "dark",
-  },
-  {
-    background: "gradient-peach",
-    backgroundColor: "#EF763A",
-    backgroundImage:
-      "https://d2k1ftgv7pobq7.cloudfront.net/images/backgrounds/gradients/peach.svg",
-    backgroundBrightness: "dark",
-  },
-  {
-    background: "gradient-flower",
-    backgroundColor: "#F488A6",
-    backgroundImage:
-      "https://d2k1ftgv7pobq7.cloudfront.net/images/backgrounds/gradients/flower.svg",
-    backgroundBrightness: "dark",
-  },
-];
-
-function getBgImgs() {
-  return bgImgs;
+function getBgGradientColors() {
+  return bgGradientColors;
 }
 
 function getBgColors() {

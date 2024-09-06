@@ -35,7 +35,7 @@ const options = [
         <div className="element-content">
           <h3 className="element-title">Workspace</h3>
           <p className="element-txt">
-            All members of the Pyello Workspace Workspace can see and edit this
+            All members of the Prello Workspace Workspace can see and edit this
             board.
           </p>
         </div>
@@ -85,7 +85,7 @@ export function AddBoardPopover({ onAddBoard, anchorEl }) {
       .getBgImgs()
       .find((bg) => bg.background === background);
     const bgColor = utilService
-      .getBgColors()
+      .getBgGradientColors()
       .find((bg) => bg.background === background);
     setSelectedBg(bgImg || bgColor);
     if (bgImg) {
@@ -144,7 +144,7 @@ export function AddBoardPopover({ onAddBoard, anchorEl }) {
         ))}
       </article>
       <article className="bg-color-options">
-        {utilService.getBgColors().map((bg) => (
+        {utilService.getBgGradientColors().map((bg) => (
           <div
             key={bg.background}
             className="bg-color-option"

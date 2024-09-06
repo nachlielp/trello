@@ -7,6 +7,7 @@
   box-shadow: var(--ds-shadow-overlay, 0 8px 12px #091e4226, 0 0 1px #091e424f);
   z-index: 300;
   animation: fadeInRight 200ms forwards;
+  padding-bottom: 10px;
   &.fade-out {
     animation: fadeOutRight 200ms forwards;
   }
@@ -36,6 +37,13 @@
       color: var(--ds-text, #172b4d);
       margin-top: 17px;
       margin-bottom: 6px;
+      a {
+        color: var(--ds-link, #0c66e4);
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
 
     .btn {
@@ -85,7 +93,12 @@
       border-radius: 8px;
       font-size: 14px;
       display: flex;
-
+      .bg {
+        width: 20px;
+        height: 20px;
+        margin-right: 8px;
+        border-radius: 3px;
+      }
       .pyello-icon {
         font-size: 20px;
         padding-right: 10px;
@@ -117,5 +130,29 @@
     scrollbar-color: var(--ds-background-neutral-hovered, #091e4224)
       var(--ds-background-neutral, #091e420f);
     scrollbar-width: thin;
+  }
+  .change-bg {
+    display: flex;
+    justify-content: space-between;
+    color: var(--ds-text, #172b4d);
+    .container {
+      text-align: center;
+      cursor: pointer;
+      &:hover .bg {
+        opacity: 0.6;
+      }
+      .bg {
+        width: 149.5px;
+        height: 96px;
+        background-size: contain;
+        border-radius: 8px;
+        &.photos {
+          background-image: url("https://trello.com/assets/8f9c1323c9c16601a9a4.jpg");
+        }
+        &.colors {
+          background-image: url("https://trello.com/assets/97db30fe74a58b7b7a18.png");
+        }
+      }
+    }
   }
 }

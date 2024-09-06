@@ -5,6 +5,10 @@ import { useEffect, useState } from "react";
 import { ErrorPage } from "./ErrorPage";
 import { userService } from "../services/user.service";
 import { Skeleton } from "antd";
+import { MdAddAPhoto } from "react-icons/md";
+import CloudinaryUpload from "../cmps/CloudinaryUpload";
+import { editUser } from "../store/user.actions";
+import { showSuccessMsg } from "../services/event-bus.service";
 
 export function UserProfile() {
   const params = useParams();
@@ -33,7 +37,7 @@ export function UserProfile() {
     {
       label: "Profile and visibility",
       to: `/u/${user?.username}`,
-      visible: (params.userName === user?.username),
+      visible: params.userName === user?.username,
     },
     // { label: "Cards", to: `/u/${user?.username}/cards`, visible: true },
   ];
@@ -52,6 +56,12 @@ export function UserProfile() {
       setIsLoaded(true);
     }
   }
+
+  function uploadPhoto(data) {
+    console.log(data.secure_url);
+    editUser({ ...user, imgUrl: data.secure_url });
+    showSuccessMsg("Success");
+  }
   return (
     <>
       {isLoaded ? (
@@ -59,7 +69,27 @@ export function UserProfile() {
           {currentUser?.id ? (
             <section className="user-profile">
               <header className="header-members-details">
-                <UserAvatar size={48} memberProp={currentUser} />
+                {currentUser.id === user.id ? (
+                  <CloudinaryUpload
+                    onAttachUrl={uploadPhoto}
+                    anchorEl={
+                      <span className="change-img">
+                        <UserAvatar
+                          size={48}
+                          memberProp={currentUser}
+                          className="img"
+                        />
+                        <MdAddAPhoto className="icon" />
+                      </span>
+                    }
+                  />
+                ) : (
+                  <UserAvatar
+                    size={48}
+                    memberProp={currentUser}
+                    className="img"
+                  />
+                )}
                 <div className="member-name">
                   <h1 className="full-name">{currentUser?.fullName}</h1>
                   <p className="user-name">@{currentUser?.username}</p>

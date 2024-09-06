@@ -17,17 +17,11 @@ async function login(email, password) {
   const match = await bcrypt.compare(password, user.password);
   if (!match) throw "Invalid username or password";
 
-  const miniUser = {
-    id: user._id,
-    fullName: user.fullName,
-    username: user.username,
-    email: user.email,
-    starredBoardIds: user.starredBoardIds,
-    bio: user.bio,
-    darkMode: user.darkMode,
-    isAdmin: user.isAdmin
-  };
-  return miniUser;
+  delete user.password;
+  user.id = user._id;
+  delete user._id;
+
+  return user;
 }
 
 function getLoginToken(user) {
@@ -40,10 +34,7 @@ function validateToken(token) {
   try {
     const json = cryptr.decrypt(token);
     const loggedinUser = JSON.parse(json);
-    if (loggedinUser.id) {
-      return loggedinUser;
-    }
-    return null;
+    return loggedinUser;
   } catch (err) {}
   return null;
 }

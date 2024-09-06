@@ -14,6 +14,7 @@ export function TaskPreviewBadges({ task, editTask }) {
   const members = useSelector((state) => state.boardModule.board.members);
   const board = useSelector((state) => state.boardModule.board);
   const user = useSelector((state) => state.userModule.user);
+  const users = useSelector((state) => state.userModule.users);
   const taskMembers =
     members?.filter((member) => task?.idMembers.includes(member?.id)) || [];
 
@@ -102,19 +103,22 @@ export function TaskPreviewBadges({ task, editTask }) {
           )}
         </aside>
         <aside className="aside-task-users">
-          {taskMembers.map((member) => (
-            <ProfilePopover
-              memberId={member.id}
-              key={member.id}
-              anchorEl={
-                <UserAvatar
-                  memberId={member.id}
-                  onClick={(e) => e.stopPropagation()}
-                  memberProp={member}
-                />
-              }
-            />
-          ))}
+          {taskMembers.map((member) => {
+            const currentUser = users?.find((u) => u.id === member.id);
+            return (
+              <ProfilePopover
+                memberId={member.id}
+                key={member.id}
+                anchorEl={
+                  <UserAvatar
+                    memberId={member.id}
+                    onClick={(e) => e.stopPropagation()}
+                    memberProp={{ ...member, imgUrl: currentUser?.imgUrl }}
+                  />
+                }
+              />
+            );
+          })}
         </aside>
       </div>
     </div>

@@ -5,6 +5,29 @@
     display: flex;
     align-items: center;
     padding: 46px 32px 46px 48px;
+    .img {
+      cursor: default !important;
+    }
+    .change-img {
+      cursor: pointer;
+      position: relative;
+      &:hover {
+        .img {
+          opacity: 0.2;
+          cursor: pointer !important;
+        }
+        .icon {
+          display: block;
+        }
+      }
+      .icon {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
     .member-name {
       margin-left: 16px;
       .full-name,

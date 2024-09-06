@@ -72,9 +72,8 @@ export async function userByUserName(req, res) {
 }
 export async function updateUser(req, res) {
   const loggedinUser = req.loggedinUser;
-  const { darkMode, bio, starredBoardIds, email, username, fullName, id } =
-    req.body;
-  if ((!darkMode, !bio, !starredBoardIds, !email, !username, !fullName, !id)) {
+  const { id } = req.body;
+  if (!id) {
     return res.status(400).send("Couldn't update user");
   }
 
@@ -86,12 +85,7 @@ export async function updateUser(req, res) {
     return res.status(400).send("Couldn't update user");
   }
   const userToSave = {
-    darkMode,
-    bio,
-    starredBoardIds,
-    email,
-    username,
-    fullName,
+    ...req.body,
     id,
   };
   try {
