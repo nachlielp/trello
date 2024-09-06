@@ -8,6 +8,8 @@ import { useMemo } from "react";
 import dayjs from "dayjs";
 import { updateBoard } from "../../store/board.actions";
 
+//TODO rename icons to badges
+//TODO move to new files and delegate logic to them
 export function TaskPreviewBadges({ task, editTask }) {
   const members = useSelector((state) => state.boardModule.board.members);
   const board = useSelector((state) => state.boardModule.board);
@@ -149,6 +151,7 @@ const dateBadge = ({
     </span>
   </Tooltip>
 );
+
 const descriptionBadge = (
   <Tooltip
     placement="bottom"
