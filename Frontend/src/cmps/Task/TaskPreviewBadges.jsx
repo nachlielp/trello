@@ -7,6 +7,7 @@ import { utilService } from "../../services/util.service";
 import { useMemo } from "react";
 import dayjs from "dayjs";
 import { updateBoard } from "../../store/board.actions";
+import { DateBadge } from "./TaskPreviewBadges/DateBadge";
 
 //TODO rename icons to badges
 //TODO move to new files and delegate logic to them
@@ -18,89 +19,69 @@ export function TaskPreviewBadges({ task, editTask }) {
   const taskMembers =
     members?.filter((member) => task?.idMembers.includes(member?.id)) || [];
 
-  const taskIcons = useMemo(() => {
-    const icons = [];
+  // const badgeArray = useMemo(() => {
+  //   const badges = [];
 
-    // Date badge
-    if (
-      utilService.isNotEmpty(task.start) ||
-      utilService.isNotEmpty(task.due)
-    ) {
-      let dateLabel = "";
-      if (
-        utilService.isNotEmpty(task.start) &&
-        utilService.isNotEmpty(task.due)
-      ) {
-        dateLabel = getDateLabel(task.start) + " - " + getDateLabel(task.due);
-      } else {
-        dateLabel = getDateLabel(task.start) + getDateLabel(task.due);
-      }
+  //   // Date badge
+  //   if (
+  //     utilService.isNotEmpty(task.start) ||
+  //     utilService.isNotEmpty(task.due)
+  //   ) {
+  //     let dateLabel = "";
+  //     if (
+  //       utilService.isNotEmpty(task.start) &&
+  //       utilService.isNotEmpty(task.due)
+  //     ) {
+  //       dateLabel = getDateLabel(task.start) + " - " + getDateLabel(task.due);
+  //     } else {
+  //       dateLabel = getDateLabel(task.start) + getDateLabel(task.due);
+  //     }
 
-      const [dueStatus, dueTooltip] = taskDueStatus(task);
+  //     const [dueStatus, dueTooltip] = taskDueStatus(task);
 
-      icons.push(
-        dateBadge({
-          dueTooltip,
-          dueComplete: task.dueComplete,
-          dateLabel,
-          dueStatus,
-          onDateClick: (e) => onDateClick(e, task),
-        })
-      );
-    }
+  //     badges.push(
+  //       dateBadge({
+  //         dueTooltip,
+  //         dueComplete: task.dueComplete,
+  //         dateLabel,
+  //         dueStatus,
+  //         onDateClick: (e) => onDateClick(e, task),
+  //       })
+  //     );
+  //   }
 
-    // Description badge
-    if (utilService.isNotEmpty(task.desc)) {
-      icons.push(descriptionBadge);
-    }
+  //   // Description badge
+  //   if (utilService.isNotEmpty(task.desc)) {
+  //     badges.push(descriptionBadge);
+  //   }
 
-    // Attachments badge
-    if (task?.attachments?.length > 0) {
-      icons.push(attachmentsBadge(task?.attachments?.length));
-    }
+  //   // Attachments badge
+  //   if (task?.attachments?.length > 0) {
+  //     badges.push(attachmentsBadge(task?.attachments?.length));
+  //   }
 
-    // Checklist badge
-    if (task.checkLists.length > 0) {
-      const result = utilService.getChecklistBadge(task.checkLists);
-      icons.push(checklistBadge(result));
-    }
+  //   // Checklist badge
+  //   if (task.checkLists.length > 0) {
+  //     const result = utilService.getChecklistBadge(task.checkLists);
+  //     badges.push(checklistBadge(result));
+  //   }
 
-    return icons;
-  }, [task]);
-
-  async function onDateClick(e) {
-    e.stopPropagation();
-    const newActivity = utilService.createActivity(
-      {
-        targetId: task.id,
-        targetName: task.name,
-      },
-      user
-    );
-    if (!task.dueComplete) {
-      newActivity.type = "completeDate";
-    } else {
-      newActivity.type = "incompleteDate";
-    }
-    board.activities.push(newActivity);
-    const newBoard = board;
-    await updateBoard(newBoard);
-    editTask({ ...task, dueComplete: !task.dueComplete });
-  }
+  //   return badges;
+  // }, [task]);
 
   return (
     <div className="task-preview-badges">
       <div
-        className={`task-badges-content ${
-          taskIcons.length === 0 && taskMembers.length === 0
-            ? "no-checklist-badges"
-            : ""
-        }`}
+        className={`task-badges-content 
+       
+        `}
       >
         <aside className="aside-task-icons">
-          {taskIcons.length > 0 && (
-            <section className="task-preview-icons">{taskIcons}</section>
-          )}
+          {
+            <section className="task-preview-icons">
+              <DateBadge task={task} editTask={editTask} />
+            </section>
+          }
         </aside>
         <aside className="aside-task-users">
           {taskMembers.map((member) => {

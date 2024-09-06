@@ -1,5 +1,6 @@
 import { login } from "../store/user.actions";
 import { bgColors, bgGradientColors, bgImgs } from "./Data";
+import dayjs from "dayjs";
 
 const boardLabelColorOptions = [
   {
@@ -856,6 +857,12 @@ function getAverageBorderColor(imageSrc, borderWidth = 1) {
   });
 }
 
-function isNotEmpty(str) {
-  return (typeof str === "string" || str instanceof String) && !!str.trim();
+function isNotEmpty(value) {
+  if (typeof value === "string") {
+    return value.trim() !== "";
+  }
+  if (dayjs.isDayjs(value)) {
+    return value.isValid();
+  }
+  return false;
 }
