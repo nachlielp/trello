@@ -9,6 +9,7 @@ import dayjs from "dayjs";
 import { updateBoard } from "../../store/board.actions";
 import { DateBadge } from "./TaskPreviewBadges/DateBadge";
 import { DescriptionBadge } from "./TaskPreviewBadges/DescriptionBadge";
+import { AttachmentsBadge } from "./TaskPreviewBadges/AttachmentsBadge";
 //TODO rename icons to badges
 //TODO move to new files and delegate logic to them
 export function TaskPreviewBadges({ task, editTask }) {
@@ -81,6 +82,7 @@ export function TaskPreviewBadges({ task, editTask }) {
             <section className="task-preview-icons">
               <DateBadge task={task} editTask={editTask} />
               <DescriptionBadge desc={task.desc} />
+              <AttachmentsBadge numOfAttachments={task.attachments.length} />
             </section>
           }
         </aside>
