@@ -283,6 +283,7 @@ export const utilService = {
   getBgColors,
   getDateLabel,
   taskDueStatus,
+  datePreviewTitle,
 };
 
 export const BOARDS_KEY = "boards";
@@ -894,4 +895,12 @@ function getDateLabel(date) {
   } else {
     return dayjs(date).format("MMM D YYYY");
   }
+}
+
+function datePreviewTitle(start, due) {
+  if (!isNotEmpty(start) && !isNotEmpty(due)) return "";
+  if (isNotEmpty(start) && isNotEmpty(due))
+    return `${getDateLabel(start)} - ${getDateLabel(due)}`;
+  if (isNotEmpty(start)) return `Start: ${getDateLabel(start)}`;
+  if (isNotEmpty(due)) return `Due: ${getDateLabel(due)}`;
 }

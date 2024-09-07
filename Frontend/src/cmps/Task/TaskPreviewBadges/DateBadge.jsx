@@ -1,34 +1,14 @@
 import { utilService } from "../../../services/util.service";
 import { Tooltip } from "antd";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
+import dayjs from "dayjs";
 
 export function DateBadge({ task, editTask }) {
-  const [isDate, setIsDate] = useState(false);
-  const [dateLabel, setDateLabel] = useState("");
-
-  useEffect(() => {
-    if (
-      !utilService.isNotEmpty(task.start) &&
-      !utilService.isNotEmpty(task.due)
-    ) {
-      setDateLabel("");
-      setIsDate(false);
-    } else if (
-      utilService.isNotEmpty(task.start) &&
-      utilService.isNotEmpty(task.due)
-    ) {
-      setDateLabel(
-        utilService.getDateLabel(task.start) +
-          " - " +
-          utilService.getDateLabel(task.due)
-      );
-      setIsDate(true);
+  const dateLabel = useMemo(() => {
+    if (!dayjs(task.start).isValid() && !dayjs(task.due).isValid()) {
+      return "";
     } else {
-      setDateLabel(
-        utilService.getDateLabel(task.start) +
-          utilService.getDateLabel(task.due)
-      );
-      setIsDate(true);
+      return utilService.datePreviewTitle(task.start, task.due);
     }
   }, [task.start, task.due]);
 
@@ -38,18 +18,18 @@ export function DateBadge({ task, editTask }) {
     e.stopPropagation();
 
     const activityType = !task.dueComplete ? "completeDate" : "incompleteDate";
-
     const activity = {
       targetId: task.id,
       targetName: task.name,
       type: activityType,
     };
+
     editTask({ ...task, dueComplete: !task.dueComplete }, activity);
   }
 
   return (
     <>
-      {isDate && (
+      {dateLabel && (
         <Tooltip
           placement="bottom"
           title={dueTooltip}
@@ -77,19 +57,7 @@ export function DateBadge({ task, editTask }) {
           </span>
         </Tooltip>
       )}
-      {!isDate && <></>}
+      {!dateLabel && <></>}
     </>
   );
-}
-
-function datePreviewTitle(start, due) {
-  if (!utilService.isNotEmpty(start) && !utilService.isNotEmpty(due)) return "";
-  if (utilService.isNotEmpty(start) && utilService.isNotEmpty(due))
-    return `${utilService.getDateLabel(start)} - ${utilService.getDateLabel(
-      due
-    )}`;
-  if (utilService.isNotEmpty(start))
-    return `Start: ${utilService.getDateLabel(start)}`;
-  if (utilService.isNotEmpty(due))
-    return `Due: ${utilService.getDateLabel(due)}`;
 }
