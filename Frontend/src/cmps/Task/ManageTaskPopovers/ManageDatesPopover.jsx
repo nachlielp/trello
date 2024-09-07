@@ -87,8 +87,6 @@ function ManageDatesPopoverContent({ task, editTask, onClose, editBoard }) {
   const endTimeRef = useRef(null);
 
   useEffect(() => {
-    const defaultEndDate = task.due ? dayjs(task.due) : dayjs().add(1, "day");
-
     if (task.start && !task.due) {
       setStartDate(dayjs(task.start));
       setValue(dayjs(task.start));
