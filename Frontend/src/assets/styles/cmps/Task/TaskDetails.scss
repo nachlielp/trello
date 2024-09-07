@@ -400,6 +400,12 @@
                         text-decoration: none;
                     }
 
+                    &:active {
+                        background-color: var(
+                            --ds-background-neutral-pressed,
+                            #091e424f
+                        );
+                    }
                     .btn-label {
                         margin-left: 8px;
                     }

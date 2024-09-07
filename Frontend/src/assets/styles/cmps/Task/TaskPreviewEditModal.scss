@@ -150,6 +150,9 @@
         &:hover {
             background-color: var(--ds-surface-raised-hovered, #f1f2f4);
         }
+        &:active {
+            background-color: var(--ds-surface-raised-pressed, #f1f2f4);
+        }
         .injected-svg {
             margin-top: 2px;
             width: 16px;
