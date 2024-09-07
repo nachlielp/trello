@@ -1,6 +1,5 @@
 import { updateBoard } from "../../../store/board.actions";
 import { utilService } from "../../../services/util.service";
-import dayjs from "dayjs";
 import { Tooltip } from "antd";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -23,15 +22,22 @@ export function DateBadge({ task, editTask }) {
       utilService.isNotEmpty(task.start) &&
       utilService.isNotEmpty(task.due)
     ) {
-      setDateLabel(getDateLabel(task.start) + " - " + getDateLabel(task.due));
+      setDateLabel(
+        utilService.getDateLabel(task.start) +
+          " - " +
+          utilService.getDateLabel(task.due)
+      );
       setIsDate(true);
     } else {
-      setDateLabel(getDateLabel(task.start) + getDateLabel(task.due));
+      setDateLabel(
+        utilService.getDateLabel(task.start) +
+          utilService.getDateLabel(task.due)
+      );
       setIsDate(true);
     }
   }, [task.start, task.due]);
 
-  const [dueStatus, dueTooltip] = taskDueStatus(task);
+  const [dueStatus, dueTooltip] = utilService.taskDueStatus(task);
 
   async function onDateClick(e) {
     e.stopPropagation();
@@ -50,7 +56,16 @@ export function DateBadge({ task, editTask }) {
     board.activities.push(newActivity);
     const newBoard = board;
     await updateBoard(newBoard);
-    editTask({ ...task, dueComplete: !task.dueComplete });
+
+    const activityType = !task.dueComplete ? "completeDate" : "incompleteDate";
+    // console.log("activityType", activityType);
+    // console.log("task.dueComplete", task.dueComplete);
+    const activity = {
+      targetId: task.id,
+      targetName: task.name,
+      type: activityType,
+    };
+    editTask({ ...task, dueComplete: !task.dueComplete }, activity);
   }
 
   return (
@@ -86,29 +101,4 @@ export function DateBadge({ task, editTask }) {
       {!isDate && <></>}
     </>
   );
-}
-
-function taskDueStatus(task) {
-  if (task.dueComplete) return ["completed", "This card is completed"];
-
-  const dueDate = dayjs(task.due);
-  const now = dayjs();
-  const diff = dueDate.diff(now, "hours");
-
-  if (diff < -24) return ["overdue", "This card is overdue"];
-  if (diff < 0)
-    return ["recently-overdue", "This card is due in the next 24 hours"];
-  if (diff > 24) return ["due", "This card is due in the next 24 hours"];
-  if (diff > 0) return ["due-soon", "This card is due in the next 24 hours"];
-  return ["", ""];
-}
-
-function getDateLabel(date) {
-  if (!date) return "";
-
-  if (dayjs(date).isSame(dayjs(), "year")) {
-    return dayjs(date).format("MMM D");
-  } else {
-    return dayjs(date).format("MMM D YYYY");
-  }
 }

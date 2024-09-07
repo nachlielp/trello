@@ -112,7 +112,7 @@ export function BoardIndex() {
     const res = await editGroup(board.id, group);
   }
 
-  async function onEditTask(task) {
+  async function onEditTask(task, activity) {
     if (task.closed) {
       const newActivity = utilService.createActivity(
         {
@@ -134,6 +134,15 @@ export function BoardIndex() {
     } else {
       const res = await editTask(task);
     }
+    // if (activity) {
+    //   console.log("activity", activity);
+    //   const newActivity = utilService.createActivity(activity, user);
+    //   console.log("newActivity", newActivity);
+    //   await updateBoard({
+    //     ...board,
+    //     activities: [...board.activities, newActivity],
+    //   });
+    // }
     loadBoard(board.id);
   }
 
@@ -164,10 +173,6 @@ export function BoardIndex() {
   async function editBoard(changes) {
     await updateBoard({ ...board, ...changes });
   }
-
-  const sortedGroups = board?.groups
-    ?.filter((l) => !l.closed)
-    .sort((a, b) => a.pos - b.pos);
 
   function onDragStart(result) {
     setIsDraggingOverId(null);
