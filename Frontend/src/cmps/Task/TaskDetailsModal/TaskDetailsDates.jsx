@@ -52,11 +52,15 @@ export function TaskDetailsDates({ task, editTask, editBoard }) {
           editTask={editTask}
           anchorEl={
             <article className="dates-info">
-              <label className="date-label">{getDateLabel(task.start)}</label>
+              <label className="date-label">
+                {utilService.getDateLabel(task.start)}
+              </label>
               {task.due && task.start && (
                 <label className="date-label"> - </label>
               )}
-              <label className="date-label">{getDateTimeLabel(task.due)}</label>
+              <label className="date-label">
+                {utilService.getDateLabel(task.due)}
+              </label>
               {task.due && (
                 <label className={`date-alert ${dueStatus}`}>{dueLabel}</label>
               )}
@@ -67,25 +71,6 @@ export function TaskDetailsDates({ task, editTask, editBoard }) {
       </main>
     </section>
   );
-}
-
-function getDateLabel(date) {
-  if (!date) return "";
-
-  if (dayjs(date).isSame(dayjs(), "year")) {
-    return dayjs(date).format("MMM D");
-  } else {
-    return dayjs(date).format("MMM D YYYY");
-  }
-}
-
-function getDateTimeLabel(date) {
-  if (!date) return "";
-  if (dayjs(date).isSame(dayjs(), "year")) {
-    return dayjs(date).format("MMM D HH:mm");
-  } else {
-    return dayjs(date).format("MMM D YYYY HH:mm");
-  }
 }
 
 function taskDueStatus(task) {

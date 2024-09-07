@@ -281,6 +281,8 @@ export const utilService = {
   isColorDark,
   isNotEmpty,
   getBgColors,
+  getDateLabel,
+  taskDueStatus,
 };
 
 export const BOARDS_KEY = "boards";
@@ -867,4 +869,29 @@ function isNotEmpty(value) {
     return value.isValid();
   }
   return false;
+}
+
+function taskDueStatus(task) {
+  if (task.dueComplete) return ["completed", "This card is completed"];
+
+  const dueDate = dayjs(task.due);
+  const now = dayjs();
+  const diff = dueDate.diff(now, "hours");
+
+  if (diff < -24) return ["overdue", "This card is overdue"];
+  if (diff < 0)
+    return ["recently-overdue", "This card is due in the next 24 hours"];
+  if (diff > 24) return ["due", "This card is due in the next 24 hours"];
+  if (diff > 0) return ["due-soon", "This card is due in the next 24 hours"];
+  return ["", ""];
+}
+
+function getDateLabel(date) {
+  if (!date) return "";
+
+  if (dayjs(date).isSame(dayjs(), "year")) {
+    return dayjs(date).format("MMM D");
+  } else {
+    return dayjs(date).format("MMM D YYYY");
+  }
 }

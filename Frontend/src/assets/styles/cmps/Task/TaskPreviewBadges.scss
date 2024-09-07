@@ -29,22 +29,24 @@
     gap: 4px;
   }
 
-  .aside-task-icons {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 6px;
-    align-self: flex-start;
-    margin-bottom: 4px;
-    width: 100%;
-  }
+  // .aside-task-icons {
+  //   display: flex;
+  //   flex-direction: row;
+  //   flex-wrap: wrap;
+  //   gap: 6px;
+  //   align-self: flex-start;
+  //   margin-bottom: 4px;
+  //   width: 100%;
+  // }
 
-  .aside-task-icons .task-preview-icons {
+  .task-preview-icons {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     margin-right: 4px;
-    // margin-bottom: 4px;
+    align-self: flex-start;
+    margin-bottom: 4px;
+    width: 100%;
     gap: 4px;
 
     .task-icon-wrapper {
