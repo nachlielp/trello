@@ -29,11 +29,13 @@ import { BoardHeader } from "../cmps/BoardHeader/BoardHeader.jsx"
 import useScrollByGrab from "../customHooks/useScrollByGrab.js"
 import { useParams, useOutletContext } from "react-router-dom"
 import { utilService } from "../services/util.service.js"
+import { useDocumentTitle } from "../customHooks/useDocumentTitle"
 
 export function BoardIndex() {
     const [selectedTaskId, setSelectedTaskId] = useState(null)
     const [isDraggingOverId, setIsDraggingOverId] = useState(null)
     const board = useSelector((state) => state.boardModule.board)
+    useDocumentTitle(`${board?.name} | Pyello`)
     const user = useSelector((state) => state.userModule.user)
     const outletProps = useOutletContext()
     const params = useParams()

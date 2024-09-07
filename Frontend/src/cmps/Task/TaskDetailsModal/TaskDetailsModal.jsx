@@ -20,7 +20,7 @@ import { TaskDetailsDates } from "./TaskDetailsDates"
 import { updateBoard } from "../../../store/board.actions"
 import { TaskDetailsAttachment } from "./TaskDetailsAttachment"
 import { ManageAttachmentsPopover } from "../ManageTaskPopovers/ManageAttachmentsPopover"
-
+import { useDocumentTitle } from "../../../customHooks/useDocumentTitle"
 export function TaskDetailsModal({
     taskId,
     editTask,
@@ -32,14 +32,15 @@ export function TaskDetailsModal({
 }) {
     const group = useSelector((state) =>
         state.boardModule.board.groups?.find((g) =>
-            g.tasks?.find((t) => t.id === taskId),
-        ),
+            g.tasks?.find((t) => t.id === taskId)
+        )
     )
     const task = useSelector((state) =>
         state.boardModule.board.groups
             ?.find((g) => g.tasks?.find((t) => t.id === taskId))
-            ?.tasks.find((t) => t.id === taskId),
+            ?.tasks.find((t) => t.id === taskId)
     )
+    useDocumentTitle(`${task?.name} | Pyello`)
     const [openedInputId, setOpenedInputId] = useState(null)
 
     const user = useSelector((state) => state.userModule.user)
@@ -57,7 +58,7 @@ export function TaskDetailsModal({
                 targetId: task.id,
                 targetName: task.name,
             },
-            user,
+            user
         )
 
         await updateBoard({
@@ -89,15 +90,15 @@ export function TaskDetailsModal({
             ? "dark"
             : "light"
         : task?.cover?.color
-          ? task?.cover?.brightness
-          : "light"
+        ? task?.cover?.brightness
+        : "light"
 
     const colorCoverHeader = (
         <section
             className={`details-header-color-cover`}
             style={{
                 backgroundColor: utilService.getColorHashByName(
-                    task.cover.color,
+                    task.cover.color
                 )?.bgColor,
             }}
         >
@@ -173,7 +174,7 @@ export function TaskDetailsModal({
         const newTask = {
             ...task,
             checkLists: task.checkLists.map((c) =>
-                c.id === checkListId ? { ...c, ...changes } : c,
+                c.id === checkListId ? { ...c, ...changes } : c
             ),
         }
         editTask(newTask)
@@ -187,10 +188,10 @@ export function TaskDetailsModal({
                     ? {
                           ...c,
                           checkItems: c.checkItems.map((i) =>
-                              i.id === itemId ? { ...i, ...changes } : i,
+                              i.id === itemId ? { ...i, ...changes } : i
                           ),
                       }
-                    : c,
+                    : c
             ),
         }
         editTask(newTask)
@@ -204,7 +205,7 @@ export function TaskDetailsModal({
                 targetName: task.name,
                 checklistName: checkList.name,
             },
-            user,
+            user
         )
         const newTask = {
             ...task,
@@ -213,7 +214,7 @@ export function TaskDetailsModal({
 
         if (!newTask.checkLists.length) {
             const newCheckListTaskIds = board.checkListTaskIds.filter(
-                (i) => i !== task.id,
+                (i) => i !== task.id
             )
 
             await editBoard({
@@ -233,10 +234,10 @@ export function TaskDetailsModal({
                     ? {
                           ...c,
                           checkItems: c.checkItems.filter(
-                              (i) => i.id !== itemId,
+                              (i) => i.id !== itemId
                           ),
                       }
-                    : c,
+                    : c
             ),
         }
         editTask(newTask)
@@ -245,7 +246,7 @@ export function TaskDetailsModal({
     async function createAsTask(name) {
         let maxPos = group.tasks.reduce(
             (max, item) => (item.pos > max ? item.pos : max),
-            0,
+            0
         )
         maxPos
         const newTask = {

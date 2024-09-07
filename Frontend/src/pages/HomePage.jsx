@@ -5,8 +5,10 @@ import { Link, useNavigate } from "react-router-dom"
 import { ReactSVG } from "react-svg"
 import atlassian from "/img/atlassianLogo.svg"
 import homeImg from "/img/homeImg.png"
+import { useDocumentTitle } from "../customHooks/useDocumentTitle"
 
 export function HomePage() {
+    useDocumentTitle("Manage Your Team’s Projects From Anywhere | Pyello")
     const user = useSelector((state) => state.userModule.user)
     const [email, setEmail] = useState("")
     const navigate = useNavigate()

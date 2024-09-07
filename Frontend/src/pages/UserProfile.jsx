@@ -9,8 +9,9 @@ import { MdAddAPhoto } from "react-icons/md"
 import CloudinaryUpload from "../cmps/CloudinaryUpload"
 import { editUser } from "../store/user.actions"
 import { showSuccessMsg } from "../services/event-bus.service"
-
+import { useDocumentTitle } from "../customHooks/useDocumentTitle"
 export function UserProfile() {
+    useDocumentTitle(`Profile | Pyello`)
     const params = useParams()
     const user = useSelector((state) => state.userModule.user)
     const [currentUser, setCurrentUser] = useState({})
