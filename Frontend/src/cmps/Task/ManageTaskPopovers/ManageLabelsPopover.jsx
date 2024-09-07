@@ -35,7 +35,7 @@ export function ManageLabelsPopover({
         if (task?.idLabels) {
             const arr = boardLabels.map((boardLabel) => {
                 const isTask = task.idLabels.find(
-                    (taskLabelId) => taskLabelId === boardLabel.id,
+                    (taskLabelId) => taskLabelId === boardLabel.id
                 )
                 if (isTask) {
                     return { ...boardLabel, isTask: true }
@@ -50,10 +50,8 @@ export function ManageLabelsPopover({
         if (inputSearch !== "") {
             setFilteredLabels(
                 boardTaskLabels.filter((label) =>
-                    label.name
-                        .toLowerCase()
-                        .includes(inputSearch.toLowerCase()),
-                ),
+                    label.name.toLowerCase().includes(inputSearch.toLowerCase())
+                )
             )
         } else {
             setFilteredLabels(boardTaskLabels)
@@ -71,7 +69,7 @@ export function ManageLabelsPopover({
             editTask({
                 ...task,
                 idLabels: task.idLabels.filter(
-                    (taskLabel) => taskLabel !== label.id,
+                    (taskLabel) => taskLabel !== label.id
                 ),
             })
         }
@@ -172,7 +170,7 @@ export function ManageLabelsPopover({
                         className="lebel-full-btn"
                         onClick={openCreateLabel}
                     >
-                        Create label
+                        Create a new label
                     </button>
                 </section>
             )}
@@ -191,7 +189,7 @@ export function ManageLabelsPopover({
                                 className="label-color-name manage-labels-color-name"
                                 style={{
                                     color: utilService.getColorHashByName(
-                                        editColor,
+                                        editColor
                                     ).lightFontColor,
                                 }}
                             >
@@ -335,10 +333,10 @@ function LabelsOption({ taskLabel, selectLabel, editColor }) {
                         backgroundColor:
                             hoveredLabelId === taskLabel.id
                                 ? utilService.getColorHashByName(
-                                      taskLabel.color,
+                                      taskLabel.color
                                   ).hoverdBgColor
                                 : utilService.getColorHashByName(
-                                      taskLabel.color,
+                                      taskLabel.color
                                   ).bgColor,
                     }}
                     onClick={() => selectLabel(taskLabel, !taskLabel.isTask)}
@@ -349,7 +347,7 @@ function LabelsOption({ taskLabel, selectLabel, editColor }) {
                         className="label-color-name manage-labels-color-name"
                         style={{
                             color: utilService.getColorHashByName(
-                                taskLabel.color,
+                                taskLabel.color
                             ).lightFontColor,
                         }}
                     >
