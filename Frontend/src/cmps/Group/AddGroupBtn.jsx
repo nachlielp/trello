@@ -51,7 +51,7 @@ export function AddGroupBtn({ addGroup }) {
 
     const addListBtnTitle =
         board.groups.filter((g) => !g.closed).length === 0
-            ? "Add a lists"
+            ? "Add a list"
             : "Add another list"
     return (
         <>

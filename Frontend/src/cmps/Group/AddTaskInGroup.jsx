@@ -13,7 +13,7 @@ export function AddTaskInGroup({
     groupRef,
 }) {
     const group = useSelector((state) =>
-        state.boardModule.board.groups.find((group) => group.id === groupId),
+        state.boardModule.board.groups.find((group) => group.id === groupId)
     )
     const [taskName, setTaskName] = useState("")
     const firstPos = useRef(null)
@@ -72,9 +72,9 @@ export function AddTaskInGroup({
 
     return (
         <section
-            className={`add-card-in-list-footer ${addToTop ? "first-task" : ""} ${
-                !addToTop ? "last-task" : ""
-            }`}
+            className={`add-card-in-list-footer ${
+                addToTop ? "first-task" : ""
+            } ${!addToTop ? "last-task" : ""}`}
             ref={groupRef}
         >
             <TextArea
