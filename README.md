@@ -27,7 +27,7 @@ A Trello-like application built with React, Redux, Node.js, and MongoDB, hosted 
 
 **Homepage**
 
-- A stylized homepage, closely resembling Trello's design, complete with a carousel.
+- A stylized homepage, closely resembling Trello's design.
 
 **User Accounts**
 
