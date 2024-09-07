@@ -4,9 +4,10 @@ import { useMemo } from "react"
 import dayjs from "dayjs"
 
 export function DateBadge({ task, editTask }) {
+    //useMemo is used to deal with the re-mount after drag and drop between lists that lead to a flicker of the component
     const dateLabel = useMemo(() => {
         if (!dayjs(task.start).isValid() && !dayjs(task.due).isValid()) {
-            return ""
+            return null
         } else {
             return utilService.datePreviewTitle(task.start, task.due)
         }

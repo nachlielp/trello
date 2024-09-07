@@ -29,7 +29,7 @@ export function AddGroupBtn({ addGroup }) {
                     type: "addGroup",
                     targetName: groupName,
                 },
-                user,
+                user
             )
             await updateBoard({
                 ...board,
@@ -48,6 +48,11 @@ export function AddGroupBtn({ addGroup }) {
             setGroupName("")
         }
     }
+
+    const addListBtnTitle =
+        board.groups.filter((g) => !g.closed).length === 0
+            ? "Add a lists"
+            : "Add another list"
     return (
         <>
             {(board.members.some((m) => m.id === user?.id) ||
@@ -60,7 +65,7 @@ export function AddGroupBtn({ addGroup }) {
                         >
                             <span className="add-group-btn-text">
                                 <PlusOutlined />
-                                &nbsp;Add another list
+                                &nbsp;{addListBtnTitle}
                             </span>
                         </button>
                     )}
