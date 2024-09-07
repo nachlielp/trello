@@ -147,6 +147,9 @@
         color: var(--ds-text);
         cursor: pointer;
 
+        &:hover {
+            background-color: var(--ds-surface-raised-hovered, #f1f2f4);
+        }
         .injected-svg {
             margin-top: 2px;
             width: 16px;
