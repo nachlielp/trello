@@ -390,8 +390,6 @@ function createNewGroup(group) {
 }
 
 function getChecklistBadge(checkLists) {
-  console.log("checkLists", checkLists);
-
   const badges = {
     checkLists: {
       count: null,
@@ -419,7 +417,6 @@ function getChecklistBadge(checkLists) {
   if (taskCheckedItemsCount) {
     badges.checkLists.count = `${totalCheckdItemsLength}/${taskCheckedItemsCount}`;
   }
-  console.log("badges", badges);
   return {
     count: badges.checkLists.count,
     allChecked: badges.checkLists.allChecked,

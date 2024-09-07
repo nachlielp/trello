@@ -36,96 +36,105 @@
     gap: 6px;
     align-self: flex-start;
     margin-bottom: 4px;
+    width: 100%;
   }
 
   .aside-task-icons .task-preview-icons {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    margin-right: 4px;
+    // margin-bottom: 4px;
     gap: 4px;
-  }
 
-  .task-icon-wrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding: 2px 6px 2px 4px;
-    border-radius: 3px;
+    .task-icon-wrapper {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      padding: 2px 6px 2px 4px;
+      border-radius: 3px;
 
-    .injected-svg {
-      height: 16px;
-      width: 16px;
-    }
-    &.checklist,
-    &.dates {
-      &.completed {
-        background-color: var(--ds-background-success-bold, #1f845a);
-        color: var(--ds-text-inverse, #ffffff);
+      .injected-svg {
+        height: 16px;
+        width: 16px;
+      }
+      &.checklist,
+      &.dates {
+        &.completed {
+          background-color: var(--ds-background-success-bold, #1f845a);
+          color: var(--ds-text-inverse, #ffffff);
+
+          .task-icon {
+            margin-bottom: 6px;
+            color: var(--ds-text-inverse, #ffffff);
+          }
+          .checklist-icon {
+            margin-bottom: 0;
+          }
+        }
+      }
+
+      &.dates {
+        .hover-icon {
+          display: none;
+          margin-bottom: 6px;
+        }
 
         .task-icon {
           margin-bottom: 6px;
-          color: var(--ds-text-inverse, #ffffff);
         }
-        .checklist-icon {
-          margin-bottom: 0;
-        }
-      }
-    }
 
-    &.dates {
-      .hover-icon {
-        display: none;
-        margin-bottom: 6px;
-      }
-
-      .task-icon {
-        margin-bottom: 6px;
-      }
-
-      &.overdue {
-        background-color: var(--ds-background-accent-red-subtler, #ffd2cc);
-        color: var(--ds-text-accent-red, #ae2a19);
-
-        .hover-icon,
-        .task-icon {
+        &.overdue {
+          background-color: var(--ds-background-accent-red-subtler, #ffd2cc);
           color: var(--ds-text-accent-red, #ae2a19);
+
+          .hover-icon,
+          .task-icon {
+            color: var(--ds-text-accent-red, #ae2a19);
+          }
         }
-      }
 
-      &.recently-overdue {
-        background-color: var(--ds-background-danger-bold, #ca3521);
-        color: var(--ds-text-inverse, #ffffff);
-
-        .hover-icon,
-        .task-icon {
+        &.recently-overdue {
+          background-color: var(--ds-background-danger-bold, #ca3521);
           color: var(--ds-text-inverse, #ffffff);
+
+          .hover-icon,
+          .task-icon {
+            color: var(--ds-text-inverse, #ffffff);
+          }
         }
-      }
 
-      &.due-soon {
-        background-color: var(--ds-background-warning-bold, #e2b203);
-        color: var(--ds-text-warning-inverse, #172b4d);
-
-        .hover-icon,
-        .task-icon {
+        &.due-soon {
+          background-color: var(--ds-background-warning-bold, #e2b203);
           color: var(--ds-text-warning-inverse, #172b4d);
-        }
-      }
 
-      &:hover {
-        cursor: pointer;
-        filter: saturate(85%) brightness(85%);
-
-        .task-icon {
-          display: block;
+          .hover-icon,
+          .task-icon {
+            color: var(--ds-text-warning-inverse, #172b4d);
+          }
         }
 
-        .default-icon {
-          display: none;
+        &:hover {
+          cursor: pointer;
+          filter: saturate(85%) brightness(85%);
+
+          .task-icon {
+            display: block;
+          }
+
+          .default-icon {
+            display: none;
+          }
         }
       }
     }
+  }
+  .members-badge {
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    gap: 4px;
   }
 
   .task-icon {

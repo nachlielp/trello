@@ -9,14 +9,12 @@ export function ChecklistBadge({ checklists }) {
 
   useEffect(() => {
     if (checklists) {
-      console.log("checkLists", checklists);
       const { count, allChecked } = utilService.getChecklistBadge(checklists);
       setCountState(count);
       setAllCheckedState(allChecked);
     }
   }, [JSON.stringify(checklists)]);
 
-  console.log("checklists count", countState);
   return countState ? (
     <Tooltip
       placement="bottom"
