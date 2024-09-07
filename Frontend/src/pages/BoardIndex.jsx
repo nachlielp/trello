@@ -27,17 +27,14 @@ import { AddGroupBtn } from "../cmps/Group/AddGroupBtn";
 import { TaskDetailsModal } from "../cmps/Task/TaskDetailsModal/TaskDetailsModal.jsx";
 import { BoardHeader } from "../cmps/BoardHeader/BoardHeader.jsx";
 import useScrollByGrab from "../customHooks/useScrollByGrab.js";
-import { useParams, useNavigate, useOutletContext } from "react-router-dom";
+import { useParams, useOutletContext } from "react-router-dom";
 import { utilService } from "../services/util.service.js";
-
-import { socketService } from "../services/socket.service.js";
 
 export function BoardIndex() {
   const [selectedTaskId, setSelectedTaskId] = useState(null);
   const [isDraggingOverId, setIsDraggingOverId] = useState(null);
   const board = useSelector((state) => state.boardModule.board);
   const user = useSelector((state) => state.userModule.user);
-  const navigate = useNavigate();
   const outletProps = useOutletContext();
   const params = useParams();
 
@@ -132,17 +129,16 @@ export function BoardIndex() {
         activities: [...board?.activities, newActivity],
       });
     } else {
-      const res = await editTask(task);
+      const newBoard = await editTask(task);
+
+      if (activity) {
+        const newActivity = utilService.createActivity(activity, user);
+        await updateBoard({
+          ...newBoard,
+          activities: [...board.activities, newActivity],
+        });
+      }
     }
-    // if (activity) {
-    //   console.log("activity", activity);
-    //   const newActivity = utilService.createActivity(activity, user);
-    //   console.log("newActivity", newActivity);
-    //   await updateBoard({
-    //     ...board,
-    //     activities: [...board.activities, newActivity],
-    //   });
-    // }
     loadBoard(board.id);
   }
 

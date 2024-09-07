@@ -1,13 +1,8 @@
-import { updateBoard } from "../../../store/board.actions";
 import { utilService } from "../../../services/util.service";
 import { Tooltip } from "antd";
-import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 export function DateBadge({ task, editTask }) {
-  const board = useSelector((state) => state.boardModule.board);
-  const user = useSelector((state) => state.userModule.user);
-
   const [isDate, setIsDate] = useState(false);
   const [dateLabel, setDateLabel] = useState("");
 
@@ -41,25 +36,9 @@ export function DateBadge({ task, editTask }) {
 
   async function onDateClick(e) {
     e.stopPropagation();
-    const newActivity = utilService.createActivity(
-      {
-        targetId: task.id,
-        targetName: task.name,
-      },
-      user
-    );
-    if (!task.dueComplete) {
-      newActivity.type = "completeDate";
-    } else {
-      newActivity.type = "incompleteDate";
-    }
-    board.activities.push(newActivity);
-    const newBoard = board;
-    await updateBoard(newBoard);
 
     const activityType = !task.dueComplete ? "completeDate" : "incompleteDate";
-    // console.log("activityType", activityType);
-    // console.log("task.dueComplete", task.dueComplete);
+
     const activity = {
       targetId: task.id,
       targetName: task.name,
@@ -101,4 +80,16 @@ export function DateBadge({ task, editTask }) {
       {!isDate && <></>}
     </>
   );
+}
+
+function datePreviewTitle(start, due) {
+  if (!utilService.isNotEmpty(start) && !utilService.isNotEmpty(due)) return "";
+  if (utilService.isNotEmpty(start) && utilService.isNotEmpty(due))
+    return `${utilService.getDateLabel(start)} - ${utilService.getDateLabel(
+      due
+    )}`;
+  if (utilService.isNotEmpty(start))
+    return `Start: ${utilService.getDateLabel(start)}`;
+  if (utilService.isNotEmpty(due))
+    return `Due: ${utilService.getDateLabel(due)}`;
 }
