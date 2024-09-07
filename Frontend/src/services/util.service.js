@@ -390,7 +390,7 @@ function createNewGroup(group) {
 }
 
 function getChecklistBadge(checkLists) {
-  if (!checkLists) return;
+  console.log("checkLists", checkLists);
 
   const badges = {
     checkLists: {
@@ -398,27 +398,32 @@ function getChecklistBadge(checkLists) {
       allChecked: false,
     },
   };
+  if (!checkLists) return badges;
 
-  if (checkLists) {
-    const taskCheckedItemsCount = checkLists.reduce(
-      (sum, obj) => sum + obj.checkItems.length,
-      0
-    );
-    const totalCheckdItemsLength = checkLists.reduce((sum, obj) => {
-      const localItemsCount = obj.checkItems.filter(
-        (item) => item.isChecked === true
-      ).length;
-      return sum + localItemsCount;
-    }, 0);
-    if (taskCheckedItemsCount / totalCheckdItemsLength === 1) {
-      badges.checkLists.allChecked = true;
-    }
-    if (taskCheckedItemsCount) {
-      badges.checkLists.count = `${totalCheckdItemsLength}/${taskCheckedItemsCount}`;
-    }
+  const flatCheckItems = checkLists.flatMap(
+    (checklist) => checklist.checkItems
+  );
+
+  const taskCheckedItemsCount = flatCheckItems.length;
+
+  const totalCheckdItemsLength = checkLists.reduce((sum, obj) => {
+    const localItemsCount = obj.checkItems.filter(
+      (item) => item.isChecked === true
+    ).length;
+    return sum + localItemsCount;
+  }, 0);
+
+  if (taskCheckedItemsCount / totalCheckdItemsLength === 1) {
+    badges.checkLists.allChecked = true;
   }
-
-  return badges;
+  if (taskCheckedItemsCount) {
+    badges.checkLists.count = `${totalCheckdItemsLength}/${taskCheckedItemsCount}`;
+  }
+  console.log("badges", badges);
+  return {
+    count: badges.checkLists.count,
+    allChecked: badges.checkLists.allChecked,
+  };
 }
 
 async function createNewBoard(board) {

@@ -64,9 +64,11 @@
         color: var(--ds-text-inverse, #ffffff);
 
         .task-icon {
-          margin-bottom: 4px;
-
+          margin-bottom: 6px;
           color: var(--ds-text-inverse, #ffffff);
+        }
+        .checklist-icon {
+          margin-bottom: 0;
         }
       }
     }
@@ -78,7 +80,7 @@
       }
 
       .task-icon {
-        margin-bottom: 4px;
+        margin-bottom: 6px;
       }
 
       &.overdue {
@@ -133,7 +135,7 @@
   }
 
   .task-icon-count {
-    margin-top: 2px;
+    // margin-top: 2px;
     font-size: 12px;
     margin-left: 2px;
   }

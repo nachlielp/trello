@@ -79,7 +79,6 @@ export function DateBadge({ task, editTask }) {
                 <label className="pyello-icon icon-checkbox-unchecked task-icon hover-icon"></label>
               </>
             )}
-
             <span className="task-icon-count">{dateLabel}</span>
           </span>
         </Tooltip>
