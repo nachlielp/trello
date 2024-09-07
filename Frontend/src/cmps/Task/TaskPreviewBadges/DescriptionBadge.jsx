@@ -9,6 +9,7 @@ export function DescriptionBadge({ desc }) {
       title="This card has a description"
       key="description"
       arrow={false}
+      overlayInnerStyle={utilService.tooltipOuterStyle()}
     >
       <span className="task-icon-wrapper">
         <ReactSVG

@@ -38,6 +38,7 @@ export function UserAvatar({
       placement="bottom"
       title={!!!offTitle && `${member?.fullName} `}
       arrow={false}
+      overlayInnerStyle={utilService.tooltipOuterStyle()}
     >
       {member ? (
         member?.imgUrl ? (

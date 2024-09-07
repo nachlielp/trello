@@ -35,6 +35,7 @@ export function DateBadge({ task, editTask }) {
           title={dueTooltip}
           key="dates"
           arrow={false}
+          overlayInnerStyle={utilService.tooltipOuterStyle()}
         >
           <span
             className={`task-icon-wrapper dates ${

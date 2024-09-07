@@ -269,7 +269,12 @@ function ManageAttachmentsPopoverContent({
 
 const ClearLinkIcon = ({ display, onClick }) => {
   return (
-    <Tooltip title="Clear link" arrow={false} placement="bottom">
+    <Tooltip
+      title="Clear link"
+      arrow={false}
+      placement="bottom"
+      overlayInnerStyle={utilService.tooltipOuterStyle()}
+    >
       <div
         className="close-icon-wrapper"
         style={{

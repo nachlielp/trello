@@ -1,6 +1,6 @@
 import { Tooltip } from "antd";
 import { ReactSVG } from "react-svg";
-
+import { utilService } from "../../../services/util.service";
 export function AttachmentsBadge({ numOfAttachments = 0 }) {
   return numOfAttachments > 0 ? (
     <Tooltip
@@ -8,6 +8,7 @@ export function AttachmentsBadge({ numOfAttachments = 0 }) {
       title="Attachments"
       key="attachments"
       arrow={false}
+      overlayInnerStyle={utilService.tooltipOuterStyle()}
     >
       <span className="task-icon-wrapper">
         <ReactSVG

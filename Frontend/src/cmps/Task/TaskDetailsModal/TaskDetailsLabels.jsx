@@ -31,13 +31,7 @@ export function TaskDetailsLabels({ task, editTask, labelActions }) {
                   }`}
                   arrow={false}
                   overlayClassName="label-details-tooltip"
-                  overlayInnerStyle={{
-                    padding: "1px 3px",
-                    minHeight: "16px",
-                    fontSize: "10px",
-                    borderRadius: "3px",
-                    backgroundColor: "#42546f",
-                  }}
+                  overlayInnerStyle={utilService.tooltipOuterStyle()}
                   key={labelInfo.id}
                 >
                   <div

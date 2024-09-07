@@ -303,6 +303,7 @@ function LabelsOption({ taskLabel, selectLabel, editColor }) {
           taskLabel.label ? taskLabel.label : "none"
         }`}
         arrow={false}
+        overlayInnerStyle={utilService.tooltipOuterStyle()}
       >
         <div
           className="label-block"

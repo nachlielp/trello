@@ -284,6 +284,7 @@ export const utilService = {
   getDateLabel,
   taskDueStatus,
   datePreviewTitle,
+  tooltipOuterStyle,
 };
 
 export const BOARDS_KEY = "boards";
@@ -903,4 +904,14 @@ function datePreviewTitle(start, due) {
     return `${getDateLabel(start)} - ${getDateLabel(due)}`;
   if (isNotEmpty(start)) return `Start: ${getDateLabel(start)}`;
   if (isNotEmpty(due)) return `Due: ${getDateLabel(due)}`;
+}
+
+function tooltipOuterStyle() {
+  return {
+    padding: "1px 3px",
+    minHeight: "16px",
+    fontSize: "10px",
+    borderRadius: "3px",
+    backgroundColor: "#42546f",
+  };
 }

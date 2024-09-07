@@ -18,13 +18,7 @@ export function TaskPreviewLabel({ label }) {
         label.name ? `"${label.name}"` : "none"
       }`}
       arrow={false}
-      overlayInnerStyle={{
-        padding: "1px 3px",
-        minHeight: "16px",
-        fontSize: "10px",
-        borderRadius: "3px",
-        backgroundColor: "#42546f",
-      }}
+      overlayInnerStyle={utilService.tooltipOuterStyle()}
     >
       <button
         className={`card-label ${isExpanded ? "expanded" : "minimized"}`}

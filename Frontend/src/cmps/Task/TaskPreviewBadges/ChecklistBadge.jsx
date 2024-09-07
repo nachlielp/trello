@@ -21,6 +21,7 @@ export function ChecklistBadge({ checklists }) {
       title="Checklist items"
       key="checklist"
       arrow={false}
+      overlayInnerStyle={utilService.tooltipOuterStyle()}
     >
       <span
         className={`task-icon-wrapper checklist ${
