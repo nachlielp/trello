@@ -1,9 +1,9 @@
-import { httpService } from "./http.service";
+import { httpService } from "./http.service"
 
 export const workspaceService = {
-  getAllBoards,
-};
+    getAllBoards,
+}
 
 async function getAllBoards() {
-  return httpService.get("boards");
+    return httpService.get("boards")
 }

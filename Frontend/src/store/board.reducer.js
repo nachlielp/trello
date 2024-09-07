@@ -1,205 +1,215 @@
-export const SET_MEMBERS = "SET_MEMBERS";
-export const SET_BOARD = "SET_BOARD";
-export const EDIT_LABEL = "EDIT_LABEL";
-export const VIEW_BOARD = "VIEW_BOARD";
+export const SET_MEMBERS = "SET_MEMBERS"
+export const SET_BOARD = "SET_BOARD"
+export const EDIT_LABEL = "EDIT_LABEL"
+export const VIEW_BOARD = "VIEW_BOARD"
 
-export const SET_IS_EXPANDED = "SET_IS_EXPANDED";
+export const SET_IS_EXPANDED = "SET_IS_EXPANDED"
 
-export const ADD_TASK = "ADD_TASK";
-export const EDIT_TASK = "EDIT_TASK";
-export const ADD_LABEL = "ADD_LABEL";
-export const DELETE_LABEL = "DELETE_LABEL";
+export const ADD_TASK = "ADD_TASK"
+export const EDIT_TASK = "EDIT_TASK"
+export const ADD_LABEL = "ADD_LABEL"
+export const DELETE_LABEL = "DELETE_LABEL"
 
-export const ADD_GROUP = "ADD_GROUP";
-export const EDIT_GROUP = "EDIT_GROUP";
-export const COPY_GROUP = "COPY_GROUP";
-export const MOVE_ALL_CARDS = "MOVE_ALL_CARDS";
-export const ARCHIVE_ALL_CARDS = "ARCHIVE_ALL_CARDS";
-export const SORT_GROUP = "SORT_GROUP";
+export const ADD_GROUP = "ADD_GROUP"
+export const EDIT_GROUP = "EDIT_GROUP"
+export const COPY_GROUP = "COPY_GROUP"
+export const MOVE_ALL_CARDS = "MOVE_ALL_CARDS"
+export const ARCHIVE_ALL_CARDS = "ARCHIVE_ALL_CARDS"
+export const SORT_GROUP = "SORT_GROUP"
 
 const initialState = {
-  board: {},
-  isExpanded: true,
-};
+    board: {},
+    isExpanded: true,
+}
 
 export function boardReducer(state = initialState, action) {
-  var newState = state;
-  switch (action.type) {
-    case SET_BOARD:
-      newState = { ...state, board: action.board };
-      break;
-    case SET_IS_EXPANDED:
-      newState = { ...state, isExpanded: action.isExpanded };
-      break;
+    var newState = state
+    switch (action.type) {
+        case SET_BOARD:
+            newState = { ...state, board: action.board }
+            break
+        case SET_IS_EXPANDED:
+            newState = { ...state, isExpanded: action.isExpanded }
+            break
 
-    case ADD_GROUP:
-      newState = {
-        ...state,
-        board: {
-          ...state.board,
-          groups: [...state.board.groups, action.group],
-          updatedAt: new Date().getTime(),
-        },
-      };
-      break;
-
-    case EDIT_GROUP:
-      newState = {
-        ...state,
-        board: {
-          ...state.board,
-          groups: state.board.groups.map((group) =>
-            group.id === action.group.id ? action.group : group
-          ),
-          updatedAt: new Date().getTime(),
-        },
-      };
-      break;
-
-    case COPY_GROUP:
-      newState = {
-        ...state,
-        board: {
-          ...state.board,
-          groups: action.groups,
-          updatedAt: new Date().getTime(),
-        },
-      };
-      break;
-
-    case MOVE_ALL_CARDS:
-      newState = {
-        ...state,
-        board: {
-          ...state.board,
-          groups: state.board.groups.map((g) => {
-            if (g.id === action.sourceGroup.id) {
-              return { ...g, tasks: action.sourceGroup.tasks };
+        case ADD_GROUP:
+            newState = {
+                ...state,
+                board: {
+                    ...state.board,
+                    groups: [...state.board.groups, action.group],
+                    updatedAt: new Date().getTime(),
+                },
             }
-            if (g.id === action.targetGroup.id) {
-              return { ...g, tasks: [...action.targetGroup.tasks] };
+            break
+
+        case EDIT_GROUP:
+            newState = {
+                ...state,
+                board: {
+                    ...state.board,
+                    groups: state.board.groups.map((group) =>
+                        group.id === action.group.id ? action.group : group,
+                    ),
+                    updatedAt: new Date().getTime(),
+                },
             }
-            return g;
-          }),
-          updatedAt: new Date().getTime(),
-        },
-      };
-      break;
+            break
 
-    case ARCHIVE_ALL_CARDS:
-      newState = {
-        ...state,
-        board: {
-          ...state.board,
-          groups: state.board.groups.map((g) =>
-            g.id === action.group.id ? action.group : g
-          ),
-          updatedAt: new Date().getTime(),
-        },
-      };
-      break;
+        case COPY_GROUP:
+            newState = {
+                ...state,
+                board: {
+                    ...state.board,
+                    groups: action.groups,
+                    updatedAt: new Date().getTime(),
+                },
+            }
+            break
 
-    case ADD_TASK:
-      newState = {
-        ...state,
-        board: {
-          ...state.board,
-          groups: state.board.groups.map((group) =>
-            group.id === action.task.idGroup
-              ? { ...group, tasks: [...(group.tasks || []), action.task] }
-              : group
-          ),
-          updatedAt: new Date().getTime(),
-        },
-      };
-      break;
+        case MOVE_ALL_CARDS:
+            newState = {
+                ...state,
+                board: {
+                    ...state.board,
+                    groups: state.board.groups.map((g) => {
+                        if (g.id === action.sourceGroup.id) {
+                            return { ...g, tasks: action.sourceGroup.tasks }
+                        }
+                        if (g.id === action.targetGroup.id) {
+                            return {
+                                ...g,
+                                tasks: [...action.targetGroup.tasks],
+                            }
+                        }
+                        return g
+                    }),
+                    updatedAt: new Date().getTime(),
+                },
+            }
+            break
 
-    case EDIT_TASK:
-      newState = {
-        ...state,
-        board: {
-          ...state.board,
-          groups: state.board.groups.map((group) =>
-            group.id === action.task.idGroup
-              ? {
-                  ...group,
-                  tasks: group.tasks.map((t) =>
-                    t.id === action.task.id ? action.task : t
-                  ),
-                  updatedAt: new Date().toISOString(),
-                }
-              : group
-          ),
-          updatedAt: new Date().getTime(),
-        },
-      };
-      break;
+        case ARCHIVE_ALL_CARDS:
+            newState = {
+                ...state,
+                board: {
+                    ...state.board,
+                    groups: state.board.groups.map((g) =>
+                        g.id === action.group.id ? action.group : g,
+                    ),
+                    updatedAt: new Date().getTime(),
+                },
+            }
+            break
 
-    case EDIT_LABEL:
-      newState = {
-        ...state,
-        board: {
-          ...state.board,
-          labels: state.board.labels.map((l) =>
-            l.id === action.label.id ? action.label : l
-          ),
-          updatedAt: new Date().getTime(),
-        },
-      };
-      break;
+        case ADD_TASK:
+            newState = {
+                ...state,
+                board: {
+                    ...state.board,
+                    groups: state.board.groups.map((group) =>
+                        group.id === action.task.idGroup
+                            ? {
+                                  ...group,
+                                  tasks: [...(group.tasks || []), action.task],
+                              }
+                            : group,
+                    ),
+                    updatedAt: new Date().getTime(),
+                },
+            }
+            break
 
-    case ADD_LABEL:
-      newState = {
-        ...state,
-        board: {
-          ...state.board,
-          labels: [...state.board.labels, action.label],
-        },
-      };
-      break;
+        case EDIT_TASK:
+            newState = {
+                ...state,
+                board: {
+                    ...state.board,
+                    groups: state.board.groups.map((group) =>
+                        group.id === action.task.idGroup
+                            ? {
+                                  ...group,
+                                  tasks: group.tasks.map((t) =>
+                                      t.id === action.task.id ? action.task : t,
+                                  ),
+                                  updatedAt: new Date().toISOString(),
+                              }
+                            : group,
+                    ),
+                    updatedAt: new Date().getTime(),
+                },
+            }
+            break
 
-    case SORT_GROUP:
-      newState = {
-        ...state,
-        board: {
-          ...state.board,
-          groups: state.board.groups.map((g) =>
-            g.id === action.group.id ? action.group : g
-          ),
-          updatedAt: new Date().getTime(),
-        },
-      };
-      break;
+        case EDIT_LABEL:
+            newState = {
+                ...state,
+                board: {
+                    ...state.board,
+                    labels: state.board.labels.map((l) =>
+                        l.id === action.label.id ? action.label : l,
+                    ),
+                    updatedAt: new Date().getTime(),
+                },
+            }
+            break
 
-    case VIEW_BOARD:
-      newState = {
-        ...state,
-        board: { ...state.board, viewedAt: Date.now() },
-      };
-      break;
+        case ADD_LABEL:
+            newState = {
+                ...state,
+                board: {
+                    ...state.board,
+                    labels: [...state.board.labels, action.label],
+                },
+            }
+            break
 
-    case DELETE_LABEL:
-      newState = {
-        ...state,
-        board: {
-          ...state.board,
-          labels: state.board.labels.filter((l) => l.id !== action.labelId),
-          groups: state.board.groups.map((g) => ({
-            ...g,
-            tasks: g.tasks.map((t) => ({
-              ...t,
-              idLabels: t.idLabels.filter((id) => id !== action.labelId),
-            })),
-          })),
-          updatedAt: new Date().getTime(),
-        },
-      };
-      break;
+        case SORT_GROUP:
+            newState = {
+                ...state,
+                board: {
+                    ...state.board,
+                    groups: state.board.groups.map((g) =>
+                        g.id === action.group.id ? action.group : g,
+                    ),
+                    updatedAt: new Date().getTime(),
+                },
+            }
+            break
 
-    default:
-      return state;
-  }
-  return newState;
+        case VIEW_BOARD:
+            newState = {
+                ...state,
+                board: { ...state.board, viewedAt: Date.now() },
+            }
+            break
+
+        case DELETE_LABEL:
+            newState = {
+                ...state,
+                board: {
+                    ...state.board,
+                    labels: state.board.labels.filter(
+                        (l) => l.id !== action.labelId,
+                    ),
+                    groups: state.board.groups.map((g) => ({
+                        ...g,
+                        tasks: g.tasks.map((t) => ({
+                            ...t,
+                            idLabels: t.idLabels.filter(
+                                (id) => id !== action.labelId,
+                            ),
+                        })),
+                    })),
+                    updatedAt: new Date().getTime(),
+                },
+            }
+            break
+
+        default:
+            return state
+    }
+    return newState
 }
 
 // unitTestReducer()

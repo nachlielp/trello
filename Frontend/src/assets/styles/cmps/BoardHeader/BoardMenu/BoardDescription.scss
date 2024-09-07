@@ -1,157 +1,167 @@
 .board-description {
-  .board-admins {
-    .admins-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 4px;
-      padding: 0 4px;
-      .pyello-icon {
-        font-size: 24px;
-        color: var(--ds-icon, #44546f);
-        margin-right: 12px;
-        margin-top: -2px;
-      }
-      h3 {
-        font-size: 16px;
-        font-weight: 600;
-        line-height: 20px;
-        color: var(--ds-text, #172b4d);
-        margin: 0;
-        padding: 8px 0;
-      }
-    }
-    .admins-main {
-      .admins-avatars {
-        display: flex;
-        margin-left: 10px;
-        margin-bottom: 14px;
-        .member {
-          &:not(:first-child) {
-            margin-left: -5px;
-          }
-        }
-      }
-      .admin-profile {
-        display: flex;
-        padding: 8px 0 8px 4px;
-        .info {
-          margin-left: 14px;
-          .fullname {
-            color: var(--ds-text, #172b4d);
-            margin: 0;
-            font-size: 16px;
-            line-height: 20px;
-            font-weight: 600;
-          }
-          .username {
-            margin: 0 0 8px;
-            color: var(--ds-text-subtle, #44546f);
-            font-size: 14px;
-            font-weight: 400;
-            line-height: 20px;
-          }
-          .bio {
-            margin: 0;
-            color: var(--ds-text-subtle, #44546f);
-            font-size: 14px;
-            font-weight: 400;
-            line-height: 20px;
-          }
-        }
-      }
-    }
-  }
-  .description {
-    margin-top: 8px;
-    &.disable * {
-      pointer-events: none;
-    }
-    .description-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 4px;
-      padding: 8px 0 8px 4px;
-      .pyello-icon {
-        font-size: 24px;
-        color: var(--ds-icon, #44546f);
-        margin-right: 12px;
-        margin-top: -2px;
-      }
-      h3 {
-        font-size: 16px;
-        font-weight: 600;
-        line-height: 20px;
-        color: var(--ds-text, #172b4d);
-        margin: 0;
-        padding: 8px 0;
-      }
-      .edit-btn {
-        margin-left: auto;
-        display: inline-flex;
-        padding: 6px 12px;
-        border-radius: 3px;
-        cursor: pointer;
-        border: none;
-        background-color: var(--ds-background-neutral, #091e420f);
-        color: var(--ds-text, #172b4d);
-        font-weight: 500;
-        transition-property: background-color, border-color, box-shadow;
-        transition-duration: 85ms;
-        transition-timing-function: ease;
-        line-height: 20px;
-        font-size: 14px;
-        &:hover {
-          background-color: var(--ds-background-neutral-hovered, #091e4224);
-        }
-      }
-    }
-    .description-main {
-      &.add-desc {
-        .description-area {
-          background-color: var(--ds-background-neutral, #091e420f);
-        }
-      }
-      .description-area {
-        background-color: inherit;
-        border: none;
-        color: var(--ds-text, #172b4d);
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 20px;
-      }
-      &.open {
-        .description-area {
-          background-color: var(--ds-background-input, white);
-          box-shadow: 0 0 0 1px inset var(--ds-border-input, #091e4224) !important;
-        }
-      }
-      .btns {
-        margin-top: 8px;
-        .btn {
-          cursor: pointer;
-          margin: 0 6px 0 0;
-          padding: 6px 12px;
-          border: none;
-          border-radius: 3px;
-          background-color: inherit;
-          color: var(--ds-text, #172b4d);
-          &:hover {
-            background-color: var(--ds-background-neutral-hovered, #091e4224);
-            color: var(--ds-text, #172b4d);
-          }
-          &.primal {
-            background-color: var(--ds-background-brand-bold, #0c66e4);
-            color: var(--ds-text-inverse, #ffffff);
-            &:hover {
-              background-color: var(
-                --ds-background-brand-bold-hovered,
-                #0055cc
-              );
-              color: var(--ds-text-inverse, #ffffff);
+    .board-admins {
+        .admins-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 4px;
+            padding: 0 4px;
+            .pyello-icon {
+                font-size: 24px;
+                color: var(--ds-icon, #44546f);
+                margin-right: 12px;
+                margin-top: -2px;
             }
-          }
+            h3 {
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 20px;
+                color: var(--ds-text, #172b4d);
+                margin: 0;
+                padding: 8px 0;
+            }
         }
-      }
+        .admins-main {
+            .admins-avatars {
+                display: flex;
+                margin-left: 10px;
+                margin-bottom: 14px;
+                .member {
+                    &:not(:first-child) {
+                        margin-left: -5px;
+                    }
+                }
+            }
+            .admin-profile {
+                display: flex;
+                padding: 8px 0 8px 4px;
+                .info {
+                    margin-left: 14px;
+                    .fullname {
+                        color: var(--ds-text, #172b4d);
+                        margin: 0;
+                        font-size: 16px;
+                        line-height: 20px;
+                        font-weight: 600;
+                    }
+                    .username {
+                        margin: 0 0 8px;
+                        color: var(--ds-text-subtle, #44546f);
+                        font-size: 14px;
+                        font-weight: 400;
+                        line-height: 20px;
+                    }
+                    .bio {
+                        margin: 0;
+                        color: var(--ds-text-subtle, #44546f);
+                        font-size: 14px;
+                        font-weight: 400;
+                        line-height: 20px;
+                    }
+                }
+            }
+        }
     }
-  }
+    .description {
+        margin-top: 8px;
+        &.disable * {
+            pointer-events: none;
+        }
+        .description-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 4px;
+            padding: 8px 0 8px 4px;
+            .pyello-icon {
+                font-size: 24px;
+                color: var(--ds-icon, #44546f);
+                margin-right: 12px;
+                margin-top: -2px;
+            }
+            h3 {
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 20px;
+                color: var(--ds-text, #172b4d);
+                margin: 0;
+                padding: 8px 0;
+            }
+            .edit-btn {
+                margin-left: auto;
+                display: inline-flex;
+                padding: 6px 12px;
+                border-radius: 3px;
+                cursor: pointer;
+                border: none;
+                background-color: var(--ds-background-neutral, #091e420f);
+                color: var(--ds-text, #172b4d);
+                font-weight: 500;
+                transition-property: background-color, border-color, box-shadow;
+                transition-duration: 85ms;
+                transition-timing-function: ease;
+                line-height: 20px;
+                font-size: 14px;
+                &:hover {
+                    background-color: var(
+                        --ds-background-neutral-hovered,
+                        #091e4224
+                    );
+                }
+            }
+        }
+        .description-main {
+            &.add-desc {
+                .description-area {
+                    background-color: var(--ds-background-neutral, #091e420f);
+                }
+            }
+            .description-area {
+                background-color: inherit;
+                border: none;
+                color: var(--ds-text, #172b4d);
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 20px;
+            }
+            &.open {
+                .description-area {
+                    background-color: var(--ds-background-input, white);
+                    box-shadow: 0 0 0 1px inset
+                        var(--ds-border-input, #091e4224) !important;
+                }
+            }
+            .btns {
+                margin-top: 8px;
+                .btn {
+                    cursor: pointer;
+                    margin: 0 6px 0 0;
+                    padding: 6px 12px;
+                    border: none;
+                    border-radius: 3px;
+                    background-color: inherit;
+                    color: var(--ds-text, #172b4d);
+                    &:hover {
+                        background-color: var(
+                            --ds-background-neutral-hovered,
+                            #091e4224
+                        );
+                        color: var(--ds-text, #172b4d);
+                    }
+                    &.primal {
+                        background-color: var(
+                            --ds-background-brand-bold,
+                            #0c66e4
+                        );
+                        color: var(--ds-text-inverse, #ffffff);
+                        &:hover {
+                            background-color: var(
+                                --ds-background-brand-bold-hovered,
+                                #0055cc
+                            );
+                            color: var(--ds-text-inverse, #ffffff);
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

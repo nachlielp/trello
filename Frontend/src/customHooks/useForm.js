@@ -7,20 +7,18 @@ export const useForm = (initialState) => {
         let { value, name: field, type, checked } = target
         // value = (type === 'number') ? +value : value
         switch (type) {
-            case 'number':
-            case 'range':
+            case "number":
+            case "range":
                 value = +value
                 break
-            case 'checkbox':
+            case "checkbox":
                 value = checked
 
-            default: break
+            default:
+                break
         }
         setFields((prevFields) => ({ ...prevFields, [field]: value }))
     }
 
-
     return [fields, setFields, handleChange]
-
-
 }

@@ -1,156 +1,156 @@
 .task-preview-edit-modal-anchor {
-  position: absolute;
-  top: 0;
-  right: 0;
-  cursor: pointer;
-  // transform: translate(-50%) !important;
-  animation: none !important;
-  opacity: 1 !important;
-
-  .preview-anchor-btn {
-    background: none;
-    border-radius: 50%;
-    border: none;
+    position: absolute;
+    top: 0;
+    right: 0;
     cursor: pointer;
-    margin: 2px 2px 8px 0;
-    width: 32px;
-    height: 32px;
-    background: var(--ds-surface, #f1f2f4);
+    // transform: translate(-50%) !important;
+    animation: none !important;
+    opacity: 1 !important;
 
-    &:hover {
-      background-color: var(--ds-surface-raised-hovered, #f1f2f4);
+    .preview-anchor-btn {
+        background: none;
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        margin: 2px 2px 8px 0;
+        width: 32px;
+        height: 32px;
+        background: var(--ds-surface, #f1f2f4);
+
+        &:hover {
+            background-color: var(--ds-surface-raised-hovered, #f1f2f4);
+        }
+
+        .pyello-icon {
+            font-size: 16px;
+            font-weight: 100;
+            color: var(--ds-text);
+        }
     }
+    .edit-button {
+        background: none;
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        margin: 2px 2px 8px 0;
+        width: 30px;
+        height: 30px;
 
-    .pyello-icon {
-      font-size: 16px;
-      font-weight: 100;
-      color: var(--ds-text);
+        color: var(--ds-text-primary);
+
+        background: var(--ds-surface, #f1f2f4);
+
+        &:hover {
+            background-color: var(--ds-surface-raised-hovered, #f1f2f4);
+        }
+
+        span {
+            font-size: 16px;
+        }
     }
-  }
-  .edit-button {
-    background: none;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    margin: 2px 2px 8px 0;
-    width: 30px;
-    height: 30px;
-
-    color: var(--ds-text-primary);
-
-    background: var(--ds-surface, #f1f2f4);
-
-    &:hover {
-      background-color: var(--ds-surface-raised-hovered, #f1f2f4);
-    }
-
-    span {
-      font-size: 16px;
-    }
-  }
 }
 
 .task-preview-edit-modal {
-  position: absolute;
-  top: 0;
-  left: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
 
-  .ant-modal-content {
-    padding: 0;
-    background: var(--ds-surface-overlay);
-  }
+    .ant-modal-content {
+        padding: 0;
+        background: var(--ds-surface-overlay);
+    }
 }
 
 .task-preview-edit-modal-content {
-  color: var(--ds-text);
-  border-radius: 4px;
-  padding: 8px 12px 4px 12px;
-
-  .ant-input-outlined {
-    padding: 0;
-    border: none;
-  }
-
-  .ant-input-outlined:focus {
-    box-shadow: none;
-  }
-
-  .task-name-title {
-    margin-top: 2px;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 16px;
     color: var(--ds-text);
-    background: var(--ds-surface-overlay);
-  }
-  .task-name-input {
-    margin-top: 2px;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 16px;
-    color: var(--ds-text);
-    background: var(--ds-surface-overlay);
-  }
+    border-radius: 4px;
+    padding: 8px 12px 4px 12px;
 
-  .preview-labels {
-    display: flex;
-    gap: 4px;
-    flex-wrap: wrap;
-    margin-bottom: 4px;
-  }
+    .ant-input-outlined {
+        padding: 0;
+        border: none;
+    }
+
+    .ant-input-outlined:focus {
+        box-shadow: none;
+    }
+
+    .task-name-title {
+        margin-top: 2px;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 16px;
+        color: var(--ds-text);
+        background: var(--ds-surface-overlay);
+    }
+    .task-name-input {
+        margin-top: 2px;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 16px;
+        color: var(--ds-text);
+        background: var(--ds-surface-overlay);
+    }
+
+    .preview-labels {
+        display: flex;
+        gap: 4px;
+        flex-wrap: wrap;
+        margin-bottom: 4px;
+    }
 }
 
 .floating-button.save-button {
-  position: absolute;
-  bottom: -40px; // Adjust as needed to position the button under the modal
-  left: 32px;
-  transform: translateX(-50%);
-  background-color: #0b65e4;
-  color: var(--ds-surface-overlay);
-  border: none;
-  border-radius: 4px;
-  padding: 8px 16px;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 16px;
+    position: absolute;
+    bottom: -40px; // Adjust as needed to position the button under the modal
+    left: 32px;
+    transform: translateX(-50%);
+    background-color: #0b65e4;
+    color: var(--ds-surface-overlay);
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 16px;
 
-  &:hover {
-    background-color: #0055cc;
-  }
+    &:hover {
+        background-color: #0055cc;
+    }
 }
 
 #task-preview-edit-modal-popup {
-  background-color: transparent;
-  box-shadow: none;
+    background-color: transparent;
+    box-shadow: none;
 }
 
 .task-preview-floating-buttons {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
-
-  .floating-button {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    border-radius: 3px;
-    border: none;
-    background-color: var(--ds-surface-raised, #ffffff);
-    color: var(--ds-text-primary);
-    padding: 6px 12px 6px 10px;
-    white-space: nowrap;
-    font-size: 14;
-    color: var(--ds-text);
-    cursor: pointer;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
 
-    .injected-svg {
-      margin-top: 2px;
-      width: 16px;
-      height: 16px;
+    .floating-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border-radius: 3px;
+        border: none;
+        background-color: var(--ds-surface-raised, #ffffff);
+        color: var(--ds-text-primary);
+        padding: 6px 12px 6px 10px;
+        white-space: nowrap;
+        font-size: 14;
+        color: var(--ds-text);
+        cursor: pointer;
+
+        .injected-svg {
+            margin-top: 2px;
+            width: 16px;
+            height: 16px;
+        }
     }
-  }
 }

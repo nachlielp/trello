@@ -1,12 +1,12 @@
-import { storageService } from './async-storage.service'
+import { storageService } from "./async-storage.service"
 
-const STORAGE_KEY = 'members'
+const STORAGE_KEY = "members"
 
 export const memberService = {
     query,
     getById,
     save,
-    remove
+    remove,
 }
 
 function query() {

@@ -1,25 +1,25 @@
 import { Popover, Input } from "antd"
-import { useState, useEffect } from "react";
-import { ManageTaskPopoverHeader } from "../ManageTaskPopovers/ManageTaskPopoverHeader";
+import { useState, useEffect } from "react"
+import { ManageTaskPopoverHeader } from "../ManageTaskPopovers/ManageTaskPopoverHeader"
 
 export function TNAME({ anchorEl, editTask, task }) {
-    const [isOpen, setIsOpen] = useState(false);
-    const [backToList, setBackToList] = useState(null);
+    const [isOpen, setIsOpen] = useState(false)
+    const [backToList, setBackToList] = useState(null)
 
-    const cardTitle = "ADD TITLE";
+    const cardTitle = "ADD TITLE"
 
     function onClose() {
-        setIsOpen(false);
+        setIsOpen(false)
     }
 
     function onNextPage(_) {
         //
-        setBackToList(() => onBackToList);
+        setBackToList(() => onBackToList)
     }
 
     function onBackToList() {
         //
-        setBackToList(null);
+        setBackToList(null)
     }
 
     return (
@@ -28,17 +28,21 @@ export function TNAME({ anchorEl, editTask, task }) {
             trigger="click"
             placement="bottomRight"
             open={isOpen}
-            close={() => { }}
+            close={() => {}}
             onOpenChange={setIsOpen}
             arrow={false}
             content={
                 <section className="manage-labels-content">
-                    <ManageTaskPopoverHeader title="cardTitle" close={onClose} back={backToList} />
+                    <ManageTaskPopoverHeader
+                        title="cardTitle"
+                        close={onClose}
+                        back={backToList}
+                    />
                     {/* ADD BODY */}
                 </section>
             }
         >
             {anchorEl}
         </Popover>
-    );
+    )
 }

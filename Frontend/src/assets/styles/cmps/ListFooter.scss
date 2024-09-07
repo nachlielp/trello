@@ -1,55 +1,55 @@
 .list-footer {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  justify-content: space-between;
-  align-items: center;
-  margin: 6px;
-  margin-top: 8px;
-
-  .add-card-btn {
-    width: 100%;
-    border: none;
-    border-radius: 8px;
-    padding: 8px;
-
     display: flex;
-    /* Ensure flexbox is used */
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-between;
     align-items: center;
-    justify-content: start;
-    color: var(--accent-text, var(--ds-text-subtle, #34546f));
-    background-color: var(--tr-background-list);
-    font-weight: 500;
+    margin: 6px;
+    margin-top: 8px;
 
-    &:hover {
-      background-color: var(
-        --accent-background-hovered,
-        var(--ds-background-neutral-hovered, #091e4224)
-      );
-      //This is effecting light
-      // color: var(--accent-text-bolder, var(--ds-text, #172b4d));
-    }
-  }
+    .add-card-btn {
+        width: 100%;
+        border: none;
+        border-radius: 8px;
+        padding: 8px;
 
-  .use-template-btn {
-    border-radius: 8px;
-    border: none;
-    background-color: var(--tr-background-list);
-    color: var(--ds-text-subtle);
+        display: flex;
+        /* Ensure flexbox is used */
+        align-items: center;
+        justify-content: start;
+        color: var(--accent-text, var(--ds-text-subtle, #34546f));
+        background-color: var(--tr-background-list);
+        font-weight: 500;
 
-    span {
-      font-size: 14px;
-    }
-
-    &:hover {
-      background-color: var(--ds-background-neutral-hovered, #091e4224);
-      color: var(--ds-text);
+        &:hover {
+            background-color: var(
+                --accent-background-hovered,
+                var(--ds-background-neutral-hovered, #091e4224)
+            );
+            //This is effecting light
+            // color: var(--accent-text-bolder, var(--ds-text, #172b4d));
+        }
     }
 
-    .injected-svg {
-      margin: 7px 3px 3px 3px;
-      width: 16px;
-      height: 16px;
+    .use-template-btn {
+        border-radius: 8px;
+        border: none;
+        background-color: var(--tr-background-list);
+        color: var(--ds-text-subtle);
+
+        span {
+            font-size: 14px;
+        }
+
+        &:hover {
+            background-color: var(--ds-background-neutral-hovered, #091e4224);
+            color: var(--ds-text);
+        }
+
+        .injected-svg {
+            margin: 7px 3px 3px 3px;
+            width: 16px;
+            height: 16px;
+        }
     }
-  }
 }

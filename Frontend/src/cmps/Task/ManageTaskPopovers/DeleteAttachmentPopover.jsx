@@ -1,74 +1,77 @@
-import React, { useState } from "react";
-import Popup from "@atlaskit/popup";
-import { ManageTaskPopoverHeader } from "./ManageTaskPopoverHeader";
+import React, { useState } from "react"
+import Popup from "@atlaskit/popup"
+import { ManageTaskPopoverHeader } from "./ManageTaskPopoverHeader"
 
 export function DeleteAttachmentPopover({
-  anchorEl,
-  popoverTitle,
-  onDelete,
-  onClose,
-  isDelete,
+    anchorEl,
+    popoverTitle,
+    onDelete,
+    onClose,
+    isDelete,
 }) {
-  const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false)
 
-  const handleOpenChange = (newOpen) => {
-    setIsOpen(newOpen);
-  };
+    const handleOpenChange = (newOpen) => {
+        setIsOpen(newOpen)
+    }
 
-  const handleDelete = () => {
-    onDelete();
-    setIsOpen(false);
-  };
+    const handleDelete = () => {
+        onDelete()
+        setIsOpen(false)
+    }
 
-  const content = (
-    <div
-      className="delete-attachment-popover"
-      onClick={(e) => e.stopPropagation()}
-    >
-      <ManageTaskPopoverHeader
-        title={popoverTitle}
-        close={() => setIsOpen(false)}
-      />
-      <section className="delete-label-page">
-        <p>
-          {isDelete
-            ? "Deleting an attachment is permanent. There is no undo."
-            : "Remove this attachment? There is no undo."}
-        </p>
-        <button className="delete-attachment-button" onClick={handleDelete}>
-          Delete
-        </button>
-      </section>
-    </div>
-  );
+    const content = (
+        <div
+            className="delete-attachment-popover"
+            onClick={(e) => e.stopPropagation()}
+        >
+            <ManageTaskPopoverHeader
+                title={popoverTitle}
+                close={() => setIsOpen(false)}
+            />
+            <section className="delete-label-page">
+                <p>
+                    {isDelete
+                        ? "Deleting an attachment is permanent. There is no undo."
+                        : "Remove this attachment? There is no undo."}
+                </p>
+                <button
+                    className="delete-attachment-button"
+                    onClick={handleDelete}
+                >
+                    Delete
+                </button>
+            </section>
+        </div>
+    )
 
-  const onTriggerClick = () => {
-    setIsOpen((prev) => !prev);
-  };
+    const onTriggerClick = () => {
+        setIsOpen((prev) => !prev)
+    }
 
-  const trigger = (triggerProps) => {
+    const trigger = (triggerProps) => {
+        return (
+            <label
+                {...triggerProps}
+                appearance="primary"
+                // isSelected={isOpen}
+                onClick={onTriggerClick}
+            >
+                {anchorEl}
+            </label>
+        )
+    }
+
     return (
-      <label
-        {...triggerProps}
-        appearance="primary"
-        // isSelected={isOpen}
-        onClick={onTriggerClick}
-      >
-        {anchorEl}
-      </label>
-    );
-  };
-
-  return (
-    <Popup
-      id="delete-attachment-popover-popup"
-      isOpen={isOpen}
-      onClose={() => setIsOpen(false)}
-      placement="bottom-start"
-      fallbackPlacements={["top-start", "auto"]}
-      content={() => content}
-      trigger={trigger}
-      zIndex={10000}
-    />
-  );
+        <Popup
+            id="delete-attachment-popover-popup"
+            isOpen={isOpen}
+            onClose={() => setIsOpen(false)}
+            placement="bottom-start"
+            fallbackPlacements={["top-start", "auto"]}
+            content={() => content}
+            trigger={trigger}
+            zIndex={10000}
+        />
+    )
 }

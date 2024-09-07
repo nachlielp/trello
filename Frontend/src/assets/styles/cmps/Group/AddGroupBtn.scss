@@ -1,95 +1,101 @@
 .add-group-btn {
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  width: 246px;
-  height: 40px;
-  border-radius: 8px;
-  border: none;
-  background-color: rgba(255, 255, 255, 0.24);
-  cursor: pointer;
-  margin-top: 10px;
-  margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    width: 246px;
+    height: 40px;
+    border-radius: 8px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.24);
+    cursor: pointer;
+    margin-top: 10px;
+    margin: 10px 0;
 }
 
 .add-group-btn-text {
-  color: #fff;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 22px;
-  opacity: 1;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 22px;
+    opacity: 1;
 }
 
 .add-group-in-board-card .ant-card-body {
-  padding: 0;
-  border: none !important;
+    padding: 0;
+    border: none !important;
 }
 
 .add-group-in-board-card {
-  width: 248px;
-  // height: 86px;
-  padding: 0;
-  border-radius: 8px;
-  border: none;
-  background-color: var(--tr-background-list);
-  margin: 10px 0;
-  padding-bottom: 10px;
-  .ant-input {
-    border-color: transparent;
-    background-color: var(--ds-surface-raised, #ffffff);
-    box-shadow: var(
-      --ds-shadow-raised,
-      0px 1px 1px #091e4240,
-      0px 0px 1px #091e424f
-    );
-    color: var(--ds-text, #172b4d);
-    &::placeholder {
-      color: var(--ds-text-subtlest, #626f86);
-    }
-  }
-
-  .footer-actions {
-    display: flex;
-    justify-content: flex-start;
-    gap: 6px;
-    margin-left: 8px;
-    .add-card-btn {
-      padding: 6px 12px;
-      border: none;
-      background-color: var(--ds-background-brand-bold, #0c66e4);
-      color: var(--ds-text-inverse, #ffffff);
-      font-size: 14px;
-      font-weight: 600;
-      border-radius: 4px;
-
-      &:hover {
-        background-color: var(--ds-background-brand-bold-hovered, #0055cc);
-      }
-    }
-
-    .close-add-card-btn {
-      cursor: pointer;
-      border: none;
-      border-radius: 4px;
-      background-color: transparent;
-      color: var(--ds-text, #172b4d);
-      font-size: 16px;
-
-      &:hover {
-        border: none;
-        background-color: var(--ds-background-neutral-hovered, #091e4224);
-        box-shadow: none;
+    width: 248px;
+    // height: 86px;
+    padding: 0;
+    border-radius: 8px;
+    border: none;
+    background-color: var(--tr-background-list);
+    margin: 10px 0;
+    padding-bottom: 10px;
+    .ant-input {
+        border-color: transparent;
+        background-color: var(--ds-surface-raised, #ffffff);
+        box-shadow: var(
+            --ds-shadow-raised,
+            0px 1px 1px #091e4240,
+            0px 0px 1px #091e424f
+        );
         color: var(--ds-text, #172b4d);
-        text-decoration: none;
-      }
+        &::placeholder {
+            color: var(--ds-text-subtlest, #626f86);
+        }
     }
-  }
+
+    .footer-actions {
+        display: flex;
+        justify-content: flex-start;
+        gap: 6px;
+        margin-left: 8px;
+        .add-card-btn {
+            padding: 6px 12px;
+            border: none;
+            background-color: var(--ds-background-brand-bold, #0c66e4);
+            color: var(--ds-text-inverse, #ffffff);
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 4px;
+
+            &:hover {
+                background-color: var(
+                    --ds-background-brand-bold-hovered,
+                    #0055cc
+                );
+            }
+        }
+
+        .close-add-card-btn {
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            background-color: transparent;
+            color: var(--ds-text, #172b4d);
+            font-size: 16px;
+
+            &:hover {
+                border: none;
+                background-color: var(
+                    --ds-background-neutral-hovered,
+                    #091e4224
+                );
+                box-shadow: none;
+                color: var(--ds-text, #172b4d);
+                text-decoration: none;
+            }
+        }
+    }
 }
 
 .add-group-input {
-  margin: 8px;
-  width: 232px;
-  padding: 6px 12px;
-  border-radius: 8px;
-  border: 1px solid #d9d9d9;
+    margin: 8px;
+    width: 232px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid #d9d9d9;
 }

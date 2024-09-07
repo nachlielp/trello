@@ -1,86 +1,89 @@
 .task-details-dates {
-  display: flex;
-  flex-direction: column;
-
-  .task-details-dates-main {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
 
-    .due-checkbox {
-      width: 20px;
-      margin-right: 8px;
+    .task-details-dates-main {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
 
-      .ant-checkbox {
-        .ant-checkbox-inner {
-          border: 1px solid #bec4ce;
-          border-radius: 2px;
+        .due-checkbox {
+            width: 20px;
+            margin-right: 8px;
+
+            .ant-checkbox {
+                .ant-checkbox-inner {
+                    border: 1px solid #bec4ce;
+                    border-radius: 2px;
+                }
+            }
+
+            .ant-checkbox-checked {
+                .ant-checkbox-inner {
+                    border: 1px solid #2f77ff;
+                    border-radius: 2px;
+                }
+            }
         }
-      }
 
-      .ant-checkbox-checked {
-        .ant-checkbox-inner {
-          border: 1px solid #2f77ff;
-          border-radius: 2px;
+        .dates-info {
+            display: flex;
+            align-items: center;
+            height: 32px;
+            background-color: var(--ds-background-neutral, #091e420f);
+            box-shadow: none;
+            color: var(--ds-text, #172b4d);
+            padding: 6px 12px;
+            border-radius: 3px;
+            box-sizing: border-box;
+            align-items: center;
+            justify-content: center;
+
+            &:hover {
+                background-color: var(
+                    --ds-background-neutral-hovered,
+                    #091e4224
+                );
+            }
+
+            .date-label {
+                font-size: 14px;
+                line-height: 20px;
+                color: var(--ds-text, #172b4d);
+                font-weight: 500;
+            }
+
+            .date-alert {
+                margin: auto 0 auto 8px;
+                padding: 0 4px;
+                border-radius: 2px;
+                font-size: 12px;
+                line-height: 16px;
+
+                &.completed {
+                    background-color: #1f845a;
+                    color: #ffffff;
+                }
+
+                &.overdue {
+                    background-color: #ffeceb;
+                    color: #ae2e24;
+                }
+
+                &.recently-overdue {
+                    background-color: #c9372c;
+                    color: #ffffff;
+                }
+
+                &.due-soon {
+                    background-color: #f5cd47;
+                    color: #172b4d;
+                }
+            }
+
+            .open-popover {
+                margin-left: 4px;
+            }
         }
-      }
     }
-
-    .dates-info {
-      display: flex;
-      align-items: center;
-      height: 32px;
-      background-color: var(--ds-background-neutral, #091e420f);
-      box-shadow: none;
-      color: var(--ds-text, #172b4d);
-      padding: 6px 12px;
-      border-radius: 3px;
-      box-sizing: border-box;
-      align-items: center;
-      justify-content: center;
-
-      &:hover {
-        background-color: var(--ds-background-neutral-hovered, #091e4224);
-      }
-
-      .date-label {
-        font-size: 14px;
-        line-height: 20px;
-        color: var(--ds-text, #172b4d);
-        font-weight: 500;
-      }
-
-      .date-alert {
-        margin: auto 0 auto 8px;
-        padding: 0 4px;
-        border-radius: 2px;
-        font-size: 12px;
-        line-height: 16px;
-
-        &.completed {
-          background-color: #1f845a;
-          color: #ffffff;
-        }
-
-        &.overdue {
-          background-color: #ffeceb;
-          color: #ae2e24;
-        }
-
-        &.recently-overdue {
-          background-color: #c9372c;
-          color: #ffffff;
-        }
-
-        &.due-soon {
-          background-color: #f5cd47;
-          color: #172b4d;
-        }
-      }
-
-      .open-popover {
-        margin-left: 4px;
-      }
-    }
-  }
 }

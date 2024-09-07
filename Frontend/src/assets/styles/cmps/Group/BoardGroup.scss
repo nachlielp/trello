@@ -4,74 +4,78 @@
 // }
 
 .board-groups:has(> .disable) * {
-  pointer-events: none;
+    pointer-events: none;
 }
 
 .board-group-container {
-  width: 272px;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  user-select: none;
-
-  &.dragging {
-    transform: rotate(5deg);
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    opacity: 0.5;
-  }
-
-  .board-group {
-    cursor: pointer;
+    width: 272px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    background-color: var(--tr-background-list);
-    margin-top: 10px;
-    border: none;
-    overflow: hidden;
-    max-height: 100%;
-    // padding-bottom: 4px;
+    height: 100%;
+    user-select: none;
 
-    &.draggOver {
-      outline: 2px solid #015ecc;
+    &.dragging {
+        transform: rotate(5deg);
+        transition:
+            transform 0.3s ease,
+            opacity 0.3s ease;
+        opacity: 0.5;
     }
 
-    .ant-card-body {
-      max-height: 100%;
-      display: flex;
-      flex-direction: column;
-
-      .board-group-main {
-        flex: 1;
-        min-height: 0;
+    .board-group {
+        cursor: pointer;
         display: flex;
         flex-direction: column;
         gap: 8px;
-        overflow-y: auto;
-        overflow-x: hidden;
-        padding: 2px 0 6px 0;
-        margin: 0 3px 0 3px;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-color: var(--ds-background-neutral-hovered, #091e4224)
-          var(--ds-background-neutral, #091e420f);
-        scrollbar-width: thin;
+        background-color: var(--tr-background-list);
+        margin-top: 10px;
+        border: none;
+        overflow: hidden;
+        max-height: 100%;
+        // padding-bottom: 4px;
 
-        .task-preview-container {
-          &.dragging {
-            transition: transform 0.3s ease, opacity 0.3s ease;
-            transform: rotate(5deg);
-            opacity: 0.5;
-          }
+        &.draggOver {
+            outline: 2px solid #015ecc;
         }
-      }
 
-      .group-footer-placeholder {
-        height: 6px;
-      }
+        .ant-card-body {
+            max-height: 100%;
+            display: flex;
+            flex-direction: column;
+
+            .board-group-main {
+                flex: 1;
+                min-height: 0;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                overflow-y: auto;
+                overflow-x: hidden;
+                padding: 2px 0 6px 0;
+                margin: 0 3px 0 3px;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-color: var(--ds-background-neutral-hovered, #091e4224)
+                    var(--ds-background-neutral, #091e420f);
+                scrollbar-width: thin;
+
+                .task-preview-container {
+                    &.dragging {
+                        transition:
+                            transform 0.3s ease,
+                            opacity 0.3s ease;
+                        transform: rotate(5deg);
+                        opacity: 0.5;
+                    }
+                }
+            }
+
+            .group-footer-placeholder {
+                height: 6px;
+            }
+        }
     }
-  }
 }
 
 .board-group.custom-card .ant-card-body {
-  padding: 2px !important;
+    padding: 2px !important;
 }

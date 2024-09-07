@@ -1,66 +1,66 @@
 .photos-bg {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(auto-fit, 96px);
-  row-gap: 8px;
-  column-gap: 4px;
-  margin-bottom: 20px;
-  .container {
-    position: relative;
-    width: 148px;
-    height: 96px;
-    border-radius: 8px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 50%;
-    display: flex;
-    align-items: end;
-    overflow: hidden;
-    cursor: pointer;
-    &.photos:last-child {
-      margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(auto-fit, 96px);
+    row-gap: 8px;
+    column-gap: 4px;
+    margin-bottom: 20px;
+    .container {
+        position: relative;
+        width: 148px;
+        height: 96px;
+        border-radius: 8px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: 50%;
+        display: flex;
+        align-items: end;
+        overflow: hidden;
+        cursor: pointer;
+        &.photos:last-child {
+            margin-bottom: 20px;
+        }
+        &:hover {
+            opacity: 0.8;
+            .title {
+                display: block;
+            }
+        }
+        .title {
+            display: none;
+            text-align: left;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 14px;
+            height: 20px;
+            padding: 2px 4px;
+            background: rgba(0, 0, 0, 0.5);
+            color: #ffffff;
+            width: 100%;
+            text-decoration: underline;
+        }
+        .emoji {
+            bottom: 16px;
+            font-size: 16px;
+            left: 10px;
+            position: absolute;
+        }
     }
-    &:hover {
-      opacity: 0.8;
-      .title {
-        display: block;
-      }
-    }
-    .title {
-      display: none;
-      text-align: left;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      font-size: 12px;
-      font-weight: 400;
-      line-height: 14px;
-      height: 20px;
-      padding: 2px 4px;
-      background: rgba(0, 0, 0, 0.5);
-      color: #ffffff;
-      width: 100%;
-      text-decoration: underline;
-    }
-    .emoji {
-      bottom: 16px;
-      font-size: 16px;
-      left: 10px;
-      position: absolute;
-    }
-  }
 }
 .colors-picker {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 8px;
-  .container {
-    width: 55px;
-    height: 57px;
-    border-radius: 8px;
-    cursor: pointer;
-    &:hover {
-      opacity: 0.7;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    .container {
+        width: 55px;
+        height: 57px;
+        border-radius: 8px;
+        cursor: pointer;
+        &:hover {
+            opacity: 0.7;
+        }
     }
-  }
 }

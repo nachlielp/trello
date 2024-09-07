@@ -28,7 +28,10 @@
             background-color: var(--ds-background-neutral, #091e420f);
 
             &:hover {
-                background-color: var(--ds-background-neutral-hovered, #091e4224);
+                background-color: var(
+                    --ds-background-neutral-hovered,
+                    #091e4224
+                );
             }
 
             .injected-svg {

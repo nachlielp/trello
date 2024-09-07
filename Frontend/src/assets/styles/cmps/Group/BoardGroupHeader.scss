@@ -1,63 +1,63 @@
 .board-group-header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin: 4px 0 4px 6px;
-  color: var(--ds-text);
-  width: 255px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 4px 0 4px 6px;
+    color: var(--ds-text);
+    width: 255px;
 }
 
 .board-group-header .group-more-btn {
-  border: none;
-  border-radius: 10px;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  box-shadow: none;
-  background-color: var(--tr-background-list);
-  color: var(--ds-icon);
-  margin-left: auto;
-  span {
-    font-size: 16px;
-  }
+    border: none;
+    border-radius: 10px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    box-shadow: none;
+    background-color: var(--tr-background-list);
+    color: var(--ds-icon);
+    margin-left: auto;
+    span {
+        font-size: 16px;
+    }
 }
 
 .board-group-header .group-more-btn:hover {
-  background-color: var(--ds-background-neutral-hovered) !important;
+    background-color: var(--ds-background-neutral-hovered) !important;
 }
 
 .board-group-header .group-more-btn .anticon {
-  color: #2c3e50; // Darker color for the ellipsis icon
+    color: #2c3e50; // Darker color for the ellipsis icon
 }
 
 .board-group-header .group-title {
-  color: var(--ds-text, #42526e);
-  display: flex;
-  align-items: center;
+    color: var(--ds-text, #42526e);
+    display: flex;
+    align-items: center;
 
-  height: 26px;
-  font-size: 14px;
-  font-weight: 600;
-  padding: 6px 8px 6px 12px;
-  margin: 0;
+    height: 26px;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 6px 8px 6px 12px;
+    margin: 0;
 }
 
 .board-group-header .group-title-input.ant-input {
-  color: var(--ds-text, #42526e);
-  margin-left: 1px;
-  height: 32px !important;
-  min-height: 32px !important;
-  border-radius: 6px;
-  border: 2px solid #5f8eec;
-  font-weight: 600;
-  padding: 4px 9px 0px 9px;
-  margin-right: 12px;
-  width: 192px;
-  line-height: 20px;
-  background: transparent;
-  font-size: 14px;
+    color: var(--ds-text, #42526e);
+    margin-left: 1px;
+    height: 32px !important;
+    min-height: 32px !important;
+    border-radius: 6px;
+    border: 2px solid #5f8eec;
+    font-weight: 600;
+    padding: 4px 9px 0px 9px;
+    margin-right: 12px;
+    width: 192px;
+    line-height: 20px;
+    background: transparent;
+    font-size: 14px;
 }

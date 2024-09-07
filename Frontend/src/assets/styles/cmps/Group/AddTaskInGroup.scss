@@ -1,66 +1,69 @@
 .add-card-in-list-footer {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  gap: 6px;
-  margin: 0 6px;
-
-  // &.first-task {
-  // }
-
-  .footer-input {
-    border-color: transparent;
-    background-color: var(--ds-surface-raised, #ffffff);
-    box-shadow: var(
-      --ds-shadow-raised,
-      0px 1px 1px #091e4240,
-      0px 0px 1px #091e424f
-    );
-    color: var(--ds-text, #172b4d);
-    &::placeholder {
-      color: var(--ds-text-subtlest, #626f86);
-    }
-  }
-
-  // &.last-task {
-  //   width: 100%;
-  // }
-
-  .footer-actions {
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    align-items: start;
     gap: 6px;
+    margin: 0 6px;
 
-    .close-add-card-btn {
-      cursor: pointer;
-      border: none;
-      border-radius: 4px;
-      background-color: transparent;
-      color: var(--ds-text, #172b4d);
-      font-size: 16px;
+    // &.first-task {
+    // }
 
-      &:hover {
-        border: none;
-        background-color: var(--ds-background-neutral-hovered, #091e4224);
-        box-shadow: none;
+    .footer-input {
+        border-color: transparent;
+        background-color: var(--ds-surface-raised, #ffffff);
+        box-shadow: var(
+            --ds-shadow-raised,
+            0px 1px 1px #091e4240,
+            0px 0px 1px #091e424f
+        );
         color: var(--ds-text, #172b4d);
-        text-decoration: none;
-      }
+        &::placeholder {
+            color: var(--ds-text-subtlest, #626f86);
+        }
     }
-  }
 
-  .add-card-btn {
-    cursor: pointer;
-    padding: 6px 12px;
-    border: none;
-    background-color: var(--ds-background-brand-bold, #0c66e4);
-    color: var(--ds-text-inverse, #ffffff);
-    font-size: 14px;
-    font-weight: 600;
-    border-radius: 4px;
+    // &.last-task {
+    //   width: 100%;
+    // }
 
-    &:hover {
-      background-color: var(--ds-background-brand-bold-hovered, #0055cc);
+    .footer-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 6px;
+
+        .close-add-card-btn {
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            background-color: transparent;
+            color: var(--ds-text, #172b4d);
+            font-size: 16px;
+
+            &:hover {
+                border: none;
+                background-color: var(
+                    --ds-background-neutral-hovered,
+                    #091e4224
+                );
+                box-shadow: none;
+                color: var(--ds-text, #172b4d);
+                text-decoration: none;
+            }
+        }
     }
-  }
+
+    .add-card-btn {
+        cursor: pointer;
+        padding: 6px 12px;
+        border: none;
+        background-color: var(--ds-background-brand-bold, #0c66e4);
+        color: var(--ds-text-inverse, #ffffff);
+        font-size: 14px;
+        font-weight: 600;
+        border-radius: 4px;
+
+        &:hover {
+            background-color: var(--ds-background-brand-bold-hovered, #0055cc);
+        }
+    }
 }

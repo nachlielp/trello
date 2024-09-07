@@ -2,7 +2,6 @@
     background-color: $clr4;
     padding: 10px;
 
-
     .user-info {
         // background-color: $clr2;
         // padding: 2px 8px;
@@ -30,10 +29,9 @@
     }
 
     nav {
-        font-size: .8em;
+        font-size: 0.8em;
         background-color: $clr5;
         padding: 5px;
-
     }
 
     nav a:first-child {
@@ -49,5 +47,4 @@
     nav .active {
         color: $clr1;
     }
-
 }
