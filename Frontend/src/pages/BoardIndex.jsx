@@ -87,7 +87,7 @@ export function BoardIndex() {
             idBoard: board.id,
         }
         try {
-            await addTask(newTask, user, group, tasksToSkip)
+            await addTask(newTask, user, group, tasksToSkip, board)
         } catch (error) {
             console.log("onAddCard", error)
         }
@@ -117,7 +117,7 @@ export function BoardIndex() {
                     targetId: task.id,
                     targetName: task.name,
                 },
-                user,
+                user
             )
             await updateBoard({
                 ...board,
@@ -126,10 +126,10 @@ export function BoardIndex() {
                         ? {
                               ...g,
                               tasks: g.tasks.map((t) =>
-                                  t.id === task.id ? task : t,
+                                  t.id === task.id ? task : t
                               ),
                           }
-                        : g,
+                        : g
                 ),
                 activities: [...board?.activities, newActivity],
             })
@@ -266,7 +266,7 @@ export function BoardIndex() {
                                             archiveGroup={() =>
                                                 onArchiveGroup(
                                                     board.id,
-                                                    group.id,
+                                                    group.id
                                                 )
                                             }
                                             editGroup={onEditGroup}

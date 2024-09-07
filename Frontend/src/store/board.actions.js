@@ -128,9 +128,9 @@ export function toggleIsExpanded() {
     })
 }
 
-export async function addTask(task, user, group, tasksToSkip) {
+export async function addTask(task, user, group, tasksToSkip, board) {
     try {
-        const board = await boardService.getById(task.idBoard)
+        // const board = await boardService.getById(task.idBoard)
         const newGroup = { ...group }
         const newTask = utilService.createNewTask(task)
         if (task.addToTop) {
