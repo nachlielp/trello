@@ -65,7 +65,7 @@ export async function loadBoardByTaskId(taskId) {
     }
     if (
         currentBoard.groups.some((group) =>
-            group.tasks.some((task) => task.id === taskId),
+            group.tasks.some((task) => task.id === taskId)
         )
     ) {
         return currentBoard.id
@@ -154,7 +154,7 @@ export async function addTask(task, user, group, tasksToSkip) {
                 targetName: newTask.name,
                 groupName: group.name,
             },
-            user,
+            user
         )
 
         const newBoard = {
@@ -168,8 +168,8 @@ export async function addTask(task, user, group, tasksToSkip) {
             activities: [...board?.activities, newActivity],
             updatedAt: new Date().getTime(),
         }
-        await boardService.save(newBoard)
         store.dispatch({ type: SET_BOARD, board: newBoard })
+        await boardService.save(newBoard)
         return newTask
     } catch (err) {
         console.log("Cannot add task", err)
@@ -208,7 +208,7 @@ export async function archiveGroup(boardId, groupId, user) {
             type: "archiveGroup",
             targetName: group.name,
         },
-        user,
+        user
     )
     const newBoard = {
         ...board,
@@ -255,7 +255,7 @@ export async function copyGroup(boardId, group, user) {
             type: "archiveGroup",
             targetName: newGroup.name,
         },
-        user,
+        user
     )
     const newTaskActivities = taskActivitiesParams.map((t) => {
         return utilService.createActivity(
@@ -265,7 +265,7 @@ export async function copyGroup(boardId, group, user) {
                 targetName: t.taskName,
                 groupName: newGroup.name,
             },
-            user,
+            user
         )
     })
     const updatedGroups = board.groups.map((g) => {
@@ -296,7 +296,7 @@ export async function moveAllCards(
     boardId,
     sourceGroupId,
     targetGroupId,
-    user,
+    user
 ) {
     const board = await boardService.getById(boardId)
     const sourceGroup = board.groups.find((g) => g.id === sourceGroupId)
@@ -317,8 +317,8 @@ export async function moveAllCards(
                             from: sourceGroup.name,
                             to: targetGroup.name,
                         },
-                        user,
-                    ),
+                        user
+                    )
                 )
                 return newTasks
             }) || []),
@@ -358,7 +358,7 @@ export async function archiveAllCards(boardId, groupId, user) {
                 targetId: t.id,
                 targetName: t.name,
             },
-            user,
+            user
         )
     })
     const newGroup = {
@@ -402,7 +402,7 @@ export async function sortGroup(boardId, groupId, sortBy, sortOrder) {
         newGroup = {
             ...group,
             tasks: group.tasks.sort(
-                (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
+                (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
             ),
         }
     }
@@ -416,7 +416,7 @@ export async function sortGroup(boardId, groupId, sortBy, sortOrder) {
     const newBoard = {
         ...board,
         groups: board.groups.map((g) =>
-            g.id === groupId ? { ...g, sortBy, sortOrder } : g,
+            g.id === groupId ? { ...g, sortBy, sortOrder } : g
         ),
         updatedAt: new Date().getTime(),
     }
@@ -435,7 +435,7 @@ export async function editTask(task) {
                       ...g,
                       tasks: g.tasks.map((t) => (t.id === task.id ? task : t)),
                   }
-                : g,
+                : g
         ),
         updatedAt: new Date().getTime(),
     }
@@ -507,10 +507,10 @@ export async function createLabel(boardId, task, label) {
                                     ...task,
                                     idLabels: [...task.idLabels, newLabel.id],
                                 }
-                              : t,
+                              : t
                       ),
                   }
-                : g,
+                : g
         ),
         updatedAt: new Date().getTime(),
     }
@@ -661,7 +661,7 @@ export async function moveTask(moveTaskEvent, board, user) {
                 from: sourceGroup.name,
                 to: board.groups.find((g) => g.id === destinationGroupId).name,
             },
-            user,
+            user
         )
 
         newBoard.activities.push(moveActivity)
