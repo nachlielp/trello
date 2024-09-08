@@ -25,8 +25,8 @@ export function setupSocketAPI(httpServer) {
     });
 
     socket.on("board-updated", (board) => {
-      socket.to(board.id).emit("board-updated", board);
-      socket.to("workspace").emit("workspace-updated", board);
+      socket.broadcast.to(board.id).emit("board-updated", board);
+      socket.broadcast.to("workspace").emit("workspace-updated", board);
     });
 
     socket.on("disconnect", () => {
