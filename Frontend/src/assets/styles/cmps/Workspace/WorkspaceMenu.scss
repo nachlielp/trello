@@ -8,6 +8,7 @@
         opacity: 1;
         background-color: rgba(0, 0, 0, var(--dynamic-light-decrease));
         position: relative;
+        z-index: 1;
 
         .open-btn {
             display: flex;

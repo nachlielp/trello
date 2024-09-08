@@ -101,7 +101,7 @@ export const bgImgs = [
     },
     {
         background: "66d8ba72df5543d7a56c59c8",
-        backgroundColor: null,
+        backgroundColor: "null",
         title: "Egor Litvinov",
         backgroundImage:
             "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/original/f5df50ec4659bd165a62b9f2218b116d/photo-1725012858121-9b336157bea4",
@@ -129,7 +129,7 @@ export const bgImgs = [
     },
     {
         background: "66d8bac4373590547b6a2823",
-        backgroundColor: null,
+        backgroundColor: "null",
         title: "Kevin Oetiker",
         backgroundImage:
             "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/original/3a065a5a616ef4412890438396b970c1/photo-1723451150503-a82e2ccf121e",
@@ -157,7 +157,7 @@ export const bgImgs = [
     },
     {
         background: "66d8bb446abedee00cb09aff",
-        backgroundColor: null,
+        backgroundColor: "null",
         title: "Kevin Wang",
         backgroundImage:
             "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/original/42f5deedb9efb6332bb026e5e8c2bebe/photo-1723653508269-7b2abc5d8e74",
@@ -185,7 +185,7 @@ export const bgImgs = [
     },
     {
         background: "66d8babdcda14b642f7b9610",
-        backgroundColor: null,
+        backgroundColor: "null",
         title: "Annie Spratt",
         backgroundImage:
             "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/original/85439380f73d12e4291be6ee99a907a6/photo-1708162664628-6913e8797929",
@@ -213,7 +213,7 @@ export const bgImgs = [
     },
     {
         background: "66d8bb4f44df03ab29a48b68",
-        backgroundColor: null,
+        backgroundColor: "null",
         title: "Evgeni Tcherkasski",
         backgroundImage:
             "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/original/d40b8ef1fec8580648dd8fceac5a0665/photo-1724063590065-7edf4195e215",
@@ -241,7 +241,7 @@ export const bgImgs = [
     },
     {
         background: "66d8ba8d79cab700730ff891",
-        backgroundColor: null,
+        backgroundColor: "null",
         title: "eberhard 🖐 grossgasteiger",
         backgroundImage:
             "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/original/33e3be69db8023322704d34a7db66d23/photo-1723908183237-d8af011f465d",
@@ -269,7 +269,7 @@ export const bgImgs = [
     },
     {
         background: "66d8bb37cbd74d18d172b7cc",
-        backgroundColor: null,
+        backgroundColor: "null",
         title: "Solen Feyissa",
         backgroundImage:
             "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/original/ee03d17d5c7350178864dc9e03b8455e/photo-1722755417793-6924c6b5ba93",
@@ -297,7 +297,7 @@ export const bgImgs = [
     },
     {
         background: "66d8bafd59b2adf8f8bdd1c7",
-        backgroundColor: null,
+        backgroundColor: "null",
         title: "Slava Auchynnikau",
         backgroundImage:
             "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/original/5535112e2b2d65b9a27099cbb7c92738/photo-1723556146809-2dcb7c1e0bf1",
@@ -325,7 +325,7 @@ export const bgImgs = [
     },
     {
         background: "66d8bbbbda50edab589f71b3",
-        backgroundColor: null,
+        backgroundColor: "null",
         title: "Tim Oun",
         backgroundImage:
             "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/original/1cf5e0489328be1186d91141c502dab1/photo-1724010930544-59b11726a226",
@@ -353,7 +353,7 @@ export const bgImgs = [
     },
     {
         background: "66d8bb2f5f7a58db18fdc74b",
-        backgroundColor: null,
+        backgroundColor: "null",
         title: "Alex Moliski",
         backgroundImage:
             "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/original/9c9c7a97b7901de64df6f407cd651d1c/photo-1693341052623-c70686d937a4",
@@ -381,7 +381,7 @@ export const bgImgs = [
     },
     {
         background: "66d98484faf9c5707a1a4f52",
-        backgroundColor: null,
+        backgroundColor: "null",
         backgroundImage:
             "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/original/1f9613dae0b1d97dbcc7a9eebcce8152/photo-1721633617180-97c67428a48e",
         backgroundTile: false,
@@ -409,7 +409,7 @@ export const bgImgs = [
     },
     {
         background: "66d981232ef190f946db1661",
-        backgroundColor: null,
+        backgroundColor: "null",
         title: "Noam Cohen",
         backgroundImage:
             "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/original/7a8338b6dc39b2296692d49e14ae4181/photo-1691157915037-68576ba139b1",
@@ -437,7 +437,7 @@ export const bgImgs = [
     },
     {
         background: "66d98966a6371956d5c34614",
-        backgroundColor: null,
+        backgroundColor: "null",
         backgroundImage:
             "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/original/1d152b93e814badf059d45c80d5e75ba/photo-1721633616855-d483ff7c784a",
         backgroundTile: false,
@@ -465,7 +465,7 @@ export const bgImgs = [
     },
     {
         background: "66d980c296ac2a94cd806408",
-        backgroundColor: null,
+        backgroundColor: "null",
         backgroundImage:
             "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/original/2e05b5f46c5a907bf532a8c2637ce857/photo-1721041879224-ff011603ada5",
         backgroundTile: false,

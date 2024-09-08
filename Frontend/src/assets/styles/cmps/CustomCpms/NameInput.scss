@@ -29,8 +29,10 @@
         transition: none;
         border-radius: 3px;
         &:focus {
+            outline: none;
             background-color: var(--ds-background-input, #ffffff);
             box-shadow: inset 0 0 0 2px var(--ds-border-focused, #388bff);
+            border: none;
         }
     }
     .name-input-buttons {
