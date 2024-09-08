@@ -13,6 +13,7 @@ import { BoardMenu } from "../cmps/BoardHeader/BoardMenu/BoardMenu"
 import { utilService } from "../services/util.service"
 import { ErrorPage } from "./ErrorPage"
 import { socketService } from "../services/socket.service"
+import { setSessionStorage, getSessionStorage } from "../services/local.service"
 
 export function WorkspaceIndex() {
     const user = useSelector((state) => state.userModule.user)
@@ -46,8 +47,11 @@ export function WorkspaceIndex() {
 
         socketService.on("workspace-updated", (data) => {
             const { boardId, byUserId } = data
-            if (byUserId !== user?.id) {
+            const userId = getSessionStorage("userId")
+            if (userId && byUserId !== userId) {
                 updateWorkspaceBoard(boardId)
+            } else if (!userId) {
+                console.error("No user in workspace-updated")
             }
         })
 
@@ -73,6 +77,7 @@ export function WorkspaceIndex() {
     useEffect(() => {
         if (user) {
             setDarkMode(user.darkMode)
+            setSessionStorage("userId", user.id)
         }
     }, [user])
 
@@ -129,6 +134,7 @@ export function WorkspaceIndex() {
     useEffect(() => {
         setStarredBoardIds(user?.starredBoardIds)
     }, [user])
+
     useEffect(() => {
         if (params.link && params.link !== board.invLink) {
             setWrongInviteLink(true)

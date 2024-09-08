@@ -1,5 +1,5 @@
 import { httpService } from "./http.service"
-
+import { setSessionStorage } from "./local.service"
 const STORAGE_KEY_LOGGEDIN_USER = "loggedinUser"
 
 export const userService = {
@@ -59,4 +59,5 @@ async function signup(userCred) {
 
 async function logout() {
     await httpService.post("auth/logout")
+    setSessionStorage("userId", null)
 }

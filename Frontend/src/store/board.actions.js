@@ -440,7 +440,6 @@ export async function editTask(task) {
         updatedAt: new Date().getTime(),
     }
     await boardService.save(newBoard)
-    console.log("newBoard", newBoard)
     return newBoard
 }
 
