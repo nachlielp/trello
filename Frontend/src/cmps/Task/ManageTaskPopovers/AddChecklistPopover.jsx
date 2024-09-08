@@ -16,18 +16,31 @@ export function AddChecklistPopover({ anchorEl, task, editTask, editBoard }) {
         setIsOpen(false)
     }
 
+    // useEffect(() => {
+    //     if (isOpen && inputRef.current) {
+    //         const inputRefElement = inputRef.current.resizableTextArea.textArea
+    //         setTimeout(() => {
+    //             inputRefElement.focus()
+    //             inputRefElement.setSelectionRange(
+    //                 0,
+    //                 inputRefElement.value.length
+    //             )
+    //         }, 0)
+    //     }
+    // }, [isOpen])
+
     useEffect(() => {
-        if (isOpen && inputRef.current) {
-            const inputRefElement = inputRef.current.resizableTextArea.textArea
+        if (isOpen) {
             setTimeout(() => {
-                inputRefElement.focus()
-                inputRefElement.setSelectionRange(
-                    0,
-                    inputRefElement.value.length,
-                ) // Select all text
-            }, 0) // Select all text
+                inputRef.current.focus()
+                inputRef.current.select()
+            }, 30)
+        }
+        return () => {
+            setChecklistName("Checklist")
         }
     }, [isOpen])
+
     function onChange(e) {
         setChecklistName(e.target.value)
     }
@@ -42,7 +55,7 @@ export function AddChecklistPopover({ anchorEl, task, editTask, editBoard }) {
                 targetName: task.name,
                 checklistName: checklistName,
             },
-            user,
+            user
         )
         if (
             !board.checkListTaskIds.length ||
@@ -57,7 +70,7 @@ export function AddChecklistPopover({ anchorEl, task, editTask, editBoard }) {
         if (task.checkLists.length > 0) {
             minPos = task.checkLists.reduce(
                 (min, item) => (item.pos > min ? item.pos : min),
-                task.checkLists[0].pos,
+                task.checkLists[0].pos
             )
         }
         const newCheckList = utilService.createCheckList({
@@ -87,11 +100,11 @@ export function AddChecklistPopover({ anchorEl, task, editTask, editBoard }) {
             <div className="checklist-main">
                 <h2>Title</h2>
                 {isOpen && (
-                    <TextArea
+                    <input
                         ref={inputRef}
                         className="checklist-title-input"
                         value={checklistName}
-                        autoSize={{ minRows: 1 }}
+                        // autoSize={{ minRows: 1 }}
                         onChange={onChange}
                     />
 

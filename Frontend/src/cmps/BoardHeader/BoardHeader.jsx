@@ -86,7 +86,7 @@ export function BoardHeader({
             >
                 {/* <FilterButton /> */}
                 <div className="members">
-                    {members?.slice(0, 3).map((member) => (
+                    {members?.slice(-5).map((member) => (
                         <ProfilePopover
                             memberId={member?.id}
                             placement="bottom"
