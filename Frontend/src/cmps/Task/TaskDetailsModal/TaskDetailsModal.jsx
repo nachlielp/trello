@@ -40,7 +40,7 @@ export function TaskDetailsModal({
             ?.find((g) => g.tasks?.find((t) => t.id === taskId))
             ?.tasks.find((t) => t.id === taskId)
     )
-    useDocumentTitle(`${task?.name} | Pyello`)
+    useDocumentTitle(`${task?.name} on ${board?.name} | Pyello`)
     const [openedInputId, setOpenedInputId] = useState(null)
 
     const user = useSelector((state) => state.userModule.user)
