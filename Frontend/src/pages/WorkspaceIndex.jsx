@@ -168,7 +168,7 @@ export function WorkspaceIndex() {
             {
                 type: "closeBoard",
             },
-            user,
+            user
         )
         if (board) {
             updateBoard({
@@ -235,7 +235,7 @@ export function WorkspaceIndex() {
                                                         ? boards
                                                               .filter(
                                                                   (b) =>
-                                                                      !b.closed,
+                                                                      !b.closed
                                                               )
                                                               .map((b) => ({
                                                                   id: b.id,
