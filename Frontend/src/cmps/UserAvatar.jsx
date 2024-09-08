@@ -12,7 +12,7 @@ export function UserAvatar({
     user,
     size = 24,
     src = defaultProfile,
-    img,
+    img = null,
     style = {},
     offTitle = false,
     ...other
@@ -22,21 +22,21 @@ export function UserAvatar({
     const member = memberProp
         ? memberProp
         : user
-          ? user
-          : users.find((u) => u.id === memberId)
+        ? user
+        : users.find((u) => u.id === memberId)
 
     const ratio = 120 / 250
     const dynamicStyles = member
         ? {
               backgroundColor: utilService.stringToColor(
-                  member?.fullName || member?.id,
+                  member?.fullName || member?.id
               ),
           }
         : {}
     return (
         <Tooltip
             placement="bottom"
-            title={!!!offTitle && `${member?.fullName} `}
+            title={!!!offTitle && member && `${member?.fullName} `}
             arrow={false}
             overlayInnerStyle={utilService.tooltipOuterStyle()}
         >
@@ -76,7 +76,6 @@ export function UserAvatar({
                 )
             ) : (
                 <Avatar
-                    key={utilService.makeId()}
                     style={{
                         ...dynamicStyles,
                         fontSize: `${size * ratio}px`,
@@ -89,8 +88,8 @@ export function UserAvatar({
                     size={size}
                     {...other}
                 >
-                    {!member && <ReactSVG src={src} />}
-                    {img}
+                    {!member && src && <ReactSVG src={src} />}
+                    {img && img}
                 </Avatar>
             )}
         </Tooltip>

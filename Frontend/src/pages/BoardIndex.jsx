@@ -71,9 +71,15 @@ export function BoardIndex() {
         load()
     }, [params, user, board])
     useEffect(() => {
-        if (board && board?.members) {
-            const membersIds = board.members.map((u) => u.id)
-            loadUsers(membersIds)
+        if (board && board.members && board.activities) {
+            const membersIds = board.members.map((u) => u.id);
+            const activitiesIds = board.activities.map((a) => a.userId);
+            
+            // Combine both arrays and make a Set to ensure uniqueness
+            const uniqueIds = new Set([...membersIds, ...activitiesIds]);
+            
+            // Convert the Set back to an array if needed
+            loadUsers([...uniqueIds]);
         }
     }, [board])
 
