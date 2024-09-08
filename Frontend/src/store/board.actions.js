@@ -666,6 +666,7 @@ export async function moveTask(moveTaskEvent, board, user) {
 
         newBoard.activities.push(moveActivity)
     }
+    newBoard.activities = newBoard.activities.slice(-50)
     store.dispatch({
         type: SET_BOARD,
         board: { ...newBoard, updatedAt: new Date().toISOString() },
