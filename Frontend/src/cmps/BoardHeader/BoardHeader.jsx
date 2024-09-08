@@ -37,7 +37,7 @@ export function BoardHeader({
                 type: "renameBoard",
                 previousName: board.name,
             },
-            user,
+            user
         )
 
         updateBoard({
@@ -55,7 +55,7 @@ export function BoardHeader({
         <div className="board-header">
             <div className="left-info">
                 {board.members.some(
-                    (m) => m.id === user?.id && m.permissionStatus === "admin",
+                    (m) => m.id === user?.id && m.permissionStatus === "admin"
                 ) || user?.isAdmin ? (
                     <NameInput
                         value={board.name}
@@ -78,7 +78,7 @@ export function BoardHeader({
             <div className="right-info">
                 {/* <FilterButton /> */}
                 <div className="members">
-                    {members?.slice(0, 3).map((member) => (
+                    {members?.slice(-5).map((member) => (
                         <ProfilePopover
                             memberId={member?.id}
                             placement="bottom"
