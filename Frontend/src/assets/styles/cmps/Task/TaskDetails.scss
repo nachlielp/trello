@@ -168,12 +168,12 @@
                     background-color: #a6c5e229;
                 }
 
-                .light {
-                    color: #000;
+                &.light {
+                    color: #154655;
                 }
 
-                .light:hover {
-                    background-color: #a6c5e224;
+                &.light:hover {
+                    background-color: #091e4224;
                 }
 
                 .injected-svg {

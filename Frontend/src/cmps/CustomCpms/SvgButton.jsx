@@ -6,7 +6,7 @@ export function SvgButton({ src, label, preLabel, ...other }) {
         <button {...other}>
             {preLabel && <span className="pre-label">{preLabel}</span>}
             <ReactSVG src={src} wrapper="span" />
-            {label}
+            {label && <span className="label">{label}</span>}
         </button>
     )
 }
