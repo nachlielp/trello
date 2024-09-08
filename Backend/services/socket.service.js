@@ -3,15 +3,7 @@ let io;
 export function setupSocketAPI(httpServer) {
   io = new Server(httpServer, {
     cors: {
-      origin:
-        process.env.NODE_ENV === "production"
-          ? [
-              "https://www.pyello.com",
-              "https://pyello-jd4b.onrender.com",
-              "https://pyello.onrender.com",
-              "localhost:3030",
-            ]
-          : ["http://localhost:5173"],
+      origin: true,
       methods: ["GET", "POST", "OPTIONS", "PUT", "DELETE"],
     },
   });
