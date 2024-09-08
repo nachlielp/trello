@@ -24,8 +24,7 @@ const corsOptions = {
 app.use(express.static("public"));
 app.use(cors(corsOptions));
 app.use(cookieParser());
-app.use(express.json());
-
+app.use(express.json({ limit: "200kb" }));
 //Routes
 app.use("/api/boards", boardRouter);
 app.use("/api/auth", authRoutes);
