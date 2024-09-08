@@ -52,8 +52,9 @@ export function UserAvatar({
                             borderRadius: "50%",
                             ...style,
                         }}
+                        className="ant-avatar"
                         {...other}
-                        src={member?.imgUrl}
+                        // src={member?.imgUrl}
                     />
                 ) : (
                     <Avatar
