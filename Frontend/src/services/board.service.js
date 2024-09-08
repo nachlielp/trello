@@ -18,8 +18,8 @@ async function getByTaskId(taskId) {
         const boards = await httpService.get("boards")
         const board = boards?.find((board) =>
             board.groups?.some((group) =>
-                group.tasks?.some((task) => task.id === taskId),
-            ),
+                group.tasks?.some((task) => task.id === taskId)
+            )
         )
         if (!board) {
             throw `Get failed, cannot find board with task id: ${taskId}`
@@ -51,6 +51,10 @@ async function remove(boardId) {
 async function save(board) {
     var savedBoard
     try {
+        const boardSize = new Blob([JSON.stringify(board)]).size
+        if (boardSize > 200000) {
+            throw new Error("Board size is too big, limit is 200kb")
+        }
         if (board.id) {
             savedBoard = await httpService.put("boards", board)
             socketService.emit("board-updated", { board: board })

@@ -44,9 +44,16 @@ export function WorkspaceIndex() {
     useEffect(() => {
         socketService.subscribeToWorkspace()
 
-        socketService.on("workspace-updated", ({ board }) => {
-            updateWorkspaceBoard(board)
+        socketService.on("workspace-updated", (data) => {
+            const { boardId, byUserId } = data
+            if (byUserId !== user.id) {
+                updateWorkspaceBoard(boardId)
+            }
         })
+
+        return () => {
+            socketService.unsubscribeFromWorkspace()
+        }
     }, [])
 
     useEffect(() => {
@@ -168,7 +175,7 @@ export function WorkspaceIndex() {
             {
                 type: "closeBoard",
             },
-            user,
+            user
         )
         if (board) {
             updateBoard({
@@ -235,7 +242,7 @@ export function WorkspaceIndex() {
                                                         ? boards
                                                               .filter(
                                                                   (b) =>
-                                                                      !b.closed,
+                                                                      !b.closed
                                                               )
                                                               .map((b) => ({
                                                                   id: b.id,

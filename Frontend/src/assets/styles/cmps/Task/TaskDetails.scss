@@ -122,6 +122,10 @@
             border-radius: 8px 8px 0 0;
             height: 160px;
 
+            &.no-cover {
+                display: none;
+            }
+
             img {
                 object-fit: cover;
                 height: 100%;
@@ -221,6 +225,10 @@
             margin: -20px -20px 16px -24px;
             border-radius: 8px 8px 0 0;
             position: relative;
+
+            &.no-cover {
+                display: none;
+            }
         }
         // .details-header-cover-actions-wrapper {
         //   position: absolute;
@@ -377,6 +385,9 @@
                     align-items: center;
                     * {
                         cursor: pointer;
+                    }
+                    &.no-cover {
+                        display: none;
                     }
                     &.delete {
                         background-color: var(

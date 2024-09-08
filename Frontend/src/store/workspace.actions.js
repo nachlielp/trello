@@ -16,7 +16,8 @@ export async function setBoards() {
     store.dispatch({ type: SET_BOARDS, boards })
 }
 
-export async function updateWorkspaceBoard(board) {
+export async function updateWorkspaceBoard(boardId) {
+    const board = await boardService.getById(boardId)
     store.dispatch({ type: EDIT_WORKSPACE, board: board })
 
     if (board.id === store.getState().boardModule.board.id) {
@@ -79,7 +80,7 @@ export async function moveTaskBetweenBoards(moveTaskEvent) {
                     tasks: g.tasks
                         .filter((t) => t.id !== taskId)
                         .map((t) =>
-                            t.pos > task.pos ? { ...t, pos: t.pos - 1 } : t,
+                            t.pos > task.pos ? { ...t, pos: t.pos - 1 } : t
                         ),
                 }
             }
@@ -95,7 +96,7 @@ export async function moveTaskBetweenBoards(moveTaskEvent) {
             boardId: destinationBoard.id,
             boardName: destinationBoard.name,
         },
-        user,
+        user
     )
     updatedSourceBoard.activities.push(sourceActivity)
     store.dispatch({ type: SET_BOARD, board: updatedSourceBoard })
@@ -110,9 +111,7 @@ export async function moveTaskBetweenBoards(moveTaskEvent) {
                 const newGroup = {
                     ...g,
                     tasks: g.tasks.map((t) =>
-                        t.pos >= destinationIndex
-                            ? { ...t, pos: t.pos + 1 }
-                            : t,
+                        t.pos >= destinationIndex ? { ...t, pos: t.pos + 1 } : t
                     ),
                 }
                 newGroup.tasks.splice(destinationIndex, 0, newTask)
@@ -129,7 +128,7 @@ export async function moveTaskBetweenBoards(moveTaskEvent) {
             boardId: sourceBoard.id,
             boardName: sourceBoard.name,
         },
-        user,
+        user
     )
     updatedDestinationBoard.activities.push(destinationActivity)
     store.dispatch({ type: EDIT_WORKSPACE, board: updatedDestinationBoard })

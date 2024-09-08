@@ -50,6 +50,7 @@ export function TaskDetailsModal({
     const hasMembers = task?.idMembers?.length > 0
     const isImgCover = task?.cover?.attachment
     const isColorCover = task?.cover?.color
+    const isNoCover = !task?.cover?.attachment && !task?.cover?.color
 
     async function onJoin() {
         const newActivity = utilService.createActivity(
@@ -95,7 +96,9 @@ export function TaskDetailsModal({
 
     const colorCoverHeader = (
         <section
-            className={`details-header-color-cover`}
+            className={`details-header-color-cover ${
+                !isColorCover ? "no-cover" : ""
+            }`}
             style={{
                 backgroundColor: utilService.getColorHashByName(
                     task.cover.color
@@ -143,7 +146,9 @@ export function TaskDetailsModal({
 
     const imgCoverHeader = (
         <section
-            className={`details-header-img-cover ${brightness}`}
+            className={`details-header-img-cover ${brightness} ${
+                !isImgCover ? "no-cover" : ""
+            }`}
             style={{
                 backgroundColor: task?.cover?.attachment?.avgBgColor?.color,
             }}
@@ -276,8 +281,8 @@ export function TaskDetailsModal({
                     <span className="text">This card is archived.</span>
                 </section>
             )}
-            {isColorCover && colorCoverHeader}
-            {!!isImgCover && imgCoverHeader}
+            {colorCoverHeader}
+            {imgCoverHeader}
             <article className="details-header">
                 <ReactSVG src={detailsIcon} className="icon" wrapper="span" />
                 <span className="info">
@@ -395,6 +400,7 @@ export function TaskDetailsModal({
                         editTask={editTask}
                         labelActions={labelActions}
                         editBoard={editBoard}
+                        isNoCover={isNoCover}
                     />
                     <TaskDetailsActions
                         task={task}
