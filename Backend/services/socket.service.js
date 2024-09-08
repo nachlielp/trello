@@ -1,7 +1,7 @@
 import { Server } from "socket.io";
-
+let io;
 export function setupSocketAPI(httpServer) {
-  const io = new Server(httpServer, {
+  io = new Server(httpServer, {
     cors: {
       origin:
         process.env.NODE_ENV === "production"
@@ -25,8 +25,8 @@ export function setupSocketAPI(httpServer) {
     });
 
     socket.on("board-updated", (board) => {
-      socket.broadcast.to(board.id).emit("board-updated", board);
-      socket.broadcast.to("workspace").emit("workspace-updated", board);
+      // socket.broadcast.to(board.id).emit("board-updated", board);
+      // socket.broadcast.to("workspace").emit("workspace-updated", board);
     });
 
     socket.on("disconnect", () => {
@@ -35,4 +35,15 @@ export function setupSocketAPI(httpServer) {
   });
 
   return io;
+}
+export function emitToBoard(boardId, event, data) {
+  if (io) {
+    io.to(boardId).emit(event, data);
+  }
+}
+
+export function emitToAll(event, data) {
+  if (io) {
+    io.emit(event, data);
+  }
 }

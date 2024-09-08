@@ -44,8 +44,9 @@ export function WorkspaceIndex() {
     useEffect(() => {
         socketService.subscribeToWorkspace()
 
-        socketService.on("workspace-updated", ({ board }) => {
-            updateWorkspaceBoard(board)
+        socketService.on("workspace-updated", (boardId) => {
+            console.log("workspace-updated", boardId)
+            // updateWorkspaceBoard(board)
         })
     }, [])
 

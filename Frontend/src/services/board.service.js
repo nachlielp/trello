@@ -18,8 +18,8 @@ async function getByTaskId(taskId) {
         const boards = await httpService.get("boards")
         const board = boards?.find((board) =>
             board.groups?.some((group) =>
-                group.tasks?.some((task) => task.id === taskId),
-            ),
+                group.tasks?.some((task) => task.id === taskId)
+            )
         )
         if (!board) {
             throw `Get failed, cannot find board with task id: ${taskId}`

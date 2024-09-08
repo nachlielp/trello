@@ -29,7 +29,7 @@ function createSocketService() {
         emit(eventName, data) {
             if (!socket) {
                 console.error(
-                    "Socket is not initialized. Attempting to reconnect...",
+                    "Socket is not initialized. Attempting to reconnect..."
                 )
                 this.setup()
                 return
