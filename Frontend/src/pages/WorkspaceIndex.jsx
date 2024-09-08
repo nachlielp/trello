@@ -44,10 +44,14 @@ export function WorkspaceIndex() {
     useEffect(() => {
         socketService.subscribeToWorkspace()
 
-        socketService.on("workspace-updated", (boardId) => {
-            console.log("workspace-updated", boardId)
-            // updateWorkspaceBoard(board)
+        socketService.on("workspace-updated", (data) => {
+            console.log("workspace-updated", data.boardId)
+            updateWorkspaceBoard(data.boardId)
         })
+
+        return () => {
+            socketService.unsubscribeFromWorkspace()
+        }
     }, [])
 
     useEffect(() => {
