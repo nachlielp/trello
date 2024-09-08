@@ -24,11 +24,13 @@
                 cursor: default !important;
             }
             .title {
+                cursor: default !important;
                 padding: 0 10px;
             }
             .title-input {
                 margin-top: -2px;
                 margin-bottom: -2px;
+                margin-right: -5.6px;
                 text-wrap: nowrap;
                 line-height: 20px;
                 color: var(--ds-text, #172b4d);
@@ -63,11 +65,6 @@
             &:hover {
                 background: rgba(166, 197, 226, 0.16);
                 font-size: 20px;
-            }
-            &.starred {
-                span {
-                    color: #e2b203;
-                }
             }
         }
 
