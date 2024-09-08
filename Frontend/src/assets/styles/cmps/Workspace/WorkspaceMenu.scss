@@ -93,10 +93,8 @@
                     p {
                         font-size: 12px;
                         display: -webkit-box;
-                        -webkit-line-clamp: 1;
                         -webkit-box-orient: vertical;
                         overflow: hidden;
-                        // color: var(--dynamic-text);
                         text-overflow: ellipsis;
                         word-break: break-word;
                         margin: 0;

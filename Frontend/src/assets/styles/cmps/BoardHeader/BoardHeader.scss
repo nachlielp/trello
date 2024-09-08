@@ -7,28 +7,31 @@
     backdrop-filter: blur(4px);
     background-color: rgba(0, 0, 0, 0.24);
     max-height: 56px;
-
+    .left-info {
+        &.dark > *,
+        &.dark > * > * > * {
+            color: #38455c !important;
+        }
+    }
     .left-info,
     .right-info {
         display: flex;
         gap: 4px;
         align-items: center;
         align-content: center;
-        &.dark > *,
-        &.dark .visibility-btn > * > * {
-            color: #38455c !important;
-        }
         .board-name {
             padding-left: 0.031;
             .cursor {
                 cursor: default !important;
             }
             .title {
+                cursor: default !important;
                 padding: 0 10px;
             }
             .title-input {
                 margin-top: -2px;
                 margin-bottom: -2px;
+                margin-right: -5.6px;
                 text-wrap: nowrap;
                 line-height: 20px;
                 color: var(--ds-text, #172b4d);
@@ -63,11 +66,6 @@
             &:hover {
                 background: rgba(166, 197, 226, 0.16);
                 font-size: 20px;
-            }
-            &.starred {
-                span {
-                    color: #e2b203;
-                }
             }
         }
 
