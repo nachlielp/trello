@@ -50,7 +50,7 @@ export function BoardHeader({
         setOpenBoardMenu(true)
         setShowBtn(false)
     }
-    console.log(board.prefs.backgroundBrightness)
+
     return (
         <div className="board-header">
             <div
