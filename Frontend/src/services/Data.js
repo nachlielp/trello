@@ -569,7 +569,7 @@ export const bgColors = [
     {
         background: "red",
         backgroundColor: "#B04632",
-        backgroundImage: null,
+        backgroundImage: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAADICAMAAAA9W+hXAAAAA1BMVEWwRjIM0HrJAAAANElEQVR4nO3BMQEAAADCoPVP7WsIoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeAN1+AABVhDU2QAAAABJRU5ErkJggg==",
         backgroundBrightness: "dark",
     },
     {
