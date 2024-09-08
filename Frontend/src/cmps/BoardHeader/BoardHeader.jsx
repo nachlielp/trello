@@ -37,7 +37,7 @@ export function BoardHeader({
                 type: "renameBoard",
                 previousName: board.name,
             },
-            user,
+            user
         )
 
         updateBoard({
@@ -50,12 +50,16 @@ export function BoardHeader({
         setOpenBoardMenu(true)
         setShowBtn(false)
     }
-
+    console.log(board.prefs.backgroundBrightness)
     return (
         <div className="board-header">
-            <div className="left-info">
+            <div
+                className={`left-info ${
+                    board?.prefs?.backgroundBrightness === "dark" ? "" : "dark"
+                }`}
+            >
                 {board.members.some(
-                    (m) => m.id === user?.id && m.permissionStatus === "admin",
+                    (m) => m.id === user?.id && m.permissionStatus === "admin"
                 ) || user?.isAdmin ? (
                     <NameInput
                         value={board.name}
@@ -75,7 +79,11 @@ export function BoardHeader({
                 <VisibilityButton />
                 <ViewsButton />
             </div>
-            <div className="right-info">
+            <div
+                className={`right-info ${
+                    board?.prefs?.backgroundBrightness === "dark" ? "" : "dark"
+                }`}
+            >
                 {/* <FilterButton /> */}
                 <div className="members">
                     {members?.slice(0, 3).map((member) => (

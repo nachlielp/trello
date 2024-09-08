@@ -38,7 +38,7 @@ export function HomePage() {
             <header className="home-header">
                 <nav className="home-nav">
                     <Link to={"/home"} className="logo-link">
-                        <ReactSVG src={atlassian} />
+                        <ReactSVG src={atlassian} wrapper="span"/>
                     </Link>
 
                     <div className="btns">

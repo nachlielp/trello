@@ -9,9 +9,12 @@ import { WorkspaceProfileMenu } from "./WorkspaceProfileMenu"
 export function WorkspaceHeader({ bgColor, userName, setDarkMode, darkMode }) {
     const navigate = useNavigate()
     const user = useSelector((state) => state.userModule.user)
+    const board = useSelector((state) => state.boardModule.board)
 
+    const dynamicIconColor =
+        board?.prefs?.backgroundBrightness === "dark" ? "#fff" : "#42526E"
     const dynamicHeaderText =
-        bgColor === "" ? "var(--ds-text-subtle, #44546f)" : "#fff"
+        bgColor === "" ? "var(--ds-text-subtle, #44546f)" : dynamicIconColor
     const borderColor =
         bgColor === "" ? "var(--ds-border, #d7dce1)" : "hsla(0, 0%, 100%, 0.16)"
     const backgroundColor =
@@ -22,22 +25,24 @@ export function WorkspaceHeader({ bgColor, userName, setDarkMode, darkMode }) {
     useEffect(() => {
         document.documentElement.style.setProperty(
             "--dynamic-header-text",
-            dynamicHeaderText,
+            dynamicHeaderText
         )
         document.documentElement.style.setProperty(
             "--border-color",
-            borderColor,
+            borderColor
         )
         document.documentElement.style.setProperty(
             "--background-color",
-            backgroundColor,
+            backgroundColor
         )
     }, [dynamicHeaderText, borderColor, backgroundColor])
 
     return (
         <div className="workspace-header">
             <nav
-                className={`workspace-header-nav ${bgColor === "" ? "white-bg" : ""}`}
+                className={`workspace-header-nav ${
+                    bgColor === "" ? "white-bg" : ""
+                }`}
             >
                 <SvgButton
                     className="btn main"
@@ -48,7 +53,13 @@ export function WorkspaceHeader({ bgColor, userName, setDarkMode, darkMode }) {
                     onClick={() => navigate(`/u/${userName}/boards`)}
                 >
                     <div
-                        className={`gif ${bgColor === "" ? "gray-filter" : ""}`}
+                        className={`gif ${
+                            bgColor === "" ? "gray-filter" : ""
+                        } ${
+                            board?.prefs?.backgroundBrightness === "dark"
+                                ? ""
+                                : "dark"
+                        }`}
                     ></div>
                 </button>
                 <SvgButton

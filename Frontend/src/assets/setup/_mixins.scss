@@ -1,0 +1,431 @@
+@mixin flex-center-center() {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin font($font-size, $line-height, $font-weight) {
+    font-size: $font-size;
+    line-height: $line-height;
+    font-weight: $font-weight;
+}
+
+@mixin font-p() {
+    @include font(14px, 20px, 400);
+}
+
+@mixin h1() {
+    @include font(18px, 32px, bold);
+}
+
+@mixin h2() {
+    @include font(14px, 20px, 600);
+}
+
+@mixin h3() {
+    @include font(12px, 20px, 600);
+}
+
+@mixin font-size-and-line-height($size) {
+    font-size: $size;
+    line-height: $size;
+}
+
+@mixin set-select($val) {
+    -webkit-user-select: $val; /* Safari */
+    -ms-user-select: $val; /* IE 10 and IE 11 */
+    user-select: $val; /* Standard syntax */
+}
+
+@mixin prevent-select() {
+    @include set-select(none);
+}
+
+@mixin allow-select() {
+    @include set-select(unset);
+}
+
+@mixin task-details-subsection-grid() {
+    display: grid;
+    grid-template-columns: 32px 8px 1fr;
+}
+
+@mixin task-details-main-subsection {
+    display: grid;
+    grid-template-columns: 32px 8px 1fr;
+    grid-template-rows: 16px auto 12px auto;
+    align-items: center;
+
+    .icon {
+        grid-area: 2 / 1;
+        justify-self: center;
+    }
+
+    .title {
+        grid-area: 2 / 3;
+        font-size: 16px;
+    }
+
+    .btn-title {
+        grid-area: 2 / 3;
+        justify-self: end;
+    }
+}
+
+@mixin font-family() {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+        'Noto Sans', Ubuntu, 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+@mixin square($size) {
+    height: $size;
+    width: $size;
+}
+
+@mixin flex-center() {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin button-bg($normal, $hovered, $pressed) {
+    background-color: $normal;
+
+    &:hover {
+        background-color: $hovered;
+    }
+
+    &:active {
+        background-color: $pressed;
+    }
+}
+
+@mixin outline-emphasis() {
+    outline: 2px solid var(--outline-emphasis-color);
+}
+
+// reuse for .title and for textarea of editable title for board details
+@mixin board-details-editable-title {
+    padding: 0px 10px;
+    @include h1();
+}
+
+// reuse for .title and for textarea of editable title for group preview
+@mixin group-editable-title {
+    padding-inline-start: 12px;
+    padding-inline-end: 8px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    @include h2();
+}
+
+// reuse for .title and for textarea of editable title for task details
+@mixin task-details-editable-title {
+    padding-inline-start: 10px;
+    padding-inline-end: 10px;
+    margin-inline-start: -10px;
+    @include font(20px, 24px, 600);
+}
+
+@mixin group-preview {
+    width: 272px;
+    background-color: var(--bg-2);
+    border-radius: 12px;
+    padding: 8px;
+    box-shadow: var(--box-shadow-subtle);
+}
+
+@mixin backdrop-blur() {
+    backdrop-filter: blur(4px);
+}
+
+@mixin textarea-styling() {
+    box-sizing: border-box;
+    padding: 8px 12px;
+    background-color: var(--bg-1);
+    border-radius: 3px;
+    box-shadow: var(--box-shadow-input-focused);
+    @include font-p();
+    outline: none;
+    resize: none;
+    overflow: hidden;
+
+    &:hover:not(:focus) {
+        background-color: var(--bg-input-hovered);
+    }
+
+    &:focus {
+        color: var(--text-color);
+    }
+}
+
+@mixin input-styling() {
+    box-sizing: border-box;
+    border: 2px solid var(--ds-border-input);
+    border-radius: 3px;
+    padding: 6px 12px;
+    outline: none;
+    @include font-p();
+    transition: background-color 0.2s ease-in-out 0s,
+        border-color 0.2s ease-in-out 0s;
+
+    &:hover:not(:focus):not(:disabled) {
+        background-color: var(--ds-background-input-hovered);
+    }
+
+    &:focus {
+        background-color: var(--ds-background-input-pressed);
+        border-color: var(--ds-border-focused);
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        border-color: transparent;
+        background-color: var(--ds-background-disabled);
+        color: var(--ds-text-disabled);
+    }
+}
+
+@mixin secondary-btn-version-2() {
+    padding: 6px 8px;
+    column-gap: 0px;
+
+    @include button-bg(
+        transparent,
+        var(--bg-neutral-hovered),
+        var(--bg-neutral-pressed)
+    );
+
+    .icon {
+        font-size: 16px;
+        line-height: 20px;
+        width: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .label {
+        @include font-p();
+    }
+}
+
+@mixin icon-btn-version-2() {
+    padding: 6px 8px;
+    border-radius: 3px;
+    width: 36px;
+    height: 32px;
+    box-sizing: border-box;
+    .icon {
+        font-size: 16px;
+        line-height: 20px;
+    }
+}
+
+@mixin btn-disabled() {
+    background-color: var(--bg-disabled);
+    color: var(--text-disabled);
+    cursor: not-allowed;
+}
+
+@mixin btn-primary() {
+    @include button-bg(
+        var(--bg-brand-bold),
+        var(--bg-brand-bold-hovered),
+        var(--bg-brand-bold-pressed)
+    );
+    color: var(--text-inverse);
+    padding: 6px 12px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:disabled {
+        @include btn-disabled();
+    }
+}
+
+@mixin btn-danger() {
+    @include btn-primary();
+    @include button-bg(
+        var(--bg-danger-bold),
+        var(--bg-danger-bold-hovered),
+        var(--bg-danger-bold-pressed)
+    );
+}
+
+@mixin btn-circle() {
+    @include button-bg(
+        transparent,
+        var(--bg-neutral-subtle-hovered),
+        var(--bg-neutral-subtle-pressed)
+    );
+    border-radius: 50%;
+    @include square(40px);
+    @include flex-center-center();
+}
+
+@mixin btn-square() {
+    @include button-bg(
+        transparent,
+        var(--bg-neutral-hovered),
+        var(--bg-neutral-pressed)
+    );
+    @include square(32px);
+    padding: 8px;
+    border-radius: 8px;
+    @include flex-center();
+}
+
+@mixin btn-secondary-centered() {
+    @include button-bg(
+        var(--bg-neutral),
+        var(--bg-neutral-hovered),
+        var(--bg-neutral-pressed)
+    );
+
+    @include flex-center-center();
+    width: 100%;
+    padding: 6px 12px;
+    border-radius: 3px;
+    font-weight: 500;
+
+    &:disabled {
+        background-color: var(--bg-disabled);
+        color: var(--text-disabled);
+        cursor: not-allowed;
+
+        & .icon {
+            color: var(--text-disabled);
+        }
+    }
+}
+
+@mixin btn-dynamic-colors() {
+    @include button-bg(
+        transparent,
+        var(--dynamic-button-hovered),
+        var(--dynamic-button-pressed)
+    );
+    color: var(--dynamic-text);
+}
+
+@mixin btn-dynamic() {
+    padding: 6px;
+    border-radius: 3px;
+    @include btn-dynamic-colors();
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &.highlighted {
+        color: var(--dynamic-button-highlighted-text);
+        background-color: var(--dynamic-button-highlighted);
+
+        &:hover {
+            background-color: var(--dynamic-button-highlighted-hovered);
+        }
+    }
+}
+
+@mixin btn-dynamic-wide() {
+    @include btn-dynamic();
+    padding-inline-start: 12px;
+    padding-inline-end: 12px;
+}
+
+@mixin ellipsis() {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+@mixin btn-login-signup-base() {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    padding: 8px 24px;
+    @include font(19.2px, 28.8px, 400);
+}
+
+@mixin btn-link-small() {
+    @include font-p();
+    text-decoration: underline;
+    cursor: pointer;
+    color: var(--ds-text-subtle);
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.8;
+    }
+    100% {
+        opacity: 0.3;
+    }
+}
+
+@mixin fade-in-out() {
+    animation: fadeInOut 1.2s ease-in-out infinite;
+}
+
+@mixin for-narrow-layout {
+    @media (max-width: $break-normal) {
+        @content;
+    }
+}
+
+@mixin for-normal-layout {
+    @media (min-width: $break-normal) {
+        @content;
+    }
+}
+
+@mixin for-wide-layout {
+    @media (min-width: $break-wide) {
+        @content;
+    }
+}
+
+@mixin overlay {
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffffd4;
+    @include flex-center-center();
+
+    span {
+        @include font(20px, 20px, 700);
+        @include fade-in-out();
+    }
+}
+
+@mixin simple-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    margin-bottom: 4px;
+
+    .icon {
+        @include square(20px);
+        font-size: 14px;
+        line-height: 14px;
+        margin-bottom: -3px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .label {
+        @include font(12px, 20px, 400);
+        color: var(--text-color-subtle);
+        padding-inline-start: 2px;
+        padding-inline-end: 4px;
+    }
+}

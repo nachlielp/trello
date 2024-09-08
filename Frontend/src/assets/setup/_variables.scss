@@ -1,0 +1,200 @@
+:root {
+    // COLORS
+
+    // generic bg colors
+    --bg-1: #ffffff;
+    --bg-2: #f1f2f4;
+
+    // neutral background (semi-transparent)
+    --bg-neutral: #091e420f;
+    --bg-neutral-hovered: #091e4224;
+    --bg-neutral-pressed: #091e424f;
+
+    // text color
+    --text-color: #172b4d;
+    --text-color-subtle: #44546f;
+    --text-color-light: #ffffff;
+    --text-warning-inverse: #172b4d;
+    --text-danger: #ae2e24;
+    --text-success-bold-hovered: #d3dcd7;
+    --text-error: #c9372c;
+    --text-link: #0052cc;
+
+    --text-inverse: #ffffff;
+
+    // icon color
+    --icon-color: #44546f;
+    --icon-color-subtle: #626f86;
+
+    // neutral subtle background
+    --bg-neutral-subtle: #00000000;
+    --bg-neutral-subtle-hovered: #091e420f;
+    --bg-neutral-subtle-pressed: #091e4224;
+
+    // backgrounds for success, warning, danger
+    --bg-success-bold: #1f845a;
+    --bg-success-bold-hovered: #216e4e;
+    --bg-warning-bold: #f5cd47;
+    --bg-warning: #fff7d6;
+
+    // brand
+    --bg-brand-bold: #0c66e4;
+    --bg-brand-bold-hovered: #0055cc;
+    --bg-brand-bold-pressed: #09326c;
+
+    // danger
+    --bg-danger: #ffeceb;
+
+    // danger bold
+    --bg-danger-bold: #c9372c;
+    --bg-danger-bold-hovered: #ae2e24;
+    --bg-danger-bold-pressed: #5d1f1a;
+
+    // sunken background
+    --bg-sunken: #f7f8f9;
+
+    // disabled button
+    --bg-disabled: #091e4208;
+    --text-disabled: #091e424f;
+
+    // input
+    --ds-background-input: #ffffff;
+    --ds-background-input-hovered: #f7f8f9;
+    --ds-background-input-pressed: #ffffff;
+    --ds-border-input: #091e4224;
+    --ds-border-focused: #388bff;
+
+    // components
+    --board-index-header-border-bottom-color: rgba(23, 43, 77, 0.16);
+    --bg-group-create: #ffffff3d;
+
+    // misc
+    --outline-emphasis-color: #388bff;
+    --bg-divider: #091e4224;
+    --bg-input: #ffffff;
+    --bg-input-hovered: #f7f8f9;
+    --bg-accent-blue-subtle: #579dff;
+    --bg-light-overlay: #ffffff3d;
+    --border-information: #1d7afc;
+    --bg-information: #e9f2ff;
+    --bg-accent-red-subtler: #ffd2cc;
+    --text-accent-red: #ae2a19;
+    --border-selected: #0c66e4;
+    --border-inverse: #ffffff;
+    --bg-label: #091e420f;
+    --ds-text-subtlest: #626f86;
+    --ds-background-accent-gray-subtler: #dcdfe4;
+    --ds-border-focused: #388bff;
+    --bg-attachment: #a9a7a9;
+
+    --ds-background-neutral: #091e420f;
+    --ds-background-neutral-hovered: #091e4224;
+    --ds-background-neutral-pressed: #091e424f;
+
+    --ds-background-neutral-subtle: #091e420f;
+    --ds-background-neutral-subtle-hovered: #091e420f;
+    --ds-background-neutral-subtle-pressed: #091e4224;
+
+    --ds-text-subtle: #44546f;
+    --ds-background-accent-gray-subtle: #8590a2;
+    --ds-border: #091e4224;
+    --ds-surface-raised: #ffffff;
+    --ds-border-inverse: #ffffff;
+    --ds-border-brand: #0c66e4;
+    --dynamic-text-transparent: hsla(218, 54%, 19.6%, 0.16);
+
+    --ds-background-brand-bold: #0c66e4;
+    --ds-background-brand-bold-hovered: #0055cc;
+    --ds-background-brand-bold-pressed: #09326c;
+
+    --ds-background-selected: #e9f2ff;
+    --ds-background-selected-hovered: #cce0ff;
+    --ds-background-selected-pressed: #85b8ff;
+    --ds-background-disabled: #091e4208;
+
+    --ds-text: #172b4d;
+    --ds-text-inverse: #ffffff;
+    --ds-text-selected: #0c66e4;
+    --ds-text-disabled: #091e424f;
+
+    --ds-icon: #44546f;
+    --ds-icon-accent-red: #c9372c;
+
+    --ds-link: #0c66e4;
+
+    --create-menu-button-color: var(--ds-text-inverse);
+
+    // BOX SHADOW
+
+    --box-shadow-subtle: 0px 1px 1px #091e4240, 0px 0px 1px #091e424f;
+    --box-shadow-strong: 0px 8px 12px #091e4226, 0px 0px 1px #091e424f;
+    --box-shadow-input: inset 0 0 0 2px #091e4224;
+    --box-shadow-input-focused: inset 0 0 0 2px #388bff;
+    --icon-star: #e2b203;
+
+    --board-menu-width: 339px;
+
+    // create menu button
+    --create-menu-button-background: var(--ds-background-brand-bold);
+    --create-menu-button-background-hovered: var(
+        --ds-background-brand-bold-hovered
+    );
+    --create-menu-button-background-active: var(--ds-background-selected);
+    --create-menu-button-background-active-hovered: var(
+        --ds-background-selected-hovered
+    );
+    --create-menu-button-color-active: var(--ds-text-selected);
+}
+
+// Dynamic variables - they change depending on the
+// .board-theme-dark / .board-theme-light classes
+
+// in the light theme, the text is dark and the background is light
+.board-theme-light,
+.task-theme-light {
+    --dynamic-button: transparent;
+    --dynamic-button-hovered: #091e4224;
+    --dynamic-button-pressed: #091e424f;
+    --dynamic-button-highlighted: rgba(0, 0, 0, 0.5);
+    --dynamic-button-highlighted-text: #ffffff;
+    --dynamic-button-highlighted-hovered: rgba(0, 0, 0, 0.6);
+    --dynamic-star: var(--dynamic-icon);
+    --dynamic-icon: #42526e;
+    --dynamic-text: #172b4d;
+    --dynamic-text-transparent: hsla(218, 54%, 19.6%, 0.16);
+    --dynamic-background: hsl(0, 0%, 100%);
+    --dynamic-background-transparent: hsla(0, 0%, 95.7%, 0.9);
+    --board-header-background-color: #ffffff3d;
+}
+
+// in the dark theme, the text is light and the background is dark
+.board-theme-dark,
+.task-theme-dark {
+    --dynamic-button: transparent;
+    --dynamic-button-hovered: #a6c5e229;
+    --dynamic-button-pressed: #bfdbf847;
+    --dynamic-button-highlighted: #dfe1e6;
+    --dynamic-button-highlighted-text: #172b4d;
+    --dynamic-button-highlighted-hovered: #ffffff;
+    --dynamic-star: var(--dynamic-icon);
+    --dynamic-icon: #ffffff;
+    --dynamic-text: #ffffff;
+    --dynamic-text-transparent: hsla(0, 0%, 100%, 0.16);
+    --dynamic-background: hsla(0, 0%, 0%, 0.16);
+    --dynamic-background-transparent: hsla(0, 0%, 0%, 0.16);
+    --board-header-background-color: #0000003d;
+
+    // create menu button
+    --create-menu-button-background: rgba(255, 255, 255, 0.2);
+    --create-menu-button-background-hovered: rgba(255, 255, 255, 0.3);
+    --create-menu-button-background-active: rgba(255, 255, 255, 0.3);
+    --create-menu-button-background-active-hovered: var(
+        --create-menu-button-background-active
+    );
+    --create-menu-button-color-active: var(--ds-text-inverse);
+}
+
+// responsive breaks
+$break-wide: 1440px;
+$break-normal: 768px;
+$break-narrow: 375px;

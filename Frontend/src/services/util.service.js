@@ -277,8 +277,8 @@ export const utilService = {
     getChecklistBadge,
     createActivity,
     isValidUrl,
-    getAverageBorderColor,
-    isColorDark,
+    getAverageBorderColor,//
+    isColorDark,//
     isNotEmpty,
     getBgColors,
     getDateLabel,

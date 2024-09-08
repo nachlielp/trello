@@ -119,6 +119,9 @@
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
+            &.dark {
+                filter: brightness(0.4);
+            }
 
             &:hover {
                 background-image: url("/img/workspace/animated-pyello-home.gif");

@@ -14,7 +14,10 @@
         gap: 4px;
         align-items: center;
         align-content: center;
-
+        &.dark > *,
+        &.dark .visibility-btn > * > * {
+            color: #38455c !important;
+        }
         .board-name {
             padding-left: 0.031;
             .cursor {

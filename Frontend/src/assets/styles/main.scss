@@ -2,6 +2,8 @@
 @import "setup/variables";
 @import "setup/functions";
 @import "setup/mixins";
+@import "setup/typography";
+
 // @import "setup/typography";
 
 @font-face {
@@ -12,7 +14,7 @@
 @import "./fonts/icons.scss";
 
 .pyello-icon {
-    font-family: "pyello-icons";
+    font-family: "pyello-icons" !important;
 }
 
 // Basics
