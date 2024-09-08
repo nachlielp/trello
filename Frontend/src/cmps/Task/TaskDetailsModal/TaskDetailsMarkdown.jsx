@@ -3,17 +3,6 @@ import rehypeRaw from "rehype-raw"
 import { useRef, useState, useEffect } from "react"
 import {
     MDXEditor,
-    headingsPlugin,
-    listsPlugin,
-    BlockTypeSelect,
-    quotePlugin,
-    CreateLink,
-    markdownShortcutPlugin,
-    thematicBreakPlugin,
-    InsertImage,
-    ListsToggle,
-    CodeToggle,
-    UndoRedo,
     BoldItalicUnderlineToggles,
     toolbarPlugin,
 } from "@mdxeditor/editor"
@@ -28,6 +17,12 @@ export function TaskDetailsMarkdown({ editTask, task }) {
     useEffect(() => {
         setMarkdown(task.desc)
     }, [task])
+
+    useEffect(() => {
+        if (ref.current) {
+            ref.current.focus()
+        }
+    }, [isEditing])
 
     const isEmpty = task.desc.trim() === ""
 
@@ -90,8 +85,10 @@ export function TaskDetailsMarkdown({ editTask, task }) {
                     <MDXEditor
                         ref={ref}
                         name="body"
-                        className={`markdown-editor ${isEditing ? "focused" : ""}`}
-                        placeholder="Message"
+                        className={`markdown-editor ${
+                            isEditing ? "focused" : ""
+                        }`}
+                        placeholder="Use Markdown shortcuts to format your page as you type, like * for lists, # for headers, and --- for a horizontal rule."
                         markdown={markdown}
                         onChange={handleChange}
                         plugins={[
