@@ -246,7 +246,7 @@ export const bgImgs = [
         backgroundImage:
             "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/original/33e3be69db8023322704d34a7db66d23/photo-1723908183237-d8af011f465d",
         backgroundTile: false,
-        backgroundBrightness: "light",
+        backgroundBrightness: "dark",
         sharedSourceUrl:
             "https://images.unsplash.com/photo-1723908183237-d8af011f465d?ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDl8MzE3MDk5fHx8fHwyfHwxNzI1NDc5NTIzfA&ixlib=rb-4.0.3&w=2560&h=2048&q=90",
         backgroundImageScaled: [
