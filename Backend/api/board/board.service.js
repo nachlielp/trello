@@ -1,6 +1,7 @@
 import { ObjectId } from "mongodb";
 import { getCollection } from "../../data/mongoDb.js";
 import { emitToBoard, emitToAll } from "../../services/socket.service.js";
+import { asyncLocalStorage } from "../../services/als.service.js";
 export const boardService = {
   save,
   query,
@@ -32,22 +33,21 @@ async function save(boardToSave) {
     const boards = await getCollection("boards");
     if (boardToSave.id) {
       const { id, ...updateFields } = boardToSave;
-      console.log("Updating existing board with _id:", id);
       const result = await boards.updateOne(
         { _id: ObjectId.createFromHexString(id) },
         { $set: updateFields }
       );
-      console.log("Result of update:", result);
       if (result.matchedCount === 0) {
         throw `Couldn't update bug with id ${id}`;
       }
     } else {
       await boards.insertOne(boardToSave);
     }
-    console.log("boardToSave.id", boardToSave.id);
     try {
-      // emitToBoard(boardToSave.id, "board-updated", boardToSave);
-      emitToAll("workspace-updated", { boardId: boardToSave.id });
+      emitToAll("workspace-updated", {
+        boardId: boardToSave.id,
+        byUserId: asyncLocalStorage.getStore().loggedinUser.id,
+      });
     } catch (err) {
       console.log("Couldn't emit workspace-updated", err);
     }

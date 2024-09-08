@@ -52,7 +52,6 @@ async function save(board) {
     var savedBoard
     try {
         const boardSize = new Blob([JSON.stringify(board)]).size
-        console.log("boardSize", boardSize)
         if (boardSize > 200000) {
             throw new Error("Board size is too big, limit is 200kb")
         }

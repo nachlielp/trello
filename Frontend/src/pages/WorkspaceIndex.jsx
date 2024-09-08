@@ -45,8 +45,10 @@ export function WorkspaceIndex() {
         socketService.subscribeToWorkspace()
 
         socketService.on("workspace-updated", (data) => {
-            console.log("workspace-updated", data.boardId)
-            updateWorkspaceBoard(data.boardId)
+            const { boardId, byUserId } = data
+            if (byUserId !== user.id) {
+                updateWorkspaceBoard(boardId)
+            }
         })
 
         return () => {

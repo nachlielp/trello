@@ -7,7 +7,7 @@ import { authRoutes } from "./api/auth/auth.routes.js";
 import { userRouter } from "./api/user/user.routes.js";
 import { boardRouter } from "./api/board/board.routes.js";
 import { setupSocketAPI } from "./services/socket.service.js";
-
+import { setupAsyncLocalStorage } from "./middlewares/setupAls.middleware.js";
 const app = express();
 const server = http.createServer(app);
 
@@ -25,6 +25,9 @@ app.use(express.static("public"));
 app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(express.json({ limit: "200kb" }));
+
+app.all("*", setupAsyncLocalStorage);
+
 //Routes
 app.use("/api/boards", boardRouter);
 app.use("/api/auth", authRoutes);
