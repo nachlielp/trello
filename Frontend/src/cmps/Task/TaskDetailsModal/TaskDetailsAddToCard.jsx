@@ -12,6 +12,7 @@ export function TaskDetailsAddToCard({
     editTask,
     labelActions,
     editBoard,
+    isNoCover,
 }) {
     const [isCover, setIsCover] = useState(false)
     useEffect(() => {
@@ -100,11 +101,13 @@ export function TaskDetailsAddToCard({
             ),
         },
         {
-            popover: !isCover ? (
+            popover: (
                 <ManageCoverPopover
                     anchorEl={
                         <button
-                            className="details-anchor-btn"
+                            className={`details-anchor-btn ${
+                                !isNoCover ? "no-cover" : ""
+                            }`}
                             style={{ width: "100%" }}
                         >
                             <label className="pyello-icon icon-card-cover " />
@@ -115,8 +118,6 @@ export function TaskDetailsAddToCard({
                     task={task}
                     isFullWidth={true}
                 />
-            ) : (
-                <></>
             ),
         },
         { svg: fieldsIcon, text: "Custom Fields" },
