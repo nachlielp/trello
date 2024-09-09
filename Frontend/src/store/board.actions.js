@@ -437,6 +437,7 @@ export async function editTask(task, activity) {
                   }
                 : g
         ),
+        activities: [...board?.activities, activity],
         updatedAt: new Date().getTime(),
     }
     await boardService.save(newBoard)
