@@ -86,25 +86,34 @@ export function TaskDetailsCheckList({
     }
 
     async function onChangeItem(item, changes) {
-        const newActivity = utilService.createActivity(
-            {
-                targetId: task.id,
-                targetName: task.name,
-                itemName: item.label,
-            },
-            user
-        )
-        if (changes.isChecked) {
-            newActivity.type = "checkedItemInCheckList"
-        } else {
-            newActivity.type = "incompleteItemInCheckList"
+        const activityType = changes.isChecked
+            ? "checkedItemInCheckList"
+            : "incompleteItemInCheckList"
+        const activity = {
+            type: activityType,
+            targetId: task.id,
+            targetName: task.name,
+            itemName: item.label,
         }
+        // const newActivity = utilService.createActivity(
+        //     {
+        //         targetId: task.id,
+        //         targetName: task.name,
+        //         itemName: item.label,
+        //     },
+        //     user
+        // )
+        // if (changes.isChecked) {
+        //     newActivity.type = "checkedItemInCheckList"
+        // } else {
+        //     newActivity.type = "incompleteItemInCheckList"
+        // }
 
-        changeItem(checkList.id, item.id, changes)
-        await editBoard({
-            ...board,
-            activities: [...board.activities, newActivity],
-        })
+        changeItem(checkList.id, item.id, changes, activity)
+        // await editBoard({
+        //     ...board,
+        //     activities: [...board.activities, newActivity],
+        // })
     }
 
     function onAddNewItem(label) {

@@ -185,7 +185,7 @@ export function TaskDetailsModal({
         editTask(newTask)
     }
 
-    function changeItem(checkListId, itemId, changes) {
+    function changeItem(checkListId, itemId, changes, activity) {
         const newTask = {
             ...task,
             checkLists: task.checkLists.map((c) =>
@@ -199,7 +199,7 @@ export function TaskDetailsModal({
                     : c
             ),
         }
-        editTask(newTask)
+        editTask(newTask, activity)
     }
 
     async function deleteList(checkList) {
