@@ -132,7 +132,7 @@ export function GroupActionsMenuPopover({
                             >
                                 Copy list
                             </p>
-                            <p className="menu-action disabled">Move list</p>
+                            {/* <p className="menu-action disabled">Move list</p> */}
                             <p
                                 className="menu-action"
                                 onClick={onSelectMoveAllCards}
@@ -142,7 +142,7 @@ export function GroupActionsMenuPopover({
                             <p className="menu-action" onClick={onSelectSortBy}>
                                 Sort by...
                             </p>
-                            <p className="menu-action disabled">Watch</p>
+                            {/* <p className="menu-action disabled">Watch</p> */}
                             <hr className="simple-gray-line" />
                             <p className="menu-action" onClick={onArchiveGroup}>
                                 Archive this list
@@ -239,7 +239,7 @@ export function GroupActionsMenuPopover({
                             >
                                 Card name (alphabeticlly)
                             </p>
-                            <p className="menu-action disabled">Due date</p>
+                            {/* <p className="menu-action disabled">Due date</p> */}
                         </article>
                     )}
                 </section>

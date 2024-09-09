@@ -4,7 +4,7 @@ import { useSelector } from "react-redux"
 
 export function MemberOption({ task, member, isSelected, editTask }) {
     const user = useSelector((state) =>
-        state.userModule.users.find((user) => member.id === user.id),
+        state.userModule.users.find((user) => member.id === user.id)
     )
 
     function onEditTask() {
@@ -18,7 +18,8 @@ export function MemberOption({ task, member, isSelected, editTask }) {
     }
     return (
         <div className="change-members-option" onClick={onEditTask}>
-            <UserAvatar memberId={member?.id} />
+            {/* //TODO: last minute fix for demo*/}
+            <UserAvatar memberId={member?.id} extraMarginToImageFlag={true} />
             <p className="member-option-member-name">{user.fullName}</p>
             {isSelected && (
                 <SvgButton
