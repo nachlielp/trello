@@ -49,7 +49,7 @@ export function boardReducer(state = initialState, action) {
                 board: {
                     ...state.board,
                     groups: state.board.groups.map((group) =>
-                        group.id === action.group.id ? action.group : group,
+                        group.id === action.group.id ? action.group : group
                     ),
                     updatedAt: new Date().getTime(),
                 },
@@ -95,7 +95,7 @@ export function boardReducer(state = initialState, action) {
                 board: {
                     ...state.board,
                     groups: state.board.groups.map((g) =>
-                        g.id === action.group.id ? action.group : g,
+                        g.id === action.group.id ? action.group : g
                     ),
                     updatedAt: new Date().getTime(),
                 },
@@ -113,7 +113,7 @@ export function boardReducer(state = initialState, action) {
                                   ...group,
                                   tasks: [...(group.tasks || []), action.task],
                               }
-                            : group,
+                            : group
                     ),
                     updatedAt: new Date().getTime(),
                 },
@@ -130,13 +130,14 @@ export function boardReducer(state = initialState, action) {
                             ? {
                                   ...group,
                                   tasks: group.tasks.map((t) =>
-                                      t.id === action.task.id ? action.task : t,
+                                      t.id === action.task.id ? action.task : t
                                   ),
                                   updatedAt: new Date().toISOString(),
                               }
-                            : group,
+                            : group
                     ),
                     updatedAt: new Date().getTime(),
+                    activities: [...state.board.activities, action.activity],
                 },
             }
             break
@@ -147,7 +148,7 @@ export function boardReducer(state = initialState, action) {
                 board: {
                     ...state.board,
                     labels: state.board.labels.map((l) =>
-                        l.id === action.label.id ? action.label : l,
+                        l.id === action.label.id ? action.label : l
                     ),
                     updatedAt: new Date().getTime(),
                 },
@@ -170,7 +171,7 @@ export function boardReducer(state = initialState, action) {
                 board: {
                     ...state.board,
                     groups: state.board.groups.map((g) =>
-                        g.id === action.group.id ? action.group : g,
+                        g.id === action.group.id ? action.group : g
                     ),
                     updatedAt: new Date().getTime(),
                 },
@@ -190,14 +191,14 @@ export function boardReducer(state = initialState, action) {
                 board: {
                     ...state.board,
                     labels: state.board.labels.filter(
-                        (l) => l.id !== action.labelId,
+                        (l) => l.id !== action.labelId
                     ),
                     groups: state.board.groups.map((g) => ({
                         ...g,
                         tasks: g.tasks.map((t) => ({
                             ...t,
                             idLabels: t.idLabels.filter(
-                                (id) => id !== action.labelId,
+                                (id) => id !== action.labelId
                             ),
                         })),
                     })),

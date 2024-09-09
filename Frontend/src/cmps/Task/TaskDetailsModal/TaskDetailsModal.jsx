@@ -211,23 +211,7 @@ export function TaskDetailsModal({
                     : c
             ),
         }
-        const newBoard = {
-            ...board,
-            groups: board.groups.map((g) =>
-                g.id === task.idGroup
-                    ? {
-                          ...g,
-                          tasks: g.tasks.map((t) =>
-                              t.id === newTask.id ? newTask : t
-                          ),
-                      }
-                    : g
-            ),
-            updatedAt: new Date().getTime(),
-            activities: [...board?.activities, newActivity],
-        }
-
-        await editBoard(newBoard)
+        editTask(newTask)
     }
 
     async function deleteList(checkList) {

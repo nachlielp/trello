@@ -15,6 +15,7 @@ export function UserAvatar({
     img = null,
     style = {},
     offTitle = false,
+    extraMarginToImageFlag = false,
     ...other
 }) {
     const users = useSelector((state) => state.userModule.users)
@@ -50,6 +51,7 @@ export function UserAvatar({
                             backgroundPosition: "50%",
                             backgroundSize: "cover",
                             borderRadius: "50%",
+                            marginRight: extraMarginToImageFlag ? "8px" : "0px",
                             ...style,
                         }}
                         {...other}
