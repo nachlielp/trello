@@ -3,10 +3,7 @@ let io;
 export function setupSocketAPI(httpServer) {
   io = new Server(httpServer, {
     cors: {
-      origin:
-        process.env.NODE_ENV === "production"
-          ? false
-          : ["http://localhost:5173"],
+      origin: true,
       methods: ["GET", "POST", "OPTIONS", "PUT", "DELETE"],
     },
   });

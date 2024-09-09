@@ -46,10 +46,10 @@ export function WorkspaceIndex() {
         socketService.subscribeToWorkspace()
 
         socketService.on("workspace-updated", (data) => {
-            const { boardId, byUserId } = data
+            const { boardId, byUserId, timestamp } = data
             const userId = getSessionStorage("userId")
             if (userId && byUserId !== userId) {
-                updateWorkspaceBoard(boardId)
+                updateWorkspaceBoard(boardId, timestamp)
             } else if (!userId) {
                 console.error("No user in workspace-updated")
             }

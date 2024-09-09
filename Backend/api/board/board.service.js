@@ -47,6 +47,7 @@ async function save(boardToSave) {
       emitToAll("workspace-updated", {
         boardId: boardToSave.id,
         byUserId: asyncLocalStorage.getStore().loggedinUser.id,
+        timestamp: Date.now(),
       });
     } catch (err) {
       console.log("Couldn't emit workspace-updated", err);
