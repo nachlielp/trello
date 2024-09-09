@@ -39,7 +39,7 @@ export function TaskDetailsCheckList({
             setCheckItems(
                 checkList.checkItems
                     .filter((item) => !item.isChecked)
-                    .sort((a, b) => a.pos - b.pos),
+                    .sort((a, b) => a.pos - b.pos)
             )
         } else {
             setCheckItems(checkList.checkItems.sort((a, b) => a.pos - b.pos))
@@ -57,7 +57,7 @@ export function TaskDetailsCheckList({
                     ? setCheckedCount((prev) => {
                           return { ...prev, checked: prev.checked + 1 }
                       })
-                    : 0,
+                    : 0
             )
         }
     }, [checkList])
@@ -69,20 +69,7 @@ export function TaskDetailsCheckList({
     }, [onAdd, openedInputId])
 
     async function onChangeCheckListLabel(newName) {
-        const newActivity = utilService.createActivity(
-            {
-                targetId: task.id,
-                targetName: task.name,
-                checklistName: newName,
-                previousName: checkList.label,
-            },
-            user,
-        )
         changeCheckList(checkList.id, { label: newName })
-        await editBoard({
-            ...board,
-            activities: [...board?.activities, newActivity],
-        })
     }
 
     async function onChangeItem(item, changes) {
@@ -92,19 +79,14 @@ export function TaskDetailsCheckList({
                 targetName: task.name,
                 itemName: item.label,
             },
-            user,
+            user
         )
         if (changes.isChecked) {
             newActivity.type = "checkedItemInCheckList"
         } else {
             newActivity.type = "incompleteItemInCheckList"
         }
-
-        await editBoard({
-            ...board,
-            activities: [...board.activities, newActivity],
-        })
-        changeItem(checkList.id, item.id, changes)
+        await changeItem(checkList.id, item.id, changes, newActivity)
     }
 
     function onAddNewItem(label) {
@@ -117,7 +99,7 @@ export function TaskDetailsCheckList({
         if (checkList.checkItems.length > 0) {
             maxPos = checkList.checkItems.reduce(
                 (max, item) => (item.pos > max ? item.pos : max),
-                0,
+                0
             )
             maxPos
         }
@@ -191,13 +173,13 @@ export function TaskDetailsCheckList({
                         (
                             (checkedCount.checked / checkedCount.all) *
                             100
-                        ).toFixed(0),
+                        ).toFixed(0)
                     ) || 0
                 }
                 percentPosition={{ align: "start", type: "outer" }}
                 className={`progres-bar ${
                     ((checkedCount.checked / checkedCount.all) * 100).toFixed(
-                        0,
+                        0
                     ) >= 100
                         ? "completed"
                         : ""
@@ -222,9 +204,9 @@ export function TaskDetailsCheckList({
                             <NameInput
                                 value={item.label}
                                 expandInputWidth={false}
-                                className={`checkbox-label ${item.isChecked ? "checked" : ""} ${
-                                    inputIsOpen ? "open" : ""
-                                }`}
+                                className={`checkbox-label ${
+                                    item.isChecked ? "checked" : ""
+                                } ${inputIsOpen ? "open" : ""}`}
                                 minRows={2}
                                 withButtons={true}
                                 inputStatus={(s) => {
@@ -281,7 +263,7 @@ export function TaskDetailsCheckList({
                             onClick={() => {
                                 setOnAdd(true)
                                 setOpenedInputId(
-                                    `${checkList.id}${checkList.label}`,
+                                    `${checkList.id}${checkList.label}`
                                 )
                             }}
                         >

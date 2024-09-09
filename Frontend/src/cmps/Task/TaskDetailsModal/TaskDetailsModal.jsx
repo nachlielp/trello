@@ -61,15 +61,27 @@ export function TaskDetailsModal({
             },
             user
         )
-
-        await updateBoard({
-            ...board,
-            activities: [...board?.activities, newActivity],
-        })
-        editTask({
+        const newTask = {
             ...task,
             idMembers: [...task.idMembers, user.id],
-        })
+        }
+        const newBoard = {
+            ...board,
+            groups: board.groups.map((g) =>
+                g.id === task.idGroup
+                    ? {
+                          ...g,
+                          tasks: g.tasks.map((t) =>
+                              t.id === newTask.id ? newTask : t
+                          ),
+                      }
+                    : g
+            ),
+            updatedAt: new Date().getTime(),
+            activities: [...board?.activities, newActivity],
+        }
+
+        await updateBoard(newBoard)
     }
 
     function onClose(e) {
@@ -185,7 +197,7 @@ export function TaskDetailsModal({
         editTask(newTask)
     }
 
-    function changeItem(checkListId, itemId, changes) {
+    async function changeItem(checkListId, itemId, changes, newActivity) {
         const newTask = {
             ...task,
             checkLists: task.checkLists.map((c) =>
@@ -199,7 +211,23 @@ export function TaskDetailsModal({
                     : c
             ),
         }
-        editTask(newTask)
+        const newBoard = {
+            ...board,
+            groups: board.groups.map((g) =>
+                g.id === task.idGroup
+                    ? {
+                          ...g,
+                          tasks: g.tasks.map((t) =>
+                              t.id === newTask.id ? newTask : t
+                          ),
+                      }
+                    : g
+            ),
+            updatedAt: new Date().getTime(),
+            activities: [...board?.activities, newActivity],
+        }
+
+        await editBoard(newBoard)
     }
 
     async function deleteList(checkList) {
