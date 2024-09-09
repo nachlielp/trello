@@ -424,8 +424,8 @@ export async function sortGroup(boardId, groupId, sortBy, sortOrder) {
     await boardService.save(newBoard)
 }
 
-export async function editTask(task) {
-    store.dispatch({ type: EDIT_TASK, task: task })
+export async function editTask(task, activity) {
+    store.dispatch({ type: EDIT_TASK, task: task, activity: activity })
     const board = await boardService.getById(task.idBoard)
     const newBoard = {
         ...board,

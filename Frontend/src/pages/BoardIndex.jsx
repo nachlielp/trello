@@ -72,14 +72,14 @@ export function BoardIndex() {
     }, [params, user, board])
     useEffect(() => {
         if (board && board.members && board.activities) {
-            const membersIds = board.members.map((u) => u.id);
-            const activitiesIds = board.activities.map((a) => a.userId);
-            
+            const membersIds = board.members.map((u) => u.id)
+            const activitiesIds = board.activities.map((a) => a.userId)
+
             // Combine both arrays and make a Set to ensure uniqueness
-            const uniqueIds = new Set([...membersIds, ...activitiesIds]);
-            
+            const uniqueIds = new Set([...membersIds, ...activitiesIds])
+
             // Convert the Set back to an array if needed
-            loadUsers([...uniqueIds]);
+            loadUsers([...uniqueIds])
         }
     }, [board])
 
@@ -142,15 +142,8 @@ export function BoardIndex() {
                 activities: [...board?.activities, newActivity],
             })
         } else {
-            const newBoard = await editTask(task)
-
-            if (activity) {
-                const newActivity = utilService.createActivity(activity, user)
-                await updateBoard({
-                    ...newBoard,
-                    activities: [...board.activities, newActivity],
-                })
-            }
+            const newActivity = utilService.createActivity(activity, user)
+            await editTask(task, newActivity)
         }
         loadBoard(board.id)
     }
