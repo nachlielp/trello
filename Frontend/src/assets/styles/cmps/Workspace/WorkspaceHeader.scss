@@ -120,7 +120,10 @@
             background-repeat: no-repeat;
             background-position: center;
             &.dark {
-                filter: brightness(0.4);
+                background-image: url("/img/workspace/dark-non-animated-pyello-home.png");
+                &:hover {
+                    background-image: url("/img/workspace/dark-animated-pyello-home.gif");
+                }
             }
 
             &:hover {
