@@ -17,7 +17,7 @@ export function TaskPreview({
     const [isHovered, setIsHovered] = useState(false)
     const [isOpenPreviewModal, setIsOpenPreviewModal] = useState(false)
     const [taskLabels, setTaskLabels] = useState(
-        skelotonPreviewLables(task.idLabels.length),
+        skelotonPreviewLables(task.idLabels.length)
     )
     const taskRef = useRef(null)
     const [taskWidth, setTaskWidth] = useState(0)
@@ -36,15 +36,9 @@ export function TaskPreview({
 
     useEffect(() => {
         const taskLabels =
-            task?.idLabels
-                .filter((labelId) =>
-                    boardLabels?.some(
-                        (boardLabel) => boardLabel.id === labelId,
-                    ),
-                )
-                .map((labelId) =>
-                    boardLabels.find((boardLabel) => boardLabel.id === labelId),
-                ) || []
+            boardLabels?.filter((boardLabel) =>
+                task?.idLabels.includes(boardLabel.id)
+            ) || []
         setTaskLabels(taskLabels)
     }, [task?.idLabels, boardLabels])
 
@@ -71,15 +65,15 @@ export function TaskPreview({
             ? taskCover.color
                 ? "task-bg-cover"
                 : taskCover.attachment
-                  ? "task-img-full-cover"
-                  : ""
+                ? "task-img-full-cover"
+                : ""
             : ""
 
     const taskColorCoverStyle =
         taskCover?.color && coverSize === "full"
             ? {
                   backgroundColor: utilService.getColorHashByName(
-                      taskCover?.color,
+                      taskCover?.color
                   ).bgColor,
               }
             : {}
@@ -123,7 +117,7 @@ export function TaskPreview({
                     }`}
                     style={{
                         backgroundColor: utilService.getColorHashByName(
-                            task?.cover.color,
+                            task?.cover.color
                         ).bgColor,
                     }}
                 ></div>

@@ -49,14 +49,11 @@ export function TaskPreviewEditModal({
     }, [isHovered, isOpen])
 
     useEffect(() => {
-        const labels = task?.idLabels
-            .filter((labelId) =>
-                boardLabels?.some((boardLabel) => boardLabel.id === labelId),
-            )
-            .map((labelId) =>
-                boardLabels.find((boardLabel) => boardLabel.id === labelId),
-            )
-        setTaskLabels(labels || [])
+        const taskLabels =
+            boardLabels?.filter((boardLabel) =>
+                task?.idLabels.includes(boardLabel.id)
+            ) || []
+        setTaskLabels(taskLabels)
     }, [task?.idLabels, boardLabels])
 
     useEffect(() => {
@@ -238,7 +235,7 @@ export function TaskPreviewEditModal({
                         className="group-task-header normal-cover"
                         style={{
                             backgroundColor: utilService.getColorHashByName(
-                                task?.cover.color,
+                                task?.cover.color
                             ).bgColor,
                         }}
                     ></div>
