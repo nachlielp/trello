@@ -1,5 +1,5 @@
 import Cryptr from "cryptr";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 import { userService } from "../user/user.service.js";
 
