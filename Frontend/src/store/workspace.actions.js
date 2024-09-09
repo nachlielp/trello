@@ -17,6 +17,14 @@ export async function setBoards() {
 }
 
 export async function updateWorkspaceBoard(boardId, timestamp) {
+    console.log(
+        "timestamp",
+        timestamp,
+        "received socket timestampe: ",
+        Date.now(),
+        "diff in milisecs: ",
+        Date.now() - timestamp
+    )
     const board = await boardService.getById(boardId)
     store.dispatch({ type: EDIT_WORKSPACE, board: board })
 
@@ -30,7 +38,7 @@ export async function updateWorkspaceBoard(boardId, timestamp) {
     console.log(
         "timestamp",
         timestamp,
-        "current timestampe: ",
+        "updated workspace timestampe: ",
         Date.now(),
         "diff in milisecs: ",
         Date.now() - timestamp
