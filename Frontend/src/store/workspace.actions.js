@@ -16,7 +16,7 @@ export async function setBoards() {
     store.dispatch({ type: SET_BOARDS, boards })
 }
 
-export async function updateWorkspaceBoard(boardId) {
+export async function updateWorkspaceBoard(boardId, timestamp) {
     const board = await boardService.getById(boardId)
     store.dispatch({ type: EDIT_WORKSPACE, board: board })
 
@@ -27,6 +27,14 @@ export async function updateWorkspaceBoard(boardId) {
     ) {
         store.dispatch({ type: ADD_BOARD, board: board })
     }
+    console.log(
+        "timestamp",
+        timestamp,
+        "current timestampe: ",
+        Date.now(),
+        "diff in milisecs: ",
+        Date.now() - timestamp
+    )
 }
 
 export async function viewWorkspaceBoard(boardId) {
