@@ -13,7 +13,7 @@ export function UserAvatar({
     size = 24,
     src = defaultProfile,
     img = null,
-    style = {},
+    style = { marginRight: "8px" },
     offTitle = false,
     ...other
 }) {
