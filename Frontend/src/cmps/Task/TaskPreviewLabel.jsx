@@ -1,12 +1,32 @@
 import { utilService } from "../../services/util.service"
 import { useSelector } from "react-redux"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { toggleIsExpanded } from "../../store/board.actions"
 import { Tooltip } from "antd"
 
 export function TaskPreviewLabel({ label }) {
     const [hoveredLabelId, setHoveredLabelId] = useState(null)
+    const [isLabelVisible, setIsLabelVisible] = useState(false)
     const isExpanded = useSelector((state) => state.boardModule.isExpanded)
+
+    useEffect(() => {
+        let timer
+        if (isExpanded) {
+            // Show label.name after 2 seconds when isExpanded is true
+            timer = setTimeout(() => setIsLabelVisible(true), 500)
+        } else {
+            // Reset the visibility immediately when not expanded
+            setIsLabelVisible(false)
+            clearTimeout(timer)
+        }
+
+        return () => clearTimeout(timer)
+    }, [isExpanded])
+
+    function onClick(e) {
+        e.stopPropagation()
+        toggleIsExpanded()
+    }
     function onClick(e) {
         e.stopPropagation()
         toggleIsExpanded()
@@ -21,7 +41,9 @@ export function TaskPreviewLabel({ label }) {
             overlayInnerStyle={utilService.tooltipOuterStyle()}
         >
             <button
-                className={`card-label ${isExpanded ? "expanded" : "minimized"}`}
+                className={`card-label ${
+                    isExpanded ? "expanded" : "minimized"
+                }`}
                 style={{
                     backgroundColor:
                         hoveredLabelId === label.id
@@ -36,7 +58,7 @@ export function TaskPreviewLabel({ label }) {
                 onMouseEnter={() => setHoveredLabelId(label.id)}
                 onMouseLeave={() => setHoveredLabelId(null)}
             >
-                {isExpanded ? label.name : ""}
+                {isExpanded &&isLabelVisible ? label.name : ""}
             </button>
         </Tooltip>
     )

@@ -53,3 +53,31 @@
         opacity: 1;
     }
 }
+
+@keyframes resizedown {
+    0% {
+        height: 14px;
+        margin: -3px 0;
+    }
+    50% {
+        height: 14px;
+        margin: -3px 0;
+    }
+
+    to {
+        height: 8px;
+        margin: 0;
+    }
+}
+@keyframes resizeup {
+    0% {
+        height: 8px;
+    }
+    50% {
+        height: 8px;
+    }
+
+    to {
+        height: 16px;
+    }
+}
