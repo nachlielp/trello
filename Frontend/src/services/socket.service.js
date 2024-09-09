@@ -10,9 +10,10 @@ function createSocketService() {
     const socketService = {
         setup() {
             socket = io(baseUrl, {
-                withCredentials: true,
-                transports: ["websocket", "polling"],
-                autoConnect: true,
+                transports: ["websocket"],
+                reconnection: true,
+                reconnectionAttempts: 5,
+                reconnectionDelay: 1000,
             })
         },
 
