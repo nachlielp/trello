@@ -84,12 +84,21 @@
         background: var(--ds-surface-overlay);
     }
     .task-name-input {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 6;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
         margin-top: 3px;
         font-size: 14px;
-        font-weight: 500;
-        line-height: 16px;
+        line-height: 1.2em; // Adjust this value to control line height
+        font-weight: 400;
         color: var(--ds-text);
         background: var(--ds-surface-overlay);
+        padding-bottom: 1.6px;
+
+        //
     }
 
     .preview-labels {

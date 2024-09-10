@@ -27,15 +27,16 @@
     }
 
     .group-task-content-title {
-        align-self: center;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
         font-size: 14px;
+        line-height: 1.2; // Adjust this value to control line height
         font-weight: 400;
-        min-height: 12px;
-        line-height: 1.2;
         color: var(--ds-text);
-        padding-bottom: 4px;
-        margin-bottom: 2p;
-        overflow-wrap: break-word;
+        margin-bottom: 2px;
     }
 
     .group-task-content-cover-title {
