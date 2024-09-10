@@ -61,15 +61,27 @@ export function TaskDetailsModal({
             },
             user
         )
-
-        await updateBoard({
-            ...board,
-            activities: [...board?.activities, newActivity],
-        })
-        editTask({
+        const newTask = {
             ...task,
             idMembers: [...task.idMembers, user.id],
-        })
+        }
+        const newBoard = {
+            ...board,
+            groups: board.groups.map((g) =>
+                g.id === task.idGroup
+                    ? {
+                          ...g,
+                          tasks: g.tasks.map((t) =>
+                              t.id === newTask.id ? newTask : t
+                          ),
+                      }
+                    : g
+            ),
+            updatedAt: new Date().getTime(),
+            activities: [...board?.activities, newActivity],
+        }
+
+        await updateBoard(newBoard)
     }
 
     function onClose(e) {
@@ -176,17 +188,17 @@ export function TaskDetailsModal({
 
     // checkList functions
     function changeCheckList(checkListId, changes) {
-        const newTask = {
+        const updatedTask = {
             ...task,
             checkLists: task.checkLists.map((c) =>
                 c.id === checkListId ? { ...c, ...changes } : c
             ),
         }
-        editTask(newTask)
+        editTask(updatedTask)
     }
 
-    function changeItem(checkListId, itemId, changes, activity) {
-        const newTask = {
+    async function changeItem(checkListId, itemId, changes, activity) {
+        const updatedTask = {
             ...task,
             checkLists: task.checkLists.map((c) =>
                 c.id === checkListId
@@ -199,7 +211,7 @@ export function TaskDetailsModal({
                     : c
             ),
         }
-        editTask(newTask, activity)
+        editTask(updatedTask, activity)
     }
 
     async function deleteList(checkList) {

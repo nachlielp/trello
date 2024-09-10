@@ -69,51 +69,24 @@ export function TaskDetailsCheckList({
     }, [onAdd, openedInputId])
 
     async function onChangeCheckListLabel(newName) {
+        changeCheckList(checkList.id, { label: newName })
+    }
+
+    async function onChangeItem(item, changes) {
         const newActivity = utilService.createActivity(
             {
                 targetId: task.id,
                 targetName: task.name,
-                checklistName: newName,
-                previousName: checkList.label,
+                itemName: item.label,
             },
             user
         )
-        changeCheckList(checkList.id, { label: newName })
-        await editBoard({
-            ...board,
-            activities: [...board?.activities, newActivity],
-        })
-    }
-
-    async function onChangeItem(item, changes) {
-        const activityType = changes.isChecked
-            ? "checkedItemInCheckList"
-            : "incompleteItemInCheckList"
-        const activity = {
-            type: activityType,
-            targetId: task.id,
-            targetName: task.name,
-            itemName: item.label,
+        if (changes.isChecked) {
+            newActivity.type = "checkedItemInCheckList"
+        } else {
+            newActivity.type = "incompleteItemInCheckList"
         }
-        // const newActivity = utilService.createActivity(
-        //     {
-        //         targetId: task.id,
-        //         targetName: task.name,
-        //         itemName: item.label,
-        //     },
-        //     user
-        // )
-        // if (changes.isChecked) {
-        //     newActivity.type = "checkedItemInCheckList"
-        // } else {
-        //     newActivity.type = "incompleteItemInCheckList"
-        // }
-
-        changeItem(checkList.id, item.id, changes, activity)
-        // await editBoard({
-        //     ...board,
-        //     activities: [...board.activities, newActivity],
-        // })
+        await changeItem(checkList.id, item.id, changes, newActivity)
     }
 
     function onAddNewItem(label) {
