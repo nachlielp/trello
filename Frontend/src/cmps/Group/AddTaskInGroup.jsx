@@ -48,6 +48,9 @@ export function AddTaskInGroup({
             e.preventDefault()
             onAddTask()
         }
+        if (e.key === "Escape") {
+            closeAddTask()
+        }
     }
 
     async function onAddTask() {
