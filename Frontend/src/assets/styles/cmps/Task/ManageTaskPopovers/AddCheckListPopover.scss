@@ -81,11 +81,17 @@
             padding: 6px 24px;
             border: none;
             border-radius: 3px;
-            background-color: var(--ds-background-brand-bold, #0c66e4);
             color: var(--ds-text-inverse, #ffffff);
             font-size: 14px;
             font-weight: 500;
             line-height: 20px;
+            background-color: var(--ds-background-brand-bold, #0c66e4);
+            &:hover {
+                background-color: var(
+                    --ds-background-brand-bold-hovered,
+                    #0055cc
+                );
+            }
         }
     }
 }

@@ -117,9 +117,16 @@
                 height: 32px;
                 border-radius: 3px;
                 border: none;
-                background-color: var(--ds-background-primary, #0052cc);
                 color: var(--ds-text-on-primary, #fff);
                 font-weight: 500;
+
+                background-color: var(--ds-background-brand-bold, #0c66e4);
+                &:hover {
+                    background-color: var(
+                        --ds-background-brand-bold-hovered,
+                        #0055cc
+                    );
+                }
             }
 
             .delete-button {
