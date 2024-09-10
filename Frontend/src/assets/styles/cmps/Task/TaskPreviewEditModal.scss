@@ -86,7 +86,6 @@
     .task-name-input {
         display: -webkit-box;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 6;
         overflow: hidden;
         text-overflow: ellipsis;
 
@@ -96,8 +95,7 @@
         font-weight: 400;
         color: var(--ds-text);
         background: var(--ds-surface-overlay);
-        padding-bottom: 1.6px;
-
+        margin-bottom: 1.4px;
         //
     }
 

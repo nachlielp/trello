@@ -260,7 +260,7 @@ export function TaskPreviewEditModal({
                     </article>
                     <TextArea
                         className="task-name-input"
-                        autoSize={{ minRows: 3, maxRows: 6 }}
+                        autoSize={{ minRows: 2, maxRows: 6 }}
                         value={taskName}
                         onChange={(e) => setTaskName(e.target.value)}
                     />
