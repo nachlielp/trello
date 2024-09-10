@@ -48,7 +48,7 @@ export function UserBoards() {
                     <article className="section-content">
                         {boards
                             .filter((board) =>
-                                user?.starredBoardIds.includes(board.id),
+                                user?.starredBoardIds.includes(board.id)
                             )
                             .map((board) => (
                                 <BoardTab
@@ -118,7 +118,7 @@ export function UserBoards() {
                         disabled={!boards.filter((b) => b.closed).length > 0}
                         onClick={() => setIsOpenModal(true)}
                     >
-                        Veiw all closed boards
+                        View all closed boards
                     </button>
                 </section>
             </main>
