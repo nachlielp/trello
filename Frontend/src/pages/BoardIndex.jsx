@@ -41,12 +41,24 @@ export function BoardIndex() {
     const params = useParams()
 
     useEffect(() => {
-        async function load() {
-            if (params.cardId) {
-                setSelectedTaskId(params.cardId)
-            }
+        load()
+    }, [params, user, board])
+    useEffect(() => {
+        if (board && board.members && board.activities) {
+            const membersIds = board.members.map((u) => u.id)
+            const activitiesIds = board.activities.map((a) => a.userId)
 
-            if (params.link && user) {
+            // Combine both arrays and make a Set to ensure uniqueness
+            const uniqueIds = new Set([...membersIds, ...activitiesIds])
+
+            // Convert the Set back to an array if needed
+            loadUsers([...uniqueIds])
+        }
+    }, [board])
+
+    async function load() {
+        setTimeout(async () => {
+            if (params.link && user && board) {
                 if (
                     board.invLink !== "" &&
                     params.link === board.invLink &&
@@ -63,25 +75,16 @@ export function BoardIndex() {
                             ...board.members,
                         ],
                     })
+                } else {
+                    history.replaceState(null, "", `/b/${board.id}`)
                 }
-                history.replaceState(null, "", `/b/${board.id}`)
-                // navigate(0,{replace:true})
             }
-        }
-        load()
-    }, [params, user, board])
-    useEffect(() => {
-        if (board && board.members && board.activities) {
-            const membersIds = board.members.map((u) => u.id)
-            const activitiesIds = board.activities.map((a) => a.userId)
+        }, 200)
 
-            // Combine both arrays and make a Set to ensure uniqueness
-            const uniqueIds = new Set([...membersIds, ...activitiesIds])
-
-            // Convert the Set back to an array if needed
-            loadUsers([...uniqueIds])
+        if (params.cardId) {
+            setSelectedTaskId(params.cardId)
         }
-    }, [board])
+    }
 
     async function loadUsers(membersIds) {
         await loadWorkspaceUsers(membersIds)
