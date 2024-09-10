@@ -35,6 +35,7 @@ export function BoardGroup({
     const [_, setScrollToPercentage] = useScrollPercentage(groupRef)
 
     const [showPlaceholder, setShowPlaceholder] = useState(false)
+    const [isOpenPreviewModal, setIsOpenPreviewModal] = useState(false)
 
     useEffect(() => {
         if (isDraggingOverId === group.id || isDraggingOverId === null) {
@@ -60,10 +61,10 @@ export function BoardGroup({
         const updatedTaskIds = filteredTasks.map((task) => task.id)
         const currentTaskIds = sortedTasks.map((task) => task.id)
         const newTaskIds = updatedTaskIds.filter(
-            (taskId) => !currentTaskIds.includes(taskId),
+            (taskId) => !currentTaskIds.includes(taskId)
         )
         const newTasks = filteredTasks.filter((task) =>
-            newTaskIds.includes(task.id),
+            newTaskIds.includes(task.id)
         )
         if (isTopAddTaskOpen) {
             setNewTasksAboveInput(newTasks)
@@ -106,6 +107,9 @@ export function BoardGroup({
         }, 0)
     }
 
+    function disableDnD(value) {
+        setIsOpenPreviewModal(value)
+    }
     return (
         <Draggable draggableId={group.id} index={group.pos}>
             {(draggableProvided, snapshot) => (
@@ -161,6 +165,7 @@ export function BoardGroup({
                                                 task={task}
                                                 editTask={editTask}
                                                 labelActions={labelActions}
+                                                disableDnD={disableDnD}
                                             />
                                         ))}
                                         {isTopAddTaskOpen && (
@@ -176,8 +181,8 @@ export function BoardGroup({
                                             .filter(
                                                 (task) =>
                                                     !newTasksAboveInput.includes(
-                                                        task.id,
-                                                    ),
+                                                        task.id
+                                                    )
                                             )
                                             .filter((task) => !task.closed)
                                             .map((task, index) => (
@@ -185,10 +190,13 @@ export function BoardGroup({
                                                     key={task.id}
                                                     draggableId={task.id}
                                                     index={index}
+                                                    isDragDisabled={
+                                                        isOpenPreviewModal
+                                                    }
                                                 >
                                                     {(
                                                         provided,
-                                                        dragSnapshot,
+                                                        dragSnapshot
                                                     ) => (
                                                         <div
                                                             ref={
@@ -213,6 +221,9 @@ export function BoardGroup({
                                                                 }
                                                                 isDragging={
                                                                     dragSnapshot.isDragging
+                                                                }
+                                                                disableDnD={
+                                                                    disableDnD
                                                                 }
                                                             />
                                                         </div>

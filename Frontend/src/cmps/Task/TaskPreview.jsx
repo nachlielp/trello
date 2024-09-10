@@ -12,6 +12,7 @@ export function TaskPreview({
     labelActions,
     isDragging,
     noHover = false,
+    disableDnD,
 }) {
     const boardLabels = useSelector((state) => state.boardModule.board.labels)
     const [isHovered, setIsHovered] = useState(false)
@@ -50,6 +51,7 @@ export function TaskPreview({
 
     function onOpenPreviewModal(value) {
         setIsOpenPreviewModal(value)
+        disableDnD(value)
     }
 
     function onClickTask() {
@@ -59,6 +61,7 @@ export function TaskPreview({
     function onClosePreviewModal() {
         setIsHovered(false)
         setIsOpenPreviewModal(false)
+        disableDnD(false)
     }
     const covorCardClass =
         coverSize === "full"
