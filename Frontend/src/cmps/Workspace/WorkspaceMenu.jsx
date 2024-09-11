@@ -59,7 +59,7 @@ export function WorkspaceMenu({
                                 alt="board cover"
                             />
                             <div className="workspace-title">
-                                <h3>Workspace</h3>
+                                <h3>Pyello Workspace</h3>
                                 <p>Free</p>
                             </div>
                         </aside>
@@ -120,10 +120,10 @@ export function WorkspaceMenu({
                             {boardsInfo
                                 .sort((a, b) => {
                                     const aIsStarred = starredBoardIds.includes(
-                                        a.id,
+                                        a.id
                                     )
                                     const bIsStarred = starredBoardIds.includes(
-                                        b.id,
+                                        b.id
                                     )
 
                                     if (aIsStarred && !bIsStarred) return -1
@@ -171,7 +171,7 @@ export function WorkspaceMenu({
                                             )}
                                             {(selectedBoardId === board.id ||
                                                 starredBoardIds.includes(
-                                                    board.id,
+                                                    board.id
                                                 ) ||
                                                 hoveredBoardId ===
                                                     board.id) && (
