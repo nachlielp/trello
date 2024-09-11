@@ -7,11 +7,13 @@ export function DateBadge({ task, editTask }) {
     const [dateLabel, setDateLabel] = useState(null)
 
     useEffect(() => {
-        if (!dayjs(task.start).isValid() && !dayjs(task.due).isValid()) {
-            setDateLabel(null)
-        } else {
-            setDateLabel(utilService.datePreviewTitle(task.start, task.due))
-        }
+        setTimeout(() => {
+            if (!dayjs(task.start).isValid() && !dayjs(task.due).isValid()) {
+                setDateLabel(null)
+            } else {
+                setDateLabel(utilService.datePreviewTitle(task.start, task.due))
+            }
+        }, 100)
     }, [task.start, task.due])
 
     const [dueStatus, dueTooltip] = utilService.taskDueStatus(task)
