@@ -114,6 +114,7 @@ export function UserBoards() {
                             ))}
                         <AddBoardPopover
                             onAddBoard={onAddBoard}
+                            placement="right-end"
                             anchorEl={
                                 <article className="board-tab-add-in-workspace">
                                     <p className="board-tab-add-title">
