@@ -197,13 +197,18 @@ export function ManageLabelsPopover({
                             </span>
                         </div>
                     </article>
-                    <h3 className="labels-sub-title">Title</h3>
+                    <label
+                        className="labels-sub-title"
+                        style={{ marginTop: "12px" }}
+                    >
+                        Title
+                    </label>
                     <Input
                         className="labels-search-input"
                         value={editTitle}
                         onChange={(e) => setEditTitle(e.target.value)}
                     />
-                    <h3 className="labels-sub-title">Select a color</h3>
+                    <label className="labels-sub-title">Select a color</label>
                     <article className="color-picker-wrapper">
                         {utilService.boardLabelColorOptions
                             .filter((color) => color.color !== "none")
