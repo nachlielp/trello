@@ -29,6 +29,9 @@
 .board-group-header .group-more-btn:hover {
     background-color: var(--ds-background-neutral-hovered) !important;
 }
+.board-group-header .group-more-btn:active {
+    background-color: #091e424f !important;
+}
 
 .board-group-header .group-more-btn .anticon {
     color: #2c3e50; // Darker color for the ellipsis icon

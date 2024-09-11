@@ -245,13 +245,13 @@ export function GroupActionsMenuPopover({
                 </section>
             }
         >
-            <Button
+            <button
                 className="group-more-btn"
                 size="small"
                 onClick={() => setOpenGroupMenu(!openGroupMenu)}
             >
                 <EllipsisOutlined />
-            </Button>
+            </button>
         </Popover>
     )
 }
