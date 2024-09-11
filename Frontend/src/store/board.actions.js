@@ -666,7 +666,13 @@ export async function moveTask(moveTaskEvent, board, user) {
 
         newBoard.activities.push(moveActivity)
     }
-    newBoard.activities = newBoard.activities.slice(-50)
+
+    //TODO on every save of board
+    newBoard.activities = newBoard.activities
+        .sort((a, b) => {
+            return a.timeStamp - b.timeStamp
+        })
+        .slice(-50)
     store.dispatch({
         type: SET_BOARD,
         board: { ...newBoard, updatedAt: new Date().toISOString() },

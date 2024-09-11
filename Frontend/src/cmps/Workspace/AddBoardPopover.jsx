@@ -60,13 +60,13 @@ const options = [
     },
 ]
 
-export function AddBoardPopover({ onAddBoard, anchorEl }) {
+export function AddBoardPopover({ onAddBoard, anchorEl, placement = "right" }) {
     const [isOpen, setIsOpen] = useState(false)
     const [boardName, setBoardName] = useState("")
     const [focused, setFocused] = useState(false)
     const [selectedBg, setSelectedBg] = useState(utilService.getBgImgs()[0])
     const [selectedBgUrl, setSelectedBgUrl] = useState(
-        utilService.getBgImgs()[0].backgroundImageScaled[2]?.url,
+        utilService.getBgImgs()[0].backgroundImageScaled[2]?.url
     )
 
     const popoverRef = useRef(null) // Add a ref for the Popover
@@ -182,7 +182,9 @@ export function AddBoardPopover({ onAddBoard, anchorEl }) {
                 onSelect={() => {}}
             />
             <button
-                className={`add-board-btn ${boardName === "" ? "disabled" : ""}`}
+                className={`add-board-btn ${
+                    boardName === "" ? "disabled" : ""
+                }`}
                 onClick={onCreateBoard}
             >
                 Create
@@ -221,7 +223,7 @@ export function AddBoardPopover({ onAddBoard, anchorEl }) {
             id="add-board-popover-popup"
             isOpen={isOpen}
             onClose={() => setIsOpen(false)}
-            placement="right"
+            placement={placement}
             content={() => content}
             trigger={trigger}
             zIndex={10000}

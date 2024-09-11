@@ -8,7 +8,7 @@ import { AddBoardPopover } from "../cmps/Workspace/AddBoardPopover"
 import { createBoard } from "../store/workspace.actions"
 import { editUser } from "../store/user.actions"
 import { ArchiveModal } from "../cmps/UserBoards/ArchiveModal"
-
+import { SvgButton } from "../cmps/CustomCpms/SvgButton"
 export function UserBoards() {
     const user = useSelector((state) => state.userModule.user)
     const boards = useSelector((state) => state.workspaceModule.boards)
@@ -48,7 +48,7 @@ export function UserBoards() {
                     <article className="section-content">
                         {boards
                             .filter((board) =>
-                                user?.starredBoardIds.includes(board.id),
+                                user?.starredBoardIds.includes(board.id)
                             )
                             .map((board) => (
                                 <BoardTab
@@ -84,7 +84,22 @@ export function UserBoards() {
                     </article>
                 </section>
                 <section className="section workspace">
-                    <h1>YOUR WORKSPACE</h1>
+                    <h1 className="workspace-title">YOUR WORKSPACES</h1>
+                    <article className="workspace-header-section">
+                        <img
+                            className="workspace-cover-img"
+                            src="/img/workspace/workspace-P.png"
+                            alt="board cover"
+                            style={{
+                                width: 32,
+                                height: 32,
+                                borderRadius: "3px",
+                            }}
+                        />
+                        <label className="workspace-sub-title">
+                            Pyello Workspace
+                        </label>
+                    </article>
                     <article className="section-content workspace-boards">
                         {boards
                             .sort((a, b) => b.updatedAt - a.updatedAt) // Sort boards by updatedAt in descending order
@@ -99,13 +114,17 @@ export function UserBoards() {
                             ))}
                         <AddBoardPopover
                             onAddBoard={onAddBoard}
+                            placement="right-end"
                             anchorEl={
                                 <article className="board-tab-add-in-workspace">
                                     <p className="board-tab-add-title">
                                         Create new board
                                     </p>
                                     <p className="board-tab-add-subtitle">
-                                        {10 - boards.length} remaining
+                                        {10 -
+                                            boards.filter((b) => !b.closed)
+                                                .length}{" "}
+                                        remaining
                                     </p>
                                 </article>
                             }
@@ -118,7 +137,7 @@ export function UserBoards() {
                         disabled={!boards.filter((b) => b.closed).length > 0}
                         onClick={() => setIsOpenModal(true)}
                     >
-                        Veiw all closed boards
+                        View all closed boards
                     </button>
                 </section>
             </main>

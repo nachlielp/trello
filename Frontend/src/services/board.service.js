@@ -2,8 +2,6 @@
 import { httpService } from "./http.service"
 import { socketService } from "../services/socket.service"
 
-const STORAGE_KEY = "boards"
-
 export const boardService = {
     getById,
     save,

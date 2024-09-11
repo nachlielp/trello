@@ -13,7 +13,7 @@
         flex-direction: column;
         align-items: start;
         // gap: 20px;
-        width: 1065px;
+        width: 900px;
 
         // .starred-boards {
         //     display: flex;
@@ -52,6 +52,36 @@
                     font-weight: 700;
                     line-height: 24px;
                     margin-left: 10px;
+                }
+            }
+
+            .workspace-header-section {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 20px;
+
+                .workspace-title {
+                    font-size: 16px;
+                    font-weight: 700;
+                    line-height: 24px;
+                    margin: 20px 0;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+
+                .workspace-sub-title {
+                    display: inline-block;
+                    flex: 1;
+                    font-size: 16px;
+                    font-weight: 700;
+                    line-height: 24px;
+                    // margin: 3px 0 0;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
                 }
             }
 
