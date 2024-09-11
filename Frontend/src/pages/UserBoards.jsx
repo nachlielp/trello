@@ -72,7 +72,7 @@ export function UserBoards() {
                         {boards
                             .sort((a, b) => b.viewedAt - a.viewedAt)
                             .filter((b) => !b.closed)
-                            .slice(0, 3)
+                            .slice(0, 4)
                             .map((board) => (
                                 <BoardTab
                                     key={board.id}
